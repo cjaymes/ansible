@@ -1,0 +1,3 @@
+---
+hardening_profile: 'None'
+ntp_server: localhost
