@@ -48,6 +48,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38437
+  when: not stig_rhel6_v1r18_v_38437_skip
 
 
 # Vuln ID: V-38438
@@ -88,6 +90,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38438
+  when: not stig_rhel6_v1r18_v_38438_skip
 
 
 # Vuln ID: V-38439
@@ -122,6 +126,8 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (1)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38439
+  when: not stig_rhel6_v1r18_v_38439_skip
 
 
 # Vuln ID: V-38443
@@ -161,6 +167,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38443
+  when: not stig_rhel6_v1r18_v_38443_skip
 
 
 # Vuln ID: V-38444
@@ -204,6 +212,8 @@
 # NIST SP 800-53A :: AC-17.1 (v)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38444
+  when: not stig_rhel6_v1r18_v_38444_skip
 
 
 # Vuln ID: V-38445
@@ -243,6 +253,8 @@
 # NIST SP 800-53 Revision 4 :: AU-9
 # 
 # 
+- name: stig_rhel6_v1r18_v_38445
+  when: not stig_rhel6_v1r18_v_38445_skip
 
 
 # Vuln ID: V-38446
@@ -286,6 +298,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38446
+  when: not stig_rhel6_v1r18_v_38446_skip
 
 
 # Vuln ID: V-38447
@@ -336,6 +350,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38447
+  when: not stig_rhel6_v1r18_v_38447_skip
 
 
 # Vuln ID: V-38448
@@ -375,6 +391,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38448
+  when: not stig_rhel6_v1r18_v_38448_skip
 
 
 # Vuln ID: V-38449
@@ -414,6 +432,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38449
+  when: not stig_rhel6_v1r18_v_38449_skip
 
 
 # Vuln ID: V-38450
@@ -453,6 +473,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38450
+  when: not stig_rhel6_v1r18_v_38450_skip
 
 
 # Vuln ID: V-38451
@@ -492,6 +514,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38451
+  when: not stig_rhel6_v1r18_v_38451_skip
 
 
 # Vuln ID: V-38452
@@ -536,6 +560,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38452
+  when: not stig_rhel6_v1r18_v_38452_skip
 
 
 # Vuln ID: V-38453
@@ -579,6 +605,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38453
+  when: not stig_rhel6_v1r18_v_38453_skip
 
 
 # Vuln ID: V-38454
@@ -622,6 +650,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38454
+  when: not stig_rhel6_v1r18_v_38454_skip
 
 
 # Vuln ID: V-38455
@@ -659,6 +689,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38455
+  when: not stig_rhel6_v1r18_v_38455_skip
 
 
 # Vuln ID: V-38456
@@ -696,6 +728,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38456
+  when: not stig_rhel6_v1r18_v_38456_skip
 
 
 # Vuln ID: V-38457
@@ -735,6 +769,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38457
+  when: not stig_rhel6_v1r18_v_38457_skip
 
 
 # Vuln ID: V-38458
@@ -774,6 +810,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38458
+  when: not stig_rhel6_v1r18_v_38458_skip
 
 
 # Vuln ID: V-38459
@@ -813,6 +851,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38459
+  when: not stig_rhel6_v1r18_v_38459_skip
 
 
 # Vuln ID: V-38460
@@ -856,6 +896,8 @@
 # NIST SP 800-53 Revision 4 :: IA-2
 # 
 # 
+- name: stig_rhel6_v1r18_v_38460
+  when: not stig_rhel6_v1r18_v_38460_skip
 
 
 # Vuln ID: V-38461
@@ -895,6 +937,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38461
+  when: not stig_rhel6_v1r18_v_38461_skip
 
 
 # Vuln ID: V-38463
@@ -932,6 +976,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38463
+  when: not stig_rhel6_v1r18_v_38463_skip
 
 
 # Vuln ID: V-38464
@@ -984,6 +1030,8 @@
 # NIST SP 800-53 Revision 4 :: AU-5 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38464
+  when: not stig_rhel6_v1r18_v_38464_skip
 
 
 # Vuln ID: V-38465
@@ -1038,6 +1086,8 @@
 # NIST SP 800-53 Revision 4 :: CM-5 (6)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38465
+  when: not stig_rhel6_v1r18_v_38465_skip
 
 
 # Vuln ID: V-38466
@@ -1106,6 +1156,8 @@
 # NIST SP 800-53 Revision 4 :: CM-5 (6)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38466
+  when: not stig_rhel6_v1r18_v_38466_skip
 
 
 # Vuln ID: V-38467
@@ -1142,6 +1194,8 @@
 # NIST SP 800-53A :: AU-4.1 (i)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38467
+  when: not stig_rhel6_v1r18_v_38467_skip
 
 
 # Vuln ID: V-38468
@@ -1194,6 +1248,8 @@
 # NIST SP 800-53 Revision 4 :: AU-5 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38468
+  when: not stig_rhel6_v1r18_v_38468_skip
 
 
 # Vuln ID: V-38469
@@ -1250,6 +1306,8 @@
 # NIST SP 800-53 Revision 4 :: CM-5 (6)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38469
+  when: not stig_rhel6_v1r18_v_38469_skip
 
 
 # Vuln ID: V-38470
@@ -1304,6 +1362,8 @@
 # NIST SP 800-53A :: AU-4.1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38470
+  when: not stig_rhel6_v1r18_v_38470_skip
 
 
 # Vuln ID: V-38471
@@ -1341,6 +1401,8 @@
 # NIST SP 800-53A :: AU-3 (2).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38471
+  when: not stig_rhel6_v1r18_v_38471_skip
 
 
 # Vuln ID: V-38472
@@ -1398,6 +1460,8 @@
 # NIST SP 800-53 Revision 4 :: CM-5 (6)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38472
+  when: not stig_rhel6_v1r18_v_38472_skip
 
 
 # Vuln ID: V-38473
@@ -1435,6 +1499,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38473
+  when: not stig_rhel6_v1r18_v_38473_skip
 
 
 # Vuln ID: V-38474
@@ -1481,6 +1547,8 @@
 # NIST SP 800-53 Revision 4 :: AC-11 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38474
+  when: not stig_rhel6_v1r18_v_38474_skip
 
 
 # Vuln ID: V-38475
@@ -1532,6 +1600,8 @@
 # NIST SP 800-53 Revision 4 :: IA-5 (1) (a)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38475
+  when: not stig_rhel6_v1r18_v_38475_skip
 
 
 # Vuln ID: V-38476
@@ -1578,6 +1648,8 @@
 # NIST SP 800-53A :: CM-5 (3).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38476
+  when: not stig_rhel6_v1r18_v_38476_skip
 
 
 # Vuln ID: V-38477
@@ -1619,6 +1691,8 @@
 # NIST SP 800-53 Revision 4 :: IA-5 (1) (d)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38477
+  when: not stig_rhel6_v1r18_v_38477_skip
 
 
 # Vuln ID: V-38478
@@ -1674,6 +1748,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38478
+  when: not stig_rhel6_v1r18_v_38478_skip
 
 
 # Vuln ID: V-38479
@@ -1715,6 +1791,8 @@
 # NIST SP 800-53 Revision 4 :: IA-5 (1) (d)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38479
+  when: not stig_rhel6_v1r18_v_38479_skip
 
 
 # Vuln ID: V-38480
@@ -1756,6 +1834,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38480
+  when: not stig_rhel6_v1r18_v_38480_skip
 
 
 # Vuln ID: V-38481
@@ -1801,6 +1881,8 @@
 # NIST SP 800-53 Revision 4 :: SI-2 (2)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38481
+  when: not stig_rhel6_v1r18_v_38481_skip
 
 
 # Vuln ID: V-38482
@@ -1838,6 +1920,8 @@
 # NIST SP 800-53 Revision 4 :: IA-5 (1) (a)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38482
+  when: not stig_rhel6_v1r18_v_38482_skip
 
 
 # Vuln ID: V-38483
@@ -1878,6 +1962,8 @@
 # NIST SP 800-53A :: SA-7.1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38483
+  when: not stig_rhel6_v1r18_v_38483_skip
 
 
 # Vuln ID: V-38484
@@ -1920,6 +2006,8 @@
 # NIST SP 800-53 Revision 4 :: AC-9
 # 
 # 
+- name: stig_rhel6_v1r18_v_38484
+  when: not stig_rhel6_v1r18_v_38484_skip
 
 
 # Vuln ID: V-38486
@@ -1956,6 +2044,8 @@
 # NIST SP 800-53 Revision 4 :: CP-9 (b)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38486
+  when: not stig_rhel6_v1r18_v_38486_skip
 
 
 # Vuln ID: V-38487
@@ -1996,6 +2086,8 @@
 # NIST SP 800-53A :: SA-7.1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38487
+  when: not stig_rhel6_v1r18_v_38487_skip
 
 
 # Vuln ID: V-38488
@@ -2032,6 +2124,8 @@
 # NIST SP 800-53 Revision 4 :: CP-9 (a)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38488
+  when: not stig_rhel6_v1r18_v_38488_skip
 
 
 # Vuln ID: V-38489
@@ -2072,6 +2166,8 @@
 # NIST SP 800-53A :: RA-5 (7).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38489
+  when: not stig_rhel6_v1r18_v_38489_skip
 
 
 # Vuln ID: V-38490
@@ -2111,6 +2207,8 @@
 # NIST SP 800-53A :: AC-19.1 (iv)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38490
+  when: not stig_rhel6_v1r18_v_38490_skip
 
 
 # Vuln ID: V-38491
@@ -2149,6 +2247,8 @@
 # NIST SP 800-53A :: AC-17 (8).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38491
+  when: not stig_rhel6_v1r18_v_38491_skip
 
 
 # Vuln ID: V-38492
@@ -2193,6 +2293,8 @@
 # NIST SP 800-53 Revision 4 :: IA-2 (5)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38492
+  when: not stig_rhel6_v1r18_v_38492_skip
 
 
 # Vuln ID: V-38493
@@ -2232,6 +2334,8 @@
 # NIST SP 800-53 Revision 4 :: AU-9
 # 
 # 
+- name: stig_rhel6_v1r18_v_38493
+  when: not stig_rhel6_v1r18_v_38493_skip
 
 
 # Vuln ID: V-38494
@@ -2274,6 +2378,8 @@
 # NIST SP 800-53 Revision 4 :: IA-2 (5)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38494
+  when: not stig_rhel6_v1r18_v_38494_skip
 
 
 # Vuln ID: V-38495
@@ -2313,6 +2419,8 @@
 # NIST SP 800-53 Revision 4 :: AU-9
 # 
 # 
+- name: stig_rhel6_v1r18_v_38495
+  when: not stig_rhel6_v1r18_v_38495_skip
 
 
 # Vuln ID: V-38496
@@ -2355,6 +2463,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38496
+  when: not stig_rhel6_v1r18_v_38496_skip
 
 
 # Vuln ID: V-38497
@@ -2392,6 +2502,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38497
+  when: not stig_rhel6_v1r18_v_38497_skip
 
 
 # Vuln ID: V-38498
@@ -2431,6 +2543,8 @@
 # NIST SP 800-53 Revision 4 :: AU-9
 # 
 # 
+- name: stig_rhel6_v1r18_v_38498
+  when: not stig_rhel6_v1r18_v_38498_skip
 
 
 # Vuln ID: V-38499
@@ -2468,6 +2582,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38499
+  when: not stig_rhel6_v1r18_v_38499_skip
 
 
 # Vuln ID: V-38500
@@ -2505,6 +2621,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38500
+  when: not stig_rhel6_v1r18_v_38500_skip
 
 
 # Vuln ID: V-38501
@@ -2554,6 +2672,8 @@
 # NIST SP 800-53A :: AC-7.1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38501
+  when: not stig_rhel6_v1r18_v_38501_skip
 
 
 # Vuln ID: V-38502
@@ -2593,6 +2713,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38502
+  when: not stig_rhel6_v1r18_v_38502_skip
 
 
 # Vuln ID: V-38503
@@ -2632,6 +2754,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38503
+  when: not stig_rhel6_v1r18_v_38503_skip
 
 
 # Vuln ID: V-38504
@@ -2671,6 +2795,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38504
+  when: not stig_rhel6_v1r18_v_38504_skip
 
 
 # Vuln ID: V-38511
@@ -2717,6 +2843,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38511
+  when: not stig_rhel6_v1r18_v_38511_skip
 
 
 # Vuln ID: V-38512
@@ -2762,6 +2890,8 @@
 # NIST SP 800-53A :: SC-7 (2).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38512
+  when: not stig_rhel6_v1r18_v_38512_skip
 
 
 # Vuln ID: V-38513
@@ -2801,6 +2931,8 @@
 # NIST SP 800-53A :: AC-17.1 (v)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38513
+  when: not stig_rhel6_v1r18_v_38513_skip
 
 
 # Vuln ID: V-38514
@@ -2839,6 +2971,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38514
+  when: not stig_rhel6_v1r18_v_38514_skip
 
 
 # Vuln ID: V-38515
@@ -2877,6 +3011,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38515
+  when: not stig_rhel6_v1r18_v_38515_skip
 
 
 # Vuln ID: V-38516
@@ -2915,6 +3051,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38516
+  when: not stig_rhel6_v1r18_v_38516_skip
 
 
 # Vuln ID: V-38517
@@ -2953,6 +3091,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38517
+  when: not stig_rhel6_v1r18_v_38517_skip
 
 
 # Vuln ID: V-38518
@@ -2997,6 +3137,8 @@
 # NIST SP 800-53 Revision 4 :: SI-11 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38518
+  when: not stig_rhel6_v1r18_v_38518_skip
 
 
 # Vuln ID: V-38519
@@ -3041,6 +3183,8 @@
 # NIST SP 800-53 Revision 4 :: SI-11 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38519
+  when: not stig_rhel6_v1r18_v_38519_skip
 
 
 # Vuln ID: V-38520
@@ -3099,6 +3243,8 @@
 # NIST SP 800-53 Revision 4 :: AU-9 (2)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38520
+  when: not stig_rhel6_v1r18_v_38520_skip
 
 
 # Vuln ID: V-38521
@@ -3157,6 +3303,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38521
+  when: not stig_rhel6_v1r18_v_38521_skip
 
 
 # Vuln ID: V-38522
@@ -3207,6 +3355,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38522
+  when: not stig_rhel6_v1r18_v_38522_skip
 
 
 # Vuln ID: V-38523
@@ -3253,6 +3403,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38523
+  when: not stig_rhel6_v1r18_v_38523_skip
 
 
 # Vuln ID: V-38524
@@ -3299,6 +3451,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38524
+  when: not stig_rhel6_v1r18_v_38524_skip
 
 
 # Vuln ID: V-38525
@@ -3346,6 +3500,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38525
+  when: not stig_rhel6_v1r18_v_38525_skip
 
 
 # Vuln ID: V-38526
@@ -3392,6 +3548,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38526
+  when: not stig_rhel6_v1r18_v_38526_skip
 
 
 # Vuln ID: V-38527
@@ -3442,6 +3600,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38527
+  when: not stig_rhel6_v1r18_v_38527_skip
 
 
 # Vuln ID: V-38528
@@ -3488,6 +3648,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38528
+  when: not stig_rhel6_v1r18_v_38528_skip
 
 
 # Vuln ID: V-38529
@@ -3534,6 +3696,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38529
+  when: not stig_rhel6_v1r18_v_38529_skip
 
 
 # Vuln ID: V-38530
@@ -3576,6 +3740,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38530
+  when: not stig_rhel6_v1r18_v_38530_skip
 
 
 # Vuln ID: V-38531
@@ -3621,6 +3787,8 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (4)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38531
+  when: not stig_rhel6_v1r18_v_38531_skip
 
 
 # Vuln ID: V-38532
@@ -3667,6 +3835,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38532
+  when: not stig_rhel6_v1r18_v_38532_skip
 
 
 # Vuln ID: V-38533
@@ -3713,6 +3883,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38533
+  when: not stig_rhel6_v1r18_v_38533_skip
 
 
 # Vuln ID: V-38534
@@ -3758,6 +3930,8 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (4)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38534
+  when: not stig_rhel6_v1r18_v_38534_skip
 
 
 # Vuln ID: V-38535
@@ -3804,6 +3978,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38535
+  when: not stig_rhel6_v1r18_v_38535_skip
 
 
 # Vuln ID: V-38536
@@ -3849,6 +4025,8 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (4)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38536
+  when: not stig_rhel6_v1r18_v_38536_skip
 
 
 # Vuln ID: V-38537
@@ -3895,6 +4073,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38537
+  when: not stig_rhel6_v1r18_v_38537_skip
 
 
 # Vuln ID: V-38538
@@ -3940,6 +4120,8 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (4)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38538
+  when: not stig_rhel6_v1r18_v_38538_skip
 
 
 # Vuln ID: V-38539
@@ -3986,6 +4168,8 @@
 # NIST SP 800-53 Revision 4 :: SC-5 (2)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38539
+  when: not stig_rhel6_v1r18_v_38539_skip
 
 
 # Vuln ID: V-38540
@@ -4047,6 +4231,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38540
+  when: not stig_rhel6_v1r18_v_38540_skip
 
 
 # Vuln ID: V-38541
@@ -4087,6 +4273,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38541
+  when: not stig_rhel6_v1r18_v_38541_skip
 
 
 # Vuln ID: V-38542
@@ -4133,6 +4321,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38542
+  when: not stig_rhel6_v1r18_v_38542_skip
 
 
 # Vuln ID: V-38543
@@ -4181,6 +4371,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38543
+  when: not stig_rhel6_v1r18_v_38543_skip
 
 
 # Vuln ID: V-38544
@@ -4227,6 +4419,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38544
+  when: not stig_rhel6_v1r18_v_38544_skip
 
 
 # Vuln ID: V-38545
@@ -4275,6 +4469,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38545
+  when: not stig_rhel6_v1r18_v_38545_skip
 
 
 # Vuln ID: V-38547
@@ -4323,6 +4519,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38547
+  when: not stig_rhel6_v1r18_v_38547_skip
 
 
 # Vuln ID: V-38548
@@ -4371,6 +4569,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38548
+  when: not stig_rhel6_v1r18_v_38548_skip
 
 
 # Vuln ID: V-38549
@@ -4418,6 +4618,8 @@
 # NIST SP 800-53A :: SC-7 (12).1
 # 
 # 
+- name: stig_rhel6_v1r18_v_38549
+  when: not stig_rhel6_v1r18_v_38549_skip
 
 
 # Vuln ID: V-38550
@@ -4466,6 +4668,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38550
+  when: not stig_rhel6_v1r18_v_38550_skip
 
 
 # Vuln ID: V-38551
@@ -4514,6 +4718,8 @@
 # NIST SP 800-53 Revision 4 :: SC-7 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38551
+  when: not stig_rhel6_v1r18_v_38551_skip
 
 
 # Vuln ID: V-38552
@@ -4562,6 +4768,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38552
+  when: not stig_rhel6_v1r18_v_38552_skip
 
 
 # Vuln ID: V-38553
@@ -4609,6 +4817,8 @@
 # NIST SP 800-53A :: SC-7 (2).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38553
+  when: not stig_rhel6_v1r18_v_38553_skip
 
 
 # Vuln ID: V-38554
@@ -4657,6 +4867,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38554
+  when: not stig_rhel6_v1r18_v_38554_skip
 
 
 # Vuln ID: V-38555
@@ -4702,6 +4914,8 @@
 # NIST SP 800-53A :: SC-7 (12).1
 # 
 # 
+- name: stig_rhel6_v1r18_v_38555
+  when: not stig_rhel6_v1r18_v_38555_skip
 
 
 # Vuln ID: V-38556
@@ -4750,6 +4964,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38556
+  when: not stig_rhel6_v1r18_v_38556_skip
 
 
 # Vuln ID: V-38557
@@ -4798,6 +5014,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38557
+  when: not stig_rhel6_v1r18_v_38557_skip
 
 
 # Vuln ID: V-38558
@@ -4846,6 +5064,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38558
+  when: not stig_rhel6_v1r18_v_38558_skip
 
 
 # Vuln ID: V-38559
@@ -4894,6 +5114,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38559
+  when: not stig_rhel6_v1r18_v_38559_skip
 
 
 # Vuln ID: V-38560
@@ -4940,6 +5162,8 @@
 # NIST SP 800-53 Revision 4 :: SC-7 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38560
+  when: not stig_rhel6_v1r18_v_38560_skip
 
 
 # Vuln ID: V-38561
@@ -4988,6 +5212,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38561
+  when: not stig_rhel6_v1r18_v_38561_skip
 
 
 # Vuln ID: V-38563
@@ -5036,6 +5262,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38563
+  when: not stig_rhel6_v1r18_v_38563_skip
 
 
 # Vuln ID: V-38565
@@ -5084,6 +5312,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38565
+  when: not stig_rhel6_v1r18_v_38565_skip
 
 
 # Vuln ID: V-38566
@@ -5134,6 +5364,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38566
+  when: not stig_rhel6_v1r18_v_38566_skip
 
 
 # Vuln ID: V-38567
@@ -5179,6 +5411,8 @@
 # NIST SP 800-53A :: AC-6 (2).1 (iii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38567
+  when: not stig_rhel6_v1r18_v_38567_skip
 
 
 # Vuln ID: V-38568
@@ -5220,6 +5454,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38568
+  when: not stig_rhel6_v1r18_v_38568_skip
 
 
 # Vuln ID: V-38569
@@ -5257,6 +5493,8 @@
 # NIST SP 800-53 Revision 4 :: IA-5 (1) (a)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38569
+  when: not stig_rhel6_v1r18_v_38569_skip
 
 
 # Vuln ID: V-38570
@@ -5294,6 +5532,8 @@
 # NIST SP 800-53 Revision 4 :: IA-5 (1) (a)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38570
+  when: not stig_rhel6_v1r18_v_38570_skip
 
 
 # Vuln ID: V-38571
@@ -5333,6 +5573,8 @@
 # NIST SP 800-53 Revision 4 :: IA-5 (1) (a)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38571
+  when: not stig_rhel6_v1r18_v_38571_skip
 
 
 # Vuln ID: V-38572
@@ -5371,6 +5613,8 @@
 # NIST SP 800-53 Revision 4 :: IA-5 (1) (b)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38572
+  when: not stig_rhel6_v1r18_v_38572_skip
 
 
 # Vuln ID: V-38573
@@ -5422,6 +5666,8 @@
 # NIST SP 800-53 Revision 4 :: AC-7 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38573
+  when: not stig_rhel6_v1r18_v_38573_skip
 
 
 # Vuln ID: V-38574
@@ -5495,6 +5741,8 @@
 # NIST SP 800-53 Revision 4 :: IA-7
 # 
 # 
+- name: stig_rhel6_v1r18_v_38574
+  when: not stig_rhel6_v1r18_v_38574_skip
 
 
 # Vuln ID: V-38575
@@ -5554,6 +5802,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38575
+  when: not stig_rhel6_v1r18_v_38575_skip
 
 
 # Vuln ID: V-38576
@@ -5593,6 +5843,8 @@
 # NIST SP 800-53 Revision 4 :: IA-7
 # 
 # 
+- name: stig_rhel6_v1r18_v_38576
+  when: not stig_rhel6_v1r18_v_38576_skip
 
 
 # Vuln ID: V-38577
@@ -5632,6 +5884,8 @@
 # NIST SP 800-53 Revision 4 :: IA-7
 # 
 # 
+- name: stig_rhel6_v1r18_v_38577
+  when: not stig_rhel6_v1r18_v_38577_skip
 
 
 # Vuln ID: V-38578
@@ -5672,6 +5926,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38578
+  when: not stig_rhel6_v1r18_v_38578_skip
 
 
 # Vuln ID: V-38579
@@ -5711,6 +5967,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38579
+  when: not stig_rhel6_v1r18_v_38579_skip
 
 
 # Vuln ID: V-38580
@@ -5768,6 +6026,8 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 # 
 # 
+- name: stig_rhel6_v1r18_v_38580
+  when: not stig_rhel6_v1r18_v_38580_skip
 
 
 # Vuln ID: V-38581
@@ -5807,6 +6067,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38581
+  when: not stig_rhel6_v1r18_v_38581_skip
 
 
 # Vuln ID: V-38582
@@ -5862,6 +6124,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38582
+  when: not stig_rhel6_v1r18_v_38582_skip
 
 
 # Vuln ID: V-38583
@@ -5915,6 +6179,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38583
+  when: not stig_rhel6_v1r18_v_38583_skip
 
 
 # Vuln ID: V-38584
@@ -5956,6 +6222,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38584
+  when: not stig_rhel6_v1r18_v_38584_skip
 
 
 # Vuln ID: V-38585
@@ -6006,6 +6274,8 @@
 # NIST SP 800-53 Revision 4 :: AC-3
 # 
 # 
+- name: stig_rhel6_v1r18_v_38585
+  when: not stig_rhel6_v1r18_v_38585_skip
 
 
 # Vuln ID: V-38586
@@ -6051,6 +6321,8 @@
 # NIST SP 800-53 Revision 4 :: AC-3
 # 
 # 
+- name: stig_rhel6_v1r18_v_38586
+  when: not stig_rhel6_v1r18_v_38586_skip
 
 
 # Vuln ID: V-38587
@@ -6092,6 +6364,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38587
+  when: not stig_rhel6_v1r18_v_38587_skip
 
 
 # Vuln ID: V-38588
@@ -6137,6 +6411,8 @@
 # NIST SP 800-53 Revision 4 :: AC-3
 # 
 # 
+- name: stig_rhel6_v1r18_v_38588
+  when: not stig_rhel6_v1r18_v_38588_skip
 
 
 # Vuln ID: V-38589
@@ -6184,6 +6460,8 @@
 # NIST SP 800-53A :: MA-4 (6).1
 # 
 # 
+- name: stig_rhel6_v1r18_v_38589
+  when: not stig_rhel6_v1r18_v_38589_skip
 
 
 # Vuln ID: V-38590
@@ -6231,6 +6509,8 @@
 # NIST SP 800-53 Revision 4 :: AC-11 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38590
+  when: not stig_rhel6_v1r18_v_38590_skip
 
 
 # Vuln ID: V-38591
@@ -6270,6 +6550,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38591
+  when: not stig_rhel6_v1r18_v_38591_skip
 
 
 # Vuln ID: V-38592
@@ -6320,6 +6602,8 @@
 # NIST SP 800-53A :: AC-7.1 (iv)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38592
+  when: not stig_rhel6_v1r18_v_38592_skip
 
 
 # Vuln ID: V-38593
@@ -6397,6 +6681,8 @@
 # NIST SP 800-53 Revision 4 :: AC-8 c 3
 # 
 # 
+- name: stig_rhel6_v1r18_v_38593
+  when: not stig_rhel6_v1r18_v_38593_skip
 
 
 # Vuln ID: V-38594
@@ -6443,6 +6729,8 @@
 # NIST SP 800-53 Revision 4 :: AC-17 (2)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38594
+  when: not stig_rhel6_v1r18_v_38594_skip
 
 
 # Vuln ID: V-38595
@@ -6491,6 +6779,8 @@
 # NIST SP 800-53 Revision 4 :: IA-2 (1)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38595
+  when: not stig_rhel6_v1r18_v_38595_skip
 
 
 # Vuln ID: V-38596
@@ -6535,6 +6825,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38596
+  when: not stig_rhel6_v1r18_v_38596_skip
 
 
 # Vuln ID: V-38597
@@ -6579,6 +6871,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38597
+  when: not stig_rhel6_v1r18_v_38597_skip
 
 
 # Vuln ID: V-38598
@@ -6625,6 +6919,8 @@
 # NIST SP 800-53 Revision 4 :: AC-17 (2)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38598
+  when: not stig_rhel6_v1r18_v_38598_skip
 
 
 # Vuln ID: V-38599
@@ -6673,6 +6969,8 @@
 # NIST SP 800-53 Revision 4 :: AC-8 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38599
+  when: not stig_rhel6_v1r18_v_38599_skip
 
 
 # Vuln ID: V-38600
@@ -6719,6 +7017,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38600
+  when: not stig_rhel6_v1r18_v_38600_skip
 
 
 # Vuln ID: V-38601
@@ -6765,6 +7065,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38601
+  when: not stig_rhel6_v1r18_v_38601_skip
 
 
 # Vuln ID: V-38602
@@ -6811,6 +7113,8 @@
 # NIST SP 800-53A :: AC-17 (8).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38602
+  when: not stig_rhel6_v1r18_v_38602_skip
 
 
 # Vuln ID: V-38603
@@ -6850,6 +7154,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38603
+  when: not stig_rhel6_v1r18_v_38603_skip
 
 
 # Vuln ID: V-38604
@@ -6903,6 +7209,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38604
+  when: not stig_rhel6_v1r18_v_38604_skip
 
 
 # Vuln ID: V-38605
@@ -6947,6 +7255,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38605
+  when: not stig_rhel6_v1r18_v_38605_skip
 
 
 # Vuln ID: V-38606
@@ -6986,6 +7296,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38606
+  when: not stig_rhel6_v1r18_v_38606_skip
 
 
 # Vuln ID: V-38607
@@ -7028,6 +7340,8 @@
 # NIST SP 800-53A :: IA-2 (8).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38607
+  when: not stig_rhel6_v1r18_v_38607_skip
 
 
 # Vuln ID: V-38608
@@ -7077,6 +7391,8 @@
 # NIST SP 800-53 Revision 4 :: SC-10
 # 
 # 
+- name: stig_rhel6_v1r18_v_38608
+  when: not stig_rhel6_v1r18_v_38608_skip
 
 
 # Vuln ID: V-38609
@@ -7122,6 +7438,8 @@
 # NIST SP 800-53A :: AC-17 (8).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38609
+  when: not stig_rhel6_v1r18_v_38609_skip
 
 
 # Vuln ID: V-38610
@@ -7165,6 +7483,8 @@
 # NIST SP 800-53 Revision 4 :: MA-4 e
 # 
 # 
+- name: stig_rhel6_v1r18_v_38610
+  when: not stig_rhel6_v1r18_v_38610_skip
 
 
 # Vuln ID: V-38611
@@ -7206,6 +7526,8 @@
 # NIST SP 800-53 Revision 4 :: IA-2 (2)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38611
+  when: not stig_rhel6_v1r18_v_38611_skip
 
 
 # Vuln ID: V-38612
@@ -7247,6 +7569,8 @@
 # NIST SP 800-53 Revision 4 :: IA-2 (2)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38612
+  when: not stig_rhel6_v1r18_v_38612_skip
 
 
 # Vuln ID: V-38613
@@ -7286,6 +7610,8 @@
 # NIST SP 800-53 Revision 4 :: IA-2 (5)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38613
+  when: not stig_rhel6_v1r18_v_38613_skip
 
 
 # Vuln ID: V-38614
@@ -7327,6 +7653,8 @@
 # NIST SP 800-53 Revision 4 :: IA-2 (2)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38614
+  when: not stig_rhel6_v1r18_v_38614_skip
 
 
 # Vuln ID: V-38615
@@ -7368,6 +7696,8 @@
 # NIST SP 800-53 Revision 4 :: AC-8 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38615
+  when: not stig_rhel6_v1r18_v_38615_skip
 
 
 # Vuln ID: V-38616
@@ -7411,6 +7741,8 @@
 # NIST SP 800-53 Revision 4 :: AC-4
 # 
 # 
+- name: stig_rhel6_v1r18_v_38616
+  when: not stig_rhel6_v1r18_v_38616_skip
 
 
 # Vuln ID: V-38617
@@ -7451,6 +7783,8 @@
 # NIST SP 800-53A :: SC-13.1
 # 
 # 
+- name: stig_rhel6_v1r18_v_38617
+  when: not stig_rhel6_v1r18_v_38617_skip
 
 
 # Vuln ID: V-38618
@@ -7504,6 +7838,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38618
+  when: not stig_rhel6_v1r18_v_38618_skip
 
 
 # Vuln ID: V-38619
@@ -7540,6 +7876,8 @@
 # NIST SP 800-53 Revision 4 :: IA-5 (1) (c)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38619
+  when: not stig_rhel6_v1r18_v_38619_skip
 
 
 # Vuln ID: V-38620
@@ -7583,6 +7921,8 @@
 # NIST SP 800-53A :: AU-8 (1).1 (iii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38620
+  when: not stig_rhel6_v1r18_v_38620_skip
 
 
 # Vuln ID: V-38621
@@ -7628,6 +7968,8 @@
 # NIST SP 800-53A :: AU-8 (1).1 (iii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38621
+  when: not stig_rhel6_v1r18_v_38621_skip
 
 
 # Vuln ID: V-38622
@@ -7669,6 +8011,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38622
+  when: not stig_rhel6_v1r18_v_38622_skip
 
 
 # Vuln ID: V-38623
@@ -7713,6 +8057,8 @@
 # NIST SP 800-53 Revision 4 :: SI-11 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38623
+  when: not stig_rhel6_v1r18_v_38623_skip
 
 
 # Vuln ID: V-38624
@@ -7751,6 +8097,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38624
+  when: not stig_rhel6_v1r18_v_38624_skip
 
 
 # Vuln ID: V-38627
@@ -7796,6 +8144,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38627
+  when: not stig_rhel6_v1r18_v_38627_skip
 
 
 # Vuln ID: V-38628
@@ -7840,6 +8190,8 @@
 # NIST SP 800-53 Revision 4 :: AU-3
 # 
 # 
+- name: stig_rhel6_v1r18_v_38628
+  when: not stig_rhel6_v1r18_v_38628_skip
 
 
 # Vuln ID: V-38629
@@ -7886,6 +8238,8 @@
 # NIST SP 800-53 Revision 4 :: AC-11 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38629
+  when: not stig_rhel6_v1r18_v_38629_skip
 
 
 # Vuln ID: V-38630
@@ -7931,6 +8285,8 @@
 # NIST SP 800-53 Revision 4 :: AC-11 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38630
+  when: not stig_rhel6_v1r18_v_38630_skip
 
 
 # Vuln ID: V-38631
@@ -7975,6 +8331,8 @@
 # NIST SP 800-53 Revision 4 :: AC-17 (1)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38631
+  when: not stig_rhel6_v1r18_v_38631_skip
 
 
 # Vuln ID: V-38632
@@ -8019,6 +8377,8 @@
 # NIST SP 800-53 Revision 4 :: AU-3
 # 
 # 
+- name: stig_rhel6_v1r18_v_38632
+  when: not stig_rhel6_v1r18_v_38632_skip
 
 
 # Vuln ID: V-38633
@@ -8060,6 +8420,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38633
+  when: not stig_rhel6_v1r18_v_38633_skip
 
 
 # Vuln ID: V-38634
@@ -8112,6 +8474,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38634
+  when: not stig_rhel6_v1r18_v_38634_skip
 
 
 # Vuln ID: V-38636
@@ -8153,6 +8517,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38636
+  when: not stig_rhel6_v1r18_v_38636_skip
 
 
 # Vuln ID: V-38637
@@ -8200,6 +8566,8 @@
 # NIST SP 800-53 Revision 4 :: AU-9 (3)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38637
+  when: not stig_rhel6_v1r18_v_38637_skip
 
 
 # Vuln ID: V-38638
@@ -8244,6 +8612,8 @@
 # NIST SP 800-53 Revision 4 :: AC-11 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38638
+  when: not stig_rhel6_v1r18_v_38638_skip
 
 
 # Vuln ID: V-38639
@@ -8289,6 +8659,8 @@
 # NIST SP 800-53 Revision 4 :: AC-11 (1)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38639
+  when: not stig_rhel6_v1r18_v_38639_skip
 
 
 # Vuln ID: V-38640
@@ -8342,6 +8714,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38640
+  when: not stig_rhel6_v1r18_v_38640_skip
 
 
 # Vuln ID: V-38641
@@ -8397,6 +8771,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38641
+  when: not stig_rhel6_v1r18_v_38641_skip
 
 
 # Vuln ID: V-38642
@@ -8438,6 +8814,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38642
+  when: not stig_rhel6_v1r18_v_38642_skip
 
 
 # Vuln ID: V-38643
@@ -8474,6 +8852,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38643
+  when: not stig_rhel6_v1r18_v_38643_skip
 
 
 # Vuln ID: V-38644
@@ -8527,6 +8907,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38644
+  when: not stig_rhel6_v1r18_v_38644_skip
 
 
 # Vuln ID: V-38645
@@ -8571,6 +8953,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38645
+  when: not stig_rhel6_v1r18_v_38645_skip
 
 
 # Vuln ID: V-38646
@@ -8624,6 +9008,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38646
+  when: not stig_rhel6_v1r18_v_38646_skip
 
 
 # Vuln ID: V-38647
@@ -8668,6 +9054,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38647
+  when: not stig_rhel6_v1r18_v_38647_skip
 
 
 # Vuln ID: V-38648
@@ -8721,6 +9109,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38648
+  when: not stig_rhel6_v1r18_v_38648_skip
 
 
 # Vuln ID: V-38649
@@ -8765,6 +9155,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38649
+  when: not stig_rhel6_v1r18_v_38649_skip
 
 
 # Vuln ID: V-38650
@@ -8818,6 +9210,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38650
+  when: not stig_rhel6_v1r18_v_38650_skip
 
 
 # Vuln ID: V-38651
@@ -8863,6 +9257,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38651
+  when: not stig_rhel6_v1r18_v_38651_skip
 
 
 # Vuln ID: V-38652
@@ -8900,6 +9296,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38652
+  when: not stig_rhel6_v1r18_v_38652_skip
 
 
 # Vuln ID: V-38653
@@ -8939,6 +9337,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38653
+  when: not stig_rhel6_v1r18_v_38653_skip
 
 
 # Vuln ID: V-38654
@@ -8976,6 +9376,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38654
+  when: not stig_rhel6_v1r18_v_38654_skip
 
 
 # Vuln ID: V-38655
@@ -9012,6 +9414,8 @@
 # NIST SP 800-53A :: AC-19.1 (v)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38655
+  when: not stig_rhel6_v1r18_v_38655_skip
 
 
 # Vuln ID: V-38656
@@ -9057,6 +9461,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38656
+  when: not stig_rhel6_v1r18_v_38656_skip
 
 
 # Vuln ID: V-38657
@@ -9098,6 +9504,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38657
+  when: not stig_rhel6_v1r18_v_38657_skip
 
 
 # Vuln ID: V-38658
@@ -9144,6 +9552,8 @@
 # NIST SP 800-53 Revision 4 :: IA-5 (1) (e)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38658
+  when: not stig_rhel6_v1r18_v_38658_skip
 
 
 # Vuln ID: V-38659
@@ -9188,6 +9598,8 @@
 # NIST SP 800-53A :: MP-4 (1).1
 # 
 # 
+- name: stig_rhel6_v1r18_v_38659
+  when: not stig_rhel6_v1r18_v_38659_skip
 
 
 # Vuln ID: V-38660
@@ -9228,6 +9640,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38660
+  when: not stig_rhel6_v1r18_v_38660_skip
 
 
 # Vuln ID: V-38661
@@ -9273,6 +9687,8 @@
 # NIST SP 800-53 Revision 4 :: SC-28
 # 
 # 
+- name: stig_rhel6_v1r18_v_38661
+  when: not stig_rhel6_v1r18_v_38661_skip
 
 
 # Vuln ID: V-38662
@@ -9317,6 +9733,8 @@
 # NIST SP 800-53A :: SC-28 (1).1 (i)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38662
+  when: not stig_rhel6_v1r18_v_38662_skip
 
 
 # Vuln ID: V-38663
@@ -9360,6 +9778,8 @@
 # NIST SP 800-53 Revision 4 :: AU-9
 # 
 # 
+- name: stig_rhel6_v1r18_v_38663
+  when: not stig_rhel6_v1r18_v_38663_skip
 
 
 # Vuln ID: V-38664
@@ -9399,6 +9819,8 @@
 # NIST SP 800-53 Revision 4 :: AU-9
 # 
 # 
+- name: stig_rhel6_v1r18_v_38664
+  when: not stig_rhel6_v1r18_v_38664_skip
 
 
 # Vuln ID: V-38665
@@ -9438,6 +9860,8 @@
 # NIST SP 800-53 Revision 4 :: AU-9
 # 
 # 
+- name: stig_rhel6_v1r18_v_38665
+  when: not stig_rhel6_v1r18_v_38665_skip
 
 
 # Vuln ID: V-38666
@@ -9486,6 +9910,8 @@
 # NIST SP 800-53A :: SI-3.1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38666
+  when: not stig_rhel6_v1r18_v_38666_skip
 
 
 # Vuln ID: V-38667
@@ -9546,6 +9972,8 @@
 # NIST SP 800-53A :: SI-4 (5).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38667
+  when: not stig_rhel6_v1r18_v_38667_skip
 
 
 # Vuln ID: V-38668
@@ -9589,6 +10017,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38668
+  when: not stig_rhel6_v1r18_v_38668_skip
 
 
 # Vuln ID: V-38669
@@ -9632,6 +10062,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38669
+  when: not stig_rhel6_v1r18_v_38669_skip
 
 
 # Vuln ID: V-38670
@@ -9671,6 +10103,8 @@
 # NIST SP 800-53A :: SI-7.1
 # 
 # 
+- name: stig_rhel6_v1r18_v_38670
+  when: not stig_rhel6_v1r18_v_38670_skip
 
 
 # Vuln ID: V-38671
@@ -9710,6 +10144,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38671
+  when: not stig_rhel6_v1r18_v_38671_skip
 
 
 # Vuln ID: V-38672
@@ -9763,6 +10199,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38672
+  when: not stig_rhel6_v1r18_v_38672_skip
 
 
 # Vuln ID: V-38673
@@ -9802,6 +10240,8 @@
 # NIST SP 800-53A :: CM-6 (3).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38673
+  when: not stig_rhel6_v1r18_v_38673_skip
 
 
 # Vuln ID: V-38674
@@ -9844,6 +10284,8 @@
 # NIST SP 800-53A :: AC-17 (8).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38674
+  when: not stig_rhel6_v1r18_v_38674_skip
 
 
 # Vuln ID: V-38675
@@ -9886,6 +10328,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38675
+  when: not stig_rhel6_v1r18_v_38675_skip
 
 
 # Vuln ID: V-38676
@@ -9929,6 +10373,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38676
+  when: not stig_rhel6_v1r18_v_38676_skip
 
 
 # Vuln ID: V-38677
@@ -9966,6 +10412,8 @@
 # NIST SP 800-53 Revision 4 :: IA-2
 # 
 # 
+- name: stig_rhel6_v1r18_v_38677
+  when: not stig_rhel6_v1r18_v_38677_skip
 
 
 # Vuln ID: V-38678
@@ -10008,6 +10456,8 @@
 # NIST SP 800-53A :: AU-5 (1).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38678
+  when: not stig_rhel6_v1r18_v_38678_skip
 
 
 # Vuln ID: V-38679
@@ -10061,6 +10511,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38679
+  when: not stig_rhel6_v1r18_v_38679_skip
 
 
 # Vuln ID: V-38680
@@ -10100,6 +10552,8 @@
 # NIST SP 800-53 Revision 4 :: AU-5 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_38680
+  when: not stig_rhel6_v1r18_v_38680_skip
 
 
 # Vuln ID: V-38681
@@ -10137,6 +10591,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38681
+  when: not stig_rhel6_v1r18_v_38681_skip
 
 
 # Vuln ID: V-38682
@@ -10181,6 +10637,8 @@
 # NIST SP 800-53A :: AC-19.1 (iii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38682
+  when: not stig_rhel6_v1r18_v_38682_skip
 
 
 # Vuln ID: V-38683
@@ -10218,6 +10676,8 @@
 # NIST SP 800-53 Revision 4 :: IA-8
 # 
 # 
+- name: stig_rhel6_v1r18_v_38683
+  when: not stig_rhel6_v1r18_v_38683_skip
 
 
 # Vuln ID: V-38684
@@ -10262,6 +10722,8 @@
 # NIST SP 800-53 Revision 4 :: AC-10
 # 
 # 
+- name: stig_rhel6_v1r18_v_38684
+  when: not stig_rhel6_v1r18_v_38684_skip
 
 
 # Vuln ID: V-38685
@@ -10303,6 +10765,8 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (2)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38685
+  when: not stig_rhel6_v1r18_v_38685_skip
 
 
 # Vuln ID: V-38686
@@ -10343,6 +10807,8 @@
 # NIST SP 800-53 Revision 4 :: SC-7 (5)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38686
+  when: not stig_rhel6_v1r18_v_38686_skip
 
 
 # Vuln ID: V-38687
@@ -10383,6 +10849,8 @@
 # NIST SP 800-53A :: SC-9.1
 # 
 # 
+- name: stig_rhel6_v1r18_v_38687
+  when: not stig_rhel6_v1r18_v_38687_skip
 
 
 # Vuln ID: V-38688
@@ -10429,6 +10897,8 @@
 # NIST SP 800-53 Revision 4 :: AC-8 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38688
+  when: not stig_rhel6_v1r18_v_38688_skip
 
 
 # Vuln ID: V-38689
@@ -10528,6 +10998,8 @@
 # NIST SP 800-53 Revision 4 :: AC-8 c 3
 # 
 # 
+- name: stig_rhel6_v1r18_v_38689
+  when: not stig_rhel6_v1r18_v_38689_skip
 
 
 # Vuln ID: V-38690
@@ -10570,6 +11042,8 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (2)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38690
+  when: not stig_rhel6_v1r18_v_38690_skip
 
 
 # Vuln ID: V-38691
@@ -10617,6 +11091,8 @@
 # NIST SP 800-53A :: AC-19.1 (iii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38691
+  when: not stig_rhel6_v1r18_v_38691_skip
 
 
 # Vuln ID: V-38692
@@ -10662,6 +11138,8 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (3)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38692
+  when: not stig_rhel6_v1r18_v_38692_skip
 
 
 # Vuln ID: V-38693
@@ -10701,6 +11179,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38693
+  when: not stig_rhel6_v1r18_v_38693_skip
 
 
 # Vuln ID: V-38694
@@ -10746,6 +11226,8 @@
 # NIST SP 800-53 Revision 4 :: IA-4 e
 # 
 # 
+- name: stig_rhel6_v1r18_v_38694
+  when: not stig_rhel6_v1r18_v_38694_skip
 
 
 # Vuln ID: V-38695
@@ -10785,6 +11267,8 @@
 # NIST SP 800-53A :: CM-6 (2).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38695
+  when: not stig_rhel6_v1r18_v_38695_skip
 
 
 # Vuln ID: V-38696
@@ -10825,6 +11309,8 @@
 # NIST SP 800-53 Revision 4 :: CM-8 (3) (a)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38696
+  when: not stig_rhel6_v1r18_v_38696_skip
 
 
 # Vuln ID: V-38697
@@ -10867,6 +11353,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38697
+  when: not stig_rhel6_v1r18_v_38697_skip
 
 
 # Vuln ID: V-38698
@@ -10906,6 +11394,8 @@
 # NIST SP 800-53A :: RA-5 (7).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38698
+  when: not stig_rhel6_v1r18_v_38698_skip
 
 
 # Vuln ID: V-38699
@@ -10943,6 +11433,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38699
+  when: not stig_rhel6_v1r18_v_38699_skip
 
 
 # Vuln ID: V-38700
@@ -10982,6 +11474,8 @@
 # NIST SP 800-53A :: SI-4 (5).1 (ii)
 # 
 # 
+- name: stig_rhel6_v1r18_v_38700
+  when: not stig_rhel6_v1r18_v_38700_skip
 
 
 # Vuln ID: V-38701
@@ -11025,6 +11519,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_38701
+  when: not stig_rhel6_v1r18_v_38701_skip
 
 
 # Vuln ID: V-38702
@@ -11078,6 +11574,8 @@
 # NIST SP 800-53 Revision 4 :: AU-3
 # 
 # 
+- name: stig_rhel6_v1r18_v_38702
+  when: not stig_rhel6_v1r18_v_38702_skip
 
 
 # Vuln ID: V-43150
@@ -11124,6 +11622,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_43150
+  when: not stig_rhel6_v1r18_v_43150_skip
 
 
 # Vuln ID: V-51337
@@ -11156,6 +11656,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_51337
+  when: not stig_rhel6_v1r18_v_51337_skip
 
 
 # Vuln ID: V-51363
@@ -11194,6 +11696,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_51363
+  when: not stig_rhel6_v1r18_v_51363_skip
 
 
 # Vuln ID: V-51369
@@ -11234,6 +11738,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_51369
+  when: not stig_rhel6_v1r18_v_51369_skip
 
 
 # Vuln ID: V-51379
@@ -11272,6 +11778,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_51379
+  when: not stig_rhel6_v1r18_v_51379_skip
 
 
 # Vuln ID: V-51391
@@ -11324,6 +11832,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_51391
+  when: not stig_rhel6_v1r18_v_51391_skip
 
 
 # Vuln ID: V-51875
@@ -11362,6 +11872,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_51875
+  when: not stig_rhel6_v1r18_v_51875_skip
 
 
 # Vuln ID: V-54381
@@ -11402,6 +11914,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 # 
 # 
+- name: stig_rhel6_v1r18_v_54381
+  when: not stig_rhel6_v1r18_v_54381_skip
 
 
 # Vuln ID: V-57569
@@ -11438,6 +11952,8 @@
 # NIST SP 800-53 Revision 4 :: CM-7 a
 # 
 # 
+- name: stig_rhel6_v1r18_v_57569
+  when: not stig_rhel6_v1r18_v_57569_skip
 
 
 # Vuln ID: V-58901
@@ -11478,6 +11994,8 @@
 # NIST SP 800-53 Revision 4 :: IA-11
 # 
 # 
+- name: stig_rhel6_v1r18_v_58901
+  when: not stig_rhel6_v1r18_v_58901_skip
 
 
 # Vuln ID: V-72817
@@ -11550,5 +12068,7 @@
 # NIST SP 800-53 Revision 4 :: SC-8
 # 
 # 
+- name: stig_rhel6_v1r18_v_72817
+  when: not stig_rhel6_v1r18_v_72817_skip
 
 
