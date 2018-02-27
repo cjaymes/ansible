@@ -1,3 +1,22 @@
+harden_accounts_skip: False
+harden_authentication_skip: False
+harden_auditing_skip: False
+harden_boot_skip: False
+harden_config_files_skip: False
+harden_filesystems_skip: False
+harden_firewall_skip: False
+harden_gconf_skip: False
+harden_modules_skip: False
+harden_ntp_skip: False
+harden_packages_skip: False
+harden_postfix_skip: False
+harden_samba_skip: False
+harden_selinux_skip: False
+harden_services_skip: False
+harden_sshd_skip: False
+harden_sysctl_skip: False
+harden_yum_skip: False
+
 stig_rhel6_v1r18_v_38437_skip: False
 stig_rhel6_v1r18_v_38438_skip: False
 stig_rhel6_v1r18_v_38439_skip: False
