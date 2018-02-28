@@ -47,7 +47,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38522
-  when: ['v_38522']|issubset(check_findings)
+  when: '"v_38522" in check_findings'
 
 
 # Vuln ID: V-38525
@@ -96,7 +96,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38525
-  when: ['v_38525']|issubset(check_findings)
+  when: '"v_38525" in check_findings'
 
 
 # Vuln ID: V-38527
@@ -148,7 +148,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38527
-  when: ['v_38527']|issubset(check_findings)
+  when: '"v_38527" in check_findings'
 
 
 # Vuln ID: V-38530
@@ -192,7 +192,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38530
-  when: ['v_38530']|issubset(check_findings)
+  when: '"v_38530" in check_findings'
 
 
 # Vuln ID: V-38531
@@ -239,7 +239,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38531
-  when: ['v_38531']|issubset(check_findings)
+  when: '"v_38531" in check_findings'
 
 
 # Vuln ID: V-38534
@@ -286,7 +286,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38534
-  when: ['v_38534']|issubset(check_findings)
+  when: '"v_38534" in check_findings'
 
 
 # Vuln ID: V-38536
@@ -333,7 +333,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38536
-  when: ['v_38536']|issubset(check_findings)
+  when: '"v_38536" in check_findings'
 
 
 # Vuln ID: V-38538
@@ -380,7 +380,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38538
-  when: ['v_38538']|issubset(check_findings)
+  when: '"v_38538" in check_findings'
 
 
 # Vuln ID: V-38540
@@ -443,7 +443,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38540
-  when: ['v_38540']|issubset(check_findings)
+  when: '"v_38540" in check_findings'
 
 
 # Vuln ID: V-38541
@@ -485,7 +485,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38541
-  when: ['v_38541']|issubset(check_findings)
+  when: '"v_38541" in check_findings'
 
 
 # Vuln ID: V-38543
@@ -535,7 +535,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38543
-  when: ['v_38543']|issubset(check_findings)
+  when: '"v_38543" in check_findings'
 
 
 # Vuln ID: V-38545
@@ -585,7 +585,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38545
-  when: ['v_38545']|issubset(check_findings)
+  when: '"v_38545" in check_findings'
 
 
 # Vuln ID: V-38547
@@ -635,7 +635,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38547
-  when: ['v_38547']|issubset(check_findings)
+  when: '"v_38547" in check_findings'
 
 
 # Vuln ID: V-38550
@@ -685,7 +685,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38550
-  when: ['v_38550']|issubset(check_findings)
+  when: '"v_38550" in check_findings'
 
 
 # Vuln ID: V-38552
@@ -735,7 +735,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38552
-  when: ['v_38552']|issubset(check_findings)
+  when: '"v_38552" in check_findings'
 
 
 # Severity: low
@@ -785,7 +785,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38554
-  when: ['v_38554']|issubset(check_findings)
+  when: '"v_38554" in check_findings'
 
 
 # Vuln ID: V-38556
@@ -835,7 +835,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38556
-  when: ['v_38556']|issubset(check_findings)
+  when: '"v_38556" in check_findings'
 
 
 # Vuln ID: V-38557
@@ -885,7 +885,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38557
-  when: ['v_38557']|issubset(check_findings)
+  when: '"v_38557" in check_findings'
 
 
 # Vuln ID: V-38558
@@ -935,7 +935,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38558
-  when: ['v_38558']|issubset(check_findings)
+  when: '"v_38558" in check_findings'
 
 
 # Vuln ID: V-38559
@@ -985,7 +985,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38559
-  when: ['v_38559']|issubset(check_findings)
+  when: '"v_38559" in check_findings'
 
 
 # Vuln ID: V-38561
@@ -1035,7 +1035,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38561
-  when: ['v_38561']|issubset(check_findings)
+  when: '"v_38561" in check_findings'
 
 
 # Vuln ID: V-38563
@@ -1085,7 +1085,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38563
-  when: ['v_38563']|issubset(check_findings)
+  when: '"v_38563" in check_findings'
 
 
 # Vuln ID: V-38565
@@ -1135,7 +1135,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38565
-  when: ['v_38565']|issubset(check_findings)
+  when: '"v_38565" in check_findings'
 
 
 # Vuln ID: V-38566
@@ -1187,7 +1187,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38566
-  when: ['v_38566']|issubset(check_findings)
+  when: '"v_38566" in check_findings'
 
 
 # Vuln ID: V-38567
@@ -1234,7 +1234,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38567
-  when: ['v_38567']|issubset(check_findings)
+  when: '"v_38567" in check_findings'
 
 
 # Vuln ID: V-38568
@@ -1277,7 +1277,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38568
-  when: ['v_38568']|issubset(check_findings)
+  when: '"v_38568" in check_findings'
 
 
 # Vuln ID: V-38575
@@ -1338,7 +1338,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38575
-  when: ['v_38575']|issubset(check_findings)
+  when: '"v_38575" in check_findings'
 
 
 # Vuln ID: V-38578
@@ -1380,7 +1380,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38578
-  when: ['v_38578']|issubset(check_findings)
+  when: '"v_38578" in check_findings'
 
 
 # Vuln ID: V-38580
@@ -1439,4 +1439,4 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38580
-  when: ['v_38580']|issubset(check_findings)
+  when: '"v_38580" in check_findings'

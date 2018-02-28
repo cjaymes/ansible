@@ -56,4 +56,4 @@
 #
 #
 - name: stig_rhel7_v1r4_v_71985
-  when: ['v_71985']|issubset(check_findings)
+  when: '"v_71985" in check_findings'

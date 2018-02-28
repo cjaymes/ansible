@@ -72,7 +72,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72081
-  when: ['v_72081']|issubset(check_findings)
+  when: '"v_72081" in check_findings'
 
 
 # Vuln ID: V-72095
@@ -125,7 +125,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72095
-  when: ['v_72095']|issubset(check_findings)
+  when: '"v_72095" in check_findings'
 
 
 # Vuln ID: V-72097
@@ -191,7 +191,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72097
-  when: ['v_72097']|issubset(check_findings)
+  when: '"v_72097" in check_findings'
 
 
 # Vuln ID: V-72099
@@ -257,7 +257,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72099
-  when: ['v_72099']|issubset(check_findings)
+  when: '"v_72099" in check_findings'
 
 
 # Vuln ID: V-72101
@@ -321,7 +321,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72101
-  when: ['v_72101']|issubset(check_findings)
+  when: '"v_72101" in check_findings'
 
 
 # Vuln ID: V-72103
@@ -387,7 +387,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72103
-  when: ['v_72103']|issubset(check_findings)
+  when: '"v_72103" in check_findings'
 
 
 # Vuln ID: V-72105
@@ -447,7 +447,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72105
-  when: ['v_72105']|issubset(check_findings)
+  when: '"v_72105" in check_findings'
 
 
 # Vuln ID: V-72107
@@ -507,7 +507,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72107
-  when: ['v_72107']|issubset(check_findings)
+  when: '"v_72107" in check_findings'
 
 
 # Vuln ID: V-72109
@@ -567,7 +567,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72109
-  when: ['v_72109']|issubset(check_findings)
+  when: '"v_72109" in check_findings'
 
 
 # Vuln ID: V-72111
@@ -628,7 +628,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72111
-  when: ['v_72111']|issubset(check_findings)
+  when: '"v_72111" in check_findings'
 
 
 # Vuln ID: V-72113
@@ -688,7 +688,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72113
-  when: ['v_72113']|issubset(check_findings)
+  when: '"v_72113" in check_findings'
 
 
 # Vuln ID: V-72115
@@ -749,7 +749,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72115
-  when: ['v_72115']|issubset(check_findings)
+  when: '"v_72115" in check_findings'
 
 
 # Vuln ID: V-72117
@@ -809,7 +809,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72117
-  when: ['v_72117']|issubset(check_findings)
+  when: '"v_72117" in check_findings'
 
 
 # Vuln ID: V-72119
@@ -870,7 +870,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72119
-  when: ['v_72119']|issubset(check_findings)
+  when: '"v_72119" in check_findings'
 
 
 # Vuln ID: V-72121
@@ -930,7 +930,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72121
-  when: ['v_72121']|issubset(check_findings)
+  when: '"v_72121" in check_findings'
 
 
 # Vuln ID: V-72123
@@ -1007,7 +1007,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72123
-  when: ['v_72123']|issubset(check_findings)
+  when: '"v_72123" in check_findings'
 
 
 # Vuln ID: V-72125
@@ -1084,7 +1084,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72125
-  when: ['v_72125']|issubset(check_findings)
+  when: '"v_72125" in check_findings'
 
 
 # Vuln ID: V-72127
@@ -1160,7 +1160,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72127
-  when: ['v_72127']|issubset(check_findings)
+  when: '"v_72127" in check_findings'
 
 
 # Vuln ID: V-72129
@@ -1237,7 +1237,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72129
-  when: ['v_72129']|issubset(check_findings)
+  when: '"v_72129" in check_findings'
 
 
 # Vuln ID: V-72131
@@ -1313,7 +1313,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72131
-  when: ['v_72131']|issubset(check_findings)
+  when: '"v_72131" in check_findings'
 
 
 # Vuln ID: V-72133
@@ -1389,7 +1389,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72133
-  when: ['v_72133']|issubset(check_findings)
+  when: '"v_72133" in check_findings'
 
 
 # Vuln ID: V-72135
@@ -1445,7 +1445,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72135
-  when: ['v_72135']|issubset(check_findings)
+  when: '"v_72135" in check_findings'
 
 
 # Vuln ID: V-72137
@@ -1501,7 +1501,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72137
-  when: ['v_72137']|issubset(check_findings)
+  when: '"v_72137" in check_findings'
 
 
 # Vuln ID: V-72139
@@ -1557,7 +1557,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72139
-  when: ['v_72139']|issubset(check_findings)
+  when: '"v_72139" in check_findings'
 
 
 # Vuln ID: V-72141
@@ -1613,7 +1613,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72141
-  when: ['v_72141']|issubset(check_findings)
+  when: '"v_72141" in check_findings'
 
 
 # Vuln ID: V-72143
@@ -1675,7 +1675,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72143
-  when: ['v_72143']|issubset(check_findings)
+  when: '"v_72143" in check_findings'
 
 
 # Vuln ID: V-72145
@@ -1737,7 +1737,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72145
-  when: ['v_72145']|issubset(check_findings)
+  when: '"v_72145" in check_findings'
 
 
 # Vuln ID: V-72147
@@ -1799,7 +1799,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72147
-  when: ['v_72147']|issubset(check_findings)
+  when: '"v_72147" in check_findings'
 
 
 # Vuln ID: V-72149
@@ -1861,7 +1861,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72149
-  when: ['v_72149']|issubset(check_findings)
+  when: '"v_72149" in check_findings'
 
 
 # Vuln ID: V-72151
@@ -1923,7 +1923,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72151
-  when: ['v_72151']|issubset(check_findings)
+  when: '"v_72151" in check_findings'
 
 
 # Vuln ID: V-72153
@@ -1985,7 +1985,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72153
-  when: ['v_72153']|issubset(check_findings)
+  when: '"v_72153" in check_findings'
 
 
 # Vuln ID: V-72155
@@ -2047,7 +2047,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72155
-  when: ['v_72155']|issubset(check_findings)
+  when: '"v_72155" in check_findings'
 
 
 # Vuln ID: V-72157
@@ -2109,7 +2109,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72157
-  when: ['v_72157']|issubset(check_findings)
+  when: '"v_72157" in check_findings'
 
 
 # Vuln ID: V-72159
@@ -2177,7 +2177,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72159
-  when: ['v_72159']|issubset(check_findings)
+  when: '"v_72159" in check_findings'
 
 
 # Vuln ID: V-72161
@@ -2245,7 +2245,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72161
-  when: ['v_72161']|issubset(check_findings)
+  when: '"v_72161" in check_findings'
 
 
 # Vuln ID: V-72163
@@ -2319,7 +2319,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72163
-  when: ['v_72163']|issubset(check_findings)
+  when: '"v_72163" in check_findings'
 
 
 # Vuln ID: V-72165
@@ -2387,7 +2387,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72165
-  when: ['v_72165']|issubset(check_findings)
+  when: '"v_72165" in check_findings'
 
 
 # Vuln ID: V-72167
@@ -2455,7 +2455,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72167
-  when: ['v_72167']|issubset(check_findings)
+  when: '"v_72167" in check_findings'
 
 
 # Vuln ID: V-72169
@@ -2523,7 +2523,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72169
-  when: ['v_72169']|issubset(check_findings)
+  when: '"v_72169" in check_findings'
 
 
 # Vuln ID: V-72171
@@ -2601,7 +2601,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72171
-  when: ['v_72171']|issubset(check_findings)
+  when: '"v_72171" in check_findings'
 
 
 # Vuln ID: V-72173
@@ -2657,7 +2657,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72173
-  when: ['v_72173']|issubset(check_findings)
+  when: '"v_72173" in check_findings'
 
 
 # Vuln ID: V-72175
@@ -2713,7 +2713,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72175
-  when: ['v_72175']|issubset(check_findings)
+  when: '"v_72175" in check_findings'
 
 
 # Vuln ID: V-72177
@@ -2769,7 +2769,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72177
-  when: ['v_72177']|issubset(check_findings)
+  when: '"v_72177" in check_findings'
 
 
 # Vuln ID: V-72179
@@ -2831,7 +2831,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72179
-  when: ['v_72179']|issubset(check_findings)
+  when: '"v_72179" in check_findings'
 
 
 # Vuln ID: V-72183
@@ -2893,7 +2893,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72183
-  when: ['v_72183']|issubset(check_findings)
+  when: '"v_72183" in check_findings'
 
 
 # Vuln ID: V-72185
@@ -2941,7 +2941,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72185
-  when: ['v_72185']|issubset(check_findings)
+  when: '"v_72185" in check_findings'
 
 
 # Vuln ID: V-72187
@@ -3003,7 +3003,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72187
-  when: ['v_72187']|issubset(check_findings)
+  when: '"v_72187" in check_findings'
 
 
 # Vuln ID: V-72189
@@ -3065,7 +3065,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72189
-  when: ['v_72189']|issubset(check_findings)
+  when: '"v_72189" in check_findings'
 
 
 # Vuln ID: V-72191
@@ -3119,7 +3119,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72191
-  when: ['v_72191']|issubset(check_findings)
+  when: '"v_72191" in check_findings'
 
 
 # Vuln ID: V-72193
@@ -3173,7 +3173,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72193
-  when: ['v_72193']|issubset(check_findings)
+  when: '"v_72193" in check_findings'
 
 
 # Vuln ID: V-72195
@@ -3229,7 +3229,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72195
-  when: ['v_72195']|issubset(check_findings)
+  when: '"v_72195" in check_findings'
 
 
 # Vuln ID: V-72197
@@ -3297,7 +3297,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72197
-  when: ['v_72197']|issubset(check_findings)
+  when: '"v_72197" in check_findings'
 
 
 # Vuln ID: V-72199
@@ -3359,7 +3359,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72199
-  when: ['v_72199']|issubset(check_findings)
+  when: '"v_72199" in check_findings'
 
 
 # Vuln ID: V-72201
@@ -3421,7 +3421,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72201
-  when: ['v_72201']|issubset(check_findings)
+  when: '"v_72201" in check_findings'
 
 
 # Vuln ID: V-72203
@@ -3483,7 +3483,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72203
-  when: ['v_72203']|issubset(check_findings)
+  when: '"v_72203" in check_findings'
 
 
 # Vuln ID: V-72205
@@ -3545,7 +3545,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72205
-  when: ['v_72205']|issubset(check_findings)
+  when: '"v_72205" in check_findings'
 
 
 # Vuln ID: V-72207
@@ -3607,7 +3607,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72207
-  when: ['v_72207']|issubset(check_findings)
+  when: '"v_72207" in check_findings'
 
 
 # Vuln ID: V-73165
@@ -3673,7 +3673,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_73165
-  when: ['v_73165']|issubset(check_findings)
+  when: '"v_73165" in check_findings'
 
 
 # Vuln ID: V-73167
@@ -3739,7 +3739,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_73167
-  when: ['v_73167']|issubset(check_findings)
+  when: '"v_73167" in check_findings'
 
 
 # Vuln ID: V-73171
@@ -3805,7 +3805,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_73171
-  when: ['v_73171']|issubset(check_findings)
+  when: '"v_73171" in check_findings'
 
 
 # Vuln ID: V-73173
@@ -3871,7 +3871,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_73173
-  when: ['v_73173']|issubset(check_findings)
+  when: '"v_73173" in check_findings'
 
 
 # Vuln ID: V-78999
@@ -3933,7 +3933,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_78999
-  when: ['v_78999']|issubset(check_findings)
+  when: '"v_78999" in check_findings'
 
 
 # Vuln ID: V-79001
@@ -3994,4 +3994,4 @@
 #
 #
 - name: stig_rhel7_v1r4_v_79001
-  when: ['v_79001']|issubset(check_findings)
+  when: '"v_79001" in check_findings'

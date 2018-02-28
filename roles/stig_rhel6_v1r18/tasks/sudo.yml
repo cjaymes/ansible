@@ -37,4 +37,4 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_58901
-  when: ['v_58901']|issubset(check_findings)
+  when: '"v_58901" in check_findings'

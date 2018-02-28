@@ -45,4 +45,4 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38666
-  when: ['v_38666']|issubset(check_findings)
+  when: '"v_38666" in check_findings'

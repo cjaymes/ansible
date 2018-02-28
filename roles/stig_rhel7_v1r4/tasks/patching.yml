@@ -41,7 +41,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_71997
-  when: ['v_71997']|issubset(check_findings)
+  when: '"v_71997" in check_findings'
 
 
 # Vuln ID: V-71999
@@ -95,4 +95,4 @@
 #
 #
 - name: stig_rhel7_v1r4_v_71999
-  when: ['v_71999']|issubset(check_findings)
+  when: '"v_71999" in check_findings'

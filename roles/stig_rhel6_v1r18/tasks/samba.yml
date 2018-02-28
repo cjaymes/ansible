@@ -42,7 +42,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38656
-  when: ['v_38656']|issubset(check_findings)
+  when: '"v_38656" in check_findings'
 
 
 # Vuln ID: V-38657
@@ -85,4 +85,4 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38657
-  when: ['v_38657']|issubset(check_findings)
+  when: '"v_38657" in check_findings'

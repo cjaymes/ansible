@@ -51,7 +51,7 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72213
-  when: ['v_72213']|issubset(check_findings)
+  when: '"v_72213" in check_findings'
 
 
 # Vuln ID: V-72215
@@ -118,4 +118,4 @@
 #
 #
 - name: stig_rhel7_v1r4_v_72215
-  when: ['v_72215']|issubset(check_findings)
+  when: '"v_72215" in check_findings'
