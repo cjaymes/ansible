@@ -1,7 +1,3 @@
 - name: stig section fixes
   include_tasks: '{{ item }}.yml'
   with_items: '{{ stig_rhel7_v1r4_sections }}'
-
-- name: stig results
-  debug: '{{ stig_rhel7_v1r4_{{ item }}_result }}'
-  with_items: '{{ stig_rhel7_v1r4_findings}}'
