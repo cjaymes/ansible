@@ -1,0 +1,40 @@
+# Vuln ID: V-58901
+# Severity: medium
+# Group Title: SRG-OS-000373
+# Rule ID: SV-73331r2_rule
+# STIG ID: RHEL-06-000529
+# Rule Title: The sudo command must require authentication.
+# Discussion: The "sudo" command allows authorized users to run programs (including shells) as other users, system users, and root. The "/etc/sudoers" file is used to configure authorized "sudo" users as well as the programs they are allowed to run. Some configuration options in the "/etc/sudoers" file allow configured users to run programs without re-authenticating. Use of these configuration options makes it easier for one compromised account to be used to compromise other accounts.
+# IA Controls:
+# Check Content: If passwords are not being used for authentication, this is Not Applicable.
+#
+# Verify neither the "NOPASSWD" option nor the "!authenticate" option is configured for use in "/etc/sudoers" and associated files. Note that the "#include" and "#includedir" directives may be used to include configuration data from locations other than the defaults enumerated here.
+#
+# # egrep '^[^#]*NOPASSWD' /etc/sudoers /etc/sudoers.d/*
+# # egrep '^[^#]*!authenticate' /etc/sudoers /etc/sudoers.d/*
+#
+# If the "NOPASSWD" or "!authenticate" options are configured for use in "/etc/sudoers" or associated files, this is a finding.
+# Fix Text: Update the "/etc/sudoers" or other sudo configuration files to remove or comment out lines utilizing the "NOPASSWD" and "!authenticate" options.
+#
+# # visudo
+# # visudo -f [other sudo configuration file]
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-002038
+# The organization requires users to reauthenticate when organization-defined circumstances or situations requiring reauthentication.
+# NIST SP 800-53 Revision 4 :: IA-11
+#
+#
+- name: check stig_rhel6_v1r18 v_58901
+  when: ['v_58901']|issubset(check_findings)

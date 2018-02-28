@@ -1,4 +1,39 @@
-stig_rhel7_v1r4_sections: '{{ stig_rhel7_sections }}'
+stig_rhel7_v1r4_sections:
+    - aide
+    - antivirus
+    - audisp
+    - audit_rules
+    - auditd
+    - cron
+    - dns
+    - files
+    - filesystems
+    - firewall
+    - gdm
+    - grub
+    - kernel
+    - ldap
+    - logins
+    - modules
+    - network
+    - ntpd
+    - packages
+    - pam
+    - passwords
+    - patching
+    - postfix
+    - rsyslogd
+    - selinux
+    - services
+    - snmpd
+    - sshd
+    - sudo
+    - systemd
+    - tftpd
+    - umask
+    - vsftpd
+    - xorg
+    - yum
 
 stig_rhel7_v1r4_findings:
   - v_71849

@@ -39,6 +39,58 @@
   when: ['v_38443']|issubset(check_findings)
 
 
+# Vuln ID: V-38447
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50247r4_rule
+# STIG ID: RHEL-06-000519
+# Rule Title: The system package management tool must verify contents of all files associated with packages.
+# Discussion: The hash on important files like system executables should match the information given by the RPM database. Executables with erroneous hashes could be a sign of nefarious activity on the system.
+# IA Controls:
+# Check Content: The following command will list which files on the system have file hashes different from what is expected by the RPM database:
+#
+# # rpm -Va | awk '$1 ~ /..5/ && $2 != "c"'
+#
+# If there is any output from the command for system binaries, verify that the changes were due to STIG application and have been documented with the ISSO.
+#
+# If there are changes to system binaries and they are not documented with the ISSO, this is a finding.
+#
+# Fix Text: The RPM package management system can check the hashes of installed software packages, including many that are important to system security. Run the following command to list which files on the system have hashes that differ from what is expected by the RPM database:
+#
+# # rpm -Va | awk '$1 ~ /..5/ && $2 != "c"'
+#
+# If the file that has changed was not expected to, refresh from distribution media or online repositories.
+#
+# rpm -Uvh [affected_package]
+#
+# OR
+#
+# yum reinstall [affected_package]
+#
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38447
+  when: ['v_38447']|issubset(check_findings)
+
+
 # Vuln ID: V-38448
 # Severity: medium
 # Group Title: SRG-OS-999999
@@ -201,6 +253,142 @@
 #
 - name: check stig_rhel6_v1r18 v_38451
   when: ['v_38451']|issubset(check_findings)
+
+
+# Vuln ID: V-38452
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50252r2_rule
+# STIG ID: RHEL-06-000518
+# Rule Title: The system package management tool must verify permissions on all files and directories associated with packages.
+# Discussion: Permissions on system binaries and configuration files that are too generous could allow an unauthorized user to gain privileges that they should not have. The permissions set by the vendor should be maintained. Any deviations from this baseline should be investigated.
+# IA Controls:
+# Check Content: The following command will list which files and directories on the system have permissions different from what is expected by the RPM database:
+#
+# # rpm -Va  | grep '^.M'
+#
+# If there is any output, for each file or directory found, find the associated RPM package and compare the RPM-expected permissions with the actual permissions on the file or directory:
+#
+# # rpm -qf [file or directory name]
+# # rpm -q --queryformat "[%{FILENAMES} %{FILEMODES:perms}\n]" [package] | grep  [filename]
+# # ls -dlL [filename]
+#
+# If the existing permissions are more permissive than those expected by RPM, this is a finding.
+# Fix Text: The RPM package management system can restore file access permissions of package files and directories. The following command will update permissions on files and directories with permissions different from what is expected by the RPM database:
+#
+# # rpm --setperms [package]
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38452
+  when: ['v_38452']|issubset(check_findings)
+
+
+# Vuln ID: V-38453
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50253r2_rule
+# STIG ID: RHEL-06-000517
+# Rule Title: The system package management tool must verify group-ownership on all files and directories associated with packages.
+# Discussion: Group-ownership of system binaries and configuration files that is incorrect could allow an unauthorized user to gain privileges that they should not have. The group-ownership set by the vendor should be maintained. Any deviations from this baseline should be investigated.
+# IA Controls:
+# Check Content: The following command will list which files on the system have group-ownership different from what is expected by the RPM database:
+#
+# # rpm -Va | grep '^......G'
+#
+#
+# If any output is produced, verify that the changes were due to STIG application and have been documented with the ISSO.
+#
+# If any output has not been documented with the ISSO, this is a finding.
+#
+# Fix Text: The RPM package management system can restore group-ownership of the package files and directories. The following command will update files and directories with group-ownership different from what is expected by the RPM database:
+#
+# # rpm -qf [file or directory name]
+# # rpm --setugids [package]
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38453
+  when: ['v_38453']|issubset(check_findings)
+
+
+# Vuln ID: V-38454
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50254r2_rule
+# STIG ID: RHEL-06-000516
+# Rule Title: The system package management tool must verify ownership on all files and directories associated with packages.
+# Discussion: Ownership of system binaries and configuration files that is incorrect could allow an unauthorized user to gain privileges that they should not have. The ownership set by the vendor should be maintained. Any deviations from this baseline should be investigated.
+# IA Controls:
+# Check Content: The following command will list which files on the system have ownership different from what is expected by the RPM database:
+#
+# # rpm -Va | grep '^.....U'
+#
+#
+# If any output is produced, verify that the changes were due to STIG application and have been documented with the ISSO.
+#
+# If any output has not been documented with the ISSO, this is a finding.
+#
+# Fix Text: The RPM package management system can restore ownership of package files and directories. The following command will update files and directories with ownership different from what is expected by the RPM database:
+#
+# # rpm -qf [file or directory name]
+# # rpm --setugids [package]
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38454
+  when: ['v_38454']|issubset(check_findings)
 
 
 # Vuln ID: V-38457
@@ -650,47 +838,6 @@
   when: ['v_38491']|issubset(check_findings)
 
 
-# Vuln ID: V-38498
-# Severity: medium
-# Group Title: SRG-OS-000058
-# Rule ID: SV-50299r1_rule
-# STIG ID: RHEL-06-000383
-# Rule Title: Audit log files must have mode 0640 or less permissive.
-# Discussion: If users can write to audit logs, audit trails can be modified or destroyed.
-# IA Controls:
-# Check Content: Run the following command to check the mode of the system audit logs:
-#
-# grep "^log_file" /etc/audit/auditd.conf|sed s/^[^\/]*//|xargs stat -c %a:%n
-#
-# Audit logs must be mode 0640 or less permissive.
-# If any are more permissive, this is a finding.
-# Fix Text: Change the mode of the audit log files with the following command:
-#
-# # chmod 0640 [audit_file]
-# False Positives:
-# False Negatives:
-# Documentable: false
-# Mitigations:
-# Potential Impact:
-# Third Party Tools:
-# Mitigation Control:
-# Responsibility:
-# Severity Override Guidance:
-# Check Content Reference: M
-# Classification: Unclass
-# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
-# VMS Asset Posture:
-#  CCI: CCI-000163
-# The information system protects audit information from unauthorized modification.
-# NIST SP 800-53 :: AU-9
-# NIST SP 800-53A :: AU-9.1
-# NIST SP 800-53 Revision 4 :: AU-9
-#
-#
-- name: check stig_rhel6_v1r18 v_38498
-  when: ['v_38498']|issubset(check_findings)
-
-
 # Vuln ID: V-38502
 # Severity: medium
 # Group Title: SRG-OS-999999
@@ -904,85 +1051,6 @@
 #
 - name: check stig_rhel6_v1r18 v_38519
   when: ['v_38519']|issubset(check_findings)
-
-
-# Vuln ID: V-38593
-# Severity: medium
-# Group Title: SRG-OS-000228
-# Rule ID: SV-50394r3_rule
-# STIG ID: RHEL-06-000073
-# Rule Title: The Department of Defense (DoD) login banner must be displayed immediately prior to, or as part of, console login prompts.
-# Discussion: An appropriate warning message reinforces policy awareness during the logon process and facilitates possible legal action against attackers.
-# IA Controls:
-# Check Content: To check if the system login banner is compliant, run the following command:
-#
-# $ cat /etc/issue
-#
-#
-# Note: The full text banner must be implemented unless there are character limitations that prevent the display of the full DoD logon banner.
-#
-# If the required DoD logon banner is not displayed, this is a finding.
-#
-# Fix Text: To configure the system login banner:
-#
-# Edit "/etc/issue". Replace the default text with a message compliant with the local site policy or a legal disclaimer. The DoD required text is either:
-#
-# "You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only. By using this IS (which includes any device attached to this IS), you consent to the following conditions:
-# -The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
-# -At any time, the USG may inspect and seize data stored on this IS.
-# -Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
-# -This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
-# -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details."
-#
-# If the device cannot support the full DoD logon banner due to character limitations, the following text can be used:
-#
-# "I've read & consent to terms in IS user agreem't."
-# False Positives:
-# False Negatives:
-# Documentable: false
-# Mitigations:
-# Potential Impact:
-# Third Party Tools:
-# Mitigation Control:
-# Responsibility:
-# Severity Override Guidance:
-# Check Content Reference: M
-# Classification: Unclass
-# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
-# VMS Asset Posture:
-#  CCI: CCI-001384
-# The information system, for publicly accessible systems, displays system use information organization-defined conditions before granting further access.
-# NIST SP 800-53 :: AC-8 c
-# NIST SP 800-53A :: AC-8.2 (i)
-# NIST SP 800-53 Revision 4 :: AC-8 c 1
-#
-# CCI-001385
-# The information system, for publicly accessible systems, displays references, if any, to monitoring that are consistent with privacy accommodations for such systems that generally prohibit those activities.
-# NIST SP 800-53 :: AC-8 c
-# NIST SP 800-53A :: AC-8.2 (ii)
-# NIST SP 800-53 Revision 4 :: AC-8 c 2
-#
-# CCI-001386
-# The information system for publicly accessible systems displays references, if any, to recording that are consistent with privacy accommodations for such systems that generally prohibit those activities.
-# NIST SP 800-53 :: AC-8 c
-# NIST SP 800-53A :: AC-8.2 (ii)
-# NIST SP 800-53 Revision 4 :: AC-8 c 2
-#
-# CCI-001387
-# The information system for publicly accessible systems displays references, if any, to auditing that are consistent with privacy accommodations for such systems that generally prohibit those activities.
-# NIST SP 800-53 :: AC-8 c
-# NIST SP 800-53A :: AC-8.2 (ii)
-# NIST SP 800-53 Revision 4 :: AC-8 c 2
-#
-# CCI-001388
-# The information system, for publicly accessible systems, includes a description of the authorized uses of the system.
-# NIST SP 800-53 :: AC-8 c
-# NIST SP 800-53A :: AC-8.2 (iii)
-# NIST SP 800-53 Revision 4 :: AC-8 c 3
-#
-#
-- name: check stig_rhel6_v1r18 v_38593
-  when: ['v_38593']|issubset(check_findings)
 
 
 # Vuln ID: V-38619

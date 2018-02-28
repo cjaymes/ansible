@@ -234,6 +234,51 @@
   when: ['v_38639']|issubset(check_findings)
 
 
+# Vuln ID: V-38676
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50477r2_rule
+# STIG ID: RHEL-06-000291
+# Rule Title: The xorg-x11-server-common (X Windows) package must not be installed, unless required.
+# Discussion: Unnecessary packages should not be installed to decrease the attack surface of the system.
+# IA Controls:
+# Check Content: To ensure the X Windows package group is removed, run the following command:
+#
+# $ rpm -qi xorg-x11-server-common
+#
+# The output should be:
+#
+# package xorg-x11-server-common is not installed
+#
+#
+# If it is not, this is a finding.
+# Fix Text: Removing all packages which constitute the X Window System ensures users or malicious software cannot start X. To do so, run the following command:
+#
+# # yum groupremove "X Window System"
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38676
+  when: ['v_38676']|issubset(check_findings)
+
+
 # Vuln ID: V-38688
 # Severity: medium
 # Group Title: SRG-OS-000024

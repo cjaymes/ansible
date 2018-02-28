@@ -1,0 +1,143 @@
+# Vuln ID: V-72051
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86675r1_rule
+# STIG ID: RHEL-07-021100
+# Rule Title: Cron logging must be implemented.
+# Discussion: Cron logging can be used to trace the successful or unsuccessful execution of cron jobs. It can also be used to spot intrusions into the use of the cron facility by unauthorized and malicious users.
+# IA Controls:
+# Check Content: Verify that "rsyslog" is configured to log cron events.
+#
+# Check the configuration of "/etc/rsyslog.conf" for the cron facility with the following command:
+#
+# Note: If another logging package is used, substitute the utility configuration file for "/etc/rsyslog.conf".
+#
+# # grep cron /etc/rsyslog.conf
+# cron.* /var/log/cron.log
+#
+# If the command does not return a response, check for cron logging all facilities by inspecting the "/etc/rsyslog.conf" file:
+#
+# # more /etc/rsyslog.conf
+#
+# Look for the following entry:
+#
+# *.* /var/log/messages
+#
+# If "rsyslog" is not logging messages for the cron facility or all facilities, this is a finding.
+#
+# If the entry is in the "/etc/rsyslog.conf" file but is after the entry "*.*", this is a finding.
+# Fix Text: Configure "rsyslog" to log all cron messages by adding or updating the following line to "/etc/rsyslog.conf":
+#
+# cron.* /var/log/cron.log
+#
+# Note: The line must be added before the following entry if it exists in "/etc/rsyslog.conf":
+#
+# *.* ~ # discards everything
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_72051
+  when: ['v_72051']|issubset(check_findings)
+
+
+# Vuln ID: V-72053
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86677r2_rule
+# STIG ID: RHEL-07-021110
+# Rule Title: If the cron.allow file exists it must be owned by root.
+# Discussion: If the owner of the "cron.allow" file is not set to root, the possibility exists for an unauthorized user to view or to edit sensitive information.
+# IA Controls:
+# Check Content: Verify that the "cron.allow" file is owned by root.
+#
+# Check the owner of the "cron.allow" file with the following command:
+#
+# # ls -al /etc/cron.allow
+# -rw------- 1 root root 6 Mar  5  2011 /etc/cron.allow
+#
+# If the "cron.allow" file exists and has an owner other than root, this is a finding.
+# Fix Text: Set the owner on the "/etc/cron.allow" file to root with the following command:
+#
+# # chown root /etc/cron.allow
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_72053
+  when: ['v_72053']|issubset(check_findings)
+
+
+# Vuln ID: V-72055
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86679r1_rule
+# STIG ID: RHEL-07-021120
+# Rule Title: If the cron.allow file exists it must be group-owned by root.
+# Discussion: If the group owner of the "cron.allow" file is not set to root, sensitive information could be viewed or edited by unauthorized users.
+# IA Controls:
+# Check Content: Verify that the "cron.allow" file is group-owned by root.
+#
+# Check the group owner of the "cron.allow" file with the following command:
+#
+# # ls -al /etc/cron.allow
+# -rw------- 1 root root 6 Mar  5  2011 /etc/cron.allow
+#
+# If the "cron.allow" file exists and has a group owner other than root, this is a finding.
+# Fix Text: Set the group owner on the "/etc/cron.allow" file to root with the following command:
+#
+# # chgrp root /etc/cron.allow
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_72055
+  when: ['v_72055']|issubset(check_findings)

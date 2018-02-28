@@ -1,4 +1,39 @@
-stig_rhel6_v1r18_sections: '{{ stig_rhel6_sections }}'
+stig_rhel6_v1r18_sections:
+    - aide
+    - antivirus
+    - audisp
+    - audit_rules
+    - auditd
+    - backup
+    - files
+    - filesystems
+    - firewall
+    - grub
+    - init
+    - ips
+    - kernel
+    - logins
+    - modules
+    - network
+    - nfs
+    - ntpd
+    - packages
+    - pam
+    - passwords
+    - patching
+    - postfix
+    - rsyslogd
+    - samba
+    - selinux
+    - services
+    - snmpd
+    - sshd
+    - sudo
+    - tftpd
+    - umask
+    - vsftpd
+    - xorg
+    - yum
 
 stig_rhel6_v1r18_findings:
   - v_38437

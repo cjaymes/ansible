@@ -1,0 +1,392 @@
+# Vuln ID: V-72041
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86665r3_rule
+# STIG ID: RHEL-07-021000
+# Rule Title: File systems that contain user home directories must be mounted to prevent files with the setuid and setgid bit set from being executed.
+# Discussion: The "nosuid" mount option causes the system to not execute setuid and setgid files with owner privileges. This option must be used for mounting any file system not containing approved setuid and setguid files. Executing files from untrusted file systems increases the opportunity for unprivileged users to attain unauthorized administrative access.
+# IA Controls:
+# Check Content: Verify file systems that contain user home directories are mounted with the "nosuid" option.
+#
+# Find the file system(s) that contain the user home directories with the following command:
+#
+# Note: If a separate file system has not been created for the user home directories (user home directories are mounted under "/"), this is not a finding as the "nosuid" option cannot be used on the "/" system.
+#
+# # cut -d: -f 1,3,6 /etc/passwd | egrep ":[1-4][0-9]{3}"
+# smithj:1001:/home/smithj
+# thomasr:1002:/home/thomasr
+#
+# Check the file systems that are mounted at boot time with the following command:
+#
+# # more /etc/fstab
+#
+# UUID=a411dc99-f2a1-4c87-9e05-184977be8539 /home   ext4   rw,relatime,discard,data=ordered,nosuid 0 2
+#
+# If a file system found in "/etc/fstab" refers to the user home directory file system and it does not have the "nosuid" option set, this is a finding.
+# Fix Text: Configure the "/etc/fstab" to use the "nosuid" option on file systems that contain user home directories.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_72041
+  when: ['v_72041']|issubset(check_findings)
+
+
+# Vuln ID: V-72043
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86667r1_rule
+# STIG ID: RHEL-07-021010
+# Rule Title: File systems that are used with removable media must be mounted to prevent files with the setuid and setgid bit set from being executed.
+# Discussion: The "nosuid" mount option causes the system to not execute "setuid" and "setgid" files with owner privileges. This option must be used for mounting any file system not containing approved "setuid" and "setguid" files. Executing files from untrusted file systems increases the opportunity for unprivileged users to attain unauthorized administrative access.
+# IA Controls:
+# Check Content: Verify file systems that are used for removable media are mounted with the "nouid" option.
+#
+# Check the file systems that are mounted at boot time with the following command:
+#
+# # more /etc/fstab
+#
+# UUID=2bc871e4-e2a3-4f29-9ece-3be60c835222     /mnt/usbflash      vfat   noauto,owner,ro,nosuid                        0 0
+#
+# If a file system found in "/etc/fstab" refers to removable media and it does not have the "nosuid" option set, this is a finding.
+# Fix Text: Configure the "/etc/fstab" to use the "nosuid" option on file systems that are associated with removable media.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_72043
+  when: ['v_72043']|issubset(check_findings)
+
+
+# Vuln ID: V-72045
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86669r1_rule
+# STIG ID: RHEL-07-021020
+# Rule Title: File systems that are being imported via Network File System (NFS) must be mounted to prevent files with the setuid and setgid bit set from being executed.
+# Discussion: The "nosuid" mount option causes the system to not execute "setuid" and "setgid" files with owner privileges. This option must be used for mounting any file system not containing approved "setuid" and "setguid" files. Executing files from untrusted file systems increases the opportunity for unprivileged users to attain unauthorized administrative access.
+# IA Controls:
+# Check Content: Verify file systems that are being NFS exported are mounted with the "nosuid" option.
+#
+# Find the file system(s) that contain the directories being exported with the following command:
+#
+# # more /etc/fstab | grep nfs
+#
+# UUID=e06097bb-cfcd-437b-9e4d-a691f5662a7d    /store           nfs           rw,nosuid                                                    0 0
+#
+# If a file system found in "/etc/fstab" refers to NFS and it does not have the "nosuid" option set, this is a finding.
+# Fix Text: Configure the "/etc/fstab" to use the "nosuid" option on file systems that are being exported via NFS.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_72045
+  when: ['v_72045']|issubset(check_findings)
+
+
+# Vuln ID: V-72059
+# Severity: low
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86683r1_rule
+# STIG ID: RHEL-07-021310
+# Rule Title: A separate file system must be used for user home directories (such as /home or an equivalent).
+# Discussion: The use of separate file systems for different paths can protect the system from failures resulting from a file system becoming full or failing.
+# IA Controls:
+# Check Content: Verify that a separate file system/partition has been created for non-privileged local interactive user home directories.
+#
+# Check the home directory assignment for all non-privileged users (those with a UID greater than 1000) on the system with the following command:
+#
+# #cut -d: -f 1,3,6,7 /etc/passwd | egrep ":[1-4][0-9]{3}" | tr ":" "\t"
+#
+# adamsj /home/adamsj /bin/bash
+# jacksonm /home/jacksonm /bin/bash
+# smithj /home/smithj /bin/bash
+#
+# The output of the command will give the directory/partition that contains the home directories for the non-privileged users on the system (in this example, /home) and users’ shell. All accounts with a valid shell (such as /bin/bash) are considered interactive users.
+#
+# Check that a file system/partition has been created for the non-privileged interactive users with the following command:
+#
+# Note: The partition of /home is used in the example.
+#
+# # grep /home /etc/fstab
+# UUID=333ada18    /home                   ext4    noatime,nobarrier,nodev  1 2
+#
+# If a separate entry for the file system/partition that contains the non-privileged interactive users' home directories does not exist, this is a finding.
+# Fix Text: Migrate the "/home" directory onto a separate file system/partition.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_72059
+  when: ['v_72059']|issubset(check_findings)
+
+
+# Vuln ID: V-72061
+# Severity: low
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86685r1_rule
+# STIG ID: RHEL-07-021320
+# Rule Title: The system must use a separate file system for /var.
+# Discussion: The use of separate file systems for different paths can protect the system from failures resulting from a file system becoming full or failing.
+# IA Controls:
+# Check Content: Verify that a separate file system/partition has been created for "/var".
+#
+# Check that a file system/partition has been created for "/var" with the following command:
+#
+# # grep /var /etc/fstab
+# UUID=c274f65f    /var                    ext4    noatime,nobarrier        1 2
+#
+# If a separate entry for "/var" is not in use, this is a finding.
+# Fix Text: Migrate the "/var" path onto a separate file system.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_72061
+  when: ['v_72061']|issubset(check_findings)
+
+
+# Vuln ID: V-72063
+# Severity: low
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86687r5_rule
+# STIG ID: RHEL-07-021330
+# Rule Title: The system must use a separate file system for the system audit data path.
+# Discussion: The use of separate file systems for different paths can protect the system from failures resulting from a file system becoming full or failing.
+# IA Controls:
+# Check Content: Determine if the "/var/log/audit" path is a separate file system.
+#
+# # grep /var/log/audit /etc/fstab
+#
+# If no result is returned, "/var/log/audit" is not on a separate file system, and this is a finding.
+# Fix Text: Migrate the system audit data path onto a separate file system.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_72063
+  when: ['v_72063']|issubset(check_findings)
+
+
+# Vuln ID: V-72065
+# Severity: low
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86689r1_rule
+# STIG ID: RHEL-07-021340
+# Rule Title: The system must use a separate file system for /tmp (or equivalent).
+# Discussion: The use of separate file systems for different paths can protect the system from failures resulting from a file system becoming full or failing.
+# IA Controls:
+# Check Content: Verify that a separate file system/partition has been created for "/tmp".
+#
+# Check that a file system/partition has been created for "/tmp" with the following command:
+#
+# # systemctl is-enabled tmp.mount
+# enabled
+#
+# If the "tmp.mount" service is not enabled, this is a finding.
+# Fix Text: Start the "tmp.mount" service with the following command:
+#
+# # systemctl enable tmp.mount
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_72065
+  when: ['v_72065']|issubset(check_findings)
+
+
+# Vuln ID: V-72311
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86935r3_rule
+# STIG ID: RHEL-07-040750
+# Rule Title: The Network File System (NFS) must be configured to use RPCSEC_GSS.
+# Discussion: When an NFS server is configured to use RPCSEC_SYS, a selected userid and groupid are used to handle requests from the remote user. The userid and groupid could mistakenly or maliciously be set incorrectly. The RPCSEC_GSS method of authentication uses certificates on the server and client systems to more securely authenticate the remote mount request.
+# IA Controls:
+# Check Content: Verify "AUTH_GSS" is being used to authenticate NFS mounts.
+#
+# To check if the system is importing an NFS file system, look for any entries in the "/etc/fstab" file that have a file system type of "nfs" with the following command:
+#
+# # cat /etc/fstab | grep nfs
+# 192.168.21.5:/mnt/export /data1 nfs4 rw,sync ,soft,sec=krb5:krb5i:krb5p
+#
+# If the system is mounting file systems via NFS and has the sec option without the "krb5:krb5i:krb5p" settings, the "sec" option has the "sys" setting, or the "sec" option is missing, this is a finding.
+# Fix Text: Update the "/etc/fstab" file so the option "sec" is defined for each NFS mounted file system and the "sec" option does not have the "sys" setting.
+#
+# Ensure the "sec" option is defined as "krb5:krb5i:krb5p".
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_72311
+  when: ['v_72311']|issubset(check_findings)
+
+
+# Vuln ID: V-73161
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-87813r1_rule
+# STIG ID: RHEL-07-021021
+# Rule Title: File systems that are being imported via Network File System (NFS) must be mounted to prevent binary files from being executed.
+# Discussion: The "noexec" mount option causes the system to not execute binary files. This option must be used for mounting any file system not containing approved binary files as they may be incompatible. Executing files from untrusted file systems increases the opportunity for unprivileged users to attain unauthorized administrative access.
+# IA Controls:
+# Check Content: Verify file systems that are being NFS exported are mounted with the "noexec" option.
+#
+# Find the file system(s) that contain the directories being exported with the following command:
+#
+# # more /etc/fstab | grep nfs
+#
+# UUID=e06097bb-cfcd-437b-9e4d-a691f5662a7d    /store           nfs           rw,noexec                                                    0 0
+#
+# If a file system found in "/etc/fstab" refers to NFS and it does not have the "noexec" option set, and use of NFS exported binaries is not documented with the Information System Security Officer (ISSO) as an operational requirement, this is a finding.
+# Fix Text: Configure the "/etc/fstab" to use the "noexec" option on file systems that are being exported via NFS.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_73161
+  when: ['v_73161']|issubset(check_findings)

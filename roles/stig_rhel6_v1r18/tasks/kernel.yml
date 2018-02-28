@@ -130,3 +130,47 @@
 #
 - name: check stig_rhel6_v1r18 v_38597
   when: ['v_38597']|issubset(check_findings)
+
+
+# Vuln ID: V-38675
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50476r2_rule
+# STIG ID: RHEL-06-000308
+# Rule Title: Process core dumps must be disabled unless needed.
+# Discussion: A core dump includes a memory image taken at the time the operating system terminates an application. The memory image could contain sensitive data and is generally useful only for developers trying to debug problems.
+# IA Controls:
+# Check Content: To verify that core dumps are disabled for all users, run the following command:
+#
+# $ grep core /etc/security/limits.conf /etc/security/limits.d/*.conf
+#
+# The output should be:
+#
+# * hard core 0
+#
+# If it is not, this is a finding.
+# Fix Text: To disable core dumps for all users, add the following line to "/etc/security/limits.conf":
+#
+# * hard core 0
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38675
+  when: ['v_38675']|issubset(check_findings)

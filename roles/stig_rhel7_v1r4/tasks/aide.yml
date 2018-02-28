@@ -1,0 +1,295 @@
+# Vuln ID: V-71973
+# Severity: medium
+# Group Title: SRG-OS-000363-GPOS-00150
+# Rule ID: SV-86597r1_rule
+# STIG ID: RHEL-07-020030
+# Rule Title: A file integrity tool must verify the baseline operating system configuration at least weekly.
+# Discussion: Unauthorized changes to the baseline configuration could make the system vulnerable to various attacks or allow unauthorized access to the operating system. Changes to operating system configurations can have unintended side effects, some of which may be relevant to security.
+#
+# Detecting such changes and providing an automated response can help avoid unintended, negative consequences that could ultimately affect the security state of the operating system. The operating system's Information Management Officer (IMO)/Information System Security Officer (ISSO) and System Administrators (SAs) must be notified via email and/or monitoring system trap when there is an unauthorized modification of a configuration item.
+# IA Controls:
+# Check Content: Verify the operating system routinely checks the baseline configuration for unauthorized changes.
+#
+# Note: A file integrity tool other than Advanced Intrusion Detection Environment (AIDE) may be used, but the tool must be executed at least once per week.
+#
+# Check to see if AIDE is installed on the system with the following command:
+#
+# # yum list installed aide
+#
+# If AIDE is not installed, ask the SA how file integrity checks are performed on the system.
+#
+# Check for the presence of a cron job running daily or weekly on the system that executes AIDE daily to scan for changes to the system baseline. The command used in the example will use a daily occurrence.
+#
+# Check the "/etc/cron.daily" subdirectory for a "crontab" file controlling the execution of the file integrity application. For example, if AIDE is installed on the system, use the following command:
+#
+# # ls -al /etc/cron.* | grep aide
+# -rwxr-xr-x  1 root root        29 Nov  22  2015 aide
+#
+# If the file integrity application does not exist, or a "crontab" file does not exist in the "/etc/cron.daily" or "/etc/cron.weekly" subdirectories, this is a finding.
+# Fix Text: Configure the file integrity tool to automatically run on the system at least weekly. The following example output is generic. It will set cron to run AIDE daily, but other file integrity tools may be used:
+#
+# # cat /etc/cron.daily/aide
+# 0 0 * * * /usr/sbin/aide --check | /bin/mail -s "aide integrity check run for <system name>" root@sysname.mil
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001744
+# The information system implements organization-defined security responses automatically if baseline configurations are changed in an unauthorized manner.
+# NIST SP 800-53 Revision 4 :: CM-3 (5)
+#
+#
+- name: stig_rhel7_v1r4_v_71973
+  when: ['v_71973']|issubset(check_findings)
+
+
+# Vuln ID: V-71975
+# Severity: medium
+# Group Title: SRG-OS-000363-GPOS-00150
+# Rule ID: SV-86599r1_rule
+# STIG ID: RHEL-07-020040
+# Rule Title: Designated personnel must be notified if baseline configurations are changed in an unauthorized manner.
+# Discussion: Unauthorized changes to the baseline configuration could make the system vulnerable to various attacks or allow unauthorized access to the operating system. Changes to operating system configurations can have unintended side effects, some of which may be relevant to security.
+#
+# Detecting such changes and providing an automated response can help avoid unintended, negative consequences that could ultimately affect the security state of the operating system. The operating system's Information Management Officer (IMO)/Information System Security Officer (ISSO) and System Administrators (SAs) must be notified via email and/or monitoring system trap when there is an unauthorized modification of a configuration item.
+# IA Controls:
+# Check Content: Verify the operating system notifies designated personnel if baseline configurations are changed in an unauthorized manner.
+#
+# Note: A file integrity tool other than Advanced Intrusion Detection Environment (AIDE) may be used, but the tool must be executed and notify specified individuals via email or an alert.
+#
+# Check to see if AIDE is installed on the system with the following command:
+#
+# # yum list installed aide
+#
+# If AIDE is not installed, ask the SA how file integrity checks are performed on the system.
+#
+# Check for the presence of a cron job running routinely on the system that executes AIDE to scan for changes to the system baseline. The commands used in the example will use a daily occurrence.
+#
+# Check the "/etc/cron.daily" subdirectory for a "crontab" file controlling the execution of the file integrity application. For example, if AIDE is installed on the system, use the following commands:
+#
+# # ls -al /etc/cron.daily | grep aide
+# -rwxr-xr-x  1 root root        32 Jul  1  2011 aide
+#
+# AIDE does not have a configuration that will send a notification, so the cron job uses the mail application on the system to email the results of the file integrity run as in the following example:
+#
+# # more /etc/cron.daily/aide
+# 0 0 * * * /usr/sbin/aide --check | /bin/mail -s "$HOSTNAME - Daily aide integrity check run" root@sysname.mil
+#
+# If the file integrity application does not notify designated personnel of changes, this is a finding.
+# Fix Text: Configure the operating system to notify designated personnel if baseline configurations are changed in an unauthorized manner. The AIDE tool can be configured to email designated personnel through the use of the cron system.
+#
+# The following example output is generic. It will set cron to run AIDE daily and to send email at the completion of the analysis.
+#
+# # more /etc/cron.daily/aide
+# 0 0 * * * /usr/sbin/aide --check | /bin/mail -s "$HOSTNAME - Daily aide integrity check run" root@sysname.mil
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001744
+# The information system implements organization-defined security responses automatically if baseline configurations are changed in an unauthorized manner.
+# NIST SP 800-53 Revision 4 :: CM-3 (5)
+#
+#
+- name: stig_rhel7_v1r4_v_71975
+  when: ['v_71975']|issubset(check_findings)
+
+
+# Vuln ID: V-72069
+# Severity: low
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86693r2_rule
+# STIG ID: RHEL-07-021600
+# Rule Title: The file integrity tool must be configured to verify Access Control Lists (ACLs).
+# Discussion: ACLs can provide permissions beyond those permitted through the file mode and must be verified by file integrity tools.
+# IA Controls:
+# Check Content: Verify the file integrity tool is configured to verify ACLs.
+#
+# Check to see if Advanced Intrusion Detection Environment (AIDE) is installed on the system with the following command:
+#
+# # yum list installed aide
+#
+# If AIDE is not installed, ask the System Administrator how file integrity checks are performed on the system.
+#
+# If there is no application installed to perform file integrity checks, this is a finding.
+#
+# Note: AIDE is highly configurable at install time. These commands assume the "aide.conf" file is under the "/etc" directory.
+#
+# Use the following command to determine if the file is in another location:
+#
+# # find / -name aide.conf
+#
+# Check the "aide.conf" file to determine if the "acl" rule has been added to the rule list being applied to the files and directories selection lists.
+#
+# An example rule that includes the "acl" rule is below:
+#
+# All= p+i+n+u+g+s+m+S+sha512+acl+xattrs+selinux
+# /bin All            # apply the custom rule to the files in bin
+# /sbin All          # apply the same custom rule to the files in sbin
+#
+# If the "acl" rule is not being used on all selection lines in the "/etc/aide.conf" file, or ACLs are not being checked by another file integrity tool, this is a finding.
+# Fix Text: Configure the file integrity tool to check file and directory ACLs.
+#
+# If AIDE is installed, ensure the "acl" rule is present on all file and directory selection lists.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_72069
+  when: ['v_72069']|issubset(check_findings)
+
+
+# Vuln ID: V-72071
+# Severity: low
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86695r2_rule
+# STIG ID: RHEL-07-021610
+# Rule Title: The file integrity tool must be configured to verify extended attributes.
+# Discussion: Extended attributes in file systems are used to contain arbitrary data and file metadata with security implications.
+# IA Controls:
+# Check Content: Verify the file integrity tool is configured to verify extended attributes.
+#
+# Check to see if Advanced Intrusion Detection Environment (AIDE) is installed on the system with the following command:
+#
+# # yum list installed aide
+#
+# If AIDE is not installed, ask the System Administrator how file integrity checks are performed on the system.
+#
+# If there is no application installed to perform file integrity checks, this is a finding.
+#
+# Note: AIDE is highly configurable at install time. These commands assume the "aide.conf" file is under the "/etc" directory.
+#
+# Use the following command to determine if the file is in another location:
+#
+# # find / -name aide.conf
+#
+# Check the "aide.conf" file to determine if the "xattrs" rule has been added to the rule list being applied to the files and directories selection lists.
+#
+# An example rule that includes the "xattrs" rule follows:
+#
+# All= p+i+n+u+g+s+m+S+sha512+acl+xattrs+selinux
+# /bin All            # apply the custom rule to the files in bin
+# /sbin All          # apply the same custom rule to the files in sbin
+#
+# If the "xattrs" rule is not being used on all selection lines in the "/etc/aide.conf" file, or extended attributes are not being checked by another file integrity tool, this is a finding.
+# Fix Text: Configure the file integrity tool to check file and directory extended attributes.
+#
+# If AIDE is installed, ensure the "xattrs" rule is present on all file and directory selection lists.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_72071
+  when: ['v_72071']|issubset(check_findings)
+
+
+# Vuln ID: V-72073
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86697r2_rule
+# STIG ID: RHEL-07-021620
+# Rule Title: The file integrity tool must use FIPS 140-2 approved cryptographic hashes for validating file contents and directories.
+# Discussion: File integrity tools use cryptographic hashes for verifying file contents and directories have not been altered. These hashes must be FIPS 140-2 approved cryptographic hashes.
+# IA Controls:
+# Check Content: Verify the file integrity tool is configured to use FIPS 140-2 approved cryptographic hashes for validating file contents and directories.
+#
+# Note: If RHEL-07-021350 is a finding, this is automatically a finding as the system cannot implement FIPS 140-2 approved cryptographic algorithms and hashes.
+#
+# Check to see if Advanced Intrusion Detection Environment (AIDE) is installed on the system with the following command:
+#
+# # yum list installed aide
+#
+# If AIDE is not installed, ask the System Administrator how file integrity checks are performed on the system.
+#
+# If there is no application installed to perform file integrity checks, this is a finding.
+#
+# Note: AIDE is highly configurable at install time. These commands assume the "aide.conf" file is under the "/etc" directory.
+#
+# Use the following command to determine if the file is in another location:
+#
+# # find / -name aide.conf
+#
+# Check the "aide.conf" file to determine if the "sha512" rule has been added to the rule list being applied to the files and directories selection lists.
+#
+# An example rule that includes the "sha512" rule follows:
+#
+# All=p+i+n+u+g+s+m+S+sha512+acl+xattrs+selinux
+# /bin All            # apply the custom rule to the files in bin
+# /sbin All          # apply the same custom rule to the files in sbin
+#
+# If the "sha512" rule is not being used on all selection lines in the "/etc/aide.conf" file, or another file integrity tool is not using FIPS 140-2 approved cryptographic hashes for validating file contents and directories, this is a finding.
+# Fix Text: Configure the file integrity tool to use FIPS 140-2 cryptographic hashes for validating file and directory contents.
+#
+# If AIDE is installed, ensure the "sha512" rule is present on all file and directory selection lists.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_72073
+  when: ['v_72073']|issubset(check_findings)

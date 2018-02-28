@@ -1,0 +1,160 @@
+# Vuln ID: V-72227
+# Severity: medium
+# Group Title: SRG-OS-000250-GPOS-00093
+# Rule ID: SV-86851r2_rule
+# STIG ID: RHEL-07-040180
+# Rule Title: The operating system must implement cryptography to protect the integrity of Lightweight Directory Access Protocol (LDAP) authentication communications.
+# Discussion: Without cryptographic integrity protections, information can be altered by unauthorized users without detection.
+#
+# Cryptographic mechanisms used for protecting the integrity of information include, for example, signed hash functions using asymmetric cryptography enabling distribution of the public key to verify the hash information while maintaining the confidentiality of the key used to generate the hash.
+# IA Controls:
+# Check Content: Verify the operating system implements cryptography to protect the integrity of remote LDAP authentication sessions.
+#
+# To determine if LDAP is being used for authentication, use the following command:
+#
+# # grep -i useldapauth /etc/sysconfig/authconfig
+# USELDAPAUTH=yes
+#
+# If USELDAPAUTH=yes, then LDAP is being used. To see if LDAP is configured to use TLS, use the following command:
+#
+# # grep -i ssl /etc/pam_ldap.conf
+# ssl start_tls
+#
+# If the "ssl" option is not "start_tls", this is a finding.
+# Fix Text: Configure the operating system to implement cryptography to protect the integrity of LDAP authentication sessions.
+#
+# Set the USELDAPAUTH=yes in "/etc/sysconfig/authconfig".
+#
+# Set "ssl start_tls" in "/etc/pam_ldap.conf".
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001453
+# The information system implements cryptographic mechanisms to protect the integrity of remote access sessions.
+# NIST SP 800-53 :: AC-17 (2)
+# NIST SP 800-53A :: AC-17 (2).1
+# NIST SP 800-53 Revision 4 :: AC-17 (2)
+#
+#
+- name: stig_rhel7_v1r4_v_72227
+  when: ['v_72227']|issubset(check_findings)
+
+
+# Vuln ID: V-72229
+# Severity: medium
+# Group Title: SRG-OS-000250-GPOS-00093
+# Rule ID: SV-86853r2_rule
+# STIG ID: RHEL-07-040190
+# Rule Title: The operating system must implement cryptography to protect the integrity of Lightweight Directory Access Protocol (LDAP) communications.
+# Discussion: Without cryptographic integrity protections, information can be altered by unauthorized users without detection.
+#
+# Cryptographic mechanisms used for protecting the integrity of information include, for example, signed hash functions using asymmetric cryptography enabling distribution of the public key to verify the hash information while maintaining the confidentiality of the key used to generate the hash.
+# IA Controls:
+# Check Content: Verify the operating system implements cryptography to protect the integrity of remote LDAP access sessions.
+#
+# To determine if LDAP is being used for authentication, use the following command:
+#
+# # grep -i useldapauth /etc/sysconfig/authconfig
+# USELDAPAUTH=yes
+#
+# If USELDAPAUTH=yes, then LDAP is being used.
+#
+# Check for the directory containing X.509 certificates for peer authentication with the following command:
+#
+# # grep -i cacertdir /etc/pam_ldap.conf
+# tls_cacertdir /etc/openldap/certs
+#
+# Verify the directory set with the "tls_cacertdir" option exists.
+#
+# If the directory does not exist or the option is commented out, this is a finding.
+# Fix Text: Configure the operating system to implement cryptography to protect the integrity of LDAP remote access sessions.
+#
+# Set the "tls_cacertdir" option in "/etc/pam_ldap.conf" to point to the directory that will contain the X.509 certificates for peer authentication.
+#
+# Set the "tls_cacertfile" option in "/etc/pam_ldap.conf" to point to the path for the X.509 certificates used for peer authentication.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001453
+# The information system implements cryptographic mechanisms to protect the integrity of remote access sessions.
+# NIST SP 800-53 :: AC-17 (2)
+# NIST SP 800-53A :: AC-17 (2).1
+# NIST SP 800-53 Revision 4 :: AC-17 (2)
+#
+#
+- name: stig_rhel7_v1r4_v_72229
+  when: ['v_72229']|issubset(check_findings)
+
+
+# Vuln ID: V-72231
+# Severity: medium
+# Group Title: SRG-OS-000250-GPOS-00093
+# Rule ID: SV-86855r2_rule
+# STIG ID: RHEL-07-040200
+# Rule Title: The operating system must implement cryptography to protect the integrity of Lightweight Directory Access Protocol (LDAP) communications.
+# Discussion: Without cryptographic integrity protections, information can be altered by unauthorized users without detection.
+#
+# Cryptographic mechanisms used for protecting the integrity of information include, for example, signed hash functions using asymmetric cryptography enabling distribution of the public key to verify the hash information while maintaining the confidentiality of the key used to generate the hash.
+# IA Controls:
+# Check Content: Verify the operating system implements cryptography to protect the integrity of remote ldap access sessions.
+#
+# To determine if LDAP is being used for authentication, use the following command:
+#
+# # grep -i useldapauth /etc/sysconfig/authconfig
+# USELDAPAUTH=yes
+#
+# If USELDAPAUTH=yes, then LDAP is being used.
+#
+# Check that the path to the X.509 certificate for peer authentication with the following command:
+#
+# # grep -i cacertfile /etc/pam_ldap.conf
+# tls_cacertfile /etc/openldap/ldap-cacert.pem
+#
+# Verify the "tls_cacertfile" option points to a file that contains the trusted CA certificate.
+#
+# If this file does not exist, or the option is commented out or missing, this is a finding.
+# Fix Text: Configure the operating system to implement cryptography to protect the integrity of LDAP remote access sessions.
+#
+# Set the "tls_cacertfile" option in "/etc/pam_ldap.conf" to point to the path for the X.509 certificates used for peer authentication.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001453
+# The information system implements cryptographic mechanisms to protect the integrity of remote access sessions.
+# NIST SP 800-53 :: AC-17 (2)
+# NIST SP 800-53A :: AC-17 (2).1
+# NIST SP 800-53 Revision 4 :: AC-17 (2)
+#
+#
+- name: stig_rhel7_v1r4_v_72231
+  when: ['v_72231']|issubset(check_findings)

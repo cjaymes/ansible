@@ -185,3 +185,37 @@
 #
 - name: check stig_rhel6_v1r18 v_38585
   when: ['v_38585']|issubset(check_findings)
+
+
+# Vuln ID: V-51337
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-65547r2_rule
+# STIG ID: RHEL-06-000017
+# Rule Title: The system must use a Linux Security Module at boot time.
+# Discussion: Disabling a major host protection feature, such as SELinux, at boot time prevents it from confining system services at boot time. Further, it increases the chances that it will remain off during system operation.
+# IA Controls:
+# Check Content: Inspect "/boot/grub/grub.conf" for any instances of "selinux=0" in the kernel boot arguments. Presence of "selinux=0" indicates that SELinux is disabled at boot time. If SELinux is disabled at boot time, this is a finding.
+# Fix Text: SELinux can be disabled at boot time by an argument in "/boot/grub/grub.conf". Remove any instances of "selinux=0" from the kernel arguments in that file to prevent SELinux from being disabled at boot.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_51337
+  when: ['v_51337']|issubset(check_findings)

@@ -1,3 +1,44 @@
+# Vuln ID: V-38606
+# Severity: medium
+# Group Title: SRG-OS-000095
+# Rule ID: SV-50407r2_rule
+# STIG ID: RHEL-06-000222
+# Rule Title: The tftp-server package must not be installed unless required.
+# Discussion: Removing the "tftp-server" package decreases the risk of the accidental (or intentional) activation of tftp services.
+# IA Controls:
+# Check Content: Run the following command to determine if the "tftp-server" package is installed:
+#
+# # rpm -q tftp-server
+#
+#
+# If the package is installed, this is a finding.
+# Fix Text: The "tftp-server" package can be removed with the following command:
+#
+# # yum erase tftp-server
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000381
+# The organization configures the information system to provide only essential capabilities.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (ii)
+# NIST SP 800-53 Revision 4 :: CM-7 a
+#
+#
+- name: check stig_rhel6_v1r18 v_38606
+  when: ['v_38606']|issubset(check_findings)
+
+
 # Vuln ID: V-38701
 # Severity: high
 # Group Title: SRG-OS-999999

@@ -1,0 +1,45 @@
+# Vuln ID: V-38481
+# Severity: medium
+# Group Title: SRG-OS-000191
+# Rule ID: SV-50281r1_rule
+# STIG ID: RHEL-06-000011
+# Rule Title: System security patches and updates must be installed and up-to-date.
+# Discussion: Installing software updates is a fundamental mitigation against the exploitation of publicly-known vulnerabilities.
+# IA Controls:
+# Check Content: If the system is joined to the Red Hat Network, a Red Hat Satellite Server, or a yum server which provides updates, invoking the following command will indicate if updates are available:
+#
+# # yum check-update
+#
+# If the system is not configured to update from one of these sources, run the following command to list when each package was last updated:
+#
+# $ rpm -qa -last
+#
+# Compare this to Red Hat Security Advisories (RHSA) listed at https://access.redhat.com/security/updates/active/ to determine whether the system is missing applicable security and bugfix  updates.
+# If updates are not installed, this is a finding.
+# Fix Text: If the system is joined to the Red Hat Network, a Red Hat Satellite Server, or a yum server, run the following command to install updates:
+#
+# # yum update
+#
+# If the system is not configured to use one of these sources, updates (in the form of RPM packages) can be manually downloaded from the Red Hat Network and installed using "rpm".
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001233
+# The organization employs automated mechanisms on an organization-defined frequency to determine the state of information system components with regard to flaw remediation.
+# NIST SP 800-53 :: SI-2 (2)
+# NIST SP 800-53A :: SI-2 (2).1 (ii)
+# NIST SP 800-53 Revision 4 :: SI-2 (2)
+#
+#
+- name: check stig_rhel6_v1r18 v_38481
+  when: ['v_38481']|issubset(check_findings)

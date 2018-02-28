@@ -1,0 +1,101 @@
+# Vuln ID: V-71993
+# Severity: high
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86617r1_rule
+# STIG ID: RHEL-07-020230
+# Rule Title: The x86 Ctrl-Alt-Delete key sequence must be disabled.
+# Discussion: A locally logged-on user who presses Ctrl-Alt-Delete, when at the console, can reboot the system. If accidentally pressed, as could happen in the case of a mixed OS environment, this can create the risk of short-term loss of availability of systems due to unintentional reboot. In the GNOME graphical environment, risk of unintentional reboot from the Ctrl-Alt-Delete sequence is reduced because the user will be prompted before any action is taken.
+# IA Controls:
+# Check Content: Verify the operating system is not configured to reboot the system when Ctrl-Alt-Delete is pressed.
+#
+# Check that the ctrl-alt-del.service is not active with the following command:
+#
+# # systemctl status ctrl-alt-del.service
+# reboot.target - Reboot
+#    Loaded: loaded (/usr/lib/systemd/system/reboot.target; disabled)
+#    Active: inactive (dead)
+#      Docs: man:systemd.special(7)
+#
+# If the ctrl-alt-del.service is active, this is a finding.
+# Fix Text: Configure the system to disable the Ctrl-Alt_Delete sequence for the command line with the following command:
+#
+# # systemctl mask ctrl-alt-del.target
+#
+# If GNOME is active on the system, create a database to contain the system-wide setting (if it does not already exist) with the following command:
+#
+# # cat /etc/dconf/db/local.d/00-disable-CAD
+#
+# Add the setting to disable the Ctrl-Alt_Delete sequence for GNOME:
+#
+# [org/gnome/settings-daemon/plugins/media-keys]
+# logout=’’
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: stig_rhel7_v1r4_v_71993
+  when: ['v_71993']|issubset(check_findings)
+
+
+# Vuln ID: V-77823
+# Severity: medium
+# Group Title: SRG-OS-000080-GPOS-00048
+# Rule ID: SV-92519r1_rule
+# STIG ID: RHEL-07-010481
+# Rule Title: The operating system must require authentication upon booting into single-user and maintenance modes.
+# Discussion: If the system does not require valid root authentication before it boots into single-user or maintenance mode, anyone who invokes single-user or maintenance mode is granted privileged access to all files on the system.
+# IA Controls:
+# Check Content: Verify the operating system must require authentication upon booting into single-user and maintenance modes.
+#
+# Check that the operating system requires authentication upon booting into single-user mode with the following command:
+#
+# # grep -i execstart /usr/lib/systemd/system/rescue.service
+#
+# ExecStart=-/bin/sh -c "/usr/sbin/sulogin; /usr/bin/systemctl --fail --no-block default"
+#
+# If "ExecStart" does not have "/usr/sbin/sulogin" as an option, this is a finding.
+#
+# Fix Text: Configure the operating system to require authentication upon booting into single-user and maintenance modes.
+#
+# Add or modify the "ExecStart" line in "/usr/lib/systemd/system/rescue.service" to include "/usr/sbin/sulogin":
+#
+# ExecStart=-/bin/sh -c "/usr/sbin/sulogin; /usr/bin/systemctl --fail --no-block default"
+#
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000213
+# The information system enforces approved authorizations for logical access to information and system resources in accordance with applicable access control policies.
+# NIST SP 800-53 :: AC-3
+# NIST SP 800-53A :: AC-3.1
+# NIST SP 800-53 Revision 4 :: AC-3
+#
+#
+- name: stig_rhel7_v1r4_v_77823
+  when: ['v_77823']|issubset(check_findings)
