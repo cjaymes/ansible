@@ -67,5 +67,6 @@
 # NIST SP 800-53 Revision 4 :: AU-8 (1) (b)
 #
 #
-- name: stig_rhel7_v1r4_v_72269
+- name: check stig_rhel7_v1r4 v_72269
+  set_fact: stig_rhel7_v1r4_v_72269_result = 'fail'
   when: '"v_72269" in check_findings'

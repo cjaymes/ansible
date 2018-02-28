@@ -49,7 +49,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: stig_rhel7_v1r4_v_71993
+- name: check stig_rhel7_v1r4 v_71993
+  set_fact: stig_rhel7_v1r4_v_71993_result = 'fail'
   when: '"v_71993" in check_findings'
 
 
@@ -97,5 +98,6 @@
 # NIST SP 800-53 Revision 4 :: AC-3
 #
 #
-- name: stig_rhel7_v1r4_v_77823
+- name: check stig_rhel7_v1r4 v_77823
+  set_fact: stig_rhel7_v1r4_v_77823_result = 'fail'
   when: '"v_77823" in check_findings'

@@ -45,6 +45,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38599
+  set_fact: stig_rhel6_v1r18_v_38599_result = 'fail'
   when: '"v_38599" in check_findings'
 
 
@@ -100,4 +101,5 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38702
+  set_fact: stig_rhel6_v1r18_v_38702_result = 'fail'
   when: '"v_38702" in check_findings'

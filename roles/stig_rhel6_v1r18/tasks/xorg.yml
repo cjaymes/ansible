@@ -43,6 +43,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38474
+  set_fact: stig_rhel6_v1r18_v_38474_result = 'fail'
   when: '"v_38474" in check_findings'
 
 
@@ -91,6 +92,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38629
+  set_fact: stig_rhel6_v1r18_v_38629_result = 'fail'
   when: '"v_38629" in check_findings'
 
 
@@ -138,6 +140,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38630
+  set_fact: stig_rhel6_v1r18_v_38630_result = 'fail'
   when: '"v_38630" in check_findings'
 
 
@@ -184,6 +187,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38638
+  set_fact: stig_rhel6_v1r18_v_38638_result = 'fail'
   when: '"v_38638" in check_findings'
 
 
@@ -231,6 +235,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38639
+  set_fact: stig_rhel6_v1r18_v_38639_result = 'fail'
   when: '"v_38639" in check_findings'
 
 
@@ -276,6 +281,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38676
+  set_fact: stig_rhel6_v1r18_v_38676_result = 'fail'
   when: '"v_38676" in check_findings'
 
 
@@ -324,6 +330,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38688
+  set_fact: stig_rhel6_v1r18_v_38688_result = 'fail'
   when: '"v_38688" in check_findings'
 
 
@@ -425,6 +432,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38689
+  set_fact: stig_rhel6_v1r18_v_38689_result = 'fail'
   when: '"v_38689" in check_findings'
 
 
@@ -473,4 +481,5 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_43150
+  set_fact: stig_rhel6_v1r18_v_43150_result = 'fail'
   when: '"v_43150" in check_findings'

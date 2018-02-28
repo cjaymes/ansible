@@ -75,7 +75,8 @@
 # NIST SP 800-53 Revision 4 :: AC-8 a
 #
 #
-- name: stig_rhel7_v1r4_v_71859
+- name: check stig_rhel7_v1r4 v_71859
+  set_fact: stig_rhel7_v1r4_v_71859_result = 'fail'
   when: '"v_71859" in check_findings'
 
 
@@ -160,7 +161,8 @@
 # NIST SP 800-53 Revision 4 :: AC-8 a
 #
 #
-- name: stig_rhel7_v1r4_v_71861
+- name: check stig_rhel7_v1r4 v_71861
+  set_fact: stig_rhel7_v1r4_v_71861_result = 'fail'
   when: '"v_71861" in check_findings'
 
 
@@ -224,7 +226,8 @@
 # NIST SP 800-53 Revision 4 :: AC-11 b
 #
 #
-- name: stig_rhel7_v1r4_v_71891
+- name: check stig_rhel7_v1r4 v_71891
+  set_fact: stig_rhel7_v1r4_v_71891_result = 'fail'
   when: '"v_71891" in check_findings'
 
 
@@ -287,7 +290,8 @@
 # NIST SP 800-53 Revision 4 :: AC-11 a
 #
 #
-- name: stig_rhel7_v1r4_v_71893
+- name: check stig_rhel7_v1r4 v_71893
+  set_fact: stig_rhel7_v1r4_v_71893_result = 'fail'
   when: '"v_71893" in check_findings'
 
 
@@ -347,7 +351,8 @@
 # NIST SP 800-53 Revision 4 :: AC-11 a
 #
 #
-- name: stig_rhel7_v1r4_v_71899
+- name: check stig_rhel7_v1r4 v_71899
+  set_fact: stig_rhel7_v1r4_v_71899_result = 'fail'
   when: '"v_71899" in check_findings'
 
 
@@ -409,7 +414,8 @@
 # NIST SP 800-53 Revision 4 :: AC-11 a
 #
 #
-- name: stig_rhel7_v1r4_v_71901
+- name: check stig_rhel7_v1r4 v_71901
+  set_fact: stig_rhel7_v1r4_v_71901_result = 'fail'
   when: '"v_71901" in check_findings'
 
 
@@ -453,7 +459,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: stig_rhel7_v1r4_v_72307
+- name: check stig_rhel7_v1r4 v_72307
+  set_fact: stig_rhel7_v1r4_v_72307_result = 'fail'
   when: '"v_72307" in check_findings'
 
 
@@ -516,7 +523,8 @@
 # NIST SP 800-53 Revision 4 :: AC-11 a
 #
 #
-- name: stig_rhel7_v1r4_v_73155
+- name: check stig_rhel7_v1r4 v_73155
+  set_fact: stig_rhel7_v1r4_v_73155_result = 'fail'
   when: '"v_73155" in check_findings'
 
 
@@ -579,7 +587,8 @@
 # NIST SP 800-53 Revision 4 :: AC-11 a
 #
 #
-- name: stig_rhel7_v1r4_v_73157
+- name: check stig_rhel7_v1r4 v_73157
+  set_fact: stig_rhel7_v1r4_v_73157_result = 'fail'
   when: '"v_73157" in check_findings'
 
 
@@ -652,7 +661,8 @@
 # NIST SP 800-53 Revision 4 :: IA-2 (12)
 #
 #
-- name: stig_rhel7_v1r4_v_77819
+- name: check stig_rhel7_v1r4 v_77819
+  set_fact: stig_rhel7_v1r4_v_77819_result = 'fail'
   when: '"v_77819" in check_findings'
 
 
@@ -720,7 +730,8 @@
 # NIST SP 800-53 Revision 4 :: AC-11 a
 #
 #
-- name: stig_rhel7_v1r4_v_78995
+- name: check stig_rhel7_v1r4 v_78995
+  set_fact: stig_rhel7_v1r4_v_78995_result = 'fail'
   when: '"v_78995" in check_findings'
 
 
@@ -786,5 +797,6 @@
 # NIST SP 800-53 Revision 4 :: AC-11 a
 #
 #
-- name: stig_rhel7_v1r4_v_78997
+- name: check stig_rhel7_v1r4 v_78997
+  set_fact: stig_rhel7_v1r4_v_78997_result = 'fail'
   when: '"v_78997" in check_findings'

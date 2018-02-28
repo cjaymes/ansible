@@ -48,7 +48,8 @@
 # NIST SP 800-53 Revision 4 :: CM-3 (5)
 #
 #
-- name: stig_rhel7_v1r4_v_71973
+- name: check stig_rhel7_v1r4 v_71973
+  set_fact: stig_rhel7_v1r4_v_71973_result = 'fail'
   when: '"v_71973" in check_findings'
 
 
@@ -109,7 +110,8 @@
 # NIST SP 800-53 Revision 4 :: CM-3 (5)
 #
 #
-- name: stig_rhel7_v1r4_v_71975
+- name: check stig_rhel7_v1r4 v_71975
+  set_fact: stig_rhel7_v1r4_v_71975_result = 'fail'
   when: '"v_71975" in check_findings'
 
 
@@ -169,7 +171,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: stig_rhel7_v1r4_v_72069
+- name: check stig_rhel7_v1r4 v_72069
+  set_fact: stig_rhel7_v1r4_v_72069_result = 'fail'
   when: '"v_72069" in check_findings'
 
 
@@ -229,7 +232,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: stig_rhel7_v1r4_v_72071
+- name: check stig_rhel7_v1r4 v_72071
+  set_fact: stig_rhel7_v1r4_v_72071_result = 'fail'
   when: '"v_72071" in check_findings'
 
 

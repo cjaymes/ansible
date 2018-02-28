@@ -44,7 +44,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: stig_rhel7_v1r4_v_72041
+- name: check stig_rhel7_v1r4 v_72041
+  set_fact: stig_rhel7_v1r4_v_72041_result = 'fail'
   when: '"v_72041" in check_findings'
 
 
@@ -86,7 +87,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: stig_rhel7_v1r4_v_72043
+- name: check stig_rhel7_v1r4 v_72043
+  set_fact: stig_rhel7_v1r4_v_72043_result = 'fail'
   when: '"v_72043" in check_findings'
 
 
@@ -128,7 +130,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: stig_rhel7_v1r4_v_72045
+- name: check stig_rhel7_v1r4 v_72045
+  set_fact: stig_rhel7_v1r4_v_72045_result = 'fail'
   when: '"v_72045" in check_findings'
 
 
@@ -181,7 +184,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: stig_rhel7_v1r4_v_72059
+- name: check stig_rhel7_v1r4 v_72059
+  set_fact: stig_rhel7_v1r4_v_72059_result = 'fail'
   when: '"v_72059" in check_findings'
 
 
@@ -222,7 +226,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: stig_rhel7_v1r4_v_72061
+- name: check stig_rhel7_v1r4 v_72061
+  set_fact: stig_rhel7_v1r4_v_72061_result = 'fail'
   when: '"v_72061" in check_findings'
 
 
@@ -260,7 +265,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: stig_rhel7_v1r4_v_72063
+- name: check stig_rhel7_v1r4 v_72063
+  set_fact: stig_rhel7_v1r4_v_72063_result = 'fail'
   when: '"v_72063" in check_findings'
 
 
@@ -303,7 +309,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: stig_rhel7_v1r4_v_72065
+- name: check stig_rhel7_v1r4 v_72065
+  set_fact: stig_rhel7_v1r4_v_72065_result = 'fail'
   when: '"v_72065" in check_findings'
 
 
@@ -346,7 +353,8 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: stig_rhel7_v1r4_v_72311
+- name: check stig_rhel7_v1r4 v_72311
+  set_fact: stig_rhel7_v1r4_v_72311_result = 'fail'
   when: '"v_72311" in check_findings'
 
 
@@ -388,5 +396,6 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: stig_rhel7_v1r4_v_73161
+- name: check stig_rhel7_v1r4 v_73161
+  set_fact: stig_rhel7_v1r4_v_73161_result = 'fail'
   when: '"v_73161" in check_findings'

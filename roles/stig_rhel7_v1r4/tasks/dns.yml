@@ -60,5 +60,6 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: stig_rhel7_v1r4_v_72281
+- name: check stig_rhel7_v1r4 v_72281
+  set_fact: stig_rhel7_v1r4_v_72281_result = 'fail'
   when: '"v_72281" in check_findings'

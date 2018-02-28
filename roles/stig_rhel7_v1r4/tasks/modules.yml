@@ -55,7 +55,8 @@
 # NIST SP 800-53 Revision 4 :: IA-3
 #
 #
-- name: stig_rhel7_v1r4_v_71983
+- name: check stig_rhel7_v1r4 v_71983
+  set_fact: stig_rhel7_v1r4_v_71983_result = 'fail'
   when: '"v_71983" in check_findings'
 
 
@@ -103,5 +104,6 @@
 # NIST SP 800-53 Revision 4 :: IA-3
 #
 #
-- name: stig_rhel7_v1r4_v_77821
+- name: check stig_rhel7_v1r4 v_77821
+  set_fact: stig_rhel7_v1r4_v_77821_result = 'fail'
   when: '"v_77821" in check_findings'
