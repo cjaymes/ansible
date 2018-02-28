@@ -1,0 +1,365 @@
+# Vuln ID: V-38447
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50247r4_rule
+# STIG ID: RHEL-06-000519
+# Rule Title: The system package management tool must verify contents of all files associated with packages.
+# Discussion: The hash on important files like system executables should match the information given by the RPM database. Executables with erroneous hashes could be a sign of nefarious activity on the system.
+# IA Controls:
+# Check Content: The following command will list which files on the system have file hashes different from what is expected by the RPM database:
+#
+# # rpm -Va | awk '$1 ~ /..5/ && $2 != "c"'
+#
+# If there is any output from the command for system binaries, verify that the changes were due to STIG application and have been documented with the ISSO.
+#
+# If there are changes to system binaries and they are not documented with the ISSO, this is a finding.
+#
+# Fix Text: The RPM package management system can check the hashes of installed software packages, including many that are important to system security. Run the following command to list which files on the system have hashes that differ from what is expected by the RPM database:
+#
+# # rpm -Va | awk '$1 ~ /..5/ && $2 != "c"'
+#
+# If the file that has changed was not expected to, refresh from distribution media or online repositories.
+#
+# rpm -Uvh [affected_package]
+#
+# OR
+#
+# yum reinstall [affected_package]
+#
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38447
+
+
+
+# Vuln ID: V-38452
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50252r2_rule
+# STIG ID: RHEL-06-000518
+# Rule Title: The system package management tool must verify permissions on all files and directories associated with packages.
+# Discussion: Permissions on system binaries and configuration files that are too generous could allow an unauthorized user to gain privileges that they should not have. The permissions set by the vendor should be maintained. Any deviations from this baseline should be investigated.
+# IA Controls:
+# Check Content: The following command will list which files and directories on the system have permissions different from what is expected by the RPM database:
+#
+# # rpm -Va  | grep '^.M'
+#
+# If there is any output, for each file or directory found, find the associated RPM package and compare the RPM-expected permissions with the actual permissions on the file or directory:
+#
+# # rpm -qf [file or directory name]
+# # rpm -q --queryformat "[%{FILENAMES} %{FILEMODES:perms}\n]" [package] | grep  [filename]
+# # ls -dlL [filename]
+#
+# If the existing permissions are more permissive than those expected by RPM, this is a finding.
+# Fix Text: The RPM package management system can restore file access permissions of package files and directories. The following command will update permissions on files and directories with permissions different from what is expected by the RPM database:
+#
+# # rpm --setperms [package]
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38452
+
+
+
+# Vuln ID: V-38453
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50253r2_rule
+# STIG ID: RHEL-06-000517
+# Rule Title: The system package management tool must verify group-ownership on all files and directories associated with packages.
+# Discussion: Group-ownership of system binaries and configuration files that is incorrect could allow an unauthorized user to gain privileges that they should not have. The group-ownership set by the vendor should be maintained. Any deviations from this baseline should be investigated.
+# IA Controls:
+# Check Content: The following command will list which files on the system have group-ownership different from what is expected by the RPM database:
+#
+# # rpm -Va | grep '^......G'
+#
+#
+# If any output is produced, verify that the changes were due to STIG application and have been documented with the ISSO.
+#
+# If any output has not been documented with the ISSO, this is a finding.
+#
+# Fix Text: The RPM package management system can restore group-ownership of the package files and directories. The following command will update files and directories with group-ownership different from what is expected by the RPM database:
+#
+# # rpm -qf [file or directory name]
+# # rpm --setugids [package]
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38453
+
+
+
+# Vuln ID: V-38454
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50254r2_rule
+# STIG ID: RHEL-06-000516
+# Rule Title: The system package management tool must verify ownership on all files and directories associated with packages.
+# Discussion: Ownership of system binaries and configuration files that is incorrect could allow an unauthorized user to gain privileges that they should not have. The ownership set by the vendor should be maintained. Any deviations from this baseline should be investigated.
+# IA Controls:
+# Check Content: The following command will list which files on the system have ownership different from what is expected by the RPM database:
+#
+# # rpm -Va | grep '^.....U'
+#
+#
+# If any output is produced, verify that the changes were due to STIG application and have been documented with the ISSO.
+#
+# If any output has not been documented with the ISSO, this is a finding.
+#
+# Fix Text: The RPM package management system can restore ownership of package files and directories. The following command will update files and directories with ownership different from what is expected by the RPM database:
+#
+# # rpm -qf [file or directory name]
+# # rpm --setugids [package]
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38454
+
+
+
+# Vuln ID: V-38476
+# Severity: high
+# Group Title: SRG-OS-000090
+# Rule ID: SV-50276r3_rule
+# STIG ID: RHEL-06-000008
+# Rule Title: Vendor-provided cryptographic certificates must be installed to verify the integrity of system software.
+# Discussion: The Red Hat GPG keys are necessary to cryptographically verify packages are from Red Hat.
+# IA Controls:
+# Check Content: To ensure that the GPG keys are installed, run:
+#
+# $ rpm -q gpg-pubkey
+#
+# The command should return the strings below:
+#
+# gpg-pubkey-fd431d51-4ae0493b
+# gpg-pubkey-2fa658e0-45700c69
+#
+# If the Red Hat GPG Keys are not installed, this is a finding.
+# Fix Text: To ensure the system can cryptographically verify base software packages come from Red Hat (and to connect to the Red Hat Network to receive them), the Red Hat GPG keys must be installed properly. To install the Red Hat GPG keys, run:
+#
+# # rhn_register
+#
+# If the system is not connected to the Internet or an RHN Satellite, then install the Red Hat GPG keys from trusted media such as the Red Hat installation CD-ROM or DVD. Assuming the disc is mounted in "/media/cdrom", use the following command as the root user to import them into the keyring:
+#
+# # rpm --import /media/cdrom/RPM-GPG-KEY
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000352
+# The information system prevents the installation of organization defined critical software programs that are not signed with a certificate that is recognized and approved by the organization.
+# NIST SP 800-53 :: CM-5 (3)
+# NIST SP 800-53A :: CM-5 (3).1 (ii)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38476
+
+
+
+# Vuln ID: V-38481
+# Severity: medium
+# Group Title: SRG-OS-000191
+# Rule ID: SV-50281r1_rule
+# STIG ID: RHEL-06-000011
+# Rule Title: System security patches and updates must be installed and up-to-date.
+# Discussion: Installing software updates is a fundamental mitigation against the exploitation of publicly-known vulnerabilities.
+# IA Controls:
+# Check Content: If the system is joined to the Red Hat Network, a Red Hat Satellite Server, or a yum server which provides updates, invoking the following command will indicate if updates are available:
+#
+# # yum check-update
+#
+# If the system is not configured to update from one of these sources, run the following command to list when each package was last updated:
+#
+# $ rpm -qa -last
+#
+# Compare this to Red Hat Security Advisories (RHSA) listed at https://access.redhat.com/security/updates/active/ to determine whether the system is missing applicable security and bugfix  updates.
+# If updates are not installed, this is a finding.
+# Fix Text: If the system is joined to the Red Hat Network, a Red Hat Satellite Server, or a yum server, run the following command to install updates:
+#
+# # yum update
+#
+# If the system is not configured to use one of these sources, updates (in the form of RPM packages) can be manually downloaded from the Red Hat Network and installed using "rpm".
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001233
+# The organization employs automated mechanisms on an organization-defined frequency to determine the state of information system components with regard to flaw remediation.
+# NIST SP 800-53 :: SI-2 (2)
+# NIST SP 800-53A :: SI-2 (2).1 (ii)
+# NIST SP 800-53 Revision 4 :: SI-2 (2)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38481
+
+
+
+# Vuln ID: V-38483
+# Severity: medium
+# Group Title: SRG-OS-000103
+# Rule ID: SV-50283r1_rule
+# STIG ID: RHEL-06-000013
+# Rule Title: The system package management tool must cryptographically verify the authenticity of system software packages during installation.
+# Discussion: Ensuring the validity of packages' cryptographic signatures prior to installation ensures the provenance of the software and protects against malicious tampering.
+# IA Controls:
+# Check Content: To determine whether "yum" is configured to use "gpgcheck", inspect "/etc/yum.conf" and ensure the following appears in the "[main]" section:
+#
+# gpgcheck=1
+#
+# A value of "1" indicates that "gpgcheck" is enabled. Absence of a "gpgcheck" line or a setting of "0" indicates that it is disabled.
+# If GPG checking is not enabled, this is a finding.
+#
+# If the "yum" system package management tool is not used to update the system, verify with the SA that installed packages are cryptographically signed.
+# Fix Text: The "gpgcheck" option should be used to ensure checking of an RPM package's signature always occurs prior to its installation. To configure yum to check package signatures before installing them, ensure the following line appears in "/etc/yum.conf" in the "[main]" section:
+#
+# gpgcheck=1
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000663
+# The organization (or information system) enforces explicit rules governing the installation of software by users.
+# NIST SP 800-53 :: SA-7
+# NIST SP 800-53A :: SA-7.1 (ii)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38483
+
+
+
+# Vuln ID: V-38487
+# Severity: low
+# Group Title: SRG-OS-000103
+# Rule ID: SV-50288r1_rule
+# STIG ID: RHEL-06-000015
+# Rule Title: The system package management tool must cryptographically verify the authenticity of all software packages during installation.
+# Discussion: Ensuring all packages' cryptographic signatures are valid prior to installation ensures the provenance of the software and protects against malicious tampering.
+# IA Controls:
+# Check Content: To determine whether "yum" has been configured to disable "gpgcheck" for any repos, inspect all files in "/etc/yum.repos.d" and ensure the following does not appear in any sections:
+#
+# gpgcheck=0
+#
+# A value of "0" indicates that "gpgcheck" has been disabled for that repo.
+# If GPG checking is disabled, this is a finding.
+#
+# If the "yum" system package management tool is not used to update the system, verify with the SA that installed packages are cryptographically signed.
+# Fix Text: To ensure signature checking is not disabled for any repos, remove any lines from files in "/etc/yum.repos.d" of the form:
+#
+# gpgcheck=0
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000663
+# The organization (or information system) enforces explicit rules governing the installation of software by users.
+# NIST SP 800-53 :: SA-7
+# NIST SP 800-53A :: SA-7.1 (ii)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38487
+

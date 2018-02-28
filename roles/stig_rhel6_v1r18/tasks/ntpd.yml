@@ -1,0 +1,90 @@
+# Vuln ID: V-38620
+# Severity: medium
+# Group Title: SRG-OS-000056
+# Rule ID: SV-50421r1_rule
+# STIG ID: RHEL-06-000247
+# Rule Title: The system clock must be synchronized continuously, or at least daily.
+# Discussion: Enabling the "ntpd" service ensures that the "ntpd" service will be running and that the system will synchronize its time to any servers specified. This is important whether the system is configured to be a client (and synchronize only its own clock) or it is also acting as an NTP server to other systems. Synchronizing time is essential for authentication services such as Kerberos, but it is also important for maintaining accurate logs and auditing possible security breaches.
+# IA Controls:
+# Check Content: Run the following command to determine the current status of the "ntpd" service:
+#
+# # service ntpd status
+#
+# If the service is enabled, it should return the following:
+#
+# ntpd is running...
+#
+#
+# If the service is not running, this is a finding.
+# Fix Text: The "ntpd" service can be enabled with the following command:
+#
+# # chkconfig ntpd on
+# # service ntpd start
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000160
+# The information system synchronizes internal information system clocks on an organization defined frequency with an organization defined authoritative time source.
+# NIST SP 800-53 :: AU-8 (1)
+# NIST SP 800-53A :: AU-8 (1).1 (iii)
+#
+#
+- name: check stig_rhel6_v1r18 v_38620
+  when: ['v_38620']|issubset(check_findings)
+
+
+# Vuln ID: V-38621
+# Severity: medium
+# Group Title: SRG-OS-000056
+# Rule ID: SV-50422r1_rule
+# STIG ID: RHEL-06-000248
+# Rule Title: The system clock must be synchronized to an authoritative DoD time source.
+# Discussion: Synchronizing with an NTP server makes it possible to collate system logs from multiple sources or correlate computer events with real time events. Using a trusted NTP server provided by your organization is recommended.
+# IA Controls:
+# Check Content: A remote NTP server should be configured for time synchronization. To verify one is configured, open the following file.
+#
+# /etc/ntp.conf
+#
+# In the file, there should be a section similar to the following:
+#
+# # --- OUR TIMESERVERS -----
+# server [ntpserver]
+#
+#
+# If this is not the case, this is a finding.
+# Fix Text: To specify a remote NTP server for time synchronization, edit the file "/etc/ntp.conf". Add or correct the following lines, substituting the IP or hostname of a remote NTP server for ntpserver.
+#
+# server [ntpserver]
+#
+# This instructs the NTP software to contact that remote server to obtain time data.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000160
+# The information system synchronizes internal information system clocks on an organization defined frequency with an organization defined authoritative time source.
+# NIST SP 800-53 :: AU-8 (1)
+# NIST SP 800-53A :: AU-8 (1).1 (iii)
+#
+#
+- name: check stig_rhel6_v1r18 v_38621
+  when: ['v_38621']|issubset(check_findings)

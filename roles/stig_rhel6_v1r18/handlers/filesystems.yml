@@ -1,0 +1,490 @@
+# Vuln ID: V-38455
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50255r1_rule
+# STIG ID: RHEL-06-000001
+# Rule Title: The system must use a separate file system for /tmp.
+# Discussion: The "/tmp" partition is used as temporary storage by many programs. Placing "/tmp" in its own partition enables the setting of more restrictive mount options, which can help protect programs which use it.
+# IA Controls:
+# Check Content: Run the following command to determine if "/tmp" is on its own partition or logical volume:
+#
+# $ mount | grep "on /tmp "
+#
+# If "/tmp" has its own partition or volume group, a line will be returned.
+# If no line is returned, this is a finding.
+# Fix Text: The "/tmp" directory is a world-writable directory used for temporary file storage. Ensure it has its own partition or logical volume at installation time, or migrate it using LVM.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38455
+
+
+
+# Vuln ID: V-38456
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50256r1_rule
+# STIG ID: RHEL-06-000002
+# Rule Title: The system must use a separate file system for /var.
+# Discussion: Ensuring that "/var" is mounted on its own partition enables the setting of more restrictive mount options. This helps protect system services such as daemons or other programs which use it. It is not uncommon for the "/var" directory to contain world-writable directories, installed by other software packages.
+# IA Controls:
+# Check Content: Run the following command to determine if "/var" is on its own partition or logical volume:
+#
+# $ mount | grep "on /var "
+#
+# If "/var" has its own partition or volume group, a line will be returned.
+# If no line is returned, this is a finding.
+# Fix Text: The "/var" directory is used by daemons and other system services to store frequently-changing data. Ensure that "/var" has its own partition or logical volume at installation time, or migrate it using LVM.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38456
+
+
+
+# Vuln ID: V-38463
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50263r1_rule
+# STIG ID: RHEL-06-000003
+# Rule Title: The system must use a separate file system for /var/log.
+# Discussion: Placing "/var/log" in its own partition enables better separation between log files and other files in "/var/".
+# IA Controls:
+# Check Content: Run the following command to determine if "/var/log" is on its own partition or logical volume:
+#
+# $ mount | grep "on /var/log "
+#
+# If "/var/log" has its own partition or volume group, a line will be returned.
+# If no line is returned, this is a finding.
+# Fix Text: System logs are stored in the "/var/log" directory. Ensure that it has its own partition or logical volume at installation time, or migrate it using LVM.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38463
+
+
+
+# Vuln ID: V-38467
+# Severity: low
+# Group Title: SRG-OS-000044
+# Rule ID: SV-50267r1_rule
+# STIG ID: RHEL-06-000004
+# Rule Title: The system must use a separate file system for the system audit data path.
+# Discussion: Placing "/var/log/audit" in its own partition enables better separation between audit files and other files, and helps ensure that auditing cannot be halted due to the partition running out of space.
+# IA Controls:
+# Check Content: Run the following command to determine if "/var/log/audit" is on its own partition or logical volume:
+#
+# $ mount | grep "on /var/log/audit "
+#
+# If "/var/log/audit" has its own partition or volume group, a line will be returned.
+# If no line is returned, this is a finding.
+# Fix Text: Audit logs are stored in the "/var/log/audit" directory. Ensure that it has its own partition or logical volume at installation time, or migrate it later using LVM. Make absolutely certain that it is large enough to store all audit logs that will be created by the auditing daemon.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000137
+# The organization allocates audit record storage capacity.
+# NIST SP 800-53 :: AU-4
+# NIST SP 800-53A :: AU-4.1 (i)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38467
+
+
+
+# Vuln ID: V-38473
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50273r1_rule
+# STIG ID: RHEL-06-000007
+# Rule Title: The system must use a separate file system for user home directories.
+# Discussion: Ensuring that "/home" is mounted on its own partition enables the setting of more restrictive mount options, and also helps ensure that users cannot trivially fill partitions used for log or audit data storage.
+# IA Controls:
+# Check Content: Run the following command to determine if "/home" is on its own partition or logical volume:
+#
+# $ mount | grep "on /home "
+#
+# If "/home" has its own partition or volume group, a line will be returned.
+# If no line is returned, this is a finding.
+# Fix Text: If user home directories will be stored locally, create a separate partition for "/home" at installation time (or migrate it later using LVM). If "/home" will be mounted from another system such as an NFS server, then creating a separate partition is not necessary at installation time, and the mountpoint can instead be configured later.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38473
+
+
+
+# Vuln ID: V-38655
+# Severity: low
+# Group Title: SRG-OS-000035
+# Rule ID: SV-50456r1_rule
+# STIG ID: RHEL-06-000271
+# Rule Title: The noexec option must be added to removable media partitions.
+# Discussion: Allowing users to execute binaries from removable media such as USB keys exposes the system to potential compromise.
+# IA Controls:
+# Check Content: To verify that binaries cannot be directly executed from removable media, run the following command:
+#
+# # grep noexec /etc/fstab
+#
+# The output should show "noexec" in use.
+# If it does not, this is a finding.
+# Fix Text: The "noexec" mount option prevents the direct execution of binaries on the mounted filesystem. Users should not be allowed to execute binaries that exist on partitions mounted from removable media (such as a USB key). The "noexec" option prevents code from being executed directly from the media itself, and may therefore provide a line of defense against certain types of worms or malicious code. Add the "noexec" option to the fourth column of "/etc/fstab" for the line which controls mounting of any removable media partitions.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000087
+# The organization disables information system functionality that provides the capability for automatic execution of code on mobile devices without user direction.
+# NIST SP 800-53 :: AC-19 e
+# NIST SP 800-53A :: AC-19.1 (v)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38655
+
+
+
+# Vuln ID: V-38659
+# Severity: low
+# Group Title: SRG-OS-000131
+# Rule ID: SV-50460r2_rule
+# STIG ID: RHEL-06-000275
+# Rule Title: The operating system must employ cryptographic mechanisms to protect information in storage.
+# Discussion: The risk of a system's physical compromise, particularly mobile systems such as laptops, places its data at risk of compromise. Encrypting this data mitigates the risk of its loss if the system is lost.
+# IA Controls:
+# Check Content: Determine if encryption must be used to protect data on the system.
+# If encryption must be used and is not employed, this is a finding.
+# Fix Text: Red Hat Enterprise Linux 6 natively supports partition encryption through the Linux Unified Key Setup-on-disk-format (LUKS) technology. The easiest way to encrypt a partition is during installation time.
+#
+# For manual installations, select the "Encrypt" checkbox during partition creation to encrypt the partition. When this option is selected the system will prompt for a passphrase to use in decrypting the partition. The passphrase will subsequently need to be entered manually every time the system boots.
+#
+# For automated/unattended installations, it is possible to use Kickstart by adding the "--encrypted" and "--passphrase=" options to the definition of each partition to be encrypted. For example, the following line would encrypt the root partition:
+#
+# part / --fstype=ext3 --size=100 --onpart=hda1 --encrypted --passphrase=[PASSPHRASE]
+#
+# Any [PASSPHRASE] is stored in the Kickstart in plaintext, and the Kickstart must then be protected accordingly. Omitting the "--passphrase=" option from the partition definition will cause the installer to pause and interactively ask for the passphrase during installation.
+#
+# Detailed information on encrypting partitions using LUKS can be found on the Red Hat Documentation web site:
+#
+# https://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Security_Guide/sect-Security_Guide-LUKS_Disk_Encryption.html
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001019
+# The organization employs cryptographic mechanisms to protect information in storage.
+# NIST SP 800-53 :: MP-4 (1)
+# NIST SP 800-53A :: MP-4 (1).1
+#
+#
+- name: fix stig_rhel6_v1r18 v_38659
+
+
+
+# Vuln ID: V-38661
+# Severity: low
+# Group Title: SRG-OS-000185
+# Rule ID: SV-50462r2_rule
+# STIG ID: RHEL-06-000276
+# Rule Title: The operating system must protect the confidentiality and integrity of data at rest.
+# Discussion: The risk of a system's physical compromise, particularly mobile systems such as laptops, places its data at risk of compromise. Encrypting this data mitigates the risk of its loss if the system is lost.
+# IA Controls:
+# Check Content: Determine if encryption must be used to protect data on the system.
+# If encryption must be used and is not employed, this is a finding.
+# Fix Text: Red Hat Enterprise Linux 6 natively supports partition encryption through the Linux Unified Key Setup-on-disk-format (LUKS) technology. The easiest way to encrypt a partition is during installation time.
+#
+# For manual installations, select the "Encrypt" checkbox during partition creation to encrypt the partition. When this option is selected the system will prompt for a passphrase to use in decrypting the partition. The passphrase will subsequently need to be entered manually every time the system boots.
+#
+# For automated/unattended installations, it is possible to use Kickstart by adding the "--encrypted" and "--passphrase=" options to the definition of each partition to be encrypted. For example, the following line would encrypt the root partition:
+#
+# part / --fstype=ext3 --size=100 --onpart=hda1 --encrypted --passphrase=[PASSPHRASE]
+#
+# Any [PASSPHRASE] is stored in the Kickstart in plaintext, and the Kickstart must then be protected accordingly. Omitting the "--passphrase=" option from the partition definition will cause the installer to pause and interactively ask for the passphrase during installation.
+#
+# Detailed information on encrypting partitions using LUKS can be found on the Red Hat Documentation web site:
+#
+# https://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Security_Guide/sect-Security_Guide-LUKS_Disk_Encryption.html
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001199
+# The information system protects the confidentiality and/or integrity of organization-defined information at rest.
+# NIST SP 800-53 :: SC-28
+# NIST SP 800-53A :: SC-28.1
+# NIST SP 800-53 Revision 4 :: SC-28
+#
+#
+- name: fix stig_rhel6_v1r18 v_38661
+
+
+
+# Vuln ID: V-38662
+# Severity: low
+# Group Title: SRG-OS-000230
+# Rule ID: SV-50463r2_rule
+# STIG ID: RHEL-06-000277
+# Rule Title: The operating system must employ cryptographic mechanisms to prevent unauthorized disclosure of data at rest unless otherwise protected by alternative physical measures.
+# Discussion: The risk of a system's physical compromise, particularly mobile systems such as laptops, places its data at risk of compromise. Encrypting this data mitigates the risk of its loss if the system is lost.
+# IA Controls:
+# Check Content: Determine if encryption must be used to protect data on the system.
+# If encryption must be used and is not employed, this is a finding.
+# Fix Text: Red Hat Enterprise Linux 6 natively supports partition encryption through the Linux Unified Key Setup-on-disk-format (LUKS) technology. The easiest way to encrypt a partition is during installation time.
+#
+# For manual installations, select the "Encrypt" checkbox during partition creation to encrypt the partition. When this option is selected the system will prompt for a passphrase to use in decrypting the partition. The passphrase will subsequently need to be entered manually every time the system boots.
+#
+# For automated/unattended installations, it is possible to use Kickstart by adding the "--encrypted" and "--passphrase=" options to the definition of each partition to be encrypted. For example, the following line would encrypt the root partition:
+#
+# part / --fstype=ext3 --size=100 --onpart=hda1 --encrypted --passphrase=[PASSPHRASE]
+#
+# Any [PASSPHRASE] is stored in the Kickstart in plaintext, and the Kickstart must then be protected accordingly. Omitting the "--passphrase=" option from the partition definition will cause the installer to pause and interactively ask for the passphrase during installation.
+#
+# Detailed information on encrypting partitions using LUKS can be found on the Red Hat Documentation web site:
+#
+# https://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Security_Guide/sect-Security_Guide-LUKS_Disk_Encryption.html
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001200
+# The organization employs cryptographic mechanisms to prevent unauthorized disclosure of information at rest unless otherwise protected by alternative physical measures.
+# NIST SP 800-53 :: SC-28 (1)
+# NIST SP 800-53A :: SC-28 (1).1 (i)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38662
+
+
+
+# Vuln ID: V-38697
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50498r2_rule
+# STIG ID: RHEL-06-000336
+# Rule Title: The sticky bit must be set on all public directories.
+# Discussion: Failing to set the sticky bit on public directories allows unauthorized users to delete files in the directory structure.
+#
+# The only authorized public directories are those temporary directories supplied with the system, or those designed to be temporary file repositories. The setting is normally reserved for directories used by the system, and by users for temporary file storage - such as /tmp - and for directories requiring global read/write access.
+# IA Controls:
+# Check Content: To find world-writable directories that lack the sticky bit, run the following command for each local partition [PART]:
+#
+# # find [PART] -xdev -type d -perm -002 \! -perm -1000
+#
+#
+# If any world-writable directories are missing the sticky bit, this is a finding.
+# Fix Text: When the so-called 'sticky bit' is set on a directory, only the owner of a given file may remove that file from the directory. Without the sticky bit, any user with write access to a directory may remove any file in the directory. Setting the sticky bit prevents users from removing each other's files. In cases where there is no reason for a directory to be world-writable, a better solution is to remove that permission rather than to set the sticky bit. However, if a directory is used by a particular application, consult that application's documentation instead of blindly changing modes.
+# To set the sticky bit on a world-writable directory [DIR], run the following command:
+#
+# # chmod +t [DIR]
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38697
+
+
+
+# Vuln ID: V-38699
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50500r2_rule
+# STIG ID: RHEL-06-000337
+# Rule Title: All public directories must be owned by a system account.
+# Discussion: Allowing a user account to own a world-writable directory is undesirable because it allows the owner of that directory to remove or replace any files that may be placed in the directory by other users.
+# IA Controls:
+# Check Content: The following command will discover and print world-writable directories that are not owned by a system account, given the assumption that only system accounts have a uid lower than 500. Run it once for each local partition [PART]:
+#
+# # find [PART] -xdev -type d -perm -0002 -uid +499 -print
+#
+#
+# If there is output, this is a finding.
+# Fix Text: All directories in local partitions which are world-writable should be owned by root or another system account. If any world-writable directories are not owned by a system account, this should be investigated. Following this, the files should be deleted or assigned to an appropriate group.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38699
+
+
+
+# Vuln ID: V-57569
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-71919r1_rule
+# STIG ID: RHEL-06-000528
+# Rule Title: The noexec option must be added to the /tmp partition.
+# Discussion: Allowing users to execute binaries from world-writable directories such as "/tmp" should never be necessary in normal operation and can expose the system to potential compromise.
+# IA Controls:
+# Check Content: To verify that binaries cannot be directly executed from the /tmp directory, run the following command:
+#
+# $ grep '\s/tmp' /etc/fstab
+#
+# The resulting output will show whether the /tmp partition has the "noexec" flag set. If the /tmp partition does not have the noexec flag set, this is a finding.
+# Fix Text: The "noexec" mount option can be used to prevent binaries from being executed out of "/tmp". Add the "noexec" option to the fourth column of "/etc/fstab" for the line which controls mounting of "/tmp".
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000381
+# The organization configures the information system to provide only essential capabilities.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (ii)
+# NIST SP 800-53 Revision 4 :: CM-7 a
+#
+#
+- name: fix stig_rhel6_v1r18 v_57569
+

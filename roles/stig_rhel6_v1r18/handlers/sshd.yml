@@ -1,0 +1,482 @@
+# Vuln ID: V-38484
+# Severity: medium
+# Group Title: SRG-OS-000025
+# Rule ID: SV-50285r2_rule
+# STIG ID: RHEL-06-000507
+# Rule Title: The operating system, upon successful logon, must display to the user the date and time of the last logon or access via ssh.
+# Discussion: Users need to be aware of activity that occurs regarding their account. Providing users with information regarding the date and time of their last successful login allows the user to determine if any unauthorized activity has occurred and gives them an opportunity to notify administrators.
+#
+# At ssh login, a user must be presented with the last successful login date and time.
+# IA Controls:
+# Check Content: Verify the value associated with the "PrintLastLog" keyword in /etc/ssh/sshd_config:
+#
+# # grep -i "^PrintLastLog" /etc/ssh/sshd_config
+#
+# If the "PrintLastLog" keyword is not present, this is not a finding.  If the value is not set to "yes", this is a finding.
+# Fix Text: Update the "PrintLastLog" keyword to "yes" in /etc/ssh/sshd_config:
+#
+# PrintLastLog yes
+#
+# While it is acceptable to remove the keyword entirely since the default action for the SSH daemon is to print the last logon date and time, it is preferred to have the value explicitly documented.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000052
+# The information system notifies the user, upon successful logon (access) to the system, of the date and time of the last logon (access).
+# NIST SP 800-53 :: AC-9
+# NIST SP 800-53A :: AC-9.1
+# NIST SP 800-53 Revision 4 :: AC-9
+#
+#
+- name: fix stig_rhel6_v1r18 v_38484
+
+
+
+# Vuln ID: V-38607
+# Severity: high
+# Group Title: SRG-OS-000112
+# Rule ID: SV-50408r1_rule
+# STIG ID: RHEL-06-000227
+# Rule Title: The SSH daemon must be configured to use only the SSHv2 protocol.
+# Discussion: SSH protocol version 1 suffers from design flaws that result in security vulnerabilities and should not be used.
+# IA Controls:
+# Check Content: To check which SSH protocol version is allowed, run the following command:
+#
+# # grep Protocol /etc/ssh/sshd_config
+#
+# If configured properly, output should be
+#
+# Protocol 2
+#
+#
+# If it is not, this is a finding.
+# Fix Text: Only SSH protocol version 2 connections should be permitted. The default setting in "/etc/ssh/sshd_config" is correct, and can be verified by ensuring that the following line appears:
+#
+# Protocol 2
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000774
+# The information system uses organization defined replay-resistant authentication mechanisms for network access to privileged accounts.
+# NIST SP 800-53 :: IA-2 (8)
+# NIST SP 800-53A :: IA-2 (8).1 (ii)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38607
+
+
+
+# Vuln ID: V-38608
+# Severity: low
+# Group Title: SRG-OS-000163
+# Rule ID: SV-50409r1_rule
+# STIG ID: RHEL-06-000230
+# Rule Title: The SSH daemon must set a timeout interval on idle sessions.
+# Discussion: Causing idle users to be automatically logged out guards against compromises one system leading trivially to compromises on another.
+# IA Controls:
+# Check Content: Run the following command to see what the timeout interval is:
+#
+# # grep ClientAliveInterval /etc/ssh/sshd_config
+#
+# If properly configured, the output should be:
+#
+# ClientAliveInterval 900
+#
+#
+# If it is not, this is a finding.
+# Fix Text: SSH allows administrators to set an idle timeout interval. After this interval has passed, the idle user will be automatically logged out.
+#
+# To set an idle timeout interval, edit the following line in "/etc/ssh/sshd_config" as follows:
+#
+# ClientAliveInterval [interval]
+#
+# The timeout [interval] is given in seconds. To have a timeout of 15 minutes, set [interval] to 900.
+#
+# If a shorter timeout has already been set for the login shell, that value will preempt any SSH setting made here. Keep in mind that some processes may stop SSH from correctly detecting that the user is idle.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001133
+# The information system terminates the network connection associated with a communications session at the end of the session or after an organization-defined time period of inactivity.
+# NIST SP 800-53 :: SC-10
+# NIST SP 800-53A :: SC-10.1 (ii)
+# NIST SP 800-53 Revision 4 :: SC-10
+#
+#
+- name: fix stig_rhel6_v1r18 v_38608
+
+
+
+# Vuln ID: V-38610
+# Severity: low
+# Group Title: SRG-OS-000126
+# Rule ID: SV-50411r1_rule
+# STIG ID: RHEL-06-000231
+# Rule Title: The SSH daemon must set a timeout count on idle sessions.
+# Discussion: This ensures a user login will be terminated as soon as the "ClientAliveCountMax" is reached.
+# IA Controls:
+# Check Content: To ensure the SSH idle timeout will occur when the "ClientAliveCountMax" is set, run the following command:
+#
+# # grep ClientAliveCountMax /etc/ssh/sshd_config
+#
+# If properly configured, output should be:
+#
+# ClientAliveCountMax 0
+#
+#
+# If it is not, this is a finding.
+# Fix Text: To ensure the SSH idle timeout occurs precisely when the "ClientAliveCountMax" is set, edit "/etc/ssh/sshd_config" as follows:
+#
+# ClientAliveCountMax 0
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000879
+# The organization terminates sessions and network connections when nonlocal maintenance is completed.
+# NIST SP 800-53 :: MA-4 e
+# NIST SP 800-53A :: MA-4.1 (vi)
+# NIST SP 800-53 Revision 4 :: MA-4 e
+#
+#
+- name: fix stig_rhel6_v1r18 v_38610
+
+
+
+# Vuln ID: V-38611
+# Severity: medium
+# Group Title: SRG-OS-000106
+# Rule ID: SV-50412r1_rule
+# STIG ID: RHEL-06-000234
+# Rule Title: The SSH daemon must ignore .rhosts files.
+# Discussion: SSH trust relationships mean a compromise on one host can allow an attacker to move trivially to other hosts.
+# IA Controls:
+# Check Content: To determine how the SSH daemon's "IgnoreRhosts" option is set, run the following command:
+#
+# # grep -i IgnoreRhosts /etc/ssh/sshd_config
+#
+# If no line, a commented line, or a line indicating the value "yes" is returned, then the required value is set.
+# If the required value is not set, this is a finding.
+# Fix Text: SSH can emulate the behavior of the obsolete rsh command in allowing users to enable insecure access to their accounts via ".rhosts" files.
+#
+# To ensure this behavior is disabled, add or correct the following line in "/etc/ssh/sshd_config":
+#
+# IgnoreRhosts yes
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000766
+# The information system implements multifactor authentication for network access to non-privileged accounts.
+# NIST SP 800-53 :: IA-2 (2)
+# NIST SP 800-53A :: IA-2 (2).1
+# NIST SP 800-53 Revision 4 :: IA-2 (2)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38611
+
+
+
+# Vuln ID: V-38612
+# Severity: medium
+# Group Title: SRG-OS-000106
+# Rule ID: SV-50413r1_rule
+# STIG ID: RHEL-06-000236
+# Rule Title: The SSH daemon must not allow host-based authentication.
+# Discussion: SSH trust relationships mean a compromise on one host can allow an attacker to move trivially to other hosts.
+# IA Controls:
+# Check Content: To determine how the SSH daemon's "HostbasedAuthentication" option is set, run the following command:
+#
+# # grep -i HostbasedAuthentication /etc/ssh/sshd_config
+#
+# If no line, a commented line, or a line indicating the value "no" is returned, then the required value is set.
+# If the required value is not set, this is a finding.
+# Fix Text: SSH's cryptographic host-based authentication is more secure than ".rhosts" authentication, since hosts are cryptographically authenticated. However, it is not recommended that hosts unilaterally trust one another, even within an organization.
+#
+# To disable host-based authentication, add or correct the following line in "/etc/ssh/sshd_config":
+#
+# HostbasedAuthentication no
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000766
+# The information system implements multifactor authentication for network access to non-privileged accounts.
+# NIST SP 800-53 :: IA-2 (2)
+# NIST SP 800-53A :: IA-2 (2).1
+# NIST SP 800-53 Revision 4 :: IA-2 (2)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38612
+
+
+
+# Vuln ID: V-38613
+# Severity: medium
+# Group Title: SRG-OS-000109
+# Rule ID: SV-50414r1_rule
+# STIG ID: RHEL-06-000237
+# Rule Title: The system must not permit root logins using remote access programs such as ssh.
+# Discussion: Permitting direct root login reduces auditable information about who ran privileged commands on the system and also allows direct attack attempts on root's password.
+# IA Controls:
+# Check Content: To determine how the SSH daemon's "PermitRootLogin" option is set, run the following command:
+#
+# # grep -i PermitRootLogin /etc/ssh/sshd_config
+#
+# If a line indicating "no" is returned, then the required value is set.
+# If the required value is not set, this is a finding.
+# Fix Text: The root user should never be allowed to log in to a system directly over a network. To disable root login via SSH, add or correct the following line in "/etc/ssh/sshd_config":
+#
+# PermitRootLogin no
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000770
+# The organization requires individuals to be authenticated with an individual authenticator when a group authenticator is employed.
+# NIST SP 800-53 :: IA-2 (5) (b)
+# NIST SP 800-53A :: IA-2 (5).2 (ii)
+# NIST SP 800-53 Revision 4 :: IA-2 (5)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38613
+
+
+
+# Vuln ID: V-38614
+# Severity: high
+# Group Title: SRG-OS-000106
+# Rule ID: SV-50415r1_rule
+# STIG ID: RHEL-06-000239
+# Rule Title: The SSH daemon must not allow authentication using an empty password.
+# Discussion: Configuring this setting for the SSH daemon provides additional assurance that remote login via SSH will require a password, even in the event of misconfiguration elsewhere.
+# IA Controls:
+# Check Content: To determine how the SSH daemon's "PermitEmptyPasswords" option is set, run the following command:
+#
+# # grep -i PermitEmptyPasswords /etc/ssh/sshd_config
+#
+# If no line, a commented line, or a line indicating the value "no" is returned, then the required value is set.
+# If the required value is not set, this is a finding.
+# Fix Text: To explicitly disallow remote login from accounts with empty passwords, add or correct the following line in "/etc/ssh/sshd_config":
+#
+# PermitEmptyPasswords no
+#
+# Any accounts with empty passwords should be disabled immediately, and PAM configuration should prevent users from being able to assign themselves empty passwords.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000766
+# The information system implements multifactor authentication for network access to non-privileged accounts.
+# NIST SP 800-53 :: IA-2 (2)
+# NIST SP 800-53A :: IA-2 (2).1
+# NIST SP 800-53 Revision 4 :: IA-2 (2)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38614
+
+
+
+# Vuln ID: V-38615
+# Severity: medium
+# Group Title: SRG-OS-000023
+# Rule ID: SV-50416r1_rule
+# STIG ID: RHEL-06-000240
+# Rule Title: The SSH daemon must be configured with the Department of Defense (DoD) login banner.
+# Discussion: The warning message reinforces policy awareness during the logon process and facilitates possible legal action against attackers. Alternatively, systems whose ownership should not be obvious should ensure usage of a banner that does not provide easy attribution.
+# IA Controls:
+# Check Content: To determine how the SSH daemon's "Banner" option is set, run the following command:
+#
+# # grep -i Banner /etc/ssh/sshd_config
+#
+# If a line indicating /etc/issue is returned, then the required value is set.
+# If the required value is not set, this is a finding.
+# Fix Text: To enable the warning banner and ensure it is consistent across the system, add or correct the following line in "/etc/ssh/sshd_config":
+#
+# Banner /etc/issue
+#
+# Another section contains information on how to create an appropriate system-wide warning banner.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000048
+# The information system displays an organization-defined system use notification message or banner before granting access to the system that provides privacy and security notices consistent with applicable federal laws, Executive Orders, directives, policies, regulations, standards, and guidance.
+# NIST SP 800-53 :: AC-8 a
+# NIST SP 800-53A :: AC-8.1 (ii)
+# NIST SP 800-53 Revision 4 :: AC-8 a
+#
+#
+- name: fix stig_rhel6_v1r18 v_38615
+
+
+
+# Vuln ID: V-38616
+# Severity: low
+# Group Title: SRG-OS-000242
+# Rule ID: SV-50417r1_rule
+# STIG ID: RHEL-06-000241
+# Rule Title: The SSH daemon must not permit user environment settings.
+# Discussion: SSH environment options potentially allow users to bypass access restriction in some configurations.
+# IA Controls:
+# Check Content: To ensure users are not able to present environment daemons, run the following command:
+#
+# # grep PermitUserEnvironment /etc/ssh/sshd_config
+#
+# If properly configured, output should be:
+#
+# PermitUserEnvironment no
+#
+#
+# If it is not, this is a finding.
+# Fix Text: To ensure users are not able to present environment options to the SSH daemon, add or correct the following line in "/etc/ssh/sshd_config":
+#
+# PermitUserEnvironment no
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001414
+# The information system enforces approved authorizations for controlling the flow of information between interconnected systems based on organization-defined information flow control policies.
+# NIST SP 800-53 :: AC-4
+# NIST SP 800-53A :: AC-4.1 (iii)
+# NIST SP 800-53 Revision 4 :: AC-4
+#
+#
+- name: fix stig_rhel6_v1r18 v_38616
+
+
+
+# Vuln ID: V-38617
+# Severity: medium
+# Group Title: SRG-OS-000169
+# Rule ID: SV-50418r1_rule
+# STIG ID: RHEL-06-000243
+# Rule Title: The SSH daemon must be configured to use only FIPS 140-2 approved ciphers.
+# Discussion: Approved algorithms should impart some level of confidence in their implementation. These are also required for compliance.
+# IA Controls:
+# Check Content: Only FIPS-approved ciphers should be used. To verify that only FIPS-approved ciphers are in use, run the following command:
+#
+# # grep Ciphers /etc/ssh/sshd_config
+#
+# The output should contain only those ciphers which are FIPS-approved, namely, the AES and 3DES ciphers.
+# If that is not the case, this is a finding.
+# Fix Text: Limit the ciphers to those algorithms which are FIPS-approved. Counter (CTR) mode is also preferred over cipher-block chaining (CBC) mode. The following line in "/etc/ssh/sshd_config" demonstrates use of FIPS-approved ciphers:
+#
+# Ciphers aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,3des-cbc,aes192-cbc,aes256-cbc
+#
+# The man page "sshd_config(5)" contains a list of supported ciphers.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001144
+# The information system implements required cryptographic protections using cryptographic modules that comply with applicable federal laws, Executive Orders, directives, policies, regulations, standards, and guidance.
+# NIST SP 800-53 :: SC-13
+# NIST SP 800-53A :: SC-13.1
+#
+#
+- name: fix stig_rhel6_v1r18 v_38617
+

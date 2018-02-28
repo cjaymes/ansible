@@ -6,9 +6,9 @@
 - hosts: os_RedHat_v_6
     gather_facts: False
     roles:
-        - harden_el_6
+        - stig_rhel6_v1r18
 
 - hosts: os_RedHat_v_7
     gather_facts: False
     roles:
-        - harden_el_7
+        - stig_rhel7_v1r4

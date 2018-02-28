@@ -1,0 +1,1 @@
+stig_rhel7_sections: '{{ stig_rhel_sections }}'

@@ -1,0 +1,431 @@
+# Vuln ID: V-38474
+# Severity: low
+# Group Title: SRG-OS-000030
+# Rule ID: SV-50274r2_rule
+# STIG ID: RHEL-06-000508
+# Rule Title: The system must allow locking of graphical desktop sessions.
+# Discussion: The ability to lock graphical desktop sessions manually allows users to easily secure their accounts should they need to depart from their workstations temporarily.
+# IA Controls:
+# Check Content: If the GConf2 package is not installed, this is not applicable.
+#
+# Verify the keybindings for the Gnome screensaver:
+#
+# # gconftool-2 --direct --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory --get /apps/gnome_settings_daemon/keybindings/screensaver
+#
+# If no output is visible, this is a finding.
+# Fix Text: Run the following command to set the Gnome desktop keybinding for locking the screen:
+#
+# # gconftool-2
+# --direct \
+# --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory \
+# --type string \
+# --set /apps/gnome_settings_daemon/keybindings/screensaver "<Control><Alt>l"
+#
+# Another keyboard sequence may be substituted for "<Control><Alt>l", which is the default for the Gnome desktop.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000058
+# The information system provides the capability for users to directly initiate session lock mechanisms.
+# NIST SP 800-53 :: AC-11 a
+# NIST SP 800-53A :: AC-11
+# NIST SP 800-53 Revision 4 :: AC-11 a
+#
+#
+- name: check stig_rhel6_v1r18 v_38474
+  when: ['v_38474']|issubset(check_findings)
+
+
+# Vuln ID: V-38629
+# Severity: medium
+# Group Title: SRG-OS-000029
+# Rule ID: SV-50430r3_rule
+# STIG ID: RHEL-06-000257
+# Rule Title: The graphical desktop environment must set the idle timeout to no more than 15 minutes.
+# Discussion: Setting the idle delay controls when the screensaver will start, and can be combined with screen locking to prevent access from passersby.
+# IA Controls:
+# Check Content: If the GConf2 package is not installed, this is not applicable.
+#
+# To check the current idle time-out value, run the following command:
+#
+# $ gconftool-2 --direct --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory --get /apps/gnome-screensaver/idle_delay
+#
+# If properly configured, the output should be "15".
+#
+# If it is not, this is a finding.
+# Fix Text: Run the following command to set the idle time-out value for inactivity in the GNOME desktop to 15 minutes:
+#
+# # gconftool-2 \
+# --direct \
+# --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory \
+# --type int \
+# --set /apps/gnome-screensaver/idle_delay 15
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000057
+# The information system initiates a session lock after the organization-defined time period of inactivity.
+# NIST SP 800-53 :: AC-11 a
+# NIST SP 800-53A :: AC-11.1 (ii)
+# NIST SP 800-53 Revision 4 :: AC-11 a
+#
+#
+- name: check stig_rhel6_v1r18 v_38629
+  when: ['v_38629']|issubset(check_findings)
+
+
+# Vuln ID: V-38630
+# Severity: medium
+# Group Title: SRG-OS-000029
+# Rule ID: SV-50431r3_rule
+# STIG ID: RHEL-06-000258
+# Rule Title: The graphical desktop environment must automatically lock after 15 minutes of inactivity and the system must require user reauthentication to unlock the environment.
+# Discussion: Enabling idle activation of the screen saver ensures the screensaver will be activated after the idle delay. Applications requiring continuous, real-time screen display (such as network management products) require the login session does not have administrator rights and the display station is located in a controlled-access area.
+# IA Controls:
+# Check Content: If the GConf2 package is not installed, this is not applicable.
+#
+# To check the screensaver mandatory use status, run the following command:
+#
+# $ gconftool-2 --direct --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory --get /apps/gnome-screensaver/idle_activation_enabled
+#
+# If properly configured, the output should be "true".
+#
+# If it is not, this is a finding.
+# Fix Text: Run the following command to activate the screensaver in the GNOME desktop after a period of inactivity:
+#
+# # gconftool-2 --direct \
+# --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory \
+# --type bool \
+# --set /apps/gnome-screensaver/idle_activation_enabled true
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000057
+# The information system initiates a session lock after the organization-defined time period of inactivity.
+# NIST SP 800-53 :: AC-11 a
+# NIST SP 800-53A :: AC-11.1 (ii)
+# NIST SP 800-53 Revision 4 :: AC-11 a
+#
+#
+- name: check stig_rhel6_v1r18 v_38630
+  when: ['v_38630']|issubset(check_findings)
+
+
+# Vuln ID: V-38638
+# Severity: medium
+# Group Title: SRG-OS-000029
+# Rule ID: SV-50439r3_rule
+# STIG ID: RHEL-06-000259
+# Rule Title: The graphical desktop environment must have automatic lock enabled.
+# Discussion: Enabling the activation of the screen lock after an idle period ensures password entry will be required in order to access the system, preventing access by passersby.
+# IA Controls:
+# Check Content: If the GConf2 package is not installed, this is not applicable.
+#
+# To check the status of the idle screen lock activation, run the following command:
+#
+# $ gconftool-2 --direct --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory --get /apps/gnome-screensaver/lock_enabled
+#
+# If properly configured, the output should be "true".
+# If it is not, this is a finding.
+# Fix Text: Run the following command to activate locking of the screensaver in the GNOME desktop when it is activated:
+#
+# # gconftool-2 --direct \
+# --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory \
+# --type bool \
+# --set /apps/gnome-screensaver/lock_enabled true
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000057
+# The information system initiates a session lock after the organization-defined time period of inactivity.
+# NIST SP 800-53 :: AC-11 a
+# NIST SP 800-53A :: AC-11.1 (ii)
+# NIST SP 800-53 Revision 4 :: AC-11 a
+#
+#
+- name: check stig_rhel6_v1r18 v_38638
+  when: ['v_38638']|issubset(check_findings)
+
+
+# Vuln ID: V-38639
+# Severity: low
+# Group Title: SRG-OS-000031
+# Rule ID: SV-50440r3_rule
+# STIG ID: RHEL-06-000260
+# Rule Title: The system must display a publicly-viewable pattern during a graphical desktop environment session lock.
+# Discussion: Setting the screensaver mode to blank-only conceals the contents of the display from passersby.
+# IA Controls:
+# Check Content: If the GConf2 package is not installed, this is not applicable.
+#
+# To ensure the screensaver is configured to be blank, run the following command:
+#
+# $ gconftool-2 --direct --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory --get /apps/gnome-screensaver/mode
+#
+# If properly configured, the output should be "blank-only".
+# If it is not, this is a finding.
+# Fix Text: Run the following command to set the screensaver mode in the GNOME desktop to a blank screen:
+#
+# # gconftool-2 \
+# --direct \
+# --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory \
+# --type string \
+# --set /apps/gnome-screensaver/mode blank-only
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000060
+# The information system conceals, via the session lock, information previously visible on the display with a publicly viewable image.
+# NIST SP 800-53 :: AC-11 (1)
+# NIST SP 800-53A :: AC-11 (1).1
+# NIST SP 800-53 Revision 4 :: AC-11 (1)
+#
+#
+- name: check stig_rhel6_v1r18 v_38639
+  when: ['v_38639']|issubset(check_findings)
+
+
+# Vuln ID: V-38688
+# Severity: medium
+# Group Title: SRG-OS-000024
+# Rule ID: SV-50489r3_rule
+# STIG ID: RHEL-06-000324
+# Rule Title: A login banner must be displayed immediately prior to, or as part of, graphical desktop environment login prompts.
+# Discussion: An appropriate warning message reinforces policy awareness during the logon process and facilitates possible legal action against attackers.
+# IA Controls:
+# Check Content: If the GConf2 package is not installed, this is not applicable.
+#
+# To ensure a login warning banner is enabled, run the following:
+#
+# $ gconftool-2 --direct --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory --get /apps/gdm/simple-greeter/banner_message_enable
+#
+# Search for the "banner_message_enable" schema. If properly configured, the "default" value should be "true".
+# If it is not, this is a finding.
+# Fix Text: To enable displaying a login warning banner in the GNOME Display Manager's login screen, run the following command:
+#
+# # gconftool-2 --direct \
+# --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory \
+# --type bool \
+# --set /apps/gdm/simple-greeter/banner_message_enable true
+#
+# To display a banner, this setting must be enabled and then banner text must also be set.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000050
+# The information system retains the notification message or banner on the screen until users acknowledge the usage conditions and take explicit actions to log on to or further access.
+# NIST SP 800-53 :: AC-8 b
+# NIST SP 800-53A :: AC-8.1 (iii)
+# NIST SP 800-53 Revision 4 :: AC-8 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38688
+  when: ['v_38688']|issubset(check_findings)
+
+
+# Vuln ID: V-38689
+# Severity: medium
+# Group Title: SRG-OS-000228
+# Rule ID: SV-50490r5_rule
+# STIG ID: RHEL-06-000326
+# Rule Title: The Department of Defense (DoD) login banner must be displayed immediately prior to, or as part of, graphical desktop environment login prompts.
+# Discussion: An appropriate warning message reinforces policy awareness during the logon process and facilitates possible legal action against attackers.
+# IA Controls:
+# Check Content: If the GConf2 package is not installed, this is not applicable.
+#
+# To ensure login warning banner text is properly set, run the following:
+#
+# $ gconftool-2 --direct --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory --get /apps/gdm/simple-greeter/banner_message_text
+#
+# If properly configured, the proper banner text will appear within this schema.
+#
+# The DoD required text is either:
+#
+# "You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only. By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+# -The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+# -At any time, the USG may inspect and seize data stored on this IS.
+# -Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
+# -This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+# -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details."
+#
+# OR:
+#
+# "I've read & consent to terms in IS user agreem't."
+#
+# If the DoD required banner text does not appear in the schema, this is a finding.
+# Fix Text: To set the text shown by the GNOME Display Manager in the login screen, run the following command:
+#
+# # gconftool-2
+# --direct \
+# --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory \
+# --type string \
+# --set /apps/gdm/simple-greeter/banner_message_text \
+# "[DoD required text]"
+#
+# Where the DoD required text is either:
+#
+# "You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only. By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+# -The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+# -At any time, the USG may inspect and seize data stored on this IS.
+# -Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
+# -This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+# -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details."
+#
+# OR:
+#
+# "I've read & consent to terms in IS user agreem't."
+#
+# When entering a warning banner that spans several lines, remember to begin and end the string with """. This command writes directly to the file "/etc/gconf/gconf.xml.mandatory/apps/gdm/simple-greeter/%gconf.xml", and this file can later be edited directly if necessary.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001384
+# The information system, for publicly accessible systems, displays system use information organization-defined conditions before granting further access.
+# NIST SP 800-53 :: AC-8 c
+# NIST SP 800-53A :: AC-8.2 (i)
+# NIST SP 800-53 Revision 4 :: AC-8 c 1
+#
+# CCI-001385
+# The information system, for publicly accessible systems, displays references, if any, to monitoring that are consistent with privacy accommodations for such systems that generally prohibit those activities.
+# NIST SP 800-53 :: AC-8 c
+# NIST SP 800-53A :: AC-8.2 (ii)
+# NIST SP 800-53 Revision 4 :: AC-8 c 2
+#
+# CCI-001386
+# The information system for publicly accessible systems displays references, if any, to recording that are consistent with privacy accommodations for such systems that generally prohibit those activities.
+# NIST SP 800-53 :: AC-8 c
+# NIST SP 800-53A :: AC-8.2 (ii)
+# NIST SP 800-53 Revision 4 :: AC-8 c 2
+#
+# CCI-001387
+# The information system for publicly accessible systems displays references, if any, to auditing that are consistent with privacy accommodations for such systems that generally prohibit those activities.
+# NIST SP 800-53 :: AC-8 c
+# NIST SP 800-53A :: AC-8.2 (ii)
+# NIST SP 800-53 Revision 4 :: AC-8 c 2
+#
+# CCI-001388
+# The information system, for publicly accessible systems, includes a description of the authorized uses of the system.
+# NIST SP 800-53 :: AC-8 c
+# NIST SP 800-53A :: AC-8.2 (iii)
+# NIST SP 800-53 Revision 4 :: AC-8 c 3
+#
+#
+- name: check stig_rhel6_v1r18 v_38689
+  when: ['v_38689']|issubset(check_findings)
+
+
+# Vuln ID: V-43150
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-55880r2_rule
+# STIG ID: RHEL-06-000527
+# Rule Title: The login user list must be disabled.
+# Discussion: Leaving the user list enabled is a security risk since it allows anyone with physical access to the system to quickly enumerate known user accounts without logging in.
+# IA Controls:
+# Check Content: If the GConf2 package is not installed, this is not applicable.
+#
+# To ensure the user list is disabled, run the following command:
+#
+# $ gconftool-2 --direct \
+# --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory \
+# --get /apps/gdm/simple-greeter/disable_user_list
+#
+# The output should be "true". If it is not, this is a finding.
+# Fix Text: In the default graphical environment, users logging directly into the system are greeted with a login screen that displays all known users. This functionality should be disabled.
+#
+# Run the following command to disable the user list:
+#
+# $ sudo gconftool-2 --direct \
+# --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory \
+# --type bool --set /apps/gdm/simple-greeter/disable_user_list true
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_43150
+  when: ['v_43150']|issubset(check_findings)

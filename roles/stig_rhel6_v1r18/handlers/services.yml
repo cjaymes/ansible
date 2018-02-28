@@ -1,0 +1,1158 @@
+# Vuln ID: V-38437
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50237r1_rule
+# STIG ID: RHEL-06-000526
+# Rule Title: Automated file system mounting tools must not be enabled unless needed.
+# Discussion: All filesystems that are required for the successful operation of the system should be explicitly listed in "/etc/fstab" by an administrator. New filesystems should not be arbitrarily introduced via the automounter.
+#
+# The "autofs" daemon mounts and unmounts filesystems, such as user home directories shared via NFS, on demand. In addition, autofs can be used to handle removable media, and the default configuration provides the cdrom device as "/misc/cd". However, this method of providing access to removable media is not common, so autofs can almost always be disabled if NFS is not in use. Even if NFS is required, it is almost always possible to configure filesystem mounts statically by editing "/etc/fstab" rather than relying on the automounter.
+# IA Controls:
+# Check Content: To verify the "autofs" service is disabled, run the following command:
+#
+# chkconfig --list autofs
+#
+# If properly configured, the output should be the following:
+#
+# autofs 0:off 1:off 2:off 3:off 4:off 5:off 6:off
+#
+# Verify the "autofs" service is not running:
+#
+# # service autofs status
+#
+# If the autofs service is enabled or running, this is a finding.
+# Fix Text: If the "autofs" service is not needed to dynamically mount NFS filesystems or removable media, disable the service for all runlevels:
+#
+# # chkconfig --level 0123456 autofs off
+#
+# Stop the service if it is already running:
+#
+# # service autofs stop
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38437
+
+
+
+# Vuln ID: V-38478
+# Severity: low
+# Group Title: SRG-OS-000096
+# Rule ID: SV-50278r2_rule
+# STIG ID: RHEL-06-000009
+# Rule Title: The Red Hat Network Service (rhnsd) service must not be running, unless using RHN or an RHN Satellite.
+# Discussion: Although systems management and patching is extremely important to system security, management by a system outside the enterprise enclave is not desirable for some environments. However, if the system is being managed by RHN or RHN Satellite Server the "rhnsd" daemon can remain on.
+# IA Controls:
+# Check Content: If the system uses RHN or an RHN Satellite, this is not applicable.
+#
+# To check that the "rhnsd" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "rhnsd" --list
+#
+# Output should indicate the "rhnsd" service has either not been installed, or has been disabled at all runlevels, as shown in the example below:
+#
+# # chkconfig "rhnsd" --list
+# "rhnsd" 0:off 1:off 2:off 3:off 4:off 5:off 6:off
+#
+# Run the following command to verify "rhnsd" is disabled through current runtime configuration:
+#
+# # service rhnsd status
+#
+# If the service is disabled the command will return the following output:
+#
+# rhnsd is stopped
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The Red Hat Network service automatically queries Red Hat Network servers to determine whether there are any actions that should be executed, such as package updates. This only occurs if the system was registered to an RHN server or satellite and managed as such. The "rhnsd" service can be disabled with the following commands:
+#
+# # chkconfig rhnsd off
+# # service rhnsd stop
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000382
+# The organization configures the information system to prohibit or restrict the use of organization defined functions, ports, protocols, and/or services.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (iii)
+# NIST SP 800-53 Revision 4 :: CM-7 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38478
+
+
+
+# Vuln ID: V-38582
+# Severity: medium
+# Group Title: SRG-OS-000096
+# Rule ID: SV-50383r2_rule
+# STIG ID: RHEL-06-000203
+# Rule Title: The xinetd service must be disabled if no network services utilizing it are enabled.
+# Discussion: The xinetd service provides a dedicated listener service for some programs, which is no longer necessary for commonly-used network services. Disabling it ensures that these uncommon services are not running, and also prevents attacks against xinetd itself.
+# IA Controls:
+# Check Content: If network services are using the xinetd service, this is not applicable.
+#
+# To check that the "xinetd" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "xinetd" --list
+#
+# Output should indicate the "xinetd" service has either not been installed, or has been disabled at all runlevels, as shown in the example below:
+#
+# # chkconfig "xinetd" --list
+# "xinetd" 0:off 1:off 2:off 3:off 4:off 5:off 6:off
+#
+# Run the following command to verify "xinetd" is disabled through current runtime configuration:
+#
+# # service xinetd status
+#
+# If the service is disabled the command will return the following output:
+#
+# xinetd is stopped
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The "xinetd" service can be disabled with the following commands:
+#
+# # chkconfig xinetd off
+# # service xinetd stop
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000382
+# The organization configures the information system to prohibit or restrict the use of organization defined functions, ports, protocols, and/or services.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (iii)
+# NIST SP 800-53 Revision 4 :: CM-7 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38582
+
+
+
+# Vuln ID: V-38584
+# Severity: low
+# Group Title: SRG-OS-000096
+# Rule ID: SV-50385r1_rule
+# STIG ID: RHEL-06-000204
+# Rule Title: The xinetd service must be uninstalled if no network services utilizing it are enabled.
+# Discussion: Removing the "xinetd" package decreases the risk of the xinetd service's accidental (or intentional) activation.
+# IA Controls:
+# Check Content: If network services are using the xinetd service, this is not applicable.
+#
+# Run the following command to determine if the "xinetd" package is installed:
+#
+# # rpm -q xinetd
+#
+#
+# If the package is installed, this is a finding.
+# Fix Text: The "xinetd" package can be uninstalled with the following command:
+#
+# # yum erase xinetd
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000382
+# The organization configures the information system to prohibit or restrict the use of organization defined functions, ports, protocols, and/or services.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (iii)
+# NIST SP 800-53 Revision 4 :: CM-7 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38584
+
+
+
+# Vuln ID: V-38587
+# Severity: high
+# Group Title: SRG-OS-000095
+# Rule ID: SV-50388r1_rule
+# STIG ID: RHEL-06-000206
+# Rule Title: The telnet-server package must not be installed.
+# Discussion: Removing the "telnet-server" package decreases the risk of the unencrypted telnet service's accidental (or intentional) activation.
+#
+# Mitigation:  If the telnet-server package is configured to only allow encrypted sessions, such as with Kerberos or the use of encrypted network tunnels, the risk of exposing sensitive information is mitigated.
+# IA Controls:
+# Check Content: Run the following command to determine if the "telnet-server" package is installed:
+#
+# # rpm -q telnet-server
+#
+#
+# If the package is installed, this is a finding.
+# Fix Text: The "telnet-server" package can be uninstalled with the following command:
+#
+# # yum erase telnet-server
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000381
+# The organization configures the information system to provide only essential capabilities.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (ii)
+# NIST SP 800-53 Revision 4 :: CM-7 a
+#
+#
+- name: fix stig_rhel6_v1r18 v_38587
+
+
+
+# Vuln ID: V-38589
+# Severity: high
+# Group Title: SRG-OS-000129
+# Rule ID: SV-50390r2_rule
+# STIG ID: RHEL-06-000211
+# Rule Title: The telnet daemon must not be running.
+# Discussion: The telnet protocol uses unencrypted network communication, which means that data from the login session, including passwords and all other information transmitted during the session, can be stolen by eavesdroppers on the network. The telnet protocol is also subject to man-in-the-middle attacks.
+#
+# Mitigation:  If an enabled telnet daemon is configured to only allow encrypted sessions, such as with Kerberos or the use of encrypted network tunnels, the risk of exposing sensitive information is mitigated.
+# IA Controls:
+# Check Content: To check that the "telnet" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "telnet" --list
+#
+# Output should indicate the "telnet" service has either not been installed, or has been disabled, as shown in the example below:
+#
+# # chkconfig "telnet" --list
+# telnet         off
+# OR
+# error reading information on service telnet: No such file or directory
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The "telnet" service can be disabled with the following command:
+#
+# # chkconfig telnet off
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000888
+# The organization employs cryptographic mechanisms to protect the integrity and confidentiality of non-local maintenance and diagnostic communications.
+# NIST SP 800-53 :: MA-4 (6)
+# NIST SP 800-53A :: MA-4 (6).1
+#
+#
+- name: fix stig_rhel6_v1r18 v_38589
+
+
+
+# Vuln ID: V-38594
+# Severity: high
+# Group Title: SRG-OS-000033
+# Rule ID: SV-50395r2_rule
+# STIG ID: RHEL-06-000214
+# Rule Title: The rshd service must not be running.
+# Discussion: The rsh service uses unencrypted network communications, which means that data from the login session, including passwords and all other information transmitted during the session, can be stolen by eavesdroppers on the network.
+# IA Controls:
+# Check Content: To check that the "rsh" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "rsh" --list
+#
+# Output should indicate the "rsh" service has either not been installed, or has been disabled, as shown in the example below:
+#
+# # chkconfig "rsh" --list
+# rsh off
+# OR
+# error reading information on service rsh: No such file or directory
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The "rsh" service, which is available with the "rsh-server" package and runs as a service through xinetd, should be disabled. The "rsh" service can be disabled with the following command:
+#
+# # chkconfig rsh off
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000068
+# The information system implements cryptographic mechanisms to protect the confidentiality of remote access sessions.
+# NIST SP 800-53 :: AC-17 (2)
+# NIST SP 800-53A :: AC-17 (2).1
+# NIST SP 800-53 Revision 4 :: AC-17 (2)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38594
+
+
+
+# Vuln ID: V-38598
+# Severity: high
+# Group Title: SRG-OS-000033
+# Rule ID: SV-50399r2_rule
+# STIG ID: RHEL-06-000216
+# Rule Title: The rexecd service must not be running.
+# Discussion: The rexec service uses unencrypted network communications, which means that data from the login session, including passwords and all other information transmitted during the session, can be stolen by eavesdroppers on the network.
+# IA Controls:
+# Check Content: To check that the "rexec" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "rexec" --list
+#
+# Output should indicate the "rexec" service has either not been installed, or has been disabled, as shown in the example below:
+#
+# # chkconfig "rexec" --list
+# rexec off
+# OR
+# error reading information on service rexec: No such file or directory
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The "rexec" service, which is available with the "rsh-server" package and runs as a service through xinetd, should be disabled. The "rexec" service can be disabled with the following command:
+#
+# # chkconfig rexec off
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000068
+# The information system implements cryptographic mechanisms to protect the confidentiality of remote access sessions.
+# NIST SP 800-53 :: AC-17 (2)
+# NIST SP 800-53A :: AC-17 (2).1
+# NIST SP 800-53 Revision 4 :: AC-17 (2)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38598
+
+
+
+# Vuln ID: V-38602
+# Severity: high
+# Group Title: SRG-OS-000248
+# Rule ID: SV-50403r2_rule
+# STIG ID: RHEL-06-000218
+# Rule Title: The rlogind service must not be running.
+# Discussion: The rlogin service uses unencrypted network communications, which means that data from the login session, including passwords and all other information transmitted during the session, can be stolen by eavesdroppers on the network.
+# IA Controls:
+# Check Content:
+# To check that the "rlogin" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "rlogin" --list
+#
+# Output should indicate the "rlogin" service has either not been installed, or has been disabled, as shown in the example below:
+#
+# # chkconfig "rlogin" --list
+# rlogin off
+# OR
+# error reading information on service rlogin: No such file or directory
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The "rlogin" service, which is available with the "rsh-server" package and runs as a service through xinetd, should be disabled. The "rlogin" service can be disabled with the following command:
+#
+# # chkconfig rlogin off
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001436
+# The organization disables organization defined networking protocols within the information system deemed to be nonsecure except for explicitly identified components in support of specific operational requirements.
+# NIST SP 800-53 :: AC-17 (8)
+# NIST SP 800-53A :: AC-17 (8).1 (ii)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38602
+
+
+
+# Vuln ID: V-38604
+# Severity: medium
+# Group Title: SRG-OS-000096
+# Rule ID: SV-50405r2_rule
+# STIG ID: RHEL-06-000221
+# Rule Title: The ypbind service must not be running.
+# Discussion: Disabling the "ypbind" service ensures the system is not acting as a client in a NIS or NIS+ domain.
+# IA Controls:
+# Check Content: To check that the "ypbind" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "ypbind" --list
+#
+# Output should indicate the "ypbind" service has either not been installed, or has been disabled at all runlevels, as shown in the example below:
+#
+# # chkconfig "ypbind" --list
+# "ypbind" 0:off 1:off 2:off 3:off 4:off 5:off 6:off
+#
+# Run the following command to verify "ypbind" is disabled through current runtime configuration:
+#
+# # service ypbind status
+#
+# If the service is disabled the command will return the following output:
+#
+# ypbind is stopped
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The "ypbind" service, which allows the system to act as a client in a NIS or NIS+ domain, should be disabled. The "ypbind" service can be disabled with the following commands:
+#
+# # chkconfig ypbind off
+# # service ypbind stop
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000382
+# The organization configures the information system to prohibit or restrict the use of organization defined functions, ports, protocols, and/or services.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (iii)
+# NIST SP 800-53 Revision 4 :: CM-7 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38604
+
+
+
+# Vuln ID: V-38605
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50406r2_rule
+# STIG ID: RHEL-06-000224
+# Rule Title: The cron service must be running.
+# Discussion: Due to its usage for maintenance and security-supporting tasks, enabling the cron daemon is essential.
+# IA Controls:
+# Check Content: Run the following command to determine the current status of the "crond" service:
+#
+# # service crond status
+#
+# If the service is enabled, it should return the following:
+#
+# crond is running...
+#
+#
+# If the service is not running, this is a finding.
+# Fix Text: The "crond" service is used to execute commands at preconfigured times. It is required by almost all systems to perform necessary maintenance tasks, such as notifying root of system activity. The "crond" service can be enabled with the following commands:
+#
+# # chkconfig crond on
+# # service crond start
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38605
+
+
+
+# Vuln ID: V-38609
+# Severity: medium
+# Group Title: SRG-OS-000248
+# Rule ID: SV-50410r2_rule
+# STIG ID: RHEL-06-000223
+# Rule Title: The TFTP service must not be running.
+# Discussion: Disabling the "tftp" service ensures the system is not acting as a tftp server, which does not provide encryption or authentication.
+# IA Controls:
+# Check Content: To check that the "tftp" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "tftp" --list
+#
+# Output should indicate the "tftp" service has either not been installed, or has been disabled, as shown in the example below:
+#
+# # chkconfig "tftp" --list
+# tftp off
+# OR
+# error reading information on service tftp: No such file or directory
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The "tftp" service should be disabled. The "tftp" service can be disabled with the following command:
+#
+# # chkconfig tftp off
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001436
+# The organization disables organization defined networking protocols within the information system deemed to be nonsecure except for explicitly identified components in support of specific operational requirements.
+# NIST SP 800-53 :: AC-17 (8)
+# NIST SP 800-53A :: AC-17 (8).1 (ii)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38609
+
+
+
+# Vuln ID: V-38618
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50419r2_rule
+# STIG ID: RHEL-06-000246
+# Rule Title: The avahi service must be disabled.
+# Discussion: Because the Avahi daemon service keeps an open network port, it is subject to network attacks. Its functionality is convenient but is only appropriate if the local network can be trusted.
+# IA Controls:
+# Check Content: To check that the "avahi-daemon" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "avahi-daemon" --list
+#
+# Output should indicate the "avahi-daemon" service has either not been installed, or has been disabled at all runlevels, as shown in the example below:
+#
+# # chkconfig "avahi-daemon" --list
+# "avahi-daemon" 0:off 1:off 2:off 3:off 4:off 5:off 6:off
+#
+# Run the following command to verify "avahi-daemon" is disabled through current runtime configuration:
+#
+# # service avahi-daemon status
+#
+# If the service is disabled the command will return the following output:
+#
+# avahi-daemon is stopped
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The "avahi-daemon" service can be disabled with the following commands:
+#
+# # chkconfig avahi-daemon off
+# # service avahi-daemon stop
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38618
+
+
+
+# Vuln ID: V-38640
+# Severity: low
+# Group Title: SRG-OS-000096
+# Rule ID: SV-50441r2_rule
+# STIG ID: RHEL-06-000261
+# Rule Title: The Automatic Bug Reporting Tool (abrtd) service must not be running.
+# Discussion: Mishandling crash data could expose sensitive information about vulnerabilities in software executing on the local machine, as well as sensitive information from within a process's address space or registers.
+# IA Controls:
+# Check Content: To check that the "abrtd" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "abrtd" --list
+#
+# Output should indicate the "abrtd" service has either not been installed, or has been disabled at all runlevels, as shown in the example below:
+#
+# # chkconfig "abrtd" --list
+# "abrtd" 0:off 1:off 2:off 3:off 4:off 5:off 6:off
+#
+# Run the following command to verify "abrtd" is disabled through current runtime configuration:
+#
+# # service abrtd status
+#
+# If the service is disabled the command will return the following output:
+#
+# abrtd is stopped
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The Automatic Bug Reporting Tool ("abrtd") daemon collects and reports crash data when an application crash is detected. Using a variety of plugins, abrtd can email crash reports to system administrators, log crash reports to files, or forward crash reports to a centralized issue tracking system such as RHTSupport. The "abrtd" service can be disabled with the following commands:
+#
+# # chkconfig abrtd off
+# # service abrtd stop
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000382
+# The organization configures the information system to prohibit or restrict the use of organization defined functions, ports, protocols, and/or services.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (iii)
+# NIST SP 800-53 Revision 4 :: CM-7 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38640
+
+
+
+# Vuln ID: V-38641
+# Severity: low
+# Group Title: SRG-OS-000096
+# Rule ID: SV-50442r3_rule
+# STIG ID: RHEL-06-000262
+# Rule Title: The atd service must be disabled.
+# Discussion: The "atd" service could be used by an unsophisticated insider to carry out activities outside of a normal login session, which could complicate accountability. Furthermore, the need to schedule tasks with "at" or "batch" is not common.
+# IA Controls:
+# Check Content: If the system requires the use of the "atd" service to support an organizational requirement, this is not applicable.
+#
+# To check that the "atd" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "atd" --list
+#
+# Output should indicate the "atd" service has either not been installed, or has been disabled at all runlevels, as shown in the example below:
+#
+# # chkconfig "atd" --list
+# "atd" 0:off 1:off 2:off 3:off 4:off 5:off 6:off
+#
+# Run the following command to verify "atd" is disabled through current runtime configuration:
+#
+# # service atd status
+#
+# If the service is disabled the command will return the following output:
+#
+# atd is stopped
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The "at" and "batch" commands can be used to schedule tasks that are meant to be executed only once. This allows delayed execution in a manner similar to cron, except that it is not recurring. The daemon "atd" keeps track of tasks scheduled via "at" and "batch", and executes them at the specified time. The "atd" service can be disabled with the following commands:
+#
+# # chkconfig atd off
+# # service atd stop
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000382
+# The organization configures the information system to prohibit or restrict the use of organization defined functions, ports, protocols, and/or services.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (iii)
+# NIST SP 800-53 Revision 4 :: CM-7 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38641
+
+
+
+# Vuln ID: V-38644
+# Severity: low
+# Group Title: SRG-OS-000096
+# Rule ID: SV-50445r2_rule
+# STIG ID: RHEL-06-000265
+# Rule Title: The ntpdate service must not be running.
+# Discussion: The "ntpdate" service may only be suitable for systems which are rebooted frequently enough that clock drift does not cause problems between reboots. In any event, the functionality of the ntpdate service is now available in the ntpd program and should be considered deprecated.
+# IA Controls:
+# Check Content: To check that the "ntpdate" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "ntpdate" --list
+#
+# Output should indicate the "ntpdate" service has either not been installed, or has been disabled at all runlevels, as shown in the example below:
+#
+# # chkconfig "ntpdate" --list
+# "ntpdate" 0:off 1:off 2:off 3:off 4:off 5:off 6:off
+#
+# Run the following command to verify "ntpdate" is disabled through current runtime configuration:
+#
+# # service ntpdate status
+#
+# If the service is disabled the command will return the following output:
+#
+# ntpdate is stopped
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The ntpdate service sets the local hardware clock by polling NTP servers when the system boots. It synchronizes to the NTP servers listed in "/etc/ntp/step-tickers" or "/etc/ntp.conf" and then sets the local hardware clock to the newly synchronized system time. The "ntpdate" service can be disabled with the following commands:
+#
+# # chkconfig ntpdate off
+# # service ntpdate stop
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000382
+# The organization configures the information system to prohibit or restrict the use of organization defined functions, ports, protocols, and/or services.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (iii)
+# NIST SP 800-53 Revision 4 :: CM-7 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38644
+
+
+
+# Vuln ID: V-38646
+# Severity: low
+# Group Title: SRG-OS-000096
+# Rule ID: SV-50447r2_rule
+# STIG ID: RHEL-06-000266
+# Rule Title: The oddjobd service must not be running.
+# Discussion: The "oddjobd" service may provide necessary functionality in some environments but it can be disabled if it is not needed. Execution of tasks by privileged programs, on behalf of unprivileged ones, has traditionally been a source of privilege escalation security issues.
+# IA Controls:
+# Check Content: To check that the "oddjobd" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "oddjobd" --list
+#
+# Output should indicate the "oddjobd" service has either not been installed, or has been disabled at all runlevels, as shown in the example below:
+#
+# # chkconfig "oddjobd" --list
+# "oddjobd" 0:off 1:off 2:off 3:off 4:off 5:off 6:off
+#
+# Run the following command to verify "oddjobd" is disabled through current runtime configuration:
+#
+# # service oddjobd status
+#
+# If the service is disabled the command will return the following output:
+#
+# oddjobd is stopped
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The "oddjobd" service exists to provide an interface and access control mechanism through which specified privileged tasks can run tasks for unprivileged client applications. Communication with "oddjobd" is through the system message bus. The "oddjobd" service can be disabled with the following commands:
+#
+# # chkconfig oddjobd off
+# # service oddjobd stop
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000382
+# The organization configures the information system to prohibit or restrict the use of organization defined functions, ports, protocols, and/or services.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (iii)
+# NIST SP 800-53 Revision 4 :: CM-7 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38646
+
+
+
+# Vuln ID: V-38648
+# Severity: low
+# Group Title: SRG-OS-000096
+# Rule ID: SV-50449r2_rule
+# STIG ID: RHEL-06-000267
+# Rule Title: The qpidd service must not be running.
+# Discussion: The qpidd service is automatically installed when the "base" package selection is selected during installation. The qpidd service listens for network connections which increases the attack surface of the system. If the system is not intended to receive AMQP traffic then the "qpidd" service is not needed and should be disabled or removed.
+# IA Controls:
+# Check Content: To check that the "qpidd" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "qpidd" --list
+#
+# Output should indicate the "qpidd" service has either not been installed, or has been disabled at all runlevels, as shown in the example below:
+#
+# # chkconfig "qpidd" --list
+# "qpidd" 0:off 1:off 2:off 3:off 4:off 5:off 6:off
+#
+# Run the following command to verify "qpidd" is disabled through current runtime configuration:
+#
+# # service qpidd status
+#
+# If the service is disabled the command will return the following output:
+#
+# qpidd is stopped
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The "qpidd" service provides high speed, secure, guaranteed delivery services. It is an implementation of the Advanced Message Queuing Protocol. By default the qpidd service will bind to port 5672 and listen for connection attempts. The "qpidd" service can be disabled with the following commands:
+#
+# # chkconfig qpidd off
+# # service qpidd stop
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000382
+# The organization configures the information system to prohibit or restrict the use of organization defined functions, ports, protocols, and/or services.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (iii)
+# NIST SP 800-53 Revision 4 :: CM-7 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38648
+
+
+
+# Vuln ID: V-38650
+# Severity: low
+# Group Title: SRG-OS-000096
+# Rule ID: SV-50451r2_rule
+# STIG ID: RHEL-06-000268
+# Rule Title: The rdisc service must not be running.
+# Discussion: General-purpose systems typically have their network and routing information configured statically by a system administrator. Workstations or some special-purpose systems often use DHCP (instead of IRDP) to retrieve dynamic network configuration information.
+# IA Controls:
+# Check Content: To check that the "rdisc" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "rdisc" --list
+#
+# Output should indicate the "rdisc" service has either not been installed, or has been disabled at all runlevels, as shown in the example below:
+#
+# # chkconfig "rdisc" --list
+# "rdisc" 0:off 1:off 2:off 3:off 4:off 5:off 6:off
+#
+# Run the following command to verify "rdisc" is disabled through current runtime configuration:
+#
+# # service rdisc status
+#
+# If the service is disabled the command will return the following output:
+#
+# rdisc is stopped
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The "rdisc" service implements the client side of the ICMP Internet Router Discovery Protocol (IRDP), which allows discovery of routers on the local subnet. If a router is discovered then the local routing table is updated with a corresponding default route. By default this daemon is disabled. The "rdisc" service can be disabled with the following commands:
+#
+# # chkconfig rdisc off
+# # service rdisc stop
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000382
+# The organization configures the information system to prohibit or restrict the use of organization defined functions, ports, protocols, and/or services.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (iii)
+# NIST SP 800-53 Revision 4 :: CM-7 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38650
+
+
+
+# Vuln ID: V-38672
+# Severity: low
+# Group Title: SRG-OS-000096
+# Rule ID: SV-50473r2_rule
+# STIG ID: RHEL-06-000289
+# Rule Title: The netconsole service must be disabled unless required.
+# Discussion: The "netconsole" service is not necessary unless there is a need to debug kernel panics, which is not common.
+# IA Controls:
+# Check Content: To check that the "netconsole" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "netconsole" --list
+#
+# Output should indicate the "netconsole" service has either not been installed, or has been disabled at all runlevels, as shown in the example below:
+#
+# # chkconfig "netconsole" --list
+# "netconsole" 0:off 1:off 2:off 3:off 4:off 5:off 6:off
+#
+# Run the following command to verify "netconsole" is disabled through current runtime configuration:
+#
+# # service netconsole status
+#
+# If the service is disabled the command will return the following output:
+#
+# netconsole is stopped
+#
+#
+# If the service is running, this is a finding.
+# Fix Text: The "netconsole" service is responsible for loading the netconsole kernel module, which logs kernel printk messages over UDP to a syslog server. This allows debugging of problems where disk logging fails and serial consoles are impractical. The "netconsole" service can be disabled with the following commands:
+#
+# # chkconfig netconsole off
+# # service netconsole stop
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000382
+# The organization configures the information system to prohibit or restrict the use of organization defined functions, ports, protocols, and/or services.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (iii)
+# NIST SP 800-53 Revision 4 :: CM-7 b
+#
+#
+- name: fix stig_rhel6_v1r18 v_38672
+
+
+
+# Vuln ID: V-38691
+# Severity: medium
+# Group Title: SRG-OS-000034
+# Rule ID: SV-50492r2_rule
+# STIG ID: RHEL-06-000331
+# Rule Title: The Bluetooth service must be disabled.
+# Discussion: Disabling the "bluetooth" service prevents the system from attempting connections to Bluetooth devices, which entails some security risk. Nevertheless, variation in this risk decision may be expected due to the utility of Bluetooth connectivity and its limited range.
+# IA Controls:
+# Check Content: To check that the "bluetooth" service is disabled in system boot configuration, run the following command:
+#
+# # chkconfig "bluetooth" --list
+#
+# Output should indicate the "bluetooth" service has either not been installed or has been disabled at all runlevels, as shown in the example below:
+#
+# # chkconfig "bluetooth" --list
+# "bluetooth" 0:off 1:off 2:off 3:off 4:off 5:off 6:off
+#
+#
+# If the service is configured to run, this is a finding.
+# Fix Text: The "bluetooth" service can be disabled with the following command:
+#
+# # chkconfig bluetooth off
+#
+#
+#
+# # service bluetooth stop
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000085
+# The organization monitors for unauthorized connections of mobile devices to organizational information systems.
+# NIST SP 800-53 :: AC-19 c
+# NIST SP 800-53A :: AC-19.1 (iii)
+#
+#
+- name: fix stig_rhel6_v1r18 v_38691
+
+
+
+# Vuln ID: V-72817
+# Severity: medium
+# Group Title: RHEL-06-000293
+# Rule ID: SV-87461r1_rule
+# STIG ID: RHEL-06-000293
+# Rule Title: Wireless network adapters must be disabled.
+# Discussion: The use of wireless networking can introduce many different attack vectors into the organization’s network. Common attack vectors such as malicious association and ad hoc networks will allow an attacker to spoof a wireless access point (AP), allowing validated systems to connect to the malicious AP and enabling the attacker to monitor and record network traffic. These malicious APs can also serve to create a man-in-the-middle attack or be used to create a denial of service to valid network resources.
+# IA Controls:
+# Check Content: This is N/A for systems that do not have wireless network adapters.
+#
+# Verify that there are no wireless interfaces configured on the system:
+#
+# # ifconfig -a
+#
+#
+# eth0      Link encap:Ethernet  HWaddr b8:ac:6f:65:31:e5
+#           inet addr:192.168.2.100  Bcast:192.168.2.255  Mask:255.255.255.0
+#           inet6 addr: fe80::baac:6fff:fe65:31e5/64 Scope:Link
+#           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+#           RX packets:2697529 errors:0 dropped:0 overruns:0 frame:0
+#           TX packets:2630541 errors:0 dropped:0 overruns:0 carrier:0
+#           collisions:0 txqueuelen:1000
+#           RX bytes:2159382827 (2.0 GiB)  TX bytes:1389552776 (1.2 GiB)
+#           Interrupt:17
+#
+# lo        Link encap:Local Loopback
+#           inet addr:127.0.0.1  Mask:255.0.0.0
+#           inet6 addr: ::1/128 Scope:Host
+#           UP LOOPBACK RUNNING  MTU:16436  Metric:1
+#           RX packets:2849 errors:0 dropped:0 overruns:0 frame:0
+#           TX packets:2849 errors:0 dropped:0 overruns:0 carrier:0
+#           collisions:0 txqueuelen:0
+#           RX bytes:2778290 (2.6 MiB)  TX bytes:2778290 (2.6 MiB)
+#
+#
+# If a wireless interface is configured, it must be documented and approved by the local Authorizing Official.
+#
+# If a wireless interface is configured and has not been documented and approved, this is a finding.
+#
+# Fix Text: Configure the system to disable all wireless network interfaces.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001443
+# The information system protects wireless access to the system using authentication of users and/or devices.
+# NIST SP 800-53 :: AC-18 (1)
+# NIST SP 800-53A :: AC-18 (1).1
+# NIST SP 800-53 Revision 4 :: AC-18 (1)
+#
+# CCI-001444
+# The information system protects wireless access to the system using encryption.
+# NIST SP 800-53 :: AC-18 (1)
+# NIST SP 800-53A :: AC-18 (1).1
+# NIST SP 800-53 Revision 4 :: AC-18 (1)
+#
+# CCI-002418
+# The information system protects the confidentiality and/or integrity of transmitted information.
+# NIST SP 800-53 Revision 4 :: SC-8
+#
+#
+- name: fix stig_rhel6_v1r18 v_72817
+

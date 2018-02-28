@@ -1,0 +1,36 @@
+stig_rhel_sections:
+    - aide
+    - audit_rules
+    - auditd
+    - authentication
+    - backup
+    - boot
+    - files
+    - filesystems
+    - firewall
+    - gconf
+    - kernel
+    - logrotate
+    - modules
+    - network
+    - nfs
+    - ntpd
+    - packages
+    - postfix
+    - runtime
+    - samba
+    - selinux
+    - services
+    - snmpd
+    - sshd
+    - tftpd
+    - umask
+    - vsftpd
+    - yum
+
+dhcp_required: True
+nfs_required: False
+samba_required: False
+snmpd_required: True
+tftpd_required: False
+vsftpd_required: True

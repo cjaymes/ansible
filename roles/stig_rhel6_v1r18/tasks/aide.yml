@@ -1,0 +1,341 @@
+# Vuln ID: V-38489
+# Severity: medium
+# Group Title: SRG-OS-000232
+# Rule ID: SV-50290r1_rule
+# STIG ID: RHEL-06-000016
+# Rule Title: A file integrity tool must be installed.
+# Discussion: The AIDE package must be installed if it is to be available for integrity checking.
+# IA Controls:
+# Check Content: If another file integrity tool is installed, this is not a finding.
+#
+# Run the following command to determine if the "aide" package is installed:
+#
+# # rpm -q aide
+#
+#
+# If the package is not installed, this is a finding.
+# Fix Text: Install the AIDE package with the command:
+#
+# # yum install aide
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001069
+# The organization employs automated mechanisms to detect the presence of unauthorized software on organizational information systems and notify designated organizational officials in accordance with the organization defined frequency.
+# NIST SP 800-53 :: RA-5 (7)
+# NIST SP 800-53A :: RA-5 (7).1 (ii)
+#
+#
+- name: check stig_rhel6_v1r18 v_38489
+  when: ['v_38489']|issubset(check_findings)
+
+
+# Vuln ID: V-38670
+# Severity: medium
+# Group Title: SRG-OS-000202
+# Rule ID: SV-50471r2_rule
+# STIG ID: RHEL-06-000306
+# Rule Title: The operating system must detect unauthorized changes to software and information.
+# Discussion: By default, AIDE does not install itself for periodic execution. Periodically running AIDE may reveal unexpected changes in installed files.
+# IA Controls:
+# Check Content: To determine that periodic AIDE execution has been scheduled, run the following command:
+#
+# # grep aide /etc/crontab /etc/cron.*/*
+#
+# If there is no output, this is a finding.
+# Fix Text: AIDE should be executed on a periodic basis to check for changes. To implement a daily execution of AIDE at 4:05am using cron, add the following line to /etc/crontab:
+#
+# 05 4 * * * root /usr/sbin/aide --check
+#
+# AIDE can be executed periodically through other means; this is merely one example.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001297
+# The information system detects unauthorized changes to software and information.
+# NIST SP 800-53 :: SI-7
+# NIST SP 800-53A :: SI-7.1
+#
+#
+- name: check stig_rhel6_v1r18 v_38670
+  when: ['v_38670']|issubset(check_findings)
+
+
+# Vuln ID: V-38673
+# Severity: medium
+# Group Title: SRG-OS-000265
+# Rule ID: SV-50474r2_rule
+# STIG ID: RHEL-06-000307
+# Rule Title: The operating system must ensure unauthorized, security-relevant configuration changes detected are tracked.
+# Discussion: By default, AIDE does not install itself for periodic execution. Periodically running AIDE may reveal unexpected changes in installed files.
+# IA Controls:
+# Check Content: To determine that periodic AIDE execution has been scheduled, run the following command:
+#
+# # grep aide /etc/crontab /etc/cron.*/*
+#
+# If there is no output, this is a finding.
+# Fix Text: AIDE should be executed on a periodic basis to check for changes. To implement a daily execution of AIDE at 4:05am using cron, add the following line to /etc/crontab:
+#
+# 05 4 * * * root /usr/sbin/aide --check
+#
+# AIDE can be executed periodically through other means; this is merely one example.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001589
+# The organization incorporates detection of unauthorized, security-relevant configuration changes into the organization’s incident response capability to ensure they are tracked.
+# NIST SP 800-53 :: CM-6 (3)
+# NIST SP 800-53A :: CM-6 (3).1 (ii)
+#
+#
+- name: check stig_rhel6_v1r18 v_38673
+  when: ['v_38673']|issubset(check_findings)
+
+
+# Vuln ID: V-38695
+# Severity: medium
+# Group Title: SRG-OS-000094
+# Rule ID: SV-50496r2_rule
+# STIG ID: RHEL-06-000302
+# Rule Title: A file integrity tool must be used at least weekly to check for unauthorized file changes, particularly the addition of unauthorized system libraries or binaries, or for unauthorized modification to authorized system libraries or binaries.
+# Discussion: By default, AIDE does not install itself for periodic execution. Periodically running AIDE may reveal unexpected changes in installed files.
+# IA Controls:
+# Check Content: To determine that periodic AIDE execution has been scheduled, run the following command:
+#
+# # grep aide /etc/crontab /etc/cron.*/*
+#
+# If there is no output or if aide is not run at least weekly, this is a finding.
+# Fix Text: AIDE should be executed on a periodic basis to check for changes. To implement a daily execution of AIDE at 4:05am using cron, add the following line to /etc/crontab:
+#
+# 05 4 * * * root /usr/sbin/aide --check
+#
+# AIDE can be executed periodically through other means; this is merely one example.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000374
+# The organization employs automated mechanisms to respond to unauthorized changes to organization defined configuration settings.
+# NIST SP 800-53 :: CM-6 (2)
+# NIST SP 800-53A :: CM-6 (2).1 (ii)
+#
+#
+- name: check stig_rhel6_v1r18 v_38695
+  when: ['v_38695']|issubset(check_findings)
+
+
+# Vuln ID: V-38696
+# Severity: medium
+# Group Title: SRG-OS-000098
+# Rule ID: SV-50497r2_rule
+# STIG ID: RHEL-06-000303
+# Rule Title: The operating system must employ automated mechanisms, per organization defined frequency, to detect the addition of unauthorized components/devices into the operating system.
+# Discussion: By default, AIDE does not install itself for periodic execution. Periodically running AIDE may reveal unexpected changes in installed files.
+# IA Controls:
+# Check Content: To determine that periodic AIDE execution has been scheduled, run the following command:
+#
+# # grep aide /etc/crontab /etc/cron.*/*
+#
+# If there is no output, this is a finding.
+# Fix Text: AIDE should be executed on a periodic basis to check for changes. To implement a daily execution of AIDE at 4:05am using cron, add the following line to /etc/crontab:
+#
+# 05 4 * * * root /usr/sbin/aide --check
+#
+# AIDE can be executed periodically through other means; this is merely one example.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000416
+# The organization employs automated mechanisms, per organization defined frequency, to detect the presence of unauthorized hardware, software, and firmware components within the information system.
+# NIST SP 800-53 :: CM-8 (3) (a)
+# NIST SP 800-53A :: CM-8 (3).1 (ii)
+# NIST SP 800-53 Revision 4 :: CM-8 (3) (a)
+#
+#
+- name: check stig_rhel6_v1r18 v_38696
+  when: ['v_38696']|issubset(check_findings)
+
+
+# Vuln ID: V-38698
+# Severity: medium
+# Group Title: SRG-OS-000232
+# Rule ID: SV-50499r2_rule
+# STIG ID: RHEL-06-000304
+# Rule Title: The operating system must employ automated mechanisms to detect the presence of unauthorized software on organizational information systems and notify designated organizational officials in accordance with the organization defined frequency.
+# Discussion: By default, AIDE does not install itself for periodic execution. Periodically running AIDE may reveal unexpected changes in installed files.
+# IA Controls:
+# Check Content: To determine that periodic AIDE execution has been scheduled, run the following command:
+#
+# # grep aide /etc/crontab /etc/cron.*/*
+#
+# If there is no output, this is a finding.
+# Fix Text: AIDE should be executed on a periodic basis to check for changes. To implement a daily execution of AIDE at 4:05am using cron, add the following line to /etc/crontab:
+#
+# 05 4 * * * root /usr/sbin/aide --check
+#
+# AIDE can be executed periodically through other means; this is merely one example.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001069
+# The organization employs automated mechanisms to detect the presence of unauthorized software on organizational information systems and notify designated organizational officials in accordance with the organization defined frequency.
+# NIST SP 800-53 :: RA-5 (7)
+# NIST SP 800-53A :: RA-5 (7).1 (ii)
+#
+#
+- name: check stig_rhel6_v1r18 v_38698
+  when: ['v_38698']|issubset(check_findings)
+
+
+# Vuln ID: V-38700
+# Severity: medium
+# Group Title: SRG-OS-000196
+# Rule ID: SV-50501r2_rule
+# STIG ID: RHEL-06-000305
+# Rule Title: The operating system must provide a near real-time alert when any of the organization defined list of compromise or potential compromise indicators occurs.
+# Discussion: By default, AIDE does not install itself for periodic execution. Periodically running AIDE may reveal unexpected changes in installed files.
+# IA Controls:
+# Check Content: To determine that periodic AIDE execution has been scheduled, run the following command:
+#
+# # grep aide /etc/crontab /etc/cron.*/*
+#
+# If there is no output, this is a finding.
+# Fix Text: AIDE should be executed on a periodic basis to check for changes. To implement a daily execution of AIDE at 4:05am using cron, add the following line to /etc/crontab:
+#
+# 05 4 * * * root /usr/sbin/aide --check
+#
+# AIDE can be executed periodically through other means; this is merely one example.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001263
+# The information system provides near real-time alerts when any of the  organization defined list of compromise or potential compromise indicators occurs.
+# NIST SP 800-53 :: SI-4 (5)
+# NIST SP 800-53A :: SI-4 (5).1 (ii)
+#
+#
+- name: check stig_rhel6_v1r18 v_38700
+  when: ['v_38700']|issubset(check_findings)
+
+
+# Vuln ID: V-51391
+# Severity: medium
+# Group Title: SRG-OS-000232
+# Rule ID: SV-65601r1_rule
+# STIG ID: RHEL-06-000018
+# Rule Title: A file integrity baseline must be created.
+# Discussion: For AIDE to be effective, an initial database of "known-good" information about files must be captured and it should be able to be verified against the installed files.
+# IA Controls:
+# Check Content: To find the location of the AIDE database file, run the following command:
+#
+# # grep DBDIR /etc/aide.conf
+#
+# Using the defined values of the [DBDIR] and [database] variables, verify the existence of the AIDE database file:
+#
+# # ls -l [DBDIR]/[database_file_name]
+#
+# If there is no database file, this is a finding.
+# Fix Text: Run the following command to generate a new database:
+#
+# # /usr/sbin/aide --init
+#
+# By default, the database will be written to the file "/var/lib/aide/aide.db.new.gz". Storing the database, the configuration file "/etc/aide.conf", and the binary "/usr/sbin/aide" (or hashes of these files), in a secure location (such as on read-only media) provides additional assurance about their integrity. The newly-generated database can be installed as follows:
+#
+# # cp /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+#
+# To initiate a manual check, run the following command:
+#
+# # /usr/sbin/aide --check
+#
+# If this check produces any unexpected output, investigate.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_51391
+  when: ['v_51391']|issubset(check_findings)
