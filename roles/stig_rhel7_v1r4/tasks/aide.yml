@@ -57,7 +57,7 @@
   register: aide_install_state
   when: '"v_71973" in check_findings'
 - name: installed
-  debug: aide_install_state
+  debug: '{{aide_install_state}}'
   when: '"v_71973" in check_findings'
 
 # Vuln ID: V-71975
