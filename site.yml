@@ -1,14 +1,14 @@
 ---
 - hosts: all
-    tasks:
-        - group_by: key=os_{{ ansible_os_family }}_v_{{ ansible_distribution_major_version }}
+  tasks:
+    - group_by: key=os_{{ ansible_os_family }}_v_{{ ansible_distribution_major_version }}
 
 - hosts: os_RedHat_v_6
-    gather_facts: False
-    roles:
-        - stig_rhel6_v1r18
+  gather_facts: False
+  roles:
+    - stig_rhel6_v1r18
 
 - hosts: os_RedHat_v_7
-    gather_facts: False
-    roles:
-        - stig_rhel7_v1r4
+  gather_facts: False
+  roles:
+    - stig_rhel7_v1r4
