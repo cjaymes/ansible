@@ -9,4 +9,3 @@
 
 - name: stig result compilation
   debug: '{{ stig_rhel7_v1r4_results }}'
-  command: /bin/true
