@@ -2,3 +2,4 @@
   include_tasks: '{{ item }}.yml'
   with_items: '{{ stig_rhel7_v1r4_sections }}'
   notify: stig section fixes
+  notify: stig results
