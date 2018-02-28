@@ -59,7 +59,8 @@
   when: '"v_71973" in check_findings'
 
 - name: installed
-  debug: 'installed'
+  debug:
+      msg: 'installed'
   when: '"v_71973" in check_findings and aide_install_state.yumstate = "installed"'
 
 # Vuln ID: V-71975
