@@ -51,14 +51,16 @@
 - name: init stig_rhel7_v1r4 v_71973
   set_fact: stig_rhel7_v1r4_v_71973_result = 'fail'
   when: '"v_71973" in check_findings'
+
 - name: check package state
   yum:
     list: aide
   register: aide_install_state
   when: '"v_71973" in check_findings'
+
 - name: installed
-  debug: '{{aide_install_state}}'
-  when: '"v_71973" in check_findings'
+  debug: 'installed'
+  when: '"v_71973" in check_findings and aide_install_state.yumstate = "installed"'
 
 # Vuln ID: V-71975
 # Severity: medium
