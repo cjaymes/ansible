@@ -5,4 +5,5 @@
 
 - name: stig results
   debug_var: '{{ stig_rhel7_v1r4_{{ item }}_result }}'
+  command: /bin/true
   with_items: '{{ stig_rhel7_v1r4_findings }}'
