@@ -4,6 +4,9 @@
   notify: stig section fixes
 
 - name: stig results
-  debug: '{{ stig_rhel7_v1r4_{{ item }}_result }}'
-  command: /bin/true
+  set_fact: stig_rhel7_v1r4_results = '{{ stig_rhel7_v1r4_results }}{{ item }}: {{ stig_rhel7_v1r4_{{ item }}_result }}\n'
   with_items: '{{ stig_rhel7_v1r4_findings }}'
+
+- name: stig result compilation
+  debug: '{{ stig_rhel7_v1r4_results }}'
+  command: /bin/true
