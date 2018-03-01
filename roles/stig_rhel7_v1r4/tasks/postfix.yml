@@ -45,5 +45,5 @@
 #
 #
 - name: check stig_rhel7_v1r4 v_72297
-  set_fact: stig_rhel7_v1r4_v_72297_result = 'fail'
+  set_fact: stig_rhel7_v1r4_results['v_72297'] = 'fail'
   when: '"v_72297" in check_findings'

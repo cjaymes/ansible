@@ -42,7 +42,7 @@
 #
 #
 - name: check stig_rhel7_v1r4 v_72083
-  set_fact: stig_rhel7_v1r4_v_72083_result = 'fail'
+  set_fact: stig_rhel7_v1r4_results['v_72083'] = 'fail'
   when: '"v_72083" in check_findings'
 
 
@@ -92,7 +92,7 @@
 #
 #
 - name: check stig_rhel7_v1r4 v_72085
-  set_fact: stig_rhel7_v1r4_v_72085_result = 'fail'
+  set_fact: stig_rhel7_v1r4_results['v_72085'] = 'fail'
   when: '"v_72085" in check_findings'
 
 
@@ -145,7 +145,7 @@
 #
 #
 - name: check stig_rhel7_v1r4 v_72087
-  set_fact: stig_rhel7_v1r4_v_72087_result = 'fail'
+  set_fact: stig_rhel7_v1r4_results['v_72087'] = 'fail'
   when: '"v_72087" in check_findings'
 
 
@@ -189,5 +189,5 @@
 #
 #
 - name: check stig_rhel7_v1r4 v_73163
-  set_fact: stig_rhel7_v1r4_v_73163_result = 'fail'
+  set_fact: stig_rhel7_v1r4_results['v_73163'] = 'fail'
   when: '"v_73163" in check_findings'

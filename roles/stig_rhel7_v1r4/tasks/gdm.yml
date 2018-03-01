@@ -45,7 +45,7 @@
 #
 #
 - name: check stig_rhel7_v1r4 v_71953
-  set_fact: stig_rhel7_v1r4_v_71953_result = 'fail'
+  set_fact: stig_rhel7_v1r4_results['v_71953'] = 'fail'
   when: '"v_71953" in check_findings'
 
 
@@ -96,5 +96,5 @@
 #
 #
 - name: check stig_rhel7_v1r4 v_71955
-  set_fact: stig_rhel7_v1r4_v_71955_result = 'fail'
+  set_fact: stig_rhel7_v1r4_results['v_71955'] = 'fail'
   when: '"v_71955" in check_findings'

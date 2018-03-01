@@ -49,8 +49,7 @@
 #
 #
 - name: init stig_rhel7_v1r4 v_71973
-  tasks:
-    - set_fact: stig_rhel7_v1r4_v_71973_result = 'fail'
+  set_fact: stig_rhel7_v1r4_results['v_71973'] = 'fail'
   when: '"v_71973" in check_findings'
 
 - name: check package state
@@ -122,7 +121,7 @@
 #
 #
 - name: check stig_rhel7_v1r4 v_71975
-  set_fact: stig_rhel7_v1r4_v_71975_result = 'fail'
+  set_fact: stig_rhel7_v1r4_results['v_71975'] = 'fail'
   when: '"v_71975" in check_findings'
 
 
@@ -183,7 +182,7 @@
 #
 #
 - name: check stig_rhel7_v1r4 v_72069
-  set_fact: stig_rhel7_v1r4_v_72069_result = 'fail'
+  set_fact: stig_rhel7_v1r4_results['v_72069'] = 'fail'
   when: '"v_72069" in check_findings'
 
 
@@ -244,7 +243,7 @@
 #
 #
 - name: check stig_rhel7_v1r4 v_72071
-  set_fact: stig_rhel7_v1r4_v_72071_result = 'fail'
+  set_fact: stig_rhel7_v1r4_results['v_72071'] = 'fail'
   when: '"v_72071" in check_findings'
 
 
@@ -307,5 +306,5 @@
 #
 #
 - name: check stig_rhel7_v1r4 v_72073
-  set_fact: stig_rhel7_v1r4_v_72073_result = 'fail'
+  set_fact: stig_rhel7_v1r4_results['v_72073'] = 'fail'
   when: '"v_72073" in check_findings'

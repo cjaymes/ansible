@@ -39,7 +39,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38484
-  set_fact: stig_rhel6_v1r18_v_38484_result = 'fail'
+  set_fact: stig_rhel6_v1r18_results['v_38484'] = 'fail'
   when: '"v_38484" in check_findings'
 
 
@@ -84,7 +84,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38607
-  set_fact: stig_rhel6_v1r18_v_38607_result = 'fail'
+  set_fact: stig_rhel6_v1r18_results['v_38607'] = 'fail'
   when: '"v_38607" in check_findings'
 
 
@@ -136,7 +136,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38608
-  set_fact: stig_rhel6_v1r18_v_38608_result = 'fail'
+  set_fact: stig_rhel6_v1r18_results['v_38608'] = 'fail'
   when: '"v_38608" in check_findings'
 
 
@@ -182,7 +182,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38610
-  set_fact: stig_rhel6_v1r18_v_38610_result = 'fail'
+  set_fact: stig_rhel6_v1r18_results['v_38610'] = 'fail'
   when: '"v_38610" in check_findings'
 
 
@@ -226,7 +226,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38611
-  set_fact: stig_rhel6_v1r18_v_38611_result = 'fail'
+  set_fact: stig_rhel6_v1r18_results['v_38611'] = 'fail'
   when: '"v_38611" in check_findings'
 
 
@@ -270,7 +270,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38612
-  set_fact: stig_rhel6_v1r18_v_38612_result = 'fail'
+  set_fact: stig_rhel6_v1r18_results['v_38612'] = 'fail'
   when: '"v_38612" in check_findings'
 
 
@@ -312,7 +312,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38613
-  set_fact: stig_rhel6_v1r18_v_38613_result = 'fail'
+  set_fact: stig_rhel6_v1r18_results['v_38613'] = 'fail'
   when: '"v_38613" in check_findings'
 
 
@@ -356,7 +356,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38614
-  set_fact: stig_rhel6_v1r18_v_38614_result = 'fail'
+  set_fact: stig_rhel6_v1r18_results['v_38614'] = 'fail'
   when: '"v_38614" in check_findings'
 
 
@@ -400,7 +400,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38615
-  set_fact: stig_rhel6_v1r18_v_38615_result = 'fail'
+  set_fact: stig_rhel6_v1r18_results['v_38615'] = 'fail'
   when: '"v_38615" in check_findings'
 
 
@@ -446,7 +446,7 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38616
-  set_fact: stig_rhel6_v1r18_v_38616_result = 'fail'
+  set_fact: stig_rhel6_v1r18_results['v_38616'] = 'fail'
   when: '"v_38616" in check_findings'
 
 
@@ -489,5 +489,5 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_38617
-  set_fact: stig_rhel6_v1r18_v_38617_result = 'fail'
+  set_fact: stig_rhel6_v1r18_results['v_38617'] = 'fail'
   when: '"v_38617" in check_findings'
