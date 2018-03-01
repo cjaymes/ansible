@@ -58,7 +58,7 @@
 
 - name: package state debug
   debug:
-      msg: '{{aide_install_state.stderr}}'
+      msg: '{{aide_install_state}}'
 
 - name: check for cron.daily aide file
   stat: path=/etc/cron.daily/aide
