@@ -300,4 +300,4 @@ stig_rhel6_v1r18_findings:
 check_findings: '{{ stig_rhel6_v1r18_findings }}'
 fix_findings: '{{ stig_rhel6_v1r18_findings }}'
 
-stig_rhel6_v1r18_results: []
+stig_rhel6_v1r18_results: {}
