@@ -55,7 +55,7 @@
   ignore_errors: yes
   changed_when: False
   register: aide_install_state
-  when: 'v_71973' in check_findings
+  when: "'v_71973' in check_findings"
 
 - name: package state debug
   debug:
@@ -64,7 +64,7 @@
 - name: check for cron.daily aide file
   stat: path=/etc/cron.daily/aide
   register: aide_cron_daily
-  when: 'Error: No matching Packages to list' in aide_install_state.stderr
+  when: "'Error: No matching Packages to list' in aide_install_state.stderr"
 
 - debug:
     msg: '{{aide_cron_daily}}'
@@ -72,7 +72,7 @@
 - name: check for cron.weekly aide file
   stat: path=/etc/cron.weekly/aide
   register: aide_cron_weekly
-  when: 'Error: No matching Packages to list' not in aide_install_state.stderr
+  when: "'Error: No matching Packages to list' not in aide_install_state.stderr"
 
 - debug:
     msg: '{{aide_cron_weekly}}'
