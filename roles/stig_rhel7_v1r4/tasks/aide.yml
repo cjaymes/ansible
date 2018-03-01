@@ -49,9 +49,10 @@
 #
 #
 - name: check package state
-  command: yum list installed aide || /bin/true
+  command: yum list installed aide
   args:
       warn: False
+  ignore_errors: yes
   register: aide_install_state
   when: '"v_71973" in check_findings'
 
