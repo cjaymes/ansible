@@ -53,8 +53,9 @@
   args:
       warn: False
   ignore_errors: yes
+  changed_when: False
   register: aide_install_state
-  when: '"v_71973" in check_findings'
+  when: "v_71973" in check_findings
 
 - name: package state debug
   debug:
@@ -63,24 +64,25 @@
 - name: check for cron.daily aide file
   stat: path=/etc/cron.daily/aide
   register: aide_cron_daily
-  when: '"Error: No matching Packages to list" in aide_install_state.stderr'
+  when: "Error: No matching Packages to list" in aide_install_state.stderr
 
 - name: check for cron.weekly aide file
   stat: path=/etc/cron.weekly/aide
   register: aide_cron_weekly
-  when: '"Error: No matching Packages to list" not in aide_install_state.stderr'
+  when: "Error: No matching Packages to list" not in aide_install_state.stderr
 
 - debug:
     msg: '{{aide_cron_daily}}'
 - debug:
     msg: '{{aide_cron_weekly}}'
 
-- name: pass stig_rhel7_v1r4 v_71975
+- name: aide runs daily
   set_fact: stig_rhel7_v1r4_results['v_71975'] = 'pass'
-  when: 'aide_cron_daily.stat.exists'
-- name: pass stig_rhel7_v1r4 v_71975
+  when: aide_cron_daily.stat.exists
+
+- name: aide runs weekly
   set_fact: stig_rhel7_v1r4_results['v_71975'] = 'pass'
-  when: 'aide_cron_weekly.stat.exists'
+  when: aide_cron_weekly.stat.exists
 
 # Vuln ID: V-71975
 # Severity: medium
