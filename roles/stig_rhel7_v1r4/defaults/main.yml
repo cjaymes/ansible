@@ -279,3 +279,5 @@ stig_rhel7_v1r4_findings:
 
 check_findings: '{{ stig_rhel7_v1r4_findings }}'
 fix_findings: '{{ stig_rhel7_v1r4_findings }}'
+
+stig_rhel7_v1r4_results: []
