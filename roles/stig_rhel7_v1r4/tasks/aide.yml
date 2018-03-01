@@ -49,7 +49,7 @@
 #
 #
 - name: check package state
-  command: yum list installed aide; echo $?
+  command: yum list installed aide
   args:
       warn: False
   register: aide_install_state
