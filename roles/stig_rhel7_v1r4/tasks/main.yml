@@ -1,5 +1,5 @@
 - name: initialize results
-  set_fact: stig_rhel7_v1r4_results[item] = 'fail'
+  set_fact: stig_rhel7_v1r4_results['{{ item }}'] = 'fail'
   with_items: '{{ stig_rhel7_v1r4_findings }}'
 
 - name: stig section checks
