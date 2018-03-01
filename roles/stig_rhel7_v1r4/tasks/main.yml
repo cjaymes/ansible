@@ -1,5 +1,6 @@
 - name: initialize results
-  set_fact: stig_rhel7_v1r4_results[item] = 'fail'
+  set_fact:
+      stig_rhel7_v1r4_results: '{{ stig_rhel7_v1r4_results | combine(item.item.name: "fail") }}'
   with_items: '{{ stig_rhel7_v1r4_findings }}'
 
 - debug:
