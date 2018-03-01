@@ -52,7 +52,9 @@
   command: yum list installed aide || true
   args:
       warn: False
+  # following is so we don't get an error about using yum with command:
   ignore_errors: yes
+  # this command doesn't actually change anything
   changed_when: False
   register: aide_install_state
   when: "'v_71973' in check_findings"
@@ -64,7 +66,7 @@
 - name: check for cron.daily aide file
   stat: path=/etc/cron.daily/aide
   register: aide_cron_daily
-  when: "'Error: No matching Packages to list' in aide_install_state.stderr"
+  when: "'Error: No matching Packages to list' not in aide_install_state.stderr"
 
 - debug:
     msg: '{{aide_cron_daily}}'
