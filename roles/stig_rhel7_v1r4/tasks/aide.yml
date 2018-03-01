@@ -49,7 +49,7 @@
 #
 #
 - name: check package state
-  command: yum list installed aide
+  command: yum list installed aide || true
   args:
       warn: False
   ignore_errors: yes
@@ -58,17 +58,17 @@
 
 - name: package state debug
   debug:
-      msg: aide_install_state
+      msg: '{{aide_install_state.stderr}}'
 
 - name: check for cron.daily aide file
   stat: path=/etc/cron.daily/aide
   register: aide_cron_daily
-  when: 'aide_install_state.rc == 0'
+  when: '"Error: No matching Packages to list" in aide_install_state.stderr'
 
 - name: check for cron.weekly aide file
   stat: path=/etc/cron.weekly/aide
   register: aide_cron_weekly
-  when: 'aide_install_state.rc == 0'
+  when: '"Error: No matching Packages to list" not in aide_install_state.stderr'
 
 - debug:
     msg: '{{aide_cron_daily}}'
