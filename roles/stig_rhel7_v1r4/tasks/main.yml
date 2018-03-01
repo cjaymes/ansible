@@ -2,7 +2,10 @@
   set_fact: stig_rhel7_v1r4_results[item] = 'fail'
   with_items: '{{ stig_rhel7_v1r4_findings }}'
 
-- name: stig section checks
-  include_tasks: '{{ item }}.yml'
-  with_items: '{{ stig_rhel7_v1r4_sections }}'
-  notify: stig section fixes
+- debug:
+    msg: '{{ stig_rhel7_v1r4_findings }}'
+
+# - name: stig section checks
+#   include_tasks: '{{ item }}.yml'
+#   with_items: '{{ stig_rhel7_v1r4_sections }}'
+#   notify: stig section fixes
