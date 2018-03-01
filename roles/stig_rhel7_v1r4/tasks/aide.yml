@@ -97,6 +97,9 @@
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
       - aide_cron_weekly.stat.exists
 
+- debug:
+    msg: '{{stig_rhel7_v1r4_results}}'
+
 - name: output test
   command: echo '{{ stig_rhel7_v1r4_results["v_71975"] }}'
   changed_when: False

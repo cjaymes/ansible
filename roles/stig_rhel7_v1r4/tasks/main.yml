@@ -4,6 +4,5 @@
 
 - name: stig section checks
   include_tasks: '{{ item }}.yml'
-  with_items: ['aide']
-#  with_items: '{{ stig_rhel7_v1r4_sections }}'
+  with_items: '{{ stig_rhel7_v1r4_sections }}'
   notify: stig section fixes
