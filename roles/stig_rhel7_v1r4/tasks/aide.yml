@@ -48,13 +48,9 @@
 # NIST SP 800-53 Revision 4 :: CM-3 (5)
 #
 #
-- name: init stig_rhel7_v1r4 v_71973
-  set_fact: stig_rhel7_v1r4_results['v_71973'] = 'fail'
-  when: '"v_71973" in check_findings'
-
 - name: check package state
   yum:
-    list: aide
+    list: ansible
   register: aide_install_state
   when: '"v_71973" in check_findings'
 
