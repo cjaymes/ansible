@@ -64,6 +64,11 @@
   register: aide_cron_weekly
   when: 'aide_install_state.results[0].yumstate == "installed"'
 
+- debug:
+    msg: '{{aide_cron_daily}}'
+- debug:
+    msg: '{{aide_cron_weekly}}'
+
 - name: pass stig_rhel7_v1r4 v_71975
   set_fact: stig_rhel7_v1r4_results['v_71975'] = 'pass'
   when: '(aide_cron_daily.stat and aide_cron_daily.stat.exists) or (aide_cron_weekly.stat and aide_cron_weekly.stat.exists)'
