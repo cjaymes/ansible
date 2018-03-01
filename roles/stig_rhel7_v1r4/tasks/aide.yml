@@ -66,7 +66,7 @@
 
 - name: pass stig_rhel7_v1r4 v_71975
   set_fact: stig_rhel7_v1r4_results['v_71975'] = 'pass'
-  when: 'aide_cron_daily.stat.exists or aide_cron_weekly.stat.exists'
+  when: '(aide_cron_daily.stat and aide_cron_daily.stat.exists) or (aide_cron_weekly.stat and aide_cron_weekly.stat.exists)'
 
 # Vuln ID: V-71975
 # Severity: medium
