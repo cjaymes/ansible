@@ -49,7 +49,9 @@
 #
 #
 - name: check package state
-  command: yum list installed aide
+  command: yum list installed aide; echo $?
+  args:
+      warn: False
   register: aide_install_state
   when: '"v_71973" in check_findings'
 
