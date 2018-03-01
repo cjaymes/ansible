@@ -1,3 +1,7 @@
+- name: initialize results
+  set_fact: stig_rhel7_v1r4_results[item] = 'fail'
+  with_items: stig_rhel6_v1r18_findings
+
 - name: stig section checks
   include_tasks: '{{ item }}.yml'
   with_items: ['aide']
