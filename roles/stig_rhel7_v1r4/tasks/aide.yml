@@ -49,20 +49,23 @@
 #
 #
 - name: check package state
-  yum:
-    list: aide
+  command: yum list installed aide
   register: aide_install_state
   when: '"v_71973" in check_findings'
+
+- name: package state debug
+  debug:
+      msg: aide_install_state
 
 - name: check for cron.daily aide file
   stat: path=/etc/cron.daily/aide
   register: aide_cron_daily
-  when: 'aide_install_state.results[0].yumstate == "installed"'
+  when: 'aide_install_state.rc == 0'
 
 - name: check for cron.weekly aide file
   stat: path=/etc/cron.weekly/aide
   register: aide_cron_weekly
-  when: 'aide_install_state.results[0].yumstate == "installed"'
+  when: 'aide_install_state.rc == 0'
 
 - debug:
     msg: '{{aide_cron_daily}}'
