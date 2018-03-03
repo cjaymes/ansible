@@ -297,8 +297,8 @@ stig_rhel6_v1r18_findings:
   - v_58901
   - v_72817
 
-stig_rhel6_v1r18_check_findings: '{{ stig_rhel6_v1r18_findings }}'
-stig_rhel6_v1r18_fix_findings: '{{ stig_rhel6_v1r18_findings }}'
+stig_rhel6_v1r18_checks: '{{ stig_rhel6_v1r18_findings }}'
+stig_rhel6_v1r18_fix_findings: true
 
 stig_rhel6_v1r18_results:
   v_38437: fail
