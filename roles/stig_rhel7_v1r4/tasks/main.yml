@@ -1,7 +1,11 @@
-- name: stig section checks
-  include_tasks: '{{ item }}.yml'
+- name: stig checks
+  include_tasks: '{{ item }}_check.yml'
   with_items: '{{ stig_rhel7_v1r4_sections }}'
-  notify: stig section fixes
+
+- name: stig fixes
+  include_tasks: '{{ item }}_fix.yml'
+  with_items: '{{ stig_rhel7_v1r4_sections }}'
+  when: stig_rhel7_v1r4_fix_findings
 
 - debug:
     msg: '{{stig_rhel7_v1r4_results}}'

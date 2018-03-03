@@ -1,0 +1,802 @@
+# Vuln ID: V-71859
+# Severity: medium
+# Group Title: SRG-OS-000023-GPOS-00006
+# Rule ID: SV-86483r3_rule
+# STIG ID: RHEL-07-010030
+# Rule Title: The operating system must display the Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via a graphical user logon.
+# Discussion: Display of a standardized and approved use notification before granting access to the operating system ensures privacy and security notification verbiage used is consistent with applicable federal laws, Executive Orders, directives, policies, regulations, standards, and guidance.
+#
+# System use notifications are required only for access via logon interfaces with human users and are not required when such human interfaces do not exist.
+#
+# The banner must be formatted in accordance with applicable DoD policy. Use the following verbiage for operating systems that can accommodate banners of 1300 characters:
+#
+# "You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.
+#
+# By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+#
+# -The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+#
+# -At any time, the USG may inspect and seize data stored on this IS.
+#
+# -Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
+#
+# -This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+#
+# -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details."
+#
+#
+# Satisfies: SRG-OS-000023-GPOS-00006, SRG-OS-000024-GPOS-00007, SRG-OS-000228-GPOS-00088
+# IA Controls:
+# Check Content: Verify the operating system displays the Standard Mandatory DoD Notice and Consent Banner before granting access to the operating system via a graphical user logon.
+#
+# Note: If the system does not have GNOME installed, this requirement is Not Applicable.
+#
+# Check to see if the operating system displays a banner at the logon screen with the following command:
+#
+# # grep banner-message-enable /etc/dconf/db/local.d/*
+# banner-message-enable=true
+#
+# If "banner-message-enable" is set to "false" or is missing, this is a finding.
+# Fix Text: Configure the operating system to display the Standard Mandatory DoD Notice and Consent Banner before granting access to the system.
+#
+# Note: If the system does not have GNOME installed, this requirement is Not Applicable.
+#
+# Create a database to contain the system-wide graphical user logon settings (if it does not already exist) with the following command:
+#
+# # touch /etc/dconf/db/local.d/01-banner-message
+#
+# Add the following line to the [org/gnome/login-screen] section of the "/etc/dconf/db/local.d/01-banner-message":
+#
+# [org/gnome/login-screen]
+# banner-message-enable=true
+#
+# Update the system databases:
+#
+# # dconf update
+#
+# Users must log out and back in again before the system-wide settings take effect.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000048
+# The information system displays an organization-defined system use notification message or banner before granting access to the system that provides privacy and security notices consistent with applicable federal laws, Executive Orders, directives, policies, regulations, standards, and guidance.
+# NIST SP 800-53 :: AC-8 a
+# NIST SP 800-53A :: AC-8.1 (ii)
+# NIST SP 800-53 Revision 4 :: AC-8 a
+#
+#
+- name: check stig_rhel7_v1r4 v_71859
+  set_fact: stig_rhel7_v1r4_results['v_71859'] = 'fail'
+  when: '"v_71859" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-71861
+# Severity: medium
+# Group Title: SRG-OS-000023-GPOS-00006
+# Rule ID: SV-86485r3_rule
+# STIG ID: RHEL-07-010040
+# Rule Title: The operating system must display the approved Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via a graphical user logon.
+# Discussion: Display of a standardized and approved use notification before granting access to the operating system ensures privacy and security notification verbiage used is consistent with applicable federal laws, Executive Orders, directives, policies, regulations, standards, and guidance.
+#
+# System use notifications are required only for access via logon interfaces with human users and are not required when such human interfaces do not exist.
+#
+# The banner must be formatted in accordance with applicable DoD policy. Use the following verbiage for operating systems that can accommodate banners of 1300 characters:
+#
+# "You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.
+#
+# By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+#
+# -The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+#
+# -At any time, the USG may inspect and seize data stored on this IS.
+#
+# -Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
+#
+# -This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+#
+# -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details."
+#
+# Satisfies: SRG-OS-000023-GPOS-00006, SRG-OS-000024-GPOS-00007, SRG-OS-000228-GPOS-00088
+# IA Controls:
+# Check Content: Verify the operating system displays the approved Standard Mandatory DoD Notice and Consent Banner before granting access to the operating system via a graphical user logon.
+#
+# Note: If the system does not have GNOME installed, this requirement is Not Applicable.
+#
+# Check that the operating system displays the exact approved Standard Mandatory DoD Notice and Consent Banner text with the command:
+#
+# # grep banner-message-text /etc/dconf/db/local.d/*
+# banner-message-text=
+# 'You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.\nBy using this IS (which includes any device attached to this IS), you consent to the following conditions:\n-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.\n-At any time, the USG may inspect and seize data stored on this IS.\n-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.\n-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.\n-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details. '
+#
+# Note: The "\n " characters are for formatting only. They will not be displayed on the GUI.
+#
+# If the banner does not match the approved Standard Mandatory DoD Notice and Consent Banner, this is a finding.
+# Fix Text: Configure the operating system to display the approved Standard Mandatory DoD Notice and Consent Banner before granting access to the system.
+#
+# Note: If the system does not have GNOME installed, this requirement is Not Applicable.
+#
+# Create a database to contain the system-wide graphical user logon settings (if it does not already exist) with the following command:
+#
+# # touch /etc/dconf/db/local.d/01-banner-message
+#
+# Add the following line to the [org/gnome/login-screen] section of the "/etc/dconf/db/local.d/01-banner-message":
+#
+# [org/gnome/login-screen]
+#
+# banner-message-enable=true
+#
+# banner-message-text='You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.\nBy using this IS (which includes any device attached to this IS), you consent to the following conditions:\n-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.\n-At any time, the USG may inspect and seize data stored on this IS.\n-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.\n-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.\n-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details. '
+#
+# Note: The "\n " characters are for formatting only. They will not be displayed on the GUI.
+#
+# Run the following command to update the database:
+# # dconf update
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000048
+# The information system displays an organization-defined system use notification message or banner before granting access to the system that provides privacy and security notices consistent with applicable federal laws, Executive Orders, directives, policies, regulations, standards, and guidance.
+# NIST SP 800-53 :: AC-8 a
+# NIST SP 800-53A :: AC-8.1 (ii)
+# NIST SP 800-53 Revision 4 :: AC-8 a
+#
+#
+- name: check stig_rhel7_v1r4 v_71861
+  set_fact: stig_rhel7_v1r4_results['v_71861'] = 'fail'
+  when: '"v_71861" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-71891
+# Severity: medium
+# Group Title: SRG-OS-000028-GPOS-00009
+# Rule ID: SV-86515r4_rule
+# STIG ID: RHEL-07-010060
+# Rule Title: The operating system must enable a user session lock until that user re-establishes access using established identification and authentication procedures.
+# Discussion: A session lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not want to log out because of the temporary nature of the absence.
+#
+# The session lock is implemented at the point where session activity can be determined.
+#
+# Regardless of where the session lock is determined and implemented, once invoked, the session lock must remain in place until the user reauthenticates. No other activity aside from reauthentication must unlock the system.
+#
+# Satisfies: SRG-OS-000028-GPOS-00009, SRG-OS-000030-GPOS-00011
+# IA Controls:
+# Check Content: Verify the operating system enables a user's session lock until that user re-establishes access using established identification and authentication procedures. The screen program must be installed to lock sessions on the console.
+#
+# Note: If the system does not have GNOME installed, this requirement is Not Applicable.
+#
+# Check to see if the screen lock is enabled with the following command:
+#
+# # grep -i lock-enabled /etc/dconf/db/local.d/00-screensaver
+# lock-enabled=true
+#
+# If the "lock-enabled" setting is missing or is not set to "true", this is a finding.
+# Fix Text: Configure the operating system to enable a user's session lock until that user re-establishes access using established identification and authentication procedures.
+#
+# Create a database to contain the system-wide screensaver settings (if it does not already exist) with the following command:
+#
+# # touch /etc/dconf/db/local.d/00-screensaver
+#
+# Edit "org/gnome/desktop/screensaver" and add or update the following lines:
+#
+# # Set this to true to lock the screen when the screensaver activates
+# lock-enabled=true
+#
+# Update the system databases:
+#
+# # dconf update
+#
+# Users must log out and back in again before the system-wide settings take effect.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000056
+# The information system retains the session lock until the user reestablishes access using established identification and authentication procedures.
+# NIST SP 800-53 :: AC-11 b
+# NIST SP 800-53A :: AC-11.1 (iii)
+# NIST SP 800-53 Revision 4 :: AC-11 b
+#
+#
+- name: check stig_rhel7_v1r4 v_71891
+  set_fact: stig_rhel7_v1r4_results['v_71891'] = 'fail'
+  when: '"v_71891" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-71893
+# Severity: medium
+# Group Title: SRG-OS-000029-GPOS-00010
+# Rule ID: SV-86517r4_rule
+# STIG ID: RHEL-07-010070
+# Rule Title: The operating system must initiate a screensaver after a 15-minute period of inactivity for graphical user interfaces.
+# Discussion: A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.
+#
+# The session lock is implemented at the point where session activity can be determined and/or controlled.
+# IA Controls:
+# Check Content: Verify the operating system initiates a screensaver after a 15-minute period of inactivity for graphical user interfaces. The screen program must be installed to lock sessions on the console.
+#
+# Note: If the system does not have GNOME installed, this requirement is Not Applicable.
+#
+# Check to see if GNOME is configured to display a screensaver after a 15 minute delay with the following command:
+#
+# # grep -i idle-delay /etc/dconf/db/local.d/*
+# idle-delay=uint32 900
+#
+# If the "idle-delay" setting is missing or is not set to "900" or less, this is a finding.
+# Fix Text: Configure the operating system to initiate a screensaver after a 15-minute period of inactivity for graphical user interfaces.
+#
+# Create a database to contain the system-wide screensaver settings (if it does not already exist) with the following command:
+#
+# # touch /etc/dconf/db/local.d/00-screensaver
+#
+# Edit /etc/dconf/db/local.d/00-screensaver and add or update the following lines:
+#
+# [org/gnome/desktop/session]
+# # Set the lock time out to 900 seconds before the session is considered idle
+# idle-delay=uint32 900
+#
+# You must include the "uint32" along with the integer key values as shown.
+#
+# Update the system databases:
+#
+# # dconf update
+#
+# Users must log out and back in again before the system-wide settings take effect.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000057
+# The information system initiates a session lock after the organization-defined time period of inactivity.
+# NIST SP 800-53 :: AC-11 a
+# NIST SP 800-53A :: AC-11.1 (ii)
+# NIST SP 800-53 Revision 4 :: AC-11 a
+#
+#
+- name: check stig_rhel7_v1r4 v_71893
+  set_fact: stig_rhel7_v1r4_results['v_71893'] = 'fail'
+  when: '"v_71893" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-71899
+# Severity: medium
+# Group Title: SRG-OS-000029-GPOS-00010
+# Rule ID: SV-86523r3_rule
+# STIG ID: RHEL-07-010100
+# Rule Title: The operating system must initiate a session lock for the screensaver after a period of inactivity for graphical user interfaces.
+# Discussion: A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.
+#
+# The session lock is implemented at the point where session activity can be determined and/or controlled.
+# IA Controls:
+# Check Content: Verify the operating system initiates a session lock after a 15-minute period of inactivity for graphical user interfaces. The screen program must be installed to lock sessions on the console.
+#
+# If it is installed, GNOME must be configured to enforce a session lock after a 15-minute delay. Check for the session lock settings with the following commands:
+#
+# # grep -i  idle-activation-enabled /etc/dconf/db/local.d/*
+#
+# idle-activation-enabled=true
+#
+# If "idle-activation-enabled" is not set to "true", this is a finding.
+# Fix Text: Configure the operating system to initiate a session lock after a 15-minute period of inactivity for graphical user interfaces.
+#
+# Create a database to contain the system-wide screensaver settings (if it does not already exist) with the following command:
+#
+# # touch /etc/dconf/db/local.d/00-screensaver
+#
+# Add the setting to enable screensaver locking after 15 minutes of inactivity:
+#
+# [org/gnome/desktop/screensaver]
+#
+# idle-activation-enabled=true
+#
+# Update the system databases:
+#
+# # dconf update
+#
+# Users must log out and back in again before the system-wide settings take effect.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000057
+# The information system initiates a session lock after the organization-defined time period of inactivity.
+# NIST SP 800-53 :: AC-11 a
+# NIST SP 800-53A :: AC-11.1 (ii)
+# NIST SP 800-53 Revision 4 :: AC-11 a
+#
+#
+- name: check stig_rhel7_v1r4 v_71899
+  set_fact: stig_rhel7_v1r4_results['v_71899'] = 'fail'
+  when: '"v_71899" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-71901
+# Severity: medium
+# Group Title: SRG-OS-000029-GPOS-00010
+# Rule ID: SV-86525r2_rule
+# STIG ID: RHEL-07-010110
+# Rule Title: The operating system must initiate a session lock for graphical user interfaces when the screensaver is activated.
+# Discussion: A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.
+#
+# The session lock is implemented at the point where session activity can be determined and/or controlled.
+# IA Controls:
+# Check Content: Verify the operating system initiates a session lock a for graphical user interfaces when the screensaver is activated.
+#
+# Note: If the system does not have GNOME installed, this requirement is Not Applicable. The screen program must be installed to lock sessions on the console.
+#
+# If GNOME is installed, check to see a session lock occurs when the screensaver is activated with the following command:
+#
+# # grep -i lock-delay /etc/dconf/db/local.d/*
+# lock-delay=uint32 5
+#
+# If the "lock-delay" setting is missing, or is not set to “5” or less, this is a finding.
+# Fix Text: Configure the operating system to initiate a session lock for graphical user interfaces when a screensaver is activated.
+#
+# Create a database to contain the system-wide screensaver settings (if it does not already exist) with the following command:
+#
+# # touch /etc/dconf/db/local.d/00-screensaver
+#
+# Add the setting to enable session locking when a screensaver is activated:
+#
+# [org/gnome/desktop/screensaver]
+# lock-delay=uint32 5
+#
+# The "uint32" must be included along with the integer key values as shown.
+#
+# Update the system databases:
+#
+# # dconf update
+#
+# Users must log out and back in again before the system-wide settings take effect.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000057
+# The information system initiates a session lock after the organization-defined time period of inactivity.
+# NIST SP 800-53 :: AC-11 a
+# NIST SP 800-53A :: AC-11.1 (ii)
+# NIST SP 800-53 Revision 4 :: AC-11 a
+#
+#
+- name: check stig_rhel7_v1r4 v_71901
+  set_fact: stig_rhel7_v1r4_results['v_71901'] = 'fail'
+  when: '"v_71901" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-72307
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86931r3_rule
+# STIG ID: RHEL-07-040730
+# Rule Title: An X Windows display manager must not be installed unless approved.
+# Discussion: Internet services that are not required for system or application processes must not be active to decrease the attack surface of the system. X Windows has a long history of security vulnerabilities and will not be used unless approved and documented.
+# IA Controls:
+# Check Content: Verify that if the system has X Windows System installed, it is authorized.
+#
+# Check for the X11 package with the following command:
+#
+# # rpm -qa | grep xorg | grep server
+#
+# Ask the System Administrator if use of the X Windows System is an operational requirement.
+#
+# If the use of X Windows on the system is not documented with the Information System Security Officer (ISSO), this is a finding.
+# Fix Text: Document the requirement for an X Windows server with the ISSO or remove the related packages with the following commands:
+#
+# # rpm -e xorg-x11-server-common
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel7_v1r4 v_72307
+  set_fact: stig_rhel7_v1r4_results['v_72307'] = 'fail'
+  when: '"v_72307" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-73155
+# Severity: medium
+# Group Title: SRG-OS-000029-GPOS-00010
+# Rule ID: SV-87807r3_rule
+# STIG ID: RHEL-07-010081
+# Rule Title: The operating system must prevent a user from overriding the screensaver lock-delay setting for the graphical user interface.
+# Discussion: A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.
+#
+# The session lock is implemented at the point where session activity can be determined and/or controlled.
+# IA Controls:
+# Check Content: Verify the operating system prevents a user from overriding a screensaver lock after a 15-minute period of inactivity for graphical user interfaces.
+#
+# Note: If the system does not have GNOME installed, this requirement is Not Applicable. The screen program must be installed to lock sessions on the console.
+#
+# Determine which profile the system database is using with the following command:
+# # grep system-db /etc/dconf/profile/user
+#
+# system-db:local
+#
+# Check for the lock delay setting with the following command:
+#
+# Note: The example below is using the database "local" for the system, so the path is "/etc/dconf/db/local.d". This path must be modified if a database other than "local" is being used.
+#
+# # grep -i lock-delay /etc/dconf/db/local.d/locks/*
+#
+# /org/gnome/desktop/screensaver/lock-delay
+#
+# If the command does not return a result, this is a finding.
+# Fix Text: Configure the operating system to prevent a user from overriding a screensaver lock after a 15-minute period of inactivity for graphical user interfaces.
+#
+# Create a database to contain the system-wide screensaver settings (if it does not already exist) with the following command:
+#
+# Note: The example below is using the database "local" for the system, so if the system is using another database in "/etc/dconf/profile/user", the file should be created under the appropriate subdirectory.
+#
+# # touch /etc/dconf/db/local.d/locks/session
+#
+# Add the setting to lock the screensaver lock delay:
+#
+# /org/gnome/desktop/screensaver/lock-delay
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000057
+# The information system initiates a session lock after the organization-defined time period of inactivity.
+# NIST SP 800-53 :: AC-11 a
+# NIST SP 800-53A :: AC-11.1 (ii)
+# NIST SP 800-53 Revision 4 :: AC-11 a
+#
+#
+- name: check stig_rhel7_v1r4 v_73155
+  set_fact: stig_rhel7_v1r4_results['v_73155'] = 'fail'
+  when: '"v_73155" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-73157
+# Severity: medium
+# Group Title: SRG-OS-000029-GPOS-00010
+# Rule ID: SV-87809r3_rule
+# STIG ID: RHEL-07-010082
+# Rule Title: The operating system must prevent a user from overriding the session idle-delay setting for the graphical user interface.
+# Discussion: A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.
+#
+# The session lock is implemented at the point where session activity can be determined and/or controlled.
+# IA Controls:
+# Check Content: Verify the operating system prevents a user from overriding session idle delay after a 15-minute period of inactivity for graphical user interfaces.
+#
+# Note: If the system does not have GNOME installed, this requirement is Not Applicable. The screen program must be installed to lock sessions on the console.
+#
+# Determine which profile the system database is using with the following command:
+# # grep system-db /etc/dconf/profile/user
+#
+# system-db:local
+#
+# Check for the session idle delay setting with the following command:
+#
+# Note: The example below is using the database "local" for the system, so the path is "/etc/dconf/db/local.d". This path must be modified if a database other than "local" is being used.
+#
+# # grep -i idle-delay /etc/dconf/db/local.d/locks/*
+#
+# /org/gnome/desktop/session/idle-delay
+#
+# If the command does not return a result, this is a finding.
+# Fix Text: Configure the operating system to prevent a user from overriding a session lock after a 15-minute period of inactivity for graphical user interfaces.
+#
+# Create a database to contain the system-wide screensaver settings (if it does not already exist) with the following command:
+#
+# Note: The example below is using the database "local" for the system, so if the system is using another database in /etc/dconf/profile/user, the file should be created under the appropriate subdirectory.
+#
+# # touch /etc/dconf/db/local.d/locks/session
+#
+# Add the setting to lock the session idle delay:
+#
+# /org/gnome/desktop/session/idle-delay
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000057
+# The information system initiates a session lock after the organization-defined time period of inactivity.
+# NIST SP 800-53 :: AC-11 a
+# NIST SP 800-53A :: AC-11.1 (ii)
+# NIST SP 800-53 Revision 4 :: AC-11 a
+#
+#
+- name: check stig_rhel7_v1r4 v_73157
+  set_fact: stig_rhel7_v1r4_results['v_73157'] = 'fail'
+  when: '"v_73157" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-77819
+# Severity: medium
+# Group Title: SRG-OS-000375-GPOS-00160
+# Rule ID: SV-92515r1_rule
+# STIG ID: RHEL-07-010061
+# Rule Title: The operating system must uniquely identify and must authenticate users using multifactor authentication via a graphical user logon.
+# Discussion: To assure accountability and prevent unauthenticated access, users must be identified and authenticated to prevent potential misuse and compromise of the system.
+#
+# Multifactor solutions that require devices separate from information systems gaining access include, for example, hardware tokens providing time-based or challenge-response authenticators and smart cards such as the U.S. Government Personal Identity Verification card and the DoD Common Access Card.
+#
+#
+# Satisfies: SRG-OS-000375-GPOS-00161,SRG-OS-000375-GPOS-00162
+#
+# IA Controls:
+# Check Content: Verify the operating system uniquely identifies and authenticates users using multifactor authentication via a graphical user logon.
+#
+# Note: If the system does not have GNOME installed, this requirement is Not Applicable.
+#
+# Determine which profile the system database is using with the following command:
+#
+# # grep system-db /etc/dconf/profile/user
+#
+# system-db:local
+#
+# Note: The example is using the database local for the system, so the path is "/etc/dconf/db/local.d". This path must be modified if a database other than local is being used.
+#
+# # grep enable-smartcard-authentication /etc/dconf/db/local.d/*
+#
+# enable-smartcard-authentication=true
+#
+# If "enable-smartcard-authentication" is set to "false" or the keyword is missing, this is a finding.
+# Fix Text: Configure the operating system to uniquely identify and authenticate users using multifactor authentication via a graphical user logon.
+#
+# Note: If the system does not have GNOME installed, this requirement is Not Applicable.
+#
+# Create a database to contain the system-wide screensaver settings (if it does not already exist) with the following command:
+#
+# Note: The example is using the database local for the system, so if the system is using another database in "/etc/dconf/profile/user", the file should be created under the appropriate subdirectory.
+#
+# # touch /etc/dconf/db/local.d/00-defaults
+#
+# Add the setting to enable smartcard login:
+# enable-smartcard-authentication=true
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001948
+# The information system implements multifactor authentication for remote access to privileged accounts such that one of the factors is provided by a device separate from the system gaining access.
+# NIST SP 800-53 Revision 4 :: IA-2 (11)
+#
+# CCI-001953
+# The information system accepts Personal Identity Verification (PIV) credentials.
+# NIST SP 800-53 Revision 4 :: IA-2 (12)
+#
+# CCI-001954
+# The information system electronically verifies Personal Identity Verification (PIV) credentials.
+# NIST SP 800-53 Revision 4 :: IA-2 (12)
+#
+#
+- name: check stig_rhel7_v1r4 v_77819
+  set_fact: stig_rhel7_v1r4_results['v_77819'] = 'fail'
+  when: '"v_77819" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-78995
+# Severity: medium
+# Group Title: SRG-OS-000029-GPOS-00010
+# Rule ID: SV-93701r1_rule
+# STIG ID: RHEL-07-010062
+# Rule Title: The operating system must prevent a user from overriding the screensaver lock-enabled setting for the graphical user interface.
+# Discussion: A session lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not want to log out because of the temporary nature of the absence.
+#
+# The session lock is implemented at the point where session activity can be determined.
+#
+# The ability to enable/disable a session lock is given to the user by default. Disabling the user’s ability to disengage the graphical user interface session lock provides the assurance that all sessions will lock after the specified period of time.
+#
+# IA Controls:
+# Check Content: Verify the operating system prevents a user from overriding the screensaver lock-enabled setting for the graphical user interface.
+#
+# Note: If the system does not have GNOME installed, this requirement is Not Applicable. The screen program must be installed to lock sessions on the console.
+#
+# Determine which profile the system database is using with the following command:
+# # grep system-db /etc/dconf/profile/user
+#
+# system-db:local
+#
+# Check for the lock-enabled setting with the following command:
+#
+# Note: The example below is using the database "local" for the system, so the path is "/etc/dconf/db/local.d". This path must be modified if a database other than "local" is being used.
+#
+# # grep -i lock-enabled /etc/dconf/db/local.d/locks/*
+#
+# /org/gnome/desktop/screensaver/lock-enabled
+#
+# If the command does not return a result, this is a finding.
+#
+# Fix Text: Configure the operating system to prevent a user from overriding a screensaver lock after a 15-minute period of inactivity for graphical user interfaces.
+#
+# Create a database to contain the system-wide screensaver settings (if it does not already exist) with the following command:
+#
+# Note: The example below is using the database "local" for the system, so if the system is using another database in "/etc/dconf/profile/user", the file should be created under the appropriate subdirectory.
+#
+# # touch /etc/dconf/db/local.d/locks/session
+#
+# Add the setting to lock the screensaver lock-enabled setting:
+#
+# /org/gnome/desktop/screensaver/lock-enabled
+#
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000057
+# The information system initiates a session lock after the organization-defined time period of inactivity.
+# NIST SP 800-53 :: AC-11 a
+# NIST SP 800-53A :: AC-11.1 (ii)
+# NIST SP 800-53 Revision 4 :: AC-11 a
+#
+#
+- name: check stig_rhel7_v1r4 v_78995
+  set_fact: stig_rhel7_v1r4_results['v_78995'] = 'fail'
+  when: '"v_78995" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-78997
+# Severity: medium
+# Group Title: SRG-OS-000029-GPOS-00010
+# Rule ID: SV-93703r1_rule
+# STIG ID: RHEL-07-010101
+# Rule Title: The operating system must prevent a user from overriding the screensaver idle-activation-enabled setting for the graphical user interface.
+# Discussion: A session lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not want to log out because of the temporary nature of the absence.
+#
+# The session lock is implemented at the point where session activity can be determined.
+#
+# The ability to enable/disable a session lock is given to the user by default. Disabling the user’s ability to disengage the graphical user interface session lock provides the assurance that all sessions will lock after the specified period of time.
+#
+# IA Controls:
+# Check Content: Verify the operating system prevents a user from overriding the screensaver idle-activation-enabled setting for the graphical user interface.
+#
+# Note: If the system does not have GNOME installed, this requirement is Not Applicable. The screen program must be installed to lock sessions on the console.
+#
+# Determine which profile the system database is using with the following command:
+# # grep system-db /etc/dconf/profile/user
+#
+# system-db:local
+#
+# Check for the idle-activation-enabled setting with the following command:
+#
+# Note: The example below is using the database "local" for the system, so the path is "/etc/dconf/db/local.d". This path must be modified if a database other than "local" is being used.
+#
+# # grep -i idle-activation-enabled /etc/dconf/db/local.d/locks/*
+#
+# /org/gnome/desktop/screensaver/idle-activation-enabled
+#
+# If the command does not return a result, this is a finding.
+# Fix Text: Configure the operating system to prevent a user from overriding a screensaver lock after a 15-minute period of inactivity for graphical user interfaces.
+#
+# Create a database to contain the system-wide screensaver settings (if it does not already exist) with the following command:
+#
+# Note: The example below is using the database "local" for the system, so if the system is using another database in "/etc/dconf/profile/user", the file should be created under the appropriate subdirectory.
+#
+# # touch /etc/dconf/db/local.d/locks/session
+#
+# Add the setting to lock the screensaver idle-activation-enabled setting:
+#
+# /org/gnome/desktop/screensaver/idle-activation-enabled
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000057
+# The information system initiates a session lock after the organization-defined time period of inactivity.
+# NIST SP 800-53 :: AC-11 a
+# NIST SP 800-53A :: AC-11.1 (ii)
+# NIST SP 800-53 Revision 4 :: AC-11 a
+#
+#
+- name: check stig_rhel7_v1r4 v_78997
+  set_fact: stig_rhel7_v1r4_results['v_78997'] = 'fail'
+  when: '"v_78997" in stig_rhel7_v1r4_checks'

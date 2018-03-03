@@ -1,0 +1,96 @@
+# Vuln ID: V-71947
+# Severity: medium
+# Group Title: SRG-OS-000373-GPOS-00156
+# Rule ID: SV-86571r2_rule
+# STIG ID: RHEL-07-010340
+# Rule Title: Users must provide a password for privilege escalation.
+# Discussion: Without re-authentication, users may access resources or perform tasks for which they do not have authorization.
+#
+# When operating systems provide the capability to escalate a functional capability, it is critical the user re-authenticate.
+#
+# Satisfies: SRG-OS-000373-GPOS-00156, SRG-OS-000373-GPOS-00157, SRG-OS-000373-GPOS-00158
+# IA Controls:
+# Check Content: If passwords are not being used for authentication, this is Not Applicable.
+#
+# Verify the operating system requires users to supply a password for privilege escalation.
+#
+# Check the configuration of the "/etc/sudoers" and "/etc/sudoers.d/*" files with the following command:
+#
+# # grep -i nopasswd /etc/sudoers /etc/sudoers.d/*
+#
+# If any uncommented line is found with a "NOPASSWD" tag, this is a finding.
+# Fix Text: Configure the operating system to require users to supply a password for privilege escalation.
+#
+# Check the configuration of the "/etc/sudoers" and "/etc/sudoers.d/*" files with the following command:
+#
+# # grep -i nopasswd /etc/sudoers /etc/sudoers.d/*
+#
+# Remove any occurrences of "NOPASSWD" tags in the file.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-002038
+# The organization requires users to reauthenticate when organization-defined circumstances or situations requiring reauthentication.
+# NIST SP 800-53 Revision 4 :: IA-11
+#
+#
+- name: check stig_rhel7_v1r4 v_71947
+  set_fact: stig_rhel7_v1r4_results['v_71947'] = 'fail'
+  when: '"v_71947" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-71949
+# Severity: medium
+# Group Title: SRG-OS-000373-GPOS-00156
+# Rule ID: SV-86573r2_rule
+# STIG ID: RHEL-07-010350
+# Rule Title: Users must re-authenticate for privilege escalation.
+# Discussion: Without re-authentication, users may access resources or perform tasks for which they do not have authorization.
+#
+# When operating systems provide the capability to escalate a functional capability, it is critical the user reauthenticate.
+#
+# Satisfies: SRG-OS-000373-GPOS-00156, SRG-OS-000373-GPOS-00157, SRG-OS-000373-GPOS-00158
+# IA Controls:
+# Check Content: Verify the operating system requires users to reauthenticate for privilege escalation.
+#
+# Check the configuration of the "/etc/sudoers" and "/etc/sudoers.d/*" files with the following command:
+#
+# # grep -i authenticate /etc/sudoers /etc/sudoers.d/*
+#
+# If any line is found with a "!authenticate" tag, this is a finding.
+# Fix Text: Configure the operating system to require users to reauthenticate for privilege escalation.
+#
+# Check the configuration of the "/etc/sudoers" and "/etc/sudoers.d/*" files with the following command:
+#
+# Remove any occurrences of "!authenticate" tags in the file.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-002038
+# The organization requires users to reauthenticate when organization-defined circumstances or situations requiring reauthentication.
+# NIST SP 800-53 Revision 4 :: IA-11
+#
+#
+- name: check stig_rhel7_v1r4 v_71949
+  set_fact: stig_rhel7_v1r4_results['v_71949'] = 'fail'
+  when: '"v_71949" in stig_rhel7_v1r4_checks'

@@ -277,8 +277,8 @@ stig_rhel7_v1r4_findings:
   - v_78999
   - v_79001
 
-stig_rhel7_v1r4_check_findings: '{{ stig_rhel7_v1r4_findings }}'
-stig_rhel7_v1r4_fix_findings: '{{ stig_rhel7_v1r4_findings }}'
+stig_rhel7_v1r4_checks: '{{ stig_rhel7_v1r4_findings }}'
+stig_rhel7_v1r4_fix_findings: True
 
 stig_rhel7_v1r4_results:
   v_71849: fail
@@ -521,3 +521,6 @@ stig_rhel7_v1r4_results:
   v_78997: fail
   v_78999: fail
   v_79001: fail
+
+aide_fix_install: false
+aide_fix_cron: false

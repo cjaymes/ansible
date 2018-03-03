@@ -1,0 +1,1 @@
+/usr/sbin/aide --check | /bin/mail -s "aide integrity check run for {{ ansible_hostname }}" {{ aide_notification_email }}

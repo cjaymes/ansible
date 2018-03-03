@@ -1,0 +1,27 @@
+- name: install aide
+  yum:
+      state: installed
+      name: aide
+  when:
+      - stig_rhel7_v1r4_fix_findings
+      - aide_fix_install
+
+- name: configure aide daily cron
+  template:
+      src: etc/cron.daily/aide.j2
+      dest: /etc/cron.daily/aide
+      mode: 0700
+  when:
+      - stig_rhel7_v1r4_fix_findings
+      - aide_fix_cron
+      - aide_frequency == 'daily'
+
+- name: configure aide weekly cron
+  template:
+      src: etc/cron.weekly/aide.j2
+      dest: /etc/cron.weekly/aide
+      mode: 0700
+  when:
+      - stig_rhel7_v1r4_fix_findings
+      - aide_fix_cron
+      - aide_frequency == 'weekly'
