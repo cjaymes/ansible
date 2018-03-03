@@ -57,7 +57,7 @@
 #
 - name: check stig_rhel7_v1r4 v_71983
   set_fact: stig_rhel7_v1r4_results['v_71983'] = 'fail'
-  when: '"v_71983" in check_findings'
+  when: '"v_71983" in stig_rhel7_v1r4_check_findings'
 
 
 # Vuln ID: V-77821
@@ -106,4 +106,4 @@
 #
 - name: check stig_rhel7_v1r4 v_77821
   set_fact: stig_rhel7_v1r4_results['v_77821'] = 'fail'
-  when: '"v_77821" in check_findings'
+  when: '"v_77821" in stig_rhel7_v1r4_check_findings'

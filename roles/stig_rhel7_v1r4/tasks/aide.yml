@@ -57,7 +57,7 @@
   # this command doesn't actually change anything
   changed_when: False
   register: aide_install_state
-  when: "'v_71973' in check_findings"
+  when: "'v_71973' in stig_rhel7_v1r4_check_findings"
 
 - name: package state debug
   debug:
@@ -67,7 +67,7 @@
   stat: path=/etc/cron.daily/aide
   register: aide_cron_daily
   when:
-      - "'v_71973' in check_findings"
+      - "'v_71973' in stig_rhel7_v1r4_check_findings"
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
 
 - debug:
@@ -77,7 +77,7 @@
   stat: path=/etc/cron.weekly/aide
   register: aide_cron_weekly
   when:
-      - "'v_71973' in check_findings"
+      - "'v_71973' in stig_rhel7_v1r4_check_findings"
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
 
 - debug:
@@ -86,14 +86,14 @@
 - name: aide runs daily
   set_fact: stig_rhel7_v1r4_results['v_71975'] = 'pass'
   when:
-      - "'v_71973' in check_findings"
+      - "'v_71973' in stig_rhel7_v1r4_check_findings"
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
       - aide_cron_daily.stat.exists
 
 - name: aide runs weekly
   set_fact: stig_rhel7_v1r4_results['v_71975'] = 'pass'
   when:
-      - "'v_71973' in check_findings"
+      - "'v_71973' in stig_rhel7_v1r4_check_findings"
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
       - aide_cron_weekly.stat.exists
 
@@ -156,7 +156,7 @@
 #
 - name: check stig_rhel7_v1r4 v_71975
   set_fact: stig_rhel7_v1r4_results['v_71975'] = 'fail'
-  when: '"v_71975" in check_findings'
+  when: '"v_71975" in stig_rhel7_v1r4_check_findings'
 
 
 # Vuln ID: V-72069
@@ -217,7 +217,7 @@
 #
 - name: check stig_rhel7_v1r4 v_72069
   set_fact: stig_rhel7_v1r4_results['v_72069'] = 'fail'
-  when: '"v_72069" in check_findings'
+  when: '"v_72069" in stig_rhel7_v1r4_check_findings'
 
 
 # Vuln ID: V-72071
@@ -278,7 +278,7 @@
 #
 - name: check stig_rhel7_v1r4 v_72071
   set_fact: stig_rhel7_v1r4_results['v_72071'] = 'fail'
-  when: '"v_72071" in check_findings'
+  when: '"v_72071" in stig_rhel7_v1r4_check_findings'
 
 
 # Vuln ID: V-72073
@@ -341,4 +341,4 @@
 #
 - name: check stig_rhel7_v1r4 v_72073
   set_fact: stig_rhel7_v1r4_results['v_72073'] = 'fail'
-  when: '"v_72073" in check_findings'
+  when: '"v_72073" in stig_rhel7_v1r4_check_findings'

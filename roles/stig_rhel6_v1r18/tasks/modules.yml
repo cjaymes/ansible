@@ -37,7 +37,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38490
   set_fact: stig_rhel6_v1r18_results['v_38490'] = 'fail'
-  when: '"v_38490" in check_findings'
+  when: '"v_38490" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-38514
@@ -78,7 +78,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38514
   set_fact: stig_rhel6_v1r18_results['v_38514'] = 'fail'
-  when: '"v_38514" in check_findings'
+  when: '"v_38514" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-38515
@@ -119,7 +119,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38515
   set_fact: stig_rhel6_v1r18_results['v_38515'] = 'fail'
-  when: '"v_38515" in check_findings'
+  when: '"v_38515" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-38516
@@ -160,7 +160,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38516
   set_fact: stig_rhel6_v1r18_results['v_38516'] = 'fail'
-  when: '"v_38516" in check_findings'
+  when: '"v_38516" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-38517
@@ -201,7 +201,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38517
   set_fact: stig_rhel6_v1r18_results['v_38517'] = 'fail'
-  when: '"v_38517" in check_findings'
+  when: '"v_38517" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-38682
@@ -248,4 +248,4 @@
 #
 - name: check stig_rhel6_v1r18 v_38682
   set_fact: stig_rhel6_v1r18_results['v_38682'] = 'fail'
-  when: '"v_38682" in check_findings'
+  when: '"v_38682" in stig_rhel6_v1r18_check_findings'

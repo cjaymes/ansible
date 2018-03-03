@@ -41,7 +41,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38620
   set_fact: stig_rhel6_v1r18_results['v_38620'] = 'fail'
-  when: '"v_38620" in check_findings'
+  when: '"v_38620" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-38621
@@ -89,4 +89,4 @@
 #
 - name: check stig_rhel6_v1r18 v_38621
   set_fact: stig_rhel6_v1r18_results['v_38621'] = 'fail'
-  when: '"v_38621" in check_findings'
+  when: '"v_38621" in stig_rhel6_v1r18_check_findings'

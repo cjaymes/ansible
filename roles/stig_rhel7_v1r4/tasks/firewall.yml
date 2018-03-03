@@ -57,7 +57,7 @@
 #
 - name: check stig_rhel7_v1r4 v_72219
   set_fact: stig_rhel7_v1r4_results['v_72219'] = 'fail'
-  when: '"v_72219" in check_findings'
+  when: '"v_72219" in stig_rhel7_v1r4_check_findings'
 
 
 # Vuln ID: V-72271
@@ -109,7 +109,7 @@
 #
 - name: check stig_rhel7_v1r4 v_72271
   set_fact: stig_rhel7_v1r4_results['v_72271'] = 'fail'
-  when: '"v_72271" in check_findings'
+  when: '"v_72271" in stig_rhel7_v1r4_check_findings'
 
 
 # Vuln ID: V-72273
@@ -180,7 +180,7 @@
 #
 - name: check stig_rhel7_v1r4 v_72273
   set_fact: stig_rhel7_v1r4_results['v_72273'] = 'fail'
-  when: '"v_72273" in check_findings'
+  when: '"v_72273" in stig_rhel7_v1r4_check_findings'
 
 
 # Vuln ID: V-72315
@@ -256,4 +256,4 @@
 #
 - name: check stig_rhel7_v1r4 v_72315
   set_fact: stig_rhel7_v1r4_results['v_72315'] = 'fail'
-  when: '"v_72315" in check_findings'
+  when: '"v_72315" in stig_rhel7_v1r4_check_findings'

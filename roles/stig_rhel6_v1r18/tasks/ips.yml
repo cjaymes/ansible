@@ -58,4 +58,4 @@
 #
 - name: check stig_rhel6_v1r18 v_38667
   set_fact: stig_rhel6_v1r18_results['v_38667'] = 'fail'
-  when: '"v_38667" in check_findings'
+  when: '"v_38667" in stig_rhel6_v1r18_check_findings'

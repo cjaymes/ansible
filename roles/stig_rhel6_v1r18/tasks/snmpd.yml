@@ -37,7 +37,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38653
   set_fact: stig_rhel6_v1r18_results['v_38653'] = 'fail'
-  when: '"v_38653" in check_findings'
+  when: '"v_38653" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-38660
@@ -80,4 +80,4 @@
 #
 - name: check stig_rhel6_v1r18 v_38660
   set_fact: stig_rhel6_v1r18_results['v_38660'] = 'fail'
-  when: '"v_38660" in check_findings'
+  when: '"v_38660" in stig_rhel6_v1r18_check_findings'

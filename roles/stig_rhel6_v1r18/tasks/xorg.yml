@@ -44,7 +44,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38474
   set_fact: stig_rhel6_v1r18_results['v_38474'] = 'fail'
-  when: '"v_38474" in check_findings'
+  when: '"v_38474" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-38629
@@ -93,7 +93,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38629
   set_fact: stig_rhel6_v1r18_results['v_38629'] = 'fail'
-  when: '"v_38629" in check_findings'
+  when: '"v_38629" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-38630
@@ -141,7 +141,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38630
   set_fact: stig_rhel6_v1r18_results['v_38630'] = 'fail'
-  when: '"v_38630" in check_findings'
+  when: '"v_38630" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-38638
@@ -188,7 +188,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38638
   set_fact: stig_rhel6_v1r18_results['v_38638'] = 'fail'
-  when: '"v_38638" in check_findings'
+  when: '"v_38638" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-38639
@@ -236,7 +236,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38639
   set_fact: stig_rhel6_v1r18_results['v_38639'] = 'fail'
-  when: '"v_38639" in check_findings'
+  when: '"v_38639" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-38676
@@ -282,7 +282,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38676
   set_fact: stig_rhel6_v1r18_results['v_38676'] = 'fail'
-  when: '"v_38676" in check_findings'
+  when: '"v_38676" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-38688
@@ -331,7 +331,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38688
   set_fact: stig_rhel6_v1r18_results['v_38688'] = 'fail'
-  when: '"v_38688" in check_findings'
+  when: '"v_38688" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-38689
@@ -433,7 +433,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38689
   set_fact: stig_rhel6_v1r18_results['v_38689'] = 'fail'
-  when: '"v_38689" in check_findings'
+  when: '"v_38689" in stig_rhel6_v1r18_check_findings'
 
 
 # Vuln ID: V-43150
@@ -482,4 +482,4 @@
 #
 - name: check stig_rhel6_v1r18 v_43150
   set_fact: stig_rhel6_v1r18_results['v_43150'] = 'fail'
-  when: '"v_43150" in check_findings'
+  when: '"v_43150" in stig_rhel6_v1r18_check_findings'
