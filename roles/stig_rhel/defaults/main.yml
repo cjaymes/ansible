@@ -1,3 +1,6 @@
+aide_frequency: daily
+aide_notification_email: root
+
 dhcp_required: True
 nfs_required: False
 samba_required: False
