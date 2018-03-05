@@ -31,3 +31,6 @@
       src: etc/aide.conf
       dest: /etc/aide.conf
       mode: 0600
+  when:
+      - stig_rhel7_v1r4_fix_findings
+      - aide_fix_conf
