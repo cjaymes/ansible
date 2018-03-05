@@ -1,4 +1,9 @@
 ---
+
+- hosts: vhost0
+  tasks:
+      - shell: virsh snapshot-revert stig_rhel7_v1r4 --snapshotname 1520269894
+
 - hosts: all
   tasks:
     - group_by: key=os_{{ ansible_os_family }}_v_{{ ansible_distribution_major_version }}
