@@ -37,5 +37,6 @@
 #
 #
 - name: check stig_rhel6_v1r18 v_58901
-  set_fact: stig_rhel6_v1r18_results['v_58901'] = 'fail'
+  set_fact:
+    stig_rhel6_v1r18_results: '{{stig_rhel6_v1r18_results|combine({v_58901: 'fail'})}}
   when: '"v_58901" in stig_rhel6_v1r18_checks'
