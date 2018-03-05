@@ -298,7 +298,6 @@ stig_rhel6_v1r18_findings:
   - v_72817
 
 stig_rhel6_v1r18_checks: '{{ stig_rhel6_v1r18_findings }}'
-stig_rhel6_v1r18_fix_findings: true
 
 stig_rhel6_v1r18_v_38437_result: notchecked
 stig_rhel6_v1r18_v_38438_result: notchecked

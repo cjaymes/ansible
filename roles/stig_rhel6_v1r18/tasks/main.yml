@@ -1,7 +1,6 @@
 - name: stig sections
   include_tasks: '{{ item }}.yml'
   with_items: '{{ stig_rhel6_v1r18_sections }}'
-  notify: stig section fixes
 
 - name: output results
   debug:

@@ -2,9 +2,6 @@
   yum:
       state: installed
       name: aide
-  when:
-      - stig_rhel7_v1r4_fix_findings
-      - aide_fix_install
   notify: aide db init
 
 - name: configure aide daily cron
@@ -13,8 +10,6 @@
       dest: /etc/cron.daily/aide
       mode: 0700
   when:
-      - stig_rhel7_v1r4_fix_findings
-      - aide_fix_cron
       - aide_frequency == 'daily'
 
 - name: configure aide weekly cron
@@ -23,8 +18,6 @@
       dest: /etc/cron.weekly/aide
       mode: 0700
   when:
-      - stig_rhel7_v1r4_fix_findings
-      - aide_fix_cron
       - aide_frequency == 'weekly'
 
 - name: aide.conf
@@ -32,7 +25,4 @@
       src: etc/aide.conf
       dest: /etc/aide.conf
       mode: 0600
-  when:
-      - stig_rhel7_v1r4_fix_findings
-      - aide_fix_conf
   notify: aide db init

@@ -1,11 +1,6 @@
 - name: stig checks
-  include_tasks: '{{ item }}_check.yml'
+  include_tasks: '{{ item }}.yml'
   with_items: '{{ stig_rhel7_v1r4_sections }}'
-
-- name: stig fixes
-  include_tasks: '{{ item }}_fix.yml'
-  with_items: '{{ stig_rhel7_v1r4_sections }}'
-  when: stig_rhel7_v1r4_fix_findings
 
 - name: output results
   debug:

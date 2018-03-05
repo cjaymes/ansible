@@ -9,12 +9,6 @@
   changed_when: false
   register: aide_install_state
 
-- name: set fix for install aide
-  set_fact:
-      aide_fix_install: true
-  when:
-      - "'Error: No matching Packages to list' in aide_install_state.stderr"
-
 - name: check for cron.daily aide file
   stat:
       path: /etc/cron.daily/aide
@@ -25,24 +19,11 @@
       path: /etc/cron.weekly/aide
   register: aide_cron_weekly
 
-- name: set fix for aide cron
-  set_fact:
-      aide_fix_cron: true
-  when:
-      - not aide_cron_daily.stat.exists
-      - not aide_cron_weekly.stat.exists
-
 - name: check /etc/aide.conf checksum
   stat:
       path: /etc/aide.conf
       checksum_algorithm: sha1
   register: aide_conf
-
-- name: set fix for aide conf
-  set_fact:
-      aide_fix_conf: true
-  when:
-      - not aide_conf.stat.exists or aide_conf.stat.checksum != aide_conf_sha1
 
 
 # Vuln ID: V-71973
@@ -100,23 +81,23 @@
   set_fact:
       stig_rhel7_v1r4_v_71973_result: 'pass'
   when:
-      - "'v_71973' in stig_rhel7_v1r4_checks"
-      - "'Error: No matching Packages to list' not in aide_install_state.stderr"
+      - 'v_71973' in stig_rhel7_v1r4_checks
+      - 'Error: No matching Packages to list' not in aide_install_state.stderr
       - aide_cron_daily.stat.exists
 
 - name: aide installed & runs weekly
   set_fact:
       stig_rhel7_v1r4_v_71973_result: 'pass'
   when:
-      - "'v_71973' in stig_rhel7_v1r4_checks"
-      - "'Error: No matching Packages to list' not in aide_install_state.stderr"
+      - 'v_71973' in stig_rhel7_v1r4_checks
+      - 'Error: No matching Packages to list' not in aide_install_state.stderr
       - aide_cron_weekly.stat.exists
 
 - name: check stig_rhel7_v1r4 v_72071 fail
   set_fact:
       stig_rhel7_v1r4_v_71973_result: 'fail'
   when:
-      - "'v_71973' in stig_rhel7_v1r4_checks"
+      - 'v_71973' in stig_rhel7_v1r4_checks
       - stig_rhel7_v1r4_v_71973_result != 'pass'
 
 # Vuln ID: V-71975
@@ -181,23 +162,23 @@
   set_fact:
       stig_rhel7_v1r4_v_71975_result: 'pass'
   when:
-      - "'v_71975' in stig_rhel7_v1r4_checks"
-      - "'Error: No matching Packages to list' not in aide_install_state.stderr"
+      - 'v_71975' in stig_rhel7_v1r4_checks
+      - 'Error: No matching Packages to list' not in aide_install_state.stderr
       - aide_cron_daily.stat.exists
 
 - name: aide installed & runs weekly
   set_fact:
       stig_rhel7_v1r4_v_71975_result: 'pass'
   when:
-      - "'v_71975' in stig_rhel7_v1r4_checks"
-      - "'Error: No matching Packages to list' not in aide_install_state.stderr"
+      - 'v_71975' in stig_rhel7_v1r4_checks
+      - 'Error: No matching Packages to list' not in aide_install_state.stderr
       - aide_cron_weekly.stat.exists
 
 - name: check stig_rhel7_v1r4 v_71975 fail
   set_fact:
       stig_rhel7_v1r4_v_71975_result: 'fail'
   when:
-      - "'v_71975' in stig_rhel7_v1r4_checks"
+      - 'v_71975' in stig_rhel7_v1r4_checks
       - stig_rhel7_v1r4_v_71975_result != 'pass'
 
 
@@ -261,14 +242,14 @@
   set_fact:
       stig_rhel7_v1r4_v_72069_result: 'pass'
   when:
-      - "'v_72069' in stig_rhel7_v1r4_checks"
+      - 'v_72069' in stig_rhel7_v1r4_checks
       - not aide_conf.stat.exists or aide_conf.stat.checksum == aide_conf_sha1
 
 - name: check stig_rhel7_v1r4 v_72069 fail
   set_fact:
       stig_rhel7_v1r4_v_72069_result: 'fail'
   when:
-      - "'v_72069' in stig_rhel7_v1r4_checks"
+      - 'v_72069' in stig_rhel7_v1r4_checks
       - stig_rhel7_v1r4_v_72069_result != 'pass'
 
 
@@ -332,14 +313,14 @@
   set_fact:
     stig_rhel7_v1r4_v_72071_result: 'pass'
   when:
-      - '"v_72071" in stig_rhel7_v1r4_checks'
+      - 'v_72071' in stig_rhel7_v1r4_checks
       - not aide_conf.stat.exists or aide_conf.stat.checksum == aide_conf_sha1
 
 - name: check stig_rhel7_v1r4 v_72071 fail
   set_fact:
       stig_rhel7_v1r4_v_72071_result: 'fail'
   when:
-      - "'v_72071' in stig_rhel7_v1r4_checks"
+      - 'v_72071' in stig_rhel7_v1r4_checks
       - stig_rhel7_v1r4_v_72071_result != 'pass'
 
 
@@ -405,12 +386,12 @@
   set_fact:
     stig_rhel7_v1r4_v_72073_result: 'pass'
   when:
-      - '"v_72073" in stig_rhel7_v1r4_checks'
+      - 'v_72073' in stig_rhel7_v1r4_checks
       - not aide_conf.stat.exists or aide_conf.stat.checksum == aide_conf_sha1
 
 - name: check stig_rhel7_v1r4 v_72073 fail
   set_fact:
       stig_rhel7_v1r4_v_72073_result: 'fail'
   when:
-      - "'v_72073' in stig_rhel7_v1r4_checks"
+      - 'v_72073' in stig_rhel7_v1r4_checks
       - stig_rhel7_v1r4_v_72073_result != 'pass'
