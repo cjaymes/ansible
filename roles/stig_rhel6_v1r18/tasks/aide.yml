@@ -38,7 +38,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38489
   set_fact:
-    stig_rhel6_v1r18_results: '{{stig_rhel6_v1r18_results|combine({v_38489: 'fail'})}}
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38489: 'fail'})}}"
   when: '"v_38489" in stig_rhel6_v1r18_checks'
 
 
@@ -81,7 +81,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38670
   set_fact:
-    stig_rhel6_v1r18_results: '{{stig_rhel6_v1r18_results|combine({v_38670: 'fail'})}}
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38670: 'fail'})}}"
   when: '"v_38670" in stig_rhel6_v1r18_checks'
 
 
@@ -124,7 +124,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38673
   set_fact:
-    stig_rhel6_v1r18_results: '{{stig_rhel6_v1r18_results|combine({v_38673: 'fail'})}}
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38673: 'fail'})}}"
   when: '"v_38673" in stig_rhel6_v1r18_checks'
 
 
@@ -167,7 +167,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38695
   set_fact:
-    stig_rhel6_v1r18_results: '{{stig_rhel6_v1r18_results|combine({v_38695: 'fail'})}}
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38695: 'fail'})}}"
   when: '"v_38695" in stig_rhel6_v1r18_checks'
 
 
@@ -211,7 +211,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38696
   set_fact:
-    stig_rhel6_v1r18_results: '{{stig_rhel6_v1r18_results|combine({v_38696: 'fail'})}}
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38696: 'fail'})}}"
   when: '"v_38696" in stig_rhel6_v1r18_checks'
 
 
@@ -254,7 +254,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38698
   set_fact:
-    stig_rhel6_v1r18_results: '{{stig_rhel6_v1r18_results|combine({v_38698: 'fail'})}}
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38698: 'fail'})}}"
   when: '"v_38698" in stig_rhel6_v1r18_checks'
 
 
@@ -297,7 +297,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38700
   set_fact:
-    stig_rhel6_v1r18_results: '{{stig_rhel6_v1r18_results|combine({v_38700: 'fail'})}}
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38700: 'fail'})}}"
   when: '"v_38700" in stig_rhel6_v1r18_checks'
 
 
@@ -353,5 +353,5 @@
 #
 - name: check stig_rhel6_v1r18 v_51391
   set_fact:
-    stig_rhel6_v1r18_results: '{{stig_rhel6_v1r18_results|combine({v_51391: 'fail'})}}
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_51391: 'fail'})}}"
   when: '"v_51391" in stig_rhel6_v1r18_checks'
