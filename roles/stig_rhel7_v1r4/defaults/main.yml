@@ -521,3 +521,6 @@ stig_rhel7_v1r4_results:
   v_78997: notchecked
   v_78999: notchecked
   v_79001: notchecked
+
+aide_fix_install: false
+aide_fix_cron: false
