@@ -12,6 +12,7 @@
 - name: set fix for install aide
   set_fact:
       aide_fix_install: true
+      stig_rhel7_v1r4_results['v_71973']: 'fail'
   when:
       - "'Error: No matching Packages to list' in aide_install_state.stderr"
 
@@ -26,6 +27,7 @@
 - name: set fix for aide cron
   set_fact:
       aide_fix_cron: true
+      stig_rhel7_v1r4_results['v_71973']: 'fail'
   when:
       - not aide_cron_daily.stat.exists
       - not aide_cron_weekly.stat.exists
