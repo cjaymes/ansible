@@ -23,9 +23,9 @@ stig_rhel7_v1r4_sections:
   # - patching
   # - postfix
   # - prohibited_files
+  # - prohibited_services
   # - rsyslogd
   # - selinux
-  # - services
   # - snmpd
   # - sshd
   # - sudo

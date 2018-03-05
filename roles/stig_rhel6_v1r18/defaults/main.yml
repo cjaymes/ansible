@@ -5,6 +5,7 @@ stig_rhel6_v1r18_sections: []
   # - audit_rules
   # - auditd
   # - backup
+  # - cron
   # - filesystems
   # - firewall
   # - grub
@@ -12,6 +13,7 @@ stig_rhel6_v1r18_sections: []
   # - ips
   # - kernel
   # - logins
+  # - logrotate
   # - modules
   # - network
   # - nfs
@@ -22,6 +24,7 @@ stig_rhel6_v1r18_sections: []
   # - patching
   # - postfix
   # - prohibited_files
+  # - prohibited_services
   # - rsyslogd
   # - samba
   # - selinux
