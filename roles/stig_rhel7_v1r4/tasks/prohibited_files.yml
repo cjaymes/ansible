@@ -1,0 +1,86 @@
+# Vuln ID: V-72277
+# Severity: high
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86901r1_rule
+# STIG ID: RHEL-07-040540
+# Rule Title: There must be no .shosts files on the system.
+# Discussion: The .shosts files are used to configure host-based authentication for individual users or the system via SSH. Host-based authentication is not sufficient for preventing unauthorized access to the system, as it does not require interactive identification and authentication of a connection request, or for the use of two-factor authentication.
+# IA Controls:
+# Check Content: Verify there are no ".shosts" files on the system.
+#
+# Check the system for the existence of these files with the following command:
+#
+# # find / -name '*.shosts'
+#
+# If any ".shosts" files are found on the system, this is a finding.
+# Fix Text: Remove any found ".shosts" files from the system.
+#
+# # rm /[path]/[to]/[file]/.shosts
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel7_v1r4 v_72277
+  set_fact:
+    stig_rhel7_v1r4_v_72277_result: 'fail'
+  when: '"v_72277" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-72279
+# Severity: high
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86903r1_rule
+# STIG ID: RHEL-07-040550
+# Rule Title: There must be no shosts.equiv files on the system.
+# Discussion: The shosts.equiv files are used to configure host-based authentication for the system via SSH. Host-based authentication is not sufficient for preventing unauthorized access to the system, as it does not require interactive identification and authentication of a connection request, or for the use of two-factor authentication.
+# IA Controls:
+# Check Content: Verify there are no "shosts.equiv" files on the system.
+#
+# Check the system for the existence of these files with the following command:
+#
+# # find / -name shosts.equiv
+#
+# If any "shosts.equiv" files are found on the system, this is a finding.
+# Fix Text: Remove any found "shosts.equiv" files from the system.
+#
+# # rm /[path]/[to]/[file]/shosts.equiv
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel7_v1r4 v_72279
+  set_fact:
+    stig_rhel7_v1r4_v_72279_result: 'fail'
+  when: '"v_72279" in stig_rhel7_v1r4_checks'

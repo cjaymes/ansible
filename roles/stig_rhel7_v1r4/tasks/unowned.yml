@@ -1,0 +1,86 @@
+# Vuln ID: V-72007
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86631r2_rule
+# STIG ID: RHEL-07-020320
+# Rule Title: All files and directories must have a valid owner.
+# Discussion: Unowned files and directories may be unintentionally inherited if a user is assigned the same User Identifier "UID" as the UID of the un-owned files.
+# IA Controls:
+# Check Content: Verify all files and directories on the system have a valid owner.
+#
+# Check the owner of all files and directories with the following command:
+#
+# Note: The value after -fstype must be replaced with the filesystem type. XFS is used as an example.
+#
+# # find / -fstype xfs -nouser
+#
+# If any files on the system do not have an assigned owner, this is a finding.
+# Fix Text: Either remove all files and directories from the system that do not have a valid user, or assign a valid user to all unowned files and directories on the system with the "chown" command:
+#
+# # chown <user> <file>
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-002165
+# The information system enforces organization-defined discretionary access control policies over defined subjects and objects.
+# NIST SP 800-53 Revision 4 :: AC-3 (4)
+#
+#
+- name: check stig_rhel7_v1r4 v_72007
+  set_fact:
+    stig_rhel7_v1r4_v_72007_result: 'fail'
+  when: '"v_72007" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-72009
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86633r2_rule
+# STIG ID: RHEL-07-020330
+# Rule Title: All files and directories must have a valid group owner.
+# Discussion: Files without a valid group owner may be unintentionally inherited if a group is assigned the same Group Identifier (GID) as the GID of the files without a valid group owner.
+# IA Controls:
+# Check Content: Verify all files and directories on the system have a valid group.
+#
+# Check the owner of all files and directories with the following command:
+#
+# Note: The value after -fstype must be replaced with the filesystem type. XFS is used as an example.
+#
+# # find / -fstype xfs -nogroup
+#
+# If any files on the system do not have an assigned group, this is a finding.
+# Fix Text: Either remove all files and directories from the system that do not have a valid group, or assign a valid group to all files and directories on the system with the "chgrp" command:
+#
+# # chgrp <group> <file>
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-002165
+# The information system enforces organization-defined discretionary access control policies over defined subjects and objects.
+# NIST SP 800-53 Revision 4 :: AC-3 (4)
+#
+#
+- name: check stig_rhel7_v1r4 v_72009
+  set_fact:
+    stig_rhel7_v1r4_v_72009_result: 'fail'
+  when: '"v_72009" in stig_rhel7_v1r4_checks'

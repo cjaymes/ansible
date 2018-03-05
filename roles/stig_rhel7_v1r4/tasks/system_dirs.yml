@@ -1,0 +1,240 @@
+# Vuln ID: V-71849
+# Severity: high
+# Group Title: SRG-OS-000257-GPOS-00098
+# Rule ID: SV-86473r2_rule
+# STIG ID: RHEL-07-010010
+# Rule Title: The file permissions, ownership, and group membership of system files and commands must match the vendor values.
+# Discussion: Discretionary access control is weakened if a user or group has access permissions to system files and directories greater than the default.
+#
+# Satisfies: SRG-OS-000257-GPOS-00098, SRG-OS-000278-GPOS-00108
+# IA Controls:
+# Check Content: Verify the file permissions, ownership, and group membership of system files and commands match the vendor values.
+#
+# Check the file permissions, ownership, and group membership of system files and commands with the following command:
+#
+# # rpm -Va | grep '^.M'
+#
+# If there is any output from the command indicating that the ownership or group of a system file or command, or a system file, has permissions less restrictive than the default, this is a finding.
+# Fix Text: Run the following command to determine which package owns the file:
+#
+# # rpm -qf <filename>
+#
+# Reset the permissions of files within a package with the following command:
+#
+# #rpm --setperms <packagename>
+#
+# Reset the user and group ownership of files within a package with the following command:
+#
+# #rpm --setugids <packagename>
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001494
+# The information system protects audit tools from unauthorized modification.
+# NIST SP 800-53 :: AU-9
+# NIST SP 800-53A :: AU-9.1
+# NIST SP 800-53 Revision 4 :: AU-9
+#
+# CCI-001496
+# The information system implements cryptographic mechanisms to protect the integrity of audit tools.
+# NIST SP 800-53 :: AU-9 (3)
+# NIST SP 800-53A :: AU-9 (3).1
+# NIST SP 800-53 Revision 4 :: AU-9 (3)
+#
+#
+- name: check stig_rhel7_v1r4 v_71849
+  set_fact:
+    stig_rhel7_v1r4_v_71849_result: 'fail'
+  when: '"v_71849" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-71855
+# Severity: high
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86479r2_rule
+# STIG ID: RHEL-07-010020
+# Rule Title: The cryptographic hash of system files and commands must match vendor values.
+# Discussion: Without cryptographic integrity protections, system command and files can be altered by unauthorized users without detection.
+#
+# Cryptographic mechanisms used for protecting the integrity of information include, for example, signed hash functions using asymmetric cryptography enabling distribution of the public key to verify the hash information while maintaining the confidentiality of the key used to generate the hash.
+# IA Controls:
+# Check Content: Verify the cryptographic hash of system files and commands match the vendor values.
+#
+# Check the cryptographic hash of system files and commands with the following command:
+#
+# Note: System configuration files (indicated by a "c" in the second column) are expected to change over time. Unusual modifications should be investigated through the system audit log.
+#
+# # rpm -Va | grep '^..5'
+#
+# If there is any output from the command for system binaries, this is a finding.
+# Fix Text: Run the following command to determine which package owns the file:
+#
+# # rpm -qf <filename>
+#
+# The package can be reinstalled from a yum repository using the command:
+#
+# # sudo yum reinstall <packagename>
+#
+# Alternatively, the package can be reinstalled from trusted media using the command:
+#
+# # sudo rpm -Uvh <packagename>
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000663
+# The organization (or information system) enforces explicit rules governing the installation of software by users.
+# NIST SP 800-53 :: SA-7
+# NIST SP 800-53A :: SA-7.1 (ii)
+#
+#
+- name: check stig_rhel7_v1r4 v_71855
+  set_fact:
+    stig_rhel7_v1r4_v_71855_result: 'fail'
+  when: '"v_71855" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-72039
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86663r1_rule
+# STIG ID: RHEL-07-020900
+# Rule Title: All system device files must be correctly labeled to prevent unauthorized modification.
+# Discussion: If an unauthorized or modified device is allowed to exist on the system, there is the possibility the system may perform unintended or unauthorized operations.
+# IA Controls:
+# Check Content: Verify that all system device files are correctly labeled to prevent unauthorized modification.
+#
+# List all device files on the system that are incorrectly labeled with the following commands:
+#
+# Note: Device files are normally found under "/dev", but applications may place device files in other directories and may necessitate a search of the entire system.
+#
+# #find /dev -context *:device_t:* \( -type c -o -type b \) -printf "%p %Z\n"
+#
+# #find /dev -context *:unlabeled_t:* \( -type c -o -type b \) -printf "%p %Z\n"
+#
+# Note: There are device files, such as "/dev/vmci", that are used when the operating system is a host virtual machine. They will not be owned by a user on the system and require the "device_t" label to operate. These device files are not a finding.
+#
+# If there is output from either of these commands, other than already noted, this is a finding.
+# Fix Text: Run the following command to determine which package owns the device file:
+#
+# # rpm -qf <filename>
+#
+# The package can be reinstalled from a yum repository using the command:
+#
+# # sudo yum reinstall <packagename>
+#
+# Alternatively, the package can be reinstalled from trusted media using the command:
+#
+# # sudo rpm -Uvh <packagename>
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000318
+# The organization audits and reviews activities associated with configuration controlled changes to the system.
+# NIST SP 800-53 :: CM-3 e
+# NIST SP 800-53A :: CM-3.1 (v)
+# NIST SP 800-53 Revision 4 :: CM-3 f
+#
+# CCI-000368
+# The organization documents any deviations from the established configuration settings for organization-defined information system components based on organization-defined operational requirements.
+# NIST SP 800-53 :: CM-6 c
+# NIST SP 800-53A :: CM-6.1 (v)
+# NIST SP 800-53 Revision 4 :: CM-6 c
+#
+# CCI-001812
+# The information system prohibits user installation of software without explicit privileged status.
+# NIST SP 800-53 Revision 4 :: CM-11 (2)
+#
+# CCI-001813
+# The information system enforces access restrictions.
+# NIST SP 800-53 Revision 4 :: CM-5 (1)
+#
+# CCI-001814
+# The Information system supports auditing of the enforcement actions.
+# NIST SP 800-53 Revision 4 :: CM-5 (1)
+#
+#
+- name: check stig_rhel7_v1r4 v_72039
+  set_fact:
+    stig_rhel7_v1r4_v_72039_result: 'fail'
+  when: '"v_72039" in stig_rhel7_v1r4_checks'
+
+
+# Vuln ID: V-72047
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86671r3_rule
+# STIG ID: RHEL-07-021030
+# Rule Title: All world-writable directories must be group-owned by root, sys, bin, or an application group.
+# Discussion: If a world-writable directory has the sticky bit set and is not group-owned by a privileged Group Identifier (GID), unauthorized users may be able to modify files created by others.
+#
+# The only authorized public directories are those temporary directories supplied with the system or those designed to be temporary file repositories. The setting is normally reserved for directories used by the system and by users for temporary file storage, (e.g., /tmp), and for directories requiring global read/write access.
+# IA Controls:
+# Check Content: Verify all world-writable directories are group-owned by root, sys, bin, or an application group.
+#
+# Check the system for world-writable directories with the following command:
+#
+# Note: The value after -fstype must be replaced with the filesystem type. XFS is used as an example.
+#
+# # find / -xdev -perm -002 -type d -fstype xfs -exec ls -lLd {} \;
+# drwxrwxrwt 2 root root 40 Aug 26 13:07 /dev/mqueue
+# drwxrwxrwt 2 root root 220 Aug 26 13:23 /dev/shm
+# drwxrwxrwt 14 root root 4096 Aug 26 13:29 /tmp
+#
+# If any world-writable directories are not owned by root, sys, bin, or an application group associated with the directory, this is a finding.
+# Fix Text: Change the group of the world-writable directories to root with the following command:
+#
+# # chgrp root <directory>
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel7_v1r4 v_72047
+  set_fact:
+    stig_rhel7_v1r4_v_72047_result: 'fail'
+  when: '"v_72047" in stig_rhel7_v1r4_checks'
