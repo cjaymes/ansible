@@ -16,11 +16,13 @@
       - "'Error: No matching Packages to list' in aide_install_state.stderr"
 
 - name: check for cron.daily aide file
-  stat: path=/etc/cron.daily/aide
+  stat:
+      path: /etc/cron.daily/aide
   register: aide_cron_daily
 
 - name: check for cron.weekly aide file
-  stat: path=/etc/cron.weekly/aide
+  stat:
+      path: /etc/cron.weekly/aide
   register: aide_cron_weekly
 
 - name: set fix for aide cron
@@ -29,6 +31,18 @@
   when:
       - not aide_cron_daily.stat.exists
       - not aide_cron_weekly.stat.exists
+
+- name: check /etc/aide.conf checksum
+  stat:
+      path: /etc/aide.conf
+      checksum_algorithm: sha1
+  register: aide_conf
+
+- name: set fix for aide conf
+  set_fact:
+      aide_fix_conf: true
+  when:
+      - aide_conf.stat.checksum != aide_conf_sha1
 
 
 # Vuln ID: V-71973
@@ -248,8 +262,7 @@
       stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72069': 'pass'})}}"
   when:
       - "'v_72069' in stig_rhel7_v1r4_checks"
-      - "'Error: No matching Packages to list' not in aide_install_state.stderr"
-      - false
+      - aide_conf.stat.checksum == aide_conf_sha1
 
 - name: check stig_rhel7_v1r4 v_72069 fail
   set_fact:
@@ -318,7 +331,9 @@
 - name: check stig_rhel7_v1r4 v_72071
   set_fact:
     stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72071': 'fail'})}}"
-  when: '"v_72071" in stig_rhel7_v1r4_checks'
+  when:
+      - '"v_72071" in stig_rhel7_v1r4_checks'
+      - aide_conf.stat.checksum == aide_conf_sha1
 
 - name: check stig_rhel7_v1r4 v_72071 fail
   set_fact:
@@ -389,4 +404,6 @@
 - name: check stig_rhel7_v1r4 v_72073
   set_fact:
     stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72073': 'fail'})}}"
-  when: '"v_72073" in stig_rhel7_v1r4_checks'
+  when:
+      - '"v_72073" in stig_rhel7_v1r4_checks'
+      - aide_conf.stat.checksum == aide_conf_sha1

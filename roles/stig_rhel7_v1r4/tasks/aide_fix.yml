@@ -25,3 +25,9 @@
       - stig_rhel7_v1r4_fix_findings
       - aide_fix_cron
       - aide_frequency == 'weekly'
+
+- name: aide.conf
+  template:
+      src: etc/aide.conf
+      dest: /etc/aide.conf
+      mode: 0600

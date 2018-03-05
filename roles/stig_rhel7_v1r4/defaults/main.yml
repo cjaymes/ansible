@@ -524,3 +524,4 @@ stig_rhel7_v1r4_results:
 
 aide_fix_install: false
 aide_fix_cron: false
+aide_conf_sha1: 2629c9d8364a53667d17b8af10a1e5bc01f30f58
