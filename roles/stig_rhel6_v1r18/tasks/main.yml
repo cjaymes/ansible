@@ -5,5 +5,5 @@
 
 - name: output results
   debug:
-      msg: '{{ hostvars[inventory_hostname]["stig_rhel6_v1r18_" + item.name + "_result"] }}'
+      msg: '{{ hostvars[inventory_hostname]["stig_rhel6_v1r18_" + {{item}} + "_result"] }}'
   with_items: '{{ stig_rhel6_v1r18_findings }}'

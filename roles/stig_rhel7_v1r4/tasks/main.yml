@@ -9,5 +9,5 @@
 
 - name: output results
   debug:
-      msg: '{{ hostvars[inventory_hostname]["stig_rhel7_v1r4_" + item.name + "_result"] }}'
+      msg: '{{ hostvars[inventory_hostname]["stig_rhel7_v1r4_" + {{item}} + "_result"] }}'
   with_items: '{{ stig_rhel7_v1r4_findings }}'
