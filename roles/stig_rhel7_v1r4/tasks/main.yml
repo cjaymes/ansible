@@ -10,245 +10,243 @@
 - name: output results
   debug:
       msg:
-          - stig_rhel7_v1r4_v_71849_result
-          - stig_rhel7_v1r4_v_71855_result
-          - stig_rhel7_v1r4_v_71859_result
-          - stig_rhel7_v1r4_v_71861_result
-          - stig_rhel7_v1r4_v_71863_result
-          - stig_rhel7_v1r4_v_71891_result
-          - stig_rhel7_v1r4_v_71893_result
-          - stig_rhel7_v1r4_v_71897_result
-          - stig_rhel7_v1r4_v_71899_result
-          - stig_rhel7_v1r4_v_71901_result
-          - stig_rhel7_v1r4_v_71903_result
-          - stig_rhel7_v1r4_v_71905_result
-          - stig_rhel7_v1r4_v_71907_result
-          - stig_rhel7_v1r4_v_71909_result
-          - stig_rhel7_v1r4_v_71911_result
-          - stig_rhel7_v1r4_v_71913_result
-          - stig_rhel7_v1r4_v_71915_result
-          - stig_rhel7_v1r4_v_71917_result
-          - stig_rhel7_v1r4_v_71919_result
-          - stig_rhel7_v1r4_v_71921_result
-          - stig_rhel7_v1r4_v_71923_result
-          - stig_rhel7_v1r4_v_71925_result
-          - stig_rhel7_v1r4_v_71927_result
-          - stig_rhel7_v1r4_v_71929_result
-          - stig_rhel7_v1r4_v_71931_result
-          - stig_rhel7_v1r4_v_71933_result
-          - stig_rhel7_v1r4_v_71935_result
-          - stig_rhel7_v1r4_v_71937_result
-          - stig_rhel7_v1r4_v_71939_result
-          - stig_rhel7_v1r4_v_71941_result
-          - stig_rhel7_v1r4_v_71943_result
-          - stig_rhel7_v1r4_v_71945_result
-          - stig_rhel7_v1r4_v_71947_result
-          - stig_rhel7_v1r4_v_71949_result
-          - stig_rhel7_v1r4_v_71951_result
-          - stig_rhel7_v1r4_v_71953_result
-          - stig_rhel7_v1r4_v_71955_result
-          - stig_rhel7_v1r4_v_71957_result
-          - stig_rhel7_v1r4_v_71959_result
-          - stig_rhel7_v1r4_v_71961_result
-          - stig_rhel7_v1r4_v_71963_result
-          - stig_rhel7_v1r4_v_71965_result
-          - stig_rhel7_v1r4_v_71967_result
-          - stig_rhel7_v1r4_v_71969_result
-          - stig_rhel7_v1r4_v_71971_result
-          - stig_rhel7_v1r4_v_71973_result
-          - stig_rhel7_v1r4_v_71975_result
-          - stig_rhel7_v1r4_v_71977_result
-          - stig_rhel7_v1r4_v_71979_result
-          - stig_rhel7_v1r4_v_71981_result
-          - stig_rhel7_v1r4_v_71983_result
-          - stig_rhel7_v1r4_v_71985_result
-          - stig_rhel7_v1r4_v_71987_result
-          - stig_rhel7_v1r4_v_71989_result
-          - stig_rhel7_v1r4_v_71991_result
-          - stig_rhel7_v1r4_v_71993_result
-          - stig_rhel7_v1r4_v_71995_result
-          - stig_rhel7_v1r4_v_71997_result
-          - stig_rhel7_v1r4_v_71999_result
-          - stig_rhel7_v1r4_v_72001_result
-          - stig_rhel7_v1r4_v_72003_result
-          - stig_rhel7_v1r4_v_72005_result
-          - stig_rhel7_v1r4_v_72007_result
-          - stig_rhel7_v1r4_v_72009_result
-          - stig_rhel7_v1r4_v_72011_result
-          - stig_rhel7_v1r4_v_72013_result
-          - stig_rhel7_v1r4_v_72015_result
-          - stig_rhel7_v1r4_v_72017_result
-          - stig_rhel7_v1r4_v_72019_result
-          - stig_rhel7_v1r4_v_72021_result
-          - stig_rhel7_v1r4_v_72023_result
-          - stig_rhel7_v1r4_v_72025_result
-          - stig_rhel7_v1r4_v_72027_result
-          - stig_rhel7_v1r4_v_72029_result
-          - stig_rhel7_v1r4_v_72031_result
-          - stig_rhel7_v1r4_v_72033_result
-          - stig_rhel7_v1r4_v_72035_result
-          - stig_rhel7_v1r4_v_72037_result
-          - stig_rhel7_v1r4_v_72039_result
-          - stig_rhel7_v1r4_v_72041_result
-          - stig_rhel7_v1r4_v_72043_result
-          - stig_rhel7_v1r4_v_72045_result
-          - stig_rhel7_v1r4_v_72047_result
-          - stig_rhel7_v1r4_v_72049_result
-          - stig_rhel7_v1r4_v_72051_result
-          - stig_rhel7_v1r4_v_72053_result
-          - stig_rhel7_v1r4_v_72055_result
-          - stig_rhel7_v1r4_v_72057_result
-          - stig_rhel7_v1r4_v_72059_result
-          - stig_rhel7_v1r4_v_72061_result
-          - stig_rhel7_v1r4_v_72063_result
-          - stig_rhel7_v1r4_v_72065_result
-          - stig_rhel7_v1r4_v_72067_result
-          - stig_rhel7_v1r4_v_72069_result
-          - stig_rhel7_v1r4_v_72071_result
-          - stig_rhel7_v1r4_v_72073_result
-          - stig_rhel7_v1r4_v_72075_result
-          - stig_rhel7_v1r4_v_72077_result
-          - stig_rhel7_v1r4_v_72079_result
-          - stig_rhel7_v1r4_v_72081_result
-          - stig_rhel7_v1r4_v_72083_result
-          - stig_rhel7_v1r4_v_72085_result
-          - stig_rhel7_v1r4_v_72087_result
-          - stig_rhel7_v1r4_v_72089_result
-          - stig_rhel7_v1r4_v_72091_result
-          - stig_rhel7_v1r4_v_72093_result
-          - stig_rhel7_v1r4_v_72095_result
-          - stig_rhel7_v1r4_v_72097_result
-          - stig_rhel7_v1r4_v_72099_result
-          - stig_rhel7_v1r4_v_72101_result
-          - stig_rhel7_v1r4_v_72103_result
-          - stig_rhel7_v1r4_v_72105_result
-          - stig_rhel7_v1r4_v_72107_result
-          - stig_rhel7_v1r4_v_72109_result
-          - stig_rhel7_v1r4_v_72111_result
-          - stig_rhel7_v1r4_v_72113_result
-          - stig_rhel7_v1r4_v_72115_result
-          - stig_rhel7_v1r4_v_72117_result
-          - stig_rhel7_v1r4_v_72119_result
-          - stig_rhel7_v1r4_v_72121_result
-          - stig_rhel7_v1r4_v_72123_result
-          - stig_rhel7_v1r4_v_72125_result
-          - stig_rhel7_v1r4_v_72127_result
-          - stig_rhel7_v1r4_v_72129_result
-          - stig_rhel7_v1r4_v_72131_result
-          - stig_rhel7_v1r4_v_72133_result
-          - stig_rhel7_v1r4_v_72135_result
-          - stig_rhel7_v1r4_v_72137_result
-          - stig_rhel7_v1r4_v_72139_result
-          - stig_rhel7_v1r4_v_72141_result
-          - stig_rhel7_v1r4_v_72143_result
-          - stig_rhel7_v1r4_v_72145_result
-          - stig_rhel7_v1r4_v_72147_result
-          - stig_rhel7_v1r4_v_72149_result
-          - stig_rhel7_v1r4_v_72151_result
-          - stig_rhel7_v1r4_v_72153_result
-          - stig_rhel7_v1r4_v_72155_result
-          - stig_rhel7_v1r4_v_72157_result
-          - stig_rhel7_v1r4_v_72159_result
-          - stig_rhel7_v1r4_v_72161_result
-          - stig_rhel7_v1r4_v_72163_result
-          - stig_rhel7_v1r4_v_72165_result
-          - stig_rhel7_v1r4_v_72167_result
-          - stig_rhel7_v1r4_v_72169_result
-          - stig_rhel7_v1r4_v_72171_result
-          - stig_rhel7_v1r4_v_72173_result
-          - stig_rhel7_v1r4_v_72175_result
-          - stig_rhel7_v1r4_v_72177_result
-          - stig_rhel7_v1r4_v_72179_result
-          - stig_rhel7_v1r4_v_72183_result
-          - stig_rhel7_v1r4_v_72185_result
-          - stig_rhel7_v1r4_v_72187_result
-          - stig_rhel7_v1r4_v_72189_result
-          - stig_rhel7_v1r4_v_72191_result
-          - stig_rhel7_v1r4_v_72193_result
-          - stig_rhel7_v1r4_v_72195_result
-          - stig_rhel7_v1r4_v_72197_result
-          - stig_rhel7_v1r4_v_72199_result
-          - stig_rhel7_v1r4_v_72201_result
-          - stig_rhel7_v1r4_v_72203_result
-          - stig_rhel7_v1r4_v_72205_result
-          - stig_rhel7_v1r4_v_72207_result
-          - stig_rhel7_v1r4_v_72209_result
-          - stig_rhel7_v1r4_v_72211_result
-          - stig_rhel7_v1r4_v_72213_result
-          - stig_rhel7_v1r4_v_72215_result
-          - stig_rhel7_v1r4_v_72217_result
-          - stig_rhel7_v1r4_v_72219_result
-          - stig_rhel7_v1r4_v_72221_result
-          - stig_rhel7_v1r4_v_72223_result
-          - stig_rhel7_v1r4_v_72225_result
-          - stig_rhel7_v1r4_v_72227_result
-          - stig_rhel7_v1r4_v_72229_result
-          - stig_rhel7_v1r4_v_72231_result
-          - stig_rhel7_v1r4_v_72233_result
-          - stig_rhel7_v1r4_v_72235_result
-          - stig_rhel7_v1r4_v_72237_result
-          - stig_rhel7_v1r4_v_72239_result
-          - stig_rhel7_v1r4_v_72241_result
-          - stig_rhel7_v1r4_v_72243_result
-          - stig_rhel7_v1r4_v_72245_result
-          - stig_rhel7_v1r4_v_72247_result
-          - stig_rhel7_v1r4_v_72249_result
-          - stig_rhel7_v1r4_v_72251_result
-          - stig_rhel7_v1r4_v_72253_result
-          - stig_rhel7_v1r4_v_72255_result
-          - stig_rhel7_v1r4_v_72257_result
-          - stig_rhel7_v1r4_v_72259_result
-          - stig_rhel7_v1r4_v_72261_result
-          - stig_rhel7_v1r4_v_72263_result
-          - stig_rhel7_v1r4_v_72265_result
-          - stig_rhel7_v1r4_v_72267_result
-          - stig_rhel7_v1r4_v_72269_result
-          - stig_rhel7_v1r4_v_72271_result
-          - stig_rhel7_v1r4_v_72273_result
-          - stig_rhel7_v1r4_v_72275_result
-          - stig_rhel7_v1r4_v_72277_result
-          - stig_rhel7_v1r4_v_72279_result
-          - stig_rhel7_v1r4_v_72281_result
-          - stig_rhel7_v1r4_v_72283_result
-          - stig_rhel7_v1r4_v_72285_result
-          - stig_rhel7_v1r4_v_72287_result
-          - stig_rhel7_v1r4_v_72289_result
-          - stig_rhel7_v1r4_v_72291_result
-          - stig_rhel7_v1r4_v_72293_result
-          - stig_rhel7_v1r4_v_72295_result
-          - stig_rhel7_v1r4_v_72297_result
-          - stig_rhel7_v1r4_v_72299_result
-          - stig_rhel7_v1r4_v_72301_result
-          - stig_rhel7_v1r4_v_72303_result
-          - stig_rhel7_v1r4_v_72305_result
-          - stig_rhel7_v1r4_v_72307_result
-          - stig_rhel7_v1r4_v_72309_result
-          - stig_rhel7_v1r4_v_72311_result
-          - stig_rhel7_v1r4_v_72313_result
-          - stig_rhel7_v1r4_v_72315_result
-          - stig_rhel7_v1r4_v_72317_result
-          - stig_rhel7_v1r4_v_72319_result
-          - stig_rhel7_v1r4_v_72417_result
-          - stig_rhel7_v1r4_v_72427_result
-          - stig_rhel7_v1r4_v_72433_result
-          - stig_rhel7_v1r4_v_73155_result
-          - stig_rhel7_v1r4_v_73157_result
-          - stig_rhel7_v1r4_v_73159_result
-          - stig_rhel7_v1r4_v_73161_result
-          - stig_rhel7_v1r4_v_73163_result
-          - stig_rhel7_v1r4_v_73165_result
-          - stig_rhel7_v1r4_v_73167_result
-          - stig_rhel7_v1r4_v_73171_result
-          - stig_rhel7_v1r4_v_73173_result
-          - stig_rhel7_v1r4_v_73175_result
-          - stig_rhel7_v1r4_v_73177_result
-          - stig_rhel7_v1r4_v_77819_result
-          - stig_rhel7_v1r4_v_77821_result
-          - stig_rhel7_v1r4_v_77823_result
-          - stig_rhel7_v1r4_v_77825_result
-          - stig_rhel7_v1r4_v_78995_result
-          - stig_rhel7_v1r4_v_78997_result
-          - stig_rhel7_v1r4_v_78999_result
-          - stig_rhel7_v1r4_v_79001_result
-
-  with_items: '{{ stig_rhel7_v1r4_findings }}'
+          - "v_71849: {{stig_rhel7_v1r4_v_71849_result}}"
+          - "v_71855: {{stig_rhel7_v1r4_v_71855_result}}"
+          - "v_71859: {{stig_rhel7_v1r4_v_71859_result}}"
+          - "v_71861: {{stig_rhel7_v1r4_v_71861_result}}"
+          - "v_71863: {{stig_rhel7_v1r4_v_71863_result}}"
+          - "v_71891: {{stig_rhel7_v1r4_v_71891_result}}"
+          - "v_71893: {{stig_rhel7_v1r4_v_71893_result}}"
+          - "v_71897: {{stig_rhel7_v1r4_v_71897_result}}"
+          - "v_71899: {{stig_rhel7_v1r4_v_71899_result}}"
+          - "v_71901: {{stig_rhel7_v1r4_v_71901_result}}"
+          - "v_71903: {{stig_rhel7_v1r4_v_71903_result}}"
+          - "v_71905: {{stig_rhel7_v1r4_v_71905_result}}"
+          - "v_71907: {{stig_rhel7_v1r4_v_71907_result}}"
+          - "v_71909: {{stig_rhel7_v1r4_v_71909_result}}"
+          - "v_71911: {{stig_rhel7_v1r4_v_71911_result}}"
+          - "v_71913: {{stig_rhel7_v1r4_v_71913_result}}"
+          - "v_71915: {{stig_rhel7_v1r4_v_71915_result}}"
+          - "v_71917: {{stig_rhel7_v1r4_v_71917_result}}"
+          - "v_71919: {{stig_rhel7_v1r4_v_71919_result}}"
+          - "v_71921: {{stig_rhel7_v1r4_v_71921_result}}"
+          - "v_71923: {{stig_rhel7_v1r4_v_71923_result}}"
+          - "v_71925: {{stig_rhel7_v1r4_v_71925_result}}"
+          - "v_71927: {{stig_rhel7_v1r4_v_71927_result}}"
+          - "v_71929: {{stig_rhel7_v1r4_v_71929_result}}"
+          - "v_71931: {{stig_rhel7_v1r4_v_71931_result}}"
+          - "v_71933: {{stig_rhel7_v1r4_v_71933_result}}"
+          - "v_71935: {{stig_rhel7_v1r4_v_71935_result}}"
+          - "v_71937: {{stig_rhel7_v1r4_v_71937_result}}"
+          - "v_71939: {{stig_rhel7_v1r4_v_71939_result}}"
+          - "v_71941: {{stig_rhel7_v1r4_v_71941_result}}"
+          - "v_71943: {{stig_rhel7_v1r4_v_71943_result}}"
+          - "v_71945: {{stig_rhel7_v1r4_v_71945_result}}"
+          - "v_71947: {{stig_rhel7_v1r4_v_71947_result}}"
+          - "v_71949: {{stig_rhel7_v1r4_v_71949_result}}"
+          - "v_71951: {{stig_rhel7_v1r4_v_71951_result}}"
+          - "v_71953: {{stig_rhel7_v1r4_v_71953_result}}"
+          - "v_71955: {{stig_rhel7_v1r4_v_71955_result}}"
+          - "v_71957: {{stig_rhel7_v1r4_v_71957_result}}"
+          - "v_71959: {{stig_rhel7_v1r4_v_71959_result}}"
+          - "v_71961: {{stig_rhel7_v1r4_v_71961_result}}"
+          - "v_71963: {{stig_rhel7_v1r4_v_71963_result}}"
+          - "v_71965: {{stig_rhel7_v1r4_v_71965_result}}"
+          - "v_71967: {{stig_rhel7_v1r4_v_71967_result}}"
+          - "v_71969: {{stig_rhel7_v1r4_v_71969_result}}"
+          - "v_71971: {{stig_rhel7_v1r4_v_71971_result}}"
+          - "v_71973: {{stig_rhel7_v1r4_v_71973_result}}"
+          - "v_71975: {{stig_rhel7_v1r4_v_71975_result}}"
+          - "v_71977: {{stig_rhel7_v1r4_v_71977_result}}"
+          - "v_71979: {{stig_rhel7_v1r4_v_71979_result}}"
+          - "v_71981: {{stig_rhel7_v1r4_v_71981_result}}"
+          - "v_71983: {{stig_rhel7_v1r4_v_71983_result}}"
+          - "v_71985: {{stig_rhel7_v1r4_v_71985_result}}"
+          - "v_71987: {{stig_rhel7_v1r4_v_71987_result}}"
+          - "v_71989: {{stig_rhel7_v1r4_v_71989_result}}"
+          - "v_71991: {{stig_rhel7_v1r4_v_71991_result}}"
+          - "v_71993: {{stig_rhel7_v1r4_v_71993_result}}"
+          - "v_71995: {{stig_rhel7_v1r4_v_71995_result}}"
+          - "v_71997: {{stig_rhel7_v1r4_v_71997_result}}"
+          - "v_71999: {{stig_rhel7_v1r4_v_71999_result}}"
+          - "v_72001: {{stig_rhel7_v1r4_v_72001_result}}"
+          - "v_72003: {{stig_rhel7_v1r4_v_72003_result}}"
+          - "v_72005: {{stig_rhel7_v1r4_v_72005_result}}"
+          - "v_72007: {{stig_rhel7_v1r4_v_72007_result}}"
+          - "v_72009: {{stig_rhel7_v1r4_v_72009_result}}"
+          - "v_72011: {{stig_rhel7_v1r4_v_72011_result}}"
+          - "v_72013: {{stig_rhel7_v1r4_v_72013_result}}"
+          - "v_72015: {{stig_rhel7_v1r4_v_72015_result}}"
+          - "v_72017: {{stig_rhel7_v1r4_v_72017_result}}"
+          - "v_72019: {{stig_rhel7_v1r4_v_72019_result}}"
+          - "v_72021: {{stig_rhel7_v1r4_v_72021_result}}"
+          - "v_72023: {{stig_rhel7_v1r4_v_72023_result}}"
+          - "v_72025: {{stig_rhel7_v1r4_v_72025_result}}"
+          - "v_72027: {{stig_rhel7_v1r4_v_72027_result}}"
+          - "v_72029: {{stig_rhel7_v1r4_v_72029_result}}"
+          - "v_72031: {{stig_rhel7_v1r4_v_72031_result}}"
+          - "v_72033: {{stig_rhel7_v1r4_v_72033_result}}"
+          - "v_72035: {{stig_rhel7_v1r4_v_72035_result}}"
+          - "v_72037: {{stig_rhel7_v1r4_v_72037_result}}"
+          - "v_72039: {{stig_rhel7_v1r4_v_72039_result}}"
+          - "v_72041: {{stig_rhel7_v1r4_v_72041_result}}"
+          - "v_72043: {{stig_rhel7_v1r4_v_72043_result}}"
+          - "v_72045: {{stig_rhel7_v1r4_v_72045_result}}"
+          - "v_72047: {{stig_rhel7_v1r4_v_72047_result}}"
+          - "v_72049: {{stig_rhel7_v1r4_v_72049_result}}"
+          - "v_72051: {{stig_rhel7_v1r4_v_72051_result}}"
+          - "v_72053: {{stig_rhel7_v1r4_v_72053_result}}"
+          - "v_72055: {{stig_rhel7_v1r4_v_72055_result}}"
+          - "v_72057: {{stig_rhel7_v1r4_v_72057_result}}"
+          - "v_72059: {{stig_rhel7_v1r4_v_72059_result}}"
+          - "v_72061: {{stig_rhel7_v1r4_v_72061_result}}"
+          - "v_72063: {{stig_rhel7_v1r4_v_72063_result}}"
+          - "v_72065: {{stig_rhel7_v1r4_v_72065_result}}"
+          - "v_72067: {{stig_rhel7_v1r4_v_72067_result}}"
+          - "v_72069: {{stig_rhel7_v1r4_v_72069_result}}"
+          - "v_72071: {{stig_rhel7_v1r4_v_72071_result}}"
+          - "v_72073: {{stig_rhel7_v1r4_v_72073_result}}"
+          - "v_72075: {{stig_rhel7_v1r4_v_72075_result}}"
+          - "v_72077: {{stig_rhel7_v1r4_v_72077_result}}"
+          - "v_72079: {{stig_rhel7_v1r4_v_72079_result}}"
+          - "v_72081: {{stig_rhel7_v1r4_v_72081_result}}"
+          - "v_72083: {{stig_rhel7_v1r4_v_72083_result}}"
+          - "v_72085: {{stig_rhel7_v1r4_v_72085_result}}"
+          - "v_72087: {{stig_rhel7_v1r4_v_72087_result}}"
+          - "v_72089: {{stig_rhel7_v1r4_v_72089_result}}"
+          - "v_72091: {{stig_rhel7_v1r4_v_72091_result}}"
+          - "v_72093: {{stig_rhel7_v1r4_v_72093_result}}"
+          - "v_72095: {{stig_rhel7_v1r4_v_72095_result}}"
+          - "v_72097: {{stig_rhel7_v1r4_v_72097_result}}"
+          - "v_72099: {{stig_rhel7_v1r4_v_72099_result}}"
+          - "v_72101: {{stig_rhel7_v1r4_v_72101_result}}"
+          - "v_72103: {{stig_rhel7_v1r4_v_72103_result}}"
+          - "v_72105: {{stig_rhel7_v1r4_v_72105_result}}"
+          - "v_72107: {{stig_rhel7_v1r4_v_72107_result}}"
+          - "v_72109: {{stig_rhel7_v1r4_v_72109_result}}"
+          - "v_72111: {{stig_rhel7_v1r4_v_72111_result}}"
+          - "v_72113: {{stig_rhel7_v1r4_v_72113_result}}"
+          - "v_72115: {{stig_rhel7_v1r4_v_72115_result}}"
+          - "v_72117: {{stig_rhel7_v1r4_v_72117_result}}"
+          - "v_72119: {{stig_rhel7_v1r4_v_72119_result}}"
+          - "v_72121: {{stig_rhel7_v1r4_v_72121_result}}"
+          - "v_72123: {{stig_rhel7_v1r4_v_72123_result}}"
+          - "v_72125: {{stig_rhel7_v1r4_v_72125_result}}"
+          - "v_72127: {{stig_rhel7_v1r4_v_72127_result}}"
+          - "v_72129: {{stig_rhel7_v1r4_v_72129_result}}"
+          - "v_72131: {{stig_rhel7_v1r4_v_72131_result}}"
+          - "v_72133: {{stig_rhel7_v1r4_v_72133_result}}"
+          - "v_72135: {{stig_rhel7_v1r4_v_72135_result}}"
+          - "v_72137: {{stig_rhel7_v1r4_v_72137_result}}"
+          - "v_72139: {{stig_rhel7_v1r4_v_72139_result}}"
+          - "v_72141: {{stig_rhel7_v1r4_v_72141_result}}"
+          - "v_72143: {{stig_rhel7_v1r4_v_72143_result}}"
+          - "v_72145: {{stig_rhel7_v1r4_v_72145_result}}"
+          - "v_72147: {{stig_rhel7_v1r4_v_72147_result}}"
+          - "v_72149: {{stig_rhel7_v1r4_v_72149_result}}"
+          - "v_72151: {{stig_rhel7_v1r4_v_72151_result}}"
+          - "v_72153: {{stig_rhel7_v1r4_v_72153_result}}"
+          - "v_72155: {{stig_rhel7_v1r4_v_72155_result}}"
+          - "v_72157: {{stig_rhel7_v1r4_v_72157_result}}"
+          - "v_72159: {{stig_rhel7_v1r4_v_72159_result}}"
+          - "v_72161: {{stig_rhel7_v1r4_v_72161_result}}"
+          - "v_72163: {{stig_rhel7_v1r4_v_72163_result}}"
+          - "v_72165: {{stig_rhel7_v1r4_v_72165_result}}"
+          - "v_72167: {{stig_rhel7_v1r4_v_72167_result}}"
+          - "v_72169: {{stig_rhel7_v1r4_v_72169_result}}"
+          - "v_72171: {{stig_rhel7_v1r4_v_72171_result}}"
+          - "v_72173: {{stig_rhel7_v1r4_v_72173_result}}"
+          - "v_72175: {{stig_rhel7_v1r4_v_72175_result}}"
+          - "v_72177: {{stig_rhel7_v1r4_v_72177_result}}"
+          - "v_72179: {{stig_rhel7_v1r4_v_72179_result}}"
+          - "v_72183: {{stig_rhel7_v1r4_v_72183_result}}"
+          - "v_72185: {{stig_rhel7_v1r4_v_72185_result}}"
+          - "v_72187: {{stig_rhel7_v1r4_v_72187_result}}"
+          - "v_72189: {{stig_rhel7_v1r4_v_72189_result}}"
+          - "v_72191: {{stig_rhel7_v1r4_v_72191_result}}"
+          - "v_72193: {{stig_rhel7_v1r4_v_72193_result}}"
+          - "v_72195: {{stig_rhel7_v1r4_v_72195_result}}"
+          - "v_72197: {{stig_rhel7_v1r4_v_72197_result}}"
+          - "v_72199: {{stig_rhel7_v1r4_v_72199_result}}"
+          - "v_72201: {{stig_rhel7_v1r4_v_72201_result}}"
+          - "v_72203: {{stig_rhel7_v1r4_v_72203_result}}"
+          - "v_72205: {{stig_rhel7_v1r4_v_72205_result}}"
+          - "v_72207: {{stig_rhel7_v1r4_v_72207_result}}"
+          - "v_72209: {{stig_rhel7_v1r4_v_72209_result}}"
+          - "v_72211: {{stig_rhel7_v1r4_v_72211_result}}"
+          - "v_72213: {{stig_rhel7_v1r4_v_72213_result}}"
+          - "v_72215: {{stig_rhel7_v1r4_v_72215_result}}"
+          - "v_72217: {{stig_rhel7_v1r4_v_72217_result}}"
+          - "v_72219: {{stig_rhel7_v1r4_v_72219_result}}"
+          - "v_72221: {{stig_rhel7_v1r4_v_72221_result}}"
+          - "v_72223: {{stig_rhel7_v1r4_v_72223_result}}"
+          - "v_72225: {{stig_rhel7_v1r4_v_72225_result}}"
+          - "v_72227: {{stig_rhel7_v1r4_v_72227_result}}"
+          - "v_72229: {{stig_rhel7_v1r4_v_72229_result}}"
+          - "v_72231: {{stig_rhel7_v1r4_v_72231_result}}"
+          - "v_72233: {{stig_rhel7_v1r4_v_72233_result}}"
+          - "v_72235: {{stig_rhel7_v1r4_v_72235_result}}"
+          - "v_72237: {{stig_rhel7_v1r4_v_72237_result}}"
+          - "v_72239: {{stig_rhel7_v1r4_v_72239_result}}"
+          - "v_72241: {{stig_rhel7_v1r4_v_72241_result}}"
+          - "v_72243: {{stig_rhel7_v1r4_v_72243_result}}"
+          - "v_72245: {{stig_rhel7_v1r4_v_72245_result}}"
+          - "v_72247: {{stig_rhel7_v1r4_v_72247_result}}"
+          - "v_72249: {{stig_rhel7_v1r4_v_72249_result}}"
+          - "v_72251: {{stig_rhel7_v1r4_v_72251_result}}"
+          - "v_72253: {{stig_rhel7_v1r4_v_72253_result}}"
+          - "v_72255: {{stig_rhel7_v1r4_v_72255_result}}"
+          - "v_72257: {{stig_rhel7_v1r4_v_72257_result}}"
+          - "v_72259: {{stig_rhel7_v1r4_v_72259_result}}"
+          - "v_72261: {{stig_rhel7_v1r4_v_72261_result}}"
+          - "v_72263: {{stig_rhel7_v1r4_v_72263_result}}"
+          - "v_72265: {{stig_rhel7_v1r4_v_72265_result}}"
+          - "v_72267: {{stig_rhel7_v1r4_v_72267_result}}"
+          - "v_72269: {{stig_rhel7_v1r4_v_72269_result}}"
+          - "v_72271: {{stig_rhel7_v1r4_v_72271_result}}"
+          - "v_72273: {{stig_rhel7_v1r4_v_72273_result}}"
+          - "v_72275: {{stig_rhel7_v1r4_v_72275_result}}"
+          - "v_72277: {{stig_rhel7_v1r4_v_72277_result}}"
+          - "v_72279: {{stig_rhel7_v1r4_v_72279_result}}"
+          - "v_72281: {{stig_rhel7_v1r4_v_72281_result}}"
+          - "v_72283: {{stig_rhel7_v1r4_v_72283_result}}"
+          - "v_72285: {{stig_rhel7_v1r4_v_72285_result}}"
+          - "v_72287: {{stig_rhel7_v1r4_v_72287_result}}"
+          - "v_72289: {{stig_rhel7_v1r4_v_72289_result}}"
+          - "v_72291: {{stig_rhel7_v1r4_v_72291_result}}"
+          - "v_72293: {{stig_rhel7_v1r4_v_72293_result}}"
+          - "v_72295: {{stig_rhel7_v1r4_v_72295_result}}"
+          - "v_72297: {{stig_rhel7_v1r4_v_72297_result}}"
+          - "v_72299: {{stig_rhel7_v1r4_v_72299_result}}"
+          - "v_72301: {{stig_rhel7_v1r4_v_72301_result}}"
+          - "v_72303: {{stig_rhel7_v1r4_v_72303_result}}"
+          - "v_72305: {{stig_rhel7_v1r4_v_72305_result}}"
+          - "v_72307: {{stig_rhel7_v1r4_v_72307_result}}"
+          - "v_72309: {{stig_rhel7_v1r4_v_72309_result}}"
+          - "v_72311: {{stig_rhel7_v1r4_v_72311_result}}"
+          - "v_72313: {{stig_rhel7_v1r4_v_72313_result}}"
+          - "v_72315: {{stig_rhel7_v1r4_v_72315_result}}"
+          - "v_72317: {{stig_rhel7_v1r4_v_72317_result}}"
+          - "v_72319: {{stig_rhel7_v1r4_v_72319_result}}"
+          - "v_72417: {{stig_rhel7_v1r4_v_72417_result}}"
+          - "v_72427: {{stig_rhel7_v1r4_v_72427_result}}"
+          - "v_72433: {{stig_rhel7_v1r4_v_72433_result}}"
+          - "v_73155: {{stig_rhel7_v1r4_v_73155_result}}"
+          - "v_73157: {{stig_rhel7_v1r4_v_73157_result}}"
+          - "v_73159: {{stig_rhel7_v1r4_v_73159_result}}"
+          - "v_73161: {{stig_rhel7_v1r4_v_73161_result}}"
+          - "v_73163: {{stig_rhel7_v1r4_v_73163_result}}"
+          - "v_73165: {{stig_rhel7_v1r4_v_73165_result}}"
+          - "v_73167: {{stig_rhel7_v1r4_v_73167_result}}"
+          - "v_73171: {{stig_rhel7_v1r4_v_73171_result}}"
+          - "v_73173: {{stig_rhel7_v1r4_v_73173_result}}"
+          - "v_73175: {{stig_rhel7_v1r4_v_73175_result}}"
+          - "v_73177: {{stig_rhel7_v1r4_v_73177_result}}"
+          - "v_77819: {{stig_rhel7_v1r4_v_77819_result}}"
+          - "v_77821: {{stig_rhel7_v1r4_v_77821_result}}"
+          - "v_77823: {{stig_rhel7_v1r4_v_77823_result}}"
+          - "v_77825: {{stig_rhel7_v1r4_v_77825_result}}"
+          - "v_78995: {{stig_rhel7_v1r4_v_78995_result}}"
+          - "v_78997: {{stig_rhel7_v1r4_v_78997_result}}"
+          - "v_78999: {{stig_rhel7_v1r4_v_78999_result}}"
+          - "v_79001: {{stig_rhel7_v1r4_v_79001_result}}"
