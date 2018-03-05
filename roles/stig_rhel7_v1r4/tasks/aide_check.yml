@@ -330,7 +330,7 @@
 #
 - name: check stig_rhel7_v1r4 v_72071
   set_fact:
-    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72071': 'fail'})}}"
+    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72071': 'pass'})}}"
   when:
       - '"v_72071" in stig_rhel7_v1r4_checks'
       - aide_conf.stat.checksum == aide_conf_sha1
@@ -403,7 +403,14 @@
 #
 - name: check stig_rhel7_v1r4 v_72073
   set_fact:
-    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72073': 'fail'})}}"
+    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72073': 'pass'})}}"
   when:
       - '"v_72073" in stig_rhel7_v1r4_checks'
       - aide_conf.stat.checksum == aide_conf_sha1
+
+- name: check stig_rhel7_v1r4 v_72073 fail
+  set_fact:
+      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72073': 'fail'})}}"
+  when:
+      - "'v_72073' in stig_rhel7_v1r4_checks"
+      - "stig_rhel7_v1r4_results['v_72073'] != 'pass'"
