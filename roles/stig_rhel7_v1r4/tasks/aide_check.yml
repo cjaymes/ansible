@@ -12,7 +12,7 @@
 - name: set fix for install aide
   set_fact:
       aide_fix_install: true
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({v_71973: 'fail'})}}"
+      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71973': 'fail'})}}"
   when:
       - "'Error: No matching Packages to list' in aide_install_state.stderr"
 
@@ -27,7 +27,7 @@
 - name: set fix for aide cron
   set_fact:
       aide_fix_cron: true
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({v_71973: 'fail'})}}"
+      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71973': 'fail'})}}"
   when:
       - not aide_cron_daily.stat.exists
       - not aide_cron_weekly.stat.exists
@@ -86,7 +86,7 @@
 
 - name: aide installed & runs daily
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({v_71973: 'pass'})}}"
+      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71973': 'pass'})}}"
   when:
       - "'v_71973' in stig_rhel7_v1r4_checks"
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
@@ -94,7 +94,7 @@
 
 - name: aide installed & runs weekly
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({v_71973: 'pass'})}}"
+      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71973': 'pass'})}}"
   when:
       - "'v_71973' in stig_rhel7_v1r4_checks"
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
@@ -161,7 +161,7 @@
 
 - name: aide installed & runs daily
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({v_71975: 'pass'})}}"
+      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71975': 'pass'})}}"
   when:
       - "'v_71975' in stig_rhel7_v1r4_checks"
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
@@ -169,7 +169,7 @@
 
 - name: aide installed & runs weekly
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({v_71975: 'pass'})}}"
+      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71975': 'pass'})}}"
   when:
       - "'v_71975' in stig_rhel7_v1r4_checks"
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
@@ -234,7 +234,7 @@
 #
 - name: aide installed & acl in all meta-rules
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({v_72069: 'pass'})}}"
+      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72069': 'pass'})}}"
   when:
       - "'v_72069' in stig_rhel7_v1r4_checks"
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
@@ -299,7 +299,7 @@
 #
 - name: check stig_rhel7_v1r4 v_72071
   set_fact:
-    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({v_72071: 'fail'})}}"
+    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72071': 'fail'})}}"
   when: '"v_72071" in stig_rhel7_v1r4_checks'
 
 
@@ -363,5 +363,5 @@
 #
 - name: check stig_rhel7_v1r4 v_72073
   set_fact:
-    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({v_72073: 'fail'})}}"
+    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72073': 'fail'})}}"
   when: '"v_72073" in stig_rhel7_v1r4_checks'

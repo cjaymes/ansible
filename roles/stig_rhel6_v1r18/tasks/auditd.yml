@@ -37,7 +37,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38445
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38445: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38445': 'fail'})}}"
   when: '"v_38445" in stig_rhel6_v1r18_checks'
 
 
@@ -93,7 +93,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38464
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38464: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38464': 'fail'})}}"
   when: '"v_38464" in stig_rhel6_v1r18_checks'
 
 
@@ -149,7 +149,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38468
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38468: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38468': 'fail'})}}"
   when: '"v_38468" in stig_rhel6_v1r18_checks'
 
 
@@ -207,7 +207,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38470
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38470: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38470': 'fail'})}}"
   when: '"v_38470" in stig_rhel6_v1r18_checks'
 
 
@@ -250,7 +250,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38493
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38493: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38493': 'fail'})}}"
   when: '"v_38493" in stig_rhel6_v1r18_checks'
 
 
@@ -293,7 +293,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38495
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38495: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38495': 'fail'})}}"
   when: '"v_38495" in stig_rhel6_v1r18_checks'
 
 
@@ -336,7 +336,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38498
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38498: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38498': 'fail'})}}"
   when: '"v_38498" in stig_rhel6_v1r18_checks'
 
 
@@ -384,7 +384,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38628
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38628: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38628': 'fail'})}}"
   when: '"v_38628" in stig_rhel6_v1r18_checks'
 
 
@@ -432,7 +432,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38631
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38631: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38631': 'fail'})}}"
   when: '"v_38631" in stig_rhel6_v1r18_checks'
 
 
@@ -480,7 +480,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38632
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38632: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38632': 'fail'})}}"
   when: '"v_38632" in stig_rhel6_v1r18_checks'
 
 
@@ -525,7 +525,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38633
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38633: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38633': 'fail'})}}"
   when: '"v_38633" in stig_rhel6_v1r18_checks'
 
 
@@ -581,7 +581,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38634
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38634: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38634': 'fail'})}}"
   when: '"v_38634" in stig_rhel6_v1r18_checks'
 
 
@@ -626,7 +626,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38636
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38636: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38636': 'fail'})}}"
   when: '"v_38636" in stig_rhel6_v1r18_checks'
 
 
@@ -677,7 +677,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38637
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38637: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38637': 'fail'})}}"
   when: '"v_38637" in stig_rhel6_v1r18_checks'
 
 
@@ -724,7 +724,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38663
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38663: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38663': 'fail'})}}"
   when: '"v_38663" in stig_rhel6_v1r18_checks'
 
 
@@ -767,7 +767,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38664
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38664: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38664': 'fail'})}}"
   when: '"v_38664" in stig_rhel6_v1r18_checks'
 
 
@@ -810,7 +810,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38665
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38665: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38665': 'fail'})}}"
   when: '"v_38665" in stig_rhel6_v1r18_checks'
 
 
@@ -856,7 +856,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38678
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38678: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38678': 'fail'})}}"
   when: '"v_38678" in stig_rhel6_v1r18_checks'
 
 
@@ -899,7 +899,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38680
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_38680: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38680': 'fail'})}}"
   when: '"v_38680" in stig_rhel6_v1r18_checks'
 
 
@@ -943,5 +943,5 @@
 #
 - name: check stig_rhel6_v1r18 v_54381
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({v_54381: 'fail'})}}"
+    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_54381': 'fail'})}}"
   when: '"v_54381" in stig_rhel6_v1r18_checks'

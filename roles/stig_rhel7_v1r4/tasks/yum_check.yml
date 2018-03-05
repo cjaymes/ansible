@@ -43,7 +43,7 @@
 #
 - name: check stig_rhel7_v1r4 v_71977
   set_fact:
-    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({v_71977: 'fail'})}}"
+    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71977': 'fail'})}}"
   when: '"v_71977" in stig_rhel7_v1r4_checks'
 
 
@@ -92,7 +92,7 @@
 #
 - name: check stig_rhel7_v1r4 v_71979
   set_fact:
-    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({v_71979: 'fail'})}}"
+    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71979': 'fail'})}}"
   when: '"v_71979" in stig_rhel7_v1r4_checks'
 
 
@@ -141,7 +141,7 @@
 #
 - name: check stig_rhel7_v1r4 v_71981
   set_fact:
-    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({v_71981: 'fail'})}}"
+    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71981': 'fail'})}}"
   when: '"v_71981" in stig_rhel7_v1r4_checks'
 
 
@@ -186,5 +186,5 @@
 #
 - name: check stig_rhel7_v1r4 v_71987
   set_fact:
-    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({v_71987: 'fail'})}}"
+    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71987': 'fail'})}}"
   when: '"v_71987" in stig_rhel7_v1r4_checks'
