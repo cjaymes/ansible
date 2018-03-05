@@ -1,0 +1,40 @@
+# Vuln ID: V-38624
+# Severity: low
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50425r1_rule
+# STIG ID: RHEL-06-000138
+# Rule Title: System logs must be rotated daily.
+# Discussion: Log files that are not properly rotated run the risk of growing so large that they fill up the /var/log partition. Valuable logging information could be lost if the /var/log partition becomes full.
+# IA Controls:
+# Check Content: Run the following commands to determine the current status of the "logrotate" service:
+#
+# # grep logrotate /var/log/cron*
+#
+# If the logrotate service is not run on a daily basis by cron, this is a finding.
+# Fix Text: The "logrotate" service should be installed or reinstalled if it is not installed and operating properly, by running the following command:
+#
+# # yum reinstall logrotate
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38624
+  set_fact:
+    stig_rhel6_v1r18_v_38624_result: 'fail'
+  when: '"v_38624" in stig_rhel6_v1r18_checks'
