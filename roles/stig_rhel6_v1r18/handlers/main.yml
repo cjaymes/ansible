@@ -1,3 +1,0 @@
-- name: stig section fixes
-  include_tasks: '{{ item }}.yml'
-  with_items: '{{ stig_rhel6_v1r18_sections }}'

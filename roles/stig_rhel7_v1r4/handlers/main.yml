@@ -1,3 +1,5 @@
-- name: stig section fixes
-  include_tasks: '{{ item }}.yml'
-  with_items: '{{ stig_rhel7_v1r4_sections }}'
+- name: aide db init
+  shell: aide --init && mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+
+- name: aide db update
+  shell: aide --update && mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz

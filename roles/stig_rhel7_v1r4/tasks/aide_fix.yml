@@ -5,6 +5,7 @@
   when:
       - stig_rhel7_v1r4_fix_findings
       - aide_fix_install
+  notify: aide db init
 
 - name: configure aide daily cron
   template:
@@ -34,3 +35,4 @@
   when:
       - stig_rhel7_v1r4_fix_findings
       - aide_fix_conf
+  notify: aide db init
