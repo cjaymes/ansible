@@ -98,7 +98,7 @@
 
 - name: aide installed & runs daily
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71973': 'pass'})}}"
+      stig_rhel7_v1r4_v_71973_result: 'pass'
   when:
       - "'v_71973' in stig_rhel7_v1r4_checks"
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
@@ -106,7 +106,7 @@
 
 - name: aide installed & runs weekly
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71973': 'pass'})}}"
+      stig_rhel7_v1r4_v_71973_result: 'pass'
   when:
       - "'v_71973' in stig_rhel7_v1r4_checks"
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
@@ -114,10 +114,10 @@
 
 - name: check stig_rhel7_v1r4 v_72071 fail
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71973': 'fail'})}}"
+      stig_rhel7_v1r4_v_71973_result: 'fail'
   when:
       - "'v_71973' in stig_rhel7_v1r4_checks"
-      - "stig_rhel7_v1r4_results['v_71973'] != 'pass'"
+      - stig_rhel7_v1r4_v_71973_result != 'pass'
 
 # Vuln ID: V-71975
 # Severity: medium
@@ -179,7 +179,7 @@
 
 - name: aide installed & runs daily
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71975': 'pass'})}}"
+      stig_rhel7_v1r4_v_71975_result: 'pass'
   when:
       - "'v_71975' in stig_rhel7_v1r4_checks"
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
@@ -187,7 +187,7 @@
 
 - name: aide installed & runs weekly
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71975': 'pass'})}}"
+      stig_rhel7_v1r4_v_71975_result: 'pass'
   when:
       - "'v_71975' in stig_rhel7_v1r4_checks"
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
@@ -195,10 +195,10 @@
 
 - name: check stig_rhel7_v1r4 v_71975 fail
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71975': 'fail'})}}"
+      stig_rhel7_v1r4_v_71975_result: 'fail'
   when:
       - "'v_71975' in stig_rhel7_v1r4_checks"
-      - "stig_rhel7_v1r4_results['v_71975'] != 'pass'"
+      - stig_rhel7_v1r4_v_71975_result != 'pass'
 
 
 # Vuln ID: V-72069
@@ -259,17 +259,17 @@
 #
 - name: aide installed & acl in all meta-rules
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72069': 'pass'})}}"
+      stig_rhel7_v1r4_v_72069_result: 'pass'
   when:
       - "'v_72069' in stig_rhel7_v1r4_checks"
       - aide_conf.stat.checksum == aide_conf_sha1
 
 - name: check stig_rhel7_v1r4 v_72069 fail
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72069': 'fail'})}}"
+      stig_rhel7_v1r4_v_72069_result: 'fail'
   when:
       - "'v_72069' in stig_rhel7_v1r4_checks"
-      - "stig_rhel7_v1r4_results['v_72069'] != 'pass'"
+      - stig_rhel7_v1r4_v_72069_result != 'pass'
 
 
 # Vuln ID: V-72071
@@ -330,17 +330,17 @@
 #
 - name: check stig_rhel7_v1r4 v_72071
   set_fact:
-    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72071': 'pass'})}}"
+    stig_rhel7_v1r4_v_72071_result: 'pass'
   when:
       - '"v_72071" in stig_rhel7_v1r4_checks'
       - aide_conf.stat.checksum == aide_conf_sha1
 
 - name: check stig_rhel7_v1r4 v_72071 fail
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72071': 'fail'})}}"
+      stig_rhel7_v1r4_v_72071_result: 'fail'
   when:
       - "'v_72071' in stig_rhel7_v1r4_checks"
-      - "stig_rhel7_v1r4_results['v_72071'] != 'pass'"
+      - stig_rhel7_v1r4_v_72071_result != 'pass'
 
 
 # Vuln ID: V-72073
@@ -403,14 +403,14 @@
 #
 - name: check stig_rhel7_v1r4 v_72073
   set_fact:
-    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72073': 'pass'})}}"
+    stig_rhel7_v1r4_v_72073_result: 'pass'
   when:
       - '"v_72073" in stig_rhel7_v1r4_checks'
       - aide_conf.stat.checksum == aide_conf_sha1
 
 - name: check stig_rhel7_v1r4 v_72073 fail
   set_fact:
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72073': 'fail'})}}"
+      stig_rhel7_v1r4_v_72073_result: 'fail'
   when:
       - "'v_72073' in stig_rhel7_v1r4_checks"
-      - "stig_rhel7_v1r4_results['v_72073'] != 'pass'"
+      - stig_rhel7_v1r4_v_72073_result != 'pass'

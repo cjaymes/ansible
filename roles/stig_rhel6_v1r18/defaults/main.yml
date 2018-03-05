@@ -300,264 +300,263 @@ stig_rhel6_v1r18_findings:
 stig_rhel6_v1r18_checks: '{{ stig_rhel6_v1r18_findings }}'
 stig_rhel6_v1r18_fix_findings: true
 
-stig_rhel6_v1r18_results:
-  v_38437: fail
-  v_38438: fail
-  v_38439: fail
-  v_38443: fail
-  v_38444: fail
-  v_38445: fail
-  v_38446: fail
-  v_38447: fail
-  v_38448: fail
-  v_38449: fail
-  v_38450: fail
-  v_38451: fail
-  v_38452: fail
-  v_38453: fail
-  v_38454: fail
-  v_38455: fail
-  v_38456: fail
-  v_38457: fail
-  v_38458: fail
-  v_38459: fail
-  v_38460: fail
-  v_38461: fail
-  v_38463: fail
-  v_38464: fail
-  v_38465: fail
-  v_38466: fail
-  v_38467: fail
-  v_38468: fail
-  v_38469: fail
-  v_38470: fail
-  v_38471: fail
-  v_38472: fail
-  v_38473: fail
-  v_38474: fail
-  v_38475: fail
-  v_38476: fail
-  v_38477: fail
-  v_38478: fail
-  v_38479: fail
-  v_38480: fail
-  v_38481: fail
-  v_38482: fail
-  v_38483: fail
-  v_38484: fail
-  v_38486: fail
-  v_38487: fail
-  v_38488: fail
-  v_38489: fail
-  v_38490: fail
-  v_38491: fail
-  v_38492: fail
-  v_38493: fail
-  v_38494: fail
-  v_38495: fail
-  v_38496: fail
-  v_38497: fail
-  v_38498: fail
-  v_38499: fail
-  v_38500: fail
-  v_38501: fail
-  v_38502: fail
-  v_38503: fail
-  v_38504: fail
-  v_38511: fail
-  v_38512: fail
-  v_38513: fail
-  v_38514: fail
-  v_38515: fail
-  v_38516: fail
-  v_38517: fail
-  v_38518: fail
-  v_38519: fail
-  v_38520: fail
-  v_38521: fail
-  v_38522: fail
-  v_38523: fail
-  v_38524: fail
-  v_38525: fail
-  v_38526: fail
-  v_38527: fail
-  v_38528: fail
-  v_38529: fail
-  v_38530: fail
-  v_38531: fail
-  v_38532: fail
-  v_38533: fail
-  v_38534: fail
-  v_38535: fail
-  v_38536: fail
-  v_38537: fail
-  v_38538: fail
-  v_38539: fail
-  v_38540: fail
-  v_38541: fail
-  v_38542: fail
-  v_38543: fail
-  v_38544: fail
-  v_38545: fail
-  v_38547: fail
-  v_38548: fail
-  v_38549: fail
-  v_38550: fail
-  v_38551: fail
-  v_38552: fail
-  v_38553: fail
-  v_38554: fail
-  v_38555: fail
-  v_38556: fail
-  v_38557: fail
-  v_38558: fail
-  v_38559: fail
-  v_38560: fail
-  v_38561: fail
-  v_38563: fail
-  v_38565: fail
-  v_38566: fail
-  v_38567: fail
-  v_38568: fail
-  v_38569: fail
-  v_38570: fail
-  v_38571: fail
-  v_38572: fail
-  v_38573: fail
-  v_38574: fail
-  v_38575: fail
-  v_38576: fail
-  v_38577: fail
-  v_38578: fail
-  v_38579: fail
-  v_38580: fail
-  v_38581: fail
-  v_38582: fail
-  v_38583: fail
-  v_38584: fail
-  v_38585: fail
-  v_38586: fail
-  v_38587: fail
-  v_38588: fail
-  v_38589: fail
-  v_38590: fail
-  v_38591: fail
-  v_38592: fail
-  v_38593: fail
-  v_38594: fail
-  v_38595: fail
-  v_38596: fail
-  v_38597: fail
-  v_38598: fail
-  v_38599: fail
-  v_38600: fail
-  v_38601: fail
-  v_38602: fail
-  v_38603: fail
-  v_38604: fail
-  v_38605: fail
-  v_38606: fail
-  v_38607: fail
-  v_38608: fail
-  v_38609: fail
-  v_38610: fail
-  v_38611: fail
-  v_38612: fail
-  v_38613: fail
-  v_38614: fail
-  v_38615: fail
-  v_38616: fail
-  v_38617: fail
-  v_38618: fail
-  v_38619: fail
-  v_38620: fail
-  v_38621: fail
-  v_38622: fail
-  v_38623: fail
-  v_38624: fail
-  v_38627: fail
-  v_38628: fail
-  v_38629: fail
-  v_38630: fail
-  v_38631: fail
-  v_38632: fail
-  v_38633: fail
-  v_38634: fail
-  v_38636: fail
-  v_38637: fail
-  v_38638: fail
-  v_38639: fail
-  v_38640: fail
-  v_38641: fail
-  v_38642: fail
-  v_38643: fail
-  v_38644: fail
-  v_38645: fail
-  v_38646: fail
-  v_38647: fail
-  v_38648: fail
-  v_38649: fail
-  v_38650: fail
-  v_38651: fail
-  v_38652: fail
-  v_38653: fail
-  v_38654: fail
-  v_38655: fail
-  v_38656: fail
-  v_38657: fail
-  v_38658: fail
-  v_38659: fail
-  v_38660: fail
-  v_38661: fail
-  v_38662: fail
-  v_38663: fail
-  v_38664: fail
-  v_38665: fail
-  v_38666: fail
-  v_38667: fail
-  v_38668: fail
-  v_38669: fail
-  v_38670: fail
-  v_38671: fail
-  v_38672: fail
-  v_38673: fail
-  v_38674: fail
-  v_38675: fail
-  v_38676: fail
-  v_38677: fail
-  v_38678: fail
-  v_38679: fail
-  v_38680: fail
-  v_38681: fail
-  v_38682: fail
-  v_38683: fail
-  v_38684: fail
-  v_38685: fail
-  v_38686: fail
-  v_38687: fail
-  v_38688: fail
-  v_38689: fail
-  v_38690: fail
-  v_38691: fail
-  v_38692: fail
-  v_38693: fail
-  v_38694: fail
-  v_38695: fail
-  v_38696: fail
-  v_38697: fail
-  v_38698: fail
-  v_38699: fail
-  v_38700: fail
-  v_38701: fail
-  v_38702: fail
-  v_43150: fail
-  v_51337: fail
-  v_51363: fail
-  v_51369: fail
-  v_51379: fail
-  v_51391: fail
-  v_51875: fail
-  v_54381: fail
-  v_57569: fail
-  v_58901: fail
-  v_72817: fail
+stig_rhel6_v1r18_v_38437_result: notchecked
+stig_rhel6_v1r18_v_38438_result: notchecked
+stig_rhel6_v1r18_v_38439_result: notchecked
+stig_rhel6_v1r18_v_38443_result: notchecked
+stig_rhel6_v1r18_v_38444_result: notchecked
+stig_rhel6_v1r18_v_38445_result: notchecked
+stig_rhel6_v1r18_v_38446_result: notchecked
+stig_rhel6_v1r18_v_38447_result: notchecked
+stig_rhel6_v1r18_v_38448_result: notchecked
+stig_rhel6_v1r18_v_38449_result: notchecked
+stig_rhel6_v1r18_v_38450_result: notchecked
+stig_rhel6_v1r18_v_38451_result: notchecked
+stig_rhel6_v1r18_v_38452_result: notchecked
+stig_rhel6_v1r18_v_38453_result: notchecked
+stig_rhel6_v1r18_v_38454_result: notchecked
+stig_rhel6_v1r18_v_38455_result: notchecked
+stig_rhel6_v1r18_v_38456_result: notchecked
+stig_rhel6_v1r18_v_38457_result: notchecked
+stig_rhel6_v1r18_v_38458_result: notchecked
+stig_rhel6_v1r18_v_38459_result: notchecked
+stig_rhel6_v1r18_v_38460_result: notchecked
+stig_rhel6_v1r18_v_38461_result: notchecked
+stig_rhel6_v1r18_v_38463_result: notchecked
+stig_rhel6_v1r18_v_38464_result: notchecked
+stig_rhel6_v1r18_v_38465_result: notchecked
+stig_rhel6_v1r18_v_38466_result: notchecked
+stig_rhel6_v1r18_v_38467_result: notchecked
+stig_rhel6_v1r18_v_38468_result: notchecked
+stig_rhel6_v1r18_v_38469_result: notchecked
+stig_rhel6_v1r18_v_38470_result: notchecked
+stig_rhel6_v1r18_v_38471_result: notchecked
+stig_rhel6_v1r18_v_38472_result: notchecked
+stig_rhel6_v1r18_v_38473_result: notchecked
+stig_rhel6_v1r18_v_38474_result: notchecked
+stig_rhel6_v1r18_v_38475_result: notchecked
+stig_rhel6_v1r18_v_38476_result: notchecked
+stig_rhel6_v1r18_v_38477_result: notchecked
+stig_rhel6_v1r18_v_38478_result: notchecked
+stig_rhel6_v1r18_v_38479_result: notchecked
+stig_rhel6_v1r18_v_38480_result: notchecked
+stig_rhel6_v1r18_v_38481_result: notchecked
+stig_rhel6_v1r18_v_38482_result: notchecked
+stig_rhel6_v1r18_v_38483_result: notchecked
+stig_rhel6_v1r18_v_38484_result: notchecked
+stig_rhel6_v1r18_v_38486_result: notchecked
+stig_rhel6_v1r18_v_38487_result: notchecked
+stig_rhel6_v1r18_v_38488_result: notchecked
+stig_rhel6_v1r18_v_38489_result: notchecked
+stig_rhel6_v1r18_v_38490_result: notchecked
+stig_rhel6_v1r18_v_38491_result: notchecked
+stig_rhel6_v1r18_v_38492_result: notchecked
+stig_rhel6_v1r18_v_38493_result: notchecked
+stig_rhel6_v1r18_v_38494_result: notchecked
+stig_rhel6_v1r18_v_38495_result: notchecked
+stig_rhel6_v1r18_v_38496_result: notchecked
+stig_rhel6_v1r18_v_38497_result: notchecked
+stig_rhel6_v1r18_v_38498_result: notchecked
+stig_rhel6_v1r18_v_38499_result: notchecked
+stig_rhel6_v1r18_v_38500_result: notchecked
+stig_rhel6_v1r18_v_38501_result: notchecked
+stig_rhel6_v1r18_v_38502_result: notchecked
+stig_rhel6_v1r18_v_38503_result: notchecked
+stig_rhel6_v1r18_v_38504_result: notchecked
+stig_rhel6_v1r18_v_38511_result: notchecked
+stig_rhel6_v1r18_v_38512_result: notchecked
+stig_rhel6_v1r18_v_38513_result: notchecked
+stig_rhel6_v1r18_v_38514_result: notchecked
+stig_rhel6_v1r18_v_38515_result: notchecked
+stig_rhel6_v1r18_v_38516_result: notchecked
+stig_rhel6_v1r18_v_38517_result: notchecked
+stig_rhel6_v1r18_v_38518_result: notchecked
+stig_rhel6_v1r18_v_38519_result: notchecked
+stig_rhel6_v1r18_v_38520_result: notchecked
+stig_rhel6_v1r18_v_38521_result: notchecked
+stig_rhel6_v1r18_v_38522_result: notchecked
+stig_rhel6_v1r18_v_38523_result: notchecked
+stig_rhel6_v1r18_v_38524_result: notchecked
+stig_rhel6_v1r18_v_38525_result: notchecked
+stig_rhel6_v1r18_v_38526_result: notchecked
+stig_rhel6_v1r18_v_38527_result: notchecked
+stig_rhel6_v1r18_v_38528_result: notchecked
+stig_rhel6_v1r18_v_38529_result: notchecked
+stig_rhel6_v1r18_v_38530_result: notchecked
+stig_rhel6_v1r18_v_38531_result: notchecked
+stig_rhel6_v1r18_v_38532_result: notchecked
+stig_rhel6_v1r18_v_38533_result: notchecked
+stig_rhel6_v1r18_v_38534_result: notchecked
+stig_rhel6_v1r18_v_38535_result: notchecked
+stig_rhel6_v1r18_v_38536_result: notchecked
+stig_rhel6_v1r18_v_38537_result: notchecked
+stig_rhel6_v1r18_v_38538_result: notchecked
+stig_rhel6_v1r18_v_38539_result: notchecked
+stig_rhel6_v1r18_v_38540_result: notchecked
+stig_rhel6_v1r18_v_38541_result: notchecked
+stig_rhel6_v1r18_v_38542_result: notchecked
+stig_rhel6_v1r18_v_38543_result: notchecked
+stig_rhel6_v1r18_v_38544_result: notchecked
+stig_rhel6_v1r18_v_38545_result: notchecked
+stig_rhel6_v1r18_v_38547_result: notchecked
+stig_rhel6_v1r18_v_38548_result: notchecked
+stig_rhel6_v1r18_v_38549_result: notchecked
+stig_rhel6_v1r18_v_38550_result: notchecked
+stig_rhel6_v1r18_v_38551_result: notchecked
+stig_rhel6_v1r18_v_38552_result: notchecked
+stig_rhel6_v1r18_v_38553_result: notchecked
+stig_rhel6_v1r18_v_38554_result: notchecked
+stig_rhel6_v1r18_v_38555_result: notchecked
+stig_rhel6_v1r18_v_38556_result: notchecked
+stig_rhel6_v1r18_v_38557_result: notchecked
+stig_rhel6_v1r18_v_38558_result: notchecked
+stig_rhel6_v1r18_v_38559_result: notchecked
+stig_rhel6_v1r18_v_38560_result: notchecked
+stig_rhel6_v1r18_v_38561_result: notchecked
+stig_rhel6_v1r18_v_38563_result: notchecked
+stig_rhel6_v1r18_v_38565_result: notchecked
+stig_rhel6_v1r18_v_38566_result: notchecked
+stig_rhel6_v1r18_v_38567_result: notchecked
+stig_rhel6_v1r18_v_38568_result: notchecked
+stig_rhel6_v1r18_v_38569_result: notchecked
+stig_rhel6_v1r18_v_38570_result: notchecked
+stig_rhel6_v1r18_v_38571_result: notchecked
+stig_rhel6_v1r18_v_38572_result: notchecked
+stig_rhel6_v1r18_v_38573_result: notchecked
+stig_rhel6_v1r18_v_38574_result: notchecked
+stig_rhel6_v1r18_v_38575_result: notchecked
+stig_rhel6_v1r18_v_38576_result: notchecked
+stig_rhel6_v1r18_v_38577_result: notchecked
+stig_rhel6_v1r18_v_38578_result: notchecked
+stig_rhel6_v1r18_v_38579_result: notchecked
+stig_rhel6_v1r18_v_38580_result: notchecked
+stig_rhel6_v1r18_v_38581_result: notchecked
+stig_rhel6_v1r18_v_38582_result: notchecked
+stig_rhel6_v1r18_v_38583_result: notchecked
+stig_rhel6_v1r18_v_38584_result: notchecked
+stig_rhel6_v1r18_v_38585_result: notchecked
+stig_rhel6_v1r18_v_38586_result: notchecked
+stig_rhel6_v1r18_v_38587_result: notchecked
+stig_rhel6_v1r18_v_38588_result: notchecked
+stig_rhel6_v1r18_v_38589_result: notchecked
+stig_rhel6_v1r18_v_38590_result: notchecked
+stig_rhel6_v1r18_v_38591_result: notchecked
+stig_rhel6_v1r18_v_38592_result: notchecked
+stig_rhel6_v1r18_v_38593_result: notchecked
+stig_rhel6_v1r18_v_38594_result: notchecked
+stig_rhel6_v1r18_v_38595_result: notchecked
+stig_rhel6_v1r18_v_38596_result: notchecked
+stig_rhel6_v1r18_v_38597_result: notchecked
+stig_rhel6_v1r18_v_38598_result: notchecked
+stig_rhel6_v1r18_v_38599_result: notchecked
+stig_rhel6_v1r18_v_38600_result: notchecked
+stig_rhel6_v1r18_v_38601_result: notchecked
+stig_rhel6_v1r18_v_38602_result: notchecked
+stig_rhel6_v1r18_v_38603_result: notchecked
+stig_rhel6_v1r18_v_38604_result: notchecked
+stig_rhel6_v1r18_v_38605_result: notchecked
+stig_rhel6_v1r18_v_38606_result: notchecked
+stig_rhel6_v1r18_v_38607_result: notchecked
+stig_rhel6_v1r18_v_38608_result: notchecked
+stig_rhel6_v1r18_v_38609_result: notchecked
+stig_rhel6_v1r18_v_38610_result: notchecked
+stig_rhel6_v1r18_v_38611_result: notchecked
+stig_rhel6_v1r18_v_38612_result: notchecked
+stig_rhel6_v1r18_v_38613_result: notchecked
+stig_rhel6_v1r18_v_38614_result: notchecked
+stig_rhel6_v1r18_v_38615_result: notchecked
+stig_rhel6_v1r18_v_38616_result: notchecked
+stig_rhel6_v1r18_v_38617_result: notchecked
+stig_rhel6_v1r18_v_38618_result: notchecked
+stig_rhel6_v1r18_v_38619_result: notchecked
+stig_rhel6_v1r18_v_38620_result: notchecked
+stig_rhel6_v1r18_v_38621_result: notchecked
+stig_rhel6_v1r18_v_38622_result: notchecked
+stig_rhel6_v1r18_v_38623_result: notchecked
+stig_rhel6_v1r18_v_38624_result: notchecked
+stig_rhel6_v1r18_v_38627_result: notchecked
+stig_rhel6_v1r18_v_38628_result: notchecked
+stig_rhel6_v1r18_v_38629_result: notchecked
+stig_rhel6_v1r18_v_38630_result: notchecked
+stig_rhel6_v1r18_v_38631_result: notchecked
+stig_rhel6_v1r18_v_38632_result: notchecked
+stig_rhel6_v1r18_v_38633_result: notchecked
+stig_rhel6_v1r18_v_38634_result: notchecked
+stig_rhel6_v1r18_v_38636_result: notchecked
+stig_rhel6_v1r18_v_38637_result: notchecked
+stig_rhel6_v1r18_v_38638_result: notchecked
+stig_rhel6_v1r18_v_38639_result: notchecked
+stig_rhel6_v1r18_v_38640_result: notchecked
+stig_rhel6_v1r18_v_38641_result: notchecked
+stig_rhel6_v1r18_v_38642_result: notchecked
+stig_rhel6_v1r18_v_38643_result: notchecked
+stig_rhel6_v1r18_v_38644_result: notchecked
+stig_rhel6_v1r18_v_38645_result: notchecked
+stig_rhel6_v1r18_v_38646_result: notchecked
+stig_rhel6_v1r18_v_38647_result: notchecked
+stig_rhel6_v1r18_v_38648_result: notchecked
+stig_rhel6_v1r18_v_38649_result: notchecked
+stig_rhel6_v1r18_v_38650_result: notchecked
+stig_rhel6_v1r18_v_38651_result: notchecked
+stig_rhel6_v1r18_v_38652_result: notchecked
+stig_rhel6_v1r18_v_38653_result: notchecked
+stig_rhel6_v1r18_v_38654_result: notchecked
+stig_rhel6_v1r18_v_38655_result: notchecked
+stig_rhel6_v1r18_v_38656_result: notchecked
+stig_rhel6_v1r18_v_38657_result: notchecked
+stig_rhel6_v1r18_v_38658_result: notchecked
+stig_rhel6_v1r18_v_38659_result: notchecked
+stig_rhel6_v1r18_v_38660_result: notchecked
+stig_rhel6_v1r18_v_38661_result: notchecked
+stig_rhel6_v1r18_v_38662_result: notchecked
+stig_rhel6_v1r18_v_38663_result: notchecked
+stig_rhel6_v1r18_v_38664_result: notchecked
+stig_rhel6_v1r18_v_38665_result: notchecked
+stig_rhel6_v1r18_v_38666_result: notchecked
+stig_rhel6_v1r18_v_38667_result: notchecked
+stig_rhel6_v1r18_v_38668_result: notchecked
+stig_rhel6_v1r18_v_38669_result: notchecked
+stig_rhel6_v1r18_v_38670_result: notchecked
+stig_rhel6_v1r18_v_38671_result: notchecked
+stig_rhel6_v1r18_v_38672_result: notchecked
+stig_rhel6_v1r18_v_38673_result: notchecked
+stig_rhel6_v1r18_v_38674_result: notchecked
+stig_rhel6_v1r18_v_38675_result: notchecked
+stig_rhel6_v1r18_v_38676_result: notchecked
+stig_rhel6_v1r18_v_38677_result: notchecked
+stig_rhel6_v1r18_v_38678_result: notchecked
+stig_rhel6_v1r18_v_38679_result: notchecked
+stig_rhel6_v1r18_v_38680_result: notchecked
+stig_rhel6_v1r18_v_38681_result: notchecked
+stig_rhel6_v1r18_v_38682_result: notchecked
+stig_rhel6_v1r18_v_38683_result: notchecked
+stig_rhel6_v1r18_v_38684_result: notchecked
+stig_rhel6_v1r18_v_38685_result: notchecked
+stig_rhel6_v1r18_v_38686_result: notchecked
+stig_rhel6_v1r18_v_38687_result: notchecked
+stig_rhel6_v1r18_v_38688_result: notchecked
+stig_rhel6_v1r18_v_38689_result: notchecked
+stig_rhel6_v1r18_v_38690_result: notchecked
+stig_rhel6_v1r18_v_38691_result: notchecked
+stig_rhel6_v1r18_v_38692_result: notchecked
+stig_rhel6_v1r18_v_38693_result: notchecked
+stig_rhel6_v1r18_v_38694_result: notchecked
+stig_rhel6_v1r18_v_38695_result: notchecked
+stig_rhel6_v1r18_v_38696_result: notchecked
+stig_rhel6_v1r18_v_38697_result: notchecked
+stig_rhel6_v1r18_v_38698_result: notchecked
+stig_rhel6_v1r18_v_38699_result: notchecked
+stig_rhel6_v1r18_v_38700_result: notchecked
+stig_rhel6_v1r18_v_38701_result: notchecked
+stig_rhel6_v1r18_v_38702_result: notchecked
+stig_rhel6_v1r18_v_43150_result: notchecked
+stig_rhel6_v1r18_v_51337_result: notchecked
+stig_rhel6_v1r18_v_51363_result: notchecked
+stig_rhel6_v1r18_v_51369_result: notchecked
+stig_rhel6_v1r18_v_51379_result: notchecked
+stig_rhel6_v1r18_v_51391_result: notchecked
+stig_rhel6_v1r18_v_51875_result: notchecked
+stig_rhel6_v1r18_v_54381_result: notchecked
+stig_rhel6_v1r18_v_57569_result: notchecked
+stig_rhel6_v1r18_v_58901_result: notchecked
+stig_rhel6_v1r18_v_72817_result: notchecked

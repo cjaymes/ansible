@@ -8,4 +8,5 @@
   when: stig_rhel7_v1r4_fix_findings
 
 - debug:
-    msg: '{{stig_rhel7_v1r4_results}}'
+  msg: '{{ "stig_rhel7_v1r4_" ~ item.name ~ "_result" }}'
+  with_items: '{{ stig_rhel7_v1r4_findings }}'

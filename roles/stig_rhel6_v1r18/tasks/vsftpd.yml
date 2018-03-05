@@ -46,7 +46,7 @@
 #
 - name: check stig_rhel6_v1r18 v_38599
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38599': 'fail'})}}"
+    stig_rhel6_v1r18_v_38599_result: 'fail'
   when: '"v_38599" in stig_rhel6_v1r18_checks'
 
 
@@ -103,5 +103,5 @@
 #
 - name: check stig_rhel6_v1r18 v_38702
   set_fact:
-    stig_rhel6_v1r18_results: "{{stig_rhel6_v1r18_results|combine({'v_38702': 'fail'})}}"
+    stig_rhel6_v1r18_v_38702_result: 'fail'
   when: '"v_38702" in stig_rhel6_v1r18_checks'

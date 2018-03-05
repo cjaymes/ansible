@@ -57,5 +57,5 @@
 #
 - name: check stig_rhel7_v1r4 v_71985
   set_fact:
-    stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71985': 'fail'})}}"
+    stig_rhel7_v1r4_v_71985_result: 'fail'
   when: '"v_71985" in stig_rhel7_v1r4_checks'
