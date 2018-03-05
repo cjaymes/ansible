@@ -12,7 +12,6 @@
 - name: set fix for install aide
   set_fact:
       aide_fix_install: true
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71973': 'fail'})}}"
   when:
       - "'Error: No matching Packages to list' in aide_install_state.stderr"
 
@@ -27,7 +26,6 @@
 - name: set fix for aide cron
   set_fact:
       aide_fix_cron: true
-      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71973': 'fail'})}}"
   when:
       - not aide_cron_daily.stat.exists
       - not aide_cron_weekly.stat.exists
@@ -100,6 +98,12 @@
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
       - aide_cron_weekly.stat.exists
 
+- name: check stig_rhel7_v1r4 v_72071 fail
+  set_fact:
+      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71973': 'fail'})}}"
+  when:
+      - "'v_71973' in stig_rhel7_v1r4_checks"
+      - "stig_rhel7_v1r4_results['v_71973'] != 'pass'"
 
 # Vuln ID: V-71975
 # Severity: medium
@@ -175,6 +179,13 @@
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
       - aide_cron_weekly.stat.exists
 
+- name: check stig_rhel7_v1r4 v_71975 fail
+  set_fact:
+      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_71975': 'fail'})}}"
+  when:
+      - "'v_71975' in stig_rhel7_v1r4_checks"
+      - "stig_rhel7_v1r4_results['v_71975'] != 'pass'"
+
 
 # Vuln ID: V-72069
 # Severity: low
@@ -240,6 +251,13 @@
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
       - false
 
+- name: check stig_rhel7_v1r4 v_72069 fail
+  set_fact:
+      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72069': 'fail'})}}"
+  when:
+      - "'v_72069' in stig_rhel7_v1r4_checks"
+      - "stig_rhel7_v1r4_results['v_72069'] != 'pass'"
+
 
 # Vuln ID: V-72071
 # Severity: low
@@ -301,6 +319,13 @@
   set_fact:
     stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72071': 'fail'})}}"
   when: '"v_72071" in stig_rhel7_v1r4_checks'
+
+- name: check stig_rhel7_v1r4 v_72071 fail
+  set_fact:
+      stig_rhel7_v1r4_results: "{{stig_rhel7_v1r4_results|combine({'v_72071': 'fail'})}}"
+  when:
+      - "'v_72071' in stig_rhel7_v1r4_checks"
+      - "stig_rhel7_v1r4_results['v_72071'] != 'pass'"
 
 
 # Vuln ID: V-72073
