@@ -1,0 +1,80 @@
+# Vuln ID: V-38491
+# Severity: high
+# Group Title: SRG-OS-000248
+# Rule ID: SV-50292r1_rule
+# STIG ID: RHEL-06-000019
+# Rule Title: There must be no .rhosts or hosts.equiv files on the system.
+# Discussion: Trust files are convenient, but when used in conjunction with the R-services, they can allow unauthenticated access to a system.
+# IA Controls:
+# Check Content: The existence of the file "/etc/hosts.equiv" or a file named ".rhosts" inside a user home directory indicates the presence of an Rsh trust relationship.
+# If these files exist, this is a finding.
+# Fix Text: The files "/etc/hosts.equiv" and "~/.rhosts" (in each user's home directory) list remote hosts and users that are trusted by the local system when using the rshd daemon. To remove these files, run the following command to delete them from any location.
+#
+# # rm /etc/hosts.equiv
+#
+#
+#
+# $ rm ~/.rhosts
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001436
+# The organization disables organization defined networking protocols within the information system deemed to be nonsecure except for explicitly identified components in support of specific operational requirements.
+# NIST SP 800-53 :: AC-17 (8)
+# NIST SP 800-53A :: AC-17 (8).1 (ii)
+#
+#
+- name: check stig_rhel6_v1r18 v_38491
+  set_fact:
+    stig_rhel6_v1r18_v_38491_result: 'fail'
+  when: '"v_38491" in stig_rhel6_v1r18_checks'
+
+
+# Vuln ID: V-38619
+# Severity: medium
+# Group Title: SRG-OS-000073
+# Rule ID: SV-50420r2_rule
+# STIG ID: RHEL-06-000347
+# Rule Title: There must be no .netrc files on the system.
+# Discussion: Unencrypted passwords for remote FTP servers may be stored in ".netrc" files. DoD policy requires passwords be encrypted in storage and not used in access scripts.
+# IA Controls:
+# Check Content: To check the system for the existence of any ".netrc" files, run the following command:
+#
+# $ sudo find /root /home -xdev -name .netrc
+#
+# If any .netrc files exist, this is a finding.
+# Fix Text: The ".netrc" files contain logon information used to auto-logon into FTP servers and reside in the user's home directory. These files may contain unencrypted passwords to remote FTP servers making them susceptible to access by unauthorized users and should not be used. Any ".netrc" files should be removed.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000196
+# The information system, for password-based authentication, stores only encrypted representations of passwords.
+# NIST SP 800-53 :: IA-5 (1) (c)
+# NIST SP 800-53A :: IA-5 (1).1 (v)
+# NIST SP 800-53 Revision 4 :: IA-5 (1) (c)
+#
+#
+- name: check stig_rhel6_v1r18 v_38619
+  set_fact:
+    stig_rhel6_v1r18_v_38619_result: 'fail'
+  when: '"v_38619" in stig_rhel6_v1r18_checks'

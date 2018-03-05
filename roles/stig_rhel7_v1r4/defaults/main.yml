@@ -6,11 +6,11 @@ stig_rhel7_v1r4_sections:
   # - auditd
   # - cron
   # - dns
-  # - files
   # - filesystems
   # - firewall
   # - gdm
   # - grub
+  # - home_dirs
   # - kernel
   # - ldap
   # - logins
@@ -22,15 +22,18 @@ stig_rhel7_v1r4_sections:
   # - passwords
   # - patching
   # - postfix
+  # - prohibited_files
   # - rsyslogd
   # - selinux
   # - services
   # - snmpd
   # - sshd
   # - sudo
+  # - system_dirs
   # - systemd
   # - tftpd
   # - umask
+  # - unowned
   # - vsftpd
   # - xorg
   # - yum

@@ -5,7 +5,6 @@ stig_rhel6_v1r18_sections: []
   # - audit_rules
   # - auditd
   # - backup
-  # - files
   # - filesystems
   # - firewall
   # - grub
@@ -22,6 +21,7 @@ stig_rhel6_v1r18_sections: []
   # - passwords
   # - patching
   # - postfix
+  # - prohibited_files
   # - rsyslogd
   # - samba
   # - selinux
@@ -29,6 +29,7 @@ stig_rhel6_v1r18_sections: []
   # - snmpd
   # - sshd
   # - sudo
+  # - system_dirs
   # - tftpd
   # - umask
   # - vsftpd

@@ -36,6 +36,393 @@
   when: '"v_38439" in stig_rhel6_v1r18_checks'
 
 
+# Vuln ID: V-38443
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50243r1_rule
+# STIG ID: RHEL-06-000036
+# Rule Title: The /etc/gshadow file must be owned by root.
+# Discussion: The "/etc/gshadow" file contains group password hashes. Protection of this file is critical for system security.
+# IA Controls:
+# Check Content: To check the ownership of "/etc/gshadow", run the command:
+#
+# $ ls -l /etc/gshadow
+#
+# If properly configured, the output should indicate the following owner: "root"
+# If it does not, this is a finding.
+# Fix Text: To properly set the owner of "/etc/gshadow", run the command:
+#
+# # chown root /etc/gshadow
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38443
+  set_fact:
+    stig_rhel6_v1r18_v_38443_result: 'fail'
+  when: '"v_38443" in stig_rhel6_v1r18_checks'
+
+
+# Vuln ID: V-38448
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50248r1_rule
+# STIG ID: RHEL-06-000037
+# Rule Title: The /etc/gshadow file must be group-owned by root.
+# Discussion: The "/etc/gshadow" file contains group password hashes. Protection of this file is critical for system security.
+# IA Controls:
+# Check Content: To check the group ownership of "/etc/gshadow", run the command:
+#
+# $ ls -l /etc/gshadow
+#
+# If properly configured, the output should indicate the following group-owner. "root"
+# If it does not, this is a finding.
+# Fix Text: To properly set the group owner of "/etc/gshadow", run the command:
+#
+# # chgrp root /etc/gshadow
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38448
+  set_fact:
+    stig_rhel6_v1r18_v_38448_result: 'fail'
+  when: '"v_38448" in stig_rhel6_v1r18_checks'
+
+
+# Vuln ID: V-38449
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50249r1_rule
+# STIG ID: RHEL-06-000038
+# Rule Title: The /etc/gshadow file must have mode 0000.
+# Discussion: The /etc/gshadow file contains group password hashes. Protection of this file is critical for system security.
+# IA Controls:
+# Check Content: To check the permissions of "/etc/gshadow", run the command:
+#
+# $ ls -l /etc/gshadow
+#
+# If properly configured, the output should indicate the following permissions: "----------"
+# If it does not, this is a finding.
+# Fix Text: To properly set the permissions of "/etc/gshadow", run the command:
+#
+# # chmod 0000 /etc/gshadow
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38449
+  set_fact:
+    stig_rhel6_v1r18_v_38449_result: 'fail'
+  when: '"v_38449" in stig_rhel6_v1r18_checks'
+
+
+# Vuln ID: V-38450
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50250r1_rule
+# STIG ID: RHEL-06-000039
+# Rule Title: The /etc/passwd file must be owned by root.
+# Discussion: The "/etc/passwd" file contains information about the users that are configured on the system. Protection of this file is critical for system security.
+# IA Controls:
+# Check Content: To check the ownership of "/etc/passwd", run the command:
+#
+# $ ls -l /etc/passwd
+#
+# If properly configured, the output should indicate the following owner: "root"
+# If it does not, this is a finding.
+# Fix Text: To properly set the owner of "/etc/passwd", run the command:
+#
+# # chown root /etc/passwd
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38450
+  set_fact:
+    stig_rhel6_v1r18_v_38450_result: 'fail'
+  when: '"v_38450" in stig_rhel6_v1r18_checks'
+
+
+# Vuln ID: V-38451
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50251r1_rule
+# STIG ID: RHEL-06-000040
+# Rule Title: The /etc/passwd file must be group-owned by root.
+# Discussion: The "/etc/passwd" file contains information about the users that are configured on the system. Protection of this file is critical for system security.
+# IA Controls:
+# Check Content: To check the group ownership of "/etc/passwd", run the command:
+#
+# $ ls -l /etc/passwd
+#
+# If properly configured, the output should indicate the following group-owner. "root"
+# If it does not, this is a finding.
+# Fix Text: To properly set the group owner of "/etc/passwd", run the command:
+#
+# # chgrp root /etc/passwd
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38451
+  set_fact:
+    stig_rhel6_v1r18_v_38451_result: 'fail'
+  when: '"v_38451" in stig_rhel6_v1r18_checks'
+
+
+# Vuln ID: V-38457
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50257r1_rule
+# STIG ID: RHEL-06-000041
+# Rule Title: The /etc/passwd file must have mode 0644 or less permissive.
+# Discussion: If the "/etc/passwd" file is writable by a group-owner or the world the risk of its compromise is increased. The file contains the list of accounts on the system and associated information, and protection of this file is critical for system security.
+# IA Controls:
+# Check Content: To check the permissions of "/etc/passwd", run the command:
+#
+# $ ls -l /etc/passwd
+#
+# If properly configured, the output should indicate the following permissions: "-rw-r--r--"
+# If it does not, this is a finding.
+# Fix Text: To properly set the permissions of "/etc/passwd", run the command:
+#
+# # chmod 0644 /etc/passwd
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38457
+  set_fact:
+    stig_rhel6_v1r18_v_38457_result: 'fail'
+  when: '"v_38457" in stig_rhel6_v1r18_checks'
+
+
+# Vuln ID: V-38458
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50258r1_rule
+# STIG ID: RHEL-06-000042
+# Rule Title: The /etc/group file must be owned by root.
+# Discussion: The "/etc/group" file contains information regarding groups that are configured on the system. Protection of this file is important for system security.
+# IA Controls:
+# Check Content: To check the ownership of "/etc/group", run the command:
+#
+# $ ls -l /etc/group
+#
+# If properly configured, the output should indicate the following owner: "root"
+# If it does not, this is a finding.
+# Fix Text: To properly set the owner of "/etc/group", run the command:
+#
+# # chown root /etc/group
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38458
+  set_fact:
+    stig_rhel6_v1r18_v_38458_result: 'fail'
+  when: '"v_38458" in stig_rhel6_v1r18_checks'
+
+
+# Vuln ID: V-38459
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50259r1_rule
+# STIG ID: RHEL-06-000043
+# Rule Title: The /etc/group file must be group-owned by root.
+# Discussion: The "/etc/group" file contains information regarding groups that are configured on the system. Protection of this file is important for system security.
+# IA Controls:
+# Check Content: To check the group ownership of "/etc/group", run the command:
+#
+# $ ls -l /etc/group
+#
+# If properly configured, the output should indicate the following group-owner. "root"
+# If it does not, this is a finding.
+# Fix Text: To properly set the group owner of "/etc/group", run the command:
+#
+# # chgrp root /etc/group
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38459
+  set_fact:
+    stig_rhel6_v1r18_v_38459_result: 'fail'
+  when: '"v_38459" in stig_rhel6_v1r18_checks'
+
+
+# Vuln ID: V-38461
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50261r1_rule
+# STIG ID: RHEL-06-000044
+# Rule Title: The /etc/group file must have mode 0644 or less permissive.
+# Discussion: The "/etc/group" file contains information regarding groups that are configured on the system. Protection of this file is important for system security.
+# IA Controls:
+# Check Content: To check the permissions of "/etc/group", run the command:
+#
+# $ ls -l /etc/group
+#
+# If properly configured, the output should indicate the following permissions: "-rw-r--r--"
+# If it does not, this is a finding.
+# Fix Text: To properly set the permissions of "/etc/group", run the command:
+#
+# # chmod 644 /etc/group
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38461
+  set_fact:
+    stig_rhel6_v1r18_v_38461_result: 'fail'
+  when: '"v_38461" in stig_rhel6_v1r18_checks'
+
+
 # Vuln ID: V-38492
 # Severity: medium
 # Group Title: SRG-OS-000109
@@ -256,6 +643,135 @@
   set_fact:
     stig_rhel6_v1r18_v_38500_result: 'fail'
   when: '"v_38500" in stig_rhel6_v1r18_checks'
+
+
+# Vuln ID: V-38502
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50303r1_rule
+# STIG ID: RHEL-06-000033
+# Rule Title: The /etc/shadow file must be owned by root.
+# Discussion: The "/etc/shadow" file contains the list of local system accounts and stores password hashes. Protection of this file is critical for system security. Failure to give ownership of this file to root provides the designated owner with access to sensitive information which could weaken the system security posture.
+# IA Controls:
+# Check Content: To check the ownership of "/etc/shadow", run the command:
+#
+# $ ls -l /etc/shadow
+#
+# If properly configured, the output should indicate the following owner: "root"
+# If it does not, this is a finding.
+# Fix Text: To properly set the owner of "/etc/shadow", run the command:
+#
+# # chown root /etc/shadow
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38502
+  set_fact:
+    stig_rhel6_v1r18_v_38502_result: 'fail'
+  when: '"v_38502" in stig_rhel6_v1r18_checks'
+
+
+# Vuln ID: V-38503
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50304r1_rule
+# STIG ID: RHEL-06-000034
+# Rule Title: The /etc/shadow file must be group-owned by root.
+# Discussion: The "/etc/shadow" file stores password hashes. Protection of this file is critical for system security.
+# IA Controls:
+# Check Content: To check the group ownership of "/etc/shadow", run the command:
+#
+# $ ls -l /etc/shadow
+#
+# If properly configured, the output should indicate the following group-owner. "root"
+# If it does not, this is a finding.
+# Fix Text: To properly set the group owner of "/etc/shadow", run the command:
+#
+# # chgrp root /etc/shadow
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38503
+  set_fact:
+    stig_rhel6_v1r18_v_38503_result: 'fail'
+  when: '"v_38503" in stig_rhel6_v1r18_checks'
+
+
+# Vuln ID: V-38504
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50305r1_rule
+# STIG ID: RHEL-06-000035
+# Rule Title: The /etc/shadow file must have mode 0000.
+# Discussion: The "/etc/shadow" file contains the list of local system accounts and stores password hashes. Protection of this file is critical for system security. Failure to give ownership of this file to root provides the designated owner with access to sensitive information which could weaken the system security posture.
+# IA Controls:
+# Check Content: To check the permissions of "/etc/shadow", run the command:
+#
+# $ ls -l /etc/shadow
+#
+# If properly configured, the output should indicate the following permissions: "----------"
+# If it does not, this is a finding.
+# Fix Text: To properly set the permissions of "/etc/shadow", run the command:
+#
+# # chmod 0000 /etc/shadow
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+- name: check stig_rhel6_v1r18 v_38504
+  set_fact:
+    stig_rhel6_v1r18_v_38504_result: 'fail'
+  when: '"v_38504" in stig_rhel6_v1r18_checks'
 
 
 # Vuln ID: V-38576
