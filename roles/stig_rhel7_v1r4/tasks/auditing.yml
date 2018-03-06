@@ -819,6 +819,7 @@
 
 - set_fact:
     auditing_setuid_setgid_combined: []
+    auditing_setuid_setgid_rule_missing: []
 
 - name: combine auditing_setuid_setgid results
   set_fact:
@@ -831,19 +832,24 @@
   debug:
     msg: '{{auditing_setuid_setgid_combined}}'
 
-# - name: grep -i '{{item}}' /etc/audit/audit.rules
-#   shell: find {{item}} -xdev -type f \( -perm -4000 -o -perm -2000 \) 2>/dev/null
-#   # following is so we don't get an error about using command instead of module
-#   args:
-#       warn: false
-#   # errors are expected; ignore
-#   ignore_errors: yes
-#   # this command doesn't actually change anything
-#   changed_when: false
-#   register: auditing_setuid_setgid
-#   with_items: '{{auditing_local_filesystems.stdoutlines}}'
-#   when:
-#     - "'v_72095' in stig_rhel7_v1r4_checks"
+- name: grep -i '{{item}}' /etc/audit/audit.rules
+  shell: grep -i '{{item}}' /etc/audit/audit.rules
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_setuid_setgid_rules
+  with_items: '{{auditing_setuid_setgid_combined}}'
+  when:
+    - "'v_72095' in stig_rhel7_v1r4_checks"
+
+- name: auditing_setuid_setgid_rules
+  debug:
+    msg: '{{auditing_setuid_setgid_rules}}'
+
 #
 # - name: fail stig_rhel7_v1r4 v_72095
 #   set_fact:
