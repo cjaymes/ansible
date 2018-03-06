@@ -1,9 +1,9 @@
 - name: check package state
   shell: yum list installed aide || true
-  # following is so we don't get an error about using yum with command:
+  # following is so we don't get an error about using command instead of module
   args:
       warn: false
-  # if the package isn't installed, we'll get a non-zero rc; ignore
+  # errors are expected; ignore
   ignore_errors: yes
   # this command doesn't actually change anything
   changed_when: false
@@ -93,7 +93,7 @@
 #
 #
 
-- name: aide installed & runs daily
+- name: pass stig_rhel7_v1r4 v_72071 aide installed & runs daily
   set_fact:
       stig_rhel7_v1r4_v_71973_result: 'pass'
   when:
@@ -101,7 +101,7 @@
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
       - aide_cron_daily.stat.exists
 
-- name: aide installed & runs weekly
+- name: pass stig_rhel7_v1r4 v_72071 aide installed & runs weekly
   set_fact:
       stig_rhel7_v1r4_v_71973_result: 'pass'
   when:
@@ -109,7 +109,7 @@
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
       - aide_cron_weekly.stat.exists
 
-- name: check stig_rhel7_v1r4 v_72071 fail
+- name: fail stig_rhel7_v1r4 v_72071
   set_fact:
       stig_rhel7_v1r4_v_71973_result: 'fail'
   when:
@@ -174,7 +174,7 @@
 #
 #
 
-- name: aide installed & runs daily
+- name: pass stig_rhel7_v1r4 v_71975 aide installed & runs daily
   set_fact:
       stig_rhel7_v1r4_v_71975_result: 'pass'
   when:
@@ -182,7 +182,7 @@
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
       - aide_cron_daily.stat.exists
 
-- name: aide installed & runs weekly
+- name: pass stig_rhel7_v1r4 v_71975 aide installed & runs weekly
   set_fact:
       stig_rhel7_v1r4_v_71975_result: 'pass'
   when:
@@ -190,7 +190,7 @@
       - "'Error: No matching Packages to list' not in aide_install_state.stderr"
       - aide_cron_weekly.stat.exists
 
-- name: check stig_rhel7_v1r4 v_71975 fail
+- name: fail stig_rhel7_v1r4 v_71975
   set_fact:
       stig_rhel7_v1r4_v_71975_result: 'fail'
   when:
@@ -254,7 +254,7 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: aide installed & acl in all meta-rules
+- name: pass stig_rhel7_v1r4 v_72069 aide installed & acl in all meta-rules
   set_fact:
       stig_rhel7_v1r4_v_72069_result: 'pass'
   when:
@@ -262,7 +262,7 @@
       - aide_conf.stat.exists
       - aide_conf.stat.checksum == aide_conf_sha1
 
-- name: check stig_rhel7_v1r4 v_72069 fail
+- name: fail stig_rhel7_v1r4 v_72069
   set_fact:
       stig_rhel7_v1r4_v_72069_result: 'fail'
   when:
@@ -326,7 +326,7 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72071
+- name: pass stig_rhel7_v1r4 v_72071
   set_fact:
     stig_rhel7_v1r4_v_72071_result: 'pass'
   when:
@@ -334,7 +334,7 @@
       - aide_conf.stat.exists
       - aide_conf.stat.checksum == aide_conf_sha1
 
-- name: check stig_rhel7_v1r4 v_72071 fail
+- name: fail stig_rhel7_v1r4 v_72071
   set_fact:
       stig_rhel7_v1r4_v_72071_result: 'fail'
   when:
@@ -400,7 +400,7 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72073
+- name: pass stig_rhel7_v1r4 v_72073
   set_fact:
     stig_rhel7_v1r4_v_72073_result: 'pass'
   when:
@@ -408,7 +408,7 @@
       - aide_conf.stat.exists
       - aide_conf.stat.checksum == aide_conf_sha1
 
-- name: check stig_rhel7_v1r4 v_72073 fail
+- name: fail stig_rhel7_v1r4 v_72073
   set_fact:
       stig_rhel7_v1r4_v_72073_result: 'fail'
   when:
