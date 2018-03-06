@@ -7,6 +7,15 @@
   debug:
     msg: '{{audisp_remote_conf}}'
 
+- name: check for /etc/audit/auditd.conf
+  stat:
+      path: /etc/audit/auditd.conf
+  register: auditd_conf
+
+- name: auditd_conf
+  debug:
+    msg: '{{auditd_conf}}'
+
 
 # Vuln ID: V-72079
 # Severity: high
@@ -509,12 +518,75 @@
 # NIST SP 800-53 Revision 4 :: AU-5 (1)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72089
-#   set_fact:
-#     stig_rhel7_v1r4_v_72089_result: 'fail'
-#   when:
-#     - "'v_72089' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72089_result != 'pass'
+- name: grep -i '^log_file' /etc/audit/auditd.conf | awk '{print $3}'
+  shell: grep -i '^log_file' /etc/audit/auditd.conf | awk '{print $3}' || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_log_file
+  when:
+      - auditd_conf.stat.exists
+
+- name: auditing_log_file
+  debug:
+    msg: '{{auditing_log_file}}'
+
+- name: df /var/log/audit/audit.log | tail -n 1 | awk '{print $2}'
+  shell: df /var/log/audit/audit.log | tail -n 1 | awk '{print $2}' || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_log_partition_size
+  when:
+      - auditd_conf.stat.exists
+
+- name: auditing_log_partition_size
+  debug:
+    msg: '{{auditing_log_partition_size}}'
+
+- name: calculate space_left size; 75% of auditing_log_partition_size
+  set_fact:
+      auditing_log_partition_75: '{{ (auditing_log_partition_size * 0.75)|int }}'
+
+- name: auditing_log_partition_75
+  debug:
+    msg: '{{auditing_log_partition_75}}'
+
+- name: grep -i '^space_left' /etc/audit/auditd.conf | awk '{print $3}'
+  shell: grep -i '^space_left' /etc/audit/auditd.conf | awk '{print $3}' || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_space_left
+  when:
+      - auditd_conf.stat.exists
+
+- name: pass stig_rhel7_v1r4 v_72089
+  set_fact:
+    stig_rhel7_v1r4_v_72089_result: 'pass'
+  when:
+    - "'v_72089' in stig_rhel7_v1r4_checks"
+    - auditd_conf.stat.exists
+    - auditing_space_left == auditing_log_partition_75
+
+- name: fail stig_rhel7_v1r4 v_72089
+  set_fact:
+    stig_rhel7_v1r4_v_72089_result: 'fail'
+  when:
+    - "'v_72089' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72089_result != 'pass'
 
 
 # Vuln ID: V-72091
