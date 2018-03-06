@@ -1,6 +1,17 @@
+aide_conf_sha1: a0c76a14d918a55fe059ff9592e708fe62b75aca
+
+auditing_email: root
+
 dhcp_required: True
+
 nfs_required: False
+
+ntp_server: localhost
+
 samba_required: False
+
 snmpd_required: True
+
 tftpd_required: False
+
 vsftpd_required: True
