@@ -560,8 +560,8 @@
   debug:
     msg: '{{auditing_log_partition_75}}'
 
-- name: grep -i '^space_left' /etc/audit/auditd.conf | awk '{print $3}'
-  shell: grep -i '^space_left' /etc/audit/auditd.conf | awk '{print $3}' || true
+- name: grep -i '^space_left ' /etc/audit/auditd.conf | awk '{print $3}'
+  shell: grep -i '^space_left ' /etc/audit/auditd.conf | awk '{print $3}' || true
   # following is so we don't get an error about using command instead of module
   args:
       warn: false
