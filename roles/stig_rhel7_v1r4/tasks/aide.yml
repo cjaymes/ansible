@@ -10,8 +10,8 @@
   register: aide_install_state
 
 - name: aide_install_state
-    debug:
-        msg: '{{aide_install_state}}'
+  debug:
+    msg: '{{aide_install_state}}'
 
 - name: check for cron.daily aide file
   stat:
@@ -19,8 +19,8 @@
   register: aide_cron_daily
 
 - name: aide_cron_daily
-    debug:
-        msg: '{{aide_cron_daily}}'
+  debug:
+    msg: '{{aide_cron_daily}}'
 
 - name: check for cron.weekly aide file
   stat:
@@ -28,8 +28,8 @@
   register: aide_cron_weekly
 
 - name: aide_cron_weekly
-    debug:
-        msg: '{{aide_cron_weekly}}'
+  debug:
+    msg: '{{aide_cron_weekly}}'
 
 - name: check /etc/aide.conf checksum
   stat:
@@ -38,8 +38,8 @@
   register: aide_conf
 
 - name: aide_conf
-    debug:
-        msg: '{{aide_conf}}'
+  debug:
+    msg: '{{aide_conf}}'
 
 
 # Vuln ID: V-71973
