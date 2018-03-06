@@ -554,7 +554,7 @@
 
 - name: calculate space_left size; 75% of auditing_log_partition_size
   set_fact:
-      auditing_log_partition_75: '{{ (auditing_log_partition_size.stdout|int * 0.75)|int }}'
+      auditing_log_partition_75: '{{ ( ( auditing_log_partition_size.stdout|int / 1024 ) * 0.75 )|int }}'
 
 - name: auditing_log_partition_75
   debug:
