@@ -53,18 +53,34 @@
 # NIST SP 800-53 Revision 4 :: AU-3
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72079
-#   set_fact:
-#     stig_rhel7_v1r4_v_72079_result: 'fail'
-#   when:
-#     - "'v_72079' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72079_result != 'pass'
-# - name: fail stig_rhel7_v1r4 v_72215
-#   set_fact:
-#     stig_rhel7_v1r4_v_72215_result: 'fail'
-#   when:
-#       - "'v_72215' in stig_rhel7_v1r4_checks"
-#       - stig_rhel7_v1r4_v_72215_result != 'pass'
+- name: systemctl status auditd
+  shell: systemctl status auditd || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_auditd_status
+
+- name: auditing_auditd_status
+  debug:
+    msg: '{{auditing_auditd_status}}'
+
+- name: pass stig_rhel7_v1r4 v_72079
+  set_fact:
+    stig_rhel7_v1r4_v_72079_result: 'pass'
+  when:
+    - "'v_72079' in stig_rhel7_v1r4_checks"
+    - '"Active: active (running)" in auditing_auditd_status.stdout'
+
+- name: fail stig_rhel7_v1r4 v_72079
+  set_fact:
+    stig_rhel7_v1r4_v_72079_result: 'fail'
+  when:
+    - "'v_72079' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72079_result != 'pass'
 
 
 # Vuln ID: V-72081
