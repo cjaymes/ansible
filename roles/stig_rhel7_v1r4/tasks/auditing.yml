@@ -229,12 +229,46 @@
 # NIST SP 800-53 Revision 4 :: AU-4 (1)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72083
-#   set_fact:
-#     stig_rhel7_v1r4_v_72083_result: 'fail'
-#   when:
-#     - "'v_72083' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72083_result != 'pass'
+- name: check for /etc/audisp/audisp-remote.conf
+  stat:
+      path: /etc/audisp/audisp-remote.conf
+  register: audisp_remote_conf
+
+- name: audisp_remote_conf
+  debug:
+    msg: '{{audisp_remote_conf}}'
+
+- name: grep -i '^remote_server' /etc/audisp/audisp-remote.conf
+  shell: grep -i '^remote_server' /etc/audisp/audisp-remote.conf || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_remote_server
+  when:
+      - audisp_remote_conf.stat.exists
+
+- name: auditing_remote_server
+  debug:
+    msg: '{{auditing_remote_server}}'
+
+- name: pass stig_rhel7_v1r4 v_72083
+  set_fact:
+    stig_rhel7_v1r4_v_72083_result: 'pass'
+  when:
+    - "'v_72083' in stig_rhel7_v1r4_checks"
+    - audisp_remote_conf.stat.exists
+    - '"remote_server = " in auditing_remote_server.stdout'
+
+- name: fail stig_rhel7_v1r4 v_72083
+  set_fact:
+    stig_rhel7_v1r4_v_72083_result: 'fail'
+  when:
+    - "'v_72083' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72083_result != 'pass'
 
 
 # Vuln ID: V-72085
