@@ -156,12 +156,34 @@
 # NIST SP 800-53 Revision 4 :: AU-5 a
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72081
-#   set_fact:
-#     stig_rhel7_v1r4_v_72081_result: 'fail'
-#   when:
-#     - "'v_72081' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72081_result != 'pass'
+- name: auditctl -s | grep -i "fail"
+  shell: auditctl -s | grep -i "fail" || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_auditctl_f
+
+- name: auditing_auditctl_f
+  debug:
+    msg: '{{auditing_auditctl_f}}'
+
+- name: pass stig_rhel7_v1r4 v_72081
+  set_fact:
+    stig_rhel7_v1r4_v_72081_result: 'pass'
+  when:
+    - "'v_72081' in stig_rhel7_v1r4_checks"
+    - '"failure 2" in auditing_auditctl_f.stdout'
+
+- name: fail stig_rhel7_v1r4 v_72081
+  set_fact:
+    stig_rhel7_v1r4_v_72081_result: 'fail'
+  when:
+    - "'v_72081' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72081_result != 'pass'
 
 
 # Vuln ID: V-72083
