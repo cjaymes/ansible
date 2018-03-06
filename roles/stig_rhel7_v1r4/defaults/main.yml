@@ -522,3 +522,4 @@ stig_rhel7_v1r4_v_78999_result: notchecked
 stig_rhel7_v1r4_v_79001_result: notchecked
 
 aide_conf_sha1: a0c76a14d918a55fe059ff9592e708fe62b75aca
+auditing_email: root

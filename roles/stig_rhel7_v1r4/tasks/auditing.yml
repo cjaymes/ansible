@@ -700,12 +700,37 @@
 # NIST SP 800-53 Revision 4 :: AU-5 (1)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72093
-#   set_fact:
-#     stig_rhel7_v1r4_v_72093_result: 'fail'
-#   when:
-#     - "'v_72093' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72093_result != 'pass'
+- name: grep -i '^action_mail_acct' /etc/audit/auditd.conf | awk '{print $3}'
+  shell: grep -i '^action_mail_acct' /etc/audit/auditd.conf | awk '{print $3}' || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_action_mail_acct
+  when:
+      - auditd_conf.stat.exists
+
+- name: auditing_action_mail_acct
+  debug:
+    msg: '{{auditing_action_mail_acct}}'
+
+- name: pass stig_rhel7_v1r4 v_72093
+  set_fact:
+    stig_rhel7_v1r4_v_72093_result: 'pass'
+  when:
+    - "'v_72093' in stig_rhel7_v1r4_checks"
+    - auditd_conf.stat.exists
+    - auditing_action_mail_acct.stdout == auditing_email
+
+- name: fail stig_rhel7_v1r4 v_72093
+  set_fact:
+    stig_rhel7_v1r4_v_72093_result: 'fail'
+  when:
+    - "'v_72093' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72093_result != 'pass'
 
 
 # Vuln ID: V-72095
