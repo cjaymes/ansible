@@ -809,7 +809,7 @@
   # this command doesn't actually change anything
   changed_when: false
   register: auditing_setuid_setgid
-  with_items: '{{auditing_local_filesystems.stdoutlines}}'
+  with_items: '{{auditing_local_filesystems.stdout_lines}}'
   when:
     - "'v_72095' in stig_rhel7_v1r4_checks"
 
