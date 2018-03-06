@@ -1,0 +1,3 @@
+- hosts: vhost0
+  tasks:
+      - shell: virsh snapshot-revert stig_rhel7_v1r4 --snapshotname 1520269894
