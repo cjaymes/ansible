@@ -863,7 +863,7 @@
 
 - name: auditing_setuid_setgid_missing
   debug:
-    msg: '{{auditing_setuid_setgid_combined}} - {{auditing_setuid_setgid_watched}} == {{auditing_setuid_setgid_combined - auditing_setuid_setgid_watched}}'
+    msg: '{{auditing_setuid_setgid_combined}} - {{auditing_setuid_setgid_watched}} == {{auditing_setuid_setgid_combined|difference(auditing_setuid_setgid_watched)}}'
 
 #
 # - name: fail stig_rhel7_v1r4 v_72095
