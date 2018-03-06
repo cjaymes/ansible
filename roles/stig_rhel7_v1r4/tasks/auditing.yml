@@ -398,12 +398,55 @@
 # NIST SP 800-53 Revision 4 :: AU-4 (1)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72087
-#   set_fact:
-#     stig_rhel7_v1r4_v_72087_result: 'fail'
-#   when:
-#     - "'v_72087' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72087_result != 'pass'
+- name: grep -i '^disk_full_action' /etc/audisp/audisp-remote.conf
+  shell: grep -i '^disk_full_action' /etc/audisp/audisp-remote.conf || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_disk_full_action
+  when:
+      - audisp_remote_conf.stat.exists
+
+- name: auditing_disk_full_action
+  debug:
+    msg: '{{auditing_disk_full_action}}'
+
+- name: grep -i '^network_failure_action' /etc/audisp/audisp-remote.conf
+  shell: grep -i '^network_failure_action' /etc/audisp/audisp-remote.conf || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_network_failure_action
+  when:
+      - audisp_remote_conf.stat.exists
+
+- name: auditing_network_failure_action
+  debug:
+    msg: '{{auditing_network_failure_action}}'
+
+- name: pass stig_rhel7_v1r4 v_72087
+  set_fact:
+    stig_rhel7_v1r4_v_72087_result: 'pass'
+  when:
+    - "'v_72087' in stig_rhel7_v1r4_checks"
+    - audisp_remote_conf.stat.exists
+    - '"disk_full_action = syslog" in auditing_disk_full_action.stdout or "disk_full_action = single" in auditing_disk_full_action.stdout or "disk_full_action = halt" in auditing_disk_full_action.stdout'
+    - '"network_failure_action = syslog" in auditing_network_failure_action.stdout or "network_failure_action = single" in auditing_network_failure_action.stdout or "network_failure_action = halt" in auditing_network_failure_action.stdout'
+
+- name: fail stig_rhel7_v1r4 v_72087
+  set_fact:
+    stig_rhel7_v1r4_v_72087_result: 'fail'
+  when:
+    - "'v_72087' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72087_result != 'pass'
 
 
 # Vuln ID: V-72089
