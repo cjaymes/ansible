@@ -3,18 +3,18 @@
       path: /etc/audisp/audisp-remote.conf
   register: audisp_remote_conf
 
-- name: audisp_remote_conf
-  debug:
-    msg: '{{audisp_remote_conf}}'
+# - name: audisp_remote_conf
+#   debug:
+#     msg: '{{audisp_remote_conf}}'
 
 - name: check for /etc/audit/auditd.conf
   stat:
       path: /etc/audit/auditd.conf
   register: auditd_conf
 
-- name: auditd_conf
-  debug:
-    msg: '{{auditd_conf}}'
+# - name: auditd_conf
+#   debug:
+#     msg: '{{auditd_conf}}'
 
 
 # Vuln ID: V-72079
@@ -82,10 +82,12 @@
   # this command doesn't actually change anything
   changed_when: false
   register: auditing_auditd_status
+  when:
+    - "'v_72079' in stig_rhel7_v1r4_checks"
 
-- name: auditing_auditd_status
-  debug:
-    msg: '{{auditing_auditd_status}}'
+# - name: auditing_auditd_status
+#   debug:
+#     msg: '{{auditing_auditd_status}}'
 
 - name: pass stig_rhel7_v1r4 v_72079
   set_fact:
@@ -185,10 +187,12 @@
   # this command doesn't actually change anything
   changed_when: false
   register: auditing_auditctl_f
+  when:
+    - "'v_72081' in stig_rhel7_v1r4_checks"
 
-- name: auditing_auditctl_f
-  debug:
-    msg: '{{auditing_auditctl_f}}'
+# - name: auditing_auditctl_f
+#   debug:
+#     msg: '{{auditing_auditctl_f}}'
 
 - name: pass stig_rhel7_v1r4 v_72081
   set_fact:
@@ -259,11 +263,12 @@
   changed_when: false
   register: auditing_remote_server
   when:
+      - "'v_72083' in stig_rhel7_v1r4_checks"
       - audisp_remote_conf.stat.exists
 
-- name: auditing_remote_server
-  debug:
-    msg: '{{auditing_remote_server}}'
+# - name: auditing_remote_server
+#   debug:
+#     msg: '{{auditing_remote_server}}'
 
 - name: pass stig_rhel7_v1r4 v_72083
   set_fact:
@@ -337,11 +342,12 @@
   changed_when: false
   register: auditing_enable_krb5
   when:
+      - "'v_72085' in stig_rhel7_v1r4_checks"
       - audisp_remote_conf.stat.exists
 
-- name: auditing_enable_krb5
-  debug:
-    msg: '{{auditing_enable_krb5}}'
+# - name: auditing_enable_krb5
+#   debug:
+#     msg: '{{auditing_enable_krb5}}'
 
 - name: pass stig_rhel7_v1r4 v_72085
   set_fact:
@@ -418,11 +424,12 @@
   changed_when: false
   register: auditing_disk_full_action
   when:
+      - "'v_72087' in stig_rhel7_v1r4_checks"
       - audisp_remote_conf.stat.exists
 
-- name: auditing_disk_full_action
-  debug:
-    msg: '{{auditing_disk_full_action}}'
+# - name: auditing_disk_full_action
+#   debug:
+#     msg: '{{auditing_disk_full_action}}'
 
 - name: grep -i '^network_failure_action' /etc/audisp/audisp-remote.conf
   shell: grep -i '^network_failure_action' /etc/audisp/audisp-remote.conf || true
@@ -435,11 +442,12 @@
   changed_when: false
   register: auditing_network_failure_action
   when:
+      - "'v_72087' in stig_rhel7_v1r4_checks"
       - audisp_remote_conf.stat.exists
 
-- name: auditing_network_failure_action
-  debug:
-    msg: '{{auditing_network_failure_action}}'
+# - name: auditing_network_failure_action
+#   debug:
+#     msg: '{{auditing_network_failure_action}}'
 
 - name: pass stig_rhel7_v1r4 v_72087
   set_fact:
@@ -529,11 +537,12 @@
   changed_when: false
   register: auditing_log_file
   when:
+      - "'v_72089' in stig_rhel7_v1r4_checks"
       - auditd_conf.stat.exists
 
-- name: auditing_log_file
-  debug:
-    msg: '{{auditing_log_file}}'
+# - name: auditing_log_file
+#   debug:
+#     msg: '{{auditing_log_file}}'
 
 - name: df /var/log/audit/audit.log | tail -n 1 | awk '{print $2}'
   shell: df /var/log/audit/audit.log | tail -n 1 | awk '{print $2}' || true
@@ -546,19 +555,22 @@
   changed_when: false
   register: auditing_log_partition_size
   when:
+      - "'v_72089' in stig_rhel7_v1r4_checks"
       - auditd_conf.stat.exists
 
-- name: auditing_log_partition_size
-  debug:
-    msg: '{{auditing_log_partition_size}}'
+# - name: auditing_log_partition_size
+#   debug:
+#     msg: '{{auditing_log_partition_size}}'
 
 - name: calculate space_left size; 75% of auditing_log_partition_size
   set_fact:
       auditing_log_partition_75: '{{ ( ( auditing_log_partition_size.stdout|int / 1024 ) * 0.75 )|int }}'
+  when:
+      - "'v_72089' in stig_rhel7_v1r4_checks"
 
-- name: auditing_log_partition_75
-  debug:
-    msg: '{{auditing_log_partition_75}}'
+# - name: auditing_log_partition_75
+#   debug:
+#     msg: '{{auditing_log_partition_75}}'
 
 - name: grep -i '^space_left ' /etc/audit/auditd.conf | awk '{print $3}'
   shell: grep -i '^space_left ' /etc/audit/auditd.conf | awk '{print $3}' || true
@@ -571,6 +583,7 @@
   changed_when: false
   register: auditing_space_left
   when:
+      - "'v_72089' in stig_rhel7_v1r4_checks"
       - auditd_conf.stat.exists
 
 - name: pass stig_rhel7_v1r4 v_72089
@@ -639,11 +652,12 @@
   changed_when: false
   register: auditing_space_left_action
   when:
-      - auditd_conf.stat.exists
+    - "'v_72091' in stig_rhel7_v1r4_checks"
+    - auditd_conf.stat.exists
 
-- name: auditing_space_left_action
-  debug:
-    msg: '{{auditing_space_left_action}}'
+# - name: auditing_space_left_action
+#   debug:
+#     msg: '{{auditing_space_left_action}}'
 
 - name: pass stig_rhel7_v1r4 v_72091
   set_fact:
@@ -711,11 +725,12 @@
   changed_when: false
   register: auditing_action_mail_acct
   when:
-      - auditd_conf.stat.exists
+    - "'v_72093' in stig_rhel7_v1r4_checks"
+    - auditd_conf.stat.exists
 
-- name: auditing_action_mail_acct
-  debug:
-    msg: '{{auditing_action_mail_acct}}'
+# - name: auditing_action_mail_acct
+#   debug:
+#     msg: '{{auditing_action_mail_acct}}'
 
 - name: pass stig_rhel7_v1r4 v_72093
   set_fact:
@@ -795,9 +810,9 @@
   when:
     - "'v_72095' in stig_rhel7_v1r4_checks"
 
-- name: auditing_local_filesystems
-  debug:
-    msg: '{{auditing_local_filesystems}}'
+# - name: auditing_local_filesystems
+#   debug:
+#     msg: '{{auditing_local_filesystems}}'
 
 - name: find {{item}} -xdev -type f \( -perm -4000 -o -perm -2000 \) 2>/dev/null
   shell: find {{item}} -xdev -type f \( -perm -4000 -o -perm -2000 \) 2>/dev/null || true
@@ -813,9 +828,9 @@
   when:
     - "'v_72095' in stig_rhel7_v1r4_checks"
 
-- name: auditing_setuid_setgid
-  debug:
-    msg: '{{auditing_setuid_setgid}}'
+# - name: auditing_setuid_setgid
+#   debug:
+#     msg: '{{auditing_setuid_setgid}}'
 
 - set_fact:
     auditing_setuid_setgid_combined: []
@@ -828,9 +843,9 @@
   when:
     - "'v_72095' in stig_rhel7_v1r4_checks"
 
-- name: auditing_setuid_setgid_combined
-  debug:
-    msg: '{{auditing_setuid_setgid_combined}}'
+# - name: auditing_setuid_setgid_combined
+#   debug:
+#     msg: '{{auditing_setuid_setgid_combined}}'
 
 - name: grep -i '{{item}}' /etc/audit/audit.rules
   shell: grep -i '{{item}}' /etc/audit/audit.rules || true
@@ -846,9 +861,9 @@
   when:
     - "'v_72095' in stig_rhel7_v1r4_checks"
 
-- name: auditing_setuid_setgid_rules
-  debug:
-    msg: '{{auditing_setuid_setgid_rules}}'
+# - name: auditing_setuid_setgid_rules
+#   debug:
+#     msg: '{{auditing_setuid_setgid_rules}}'
 
 - name: collect watched setuid setgid
   set_fact:
@@ -857,21 +872,23 @@
   when:
     - "'v_72095' in stig_rhel7_v1r4_checks"
 
-- name: auditing_setuid_setgid_watched
-  debug:
-    msg: '{{auditing_setuid_setgid_watched}}'
+# - name: auditing_setuid_setgid_watched
+#   debug:
+#     msg: '{{auditing_setuid_setgid_watched}}'
 
-- name: auditing_setuid_setgid_missing
-  debug:
-    msg: '{{auditing_setuid_setgid_combined}} - {{auditing_setuid_setgid_watched}} == {{auditing_setuid_setgid_combined|difference(auditing_setuid_setgid_watched)}}'
+- name: pass stig_rhel7_v1r4 v_72095
+  set_fact:
+    stig_rhel7_v1r4_v_72093_result: 'pass'
+  when:
+    - "'v_72095' in stig_rhel7_v1r4_checks"
+    - auditing_setuid_setgid_combined|difference(auditing_setuid_setgid_watched) == []
 
-#
-# - name: fail stig_rhel7_v1r4 v_72095
-#   set_fact:
-#     stig_rhel7_v1r4_v_72095_result: 'fail'
-#   when:
-#     - "'v_72095' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72095_result != 'pass'
+- name: fail stig_rhel7_v1r4 v_72095
+  set_fact:
+    stig_rhel7_v1r4_v_72095_result: 'fail'
+  when:
+    - "'v_72095' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72095_result != 'pass'
 
 
 # Vuln ID: V-72097
