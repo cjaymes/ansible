@@ -783,7 +783,7 @@
 #
 #
 - name: df | grep -i '^/' | awk '{print $6}'
-  shell: df | grep -i '^/' | awk '{print $6}'
+  shell: df | grep -i '^/' | awk '{print $6}' || true
   # following is so we don't get an error about using command instead of module
   args:
       warn: false
@@ -800,7 +800,7 @@
     msg: '{{auditing_local_filesystems}}'
 
 - name: find {{item}} -xdev -type f \( -perm -4000 -o -perm -2000 \) 2>/dev/null
-  shell: find {{item}} -xdev -type f \( -perm -4000 -o -perm -2000 \) 2>/dev/null
+  shell: find {{item}} -xdev -type f \( -perm -4000 -o -perm -2000 \) 2>/dev/null || true
   # following is so we don't get an error about using command instead of module
   args:
       warn: false
@@ -819,7 +819,7 @@
 
 - set_fact:
     auditing_setuid_setgid_combined: []
-    auditing_setuid_setgid_rule_missing: []
+    auditing_setuid_setgid_watched: []
 
 - name: combine auditing_setuid_setgid results
   set_fact:
@@ -833,7 +833,7 @@
     msg: '{{auditing_setuid_setgid_combined}}'
 
 - name: grep -i '{{item}}' /etc/audit/audit.rules
-  shell: grep -i '{{item}}' /etc/audit/audit.rules
+  shell: grep -i '{{item}}' /etc/audit/audit.rules || true
   # following is so we don't get an error about using command instead of module
   args:
       warn: false
@@ -849,6 +849,21 @@
 - name: auditing_setuid_setgid_rules
   debug:
     msg: '{{auditing_setuid_setgid_rules}}'
+
+- name: collect watched setuid setgid
+  set_fact:
+      auditing_setuid_setgid_watched: '{{auditing_setuid_setgid_watched}} + {{item.stdout_lines}}'
+  with_items: '{{auditing_setuid_setgid_rules.results}}'
+  when:
+    - "'v_72095' in stig_rhel7_v1r4_checks"
+
+- name: auditing_setuid_setgid_watched
+  debug:
+    msg: '{{auditing_setuid_setgid_watched}}'
+
+- name: auditing_setuid_setgid_missing
+  debug:
+    msg: '{{auditing_setuid_setgid_combined}} - {{auditing_setuid_setgid_watched}}'
 
 #
 # - name: fail stig_rhel7_v1r4 v_72095
