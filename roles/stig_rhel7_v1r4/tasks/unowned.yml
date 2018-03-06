@@ -36,10 +36,12 @@
 # NIST SP 800-53 Revision 4 :: AC-3 (4)
 #
 #
-- name: check stig_rhel7_v1r4 v_72007
-  set_fact:
-    stig_rhel7_v1r4_v_72007_result: 'fail'
-  when: '"v_72007" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72007
+#   set_fact:
+#     stig_rhel7_v1r4_v_72007_result: 'fail'
+#   when:
+#     - "'v_72007' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72007_result != 'pass'
 
 
 # Vuln ID: V-72009
@@ -80,7 +82,9 @@
 # NIST SP 800-53 Revision 4 :: AC-3 (4)
 #
 #
-- name: check stig_rhel7_v1r4 v_72009
-  set_fact:
-    stig_rhel7_v1r4_v_72009_result: 'fail'
-  when: '"v_72009" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72009
+#   set_fact:
+#     stig_rhel7_v1r4_v_72009_result: 'fail'
+#   when:
+#     - "'v_72009' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72009_result != 'pass'

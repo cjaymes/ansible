@@ -1,9 +1,7 @@
 stig_rhel7_v1r4_sections:
   - aide
   - antivirus
-  # - audisp
-  # - audit_rules
-  # - auditd
+  - auditing
   # - cron
   # - dns
   # - filesystems

@@ -42,10 +42,12 @@
 # NIST SP 800-53A :: CM-5 (3).1 (ii)
 #
 #
-- name: check stig_rhel6_v1r18 v_38476
-  set_fact:
-    stig_rhel6_v1r18_v_38476_result: 'fail'
-  when: '"v_38476" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38476
+#   set_fact:
+#     stig_rhel6_v1r18_v_38476_result: 'fail'
+#   when:
+#     - "'v_38476' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38476_result != 'pass'
 
 
 # Vuln ID: V-38483
@@ -86,10 +88,12 @@
 # NIST SP 800-53A :: SA-7.1 (ii)
 #
 #
-- name: check stig_rhel6_v1r18 v_38483
-  set_fact:
-    stig_rhel6_v1r18_v_38483_result: 'fail'
-  when: '"v_38483" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38483
+#   set_fact:
+#     stig_rhel6_v1r18_v_38483_result: 'fail'
+#   when:
+#     - "'v_38483' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38483_result != 'pass'
 
 
 # Vuln ID: V-38487
@@ -130,7 +134,9 @@
 # NIST SP 800-53A :: SA-7.1 (ii)
 #
 #
-- name: check stig_rhel6_v1r18 v_38487
-  set_fact:
-    stig_rhel6_v1r18_v_38487_result: 'fail'
-  when: '"v_38487" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38487
+#   set_fact:
+#     stig_rhel6_v1r18_v_38487_result: 'fail'
+#   when:
+#     - "'v_38487' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38487_result != 'pass'

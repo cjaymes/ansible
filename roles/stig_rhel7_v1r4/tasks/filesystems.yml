@@ -44,10 +44,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72041
-  set_fact:
-    stig_rhel7_v1r4_v_72041_result: 'fail'
-  when: '"v_72041" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72041
+#   set_fact:
+#     stig_rhel7_v1r4_v_72041_result: 'fail'
+#   when:
+#     - "'v_72041' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72041_result != 'pass'
 
 
 # Vuln ID: V-72043
@@ -88,10 +90,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72043
-  set_fact:
-    stig_rhel7_v1r4_v_72043_result: 'fail'
-  when: '"v_72043" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72043
+#   set_fact:
+#     stig_rhel7_v1r4_v_72043_result: 'fail'
+#   when:
+#     - "'v_72043' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72043_result != 'pass'
 
 
 # Vuln ID: V-72045
@@ -132,10 +136,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72045
-  set_fact:
-    stig_rhel7_v1r4_v_72045_result: 'fail'
-  when: '"v_72045" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72045
+#   set_fact:
+#     stig_rhel7_v1r4_v_72045_result: 'fail'
+#   when:
+#     - "'v_72045' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72045_result != 'pass'
 
 
 # Vuln ID: V-72059
@@ -187,10 +193,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72059
-  set_fact:
-    stig_rhel7_v1r4_v_72059_result: 'fail'
-  when: '"v_72059" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72059
+#   set_fact:
+#     stig_rhel7_v1r4_v_72059_result: 'fail'
+#   when:
+#     - "'v_72059' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72059_result != 'pass'
 
 
 # Vuln ID: V-72061
@@ -230,10 +238,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72061
-  set_fact:
-    stig_rhel7_v1r4_v_72061_result: 'fail'
-  when: '"v_72061" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72061
+#   set_fact:
+#     stig_rhel7_v1r4_v_72061_result: 'fail'
+#   when:
+#     - "'v_72061' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72061_result != 'pass'
 
 
 # Vuln ID: V-72063
@@ -270,10 +280,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72063
-  set_fact:
-    stig_rhel7_v1r4_v_72063_result: 'fail'
-  when: '"v_72063" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72063
+#   set_fact:
+#     stig_rhel7_v1r4_v_72063_result: 'fail'
+#   when:
+#     - "'v_72063' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72063_result != 'pass'
 
 
 # Vuln ID: V-72065
@@ -315,10 +327,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72065
-  set_fact:
-    stig_rhel7_v1r4_v_72065_result: 'fail'
-  when: '"v_72065" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72065
+#   set_fact:
+#     stig_rhel7_v1r4_v_72065_result: 'fail'
+#   when:
+#     - "'v_72065' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72065_result != 'pass'
 
 
 # Vuln ID: V-72311
@@ -360,10 +374,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72311
-  set_fact:
-    stig_rhel7_v1r4_v_72311_result: 'fail'
-  when: '"v_72311" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72311
+#   set_fact:
+#     stig_rhel7_v1r4_v_72311_result: 'fail'
+#   when:
+#     - "'v_72311' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72311_result != 'pass'
 
 
 # Vuln ID: V-73161
@@ -404,7 +420,9 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_73161
-  set_fact:
-    stig_rhel7_v1r4_v_73161_result: 'fail'
-  when: '"v_73161" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_73161
+#   set_fact:
+#     stig_rhel7_v1r4_v_73161_result: 'fail'
+#   when:
+#     - "'v_73161' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_73161_result != 'pass'

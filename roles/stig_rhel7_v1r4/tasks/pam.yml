@@ -39,10 +39,12 @@
 # NIST SP 800-53 Revision 4 :: IA-5 (1) (c)
 #
 #
-- name: check stig_rhel7_v1r4 v_71919
-  set_fact:
-    stig_rhel7_v1r4_v_71919_result: 'fail'
-  when: '"v_71919" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_71919
+#   set_fact:
+#     stig_rhel7_v1r4_v_71919_result: 'fail'
+#   when:
+#     - "'v_71919' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_71919_result != 'pass'
 
 
 # Vuln ID: V-71933
@@ -86,10 +88,12 @@
 # NIST SP 800-53 Revision 4 :: IA-5 (1) (e)
 #
 #
-- name: check stig_rhel7_v1r4 v_71933
-  set_fact:
-    stig_rhel7_v1r4_v_71933_result: 'fail'
-  when: '"v_71933" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_71933
+#   set_fact:
+#     stig_rhel7_v1r4_v_71933_result: 'fail'
+#   when:
+#     - "'v_71933' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_71933_result != 'pass'
 
 
 # Vuln ID: V-71937
@@ -132,10 +136,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_71937
-  set_fact:
-    stig_rhel7_v1r4_v_71937_result: 'fail'
-  when: '"v_71937" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_71937
+#   set_fact:
+#     stig_rhel7_v1r4_v_71937_result: 'fail'
+#   when:
+#     - "'v_71937' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_71937_result != 'pass'
 
 
 # Vuln ID: V-71943
@@ -191,10 +197,12 @@
 # NIST SP 800-53 Revision 4 :: AC-7 b
 #
 #
-- name: check stig_rhel7_v1r4 v_71943
-  set_fact:
-    stig_rhel7_v1r4_v_71943_result: 'fail'
-  when: '"v_71943" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_71943
+#   set_fact:
+#     stig_rhel7_v1r4_v_71943_result: 'fail'
+#   when:
+#     - "'v_71943' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_71943_result != 'pass'
 
 
 # Vuln ID: V-71945
@@ -250,10 +258,12 @@
 # NIST SP 800-53 Revision 4 :: AC-7 b
 #
 #
-- name: check stig_rhel7_v1r4 v_71945
-  set_fact:
-    stig_rhel7_v1r4_v_71945_result: 'fail'
-  when: '"v_71945" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_71945
+#   set_fact:
+#     stig_rhel7_v1r4_v_71945_result: 'fail'
+#   when:
+#     - "'v_71945' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_71945_result != 'pass'
 
 
 # Vuln ID: V-71965
@@ -315,10 +325,12 @@
 # NIST SP 800-53 Revision 4 :: IA-2 (2)
 #
 #
-- name: check stig_rhel7_v1r4 v_71965
-  set_fact:
-    stig_rhel7_v1r4_v_71965_result: 'fail'
-  when: '"v_71965" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_71965
+#   set_fact:
+#     stig_rhel7_v1r4_v_71965_result: 'fail'
+#   when:
+#     - "'v_71965' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_71965_result != 'pass'
 
 
 # Vuln ID: V-72275
@@ -367,10 +379,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72275
-  set_fact:
-    stig_rhel7_v1r4_v_72275_result: 'fail'
-  when: '"v_72275" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72275
+#   set_fact:
+#     stig_rhel7_v1r4_v_72275_result: 'fail'
+#   when:
+#     - "'v_72275' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72275_result != 'pass'
 
 
 # Vuln ID: V-72417
@@ -438,10 +452,12 @@
 # NIST SP 800-53 Revision 4 :: IA-2 (12)
 #
 #
-- name: check stig_rhel7_v1r4 v_72417
-  set_fact:
-    stig_rhel7_v1r4_v_72417_result: 'fail'
-  when: '"v_72417" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72417
+#   set_fact:
+#     stig_rhel7_v1r4_v_72417_result: 'fail'
+#   when:
+#     - "'v_72417' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72417_result != 'pass'
 
 
 # Vuln ID: V-72433
@@ -508,10 +524,12 @@
 # NIST SP 800-53 Revision 4 :: IA-2 (12)
 #
 #
-- name: check stig_rhel7_v1r4 v_72433
-  set_fact:
-    stig_rhel7_v1r4_v_72433_result: 'fail'
-  when: '"v_72433" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72433
+#   set_fact:
+#     stig_rhel7_v1r4_v_72433_result: 'fail'
+#   when:
+#     - "'v_72433' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72433_result != 'pass'
 
 
 # Vuln ID: V-73159
@@ -560,7 +578,9 @@
 # NIST SP 800-53 Revision 4 :: IA-5 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_73159
-  set_fact:
-    stig_rhel7_v1r4_v_73159_result: 'fail'
-  when: '"v_73159" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_73159
+#   set_fact:
+#     stig_rhel7_v1r4_v_73159_result: 'fail'
+#   when:
+#     - "'v_73159' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_73159_result != 'pass'

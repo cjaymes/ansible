@@ -1,9 +1,7 @@
 stig_rhel6_v1r18_sections: []
   # - aide
   # - antivirus
-  # - audisp
-  # - audit_rules
-  # - auditd
+  # - auditing
   # - backup
   # - cron
   # - filesystems

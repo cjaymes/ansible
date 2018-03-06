@@ -54,10 +54,12 @@
 # NIST SP 800-53 Revision 4 :: AU-9 (2)
 #
 #
-- name: check stig_rhel6_v1r18 v_38520
-  set_fact:
-    stig_rhel6_v1r18_v_38520_result: 'fail'
-  when: '"v_38520" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38520
+#   set_fact:
+#     stig_rhel6_v1r18_v_38520_result: 'fail'
+#   when:
+#     - "'v_38520' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38520_result != 'pass'
 
 
 # Vuln ID: V-38521
@@ -116,7 +118,9 @@
 # NIST SP 800-53 Revision 4 :: AU-12 a
 #
 #
-- name: check stig_rhel6_v1r18 v_38521
-  set_fact:
-    stig_rhel6_v1r18_v_38521_result: 'fail'
-  when: '"v_38521" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38521
+#   set_fact:
+#     stig_rhel6_v1r18_v_38521_result: 'fail'
+#   when:
+#     - "'v_38521' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38521_result != 'pass'

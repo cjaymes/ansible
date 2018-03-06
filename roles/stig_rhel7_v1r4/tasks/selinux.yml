@@ -73,10 +73,12 @@
 # NIST SP 800-53 Revision 4 :: AC-6 (10)
 #
 #
-- name: check stig_rhel7_v1r4 v_71971
-  set_fact:
-    stig_rhel7_v1r4_v_71971_result: 'fail'
-  when: '"v_71971" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_71971
+#   set_fact:
+#     stig_rhel7_v1r4_v_71971_result: 'fail'
+#   when:
+#     - "'v_71971' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_71971_result != 'pass'
 
 
 # Vuln ID: V-71989
@@ -126,10 +128,12 @@
 # NIST SP 800-53 Revision 4 :: SI-6 a
 #
 #
-- name: check stig_rhel7_v1r4 v_71989
-  set_fact:
-    stig_rhel7_v1r4_v_71989_result: 'fail'
-  when: '"v_71989" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_71989
+#   set_fact:
+#     stig_rhel7_v1r4_v_71989_result: 'fail'
+#   when:
+#     - "'v_71989' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_71989_result != 'pass'
 
 
 # Vuln ID: V-71991
@@ -198,7 +202,9 @@
 # NIST SP 800-53 Revision 4 :: SI-6 a
 #
 #
-- name: check stig_rhel7_v1r4 v_71991
-  set_fact:
-    stig_rhel7_v1r4_v_71991_result: 'fail'
-  when: '"v_71991" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_71991
+#   set_fact:
+#     stig_rhel7_v1r4_v_71991_result: 'fail'
+#   when:
+#     - "'v_71991' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_71991_result != 'pass'

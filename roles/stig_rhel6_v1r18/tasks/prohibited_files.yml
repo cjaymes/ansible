@@ -34,10 +34,12 @@
 # NIST SP 800-53A :: AC-17 (8).1 (ii)
 #
 #
-- name: check stig_rhel6_v1r18 v_38491
-  set_fact:
-    stig_rhel6_v1r18_v_38491_result: 'fail'
-  when: '"v_38491" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38491
+#   set_fact:
+#     stig_rhel6_v1r18_v_38491_result: 'fail'
+#   when:
+#     - "'v_38491' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38491_result != 'pass'
 
 
 # Vuln ID: V-38619
@@ -74,7 +76,9 @@
 # NIST SP 800-53 Revision 4 :: IA-5 (1) (c)
 #
 #
-- name: check stig_rhel6_v1r18 v_38619
-  set_fact:
-    stig_rhel6_v1r18_v_38619_result: 'fail'
-  when: '"v_38619" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38619
+#   set_fact:
+#     stig_rhel6_v1r18_v_38619_result: 'fail'
+#   when:
+#     - "'v_38619' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38619_result != 'pass'

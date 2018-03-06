@@ -36,10 +36,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72277
-  set_fact:
-    stig_rhel7_v1r4_v_72277_result: 'fail'
-  when: '"v_72277" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72277
+#   set_fact:
+#     stig_rhel7_v1r4_v_72277_result: 'fail'
+#   when:
+#     - "'v_72277' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72277_result != 'pass'
 
 
 # Vuln ID: V-72279
@@ -80,7 +82,9 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72279
-  set_fact:
-    stig_rhel7_v1r4_v_72279_result: 'fail'
-  when: '"v_72279" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72279
+#   set_fact:
+#     stig_rhel7_v1r4_v_72279_result: 'fail'
+#   when:
+#     - "'v_72279' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72279_result != 'pass'

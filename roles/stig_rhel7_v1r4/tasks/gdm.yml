@@ -44,10 +44,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_71953
-  set_fact:
-    stig_rhel7_v1r4_v_71953_result: 'fail'
-  when: '"v_71953" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_71953
+#   set_fact:
+#     stig_rhel7_v1r4_v_71953_result: 'fail'
+#   when:
+#     - "'v_71953' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_71953_result != 'pass'
 
 
 # Vuln ID: V-71955
@@ -96,7 +98,9 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_71955
-  set_fact:
-    stig_rhel7_v1r4_v_71955_result: 'fail'
-  when: '"v_71955" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_71955
+#   set_fact:
+#     stig_rhel7_v1r4_v_71955_result: 'fail'
+#   when:
+#     - "'v_71955' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_71955_result != 'pass'

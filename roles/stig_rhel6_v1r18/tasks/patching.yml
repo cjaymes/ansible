@@ -41,7 +41,9 @@
 # NIST SP 800-53 Revision 4 :: SI-2 (2)
 #
 #
-- name: check stig_rhel6_v1r18 v_38481
-  set_fact:
-    stig_rhel6_v1r18_v_38481_result: 'fail'
-  when: '"v_38481" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38481
+#   set_fact:
+#     stig_rhel6_v1r18_v_38481_result: 'fail'
+#   when:
+#     - "'v_38481' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38481_result != 'pass'

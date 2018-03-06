@@ -1,3 +1,72 @@
+# Vuln ID: V-72079
+# Severity: high
+# Group Title: SRG-OS-000038-GPOS-00016
+# Rule ID: SV-86703r2_rule
+# STIG ID: RHEL-07-030000
+# Rule Title: Auditing must be configured to produce records containing information to establish what type of events occurred, where the events occurred, the source of the events, and the outcome of the events.
+#
+# These audit records must also identify individual identities of group account users.
+# Discussion: Without establishing what type of events occurred, it would be difficult to establish, correlate, and investigate the events leading up to an outage or attack.
+#
+# Audit record content that may be necessary to satisfy this requirement includes, for example, time stamps, source and destination addresses, user/process identifiers, event descriptions, success/fail indications, filenames involved, and access control or flow control rules invoked.
+#
+# Associating event types with detected events in the operating system audit logs provides a means of investigating an attack; recognizing resource utilization or capacity thresholds; or identifying an improperly configured operating system.
+#
+# Satisfies: SRG-OS-000038-GPOS-00016, SRG-OS-000039-GPOS-00017, SRG-OS-000042-GPOS-00021, SRG-OS-000254-GPOS-00095, SRG-OS-000255-GPOS-00096
+# IA Controls:
+# Check Content: Verify the operating system produces audit records containing information to establish when (date and time) the events occurred.
+#
+# Check to see if auditing is active by issuing the following command:
+#
+# # systemctl is-active auditd.service
+# Active: active (running) since Tue 2015-01-27 19:41:23 EST; 22h ago
+#
+# If the "auditd" status is not active, this is a finding.
+# Fix Text: Configure the operating system to produce audit records containing information to establish when (date and time) the events occurred.
+#
+# Enable the auditd service with the following command:
+#
+# # systemctl start auditd.service
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000126
+# The organization determines that the organization-defined subset of the auditable events defined in AU-2 are to be audited within the information system.
+# NIST SP 800-53 :: AU-2 d
+# NIST SP 800-53A :: AU-2.1 (v)
+# NIST SP 800-53 Revision 4 :: AU-2 d
+#
+# CCI-000131
+# The information system generates audit records containing information that establishes when an event occurred.
+# NIST SP 800-53 :: AU-3
+# NIST SP 800-53A :: AU-3.1
+# NIST SP 800-53 Revision 4 :: AU-3
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72079
+#   set_fact:
+#     stig_rhel7_v1r4_v_72079_result: 'fail'
+#   when:
+#     - "'v_72079' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72079_result != 'pass'
+# - name: fail stig_rhel7_v1r4 v_72215
+#   set_fact:
+#     stig_rhel7_v1r4_v_72215_result: 'fail'
+#   when:
+#       - "'v_72215' in stig_rhel7_v1r4_checks"
+#       - stig_rhel7_v1r4_v_72215_result != 'pass'
+
+
 # Vuln ID: V-72081
 # Severity: medium
 # Group Title: SRG-OS-000046-GPOS-00022
@@ -71,10 +140,334 @@
 # NIST SP 800-53 Revision 4 :: AU-5 a
 #
 #
-- name: check stig_rhel7_v1r4 v_72081
-  set_fact:
-    stig_rhel7_v1r4_v_72081_result: 'fail'
-  when: '"v_72081" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72081
+#   set_fact:
+#     stig_rhel7_v1r4_v_72081_result: 'fail'
+#   when:
+#     - "'v_72081' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72081_result != 'pass'
+
+
+# Vuln ID: V-72083
+# Severity: medium
+# Group Title: SRG-OS-000342-GPOS-00133
+# Rule ID: SV-86707r1_rule
+# STIG ID: RHEL-07-030300
+# Rule Title: The operating system must off-load audit records onto a different system or media from the system being audited.
+# Discussion: Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
+#
+# Off-loading is a common process in information systems with limited audit storage capacity.
+#
+# Satisfies: SRG-OS-000342-GPOS-00133, SRG-OS-000479-GPOS-00224
+# IA Controls:
+# Check Content: Verify the operating system off-loads audit records onto a different system or media from the system being audited.
+#
+# To determine the remote server that the records are being sent to, use the following command:
+#
+# # grep -i remote_server /etc/audisp/audisp-remote.conf
+# remote_server = 10.0.21.1
+#
+# If a remote server is not configured, or the line is commented out, ask the System Administrator to indicate how the audit logs are off-loaded to a different system or media.
+#
+# If there is no evidence that the audit logs are being off-loaded to another system or media, this is a finding.
+# Fix Text: Configure the operating system to off-load audit records onto a different system or media from the system being audited.
+#
+# Set the remote server option in "/etc/audisp/audisp-remote.conf" with the IP address of the log aggregation server.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001851
+# The information system off-loads audit records per organization-defined frequency onto a different system or media than the system being audited.
+# NIST SP 800-53 Revision 4 :: AU-4 (1)
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72083
+#   set_fact:
+#     stig_rhel7_v1r4_v_72083_result: 'fail'
+#   when:
+#     - "'v_72083' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72083_result != 'pass'
+
+
+# Vuln ID: V-72085
+# Severity: medium
+# Group Title: SRG-OS-000342-GPOS-00133
+# Rule ID: SV-86709r1_rule
+# STIG ID: RHEL-07-030310
+# Rule Title: The operating system must encrypt the transfer of audit records off-loaded onto a different system or media from the system being audited.
+# Discussion: Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
+#
+# Off-loading is a common process in information systems with limited audit storage capacity.
+#
+# Satisfies: SRG-OS-000342-GPOS-00133, SRG-OS-000479-GPOS-00224
+# IA Controls:
+# Check Content: Verify the operating system encrypts audit records off-loaded onto a different system or media from the system being audited.
+#
+# To determine if the transfer is encrypted, use the following command:
+#
+# # grep -i enable_krb5 /etc/audisp/audisp-remote.conf
+# enable_krb5 = yes
+#
+# If the value of the "enable_krb5" option is not set to "yes" or the line is commented out, ask the System Administrator to indicate how the audit logs are off-loaded to a different system or media.
+#
+# If there is no evidence that the transfer of the audit logs being off-loaded to another system or media is encrypted, this is a finding.
+# Fix Text: Configure the operating system to encrypt the transfer of off-loaded audit records onto a different system or media from the system being audited.
+#
+# Uncomment the "enable_krb5" option in "/etc/audisp/audisp-remote.conf" and set it with the following line:
+#
+# enable_krb5 = yes
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001851
+# The information system off-loads audit records per organization-defined frequency onto a different system or media than the system being audited.
+# NIST SP 800-53 Revision 4 :: AU-4 (1)
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72085
+#   set_fact:
+#     stig_rhel7_v1r4_v_72085_result: 'fail'
+#   when:
+#     - "'v_72085' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72085_result != 'pass'
+
+
+# Vuln ID: V-72087
+# Severity: medium
+# Group Title: SRG-OS-000342-GPOS-00133
+# Rule ID: SV-86711r2_rule
+# STIG ID: RHEL-07-030320
+# Rule Title: The audit system must take appropriate action when the audit storage volume is full.
+# Discussion: Taking appropriate action in case of a filled audit storage volume will minimize the possibility of losing audit records.
+# IA Controls:
+# Check Content: Verify the action the operating system takes if the disk the audit records are written to becomes full.
+#
+# To determine the action that takes place if the disk is full on the remote server, use the following command:
+#
+# # grep -i disk_full_action /etc/audisp/audisp-remote.conf
+# disk_full_action = single
+#
+# To determine the action that takes place if the network connection fails, use the following command:
+#
+# # grep -i network_failure_action /etc/audisp/audisp-remote.conf
+# network_failure_action = stop
+#
+# If the value of the "network_failure_action" option is not "syslog", "single", or "halt", or the line is commented out, this is a finding.
+#
+# If the value of the "disk_full_action" option is not "syslog", "single", or "halt", or the line is commented out, this is a finding.
+# Fix Text: Configure the action the operating system takes if the disk the audit records are written to becomes full.
+#
+# Uncomment or edit the "disk_full_action" option in "/etc/audisp/audisp-remote.conf" and set it to "syslog", "single", or "halt", such as the following line:
+#
+# disk_full_action = single
+#
+# Uncomment the "network_failure_action" option in "/etc/audisp/audisp-remote.conf" and set it to "syslog", "single", or "halt".
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001851
+# The information system off-loads audit records per organization-defined frequency onto a different system or media than the system being audited.
+# NIST SP 800-53 Revision 4 :: AU-4 (1)
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72087
+#   set_fact:
+#     stig_rhel7_v1r4_v_72087_result: 'fail'
+#   when:
+#     - "'v_72087' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72087_result != 'pass'
+
+
+# Vuln ID: V-72089
+# Severity: medium
+# Group Title: SRG-OS-000343-GPOS-00134
+# Rule ID: SV-86713r1_rule
+# STIG ID: RHEL-07-030330
+# Rule Title: The operating system must immediately notify the System Administrator (SA) and Information System Security Officer ISSO (at a minimum) when allocated audit record storage volume reaches 75% of the repository maximum audit record storage capacity.
+# Discussion: If security personnel are not notified immediately when storage volume reaches 75 percent utilization, they are unable to plan for audit record storage capacity expansion.
+# IA Controls:
+# Check Content: Verify the operating system immediately notifies the SA and ISSO (at a minimum) when allocated audit record storage volume reaches 75 percent of the repository maximum audit record storage capacity.
+#
+# Check the system configuration to determine the partition the audit records are being written to with the following command:
+#
+# # grep log_file /etc/audit/auditd.conf
+# log_file = /var/log/audit/audit.log
+#
+# Check the size of the partition that audit records are written to (with the example being "/var/log/audit/"):
+#
+# # df -h /var/log/audit/
+# 0.9G /var/log/audit
+#
+# If the audit records are not being written to a partition specifically created for audit records (in this example "/var/log/audit" is a separate partition), determine the amount of space other files in the partition are currently occupying with the following command:
+#
+# # du -sh <partition>
+# 1.8G /var
+#
+# Determine what the threshold is for the system to take action when 75 percent of the repository maximum audit record storage capacity is reached:
+#
+# # grep -i space_left /etc/audit/auditd.conf
+# space_left = 225
+#
+# If the value of the "space_left" keyword is not set to 25 percent of the total partition size, this is a finding.
+# Fix Text: Configure the operating system to immediately notify the SA and ISSO (at a minimum) when allocated audit record storage volume reaches 75 percent of the repository maximum audit record storage capacity.
+#
+# Check the system configuration to determine the partition the audit records are being written to:
+#
+# # grep log_file /etc/audit/auditd.conf
+#
+# Determine the size of the partition that audit records are written to (with the example being "/var/log/audit/"):
+#
+# # df -h /var/log/audit/
+#
+# Set the value of the "space_left" keyword in "/etc/audit/auditd.conf" to 75 percent of the partition size.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001855
+# The information system provides a warning to organization-defined personnel, roles, and/or locations within organization-defined time period when allocated audit record storage volume reaches organization-defined percentage of repository maximum audit record storage capacity.
+# NIST SP 800-53 Revision 4 :: AU-5 (1)
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72089
+#   set_fact:
+#     stig_rhel7_v1r4_v_72089_result: 'fail'
+#   when:
+#     - "'v_72089' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72089_result != 'pass'
+
+
+# Vuln ID: V-72091
+# Severity: medium
+# Group Title: SRG-OS-000343-GPOS-00134
+# Rule ID: SV-86715r1_rule
+# STIG ID: RHEL-07-030340
+# Rule Title: The operating system must immediately notify the System Administrator (SA) and Information System Security Officer (ISSO) (at a minimum) via email when the threshold for the repository maximum audit record storage capacity is reached.
+# Discussion: If security personnel are not notified immediately when the threshold for the repository maximum audit record storage capacity is reached, they are unable to expand the audit record storage capacity before records are lost.
+# IA Controls:
+# Check Content: Verify the operating system immediately notifies the SA and ISSO (at a minimum) via email when the allocated audit record storage volume reaches 75 percent of the repository maximum audit record storage capacity.
+#
+# Check what action the operating system takes when the threshold for the repository maximum audit record storage capacity is reached with the following command:
+#
+# # grep -i space_left_action  /etc/audit/auditd.conf
+# space_left_action = email
+#
+# If the value of the "space_left_action" keyword is not set to "email", this is a finding.
+# Fix Text: Configure the operating system to immediately notify the SA and ISSO (at a minimum) when the threshold for the repository maximum audit record storage capacity is reached.
+#
+# Uncomment or edit the "space_left_action" keyword in "/etc/audit/auditd.conf" and set it to "email".
+#
+# space_left_action = email
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001855
+# The information system provides a warning to organization-defined personnel, roles, and/or locations within organization-defined time period when allocated audit record storage volume reaches organization-defined percentage of repository maximum audit record storage capacity.
+# NIST SP 800-53 Revision 4 :: AU-5 (1)
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72091
+#   set_fact:
+#     stig_rhel7_v1r4_v_72091_result: 'fail'
+#   when:
+#     - "'v_72091' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72091_result != 'pass'
+
+
+# Vuln ID: V-72093
+# Severity: medium
+# Group Title: SRG-OS-000343-GPOS-00134
+# Rule ID: SV-86717r2_rule
+# STIG ID: RHEL-07-030350
+# Rule Title: The operating system must immediately notify the System Administrator (SA) and Information System Security Officer (ISSO) (at a minimum) when the threshold for the repository maximum audit record storage capacity is reached.
+# Discussion: If security personnel are not notified immediately when the threshold for the repository maximum audit record storage capacity is reached, they are unable to expand the audit record storage capacity before records are lost.
+# IA Controls:
+# Check Content: Verify the operating system immediately notifies the SA and ISSO (at a minimum) via email when the threshold for the repository maximum audit record storage capacity is reached.
+#
+# Check what account the operating system emails when the threshold for the repository maximum audit record storage capacity is reached with the following command:
+#
+# # grep -i action_mail_acct  /etc/audit/auditd.conf
+# action_mail_acct = root
+#
+# If the value of the "action_mail_acct" keyword is not set to "root" and other accounts for security personnel, this is a finding.
+# Fix Text: Configure the operating system to immediately notify the SA and ISSO (at a minimum) when the threshold for the repository maximum audit record storage capacity is reached.
+#
+# Uncomment or edit the "action_mail_acct" keyword in "/etc/audit/auditd.conf" and set it to root and any other accounts associated with security personnel.
+#
+# action_mail_acct = root
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001855
+# The information system provides a warning to organization-defined personnel, roles, and/or locations within organization-defined time period when allocated audit record storage volume reaches organization-defined percentage of repository maximum audit record storage capacity.
+# NIST SP 800-53 Revision 4 :: AU-5 (1)
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72093
+#   set_fact:
+#     stig_rhel7_v1r4_v_72093_result: 'fail'
+#   when:
+#     - "'v_72093' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72093_result != 'pass'
 
 
 # Vuln ID: V-72095
@@ -126,10 +519,12 @@
 # NIST SP 800-53 Revision 4 :: AC-6 (9)
 #
 #
-- name: check stig_rhel7_v1r4 v_72095
-  set_fact:
-    stig_rhel7_v1r4_v_72095_result: 'fail'
-  when: '"v_72095" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72095
+#   set_fact:
+#     stig_rhel7_v1r4_v_72095_result: 'fail'
+#   when:
+#     - "'v_72095' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72095_result != 'pass'
 
 
 # Vuln ID: V-72097
@@ -194,10 +589,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72097
-  set_fact:
-    stig_rhel7_v1r4_v_72097_result: 'fail'
-  when: '"v_72097" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72097
+#   set_fact:
+#     stig_rhel7_v1r4_v_72097_result: 'fail'
+#   when:
+#     - "'v_72097' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72097_result != 'pass'
 
 
 # Vuln ID: V-72099
@@ -262,10 +659,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72099
-  set_fact:
-    stig_rhel7_v1r4_v_72099_result: 'fail'
-  when: '"v_72099" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72099
+#   set_fact:
+#     stig_rhel7_v1r4_v_72099_result: 'fail'
+#   when:
+#     - "'v_72099' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72099_result != 'pass'
 
 
 # Vuln ID: V-72101
@@ -328,10 +727,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72101
-  set_fact:
-    stig_rhel7_v1r4_v_72101_result: 'fail'
-  when: '"v_72101" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72101
+#   set_fact:
+#     stig_rhel7_v1r4_v_72101_result: 'fail'
+#   when:
+#     - "'v_72101' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72101_result != 'pass'
 
 
 # Vuln ID: V-72103
@@ -396,10 +797,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72103
-  set_fact:
-    stig_rhel7_v1r4_v_72103_result: 'fail'
-  when: '"v_72103" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72103
+#   set_fact:
+#     stig_rhel7_v1r4_v_72103_result: 'fail'
+#   when:
+#     - "'v_72103' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72103_result != 'pass'
 
 
 # Vuln ID: V-72105
@@ -458,10 +861,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72105
-  set_fact:
-    stig_rhel7_v1r4_v_72105_result: 'fail'
-  when: '"v_72105" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72105
+#   set_fact:
+#     stig_rhel7_v1r4_v_72105_result: 'fail'
+#   when:
+#     - "'v_72105' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72105_result != 'pass'
 
 
 # Vuln ID: V-72107
@@ -520,10 +925,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72107
-  set_fact:
-    stig_rhel7_v1r4_v_72107_result: 'fail'
-  when: '"v_72107" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72107
+#   set_fact:
+#     stig_rhel7_v1r4_v_72107_result: 'fail'
+#   when:
+#     - "'v_72107' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72107_result != 'pass'
 
 
 # Vuln ID: V-72109
@@ -582,10 +989,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72109
-  set_fact:
-    stig_rhel7_v1r4_v_72109_result: 'fail'
-  when: '"v_72109" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72109
+#   set_fact:
+#     stig_rhel7_v1r4_v_72109_result: 'fail'
+#   when:
+#     - "'v_72109' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72109_result != 'pass'
 
 
 # Vuln ID: V-72111
@@ -645,10 +1054,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72111
-  set_fact:
-    stig_rhel7_v1r4_v_72111_result: 'fail'
-  when: '"v_72111" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72111
+#   set_fact:
+#     stig_rhel7_v1r4_v_72111_result: 'fail'
+#   when:
+#     - "'v_72111' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72111_result != 'pass'
 
 
 # Vuln ID: V-72113
@@ -707,10 +1118,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72113
-  set_fact:
-    stig_rhel7_v1r4_v_72113_result: 'fail'
-  when: '"v_72113" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72113
+#   set_fact:
+#     stig_rhel7_v1r4_v_72113_result: 'fail'
+#   when:
+#     - "'v_72113' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72113_result != 'pass'
 
 
 # Vuln ID: V-72115
@@ -770,10 +1183,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72115
-  set_fact:
-    stig_rhel7_v1r4_v_72115_result: 'fail'
-  when: '"v_72115" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72115
+#   set_fact:
+#     stig_rhel7_v1r4_v_72115_result: 'fail'
+#   when:
+#     - "'v_72115' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72115_result != 'pass'
 
 
 # Vuln ID: V-72117
@@ -832,10 +1247,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72117
-  set_fact:
-    stig_rhel7_v1r4_v_72117_result: 'fail'
-  when: '"v_72117" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72117
+#   set_fact:
+#     stig_rhel7_v1r4_v_72117_result: 'fail'
+#   when:
+#     - "'v_72117' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72117_result != 'pass'
 
 
 # Vuln ID: V-72119
@@ -895,10 +1312,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72119
-  set_fact:
-    stig_rhel7_v1r4_v_72119_result: 'fail'
-  when: '"v_72119" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72119
+#   set_fact:
+#     stig_rhel7_v1r4_v_72119_result: 'fail'
+#   when:
+#     - "'v_72119' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72119_result != 'pass'
 
 
 # Vuln ID: V-72121
@@ -957,10 +1376,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72121
-  set_fact:
-    stig_rhel7_v1r4_v_72121_result: 'fail'
-  when: '"v_72121" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72121
+#   set_fact:
+#     stig_rhel7_v1r4_v_72121_result: 'fail'
+#   when:
+#     - "'v_72121' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72121_result != 'pass'
 
 
 # Vuln ID: V-72123
@@ -1036,10 +1457,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72123
-  set_fact:
-    stig_rhel7_v1r4_v_72123_result: 'fail'
-  when: '"v_72123" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72123
+#   set_fact:
+#     stig_rhel7_v1r4_v_72123_result: 'fail'
+#   when:
+#     - "'v_72123' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72123_result != 'pass'
 
 
 # Vuln ID: V-72125
@@ -1115,10 +1538,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72125
-  set_fact:
-    stig_rhel7_v1r4_v_72125_result: 'fail'
-  when: '"v_72125" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72125
+#   set_fact:
+#     stig_rhel7_v1r4_v_72125_result: 'fail'
+#   when:
+#     - "'v_72125' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72125_result != 'pass'
 
 
 # Vuln ID: V-72127
@@ -1193,10 +1618,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72127
-  set_fact:
-    stig_rhel7_v1r4_v_72127_result: 'fail'
-  when: '"v_72127" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72127
+#   set_fact:
+#     stig_rhel7_v1r4_v_72127_result: 'fail'
+#   when:
+#     - "'v_72127' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72127_result != 'pass'
 
 
 # Vuln ID: V-72129
@@ -1272,10 +1699,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72129
-  set_fact:
-    stig_rhel7_v1r4_v_72129_result: 'fail'
-  when: '"v_72129" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72129
+#   set_fact:
+#     stig_rhel7_v1r4_v_72129_result: 'fail'
+#   when:
+#     - "'v_72129' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72129_result != 'pass'
 
 
 # Vuln ID: V-72131
@@ -1350,10 +1779,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72131
-  set_fact:
-    stig_rhel7_v1r4_v_72131_result: 'fail'
-  when: '"v_72131" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72131
+#   set_fact:
+#     stig_rhel7_v1r4_v_72131_result: 'fail'
+#   when:
+#     - "'v_72131' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72131_result != 'pass'
 
 
 # Vuln ID: V-72133
@@ -1428,10 +1859,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72133
-  set_fact:
-    stig_rhel7_v1r4_v_72133_result: 'fail'
-  when: '"v_72133" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72133
+#   set_fact:
+#     stig_rhel7_v1r4_v_72133_result: 'fail'
+#   when:
+#     - "'v_72133' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72133_result != 'pass'
 
 
 # Vuln ID: V-72135
@@ -1486,10 +1919,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72135
-  set_fact:
-    stig_rhel7_v1r4_v_72135_result: 'fail'
-  when: '"v_72135" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72135
+#   set_fact:
+#     stig_rhel7_v1r4_v_72135_result: 'fail'
+#   when:
+#     - "'v_72135' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72135_result != 'pass'
 
 
 # Vuln ID: V-72137
@@ -1544,10 +1979,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72137
-  set_fact:
-    stig_rhel7_v1r4_v_72137_result: 'fail'
-  when: '"v_72137" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72137
+#   set_fact:
+#     stig_rhel7_v1r4_v_72137_result: 'fail'
+#   when:
+#     - "'v_72137' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72137_result != 'pass'
 
 
 # Vuln ID: V-72139
@@ -1602,10 +2039,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72139
-  set_fact:
-    stig_rhel7_v1r4_v_72139_result: 'fail'
-  when: '"v_72139" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72139
+#   set_fact:
+#     stig_rhel7_v1r4_v_72139_result: 'fail'
+#   when:
+#     - "'v_72139' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72139_result != 'pass'
 
 
 # Vuln ID: V-72141
@@ -1660,10 +2099,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72141
-  set_fact:
-    stig_rhel7_v1r4_v_72141_result: 'fail'
-  when: '"v_72141" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72141
+#   set_fact:
+#     stig_rhel7_v1r4_v_72141_result: 'fail'
+#   when:
+#     - "'v_72141' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72141_result != 'pass'
 
 
 # Vuln ID: V-72143
@@ -1724,10 +2165,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72143
-  set_fact:
-    stig_rhel7_v1r4_v_72143_result: 'fail'
-  when: '"v_72143" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72143
+#   set_fact:
+#     stig_rhel7_v1r4_v_72143_result: 'fail'
+#   when:
+#     - "'v_72143' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72143_result != 'pass'
 
 
 # Vuln ID: V-72145
@@ -1788,10 +2231,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72145
-  set_fact:
-    stig_rhel7_v1r4_v_72145_result: 'fail'
-  when: '"v_72145" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72145
+#   set_fact:
+#     stig_rhel7_v1r4_v_72145_result: 'fail'
+#   when:
+#     - "'v_72145' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72145_result != 'pass'
 
 
 # Vuln ID: V-72147
@@ -1852,10 +2297,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72147
-  set_fact:
-    stig_rhel7_v1r4_v_72147_result: 'fail'
-  when: '"v_72147" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72147
+#   set_fact:
+#     stig_rhel7_v1r4_v_72147_result: 'fail'
+#   when:
+#     - "'v_72147' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72147_result != 'pass'
 
 
 # Vuln ID: V-72149
@@ -1916,10 +2363,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72149
-  set_fact:
-    stig_rhel7_v1r4_v_72149_result: 'fail'
-  when: '"v_72149" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72149
+#   set_fact:
+#     stig_rhel7_v1r4_v_72149_result: 'fail'
+#   when:
+#     - "'v_72149' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72149_result != 'pass'
 
 
 # Vuln ID: V-72151
@@ -1980,10 +2429,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72151
-  set_fact:
-    stig_rhel7_v1r4_v_72151_result: 'fail'
-  when: '"v_72151" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72151
+#   set_fact:
+#     stig_rhel7_v1r4_v_72151_result: 'fail'
+#   when:
+#     - "'v_72151' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72151_result != 'pass'
 
 
 # Vuln ID: V-72153
@@ -2044,10 +2495,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72153
-  set_fact:
-    stig_rhel7_v1r4_v_72153_result: 'fail'
-  when: '"v_72153" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72153
+#   set_fact:
+#     stig_rhel7_v1r4_v_72153_result: 'fail'
+#   when:
+#     - "'v_72153' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72153_result != 'pass'
 
 
 # Vuln ID: V-72155
@@ -2108,10 +2561,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72155
-  set_fact:
-    stig_rhel7_v1r4_v_72155_result: 'fail'
-  when: '"v_72155" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72155
+#   set_fact:
+#     stig_rhel7_v1r4_v_72155_result: 'fail'
+#   when:
+#     - "'v_72155' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72155_result != 'pass'
 
 
 # Vuln ID: V-72157
@@ -2172,10 +2627,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72157
-  set_fact:
-    stig_rhel7_v1r4_v_72157_result: 'fail'
-  when: '"v_72157" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72157
+#   set_fact:
+#     stig_rhel7_v1r4_v_72157_result: 'fail'
+#   when:
+#     - "'v_72157' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72157_result != 'pass'
 
 
 # Vuln ID: V-72159
@@ -2242,10 +2699,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72159
-  set_fact:
-    stig_rhel7_v1r4_v_72159_result: 'fail'
-  when: '"v_72159" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72159
+#   set_fact:
+#     stig_rhel7_v1r4_v_72159_result: 'fail'
+#   when:
+#     - "'v_72159' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72159_result != 'pass'
 
 
 # Vuln ID: V-72161
@@ -2312,10 +2771,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72161
-  set_fact:
-    stig_rhel7_v1r4_v_72161_result: 'fail'
-  when: '"v_72161" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72161
+#   set_fact:
+#     stig_rhel7_v1r4_v_72161_result: 'fail'
+#   when:
+#     - "'v_72161' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72161_result != 'pass'
 
 
 # Vuln ID: V-72163
@@ -2388,10 +2849,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72163
-  set_fact:
-    stig_rhel7_v1r4_v_72163_result: 'fail'
-  when: '"v_72163" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72163
+#   set_fact:
+#     stig_rhel7_v1r4_v_72163_result: 'fail'
+#   when:
+#     - "'v_72163' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72163_result != 'pass'
 
 
 # Vuln ID: V-72165
@@ -2458,10 +2921,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72165
-  set_fact:
-    stig_rhel7_v1r4_v_72165_result: 'fail'
-  when: '"v_72165" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72165
+#   set_fact:
+#     stig_rhel7_v1r4_v_72165_result: 'fail'
+#   when:
+#     - "'v_72165' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72165_result != 'pass'
 
 
 # Vuln ID: V-72167
@@ -2528,10 +2993,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72167
-  set_fact:
-    stig_rhel7_v1r4_v_72167_result: 'fail'
-  when: '"v_72167" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72167
+#   set_fact:
+#     stig_rhel7_v1r4_v_72167_result: 'fail'
+#   when:
+#     - "'v_72167' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72167_result != 'pass'
 
 
 # Vuln ID: V-72169
@@ -2598,10 +3065,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72169
-  set_fact:
-    stig_rhel7_v1r4_v_72169_result: 'fail'
-  when: '"v_72169" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72169
+#   set_fact:
+#     stig_rhel7_v1r4_v_72169_result: 'fail'
+#   when:
+#     - "'v_72169' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72169_result != 'pass'
 
 
 # Vuln ID: V-72171
@@ -2678,10 +3147,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72171
-  set_fact:
-    stig_rhel7_v1r4_v_72171_result: 'fail'
-  when: '"v_72171" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72171
+#   set_fact:
+#     stig_rhel7_v1r4_v_72171_result: 'fail'
+#   when:
+#     - "'v_72171' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72171_result != 'pass'
 
 
 # Vuln ID: V-72173
@@ -2736,10 +3207,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72173
-  set_fact:
-    stig_rhel7_v1r4_v_72173_result: 'fail'
-  when: '"v_72173" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72173
+#   set_fact:
+#     stig_rhel7_v1r4_v_72173_result: 'fail'
+#   when:
+#     - "'v_72173' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72173_result != 'pass'
 
 
 # Vuln ID: V-72175
@@ -2794,10 +3267,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72175
-  set_fact:
-    stig_rhel7_v1r4_v_72175_result: 'fail'
-  when: '"v_72175" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72175
+#   set_fact:
+#     stig_rhel7_v1r4_v_72175_result: 'fail'
+#   when:
+#     - "'v_72175' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72175_result != 'pass'
 
 
 # Vuln ID: V-72177
@@ -2852,10 +3327,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72177
-  set_fact:
-    stig_rhel7_v1r4_v_72177_result: 'fail'
-  when: '"v_72177" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72177
+#   set_fact:
+#     stig_rhel7_v1r4_v_72177_result: 'fail'
+#   when:
+#     - "'v_72177' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72177_result != 'pass'
 
 
 # Vuln ID: V-72179
@@ -2916,10 +3393,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72179
-  set_fact:
-    stig_rhel7_v1r4_v_72179_result: 'fail'
-  when: '"v_72179" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72179
+#   set_fact:
+#     stig_rhel7_v1r4_v_72179_result: 'fail'
+#   when:
+#     - "'v_72179' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72179_result != 'pass'
 
 
 # Vuln ID: V-72183
@@ -2980,10 +3459,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72183
-  set_fact:
-    stig_rhel7_v1r4_v_72183_result: 'fail'
-  when: '"v_72183" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72183
+#   set_fact:
+#     stig_rhel7_v1r4_v_72183_result: 'fail'
+#   when:
+#     - "'v_72183' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72183_result != 'pass'
 
 
 # Vuln ID: V-72185
@@ -3030,10 +3511,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72185
-  set_fact:
-    stig_rhel7_v1r4_v_72185_result: 'fail'
-  when: '"v_72185" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72185
+#   set_fact:
+#     stig_rhel7_v1r4_v_72185_result: 'fail'
+#   when:
+#     - "'v_72185' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72185_result != 'pass'
 
 
 # Vuln ID: V-72187
@@ -3094,10 +3577,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72187
-  set_fact:
-    stig_rhel7_v1r4_v_72187_result: 'fail'
-  when: '"v_72187" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72187
+#   set_fact:
+#     stig_rhel7_v1r4_v_72187_result: 'fail'
+#   when:
+#     - "'v_72187' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72187_result != 'pass'
 
 
 # Vuln ID: V-72189
@@ -3158,10 +3643,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72189
-  set_fact:
-    stig_rhel7_v1r4_v_72189_result: 'fail'
-  when: '"v_72189" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72189
+#   set_fact:
+#     stig_rhel7_v1r4_v_72189_result: 'fail'
+#   when:
+#     - "'v_72189' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72189_result != 'pass'
 
 
 # Vuln ID: V-72191
@@ -3214,10 +3701,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72191
-  set_fact:
-    stig_rhel7_v1r4_v_72191_result: 'fail'
-  when: '"v_72191" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72191
+#   set_fact:
+#     stig_rhel7_v1r4_v_72191_result: 'fail'
+#   when:
+#     - "'v_72191' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72191_result != 'pass'
 
 
 # Vuln ID: V-72193
@@ -3270,10 +3759,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72193
-  set_fact:
-    stig_rhel7_v1r4_v_72193_result: 'fail'
-  when: '"v_72193" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72193
+#   set_fact:
+#     stig_rhel7_v1r4_v_72193_result: 'fail'
+#   when:
+#     - "'v_72193' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72193_result != 'pass'
 
 
 # Vuln ID: V-72195
@@ -3328,10 +3819,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_72195
-  set_fact:
-    stig_rhel7_v1r4_v_72195_result: 'fail'
-  when: '"v_72195" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72195
+#   set_fact:
+#     stig_rhel7_v1r4_v_72195_result: 'fail'
+#   when:
+#     - "'v_72195' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72195_result != 'pass'
 
 
 # Vuln ID: V-72197
@@ -3398,10 +3891,12 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (4)
 #
 #
-- name: check stig_rhel7_v1r4 v_72197
-  set_fact:
-    stig_rhel7_v1r4_v_72197_result: 'fail'
-  when: '"v_72197" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72197
+#   set_fact:
+#     stig_rhel7_v1r4_v_72197_result: 'fail'
+#   when:
+#     - "'v_72197' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72197_result != 'pass'
 
 
 # Vuln ID: V-72199
@@ -3462,10 +3957,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72199
-  set_fact:
-    stig_rhel7_v1r4_v_72199_result: 'fail'
-  when: '"v_72199" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72199
+#   set_fact:
+#     stig_rhel7_v1r4_v_72199_result: 'fail'
+#   when:
+#     - "'v_72199' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72199_result != 'pass'
 
 
 # Vuln ID: V-72201
@@ -3526,10 +4023,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72201
-  set_fact:
-    stig_rhel7_v1r4_v_72201_result: 'fail'
-  when: '"v_72201" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72201
+#   set_fact:
+#     stig_rhel7_v1r4_v_72201_result: 'fail'
+#   when:
+#     - "'v_72201' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72201_result != 'pass'
 
 
 # Vuln ID: V-72203
@@ -3590,10 +4089,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72203
-  set_fact:
-    stig_rhel7_v1r4_v_72203_result: 'fail'
-  when: '"v_72203" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72203
+#   set_fact:
+#     stig_rhel7_v1r4_v_72203_result: 'fail'
+#   when:
+#     - "'v_72203' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72203_result != 'pass'
 
 
 # Vuln ID: V-72205
@@ -3654,10 +4155,12 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72205
-  set_fact:
-    stig_rhel7_v1r4_v_72205_result: 'fail'
-  when: '"v_72205" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72205
+#   set_fact:
+#     stig_rhel7_v1r4_v_72205_result: 'fail'
+#   when:
+#     - "'v_72205' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72205_result != 'pass'
 
 
 # Vuln ID: V-72207
@@ -3718,10 +4221,59 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-- name: check stig_rhel7_v1r4 v_72207
-  set_fact:
-    stig_rhel7_v1r4_v_72207_result: 'fail'
-  when: '"v_72207" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72207
+#   set_fact:
+#     stig_rhel7_v1r4_v_72207_result: 'fail'
+#   when:
+#     - "'v_72207' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72207_result != 'pass'
+
+
+# Vuln ID: V-73163
+# Severity: medium
+# Group Title: SRG-OS-000342-GPOS-00133
+# Rule ID: SV-87815r2_rule
+# STIG ID: RHEL-07-030321
+# Rule Title: The audit system must take appropriate action when there is an error sending audit records to a remote system.
+# Discussion: Taking appropriate action when there is an error sending audit records to a remote system will minimize the possibility of losing audit records.
+# IA Controls:
+# Check Content: Verify the action the operating system takes if there is an error sending audit records to a remote system.
+#
+# Check the action that takes place if there is an error sending audit records to a remote system with the following command:
+#
+# # grep -i network_failure_action /etc/audisp/audisp-remote.conf
+# network_failure_action = stop
+#
+# If the value of the "network_failure_action" option is not "syslog", "single", or "halt", or the line is commented out, this is a finding.
+# Fix Text: Configure the action the operating system takes if there is an error sending audit records to a remote system.
+#
+# Uncomment the "network_failure_action" option in "/etc/audisp/audisp-remote.conf" and set it to "syslog", "single", or "halt".
+#
+# network_failure_action = single
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001851
+# The information system off-loads audit records per organization-defined frequency onto a different system or media than the system being audited.
+# NIST SP 800-53 Revision 4 :: AU-4 (1)
+#
+#
+# - name: fail stig_rhel7_v1r4 v_73163
+#   set_fact:
+#     stig_rhel7_v1r4_v_73163_result: 'fail'
+#   when:
+#     - "'v_73163' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_73163_result != 'pass'
 
 
 # Vuln ID: V-73165
@@ -3786,10 +4338,12 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (4)
 #
 #
-- name: check stig_rhel7_v1r4 v_73165
-  set_fact:
-    stig_rhel7_v1r4_v_73165_result: 'fail'
-  when: '"v_73165" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_73165
+#   set_fact:
+#     stig_rhel7_v1r4_v_73165_result: 'fail'
+#   when:
+#     - "'v_73165' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_73165_result != 'pass'
 
 
 # Vuln ID: V-73167
@@ -3854,10 +4408,12 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (4)
 #
 #
-- name: check stig_rhel7_v1r4 v_73167
-  set_fact:
-    stig_rhel7_v1r4_v_73167_result: 'fail'
-  when: '"v_73167" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_73167
+#   set_fact:
+#     stig_rhel7_v1r4_v_73167_result: 'fail'
+#   when:
+#     - "'v_73167' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_73167_result != 'pass'
 
 
 # Vuln ID: V-73171
@@ -3922,10 +4478,12 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (4)
 #
 #
-- name: check stig_rhel7_v1r4 v_73171
-  set_fact:
-    stig_rhel7_v1r4_v_73171_result: 'fail'
-  when: '"v_73171" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_73171
+  # set_fact:
+  #   stig_rhel7_v1r4_v_73171_result: 'fail'
+#   when:
+#     - "'v_73171' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_73171_result != 'pass'
 
 
 # Vuln ID: V-73173
@@ -3990,10 +4548,12 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (4)
 #
 #
-- name: check stig_rhel7_v1r4 v_73173
-  set_fact:
-    stig_rhel7_v1r4_v_73173_result: 'fail'
-  when: '"v_73173" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_73173
+  # set_fact:
+  #   stig_rhel7_v1r4_v_73173_result: 'fail'
+#   when:
+#     - "'v_73173' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_73173_result != 'pass'
 
 
 # Vuln ID: V-78999
@@ -4054,10 +4614,12 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_78999
-  set_fact:
-    stig_rhel7_v1r4_v_78999_result: 'fail'
-  when: '"v_78999" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_78999
+  # set_fact:
+  #   stig_rhel7_v1r4_v_78999_result: 'fail'
+#   when:
+#     - "'v_78999' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_78999_result != 'pass'
 
 
 # Vuln ID: V-79001
@@ -4117,7 +4679,10 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: check stig_rhel7_v1r4 v_79001
-  set_fact:
-    stig_rhel7_v1r4_v_79001_result: 'fail'
-  when: '"v_79001" in stig_rhel7_v1r4_checks'
+
+# - name: fail stig_rhel7_v1r4 v_79001
+  # set_fact:
+  #   stig_rhel7_v1r4_v_79001_result: 'fail'
+#   when:
+#     - "'v_79001' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_79001_result != 'pass'

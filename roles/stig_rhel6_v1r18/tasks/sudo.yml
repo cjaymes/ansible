@@ -36,7 +36,9 @@
 # NIST SP 800-53 Revision 4 :: IA-11
 #
 #
-- name: check stig_rhel6_v1r18 v_58901
-  set_fact:
-    stig_rhel6_v1r18_v_58901_result: 'fail'
-  when: '"v_58901" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_58901
+#   set_fact:
+#     stig_rhel6_v1r18_v_58901_result: 'fail'
+#   when:
+#     - "'v_58901' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_58901_result != 'pass'

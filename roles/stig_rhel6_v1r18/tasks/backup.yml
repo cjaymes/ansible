@@ -32,10 +32,12 @@
 # NIST SP 800-53 Revision 4 :: CP-9 (b)
 #
 #
-- name: check stig_rhel6_v1r18 v_38486
-  set_fact:
-    stig_rhel6_v1r18_v_38486_result: 'fail'
-  when: '"v_38486" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38486
+#   set_fact:
+#     stig_rhel6_v1r18_v_38486_result: 'fail'
+#   when:
+#     - "'v_38486' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38486_result != 'pass'
 
 
 # Vuln ID: V-38488
@@ -72,7 +74,9 @@
 # NIST SP 800-53 Revision 4 :: CP-9 (a)
 #
 #
-- name: check stig_rhel6_v1r18 v_38488
-  set_fact:
-    stig_rhel6_v1r18_v_38488_result: 'fail'
-  when: '"v_38488" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38488
+#   set_fact:
+#     stig_rhel6_v1r18_v_38488_result: 'fail'
+#   when:
+#     - "'v_38488' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38488_result != 'pass'

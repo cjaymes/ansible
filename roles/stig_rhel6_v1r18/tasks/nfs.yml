@@ -39,10 +39,12 @@
 # NIST SP 800-53 Revision 4 :: IA-2
 #
 #
-- name: check stig_rhel6_v1r18 v_38460
-  set_fact:
-    stig_rhel6_v1r18_v_38460_result: 'fail'
-  when: '"v_38460" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38460
+#   set_fact:
+#     stig_rhel6_v1r18_v_38460_result: 'fail'
+#   when:
+#     - "'v_38460' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38460_result != 'pass'
 
 
 # Vuln ID: V-38677
@@ -80,7 +82,9 @@
 # NIST SP 800-53 Revision 4 :: IA-2
 #
 #
-- name: check stig_rhel6_v1r18 v_38677
-  set_fact:
-    stig_rhel6_v1r18_v_38677_result: 'fail'
-  when: '"v_38677" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38677
+#   set_fact:
+#     stig_rhel6_v1r18_v_38677_result: 'fail'
+#   when:
+#     - "'v_38677' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38677_result != 'pass'

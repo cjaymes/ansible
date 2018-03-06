@@ -45,10 +45,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72057
-  set_fact:
-    stig_rhel7_v1r4_v_72057_result: 'fail'
-  when: '"v_72057" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72057
+#   set_fact:
+#     stig_rhel7_v1r4_v_72057_result: 'fail'
+#   when:
+#     - "'v_72057' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72057_result != 'pass'
 
 
 # Vuln ID: V-77825
@@ -93,7 +95,9 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_77825
-  set_fact:
-    stig_rhel7_v1r4_v_77825_result: 'fail'
-  when: '"v_77825" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_77825
+#   set_fact:
+#     stig_rhel7_v1r4_v_77825_result: 'fail'
+#   when:
+#     - "'v_77825' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_77825_result != 'pass'

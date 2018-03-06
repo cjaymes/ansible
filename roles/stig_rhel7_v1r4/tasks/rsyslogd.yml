@@ -41,10 +41,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72209
-  set_fact:
-    stig_rhel7_v1r4_v_72209_result: 'fail'
-  when: '"v_72209" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72209
+#   set_fact:
+#     stig_rhel7_v1r4_v_72209_result: 'fail'
+#   when:
+#     - "'v_72209' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72209_result != 'pass'
 
 
 # Vuln ID: V-72211
@@ -105,7 +107,9 @@
 # NIST SP 800-53 Revision 4 :: CM-5 (1)
 #
 #
-- name: check stig_rhel7_v1r4 v_72211
-  set_fact:
-    stig_rhel7_v1r4_v_72211_result: 'fail'
-  when: '"v_72211" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72211
+#   set_fact:
+#     stig_rhel7_v1r4_v_72211_result: 'fail'
+#   when:
+#     - "'v_72211' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72211_result != 'pass'

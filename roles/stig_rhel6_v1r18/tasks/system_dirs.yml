@@ -46,10 +46,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel6_v1r18 v_38447
-  set_fact:
-    stig_rhel6_v1r18_v_38447_result: 'fail'
-  when: '"v_38447" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38447
+#   set_fact:
+#     stig_rhel6_v1r18_v_38447_result: 'fail'
+#   when:
+#     - "'v_38447' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38447_result != 'pass'
 
 
 # Vuln ID: V-38452
@@ -94,10 +96,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel6_v1r18 v_38452
-  set_fact:
-    stig_rhel6_v1r18_v_38452_result: 'fail'
-  when: '"v_38452" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38452
+#   set_fact:
+#     stig_rhel6_v1r18_v_38452_result: 'fail'
+#   when:
+#     - "'v_38452' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38452_result != 'pass'
 
 
 # Vuln ID: V-38453
@@ -141,10 +145,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel6_v1r18 v_38453
-  set_fact:
-    stig_rhel6_v1r18_v_38453_result: 'fail'
-  when: '"v_38453" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38453
+#   set_fact:
+#     stig_rhel6_v1r18_v_38453_result: 'fail'
+#   when:
+#     - "'v_38453' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38453_result != 'pass'
 
 
 # Vuln ID: V-38454
@@ -188,10 +194,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel6_v1r18 v_38454
-  set_fact:
-    stig_rhel6_v1r18_v_38454_result: 'fail'
-  when: '"v_38454" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38454
+#   set_fact:
+#     stig_rhel6_v1r18_v_38454_result: 'fail'
+#   when:
+#     - "'v_38454' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38454_result != 'pass'
 
 
 # Vuln ID: V-38465
@@ -246,10 +254,12 @@
 # NIST SP 800-53 Revision 4 :: CM-5 (6)
 #
 #
-- name: check stig_rhel6_v1r18 v_38465
-  set_fact:
-    stig_rhel6_v1r18_v_38465_result: 'fail'
-  when: '"v_38465" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38465
+#   set_fact:
+#     stig_rhel6_v1r18_v_38465_result: 'fail'
+#   when:
+#     - "'v_38465' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38465_result != 'pass'
 
 
 # Vuln ID: V-38466
@@ -318,10 +328,12 @@
 # NIST SP 800-53 Revision 4 :: CM-5 (6)
 #
 #
-- name: check stig_rhel6_v1r18 v_38466
-  set_fact:
-    stig_rhel6_v1r18_v_38466_result: 'fail'
-  when: '"v_38466" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38466
+#   set_fact:
+#     stig_rhel6_v1r18_v_38466_result: 'fail'
+#   when:
+#     - "'v_38466' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38466_result != 'pass'
 
 
 # Vuln ID: V-38469
@@ -378,10 +390,12 @@
 # NIST SP 800-53 Revision 4 :: CM-5 (6)
 #
 #
-- name: check stig_rhel6_v1r18 v_38469
-  set_fact:
-    stig_rhel6_v1r18_v_38469_result: 'fail'
-  when: '"v_38469" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38469
+#   set_fact:
+#     stig_rhel6_v1r18_v_38469_result: 'fail'
+#   when:
+#     - "'v_38469' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38469_result != 'pass'
 
 
 # Vuln ID: V-38472
@@ -439,10 +453,12 @@
 # NIST SP 800-53 Revision 4 :: CM-5 (6)
 #
 #
-- name: check stig_rhel6_v1r18 v_38472
-  set_fact:
-    stig_rhel6_v1r18_v_38472_result: 'fail'
-  when: '"v_38472" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38472
+#   set_fact:
+#     stig_rhel6_v1r18_v_38472_result: 'fail'
+#   when:
+#     - "'v_38472' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38472_result != 'pass'
 
 
 # Vuln ID: V-38518
@@ -487,10 +503,12 @@
 # NIST SP 800-53 Revision 4 :: SI-11 b
 #
 #
-- name: check stig_rhel6_v1r18 v_38518
-  set_fact:
-    stig_rhel6_v1r18_v_38518_result: 'fail'
-  when: '"v_38518" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38518
+#   set_fact:
+#     stig_rhel6_v1r18_v_38518_result: 'fail'
+#   when:
+#     - "'v_38518' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38518_result != 'pass'
 
 
 # Vuln ID: V-38519
@@ -535,10 +553,12 @@
 # NIST SP 800-53 Revision 4 :: SI-11 b
 #
 #
-- name: check stig_rhel6_v1r18 v_38519
-  set_fact:
-    stig_rhel6_v1r18_v_38519_result: 'fail'
-  when: '"v_38519" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38519
+#   set_fact:
+#     stig_rhel6_v1r18_v_38519_result: 'fail'
+#   when:
+#     - "'v_38519' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38519_result != 'pass'
 
 
 # Vuln ID: V-38623
@@ -583,10 +603,12 @@
 # NIST SP 800-53 Revision 4 :: SI-11 b
 #
 #
-- name: check stig_rhel6_v1r18 v_38623
-  set_fact:
-    stig_rhel6_v1r18_v_38623_result: 'fail'
-  when: '"v_38623" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38623
+#   set_fact:
+#     stig_rhel6_v1r18_v_38623_result: 'fail'
+#   when:
+#     - "'v_38623' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38623_result != 'pass'
 
 
 # Vuln ID: V-38643
@@ -623,10 +645,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel6_v1r18 v_38643
-  set_fact:
-    stig_rhel6_v1r18_v_38643_result: 'fail'
-  when: '"v_38643" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38643
+#   set_fact:
+#     stig_rhel6_v1r18_v_38643_result: 'fail'
+#   when:
+#     - "'v_38643' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38643_result != 'pass'
 
 
 # Vuln ID: V-38697
@@ -669,10 +693,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel6_v1r18 v_38697
-  set_fact:
-    stig_rhel6_v1r18_v_38697_result: 'fail'
-  when: '"v_38697" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38697
+#   set_fact:
+#     stig_rhel6_v1r18_v_38697_result: 'fail'
+#   when:
+#     - "'v_38697' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38697_result != 'pass'
 
 
 # Vuln ID: V-38699
@@ -710,7 +736,9 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel6_v1r18 v_38699
-  set_fact:
-    stig_rhel6_v1r18_v_38699_result: 'fail'
-  when: '"v_38699" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38699
+#   set_fact:
+#     stig_rhel6_v1r18_v_38699_result: 'fail'
+#   when:
+#     - "'v_38699' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38699_result != 'pass'

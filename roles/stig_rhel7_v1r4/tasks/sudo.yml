@@ -44,10 +44,12 @@
 # NIST SP 800-53 Revision 4 :: IA-11
 #
 #
-- name: check stig_rhel7_v1r4 v_71947
-  set_fact:
-    stig_rhel7_v1r4_v_71947_result: 'fail'
-  when: '"v_71947" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_71947
+#   set_fact:
+#     stig_rhel7_v1r4_v_71947_result: 'fail'
+#   when:
+#     - "'v_71947' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_71947_result != 'pass'
 
 
 # Vuln ID: V-71949
@@ -92,7 +94,9 @@
 # NIST SP 800-53 Revision 4 :: IA-11
 #
 #
-- name: check stig_rhel7_v1r4 v_71949
-  set_fact:
-    stig_rhel7_v1r4_v_71949_result: 'fail'
-  when: '"v_71949" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_71949
+#   set_fact:
+#     stig_rhel7_v1r4_v_71949_result: 'fail'
+#   when:
+#     - "'v_71949' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_71949_result != 'pass'

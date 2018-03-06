@@ -166,7 +166,10 @@
 # NIST SP 800-53A :: SI-3.1 (ii)
 #
 #
-- name: check stig_rhel7_v1r4 v_72215
-  set_fact:
-    stig_rhel7_v1r4_v_72215_result: 'fail'
-  when: '"v_72215" in stig_rhel7_v1r4_checks'
+
+# - name: fail stig_rhel7_v1r4 v_72215
+#   set_fact:
+#     stig_rhel7_v1r4_v_72215_result: 'fail'
+#   when:
+#       - "'v_72215' in stig_rhel7_v1r4_checks"
+#       - stig_rhel7_v1r4_v_72215_result != 'pass'

@@ -35,10 +35,12 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel6_v1r18 v_38653
-  set_fact:
-    stig_rhel6_v1r18_v_38653_result: 'fail'
-  when: '"v_38653" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38653
+#   set_fact:
+#     stig_rhel6_v1r18_v_38653_result: 'fail'
+#   when:
+#     - "'v_38653' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38653_result != 'pass'
 
 
 # Vuln ID: V-38660
@@ -79,7 +81,9 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel6_v1r18 v_38660
-  set_fact:
-    stig_rhel6_v1r18_v_38660_result: 'fail'
-  when: '"v_38660" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38660
+#   set_fact:
+#     stig_rhel6_v1r18_v_38660_result: 'fail'
+#   when:
+#     - "'v_38660' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38660_result != 'pass'

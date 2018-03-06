@@ -55,10 +55,12 @@
 # NIST SP 800-53 Revision 4 :: CM-5 (1)
 #
 #
-- name: check stig_rhel7_v1r4 v_72301
-  set_fact:
-    stig_rhel7_v1r4_v_72301_result: 'fail'
-  when: '"v_72301" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72301
+#   set_fact:
+#     stig_rhel7_v1r4_v_72301_result: 'fail'
+#   when:
+#     - "'v_72301' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72301_result != 'pass'
 
 
 # Vuln ID: V-72305
@@ -107,7 +109,9 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: check stig_rhel7_v1r4 v_72305
-  set_fact:
-    stig_rhel7_v1r4_v_72305_result: 'fail'
-  when: '"v_72305" in stig_rhel7_v1r4_checks'
+# - name: fail stig_rhel7_v1r4 v_72305
+#   set_fact:
+#     stig_rhel7_v1r4_v_72305_result: 'fail'
+#   when:
+#     - "'v_72305' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72305_result != 'pass'

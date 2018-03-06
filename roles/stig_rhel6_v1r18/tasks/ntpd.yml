@@ -39,10 +39,12 @@
 # NIST SP 800-53A :: AU-8 (1).1 (iii)
 #
 #
-- name: check stig_rhel6_v1r18 v_38620
-  set_fact:
-    stig_rhel6_v1r18_v_38620_result: 'fail'
-  when: '"v_38620" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38620
+#   set_fact:
+#     stig_rhel6_v1r18_v_38620_result: 'fail'
+#   when:
+#     - "'v_38620' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38620_result != 'pass'
 
 
 # Vuln ID: V-38621
@@ -88,7 +90,9 @@
 # NIST SP 800-53A :: AU-8 (1).1 (iii)
 #
 #
-- name: check stig_rhel6_v1r18 v_38621
-  set_fact:
-    stig_rhel6_v1r18_v_38621_result: 'fail'
-  when: '"v_38621" in stig_rhel6_v1r18_checks'
+# - name: fail stig_rhel6_v1r18 v_38621
+#   set_fact:
+#     stig_rhel6_v1r18_v_38621_result: 'fail'
+#   when:
+#     - "'v_38621' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38621_result != 'pass'
