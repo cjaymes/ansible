@@ -819,7 +819,7 @@
 
 - name: combine auditing_setuid_setgid results
   set_fact:
-      auditing_setuid_setgid_combined: '{{ auditing_setuid_setgid_combined|default([])|combine(item.stdout_lines) }}'
+      auditing_setuid_setgid_combined: '{{ auditing_setuid_setgid_combined|default([])|zip(item.stdout_lines) }}'
   with_items: '{{auditing_setuid_setgid.results}}'
 
 # - name: grep -i '{{item}}' /etc/audit/audit.rules
