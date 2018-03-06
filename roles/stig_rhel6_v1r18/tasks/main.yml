@@ -1,6 +1,8 @@
 - name: stig sections
-  include_tasks: '{{ item }}.yml'
+  include_tasks: '{{ stig_rhel6_v1r18_section }}.yml'
   with_items: '{{ stig_rhel6_v1r18_sections }}'
+  loop_control:
+      loop_var: stig_rhel6_v1r18_section
 
 - name: output results
   debug:
