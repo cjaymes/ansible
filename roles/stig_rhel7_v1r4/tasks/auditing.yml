@@ -616,7 +616,7 @@
   when:
     - "'v_72091' in stig_rhel7_v1r4_checks"
     - auditing_auditd_conf_stat.stat.exists
-    - auditing_auditd_conf|search('^\s*space_left_action\s*=\s*email')
+    - auditing_auditd_conf.stdout|search('^\s*space_left_action\s*=\s*email')
 
 - name: fail stig_rhel7_v1r4 v_72091
   set_fact:
