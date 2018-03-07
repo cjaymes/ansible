@@ -14,3 +14,5 @@
   systemd:
       name: auditd
       state: restarted
+  # if everything has been configured, we can't restart, but we want to show
+  ignore_errors: yes
