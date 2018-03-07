@@ -1,0 +1,16 @@
+-a always,exit -F arch=b32 -S init_module -k module-change
+-a always,exit -F arch=b64 -S init_module -k module-change
+
+-a always,exit -F arch=b32 -S delete_module -k module-change
+-a always,exit -F arch=b64 -S delete_module -k module-change
+
+-w /sbin/insmod -p x -F auid!=4294967295 -k module-change
+-w /sbin/rmmod -p x -F auid!=4294967295 -k module-change
+
+-w /sbin/modprobe -p x -F auid!=4294967295 -k module-change
+
+-a always,exit -F arch=b32 -S create_module -k module-change
+-a always,exit -F arch=b64 -S create_module -k module-change
+
+-a always,exit -F arch=b32 -S finit_module -k module-change
+-a always,exit -F arch=b64 -S finit_module -k module-change

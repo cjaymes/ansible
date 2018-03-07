@@ -1,0 +1,99 @@
+- name: install packages
+  yum:
+      state: installed
+      name: {{item}}
+  with_items:
+      - audit
+      - audispd-plugins
+
+- name: run auditd
+  systemd:
+      name: auditd
+      state: started
+
+- name: remove /etc/audit/rules.d/audit.rules
+  file:
+      path: /etc/audit/rules.d/audit.rules
+      state: absent
+
+- name: df | grep -i '^/' | awk '{print $6}'
+  shell: df | grep -i '^/' | awk '{print $6}' || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_local_filesystems
+
+# - name: auditing_local_filesystems
+#   debug:
+#     msg: '{{auditing_local_filesystems}}'
+
+- name: find {{item}} -xdev -type f \( -perm -4000 -o -perm -2000 \) 2>/dev/null
+  shell: find {{item}} -xdev -type f \( -perm -4000 -o -perm -2000 \) 2>/dev/null || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_setuid_setgid
+  with_items: '{{auditing_local_filesystems.stdout_lines}}'
+
+- set_fact:
+    auditing_setuid_setgid_combined: []
+
+- name: combine auditing_setuid_setgid results
+  set_fact:
+      auditing_setuid_setgid_combined: '{{auditing_setuid_setgid_combined}} + {{item.stdout_lines}}'
+  with_items: '{{auditing_setuid_setgid.results}}'
+
+- name: configure audit rules
+  template:
+      src: etc/audit/rules.d/{{item}}.rules.j2
+      dest: /etc/audit/rules.d/{{item}}.rules
+      mode: 0600
+  with_items:
+      - 00_failure
+      - setuid_setgid
+  notify: auditing generate rules
+
+- name: configure audisp-remote.conf
+  template:
+      src: etc/audisp/audisp-remote.conf.j2
+      dest: /etc/audisp/audisp-remote.conf
+      mode: 0600
+  notify: auditing restart
+
+- name: df /var/log/audit/audit.log | tail -n 1 | awk '{print $2}'
+  shell: df /var/log/audit/audit.log | tail -n 1 | awk '{print $2}' || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_log_partition_size
+
+# - name: auditing_log_partition_size
+#   debug:
+#     msg: '{{auditing_log_partition_size}}'
+
+- name: calculate space_left size; 75% of auditing_log_partition_size
+  set_fact:
+      auditing_log_partition_75: '{{ ( ( auditing_log_partition_size.stdout|int / 1024 ) * 0.75 )|int }}'
+
+# - name: auditing_log_partition_75
+#   debug:
+#     msg: '{{auditing_log_partition_75}}'
+
+- name: configure auditd.conf
+  template:
+      src: etc/audit/auditd.conf.j2
+      dest: /etc/audit/auditd.conf
+      mode: 0600
+  notify: auditing restart

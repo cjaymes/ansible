@@ -1,0 +1,10 @@
+- name: auditing generate rules
+  command: augenrules --load
+  register: auditing_augenrules
+  changed_when: "'No change' not in auditing_augenrules.stdout"
+  notify: auditing restart
+
+- name: auditing restart
+  systemd:
+      name: auditd
+      state: restarted

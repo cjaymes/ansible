@@ -3,6 +3,10 @@ aide_frequency: daily
 aide_notification_email: root
 
 auditing_email: root
+auditing_aggregation_server:
+auditing_network_failure_action: syslog
+auditing_disk_full_action: syslog
+auditing_log_file_default: /var/log/audit/audit.log
 
 dhcp_required: True
 
