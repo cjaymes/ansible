@@ -1,21 +1,78 @@
 - name: check for /etc/audisp/audisp-remote.conf
   stat:
       path: /etc/audisp/audisp-remote.conf
-  register: audisp_remote_conf
+  register: auditing_audisp_remote_conf_stat
 
-# - name: audisp_remote_conf
+# - name: auditing_audisp_remote_conf_stat
 #   debug:
-#     msg: '{{audisp_remote_conf}}'
+#     msg: '{{auditing_audisp_remote_conf_stat}}'
+
+- name: cat /etc/audisp/audisp-remote.conf
+  shell: cat /etc/audisp/audisp-remote.conf || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_audisp_remote_conf
+  when:
+      - auditing_audisp_remote_conf_stat.stat.exists
+
+# - name: auditing_audisp_remote_conf
+#   debug:
+#     msg: '{{auditing_audisp_remote_conf}}'
 
 - name: check for /etc/audit/auditd.conf
   stat:
       path: /etc/audit/auditd.conf
-  register: auditd_conf
+  register: auditing_auditd_conf_stat
 
-# - name: auditd_conf
+# - name: auditing_auditd_conf_stat
 #   debug:
-#     msg: '{{auditd_conf}}'
+#     msg: '{{auditing_auditd_conf_stat}}'
 
+- name: check for /etc/audit/audit.rules
+  stat:
+      path: /etc/audit/audit.rules
+  register: auditing_rules_stat
+
+# - name: auditing_rules_stat
+#   debug:
+#     msg: '{{auditing_rules_stat}}'
+
+- name: cat /etc/audit/audit.rules
+  shell: cat /etc/audit/audit.rules || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_rules
+  when:
+      - auditing_rules_stat.stat.exists
+
+# - name: auditing_rules
+#   debug:
+#     msg: '{{auditing_rules}}'
+
+- name: auditctl -s
+  shell: auditctl -s || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_auditctl_s
+
+# - name: auditing_auditctl_s
+#   debug:
+#     msg: '{{auditing_auditctl_s}}'
 
 # Vuln ID: V-72079
 # Severity: high
@@ -177,29 +234,12 @@
 # NIST SP 800-53 Revision 4 :: AU-5 a
 #
 #
-- name: auditctl -s | grep -i "fail"
-  shell: auditctl -s | grep -i "fail" || true
-  # following is so we don't get an error about using command instead of module
-  args:
-      warn: false
-  # errors are expected; ignore
-  ignore_errors: yes
-  # this command doesn't actually change anything
-  changed_when: false
-  register: auditing_auditctl_f
-  when:
-    - "'v_72081' in stig_rhel7_v1r4_checks"
-
-# - name: auditing_auditctl_f
-#   debug:
-#     msg: '{{auditing_auditctl_f}}'
-
 - name: pass stig_rhel7_v1r4 v_72081
   set_fact:
     stig_rhel7_v1r4_v_72081_result: 'pass'
   when:
     - "'v_72081' in stig_rhel7_v1r4_checks"
-    - '"failure 2" in auditing_auditctl_f.stdout'
+    - auditing_auditctl_s.stdout|search('^\s*failure\s+2')
 
 - name: fail stig_rhel7_v1r4 v_72081
   set_fact:
@@ -252,31 +292,13 @@
 # NIST SP 800-53 Revision 4 :: AU-4 (1)
 #
 #
-- name: grep -i '^remote_server' /etc/audisp/audisp-remote.conf
-  shell: grep -i '^remote_server' /etc/audisp/audisp-remote.conf || true
-  # following is so we don't get an error about using command instead of module
-  args:
-      warn: false
-  # errors are expected; ignore
-  ignore_errors: yes
-  # this command doesn't actually change anything
-  changed_when: false
-  register: auditing_remote_server
-  when:
-      - "'v_72083' in stig_rhel7_v1r4_checks"
-      - audisp_remote_conf.stat.exists
-
-# - name: auditing_remote_server
-#   debug:
-#     msg: '{{auditing_remote_server}}'
-
 - name: pass stig_rhel7_v1r4 v_72083
   set_fact:
     stig_rhel7_v1r4_v_72083_result: 'pass'
   when:
     - "'v_72083' in stig_rhel7_v1r4_checks"
-    - audisp_remote_conf.stat.exists
-    - '"remote_server = " in auditing_remote_server.stdout'
+    - auditing_audisp_remote_conf_stat.stat.exists
+    - auditing_audisp_remote_conf.stdout|search('^\s*remote_server')
 
 - name: fail stig_rhel7_v1r4 v_72083
   set_fact:
@@ -331,31 +353,13 @@
 # NIST SP 800-53 Revision 4 :: AU-4 (1)
 #
 #
-- name: grep -i '^enable_krb5' /etc/audisp/audisp-remote.conf
-  shell: grep -i '^enable_krb5' /etc/audisp/audisp-remote.conf || true
-  # following is so we don't get an error about using command instead of module
-  args:
-      warn: false
-  # errors are expected; ignore
-  ignore_errors: yes
-  # this command doesn't actually change anything
-  changed_when: false
-  register: auditing_enable_krb5
-  when:
-      - "'v_72085' in stig_rhel7_v1r4_checks"
-      - audisp_remote_conf.stat.exists
-
-# - name: auditing_enable_krb5
-#   debug:
-#     msg: '{{auditing_enable_krb5}}'
-
 - name: pass stig_rhel7_v1r4 v_72085
   set_fact:
     stig_rhel7_v1r4_v_72085_result: 'pass'
   when:
     - "'v_72085' in stig_rhel7_v1r4_checks"
-    - audisp_remote_conf.stat.exists
-    - '"enable_krb5 = yes" in auditing_enable_krb5.stdout'
+    - auditing_audisp_remote_conf_stat.stat.exists
+    - auditing_audisp_remote_conf.stdout|search('^\s*enable_krb5\s*=\s*yes')
 
 - name: fail stig_rhel7_v1r4 v_72085
   set_fact:
@@ -413,50 +417,14 @@
 # NIST SP 800-53 Revision 4 :: AU-4 (1)
 #
 #
-- name: grep -i '^disk_full_action' /etc/audisp/audisp-remote.conf
-  shell: grep -i '^disk_full_action' /etc/audisp/audisp-remote.conf || true
-  # following is so we don't get an error about using command instead of module
-  args:
-      warn: false
-  # errors are expected; ignore
-  ignore_errors: yes
-  # this command doesn't actually change anything
-  changed_when: false
-  register: auditing_disk_full_action
-  when:
-      - "'v_72087' in stig_rhel7_v1r4_checks"
-      - audisp_remote_conf.stat.exists
-
-# - name: auditing_disk_full_action
-#   debug:
-#     msg: '{{auditing_disk_full_action}}'
-
-- name: grep -i '^network_failure_action' /etc/audisp/audisp-remote.conf
-  shell: grep -i '^network_failure_action' /etc/audisp/audisp-remote.conf || true
-  # following is so we don't get an error about using command instead of module
-  args:
-      warn: false
-  # errors are expected; ignore
-  ignore_errors: yes
-  # this command doesn't actually change anything
-  changed_when: false
-  register: auditing_network_failure_action
-  when:
-      - "'v_72087' in stig_rhel7_v1r4_checks"
-      - audisp_remote_conf.stat.exists
-
-# - name: auditing_network_failure_action
-#   debug:
-#     msg: '{{auditing_network_failure_action}}'
-
 - name: pass stig_rhel7_v1r4 v_72087
   set_fact:
     stig_rhel7_v1r4_v_72087_result: 'pass'
   when:
     - "'v_72087' in stig_rhel7_v1r4_checks"
-    - audisp_remote_conf.stat.exists
-    - '"disk_full_action = syslog" in auditing_disk_full_action.stdout or "disk_full_action = single" in auditing_disk_full_action.stdout or "disk_full_action = halt" in auditing_disk_full_action.stdout'
-    - '"network_failure_action = syslog" in auditing_network_failure_action.stdout or "network_failure_action = single" in auditing_network_failure_action.stdout or "network_failure_action = halt" in auditing_network_failure_action.stdout'
+    - auditing_audisp_remote_conf_stat.stat.exists
+    - auditing_audisp_remote_conf.stdout|search('^\s*disk_full_action\s*=\s*(syslog|single|halt)')
+    - auditing_audisp_remote_conf.stdout|search('^\s*network_failure_action\s*=\s*(syslog|single|halt)')
 
 - name: fail stig_rhel7_v1r4 v_72087
   set_fact:
@@ -526,6 +494,7 @@
 # NIST SP 800-53 Revision 4 :: AU-5 (1)
 #
 #
+# TODO do the following in jinja vs on the remote
 - name: grep -i '^log_file' /etc/audit/auditd.conf | awk '{print $3}'
   shell: grep -i '^log_file' /etc/audit/auditd.conf | awk '{print $3}' || true
   # following is so we don't get an error about using command instead of module
@@ -538,14 +507,14 @@
   register: auditing_log_file
   when:
       - "'v_72089' in stig_rhel7_v1r4_checks"
-      - auditd_conf.stat.exists
+      - auditing_auditd_conf_stat.stat.exists
 
 # - name: auditing_log_file
 #   debug:
 #     msg: '{{auditing_log_file}}'
 
-- name: df /var/log/audit/audit.log | tail -n 1 | awk '{print $2}'
-  shell: df /var/log/audit/audit.log | tail -n 1 | awk '{print $2}' || true
+- name: df {{auditing_log_file.stdout}} | tail -n 1 | awk '{print $2}'
+  shell: df {{auditing_log_file.stdout}} | tail -n 1 | awk '{print $2}' || true
   # following is so we don't get an error about using command instead of module
   args:
       warn: false
@@ -556,7 +525,7 @@
   register: auditing_log_partition_size
   when:
       - "'v_72089' in stig_rhel7_v1r4_checks"
-      - auditd_conf.stat.exists
+      - auditing_auditd_conf_stat.stat.exists
 
 # - name: auditing_log_partition_size
 #   debug:
@@ -584,14 +553,14 @@
   register: auditing_space_left
   when:
       - "'v_72089' in stig_rhel7_v1r4_checks"
-      - auditd_conf.stat.exists
+      - auditing_auditd_conf_stat.stat.exists
 
 - name: pass stig_rhel7_v1r4 v_72089
   set_fact:
     stig_rhel7_v1r4_v_72089_result: 'pass'
   when:
     - "'v_72089' in stig_rhel7_v1r4_checks"
-    - auditd_conf.stat.exists
+    - auditing_auditd_conf_stat.stat.exists
     - auditing_space_left.stdout|int == auditing_log_partition_75
 
 - name: fail stig_rhel7_v1r4 v_72089
@@ -641,31 +610,13 @@
 # NIST SP 800-53 Revision 4 :: AU-5 (1)
 #
 #
-- name: grep -i '^space_left_action' /etc/audit/auditd.conf | awk '{print $3}'
-  shell: grep -i '^space_left_action' /etc/audit/auditd.conf | awk '{print $3}' || true
-  # following is so we don't get an error about using command instead of module
-  args:
-      warn: false
-  # errors are expected; ignore
-  ignore_errors: yes
-  # this command doesn't actually change anything
-  changed_when: false
-  register: auditing_space_left_action
-  when:
-    - "'v_72091' in stig_rhel7_v1r4_checks"
-    - auditd_conf.stat.exists
-
-# - name: auditing_space_left_action
-#   debug:
-#     msg: '{{auditing_space_left_action}}'
-
 - name: pass stig_rhel7_v1r4 v_72091
   set_fact:
     stig_rhel7_v1r4_v_72091_result: 'pass'
   when:
     - "'v_72091' in stig_rhel7_v1r4_checks"
-    - auditd_conf.stat.exists
-    - auditing_space_left_action.stdout == 'email'
+    - auditing_auditd_conf_stat.stat.exists
+    - auditing_auditd_conf|search('^\s*space_left_action\s*=\s*email')
 
 - name: fail stig_rhel7_v1r4 v_72091
   set_fact:
@@ -714,31 +665,13 @@
 # NIST SP 800-53 Revision 4 :: AU-5 (1)
 #
 #
-- name: grep -i '^action_mail_acct' /etc/audit/auditd.conf | awk '{print $3}'
-  shell: grep -i '^action_mail_acct' /etc/audit/auditd.conf | awk '{print $3}' || true
-  # following is so we don't get an error about using command instead of module
-  args:
-      warn: false
-  # errors are expected; ignore
-  ignore_errors: yes
-  # this command doesn't actually change anything
-  changed_when: false
-  register: auditing_action_mail_acct
-  when:
-    - "'v_72093' in stig_rhel7_v1r4_checks"
-    - auditd_conf.stat.exists
-
-# - name: auditing_action_mail_acct
-#   debug:
-#     msg: '{{auditing_action_mail_acct}}'
-
 - name: pass stig_rhel7_v1r4 v_72093
   set_fact:
     stig_rhel7_v1r4_v_72093_result: 'pass'
   when:
     - "'v_72093' in stig_rhel7_v1r4_checks"
-    - auditd_conf.stat.exists
-    - auditing_action_mail_acct.stdout == auditing_email
+    - auditing_auditd_conf_stat.stat.exists
+    - auditing_auditd_conf.stdout|search('^\s*action_mail_acct\s*=\s*' ~ auditing_email)
 
 - name: fail stig_rhel7_v1r4 v_72093
   set_fact:
@@ -797,6 +730,7 @@
 # NIST SP 800-53 Revision 4 :: AC-6 (9)
 #
 #
+# TODO do the following in jinja vs on the remote
 - name: df | grep -i '^/' | awk '{print $6}'
   shell: df | grep -i '^/' | awk '{print $6}' || true
   # following is so we don't get an error about using command instead of module
@@ -953,29 +887,13 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: grep -iw chown /etc/audit/audit.rules
-  shell: grep -iw chown /etc/audit/audit.rules || true
-  # following is so we don't get an error about using command instead of module
-  args:
-      warn: false
-  # errors are expected; ignore
-  ignore_errors: yes
-  # this command doesn't actually change anything
-  changed_when: false
-  register: auditing_chown_rules
-  when:
-    - "'v_72097' in stig_rhel7_v1r4_checks"
-
-# - name: auditing_chown_rules
-#   debug:
-#     msg: '{{auditing_chown_rules}}'
-
 - name: pass stig_rhel7_v1r4 v_72097
   set_fact:
     stig_rhel7_v1r4_v_72097_result: 'pass'
   when:
     - "'v_72097' in stig_rhel7_v1r4_checks"
-    - "'chown' in auditing_chown_rules"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\schown\s')
 
 - name: fail stig_rhel7_v1r4 v_72097
   set_fact:
@@ -1115,29 +1033,13 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-- name: grep -iw fchown /etc/audit/audit.rules
-  shell: grep -iw fchown /etc/audit/audit.rules || true
-  # following is so we don't get an error about using command instead of module
-  args:
-      warn: false
-  # errors are expected; ignore
-  ignore_errors: yes
-  # this command doesn't actually change anything
-  changed_when: false
-  register: auditing_fchown_rules
-  when:
-    - "'v_72101' in stig_rhel7_v1r4_checks"
-
-# - name: auditing_chown_rules
-#   debug:
-#     msg: '{{auditing_chown_rules}}'
-
 - name: pass stig_rhel7_v1r4 v_72101
   set_fact:
     stig_rhel7_v1r4_v_72101_result: 'pass'
   when:
     - "'v_72101' in stig_rhel7_v1r4_checks"
-    - "'fchown' in auditing_fchown_rules"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\sfchown\s')
 
 - name: fail stig_rhel7_v1r4 v_72101
   set_fact:
@@ -1209,12 +1111,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72103
-#   set_fact:
-#     stig_rhel7_v1r4_v_72103_result: 'fail'
-#   when:
-#     - "'v_72103' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72103_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72103
+  set_fact:
+    stig_rhel7_v1r4_v_72103_result: 'pass'
+  when:
+    - "'v_72103' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\sfchownat\s')
+
+- name: fail stig_rhel7_v1r4 v_72103
+  set_fact:
+    stig_rhel7_v1r4_v_72103_result: 'fail'
+  when:
+    - "'v_72103' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72103_result != 'pass'
 
 
 # Vuln ID: V-72105
@@ -1273,12 +1183,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72105
-#   set_fact:
-#     stig_rhel7_v1r4_v_72105_result: 'fail'
-#   when:
-#     - "'v_72105' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72105_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72105
+  set_fact:
+    stig_rhel7_v1r4_v_72105_result: 'pass'
+  when:
+    - "'v_72105' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\schmod\s')
+
+- name: fail stig_rhel7_v1r4 v_72105
+  set_fact:
+    stig_rhel7_v1r4_v_72105_result: 'fail'
+  when:
+    - "'v_72105' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72105_result != 'pass'
 
 
 # Vuln ID: V-72107
@@ -1337,12 +1255,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72107
-#   set_fact:
-#     stig_rhel7_v1r4_v_72107_result: 'fail'
-#   when:
-#     - "'v_72107' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72107_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72107
+  set_fact:
+    stig_rhel7_v1r4_v_72107_result: 'pass'
+  when:
+    - "'v_72107' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\sfchmod\s')
+
+- name: fail stig_rhel7_v1r4 v_72107
+  set_fact:
+    stig_rhel7_v1r4_v_72107_result: 'fail'
+  when:
+    - "'v_72107' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72107_result != 'pass'
 
 
 # Vuln ID: V-72109
@@ -1401,12 +1327,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72109
-#   set_fact:
-#     stig_rhel7_v1r4_v_72109_result: 'fail'
-#   when:
-#     - "'v_72109' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72109_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72109
+  set_fact:
+    stig_rhel7_v1r4_v_72109_result: 'pass'
+  when:
+    - "'v_72109' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\sfchmodat\s')
+
+- name: fail stig_rhel7_v1r4 v_72109
+  set_fact:
+    stig_rhel7_v1r4_v_72109_result: 'fail'
+  when:
+    - "'v_72109' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72109_result != 'pass'
 
 
 # Vuln ID: V-72111
@@ -1466,12 +1400,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72111
-#   set_fact:
-#     stig_rhel7_v1r4_v_72111_result: 'fail'
-#   when:
-#     - "'v_72111' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72111_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72111
+  set_fact:
+    stig_rhel7_v1r4_v_72111_result: 'pass'
+  when:
+    - "'v_72111' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\ssetxattr\s')
+
+- name: fail stig_rhel7_v1r4 v_72111
+  set_fact:
+    stig_rhel7_v1r4_v_72111_result: 'fail'
+  when:
+    - "'v_72111' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72111_result != 'pass'
 
 
 # Vuln ID: V-72113
@@ -1530,12 +1472,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72113
-#   set_fact:
-#     stig_rhel7_v1r4_v_72113_result: 'fail'
-#   when:
-#     - "'v_72113' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72113_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72113
+  set_fact:
+    stig_rhel7_v1r4_v_72113_result: 'pass'
+  when:
+    - "'v_72113' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\sfsetxattr\s')
+
+- name: fail stig_rhel7_v1r4 v_72113
+  set_fact:
+    stig_rhel7_v1r4_v_72113_result: 'fail'
+  when:
+    - "'v_72113' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72113_result != 'pass'
 
 
 # Vuln ID: V-72115
@@ -1595,12 +1545,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72115
-#   set_fact:
-#     stig_rhel7_v1r4_v_72115_result: 'fail'
-#   when:
-#     - "'v_72115' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72115_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72115
+  set_fact:
+    stig_rhel7_v1r4_v_72115_result: 'pass'
+  when:
+    - "'v_72115' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\slsetxattr\s')
+
+- name: fail stig_rhel7_v1r4 v_72115
+  set_fact:
+    stig_rhel7_v1r4_v_72115_result: 'fail'
+  when:
+    - "'v_72115' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72115_result != 'pass'
 
 
 # Vuln ID: V-72117
@@ -1659,12 +1617,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72117
-#   set_fact:
-#     stig_rhel7_v1r4_v_72117_result: 'fail'
-#   when:
-#     - "'v_72117' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72117_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72117
+  set_fact:
+    stig_rhel7_v1r4_v_72117_result: 'pass'
+  when:
+    - "'v_72117' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\sremovexattr\s')
+
+- name: fail stig_rhel7_v1r4 v_72117
+  set_fact:
+    stig_rhel7_v1r4_v_72117_result: 'fail'
+  when:
+    - "'v_72117' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72117_result != 'pass'
 
 
 # Vuln ID: V-72119
@@ -1724,12 +1690,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72119
-#   set_fact:
-#     stig_rhel7_v1r4_v_72119_result: 'fail'
-#   when:
-#     - "'v_72119' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72119_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72119
+  set_fact:
+    stig_rhel7_v1r4_v_72119_result: 'pass'
+  when:
+    - "'v_72119' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\sfremovexattr\s')
+
+- name: fail stig_rhel7_v1r4 v_72119
+  set_fact:
+    stig_rhel7_v1r4_v_72119_result: 'fail'
+  when:
+    - "'v_72119' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72119_result != 'pass'
 
 
 # Vuln ID: V-72121
@@ -1788,12 +1762,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72121
-#   set_fact:
-#     stig_rhel7_v1r4_v_72121_result: 'fail'
-#   when:
-#     - "'v_72121' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72121_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72121
+  set_fact:
+    stig_rhel7_v1r4_v_72121_result: 'pass'
+  when:
+    - "'v_72121' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\slremovexattr\s')
+
+- name: fail stig_rhel7_v1r4 v_72121
+  set_fact:
+    stig_rhel7_v1r4_v_72121_result: 'fail'
+  when:
+    - "'v_72121' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72121_result != 'pass'
 
 
 # Vuln ID: V-72123
@@ -1869,12 +1851,21 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72123
-#   set_fact:
-#     stig_rhel7_v1r4_v_72123_result: 'fail'
-#   when:
-#     - "'v_72123' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72123_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72123
+  set_fact:
+    stig_rhel7_v1r4_v_72123_result: 'pass'
+  when:
+    - "'v_72123' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('-S creat -F exit=-EPERM')
+    - auditing_rules.stdout|search('-S creat -F exit=-EACCES')
+
+- name: fail stig_rhel7_v1r4 v_72123
+  set_fact:
+    stig_rhel7_v1r4_v_72123_result: 'fail'
+  when:
+    - "'v_72123' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72123_result != 'pass'
 
 
 # Vuln ID: V-72125
@@ -1950,12 +1941,21 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72125
-#   set_fact:
-#     stig_rhel7_v1r4_v_72125_result: 'fail'
-#   when:
-#     - "'v_72125' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72125_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72125
+  set_fact:
+    stig_rhel7_v1r4_v_72125_result: 'pass'
+  when:
+    - "'v_72125' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('-S open -F exit=-EPERM')
+    - auditing_rules.stdout|search('-S open -F exit=-EACCES')
+
+- name: fail stig_rhel7_v1r4 v_72125
+  set_fact:
+    stig_rhel7_v1r4_v_72125_result: 'fail'
+  when:
+    - "'v_72125' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72125_result != 'pass'
 
 
 # Vuln ID: V-72127
@@ -2030,12 +2030,21 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72127
-#   set_fact:
-#     stig_rhel7_v1r4_v_72127_result: 'fail'
-#   when:
-#     - "'v_72127' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72127_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72127
+  set_fact:
+    stig_rhel7_v1r4_v_72127_result: 'pass'
+  when:
+    - "'v_72127' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('-S openat -F exit=-EPERM')
+    - auditing_rules.stdout|search('-S openat -F exit=-EACCES')
+
+- name: fail stig_rhel7_v1r4 v_72127
+  set_fact:
+    stig_rhel7_v1r4_v_72127_result: 'fail'
+  when:
+    - "'v_72127' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72127_result != 'pass'
 
 
 # Vuln ID: V-72129
@@ -2111,12 +2120,21 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72129
-#   set_fact:
-#     stig_rhel7_v1r4_v_72129_result: 'fail'
-#   when:
-#     - "'v_72129' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72129_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72129
+  set_fact:
+    stig_rhel7_v1r4_v_72129_result: 'pass'
+  when:
+    - "'v_72129' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('-S open_by_handle_at -F exit=-EPERM')
+    - auditing_rules.stdout|search('-S open_by_handle_at -F exit=-EACCES')
+
+- name: fail stig_rhel7_v1r4 v_72129
+  set_fact:
+    stig_rhel7_v1r4_v_72129_result: 'fail'
+  when:
+    - "'v_72129' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72129_result != 'pass'
 
 
 # Vuln ID: V-72131
@@ -2191,12 +2209,21 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72131
-#   set_fact:
-#     stig_rhel7_v1r4_v_72131_result: 'fail'
-#   when:
-#     - "'v_72131' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72131_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72131
+  set_fact:
+    stig_rhel7_v1r4_v_72131_result: 'pass'
+  when:
+    - "'v_72131' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('-S truncate -F exit=-EPERM')
+    - auditing_rules.stdout|search('-S truncate -F exit=-EACCES')
+
+- name: fail stig_rhel7_v1r4 v_72131
+  set_fact:
+    stig_rhel7_v1r4_v_72131_result: 'fail'
+  when:
+    - "'v_72131' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72131_result != 'pass'
 
 
 # Vuln ID: V-72133
@@ -2271,12 +2298,21 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72133
-#   set_fact:
-#     stig_rhel7_v1r4_v_72133_result: 'fail'
-#   when:
-#     - "'v_72133' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72133_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72133
+  set_fact:
+    stig_rhel7_v1r4_v_72133_result: 'pass'
+  when:
+    - "'v_72133' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\s-S ftruncate -F exit=-EPERM\s')
+    - auditing_rules.stdout|search('\s-S ftruncate -F exit=-EACCES\s')
+
+- name: fail stig_rhel7_v1r4 v_72133
+  set_fact:
+    stig_rhel7_v1r4_v_72133_result: 'fail'
+  when:
+    - "'v_72133' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72133_result != 'pass'
 
 
 # Vuln ID: V-72135
@@ -2331,12 +2367,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72135
-#   set_fact:
-#     stig_rhel7_v1r4_v_72135_result: 'fail'
-#   when:
-#     - "'v_72135' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72135_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72135
+  set_fact:
+    stig_rhel7_v1r4_v_72135_result: 'pass'
+  when:
+    - "'v_72135' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/sbin/semanage')
+
+- name: fail stig_rhel7_v1r4 v_72135
+  set_fact:
+    stig_rhel7_v1r4_v_72135_result: 'fail'
+  when:
+    - "'v_72135' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72135_result != 'pass'
 
 
 # Vuln ID: V-72137
@@ -2391,12 +2435,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72137
-#   set_fact:
-#     stig_rhel7_v1r4_v_72137_result: 'fail'
-#   when:
-#     - "'v_72137' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72137_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72137
+  set_fact:
+    stig_rhel7_v1r4_v_72137_result: 'pass'
+  when:
+    - "'v_72137' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/sbin/setsebool')
+
+- name: fail stig_rhel7_v1r4 v_72137
+  set_fact:
+    stig_rhel7_v1r4_v_72137_result: 'fail'
+  when:
+    - "'v_72137' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72137_result != 'pass'
 
 
 # Vuln ID: V-72139
@@ -2451,12 +2503,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72139
-#   set_fact:
-#     stig_rhel7_v1r4_v_72139_result: 'fail'
-#   when:
-#     - "'v_72139' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72139_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72139
+  set_fact:
+    stig_rhel7_v1r4_v_72139_result: 'pass'
+  when:
+    - "'v_72139' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/bin/chcon')
+
+- name: fail stig_rhel7_v1r4 v_72139
+  set_fact:
+    stig_rhel7_v1r4_v_72139_result: 'fail'
+  when:
+    - "'v_72139' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72139_result != 'pass'
 
 
 # Vuln ID: V-72141
@@ -2511,12 +2571,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72141
-#   set_fact:
-#     stig_rhel7_v1r4_v_72141_result: 'fail'
-#   when:
-#     - "'v_72141' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72141_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72141
+  set_fact:
+    stig_rhel7_v1r4_v_72141_result: 'pass'
+  when:
+    - "'v_72141' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/sbin/setfiles')
+
+- name: fail stig_rhel7_v1r4 v_72141
+  set_fact:
+    stig_rhel7_v1r4_v_72141_result: 'fail'
+  when:
+    - "'v_72141' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72141_result != 'pass'
 
 
 # Vuln ID: V-72143
@@ -2577,12 +2645,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72143
-#   set_fact:
-#     stig_rhel7_v1r4_v_72143_result: 'fail'
-#   when:
-#     - "'v_72143' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72143_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72143
+  set_fact:
+    stig_rhel7_v1r4_v_72143_result: 'pass'
+  when:
+    - "'v_72143' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/var/log/tallylog')
+
+- name: fail stig_rhel7_v1r4 v_72143
+  set_fact:
+    stig_rhel7_v1r4_v_72143_result: 'fail'
+  when:
+    - "'v_72143' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72143_result != 'pass'
 
 
 # Vuln ID: V-72145
@@ -2643,12 +2719,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72145
-#   set_fact:
-#     stig_rhel7_v1r4_v_72145_result: 'fail'
-#   when:
-#     - "'v_72145' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72145_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72145
+  set_fact:
+    stig_rhel7_v1r4_v_72145_result: 'pass'
+  when:
+    - "'v_72145' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/var/run/faillock')
+
+- name: fail stig_rhel7_v1r4 v_72145
+  set_fact:
+    stig_rhel7_v1r4_v_72145_result: 'fail'
+  when:
+    - "'v_72145' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72145_result != 'pass'
 
 
 # Vuln ID: V-72147
@@ -2709,12 +2793,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72147
-#   set_fact:
-#     stig_rhel7_v1r4_v_72147_result: 'fail'
-#   when:
-#     - "'v_72147' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72147_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72147
+  set_fact:
+    stig_rhel7_v1r4_v_72147_result: 'pass'
+  when:
+    - "'v_72147' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/var/log/lastlog')
+
+- name: fail stig_rhel7_v1r4 v_72147
+  set_fact:
+    stig_rhel7_v1r4_v_72147_result: 'fail'
+  when:
+    - "'v_72147' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72147_result != 'pass'
 
 
 # Vuln ID: V-72149
@@ -2775,12 +2867,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72149
-#   set_fact:
-#     stig_rhel7_v1r4_v_72149_result: 'fail'
-#   when:
-#     - "'v_72149' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72149_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72149
+  set_fact:
+    stig_rhel7_v1r4_v_72149_result: 'pass'
+  when:
+    - "'v_72149' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/bin/passwd')
+
+- name: fail stig_rhel7_v1r4 v_72149
+  set_fact:
+    stig_rhel7_v1r4_v_72149_result: 'fail'
+  when:
+    - "'v_72149' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72149_result != 'pass'
 
 
 # Vuln ID: V-72151
@@ -2841,12 +2941,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72151
-#   set_fact:
-#     stig_rhel7_v1r4_v_72151_result: 'fail'
-#   when:
-#     - "'v_72151' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72151_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72151
+  set_fact:
+    stig_rhel7_v1r4_v_72151_result: 'pass'
+  when:
+    - "'v_72151' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/sbin/unix_chkpwd')
+
+- name: fail stig_rhel7_v1r4 v_72151
+  set_fact:
+    stig_rhel7_v1r4_v_72151_result: 'fail'
+  when:
+    - "'v_72151' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72151_result != 'pass'
 
 
 # Vuln ID: V-72153
@@ -2907,12 +3015,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72153
-#   set_fact:
-#     stig_rhel7_v1r4_v_72153_result: 'fail'
-#   when:
-#     - "'v_72153' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72153_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72153
+  set_fact:
+    stig_rhel7_v1r4_v_72153_result: 'pass'
+  when:
+    - "'v_72153' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/bin/gpasswd')
+
+- name: fail stig_rhel7_v1r4 v_72153
+  set_fact:
+    stig_rhel7_v1r4_v_72153_result: 'fail'
+  when:
+    - "'v_72153' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72153_result != 'pass'
 
 
 # Vuln ID: V-72155
@@ -2973,12 +3089,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72155
-#   set_fact:
-#     stig_rhel7_v1r4_v_72155_result: 'fail'
-#   when:
-#     - "'v_72155' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72155_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72155
+  set_fact:
+    stig_rhel7_v1r4_v_72155_result: 'pass'
+  when:
+    - "'v_72155' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/bin/chage')
+
+- name: fail stig_rhel7_v1r4 v_72155
+  set_fact:
+    stig_rhel7_v1r4_v_72155_result: 'fail'
+  when:
+    - "'v_72155' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72155_result != 'pass'
 
 
 # Vuln ID: V-72157
@@ -3039,12 +3163,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72157
-#   set_fact:
-#     stig_rhel7_v1r4_v_72157_result: 'fail'
-#   when:
-#     - "'v_72157' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72157_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72157
+  set_fact:
+    stig_rhel7_v1r4_v_72157_result: 'pass'
+  when:
+    - "'v_72157' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/sbin/userhelper')
+
+- name: fail stig_rhel7_v1r4 v_72157
+  set_fact:
+    stig_rhel7_v1r4_v_72157_result: 'fail'
+  when:
+    - "'v_72157' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72157_result != 'pass'
 
 
 # Vuln ID: V-72159
@@ -3111,12 +3243,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72159
-#   set_fact:
-#     stig_rhel7_v1r4_v_72159_result: 'fail'
-#   when:
-#     - "'v_72159' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72159_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72159
+  set_fact:
+    stig_rhel7_v1r4_v_72159_result: 'pass'
+  when:
+    - "'v_72159' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/bin/su')
+
+- name: fail stig_rhel7_v1r4 v_72159
+  set_fact:
+    stig_rhel7_v1r4_v_72159_result: 'fail'
+  when:
+    - "'v_72159' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72159_result != 'pass'
 
 
 # Vuln ID: V-72161
@@ -3183,12 +3323,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72161
-#   set_fact:
-#     stig_rhel7_v1r4_v_72161_result: 'fail'
-#   when:
-#     - "'v_72161' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72161_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72161
+  set_fact:
+    stig_rhel7_v1r4_v_72161_result: 'pass'
+  when:
+    - "'v_72161' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/bin/sudo')
+
+- name: fail stig_rhel7_v1r4 v_72161
+  set_fact:
+    stig_rhel7_v1r4_v_72161_result: 'fail'
+  when:
+    - "'v_72161' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72161_result != 'pass'
 
 
 # Vuln ID: V-72163
@@ -3261,12 +3409,21 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72163
-#   set_fact:
-#     stig_rhel7_v1r4_v_72163_result: 'fail'
-#   when:
-#     - "'v_72163' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72163_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72163
+  set_fact:
+    stig_rhel7_v1r4_v_72163_result: 'pass'
+  when:
+    - "'v_72163' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/etc/sudoers\s')
+    - auditing_rules.stdout|search('/etc/sudoers.d/?\s')
+
+- name: fail stig_rhel7_v1r4 v_72163
+  set_fact:
+    stig_rhel7_v1r4_v_72163_result: 'fail'
+  when:
+    - "'v_72163' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72163_result != 'pass'
 
 
 # Vuln ID: V-72165
@@ -3333,12 +3490,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72165
-#   set_fact:
-#     stig_rhel7_v1r4_v_72165_result: 'fail'
-#   when:
-#     - "'v_72165' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72165_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72165
+  set_fact:
+    stig_rhel7_v1r4_v_72165_result: 'pass'
+  when:
+    - "'v_72165' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/bin/newgrp')
+
+- name: fail stig_rhel7_v1r4 v_72165
+  set_fact:
+    stig_rhel7_v1r4_v_72165_result: 'fail'
+  when:
+    - "'v_72165' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72165_result != 'pass'
 
 
 # Vuln ID: V-72167
@@ -3405,12 +3570,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72167
-#   set_fact:
-#     stig_rhel7_v1r4_v_72167_result: 'fail'
-#   when:
-#     - "'v_72167' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72167_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72167
+  set_fact:
+    stig_rhel7_v1r4_v_72167_result: 'pass'
+  when:
+    - "'v_72167' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/bin/chsh')
+
+- name: fail stig_rhel7_v1r4 v_72167
+  set_fact:
+    stig_rhel7_v1r4_v_72167_result: 'fail'
+  when:
+    - "'v_72167' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72167_result != 'pass'
 
 
 # Vuln ID: V-72169
@@ -3477,12 +3650,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72169
-#   set_fact:
-#     stig_rhel7_v1r4_v_72169_result: 'fail'
-#   when:
-#     - "'v_72169' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72169_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72169
+  set_fact:
+    stig_rhel7_v1r4_v_72169_result: 'pass'
+  when:
+    - "'v_72169' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/bin/sudoedit')
+
+- name: fail stig_rhel7_v1r4 v_72169
+  set_fact:
+    stig_rhel7_v1r4_v_72169_result: 'fail'
+  when:
+    - "'v_72169' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72169_result != 'pass'
 
 
 # Vuln ID: V-72171
@@ -3559,12 +3740,22 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72171
-#   set_fact:
-#     stig_rhel7_v1r4_v_72171_result: 'fail'
-#   when:
-#     - "'v_72171' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72171_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72171
+  set_fact:
+    stig_rhel7_v1r4_v_72171_result: 'pass'
+  when:
+    - "'v_72171' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\smount\s')
+    - auditing_rules.stdout|search('/bin/mount')
+    - auditing_rules.stdout|search('/usr/bin/mount')
+
+- name: fail stig_rhel7_v1r4 v_72171
+  set_fact:
+    stig_rhel7_v1r4_v_72171_result: 'fail'
+  when:
+    - "'v_72171' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72171_result != 'pass'
 
 
 # Vuln ID: V-72173
@@ -3619,12 +3810,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72173
-#   set_fact:
-#     stig_rhel7_v1r4_v_72173_result: 'fail'
-#   when:
-#     - "'v_72173' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72173_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72173
+  set_fact:
+    stig_rhel7_v1r4_v_72173_result: 'pass'
+  when:
+    - "'v_72173' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/bin/umount')
+
+- name: fail stig_rhel7_v1r4 v_72173
+  set_fact:
+    stig_rhel7_v1r4_v_72173_result: 'fail'
+  when:
+    - "'v_72173' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72173_result != 'pass'
 
 
 # Vuln ID: V-72175
@@ -3679,12 +3878,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72175
-#   set_fact:
-#     stig_rhel7_v1r4_v_72175_result: 'fail'
-#   when:
-#     - "'v_72175' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72175_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72175
+  set_fact:
+    stig_rhel7_v1r4_v_72175_result: 'pass'
+  when:
+    - "'v_72175' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/sbin/postdrop')
+
+- name: fail stig_rhel7_v1r4 v_72175
+  set_fact:
+    stig_rhel7_v1r4_v_72175_result: 'fail'
+  when:
+    - "'v_72175' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72175_result != 'pass'
 
 
 # Vuln ID: V-72177
@@ -3739,12 +3946,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72177
-#   set_fact:
-#     stig_rhel7_v1r4_v_72177_result: 'fail'
-#   when:
-#     - "'v_72177' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72177_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72177
+  set_fact:
+    stig_rhel7_v1r4_v_72177_result: 'pass'
+  when:
+    - "'v_72177' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/sbin/postqueue')
+
+- name: fail stig_rhel7_v1r4 v_72177
+  set_fact:
+    stig_rhel7_v1r4_v_72177_result: 'fail'
+  when:
+    - "'v_72177' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72177_result != 'pass'
 
 
 # Vuln ID: V-72179
@@ -3805,12 +4020,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72179
-#   set_fact:
-#     stig_rhel7_v1r4_v_72179_result: 'fail'
-#   when:
-#     - "'v_72179' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72179_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72179
+  set_fact:
+    stig_rhel7_v1r4_v_72179_result: 'pass'
+  when:
+    - "'v_72179' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/libexec/openssh/ssh-keysign')
+
+- name: fail stig_rhel7_v1r4 v_72179
+  set_fact:
+    stig_rhel7_v1r4_v_72179_result: 'fail'
+  when:
+    - "'v_72179' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72179_result != 'pass'
 
 
 # Vuln ID: V-72183
@@ -3871,12 +4094,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72183
-#   set_fact:
-#     stig_rhel7_v1r4_v_72183_result: 'fail'
-#   when:
-#     - "'v_72183' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72183_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72183
+  set_fact:
+    stig_rhel7_v1r4_v_72183_result: 'pass'
+  when:
+    - "'v_72183' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/usr/bin/crontab')
+
+- name: fail stig_rhel7_v1r4 v_72183
+  set_fact:
+    stig_rhel7_v1r4_v_72183_result: 'fail'
+  when:
+    - "'v_72183' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72183_result != 'pass'
 
 
 # Vuln ID: V-72185
@@ -3923,12 +4154,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72185
-#   set_fact:
-#     stig_rhel7_v1r4_v_72185_result: 'fail'
-#   when:
-#     - "'v_72185' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72185_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72185
+  set_fact:
+    stig_rhel7_v1r4_v_72185_result: 'pass'
+  when:
+    - "'v_72185' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/sbin/pam_timestamp_check')
+
+- name: fail stig_rhel7_v1r4 v_72185
+  set_fact:
+    stig_rhel7_v1r4_v_72185_result: 'fail'
+  when:
+    - "'v_72185' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72185_result != 'pass'
 
 
 # Vuln ID: V-72187
@@ -3989,12 +4228,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72187
-#   set_fact:
-#     stig_rhel7_v1r4_v_72187_result: 'fail'
-#   when:
-#     - "'v_72187' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72187_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72187
+  set_fact:
+    stig_rhel7_v1r4_v_72187_result: 'pass'
+  when:
+    - "'v_72187' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\sinit_module\s')
+
+- name: fail stig_rhel7_v1r4 v_72187
+  set_fact:
+    stig_rhel7_v1r4_v_72187_result: 'fail'
+  when:
+    - "'v_72187' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72187_result != 'pass'
 
 
 # Vuln ID: V-72189
@@ -4055,12 +4302,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72189
-#   set_fact:
-#     stig_rhel7_v1r4_v_72189_result: 'fail'
-#   when:
-#     - "'v_72189' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72189_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72189
+  set_fact:
+    stig_rhel7_v1r4_v_72189_result: 'pass'
+  when:
+    - "'v_72189' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\sdelete_module\s')
+
+- name: fail stig_rhel7_v1r4 v_72189
+  set_fact:
+    stig_rhel7_v1r4_v_72189_result: 'fail'
+  when:
+    - "'v_72189' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72189_result != 'pass'
 
 
 # Vuln ID: V-72191
@@ -4113,12 +4368,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72191
-#   set_fact:
-#     stig_rhel7_v1r4_v_72191_result: 'fail'
-#   when:
-#     - "'v_72191' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72191_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72191
+  set_fact:
+    stig_rhel7_v1r4_v_72191_result: 'pass'
+  when:
+    - "'v_72191' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/sbin/insmod')
+
+- name: fail stig_rhel7_v1r4 v_72191
+  set_fact:
+    stig_rhel7_v1r4_v_72191_result: 'fail'
+  when:
+    - "'v_72191' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72191_result != 'pass'
 
 
 # Vuln ID: V-72193
@@ -4171,12 +4434,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72193
-#   set_fact:
-#     stig_rhel7_v1r4_v_72193_result: 'fail'
-#   when:
-#     - "'v_72193' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72193_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72193
+  set_fact:
+    stig_rhel7_v1r4_v_72193_result: 'pass'
+  when:
+    - "'v_72193' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/sbin/rmmod')
+
+- name: fail stig_rhel7_v1r4 v_72193
+  set_fact:
+    stig_rhel7_v1r4_v_72193_result: 'fail'
+  when:
+    - "'v_72193' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72193_result != 'pass'
 
 
 # Vuln ID: V-72195
@@ -4231,12 +4502,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72195
-#   set_fact:
-#     stig_rhel7_v1r4_v_72195_result: 'fail'
-#   when:
-#     - "'v_72195' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72195_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72195
+  set_fact:
+    stig_rhel7_v1r4_v_72195_result: 'pass'
+  when:
+    - "'v_72195' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/sbin/modprobe')
+
+- name: fail stig_rhel7_v1r4 v_72195
+  set_fact:
+    stig_rhel7_v1r4_v_72195_result: 'fail'
+  when:
+    - "'v_72195' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72195_result != 'pass'
 
 
 # Vuln ID: V-72197
@@ -4303,12 +4582,20 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (4)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72197
-#   set_fact:
-#     stig_rhel7_v1r4_v_72197_result: 'fail'
-#   when:
-#     - "'v_72197' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72197_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72197
+  set_fact:
+    stig_rhel7_v1r4_v_72197_result: 'pass'
+  when:
+    - "'v_72197' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/etc/passwd')
+
+- name: fail stig_rhel7_v1r4 v_72197
+  set_fact:
+    stig_rhel7_v1r4_v_72197_result: 'fail'
+  when:
+    - "'v_72197' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72197_result != 'pass'
 
 
 # Vuln ID: V-72199
@@ -4369,12 +4656,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72199
-#   set_fact:
-#     stig_rhel7_v1r4_v_72199_result: 'fail'
-#   when:
-#     - "'v_72199' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72199_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72199
+  set_fact:
+    stig_rhel7_v1r4_v_72199_result: 'pass'
+  when:
+    - "'v_72199' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\srename\s')
+
+- name: fail stig_rhel7_v1r4 v_72199
+  set_fact:
+    stig_rhel7_v1r4_v_72199_result: 'fail'
+  when:
+    - "'v_72199' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72199_result != 'pass'
 
 
 # Vuln ID: V-72201
@@ -4435,12 +4730,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72201
-#   set_fact:
-#     stig_rhel7_v1r4_v_72201_result: 'fail'
-#   when:
-#     - "'v_72201' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72201_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72201
+  set_fact:
+    stig_rhel7_v1r4_v_72201_result: 'pass'
+  when:
+    - "'v_72201' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\srenameat\s')
+
+- name: fail stig_rhel7_v1r4 v_72201
+  set_fact:
+    stig_rhel7_v1r4_v_72201_result: 'fail'
+  when:
+    - "'v_72201' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72201_result != 'pass'
 
 
 # Vuln ID: V-72203
@@ -4501,12 +4804,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72203
-#   set_fact:
-#     stig_rhel7_v1r4_v_72203_result: 'fail'
-#   when:
-#     - "'v_72203' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72203_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72203
+  set_fact:
+    stig_rhel7_v1r4_v_72203_result: 'pass'
+  when:
+    - "'v_72203' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\srmdir\s')
+
+- name: fail stig_rhel7_v1r4 v_72203
+  set_fact:
+    stig_rhel7_v1r4_v_72203_result: 'fail'
+  when:
+    - "'v_72203' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72203_result != 'pass'
 
 
 # Vuln ID: V-72205
@@ -4567,12 +4878,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72205
-#   set_fact:
-#     stig_rhel7_v1r4_v_72205_result: 'fail'
-#   when:
-#     - "'v_72205' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72205_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72205
+  set_fact:
+    stig_rhel7_v1r4_v_72205_result: 'pass'
+  when:
+    - "'v_72205' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\sunlink\s')
+
+- name: fail stig_rhel7_v1r4 v_72205
+  set_fact:
+    stig_rhel7_v1r4_v_72205_result: 'fail'
+  when:
+    - "'v_72205' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72205_result != 'pass'
 
 
 # Vuln ID: V-72207
@@ -4633,12 +4952,20 @@
 # NIST SP 800-53 Revision 4 :: MA-4 (1) (a)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72207
-#   set_fact:
-#     stig_rhel7_v1r4_v_72207_result: 'fail'
-#   when:
-#     - "'v_72207' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72207_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72207
+  set_fact:
+    stig_rhel7_v1r4_v_72207_result: 'pass'
+  when:
+    - "'v_72207' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\sunlinkat\s')
+
+- name: fail stig_rhel7_v1r4 v_72207
+  set_fact:
+    stig_rhel7_v1r4_v_72207_result: 'fail'
+  when:
+    - "'v_72207' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72207_result != 'pass'
 
 
 # Vuln ID: V-73163
@@ -4680,12 +5007,20 @@
 # NIST SP 800-53 Revision 4 :: AU-4 (1)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_73163
-#   set_fact:
-#     stig_rhel7_v1r4_v_73163_result: 'fail'
-#   when:
-#     - "'v_73163' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_73163_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_73163
+  set_fact:
+    stig_rhel7_v1r4_v_73163_result: 'pass'
+  when:
+    - "'v_73163' in stig_rhel7_v1r4_checks"
+    - auditing_audisp_remote_conf_stat.stat.exists
+    - auditing_audisp_remote_conf.stdout|search('^\s*network_failure_action\s*=\s*(syslog|single|halt)')
+
+- name: fail stig_rhel7_v1r4 v_73163
+  set_fact:
+    stig_rhel7_v1r4_v_73163_result: 'fail'
+  when:
+    - "'v_73163' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_73163_result != 'pass'
 
 
 # Vuln ID: V-73165
@@ -4750,12 +5085,20 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (4)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_73165
-#   set_fact:
-#     stig_rhel7_v1r4_v_73165_result: 'fail'
-#   when:
-#     - "'v_73165' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_73165_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_73165
+  set_fact:
+    stig_rhel7_v1r4_v_73165_result: 'pass'
+  when:
+    - "'v_73165' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/etc/group')
+
+- name: fail stig_rhel7_v1r4 v_73165
+  set_fact:
+    stig_rhel7_v1r4_v_73165_result: 'fail'
+  when:
+    - "'v_73165' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_73165_result != 'pass'
 
 
 # Vuln ID: V-73167
@@ -4820,12 +5163,20 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (4)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_73167
-#   set_fact:
-#     stig_rhel7_v1r4_v_73167_result: 'fail'
-#   when:
-#     - "'v_73167' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_73167_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_73167
+  set_fact:
+    stig_rhel7_v1r4_v_73167_result: 'pass'
+  when:
+    - "'v_73167' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/etc/gshadow')
+
+- name: fail stig_rhel7_v1r4 v_73167
+  set_fact:
+    stig_rhel7_v1r4_v_73167_result: 'fail'
+  when:
+    - "'v_73167' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_73167_result != 'pass'
 
 
 # Vuln ID: V-73171
@@ -4890,12 +5241,20 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (4)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_73171
-  # set_fact:
-  #   stig_rhel7_v1r4_v_73171_result: 'fail'
-#   when:
-#     - "'v_73171' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_73171_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_73171
+  set_fact:
+    stig_rhel7_v1r4_v_73171_result: 'pass'
+  when:
+    - "'v_73171' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/etc/shadow')
+
+- name: fail stig_rhel7_v1r4 v_73171
+  set_fact:
+    stig_rhel7_v1r4_v_73171_result: 'fail'
+  when:
+    - "'v_73171' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_73171_result != 'pass'
 
 
 # Vuln ID: V-73173
@@ -4960,12 +5319,20 @@
 # NIST SP 800-53 Revision 4 :: AC-2 (4)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_73173
-  # set_fact:
-  #   stig_rhel7_v1r4_v_73173_result: 'fail'
-#   when:
-#     - "'v_73173' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_73173_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_73173
+  set_fact:
+    stig_rhel7_v1r4_v_73173_result: 'pass'
+  when:
+    - "'v_73173' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('/etc/security/opasswd')
+
+- name: fail stig_rhel7_v1r4 v_73173
+  set_fact:
+    stig_rhel7_v1r4_v_73173_result: 'fail'
+  when:
+    - "'v_73173' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_73173_result != 'pass'
 
 
 # Vuln ID: V-78999
@@ -5026,12 +5393,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_78999
-  # set_fact:
-  #   stig_rhel7_v1r4_v_78999_result: 'fail'
-#   when:
-#     - "'v_78999' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_78999_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_78999
+  set_fact:
+    stig_rhel7_v1r4_v_78999_result: 'pass'
+  when:
+    - "'v_78999' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\screate_module\s')
+
+- name: fail stig_rhel7_v1r4 v_78999
+  set_fact:
+    stig_rhel7_v1r4_v_78999_result: 'fail'
+  when:
+    - "'v_78999' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_78999_result != 'pass'
 
 
 # Vuln ID: V-79001
@@ -5092,9 +5467,17 @@
 #
 #
 
-# - name: fail stig_rhel7_v1r4 v_79001
-  # set_fact:
-  #   stig_rhel7_v1r4_v_79001_result: 'fail'
-#   when:
-#     - "'v_79001' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_79001_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_79001
+  set_fact:
+    stig_rhel7_v1r4_v_79001_result: 'pass'
+  when:
+    - "'v_79001' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\sfinit_module\s')
+
+- name: fail stig_rhel7_v1r4 v_79001
+  set_fact:
+    stig_rhel7_v1r4_v_79001_result: 'fail'
+  when:
+    - "'v_79001' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_79001_result != 'pass'
