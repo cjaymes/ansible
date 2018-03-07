@@ -57,8 +57,25 @@
       dest: /etc/audit/rules.d/{{item}}.rules
       mode: 0600
   with_items:
-      - 00_failure
+      - 00_delete_rules
+      - 01_backlog
+      - 02_failure
+      - access
+      - delete
+      - identity
+      - logins
+      - module-change
+      - perm_mod
+      - privileged-actions
+      - privileged-cron
+      - privileged-mount
+      - privileged-pam
+      - privileged-passwd
+      - privileged-postfix
+      - privileged-priv_change
+      - privileged-ssh
       - setuid_setgid
+      - zz_enabled
   notify: auditing generate rules
 
 - name: configure audisp-remote.conf
