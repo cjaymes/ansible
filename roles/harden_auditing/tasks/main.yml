@@ -1,7 +1,7 @@
 - name: install packages
   yum:
       state: installed
-      name: {{item}}
+      name: '{{item}}'
   with_items:
       - audit
       - audispd-plugins
