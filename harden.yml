@@ -3,9 +3,9 @@
 # - hosts: all
 - hosts: stig-rhel7
   roles:
-    - harden_aide
+    # - harden_aide
     # - harden_antivirus
-    # - harden_auditing
+    - harden_auditing
     # - harden_backup
     # - harden_filesystems
     # - harden_firewall
