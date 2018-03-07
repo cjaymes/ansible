@@ -33,6 +33,23 @@
 #   debug:
 #     msg: '{{auditing_auditd_conf_stat}}'
 
+- name: cat /etc/audit/auditd.conf
+  shell: cat /etc/audit/auditd.conf || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_auditd_conf
+  when:
+      - auditing_auditd_conf_stat.stat.exists
+
+# - name: auditing_auditd_conf
+#   debug:
+#     msg: '{{auditing_auditd_conf}}'
+
 - name: check for /etc/audit/audit.rules
   stat:
       path: /etc/audit/audit.rules
