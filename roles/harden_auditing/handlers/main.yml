@@ -1,7 +1,13 @@
 - name: auditing generate rules
-  command: augenrules --load
+  command: augenrules
   register: auditing_augenrules
   changed_when: "'No change' not in auditing_augenrules.stdout"
+  notify: auditing reload
+
+- name: auditing reload
+  command: auditctl -R /etc/audit/audit.rules
+  register: auditing_reload
+  changed_when: "'No change' not in auditing_reload.stdout"
   notify: auditing restart
 
 - name: auditing restart
