@@ -982,12 +982,20 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72099
-#   set_fact:
-#     stig_rhel7_v1r4_v_72099_result: 'fail'
-#   when:
-#     - "'v_72099' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72099_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72099
+  set_fact:
+    stig_rhel7_v1r4_v_72099_result: 'pass'
+  when:
+    - "'v_72099' in stig_rhel7_v1r4_checks"
+    - auditing_rules_stat.stat.exists
+    - auditing_rules.stdout|search('\sfchown\s')
+
+- name: fail stig_rhel7_v1r4 v_72099
+  set_fact:
+    stig_rhel7_v1r4_v_72099_result: 'fail'
+  when:
+    - "'v_72099' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72099_result != 'pass'
 
 
 # Vuln ID: V-72101
@@ -1056,7 +1064,7 @@
   when:
     - "'v_72101' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|search('\sfchown\s')
+    - auditing_rules.stdout|search('\slchown\s')
 
 - name: fail stig_rhel7_v1r4 v_72101
   set_fact:
