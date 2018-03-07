@@ -1115,12 +1115,36 @@
 # NIST SP 800-53 Revision 4 :: AU-12 c
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72101
-#   set_fact:
-#     stig_rhel7_v1r4_v_72101_result: 'fail'
-#   when:
-#     - "'v_72101' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72101_result != 'pass'
+- name: grep -iw fchown /etc/audit/audit.rules
+  shell: grep -iw fchown /etc/audit/audit.rules || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: auditing_fchown_rules
+  when:
+    - "'v_72101' in stig_rhel7_v1r4_checks"
+
+# - name: auditing_chown_rules
+#   debug:
+#     msg: '{{auditing_chown_rules}}'
+
+- name: pass stig_rhel7_v1r4 v_72101
+  set_fact:
+    stig_rhel7_v1r4_v_72101_result: 'pass'
+  when:
+    - "'v_72101' in stig_rhel7_v1r4_checks"
+    - "'fchown' in auditing_fchown_rules"
+
+- name: fail stig_rhel7_v1r4 v_72101
+  set_fact:
+    stig_rhel7_v1r4_v_72101_result: 'fail'
+  when:
+    - "'v_72101' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72101_result != 'pass'
 
 
 # Vuln ID: V-72103
