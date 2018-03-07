@@ -9,9 +9,9 @@
   changed_when: false
   register: antivirus_nails_status
 
-- name: antivirus_nails_status
-  debug:
-    msg: '{{antivirus_nails_status}}'
+# - name: antivirus_nails_status
+#   debug:
+#     msg: '{{antivirus_nails_status}}'
 
 - name: systemctl status clamav-daemon
   shell: systemctl status clamav-daemon || true
@@ -24,9 +24,9 @@
   changed_when: false
   register: antivirus_clamav_status
 
-- name: antivirus_clamav_status
-  debug:
-    msg: '{{antivirus_clamav_status}}'
+# - name: antivirus_clamav_status
+#   debug:
+#     msg: '{{antivirus_clamav_status}}'
 
 
 # Vuln ID: V-72213
