@@ -5037,6 +5037,7 @@
         - "{{auditing_audisp_remote_conf.stdout}}"
         # - "{{auditing_audisp_remote_conf.stdout|regex_search('^\s*network_failure_action\s*=\s*')}}"
         # - "{{auditing_audisp_remote_conf.stdout|regex_search('^\s*network_failure_action\s*=\s*(syslog|single|halt)')}}"
+        - "{{auditing_audisp_remote_conf.stdout|search('^network_failure_action = (syslog|single|halt)')}}"
         - "{{auditing_audisp_remote_conf.stdout|regex_search('^network_failure_action = ')}}"
         - "{{auditing_audisp_remote_conf.stdout|regex_search('^network_failure_action = (syslog|single|halt)')}}"
         - "{{auditing_audisp_remote_conf.stdout|regex_search('^network_failure_action\\s*=\\s*')}}"
