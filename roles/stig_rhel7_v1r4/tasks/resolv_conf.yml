@@ -93,6 +93,42 @@
     - "'v_72281' in stig_rhel7_v1r4_checks"
     - not nsswitch_conf.stdout|search('\\nhosts:\\s+[a-zA-Z0-9 ]*dns')
 
+# We're using DNS for resolution
+
+- name: check for /etc/resolv.conf
+  stat:
+      path: /etc/resolv.conf
+  register: resolv_conf_stat
+
+- name: resolv_conf_stat
+  debug:
+    msg: '{{resolv_conf_stat}}'
+
+- name: cat /etc/resolv.conf
+  shell: cat /etc/resolv.conf || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: resolv_conf
+  when:
+      - resolv_conf_stat.stat.exists
+      - nsswitch_conf.stdout|search('\\nhosts:\\s+[a-zA-Z0-9 ]*dns')
+
+- name: resolv_conf
+  debug:
+    msg: '{{resolv_conf}}'
+
+- name: pass stig_rhel7_v1r4 v_72281 if using two nameservers
+  set_fact:
+    stig_rhel7_v1r4_v_72281_result: 'pass'
+  when:
+    - "'v_72281' in stig_rhel7_v1r4_checks"
+    - nsswitch_conf.stdout|search('\\nhosts:\\s+[a-zA-Z0-9 ]*dns')
+    - resolv_conf.stdout|search('\\nnameserver [0-9.]+.*\\nnameserver [0-9.]+')
 
 - name: fail stig_rhel7_v1r4 v_72281
   set_fact:
