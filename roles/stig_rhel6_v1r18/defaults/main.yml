@@ -23,7 +23,7 @@ stig_rhel6_v1r18_sections: []
   # - postfix
   # - prohibited_files
   # - prohibited_services
-  # - rsyslogd
+  # - rsyslog
   # - samba
   # - selinux
   # - services
