@@ -1,0 +1,7 @@
+- name: set cron.allow ownership
+  file:
+      path: /etc/cron.allow
+      owner: root
+      group: root
+      mode: 0600
+      state: file
