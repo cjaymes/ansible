@@ -2,8 +2,8 @@ stig_rhel7_v1r4_sections:
   # - aide
   # - antivirus
   # - auditing
-  - cron
-  # - dns
+  # - cron
+  - dns
   # - filesystems
   # - firewall
   # - gdm
