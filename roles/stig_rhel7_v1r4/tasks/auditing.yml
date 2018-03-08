@@ -5032,6 +5032,13 @@
 # NIST SP 800-53 Revision 4 :: AU-4 (1)
 #
 #
+- debug:
+    msg:
+        - auditing_audisp_remote_conf.stdout
+        - auditing_audisp_remote_conf.stdout|regex_search('^\s*network_failure_action\s*=\s*')
+        - auditing_audisp_remote_conf.stdout|regex_search('^\s*network_failure_action\s*=\s*(syslog|single|halt)')
+        - auditing_audisp_remote_conf.stdout|regex_search('^\\s*network_failure_action\\s*=\\s*')
+        - auditing_audisp_remote_conf.stdout|regex_search('^\\s*network_failure_action\\s*=\\s*(syslog|single|halt)')
 - name: pass stig_rhel7_v1r4 v_73163
   set_fact:
     stig_rhel7_v1r4_v_73163_result: 'pass'
