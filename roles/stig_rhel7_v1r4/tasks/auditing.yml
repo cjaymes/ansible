@@ -5038,7 +5038,6 @@
   when:
     - "'v_73163' in stig_rhel7_v1r4_checks"
     - auditing_audisp_remote_conf_stat.stat.exists
-    network_failure_action = syslog
     - auditing_audisp_remote_conf.stdout|regex_search('^\\s*network_failure_action\\s*=\\s*(syslog|single|halt)')
 
 - name: fail stig_rhel7_v1r4 v_73163
