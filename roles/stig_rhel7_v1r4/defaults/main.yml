@@ -22,7 +22,7 @@ stig_rhel7_v1r4_sections:
   # - postfix
   # - prohibited_files
   # - prohibited_services
-  # - rsyslogd
+  # - rsyslog
   # - selinux
   # - snmpd
   # - sshd
