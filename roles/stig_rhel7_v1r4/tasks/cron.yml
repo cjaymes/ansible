@@ -46,7 +46,14 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: pass stig_rhel7_v1r4 v_72053
+- name: pass stig_rhel7_v1r4 v_72053 - doesn't exist
+  set_fact:
+    stig_rhel7_v1r4_v_72053_result: 'pass'
+  when:
+    - "'v_72053' in stig_rhel7_v1r4_checks"
+    - not cron_allow_stat.stat.exists
+
+- name: pass stig_rhel7_v1r4 v_72053 - owned by root
   set_fact:
     stig_rhel7_v1r4_v_72053_result: 'pass'
   when:
@@ -101,7 +108,14 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: pass stig_rhel7_v1r4 v_72055
+- name: pass stig_rhel7_v1r4 v_72055 - doesn't exist
+  set_fact:
+    stig_rhel7_v1r4_v_72055_result: 'pass'
+  when:
+    - "'v_72055' in stig_rhel7_v1r4_checks"
+    - not cron_allow_stat.stat.exists
+
+- name: pass stig_rhel7_v1r4 v_72055 - group-owned by root
   set_fact:
     stig_rhel7_v1r4_v_72055_result: 'pass'
   when:
