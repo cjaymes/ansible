@@ -5037,6 +5037,9 @@
         - "{{auditing_audisp_remote_conf.stdout}}"
         # - "{{auditing_audisp_remote_conf.stdout|regex_search('^\s*network_failure_action\s*=\s*')}}"
         # - "{{auditing_audisp_remote_conf.stdout|regex_search('^\s*network_failure_action\s*=\s*(syslog|single|halt)')}}"
+        - "{{auditing_audisp_remote_conf.stdout|regex_search('^network_failure_action = ')}}"
+        - "{{auditing_audisp_remote_conf.stdout|regex_search('^network_failure_action = (syslog|single|halt)')}}"
+        - "{{auditing_audisp_remote_conf.stdout|regex_search('^network_failure_action\\s*=\\s*')}}"
         - "{{auditing_audisp_remote_conf.stdout|regex_search('^\\s*network_failure_action\\s*=\\s*')}}"
         - "{{auditing_audisp_remote_conf.stdout|regex_search('^\\s*network_failure_action\\s*=\\s*(syslog|single|halt)')}}"
 - name: pass stig_rhel7_v1r4 v_73163
