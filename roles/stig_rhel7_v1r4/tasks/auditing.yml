@@ -815,7 +815,7 @@
     stig_rhel7_v1r4_v_72093_result: 'pass'
   when:
     - "'v_72095' in stig_rhel7_v1r4_checks"
-    - stig_rhel7_v1r4_v_72095_result != 'fail'
+    - stig_rhel7_v1r4_v_72095_result == 'notchecked'
 
 
 # Vuln ID: V-72097
