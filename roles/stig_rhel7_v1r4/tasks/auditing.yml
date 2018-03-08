@@ -582,7 +582,7 @@
   when:
     - "'v_72089' in stig_rhel7_v1r4_checks"
     - auditing_auditd_conf_stat.stat.exists
-    - auditing_space_left.stdout|int == auditing_log_partition_75
+    - auditing_space_left.stdout == auditing_log_partition_75
 
 - name: fail stig_rhel7_v1r4 v_72089
   set_fact:
