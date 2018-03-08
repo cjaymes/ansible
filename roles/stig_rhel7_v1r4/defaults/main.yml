@@ -1,8 +1,8 @@
 stig_rhel7_v1r4_sections:
   # - aide
   # - antivirus
-  - auditing
-  # - cron
+  # - auditing
+  - cron
   # - dns
   # - filesystems
   # - firewall
@@ -279,8 +279,6 @@ stig_rhel7_v1r4_findings:
   - v_79001
 
 stig_rhel7_v1r4_checks: '{{ stig_rhel7_v1r4_findings }}'
-# stig_rhel7_v1r4_checks:
-#     - v_72089
 
 stig_rhel7_v1r4_v_71849_result: notchecked
 stig_rhel7_v1r4_v_71855_result: notchecked
