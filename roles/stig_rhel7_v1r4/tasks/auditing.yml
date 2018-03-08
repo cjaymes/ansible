@@ -256,7 +256,7 @@
     stig_rhel7_v1r4_v_72081_result: 'pass'
   when:
     - "'v_72081' in stig_rhel7_v1r4_checks"
-    - auditing_auditctl_s.stdout|regex_search('^\s*failure\s+2')
+    - auditing_auditctl_s.stdout|regex_search('^\\s*failure\\s+2')
 
 - name: fail stig_rhel7_v1r4 v_72081
   set_fact:
@@ -315,7 +315,7 @@
   when:
     - "'v_72083' in stig_rhel7_v1r4_checks"
     - auditing_audisp_remote_conf_stat.stat.exists
-    - auditing_audisp_remote_conf.stdout|regex_search('^\s*remote_server')
+    - auditing_audisp_remote_conf.stdout|regex_search('^\\s*remote_server')
 
 - name: fail stig_rhel7_v1r4 v_72083
   set_fact:
@@ -376,7 +376,7 @@
   when:
     - "'v_72085' in stig_rhel7_v1r4_checks"
     - auditing_audisp_remote_conf_stat.stat.exists
-    - auditing_audisp_remote_conf.stdout|regex_search('^\s*enable_krb5\s*=\s*yes')
+    - auditing_audisp_remote_conf.stdout|regex_search('^\\s*enable_krb5\\s*=\\s*yes')
 
 - name: fail stig_rhel7_v1r4 v_72085
   set_fact:
@@ -440,8 +440,8 @@
   when:
     - "'v_72087' in stig_rhel7_v1r4_checks"
     - auditing_audisp_remote_conf_stat.stat.exists
-    - auditing_audisp_remote_conf.stdout|regex_search('^\s*disk_full_action\s*=\s*(syslog|single|halt)')
-    - auditing_audisp_remote_conf.stdout|regex_search('^\s*network_failure_action\s*=\s*(syslog|single|halt)')
+    - auditing_audisp_remote_conf.stdout|regex_search('^\\s*disk_full_action\\s*=\\s*(syslog|single|halt)')
+    - auditing_audisp_remote_conf.stdout|regex_search('^\\s*network_failure_action\\s*=\\s*(syslog|single|halt)')
 
 - name: fail stig_rhel7_v1r4 v_72087
   set_fact:
@@ -633,7 +633,7 @@
   when:
     - "'v_72091' in stig_rhel7_v1r4_checks"
     - auditing_auditd_conf_stat.stat.exists
-    - auditing_auditd_conf.stdout|regex_search('^\s*space_left_action\s*=\s*email')
+    - auditing_auditd_conf.stdout|regex_search('^\\s*space_left_action\\s*=\\s*email')
 
 - name: fail stig_rhel7_v1r4 v_72091
   set_fact:
@@ -688,7 +688,7 @@
   when:
     - "'v_72093' in stig_rhel7_v1r4_checks"
     - auditing_auditd_conf_stat.stat.exists
-    - auditing_auditd_conf.stdout|regex_search('^\s*action_mail_acct\s*=\s*' ~ auditing_email)
+    - auditing_auditd_conf.stdout|regex_search('^\\s*action_mail_acct\\s*=\\s*' ~ auditing_email)
 
 - name: fail stig_rhel7_v1r4 v_72093
   set_fact:
@@ -910,7 +910,7 @@
   when:
     - "'v_72097' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\schown\s')
+    - auditing_rules.stdout|regex_search('\\schown\\s')
 
 - name: fail stig_rhel7_v1r4 v_72097
   set_fact:
@@ -988,7 +988,7 @@
   when:
     - "'v_72099' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\sfchown\s')
+    - auditing_rules.stdout|regex_search('\\sfchown\\s')
 
 - name: fail stig_rhel7_v1r4 v_72099
   set_fact:
@@ -1064,7 +1064,7 @@
   when:
     - "'v_72101' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\slchown\s')
+    - auditing_rules.stdout|regex_search('\\slchown\\s')
 
 - name: fail stig_rhel7_v1r4 v_72101
   set_fact:
@@ -1142,7 +1142,7 @@
   when:
     - "'v_72103' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\sfchownat\s')
+    - auditing_rules.stdout|regex_search('\\sfchownat\\s')
 
 - name: fail stig_rhel7_v1r4 v_72103
   set_fact:
@@ -1214,7 +1214,7 @@
   when:
     - "'v_72105' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\schmod\s')
+    - auditing_rules.stdout|regex_search('\\schmod\\s')
 
 - name: fail stig_rhel7_v1r4 v_72105
   set_fact:
@@ -1286,7 +1286,7 @@
   when:
     - "'v_72107' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\sfchmod\s')
+    - auditing_rules.stdout|regex_search('\\sfchmod\\s')
 
 - name: fail stig_rhel7_v1r4 v_72107
   set_fact:
@@ -1358,7 +1358,7 @@
   when:
     - "'v_72109' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\sfchmodat\s')
+    - auditing_rules.stdout|regex_search('\\sfchmodat\\s')
 
 - name: fail stig_rhel7_v1r4 v_72109
   set_fact:
@@ -1431,7 +1431,7 @@
   when:
     - "'v_72111' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\ssetxattr\s')
+    - auditing_rules.stdout|regex_search('\\ssetxattr\\s')
 
 - name: fail stig_rhel7_v1r4 v_72111
   set_fact:
@@ -1503,7 +1503,7 @@
   when:
     - "'v_72113' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\sfsetxattr\s')
+    - auditing_rules.stdout|regex_search('\\sfsetxattr\\s')
 
 - name: fail stig_rhel7_v1r4 v_72113
   set_fact:
@@ -1576,7 +1576,7 @@
   when:
     - "'v_72115' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\slsetxattr\s')
+    - auditing_rules.stdout|regex_search('\\slsetxattr\\s')
 
 - name: fail stig_rhel7_v1r4 v_72115
   set_fact:
@@ -1648,7 +1648,7 @@
   when:
     - "'v_72117' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\sremovexattr\s')
+    - auditing_rules.stdout|regex_search('\\sremovexattr\\s')
 
 - name: fail stig_rhel7_v1r4 v_72117
   set_fact:
@@ -1721,7 +1721,7 @@
   when:
     - "'v_72119' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\sfremovexattr\s')
+    - auditing_rules.stdout|regex_search('\\sfremovexattr\\s')
 
 - name: fail stig_rhel7_v1r4 v_72119
   set_fact:
@@ -1793,7 +1793,7 @@
   when:
     - "'v_72121' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\slremovexattr\s')
+    - auditing_rules.stdout|regex_search('\\slremovexattr\\s')
 
 - name: fail stig_rhel7_v1r4 v_72121
   set_fact:
@@ -2329,8 +2329,8 @@
   when:
     - "'v_72133' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\s-S ftruncate -F exit=-EPERM\s')
-    - auditing_rules.stdout|regex_search('\s-S ftruncate -F exit=-EACCES\s')
+    - auditing_rules.stdout|regex_search('\\s-S ftruncate -F exit=-EPERM\\s')
+    - auditing_rules.stdout|regex_search('\\s-S ftruncate -F exit=-EACCES\\s')
 
 - name: fail stig_rhel7_v1r4 v_72133
   set_fact:
@@ -3440,8 +3440,8 @@
   when:
     - "'v_72163' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('/etc/sudoers\s')
-    - auditing_rules.stdout|regex_search('/etc/sudoers.d/?\s')
+    - auditing_rules.stdout|regex_search('/etc/sudoers\\s')
+    - auditing_rules.stdout|regex_search('/etc/sudoers.d/?\\s')
 
 - name: fail stig_rhel7_v1r4 v_72163
   set_fact:
@@ -3771,7 +3771,7 @@
   when:
     - "'v_72171' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\smount\s')
+    - auditing_rules.stdout|regex_search('\\smount\\s')
     - auditing_rules.stdout|regex_search('/bin/mount')
     - auditing_rules.stdout|regex_search('/usr/bin/mount')
 
@@ -4259,7 +4259,7 @@
   when:
     - "'v_72187' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\sinit_module\s')
+    - auditing_rules.stdout|regex_search('\\sinit_module\\s')
 
 - name: fail stig_rhel7_v1r4 v_72187
   set_fact:
@@ -4333,7 +4333,7 @@
   when:
     - "'v_72189' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\sdelete_module\s')
+    - auditing_rules.stdout|regex_search('\\sdelete_module\\s')
 
 - name: fail stig_rhel7_v1r4 v_72189
   set_fact:
@@ -4687,7 +4687,7 @@
   when:
     - "'v_72199' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\srename\s')
+    - auditing_rules.stdout|regex_search('\\srename\\s')
 
 - name: fail stig_rhel7_v1r4 v_72199
   set_fact:
@@ -4761,7 +4761,7 @@
   when:
     - "'v_72201' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\srenameat\s')
+    - auditing_rules.stdout|regex_search('\\srenameat\\s')
 
 - name: fail stig_rhel7_v1r4 v_72201
   set_fact:
@@ -4835,7 +4835,7 @@
   when:
     - "'v_72203' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\srmdir\s')
+    - auditing_rules.stdout|regex_search('\\srmdir\\s')
 
 - name: fail stig_rhel7_v1r4 v_72203
   set_fact:
@@ -4909,7 +4909,7 @@
   when:
     - "'v_72205' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\sunlink\s')
+    - auditing_rules.stdout|regex_search('\\sunlink\\s')
 
 - name: fail stig_rhel7_v1r4 v_72205
   set_fact:
@@ -4983,7 +4983,7 @@
   when:
     - "'v_72207' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\sunlinkat\s')
+    - auditing_rules.stdout|regex_search('\\sunlinkat\\s')
 
 - name: fail stig_rhel7_v1r4 v_72207
   set_fact:
@@ -5038,7 +5038,7 @@
   when:
     - "'v_73163' in stig_rhel7_v1r4_checks"
     - auditing_audisp_remote_conf_stat.stat.exists
-    - auditing_audisp_remote_conf.stdout|regex_search('^network_failure_action\s*=\s*(syslog|single|halt)')
+    - auditing_audisp_remote_conf.stdout|regex_search('^network_failure_action\\s*=\\s*(syslog|single|halt)')
 
 - name: fail stig_rhel7_v1r4 v_73163
   set_fact:
@@ -5424,7 +5424,7 @@
   when:
     - "'v_78999' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\screate_module\s')
+    - auditing_rules.stdout|regex_search('\\screate_module\\s')
 
 - name: fail stig_rhel7_v1r4 v_78999
   set_fact:
@@ -5498,7 +5498,7 @@
   when:
     - "'v_79001' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('\sfinit_module\s')
+    - auditing_rules.stdout|regex_search('\\sfinit_module\\s')
 
 - name: fail stig_rhel7_v1r4 v_79001
   set_fact:
