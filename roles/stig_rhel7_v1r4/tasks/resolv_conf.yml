@@ -91,7 +91,7 @@
     stig_rhel7_v1r4_v_72281_result: 'pass'
   when:
     - "'v_72281' in stig_rhel7_v1r4_checks"
-    - not nsswitch_conf|search('\\nhosts:\\s+[a-zA-Z0-9 ]*dns')
+    - not nsswitch_conf.stdout|search('\\nhosts:\\s+[a-zA-Z0-9 ]*dns')
 
 
 - name: fail stig_rhel7_v1r4 v_72281
