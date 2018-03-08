@@ -5,8 +5,9 @@
   roles:
     # - harden_aide
     # - harden_antivirus
-    - harden_auditing
+    # - harden_auditing
     # - harden_backup
+    - harden_cron
     # - harden_filesystems
     # - harden_firewall
     # - harden_gdm

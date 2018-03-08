@@ -1,6 +1,27 @@
+- name: install packages
+  yum:
+      state: installed
+      name: cron
+
 - name: set cron.allow ownership
   file:
       path: /etc/cron.allow
+      owner: root
+      group: root
+      mode: 0600
+      state: file
+
+- name: set cron.deny ownership
+  file:
+      path: /etc/cron.deny
+      owner: root
+      group: root
+      mode: 0600
+      state: file
+
+- name: set crontab ownership
+  file:
+      path: /etc/crontab
       owner: root
       group: root
       mode: 0600
