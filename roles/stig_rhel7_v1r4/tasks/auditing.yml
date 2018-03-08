@@ -3,9 +3,9 @@
       path: /etc/audisp/audisp-remote.conf
   register: auditing_audisp_remote_conf_stat
 
-# - name: auditing_audisp_remote_conf_stat
-#   debug:
-#     msg: '{{auditing_audisp_remote_conf_stat}}'
+- name: auditing_audisp_remote_conf_stat
+  debug:
+    msg: '{{auditing_audisp_remote_conf_stat}}'
 
 - name: cat /etc/audisp/audisp-remote.conf
   shell: cat /etc/audisp/audisp-remote.conf || true
@@ -20,18 +20,18 @@
   when:
       - auditing_audisp_remote_conf_stat.stat.exists
 
-# - name: auditing_audisp_remote_conf
-#   debug:
-#     msg: '{{auditing_audisp_remote_conf}}'
+- name: auditing_audisp_remote_conf
+  debug:
+    msg: '{{auditing_audisp_remote_conf}}'
 
 - name: check for /etc/audit/auditd.conf
   stat:
       path: /etc/audit/auditd.conf
   register: auditing_auditd_conf_stat
 
-# - name: auditing_auditd_conf_stat
-#   debug:
-#     msg: '{{auditing_auditd_conf_stat}}'
+- name: auditing_auditd_conf_stat
+  debug:
+    msg: '{{auditing_auditd_conf_stat}}'
 
 - name: cat /etc/audit/auditd.conf
   shell: cat /etc/audit/auditd.conf || true
@@ -46,18 +46,18 @@
   when:
       - auditing_auditd_conf_stat.stat.exists
 
-# - name: auditing_auditd_conf
-#   debug:
-#     msg: '{{auditing_auditd_conf}}'
+- name: auditing_auditd_conf
+  debug:
+    msg: '{{auditing_auditd_conf}}'
 
 - name: check for /etc/audit/audit.rules
   stat:
       path: /etc/audit/audit.rules
   register: auditing_rules_stat
 
-# - name: auditing_rules_stat
-#   debug:
-#     msg: '{{auditing_rules_stat}}'
+- name: auditing_rules_stat
+  debug:
+    msg: '{{auditing_rules_stat}}'
 
 - name: cat /etc/audit/audit.rules
   shell: cat /etc/audit/audit.rules || true
@@ -72,9 +72,9 @@
   when:
       - auditing_rules_stat.stat.exists
 
-# - name: auditing_rules
-#   debug:
-#     msg: '{{auditing_rules}}'
+- name: auditing_rules
+  debug:
+    msg: '{{auditing_rules}}'
 
 - name: auditctl -s
   shell: auditctl -s || true
@@ -87,9 +87,9 @@
   changed_when: false
   register: auditing_auditctl_s
 
-# - name: auditing_auditctl_s
-#   debug:
-#     msg: '{{auditing_auditctl_s}}'
+- name: auditing_auditctl_s
+  debug:
+    msg: '{{auditing_auditctl_s}}'
 
 # Vuln ID: V-72079
 # Severity: high
@@ -159,9 +159,9 @@
   when:
     - "'v_72079' in stig_rhel7_v1r4_checks"
 
-# - name: auditing_auditd_status
-#   debug:
-#     msg: '{{auditing_auditd_status}}'
+- name: auditing_auditd_status
+  debug:
+    msg: '{{auditing_auditd_status}}'
 
 - name: pass stig_rhel7_v1r4 v_72079
   set_fact:
@@ -526,9 +526,9 @@
       - "'v_72089' in stig_rhel7_v1r4_checks"
       - auditing_auditd_conf_stat.stat.exists
 
-# - name: auditing_log_file
-#   debug:
-#     msg: '{{auditing_log_file}}'
+- name: auditing_log_file
+  debug:
+    msg: '{{auditing_log_file}}'
 
 - name: df {{auditing_log_file.stdout}} | tail -n 1 | awk '{print $2}'
   shell: df {{auditing_log_file.stdout}} | tail -n 1 | awk '{print $2}' || true
@@ -544,9 +544,9 @@
       - "'v_72089' in stig_rhel7_v1r4_checks"
       - auditing_auditd_conf_stat.stat.exists
 
-# - name: auditing_log_partition_size
-#   debug:
-#     msg: '{{auditing_log_partition_size}}'
+- name: auditing_log_partition_size
+  debug:
+    msg: '{{auditing_log_partition_size}}'
 
 - name: calculate space_left size; 75% of auditing_log_partition_size
   set_fact:
@@ -554,9 +554,9 @@
   when:
       - "'v_72089' in stig_rhel7_v1r4_checks"
 
-# - name: auditing_log_partition_75
-#   debug:
-#     msg: '{{auditing_log_partition_75}}'
+- name: auditing_log_partition_75
+  debug:
+    msg: '{{auditing_log_partition_75}}'
 
 - name: grep -i '^space_left ' /etc/audit/auditd.conf | awk '{print $3}'
   shell: grep -i '^space_left ' /etc/audit/auditd.conf | awk '{print $3}' || true
@@ -572,9 +572,9 @@
       - "'v_72089' in stig_rhel7_v1r4_checks"
       - auditing_auditd_conf_stat.stat.exists
 
-# - name: auditing_space_left
-#   debug:
-#     msg: '{{auditing_space_left}}'
+- name: auditing_space_left
+  debug:
+    msg: '{{auditing_space_left}}'
 
 - name: pass stig_rhel7_v1r4 v_72089
   set_fact:
@@ -812,7 +812,7 @@
 
 - name: pass stig_rhel7_v1r4 v_72095
   set_fact:
-    stig_rhel7_v1r4_v_72093_result: 'pass'
+    stig_rhel7_v1r4_v_72095_result: 'pass'
   when:
     - "'v_72095' in stig_rhel7_v1r4_checks"
     - stig_rhel7_v1r4_v_72095_result == 'notchecked'
