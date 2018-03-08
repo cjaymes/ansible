@@ -3681,7 +3681,7 @@
   when:
     - "'v_72169' in stig_rhel7_v1r4_checks"
     - auditing_rules_stat.stat.exists
-    - auditing_rules.stdout|regex_search('/usr/bin/sudoedit')
+    - auditing_rules.stdout|regex_search('/bin/sudoedit')
 
 - name: fail stig_rhel7_v1r4 v_72169
   set_fact:
