@@ -3,12 +3,19 @@
       state: installed
       name: cronie
 
+- name: get cron.allow stat
+  stat:
+      path: /etc/cron.allow
+  register: cron_allow_stat
+
 - name: set cron.allow properties
   file:
       path: /etc/cron.allow
       owner: root
       group: root
       mode: 0600
+  when:
+      - cron_allow_stat.stat.exists
 
 - name: set cron.deny properties
   file:
@@ -16,7 +23,6 @@
       owner: root
       group: root
       mode: 0600
-      state: file
 
 - name: set crontab properties
   file:
@@ -24,4 +30,3 @@
       owner: root
       group: root
       mode: 0600
-      state: file
