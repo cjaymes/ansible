@@ -3,7 +3,6 @@ stig_rhel7_v1r4_sections:
   # - antivirus
   # - auditing
   # - cron
-  - dns
   # - filesystems
   # - firewall
   # - gdm
@@ -22,6 +21,7 @@ stig_rhel7_v1r4_sections:
   # - postfix
   # - prohibited_files
   # - prohibited_services
+  - resolv_conf
   # - rsyslog
   # - selinux
   # - snmpd

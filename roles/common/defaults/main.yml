@@ -10,6 +10,8 @@ auditing_log_file_default: /var/log/audit/audit.log
 
 dhcp_required: True
 
+dns_required: True
+
 nfs_required: False
 
 ntp_server: localhost

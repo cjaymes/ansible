@@ -60,9 +60,43 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72281
-#   set_fact:
-#     stig_rhel7_v1r4_v_72281_result: 'fail'
-#   when:
-#     - "'v_72281' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72281_result != 'pass'
+- name: check for /etc/nsswitch.conf
+  stat:
+      path: /etc/nsswitch.conf
+  register: nsswitch_conf_stat
+
+- name: nsswitch_conf_stat
+  debug:
+    msg: '{{nsswitch_conf_stat}}'
+
+- name: cat /etc/nsswitch.conf
+  shell: cat /etc/nsswitch.conf || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: nsswitch_conf
+  when:
+      - nsswitch_conf_stat.stat.exists
+
+- name: nsswitch_conf
+  debug:
+    msg: '{{nsswitch_conf}}'
+
+- name: pass stig_rhel7_v1r4 v_72281 if not using dns
+  set_fact:
+    stig_rhel7_v1r4_v_72281_result: 'pass'
+  when:
+    - "'v_72281' in stig_rhel7_v1r4_checks"
+    - not nsswitch_conf|search('\\nhosts:\\s+[a-zA-Z0-9 ]*dns')
+
+
+- name: fail stig_rhel7_v1r4 v_72281
+  set_fact:
+    stig_rhel7_v1r4_v_72281_result: 'fail'
+  when:
+    - "'v_72281' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72281_result != 'pass'
