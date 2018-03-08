@@ -3,9 +3,9 @@
       path: /etc/audisp/audisp-remote.conf
   register: auditing_audisp_remote_conf_stat
 
-- name: auditing_audisp_remote_conf_stat
-  debug:
-    msg: '{{auditing_audisp_remote_conf_stat}}'
+# - name: auditing_audisp_remote_conf_stat
+#   debug:
+#     msg: '{{auditing_audisp_remote_conf_stat}}'
 
 - name: cat /etc/audisp/audisp-remote.conf
   shell: cat /etc/audisp/audisp-remote.conf || true
@@ -20,18 +20,18 @@
   when:
       - auditing_audisp_remote_conf_stat.stat.exists
 
-- name: auditing_audisp_remote_conf
-  debug:
-    msg: '{{auditing_audisp_remote_conf}}'
+# - name: auditing_audisp_remote_conf
+#   debug:
+#     msg: '{{auditing_audisp_remote_conf}}'
 
 - name: check for /etc/audit/auditd.conf
   stat:
       path: /etc/audit/auditd.conf
   register: auditing_auditd_conf_stat
 
-- name: auditing_auditd_conf_stat
-  debug:
-    msg: '{{auditing_auditd_conf_stat}}'
+# - name: auditing_auditd_conf_stat
+#   debug:
+#     msg: '{{auditing_auditd_conf_stat}}'
 
 - name: cat /etc/audit/auditd.conf
   shell: cat /etc/audit/auditd.conf || true
@@ -46,18 +46,18 @@
   when:
       - auditing_auditd_conf_stat.stat.exists
 
-- name: auditing_auditd_conf
-  debug:
-    msg: '{{auditing_auditd_conf}}'
+# - name: auditing_auditd_conf
+#   debug:
+#     msg: '{{auditing_auditd_conf}}'
 
 - name: check for /etc/audit/audit.rules
   stat:
       path: /etc/audit/audit.rules
   register: auditing_rules_stat
 
-- name: auditing_rules_stat
-  debug:
-    msg: '{{auditing_rules_stat}}'
+# - name: auditing_rules_stat
+#   debug:
+#     msg: '{{auditing_rules_stat}}'
 
 - name: cat /etc/audit/audit.rules
   shell: cat /etc/audit/audit.rules || true
@@ -72,9 +72,9 @@
   when:
       - auditing_rules_stat.stat.exists
 
-- name: auditing_rules
-  debug:
-    msg: '{{auditing_rules}}'
+# - name: auditing_rules
+#   debug:
+#     msg: '{{auditing_rules}}'
 
 - name: auditctl -s
   shell: auditctl -s || true
@@ -87,9 +87,9 @@
   changed_when: false
   register: auditing_auditctl_s
 
-- name: auditing_auditctl_s
-  debug:
-    msg: '{{auditing_auditctl_s}}'
+# - name: auditing_auditctl_s
+#   debug:
+#     msg: '{{auditing_auditctl_s}}'
 
 # Vuln ID: V-72079
 # Severity: high
