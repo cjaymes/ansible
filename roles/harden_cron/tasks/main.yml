@@ -9,7 +9,6 @@
       owner: root
       group: root
       mode: 0600
-      state: file
 
 - name: set cron.deny properties
   file:
