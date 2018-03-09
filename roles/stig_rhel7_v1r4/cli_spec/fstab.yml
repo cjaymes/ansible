@@ -1,0 +1,14 @@
+vars:
+    filesystem:
+        spec: '{{ item.spec }}'
+        mountpoint: '{{ item.mountpoint }}'
+        type: '{{ item.fstype }}'
+        options: '{{ item.options }}'
+        freq: '{{ item.freq }}'
+        passno: '{{ item.passno }}'
+
+keys:
+    filesystems:
+        type: list
+        value: '{{ filesystem }}'
+        items: '(?P<spec>.+)\\s+(?P<mountpoint>.+)\\s+(?P<type>.+)\\s+(?P<options>.+)(\\s+(?P<freq>.+)(\\s+(?P<passno>.+))?)?'
