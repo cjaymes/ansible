@@ -30,7 +30,7 @@
 
 - name: parse fstab
   debug:
-    msg: "{{fstab | parse_cli('roles/stig_rhel7_v1r4/cli_spec/fstab.yml') }}"
+    msg: "{{ fstab | parse_cli('parsers/fstab.yml') }}"
 
 - name: df /home | tail -n 1 | awk '{print $6}'
   shell: df /home | tail -n 1 | awk '{print $6}' || true
