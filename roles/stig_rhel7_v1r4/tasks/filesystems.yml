@@ -74,12 +74,19 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72041
-#   set_fact:
-#     stig_rhel7_v1r4_v_72041_result: 'fail'
-#   when:
-#     - "'v_72041' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72041_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72041 no interactive users
+  set_fact:
+    stig_rhel7_v1r4_v_72041_result: 'pass'
+  when:
+    - "'v_72041' in stig_rhel7_v1r4_checks"
+    - interactive_users == ''
+
+- name: fail stig_rhel7_v1r4 v_72041
+  set_fact:
+    stig_rhel7_v1r4_v_72041_result: 'fail'
+  when:
+    - "'v_72041' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72041_result != 'pass'
 
 
 # Vuln ID: V-72043
