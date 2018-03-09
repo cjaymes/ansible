@@ -96,12 +96,22 @@
     - "'v_72041' in stig_rhel7_v1r4_checks"
     - interactive_users.stdout == ''
 
+# TODO non-standard home directories
+
 - name: pass stig_rhel7_v1r4 v_72041 no separate /home partition
   set_fact:
     stig_rhel7_v1r4_v_72041_result: 'pass'
   when:
     - "'v_72041' in stig_rhel7_v1r4_checks"
     - home_mountpoint.stdout == '/'
+
+- name: pass stig_rhel7_v1r4 v_72041 no separate /home partition
+  set_fact:
+    stig_rhel7_v1r4_v_72041_result: 'pass'
+  when:
+    - "'v_72041' in stig_rhel7_v1r4_checks"
+    - home_mountpoint.stdout == '/home'
+    - fstab.stdout|search('/home\\s+[a-zA-Z0-9]\\s+[a-zA-Z0-9,]*nosuid')
 
 - name: fail stig_rhel7_v1r4 v_72041
   set_fact:
