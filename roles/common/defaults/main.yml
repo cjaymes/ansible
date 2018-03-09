@@ -10,7 +10,44 @@ auditing_log_file_default: /var/log/audit/audit.log
 
 dhcp_required: True
 
-dns_required: True
+filesystems_types_local:
+    - btrfs
+    - ext2
+    - ext3
+    - ext4
+    - reiserfs
+    - xfs
+    - squashfs
+    - romfs
+    - ramfs
+    - fuse
+filesystems_types_network:
+    - cifs
+    - nfs
+    - nfs4
+    - smbfs
+filesystems_types_removable:
+    - iso9660
+    - msdos
+    - vfat
+    - udf
+    - ubifs         # flash filesystem
+    - jffs2         # flash filesystem
+filesystems_types_pseudo:
+    - sysfs
+    - rootfs
+    - proc
+    - cgroup
+    - cpuset
+    - devtmpfs
+    - debugfs
+    - securityfs
+    - configfs
+    - devpts
+    - selinuxfs
+    - mqueue
+    - hugetlbfs
+    - systemd-1
 
 nfs_required: False
 
