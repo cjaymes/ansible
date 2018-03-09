@@ -1,5 +1,5 @@
 - name: get interactive users
-  shell: cut -d: -f 1,3,6 /etc/passwd | egrep ':[1-4][0-9]\{3\}' | true
+  shell: "cut -d: -f 1,3,6 /etc/passwd | egrep ':[1-4][0-9]{3}' | true"
   # following is so we don't get an error about using command instead of module
   args:
       warn: false
