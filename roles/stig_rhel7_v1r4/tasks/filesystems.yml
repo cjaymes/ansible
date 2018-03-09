@@ -28,6 +28,21 @@
   debug:
     msg: '{{fstab}}'
 
+- name: df /home | tail -n 1 | awk '{print $6}'
+  shell: df /home | tail -n 1 | awk '{print $6}' || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: home_mountpoint
+
+- name: home_mountpoint
+  debug:
+    msg: '{{home_mountpoint}}'
+
 # Vuln ID: V-72041
 # Severity: medium
 # Group Title: SRG-OS-000480-GPOS-00227
@@ -80,6 +95,13 @@
   when:
     - "'v_72041' in stig_rhel7_v1r4_checks"
     - interactive_users.stdout == ''
+
+- name: pass stig_rhel7_v1r4 v_72041 no separate /home partition
+  set_fact:
+    stig_rhel7_v1r4_v_72041_result: 'pass'
+  when:
+    - "'v_72041' in stig_rhel7_v1r4_checks"
+    - home_mountpoint.stdout == '/'
 
 - name: fail stig_rhel7_v1r4 v_72041
   set_fact:
