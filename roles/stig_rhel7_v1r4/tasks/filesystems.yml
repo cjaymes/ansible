@@ -30,7 +30,7 @@
 
 - name: parse fstab
   set_fact:
-      fstab: "{{ fstab.stdout | parse_cli_textfsm('textfsm_templates/fstab') }}"
+      fstab: "{{ fstab.stdout | parse_cli_textfsm('textfsm_templates/etc/fstab') }}"
 
 - name: fstab
   debug:
