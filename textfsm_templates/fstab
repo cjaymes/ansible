@@ -1,9 +1,9 @@
-Value Required Spec
-Value Required Mountpoint
-Value Required Type
-Value Required Options
-Value Frequency
-Value PassNo
+Value Required Spec (\S+)
+Value Required Mountpoint (\S+)
+Value Required Type (\S+)
+Value Required Options (\S+)
+Value Frequency (\S+)
+Value PassNo (\S+)
 
 Start
   ^${Spec}\s+${Mountpoint}\s+${Type}\s+${Options}\s+${Frequency}\s+${PassNo}
