@@ -1,3 +1,26 @@
+- name: cat /etc/passwd
+  shell: cat /etc/passwd || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: passwd
+
+- name: passwd
+  debug:
+    msg: '{{passwd}}'
+
+- name: parse passwd
+  set_fact:
+      fstab: "{{ passwd.stdout | parse_cli_textfsm('textfsm_templates/etc/passwd') }}"
+
+- name: passwd
+  debug:
+    msg: '{{passwd}}'
+
 - name: get interactive users
   shell: "cut -d: -f 1,3,6 /etc/passwd | egrep ':[1-4][0-9]{3}' | true"
   # following is so we don't get an error about using command instead of module
