@@ -6,4 +6,5 @@ Value Frequency (\S+)
 Value PassNo (\S+)
 
 Start
+  ^\s*#
   ^${Spec}\s+${Mountpoint}\s+${Type}\s+${Options}\s+${Frequency}\s+${PassNo} -> Record
