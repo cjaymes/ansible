@@ -23,7 +23,7 @@
 
 - name: select interactive users
   set_fact:
-      interactive_users: "{{passwd|selectattr('uid', 'ge', 1000)}}"
+      interactive_users: "{{passwd|selectattr('uid', 'ge', 1000)|list}}"
 
 # - name: get interactive users
 #   shell: "cut -d: -f 1,3,6 /etc/passwd | egrep ':[1-4][0-9]{3}' | true"
