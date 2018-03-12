@@ -169,20 +169,22 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-# - name: pass stig_rhel7_v1r4 v_72043 no separate /home partition
-#   set_fact:
-#     stig_rhel7_v1r4_v_72041_result: 'pass'
-#   when:
-#     - "'v_72041' in stig_rhel7_v1r4_checks"
-#     - home_mountpoint.stdout == '/home'
-#     - fstab.stdout|search('/home\\s+[a-zA-Z0-9]\\s+[a-zA-Z0-9,]*nosuid')
-#
-# - name: fail stig_rhel7_v1r4 v_72043
-#   set_fact:
-#     stig_rhel7_v1r4_v_72043_result: 'fail'
-#   when:
-#     - "'v_72043' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72043_result != 'pass'
+- name: fail stig_rhel7_v1r4 v_72043 removable type without nosuid
+  set_fact:
+    stig_rhel7_v1r4_v_72043_result: 'fail'
+  with_items: '{{fstab}}'
+  when:
+    - "'v_72043' in stig_rhel7_v1r4_checks"
+    - home_mountpoint.stdout == '/home'
+    - item.type in filesystems_types_removable
+    - not item.options|search('nosuid')
+
+- name: pass stig_rhel7_v1r4 v_72043
+  set_fact:
+    stig_rhel7_v1r4_v_72043_result: 'pass'
+  when:
+    - "'v_72043' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72043_result != 'fail'
 
 
 # Vuln ID: V-72045
