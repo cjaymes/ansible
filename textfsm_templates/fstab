@@ -6,4 +6,4 @@ Value Frequency (\S+)
 Value PassNo (\S+)
 
 Start
-  ^${Spec}\s+${Mountpoint}\s+${Type}\s+${Options}\s+${Frequency}\s+${PassNo} -> Start
+  ^${Spec}\s+${Mountpoint}\s+${Type}\s+${Options}\s+${Frequency}\s+${PassNo} -> Record
