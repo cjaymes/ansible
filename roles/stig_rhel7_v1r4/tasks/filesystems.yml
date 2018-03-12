@@ -29,17 +29,6 @@
           {% endif %}\
         {% endfor %}"
 
-# - name: get interactive users
-#   shell: "cut -d: -f 1,3,6 /etc/passwd | egrep ':[1-4][0-9]{3}' | true"
-#   # following is so we don't get an error about using command instead of module
-#   args:
-#       warn: false
-#   # errors are expected; ignore
-#   ignore_errors: yes
-#   # this command doesn't actually change anything
-#   changed_when: false
-#   register: interactive_users
-#
 - name: interactive_users
   debug:
     msg: '{{interactive_users}}'
@@ -133,7 +122,7 @@
     stig_rhel7_v1r4_v_72041_result: 'pass'
   when:
     - "'v_72041' in stig_rhel7_v1r4_checks"
-    - interactive_users.stdout == ''
+    - length(interactive_users) == 0
 
 # TODO non-standard home directories
 
