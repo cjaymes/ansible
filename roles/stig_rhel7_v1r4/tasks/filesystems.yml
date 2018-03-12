@@ -39,7 +39,7 @@
 - name: interactive_users
   debug:
     msg: "{% for i in passwd %}\
-        {% if i.uid >= 1000 %}\
+        {% if i.uid|int >= 1000 %}\
           {{ i }}\
         {% endif %}\
       {% endfor %}"
