@@ -1,10 +1,10 @@
-Value Required Spec (\S+)
-Value Required Mountpoint (\S+)
-Value Required Type (\S+)
-Value Required Options (\S+)
-Value Frequency (\S+)
-Value PassNo (\S+)
+Value Required spec (\S+)
+Value Required mountpoint (\S+)
+Value Required type (\S+)
+Value Required options (\S+)
+Value frequency (\S+)
+Value passno (\S+)
 
 Start
   ^\s*#
-  ^${Spec}\s+${Mountpoint}\s+${Type}\s+${Options}\s+${Frequency}\s+${PassNo} -> Record
+  ^${spec}\s+${mountpoint}\s+${type}\s+${options}\s+${frequency}\s+${passno} -> Record
