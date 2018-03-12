@@ -29,8 +29,12 @@
     msg: '{{fstab}}'
 
 - name: parse fstab
+  set_fact:
+      fstab: "{{ fstab.stdout | parse_cli_textfsm('textfsm_templates/fstab') }}"
+
+- name: fstab
   debug:
-    msg: "{{ fstab.stdout | parse_cli_textfsm('textfsm_templates/fstab') }}"
+    msg: '{{fstab}}'
 
 - name: df /home | tail -n 1 | awk '{print $6}'
   shell: df /home | tail -n 1 | awk '{print $6}' || true
@@ -93,36 +97,38 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-# - name: pass stig_rhel7_v1r4 v_72041 no interactive users
-#   set_fact:
-#     stig_rhel7_v1r4_v_72041_result: 'pass'
-#   when:
-#     - "'v_72041' in stig_rhel7_v1r4_checks"
-#     - interactive_users.stdout == ''
-#
-# # TODO non-standard home directories
-#
-# - name: pass stig_rhel7_v1r4 v_72041 no separate /home partition
-#   set_fact:
-#     stig_rhel7_v1r4_v_72041_result: 'pass'
-#   when:
-#     - "'v_72041' in stig_rhel7_v1r4_checks"
-#     - home_mountpoint.stdout == '/'
-#
-# - name: pass stig_rhel7_v1r4 v_72041 no separate /home partition
-#   set_fact:
-#     stig_rhel7_v1r4_v_72041_result: 'pass'
-#   when:
-#     - "'v_72041' in stig_rhel7_v1r4_checks"
-#     - home_mountpoint.stdout == '/home'
-#     - fstab.stdout|search('/home\\s+[a-zA-Z0-9]\\s+[a-zA-Z0-9,]*nosuid')
-#
-# - name: fail stig_rhel7_v1r4 v_72041
-#   set_fact:
-#     stig_rhel7_v1r4_v_72041_result: 'fail'
-#   when:
-#     - "'v_72041' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72041_result != 'pass'
+- name: pass stig_rhel7_v1r4 v_72041 no interactive users
+  set_fact:
+    stig_rhel7_v1r4_v_72041_result: 'pass'
+  when:
+    - "'v_72041' in stig_rhel7_v1r4_checks"
+    - interactive_users.stdout == ''
+
+# TODO non-standard home directories
+
+- name: pass stig_rhel7_v1r4 v_72041 no separate /home partition
+  set_fact:
+    stig_rhel7_v1r4_v_72041_result: 'pass'
+  when:
+    - "'v_72041' in stig_rhel7_v1r4_checks"
+    - home_mountpoint.stdout == '/'
+
+- name: pass stig_rhel7_v1r4 v_72041 no separate /home partition
+  set_fact:
+    stig_rhel7_v1r4_v_72041_result: 'pass'
+  with_items: '{{fstab}}'
+  when:
+    - "'v_72041' in stig_rhel7_v1r4_checks"
+    - home_mountpoint.stdout == '/home'
+    - item.mountpoint == '/home'
+    - not item.options|search('nosuid')
+
+- name: fail stig_rhel7_v1r4 v_72041
+  set_fact:
+    stig_rhel7_v1r4_v_72041_result: 'fail'
+  when:
+    - "'v_72041' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72041_result != 'pass'
 
 
 # Vuln ID: V-72043
