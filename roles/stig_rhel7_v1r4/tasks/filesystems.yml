@@ -15,7 +15,7 @@
 
 - name: parse passwd
   set_fact:
-      fstab: "{{ passwd.stdout | parse_cli_textfsm('textfsm_templates/etc/passwd') }}"
+      passwd: "{{ passwd.stdout | parse_cli_textfsm('textfsm_templates/etc/passwd') }}"
 
 - name: passwd
   debug:
