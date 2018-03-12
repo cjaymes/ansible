@@ -30,7 +30,7 @@
 
 - name: parse fstab
   debug:
-    msg: "{{ fstab.stdout | parse_cli('parsers/fstab.yml') }}"
+    msg: "{{ fstab.stdout | parse_cli_textfsm('textfsm_templates/fstab') }}"
 
 - name: df /home | tail -n 1 | awk '{print $6}'
   shell: df /home | tail -n 1 | awk '{print $6}' || true
