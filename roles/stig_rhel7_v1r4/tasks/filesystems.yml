@@ -24,6 +24,8 @@
 - name: select interactive users
   set_fact:
       interactive_users: "{% for i in passwd %}\
+          {% i.uid = i.uid|int %}\
+          {% i.gid = i.gid|int %}\
           {% if (i.uid|int) >= 1000 %}\
             {{ i }}\
           {% endif %}\
