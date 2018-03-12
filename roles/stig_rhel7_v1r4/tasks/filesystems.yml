@@ -225,7 +225,7 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: fail stig_rhel7_v1r4 v_72045 removable type without nosuid
+- name: fail stig_rhel7_v1r4 v_72045 network type without nosuid
   set_fact:
     stig_rhel7_v1r4_v_72045_result: 'fail'
   with_items: '{{fstab}}'
