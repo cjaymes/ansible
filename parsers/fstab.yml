@@ -11,4 +11,4 @@ keys:
     filesystems:
         type: list
         value: '{{ filesystem }}'
-        items: '(?P<spec>\\S+)\\s+(?P<mountpoint>\\S+)\\s+(?P<type>\\S+)\\s+(?P<options>\\S+)(\\s+(?P<freq>\\S+)(\\s+(?P<passno>\\S+))?)?'
+        items: '^(?P<spec>\\S+)\\s+(?P<mountpoint>\\S+)\\s+(?P<type>\\S+)\\s+(?P<options>\\S+)(\\s+(?P<freq>\\S+)(\\s+(?P<passno>\\S+))?)?'
