@@ -225,12 +225,22 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72045
-#   set_fact:
-#     stig_rhel7_v1r4_v_72045_result: 'fail'
-#   when:
-#     - "'v_72045' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72045_result != 'pass'
+- name: fail stig_rhel7_v1r4 v_72045 removable type without nosuid
+  set_fact:
+    stig_rhel7_v1r4_v_72045_result: 'fail'
+  with_items: '{{fstab}}'
+  when:
+    - "'v_72045' in stig_rhel7_v1r4_checks"
+    - home_mountpoint.stdout == '/home'
+    - item.type in filesystems_types_network
+    - not item.options|search('nosuid')
+
+- name: pass stig_rhel7_v1r4 v_72045
+  set_fact:
+    stig_rhel7_v1r4_v_72045_result: 'pass'
+  when:
+    - "'v_72045' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72045_result != 'fail'
 
 
 # Vuln ID: V-72059
