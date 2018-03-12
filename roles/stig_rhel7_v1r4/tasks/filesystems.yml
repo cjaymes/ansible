@@ -23,12 +23,11 @@
 
 - name: select interactive users
   set_fact:
-      interactive_users: |
-        {% for i in passwd %}
-          {% if (i.uid|int) >= 1000 %}
-            {{ i }}
-          {% endif %}
-        {% endfor %}
+      interactive_users: "{% for i in passwd %}\
+          {% if (i.uid|int) >= 1000 %}\
+            {{ i }}\
+          {% endif %}\
+        {% endfor %}"
 
 # - name: get interactive users
 #   shell: "cut -d: -f 1,3,6 /etc/passwd | egrep ':[1-4][0-9]{3}' | true"
