@@ -21,6 +21,22 @@
   set_fact:
       interactive_users: "{{ passwd | selectattr('uid', 'match', '^[1-4][0-9]{3}$') | list }}"
 
+- name: df {{item}} | tail -n 1 | awk '{print $6}'
+  shell: df {{item}} | tail -n 1 | awk '{print $6}' || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: user_home_parts
+  with_items: "{{interactive_users|map(attribute='home')|list}}"
+
+- name: user_home_parts
+  set_fact:
+      user_home_parts: "{{user_home_parts|map(attribute='stdout')|unique|list}}"
+
 - name: cat /etc/fstab
   shell: cat /etc/fstab || true
   # following is so we don't get an error about using command instead of module
@@ -97,35 +113,21 @@
     - "'v_72041' in stig_rhel7_v1r4_checks"
     - interactive_users|length == 0
 
-- name: df {{item}} | tail -n 1 | awk '{print $6}'
-  shell: df {{item}} | tail -n 1 | awk '{print $6}' || true
-  # following is so we don't get an error about using command instead of module
-  args:
-      warn: false
-  # errors are expected; ignore
-  ignore_errors: yes
-  # this command doesn't actually change anything
-  changed_when: false
-  register: user_homes
-  with_items: "{{interactive_users|map(attribute='home')|list}}"
-
-- name: user_homes
-  debug:
-    msg: '{{user_homes}}'
-
 - name: pass stig_rhel7_v1r4 v_72041 no separate /home partition
   set_fact:
     stig_rhel7_v1r4_v_72041_result: 'pass'
   when:
     - "'v_72041' in stig_rhel7_v1r4_checks"
-    - home_mountpoint.stdout == '/'
+    - stig_rhel7_v1r4_v_72041_result != 'pass'
+    - user_home_parts == ['/']
 
-- name: pass stig_rhel7_v1r4 v_72041 no separate /home partition
+- name: pass stig_rhel7_v1r4 v_72041 home part doesn't have nosuid
   set_fact:
     stig_rhel7_v1r4_v_72041_result: 'pass'
-  with_items: '{{fstab}}'
+  with_items: '{{user_home_parts}}'
   when:
     - "'v_72041' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72041_result != 'pass'
     - home_mountpoint.stdout == '/home'
     - item.mountpoint == '/home'
     - not item.options|search('nosuid')
