@@ -23,13 +23,13 @@
     fstab_network:
 
 - name: add nosuid to /home
-  import_tasks: fstab-opt-present.yml
+  include_tasks: fstab-opt-present.yml
   vars:
     point: /home
     opt: nosuid
 
 - name: add nosuid to removable
-  import_tasks: fstab-opt-present.yml
+  include_tasks: fstab-opt-present.yml
   vars:
     point: "{{item.mountpoint}}"
     opt: nosuid
@@ -38,7 +38,7 @@
       - item.type in filesystems_types_removable
 
 - name: add nosuid to network
-  import_tasks: fstab-opt-present.yml
+  include_tasks: fstab-opt-present.yml
   vars:
     point: "{{item.mountpoint}}"
     opt: nosuid
@@ -55,7 +55,7 @@
       state: started
 
 - name: add sec=krb5:krb5i:krb5p to nfs mounts
-  import_tasks: fstab-opt-present.yml
+  include_tasks: fstab-opt-present.yml
   vars:
     point: "{{item.mountpoint}}"
     opt: sec=krb5:krb5i:krb5p
@@ -64,7 +64,7 @@
       - item.type in ['nfs', 'nfs4']
 
 - name: add noexec to network
-  import_tasks: fstab-opt-present.yml
+  include_tasks: fstab-opt-present.yml
   vars:
     point: "{{item.mountpoint}}"
     opt: noexec
