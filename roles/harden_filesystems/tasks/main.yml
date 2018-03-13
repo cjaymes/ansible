@@ -1,0 +1,14 @@
+- name: add nosuid to /home
+  import_tasks: fstab-opt-present.yml point=/home opt=nosuid
+
+# TODO add nosuid to removable
+
+# TODO add nosuid to network
+
+# can't fix separate filesystem for /home,/var,/var/log/audit,/tmp
+# TODO enable tmp.mount
+#systemctl enable tmp.mount
+
+# TODO add sec=krb5:krb5i:krb5p to nfs mounts
+
+# TODO add noexec to network
