@@ -17,17 +17,9 @@
   set_fact:
       passwd: "{{ passwd.stdout | parse_cli_textfsm('textfsm_templates/etc/passwd') }}"
 
-- name: passwd
-  debug:
-    msg: '{{passwd}}'
-
 - name: select interactive users
   set_fact:
       interactive_users: "{{ passwd | selectattr('uid', 'match', '^[1-4][0-9]{3}$') | list }}"
-
-- name: interactive_users
-  debug:
-    msg: '{{interactive_users}}'
 
 - name: cat /etc/fstab
   shell: cat /etc/fstab || true
@@ -105,8 +97,8 @@
     - "'v_72041' in stig_rhel7_v1r4_checks"
     - interactive_users|length == 0
 
-- name: df {{item.home}} | tail -n 1 | awk '{print $6}'
-  shell: df {{item.home}} | tail -n 1 | awk '{print $6}' || true
+- name: df {{item}} | tail -n 1 | awk '{print $6}'
+  shell: df {{item}} | tail -n 1 | awk '{print $6}' || true
   # following is so we don't get an error about using command instead of module
   args:
       warn: false
@@ -115,7 +107,7 @@
   # this command doesn't actually change anything
   changed_when: false
   register: user_homes
-  with_items: '{{interactive_users}}'
+  with_items: '{{interactive_users|map(attribute='home')|list}}'
 
 - name: user_homes
   debug:
