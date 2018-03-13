@@ -195,7 +195,7 @@
     stig_rhel7_v1r4_v_72043_result: 'pass'
   when:
     - "'v_72043' in stig_rhel7_v1r4_checks"
-    - stig_rhel7_v1r4_v_72043_result != 'fail'
+    - stig_rhel7_v1r4_v_72043_result not in ['fail', 'notchecked']
 
 
 # Vuln ID: V-72045
@@ -311,18 +311,18 @@
   ignore_errors: yes
   # this command doesn't actually change anything
   changed_when: false
-  register: home_df
+  register: home_part
 
-- name: home_df
+- name: home_part
   debug:
-      msg: "{{home_df}}"
+      msg: "{{home_part}}"
 
 - name: pass stig_rhel7_v1r4 v_72059
   set_fact:
     stig_rhel7_v1r4_v_72059_result: 'pass'
   when:
     - "'v_72059' in stig_rhel7_v1r4_checks"
-    - home_df.stdout == '/home'
+    - home_part.stdout == '/home'
 
 - name: fail stig_rhel7_v1r4 v_72059
   set_fact:
@@ -369,12 +369,34 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72061
-#   set_fact:
-#     stig_rhel7_v1r4_v_72061_result: 'fail'
-#   when:
-#     - "'v_72061' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72061_result != 'pass'
+- name: df /var | tail -n 1 | awk '{print $6}'
+  shell: df /var | tail -n 1 | awk '{print $6}' || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: var_part
+
+- name: var_part
+  debug:
+      msg: "{{var_part}}"
+
+- name: pass stig_rhel7_v1r4 v_72061
+  set_fact:
+    stig_rhel7_v1r4_v_72061_result: 'pass'
+  when:
+    - "'v_72061' in stig_rhel7_v1r4_checks"
+    - var_part.stdout == '/var'
+
+- name: fail stig_rhel7_v1r4 v_72061
+  set_fact:
+    stig_rhel7_v1r4_v_72061_result: 'fail'
+  when:
+    - "'v_72061' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72061_result != 'pass'
 
 
 # Vuln ID: V-72063
@@ -411,12 +433,34 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72063
-#   set_fact:
-#     stig_rhel7_v1r4_v_72063_result: 'fail'
-#   when:
-#     - "'v_72063' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72063_result != 'pass'
+- name: df /var/log/audit | tail -n 1 | awk '{print $6}'
+  shell: df /var/log/audit | tail -n 1 | awk '{print $6}' || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: var_log_audit_part
+
+- name: var_log_audit_part
+  debug:
+      msg: "{{var_log_audit_part}}"
+
+- name: pass stig_rhel7_v1r4 v_72063
+  set_fact:
+    stig_rhel7_v1r4_v_72063_result: 'pass'
+  when:
+    - "'v_72063' in stig_rhel7_v1r4_checks"
+    - var_log_audit_part.stdout == '/var/log/audit'
+
+- name: fail stig_rhel7_v1r4 v_72063
+  set_fact:
+    stig_rhel7_v1r4_v_72063_result: 'fail'
+  when:
+    - "'v_72063' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72063_result != 'pass'
 
 
 # Vuln ID: V-72065
@@ -458,12 +502,59 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72065
-#   set_fact:
-#     stig_rhel7_v1r4_v_72065_result: 'fail'
-#   when:
-#     - "'v_72065' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72065_result != 'pass'
+- name: systemctl is-enabled tmp.mount
+  shell: systemctl is-enabled tmp.mount || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: tmp_mount_enabled
+
+- name: tmp_mount_enabled
+  debug:
+      msg: "{{tmp_mount_enabled}}"
+
+- name: pass stig_rhel7_v1r4 v_72065
+  set_fact:
+    stig_rhel7_v1r4_v_72065_result: 'pass'
+  when:
+    - "'v_72065' in stig_rhel7_v1r4_checks"
+    - tmp_mount_enabled.stdout == 'enabled'
+
+# NOTE: prefer tmp.mount, but another partition works too
+
+- name: df /tmp | tail -n 1 | awk '{print $6}'
+  shell: df /tmp | tail -n 1 | awk '{print $6}' || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: tmp_part
+
+- name: tmp_part
+  debug:
+      msg: "{{tmp_part}}"
+
+- name: pass stig_rhel7_v1r4 v_72065
+  set_fact:
+    stig_rhel7_v1r4_v_72065_result: 'pass'
+  when:
+    - "'v_72065' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72065_result != 'pass'
+    - tmp_part.stdout == '/tmp'
+
+- name: fail stig_rhel7_v1r4 v_72065
+  set_fact:
+    stig_rhel7_v1r4_v_72065_result: 'fail'
+  when:
+    - "'v_72065' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72065_result != 'pass'
 
 
 # Vuln ID: V-72311
@@ -505,12 +596,21 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72311
-#   set_fact:
-#     stig_rhel7_v1r4_v_72311_result: 'fail'
-#   when:
-#     - "'v_72311' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72311_result != 'pass'
+- name: fail stig_rhel7_v1r4 v_72311
+  set_fact:
+    stig_rhel7_v1r4_v_72311_result: 'fail'
+  with_items: '{{fstab}}'
+  when:
+    - "'v_72311' in stig_rhel7_v1r4_checks"
+    - item.type in ['nfs','nfs4']
+    - (not item.options|search('sec=krb5:krb5i:krb5p')) or item.options|search('sec=[^,]*sys')
+
+- name: pass stig_rhel7_v1r4 v_72311
+  set_fact:
+    stig_rhel7_v1r4_v_72311_result: 'pass'
+  when:
+    - "'v_72311' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72311_result not in ['fail', 'notchecked']
 
 
 # Vuln ID: V-73161
@@ -551,9 +651,18 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-# - name: fail stig_rhel7_v1r4 v_73161
-#   set_fact:
-#     stig_rhel7_v1r4_v_73161_result: 'fail'
-#   when:
-#     - "'v_73161' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_73161_result != 'pass'
+- name: fail stig_rhel7_v1r4 v_73161
+  set_fact:
+    stig_rhel7_v1r4_v_73161_result: 'fail'
+  with_items: '{{fstab}}'
+  when:
+    - "'v_73161' in stig_rhel7_v1r4_checks"
+    - item.type in ['nfs','nfs4']
+    - not item.options|search('noexec')
+
+- name: pass stig_rhel7_v1r4 v_73161
+  set_fact:
+    stig_rhel7_v1r4_v_73161_result: 'pass'
+  when:
+    - "'v_73161' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_73161_result not in ['fail', 'notchecked']
