@@ -39,7 +39,7 @@
 
 - name: user_home_parts
   set_fact:
-      user_home_parts: "{{user_home_df|map(attribute='stdout')|unique|list}}"
+      user_home_parts: "{{user_home_df.results|map(attribute='stdout')|unique|list}}"
 
 - name: cat /etc/fstab
   shell: cat /etc/fstab || true
