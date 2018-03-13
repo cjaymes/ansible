@@ -1,3 +1,5 @@
+# From: https://stackoverflow.com/questions/25977410/adding-an-fstab-option-using-ansible
+
 - name: '/etc/fstab: Set opt "{{ opt }}" for mount point {{ point }}'
   lineinfile:
     path: /etc/fstab
