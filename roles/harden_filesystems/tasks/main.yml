@@ -1,7 +1,8 @@
-- import_tasks: fstab-opt-present.yml
-  vars:
-      point: /home
-      opt: nosuid
+- name: add nosuid to /home
+    import_tasks: fstab-opt-present.yml
+      vars:
+          point: /home
+          opt: nosuid
 
 # TODO add nosuid to removable
 
