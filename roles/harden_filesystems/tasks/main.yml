@@ -1,17 +1,73 @@
+- name: cat /etc/fstab
+  shell: cat /etc/fstab || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: fstab
+
+- name: fstab
+  debug:
+    msg: '{{fstab}}'
+
+- name: parse fstab
+  set_fact:
+      fstab: "{{ fstab.stdout | parse_cli_textfsm('textfsm_templates/etc/fstab') }}"
+
+- name: removable, network mounts
+  set_fact:
+    fstab_removable: "{{ fstab|selectattr('type')}}"
+    fstab_network:
+
 - name: add nosuid to /home
   import_tasks: fstab-opt-present.yml
   vars:
     point: /home
     opt: nosuid
 
-# TODO add nosuid to removable
+- name: add nosuid to removable
+  import_tasks: fstab-opt-present.yml
+  vars:
+    point: {{item.mountpoint}}
+    opt: nosuid
+  with_items: "{{fstab}}"
+  when:
+      - item.type in filesystems_types_removable
 
-# TODO add nosuid to network
+- name: add nosuid to network
+  import_tasks: fstab-opt-present.yml
+  vars:
+    point: {{item.mountpoint}}
+    opt: nosuid
+  with_items: "{{fstab}}"
+  when:
+      - item.type in filesystems_types_network
 
-# can't fix separate filesystem for /home,/var,/var/log/audit,/tmp
-# TODO enable tmp.mount
-#systemctl enable tmp.mount
+# NOTE: can't fix separate filesystem for /home,/var,/var/log/audit,/tmp
 
-# TODO add sec=krb5:krb5i:krb5p to nfs mounts
+- name: enable (and start) tmp.mount
+  systemd:
+      name: tmp.mount
+      enabled: yes
+      state: started
 
-# TODO add noexec to network
+- name: add sec=krb5:krb5i:krb5p to nfs mounts
+  import_tasks: fstab-opt-present.yml
+  vars:
+    point: {{item.mountpoint}}
+    opt: sec=krb5:krb5i:krb5p
+  with_items: "{{fstab}}"
+  when:
+      - item.type in ['nfs', 'nfs4']
+
+- name: add noexec to network
+  import_tasks: fstab-opt-present.yml
+  vars:
+    point: {{item.mountpoint}}
+    opt: noexec
+  with_items: "{{fstab}}"
+  when:
+      - item.type in filesystems_types_network
