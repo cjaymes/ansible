@@ -23,7 +23,7 @@
 
 - name: select interactive users
   set_fact:
-      interactive_users: "{% set r = [] }\
+      interactive_users: "{% set r = [] %}\
         {% for i in passwd if (i.uid|int) >= 1000 %}\
         {% r += i %}\
         {% endfor %}"
