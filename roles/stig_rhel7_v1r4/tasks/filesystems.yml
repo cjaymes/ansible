@@ -125,18 +125,15 @@
     - stig_rhel7_v1r4_v_72041_result != 'pass'
     - user_home_parts == ['/']
 
-- name: nosuid_mountpoints
+- name: fail stig_rhel7_v1r4 v_72041 home part not using nosuid
   set_fact:
-      nosuid_mountpoints: "{{fstab|selectattr('options', 'search', 'nosuid')|map('mountpoint')|list}}"
-
-- name: pass stig_rhel7_v1r4 v_72041 home part {{item}} using nosuid
-  set_fact:
-    stig_rhel7_v1r4_v_72041_result: 'pass'
-  with_items: '{{user_home_parts}}'
+    stig_rhel7_v1r4_v_72041_result: 'fail'
+  with_items: '{{fstab}}'
   when:
     - "'v_72041' in stig_rhel7_v1r4_checks"
     - stig_rhel7_v1r4_v_72041_result != 'pass'
-    - item not in nosuid_mountpoints
+    - item.mountpoint in user_home_parts
+    - not item.options|search('nosuid')
 
 - name: fail stig_rhel7_v1r4 v_72041
   set_fact:
@@ -190,7 +187,6 @@
   with_items: '{{fstab}}'
   when:
     - "'v_72043' in stig_rhel7_v1r4_checks"
-    - home_mountpoint.stdout == '/home'
     - item.type in filesystems_types_removable
     - not item.options|search('nosuid')
 
@@ -246,7 +242,6 @@
   with_items: '{{fstab}}'
   when:
     - "'v_72045' in stig_rhel7_v1r4_checks"
-    - home_mountpoint.stdout == '/home'
     - item.type in filesystems_types_network
     - not item.options|search('nosuid')
 
