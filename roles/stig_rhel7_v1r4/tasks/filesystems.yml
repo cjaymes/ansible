@@ -33,6 +33,10 @@
   register: user_home_df
   with_items: "{{interactive_users|map(attribute='home')|list}}"
 
+- name: user_home_df
+  debug:
+      msg: "{{user_home_df}}"
+
 - name: user_home_parts
   set_fact:
       user_home_parts: "{{user_home_df|map(attribute='stdout')|unique|list}}"
