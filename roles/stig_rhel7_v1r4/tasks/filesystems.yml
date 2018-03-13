@@ -30,12 +30,12 @@
   ignore_errors: yes
   # this command doesn't actually change anything
   changed_when: false
-  register: user_home_parts
+  register: user_home_df
   with_items: "{{interactive_users|map(attribute='home')|list}}"
 
 - name: user_home_parts
   set_fact:
-      user_home_parts: "{{user_home_parts|map(attribute='stdout')|unique|list}}"
+      user_home_parts: "{{user_home_df|map(attribute='stdout')|unique|list}}"
 
 - name: cat /etc/fstab
   shell: cat /etc/fstab || true
