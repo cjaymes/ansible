@@ -23,6 +23,12 @@
     point: /home
     opt: nosuid
 
+- debug:
+    msg: "{{item.mountpoint}}"
+  with_items: "{{fstab}}"
+  when:
+      - item.type in filesystems_types_removable
+
 - name: add nosuid to removable
   include_tasks: fstab-opt-present.yml
   vars:
