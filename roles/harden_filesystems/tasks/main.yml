@@ -7,15 +7,15 @@
   ignore_errors: yes
   # this command doesn't actually change anything
   changed_when: false
-  register: fstab
+  register: fstab_txt
 
-- name: fstab
+- name: fstab_txt
   debug:
-    msg: '{{fstab}}'
+    msg: '{{fstab_txt}}'
 
 - name: parse fstab
   set_fact:
-      fstab: "{{ fstab.stdout | parse_cli_textfsm('textfsm_templates/etc/fstab')|list }}"
+      fstab: "{{ fstab_txt.stdout | parse_cli_textfsm('textfsm_templates/etc/fstab')|list }}"
 
 - name: fstab
   debug:
