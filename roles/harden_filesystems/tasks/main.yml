@@ -15,7 +15,7 @@
 
 - name: parse fstab
   set_fact:
-      fstab: "{{ fstab_txt.stdout | parse_cli_textfsm('textfsm_templates/etc/fstab')|list }}"
+      fstab: "{{ fstab_txt.stdout | parse_cli_textfsm('textfsm_templates/etc/fstab') | list }}"
 
 - name: fstab
   debug:
@@ -29,7 +29,7 @@
 
 - debug:
     msg: "{{item.mountpoint}}"
-  with_items: "{{fstab}}"
+  with_items: '{{fstab}}'
   when:
       - item.type in filesystems_types_removable
 
