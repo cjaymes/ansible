@@ -17,11 +17,6 @@
   set_fact:
       fstab: "{{ fstab.stdout | parse_cli_textfsm('textfsm_templates/etc/fstab')|list }}"
 
-- name: removable, network mounts
-  set_fact:
-    fstab_removable: "{{ fstab|selectattr('type')}}"
-    fstab_network:
-
 - name: add nosuid to /home
   include_tasks: fstab-opt-present.yml
   vars:
