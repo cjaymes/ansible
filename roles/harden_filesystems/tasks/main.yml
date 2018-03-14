@@ -29,7 +29,7 @@
 
 - debug:
     msg: "{{item.mountpoint}}"
-  with_items: '{{fstab}}'
+  with_items: '{{fstab|list}}'
   when:
       - item.type in filesystems_types_removable
 
