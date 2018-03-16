@@ -7,11 +7,11 @@
   ignore_errors: yes
   # this command doesn't actually change anything
   changed_when: false
-  register: fstab_txt
+  register: fstab
 
-- name: fstab_txt
+- name: fstab
   debug:
-    msg: '{{fstab_txt}}'
+    msg: '{{fstab}}'
 
 - name: parse fstab
   set_fact:
@@ -26,11 +26,6 @@
   vars:
     point: /home
     opt: nosuid
-
-- name: test
-  debug:
-    msg: "{{item.mountpoint}}"
-  with_items: "{{fstab|selectattr('type', 'in', 'filesystems_types_removable')|list}}"
 
 - name: add nosuid to removable
   include_tasks: fstab-opt-present.yml
@@ -50,7 +45,8 @@
   when:
       - item.type in filesystems_types_network
 
-# NOTE: can't fix separate filesystem for /home,/var,/var/log/audit,/tmp
+# TODO fix separate filesystem for /home,/var,/var/log/audit,/tmp
+# TODO maybe use available lvm pool?
 
 - name: enable (and start) tmp.mount
   systemd:
