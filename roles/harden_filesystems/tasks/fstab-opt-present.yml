@@ -7,8 +7,8 @@
     backrefs: yes
     regexp: '^(\S+\s+{{ point }}\s+\S+\s+)(?!(?:\S*,)?{{ opt }}(?:,\S*)?\s+)(\S+)(\s+.+)$'
     line: '\1{{ opt }},\2\3'
-  register: fstab
+  register: fstab_lif
 
 - name: 'If {{ point }} changed, remount'
   command: 'mount {{ point }} -o remount'
-  when: fstab.changed
+  when: fstab_lif.changed
