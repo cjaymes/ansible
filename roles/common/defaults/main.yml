@@ -51,7 +51,7 @@ filesystems_types_pseudo:
 
 firewalld_zones:
     block:
-        target: %%REJECT%%
+        target: '%%REJECT%%'
         icmp_block_inversion: no
         sources:
         services:
