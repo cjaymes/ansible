@@ -49,6 +49,135 @@ filesystems_types_pseudo:
     - hugetlbfs
     - systemd-1
 
+firewalld_zones:
+    block:
+        target: %%REJECT%%
+        icmp_block_inversion: no
+        sources:
+        services:
+        ports:
+        protocols:
+        masquerade: no
+        forward_ports:
+        source_ports:
+        icmp_blocks:
+        rich_rules:
+    dmz:
+        target: default
+        icmp_block_inversion: no
+        sources:
+        services:
+            - ssh
+        ports:
+        protocols:
+        masquerade: no
+        forward_ports:
+        source_ports:
+        icmp_blocks:
+        rich_rules:
+    drop:
+        target: DROP
+        icmp_block_inversion: no
+        sources:
+        services:
+        ports:
+        protocols:
+        masquerade: no
+        forward_ports:
+        source_ports:
+        icmp_blocks:
+        rich_rules:
+    external:
+        target: default
+        icmp_block_inversion: no
+        sources:
+        services:
+            - ssh
+        ports:
+        protocols:
+        masquerade: yes
+        forward_ports:
+        source_ports:
+        icmp_blocks:
+        rich_rules:
+    home:
+        target: default
+        icmp_block_inversion: no
+        sources:
+        services:
+            - ssh
+            - mdns
+            - samba-client
+            - dhcpv6-client
+        ports:
+        protocols:
+        masquerade: no
+        forward_ports:
+        source_ports:
+        icmp_blocks:
+        rich_rules:
+    internal:
+        target: default
+        icmp_block_inversion: no
+        sources:
+        services:
+            - ssh
+            - mdns
+            - samba-client
+            - dhcpv6-client
+        ports:
+        protocols:
+        masquerade: no
+        forward_ports:
+        source_ports:
+        icmp_blocks:
+        rich_rules:
+    public:
+        target: default
+        icmp_block_inversion: no
+        sources:
+        services:
+            - dhcpv6-client
+            - ssh
+        ports:
+        protocols:
+        masquerade: no
+        forward_ports:
+        source_ports:
+        icmp_blocks:
+        rich_rules:
+    trusted:
+        target: ACCEPT
+        icmp_block_inversion: no
+        sources:
+        services:
+        ports:
+        protocols:
+        masquerade: no
+        forward_ports:
+        source_ports:
+        icmp_blocks:
+        rich_rules:
+    work:
+        target: default
+        icmp_block_inversion: no
+        sources:
+        services:
+            - ssh
+            - dhcpv6-client
+        ports:
+        protocols:
+        masquerade: no
+        forward_ports:
+        source_ports:
+        icmp_blocks:
+        rich_rules:
+firewalld_default_zone: drop
+firewalld_interface_zones:
+firewalld_direct_chains:
+firewalld_direct_rules:
+    - ipv4 filter IN_drop_allow 0 -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
+
 nfs_required: False
 
 ntp_server: localhost
