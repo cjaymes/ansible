@@ -1,0 +1,17 @@
+- name: AutomaticLoginEnable = false in /etc/gdm/custom.conf [daemon]
+  ini_file:
+      path: /etc/gdm/custom.conf
+      section: daemon
+      mode: 0644
+      option: AutomaticLoginEnable
+      value: false
+      state: present
+
+- name: TimedLoginEnable = false in /etc/gdm/custom.conf [daemon]
+  ini_file:
+      path: /etc/gdm/custom.conf
+      section: daemon
+      mode: 0644
+      option: TimedLoginEnable
+      value: false
+      state: present
