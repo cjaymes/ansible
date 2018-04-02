@@ -1,3 +1,14 @@
+- name: gdm is installed
+  shell: yum list installed gdm 2&>1 >/dev/null || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: gdm_installed
+
 - name: AutomaticLoginEnable = false in /etc/gdm/custom.conf [daemon]
   ini_file:
       path: /etc/gdm/custom.conf
