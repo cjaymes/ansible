@@ -1,5 +1,5 @@
 - name: gdm is installed
-  shell: yum list installed gdm 2&>1 >/dev/null || true
+  shell: yum list installed gdm || true
   # following is so we don't get an error about using command instead of module
   args:
       warn: false
@@ -9,6 +9,15 @@
   changed_when: false
   register: gdm_installed
 
+# - debug:
+#     msg: "{{gdm_installed}}"
+#
+- set_fact:
+    gdm_installed: "{{gdm_installed.failed == false and gdm_installed.stderr != ''}}"
+
+# - debug:
+#     msg: "{{gdm_installed}}"
+#
 - name: AutomaticLoginEnable = false in /etc/gdm/custom.conf [daemon]
   ini_file:
       path: /etc/gdm/custom.conf
@@ -17,6 +26,8 @@
       option: AutomaticLoginEnable
       value: false
       state: present
+  when:
+      - not gdm_installed
 
 - name: TimedLoginEnable = false in /etc/gdm/custom.conf [daemon]
   ini_file:
@@ -26,3 +37,5 @@
       option: TimedLoginEnable
       value: false
       state: present
+  when:
+      - not gdm_installed
