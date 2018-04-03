@@ -9,14 +9,18 @@
   changed_when: false
   register: systemctl_status_firewalld
 
-- name: systemctl_status_firewalld
-  debug:
-    msg: '{{systemctl_status_firewalld}}'
+- set_fact:
+    firewalld_active: true
+  when:
+      - 'Loaded: loaded' in systemctl_status_firewalld.stdout
+      - 'Active: active (running)' in systemctl_status_firewalld.stdout
+      - not systemctl_status_firewalld.failed
 
 - set_fact:
-    firewalld_active: "{{'Loaded: loaded' in systemctl_status_firewalld.stdout and 'Active: active (running)' in systemctl_status_firewalld.stdout}}"
+    firewalld_active: false
   when:
-      - not systemctl_status_firewalld.failed
+      - not firewalld_active
+
 - name: firewalld_active
   debug:
     msg: '{{firewalld_active}}'
