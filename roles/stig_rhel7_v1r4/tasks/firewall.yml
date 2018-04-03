@@ -1,3 +1,28 @@
+- name: systemctl status firewalld
+  shell: systemctl status firewalld || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: systemctl_status_firewalld
+
+- name: systemctl_status_firewalld
+  debug:
+    msg: '{{systemctl_status_firewalld}}'
+
+- set_fact:
+    firewalld_active: "{{'Loaded: loaded' in systemctl_status_firewalld.stdout and 'Active: active (running)' in systemctl_status_firewalld.stdout}}"
+  when:
+      - not systemctl_status_firewalld.failed
+- name: firewalld_active
+  debug:
+    msg: '{{firewalld_active}}'
+  when:
+      - not systemctl_status_firewalld.failed
+
 # Vuln ID: V-72219
 # Severity: medium
 # Group Title: SRG-OS-000096-GPOS-00050
@@ -55,12 +80,14 @@
 # NIST SP 800-53 Revision 4 :: AC-17 (1)
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72219
-#   set_fact:
-#     stig_rhel7_v1r4_v_72219_result: 'fail'
-#   when:
-#     - "'v_72219' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72219_result != 'pass'
+
+
+- name: fail stig_rhel7_v1r4 v_72219
+  set_fact:
+    stig_rhel7_v1r4_v_72219_result: 'fail'
+  when:
+    - "'v_72219' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72219_result != 'pass'
 
 
 # Vuln ID: V-72271
