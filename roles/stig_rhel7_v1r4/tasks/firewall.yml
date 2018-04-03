@@ -12,8 +12,8 @@
 - set_fact:
     firewalld_active: true
   when:
-      - "{{'Loaded: loaded' in systemctl_status_firewalld.stdout}}"
-      - "{{'Active: active (running)' in systemctl_status_firewalld.stdout}}"
+      - "'Loaded: loaded' in systemctl_status_firewalld.stdout"
+      - "'Active: active (running)' in systemctl_status_firewalld.stdout"
       - not systemctl_status_firewalld.failed
 
 - set_fact:
