@@ -3,8 +3,8 @@ stig_rhel7_v1r4_sections:
   # - antivirus
   # - auditing
   # - cron
-  - filesystems
-  # - firewall
+  # - filesystems
+  - firewall
   # - gdm
   # - grub
   # - home_dirs
