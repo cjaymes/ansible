@@ -49,6 +49,14 @@ filesystems_types_pseudo:
     - hugetlbfs
     - systemd-1
 
+# TODO ipset definitions
+# TODO icmptype definitions
+# TODO service definitions
+# TODO helper definitions
+# TODO direct chain definitions
+# TODO passthrough definitions
+# TODO lockdown
+# TODO lockdown whitelist defintion
 firewalld_zones:
     block:
         target: '%%REJECT%%'
@@ -174,7 +182,6 @@ firewalld_zones:
         rich_rules:
 firewalld_default_zone: drop
 firewalld_interface_zones:
-firewalld_direct_chains:
 firewalld_direct_rules:
     - ipv4 filter IN_drop_allow 0 -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
 
