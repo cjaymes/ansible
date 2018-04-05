@@ -30,4 +30,4 @@ Start
 
 RichRules
   ^${rich_rule} -> Record
-  ^\s*$
+  ^\s*
