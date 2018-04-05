@@ -1,0 +1,33 @@
+Value Required zone (\S+)
+Value active (active)
+Value target (\S+)
+Value icmp_block_inversion (yes|no)
+Value interfaces (\S+)
+Value sources (\S+)
+Value services (\S+)
+Value ports (\S+)
+Value protocols (\S+)
+Value masquerade (yes|no)
+Value forward_ports (\S+)
+Value source_ports (\S+)
+Value icmp_blocks (\S+)
+Value rich_rule (.+)
+
+Start
+  ^${zone}( \(${active}\))?
+  ^  target: ${target} -> Record
+  ^  icmp-block-inversion: ${icmp_block_inversion} -> Record
+  ^  interfaces: ${interfaces} -> Record
+  ^  sources: ${sources} -> Record
+  ^  services: ${services} -> Record
+  ^  ports: ${ports} -> Record
+  ^  protocols: ${protocols} -> Record
+  ^  masquerade: ${masquerade} -> Record
+  ^  forward-ports: ${forward_ports} -> Record
+  ^  source-ports: ${source_ports} -> Record
+  ^  icmp-blocks: ${icmp_blocks} -> Record
+  ^  rich rules: -> RichRules
+
+RichRules
+  ^${rich_rule} -> Record
+  ^\s*$
