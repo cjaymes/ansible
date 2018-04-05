@@ -112,9 +112,8 @@
     - firewalld_running
 
 - debug:
-    msg: "{{ item|map(attribute='stdout')|string|parse_cli_textfsm('textfsm_templates/firewall-cmd_info_zone') }}"
-  with_items:
-      firewalld_info_zones
+    msg: "{{ item.stdout|parse_cli_textfsm('textfsm_templates/firewall-cmd_info_zone') }}"
+  with_items: "{{firewalld_info_zones}}"
   when:
     - firewalld_active
     - firewalld_running
