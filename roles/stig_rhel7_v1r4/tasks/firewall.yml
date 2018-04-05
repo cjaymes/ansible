@@ -113,7 +113,7 @@
 
 - debug:
     msg: "{{ item.stdout|parse_cli_textfsm('textfsm_templates/firewall-cmd_info_zone') }}"
-  with_items: "{{firewalld_info_zones}}"
+  with_items: "{{firewalld_info_zones.results}}"
   when:
     - firewalld_active
     - firewalld_running
