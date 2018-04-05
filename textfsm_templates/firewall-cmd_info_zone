@@ -11,7 +11,7 @@ Value masquerade (\S+)
 Value forward_ports (.*)
 Value source_ports (.*)
 Value icmp_blocks (.*)
-Value Filldown rich_rule (.*)
+Value Filldown rich_rules (.*)
 
 Start
   ^${zone}( \(${active}\))?
@@ -30,4 +30,4 @@ Start
 
 RichRules
   ^\t -> EOF
-  ^${rich_rule} -> Record
+  ^${rich_rules} -> Record
