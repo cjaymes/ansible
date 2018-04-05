@@ -61,7 +61,7 @@
   register: firewalld_get_default_zone
 
 - set_fact:
-    firewalld_get_default_zone: firewalld_get_default_zone.stdout
+    firewalld_get_default_zone: "{{firewalld_get_default_zone.stdout}}"
 
 - name: firewall-cmd --get-zones
   shell: firewall-cmd --get-zones || true
@@ -76,7 +76,7 @@
 
 - name: split zones
   set_fact:
-      firewalld_get_zones: firewalld_get_zones.stdout.split(' ')
+      firewalld_get_zones: "{{firewalld_get_zones.stdout.split(' ')}}"
 
 - debug:
     msg: firewalld_get_zones
