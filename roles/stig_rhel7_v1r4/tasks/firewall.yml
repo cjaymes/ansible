@@ -118,6 +118,14 @@
     - firewalld_active
     - firewalld_running
 
+
+- set_fact:
+    firewalld_zones_dict: "{{ firewalld_zones_dict|combine({item['zone']: item}) }}"
+  with_items: "{{firewalld_zones_parsed}}"
+  when:
+    - firewalld_active
+    - firewalld_running
+
 - debug:
     msg: "{{firewalld_zones_parsed}}"
 
