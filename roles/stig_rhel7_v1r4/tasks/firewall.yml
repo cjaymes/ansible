@@ -59,9 +59,15 @@
   # this command doesn't actually change anything
   changed_when: false
   register: firewalld_get_default_zone
+  when:
+    - firewalld_active
+    - firewalld_running
 
 - set_fact:
     firewalld_get_default_zone: "{{firewalld_get_default_zone.stdout}}"
+  when:
+    - firewalld_active
+    - firewalld_running
 
 - name: firewall-cmd --get-zones
   shell: firewall-cmd --get-zones || true
@@ -73,13 +79,43 @@
   # this command doesn't actually change anything
   changed_when: false
   register: firewalld_get_zones
+  when:
+    - firewalld_active
+    - firewalld_running
 
 - name: split zones
   set_fact:
       firewalld_get_zones: "{{firewalld_get_zones.stdout.split(' ')}}"
+  when:
+    - firewalld_active
+    - firewalld_running
 
 - debug:
-    msg: firewalld_get_zones
+    msg: "{{firewalld_get_zones}}"
+  when:
+    - firewalld_active
+    - firewalld_running
+
+- name: firewall-cmd --info-zone {{item}}
+  shell: firewall-cmd --info-zone {{item}} || true
+  # following is so we don't get an error about using command instead of module
+  args:
+      warn: false
+  # errors are expected; ignore
+  ignore_errors: yes
+  # this command doesn't actually change anything
+  changed_when: false
+  register: firewalld_info_zones
+  with_items: "{{firewalld_get_zones}}"
+  when:
+    - firewalld_active
+    - firewalld_running
+
+- debug:
+    msg: "{{firewalld_info_zones}}"
+  when:
+    - firewalld_active
+    - firewalld_running
 
 # Vuln ID: V-72219
 # Severity: medium
