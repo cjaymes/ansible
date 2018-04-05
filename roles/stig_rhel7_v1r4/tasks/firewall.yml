@@ -112,7 +112,7 @@
     - firewalld_running
 
 - set_fact:
-    firewalld_zones_parsed: "{{ firewalld_zones_parsed|default(list) + [ item.stdout|parse_cli_textfsm('textfsm_templates/firewall-cmd_info_zone') ] }}"
+    firewalld_zones_parsed: "{{ firewalld_zones_parsed|default([]) + [ item.stdout|parse_cli_textfsm('textfsm_templates/firewall-cmd_info_zone') ] }}"
   with_items: "{{firewalld_info_zones.results}}"
   when:
     - firewalld_active
