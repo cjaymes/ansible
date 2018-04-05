@@ -11,22 +11,22 @@ Value masquerade (\S+)
 Value forward_ports (.*)
 Value source_ports (.*)
 Value icmp_blocks (.*)
-Value rich_rule (.+)
+Value rich_rule (.*)
 
 Start
   ^${zone}( \(${active}\))?
-  ^  target: ${target} -> Record
-  ^  icmp-block-inversion: ${icmp_block_inversion} -> Record
-  ^  interfaces: ${interfaces} -> Record
-  ^  sources: ${sources} -> Record
-  ^  services: ${services} -> Record
-  ^  ports: ${ports} -> Record
-  ^  protocols: ${protocols} -> Record
-  ^  masquerade: ${masquerade} -> Record
-  ^  forward-ports: ${forward_ports} -> Record
-  ^  source-ports: ${source_ports} -> Record
-  ^  icmp-blocks: ${icmp_blocks} -> Record
-  ^  rich rules: -> RichRules
+  ^\s+target: ${target}
+  ^\s+icmp-block-inversion: ${icmp_block_inversion}
+  ^\s+interfaces: ${interfaces}
+  ^\s+sources: ${sources}
+  ^\s+services: ${services}
+  ^\s+ports: ${ports}
+  ^\s+protocols: ${protocols}
+  ^\s+masquerade: ${masquerade}
+  ^\s+forward-ports: ${forward_ports}
+  ^\s+source-ports: ${source_ports}
+  ^\s+icmp-blocks: ${icmp_blocks}
+  ^\s+rich rules: -> RichRules
 
 RichRules
   ^${rich_rule} -> Record
