@@ -29,5 +29,5 @@ Start
   ^\s+rich rules: -> RichRules
 
 RichRules
-  ^${rich_rule} -> Record
   ^\t -> EOF
+  ^${rich_rule} -> Record
