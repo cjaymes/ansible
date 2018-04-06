@@ -106,7 +106,9 @@
   # this command doesn't actually change anything
   changed_when: false
   register: firewalld_info_zones
-  with_items: "{{firewalld_get_zones}}"
+  loop_control:
+    label: "{{ item.cmd }}"
+  loop: "{{ firewalld_get_zones }}"
   when:
     - firewalld_active
     - firewalld_running
