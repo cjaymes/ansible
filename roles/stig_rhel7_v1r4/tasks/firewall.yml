@@ -108,7 +108,7 @@
   register: firewalld_info_zones
   loop: "{{ firewalld_get_zones }}"
   loop_control:
-    label: "{{ item.cmd }}"
+    label: "{{ item }}"
   when:
     - firewalld_active
     - firewalld_running
