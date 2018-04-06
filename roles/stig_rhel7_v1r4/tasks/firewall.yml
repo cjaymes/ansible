@@ -113,21 +113,13 @@
 
 - set_fact:
     firewalld_zones_parsed: "{{ firewalld_zones_parsed|default([]) + item.stdout|parse_cli_textfsm('textfsm_templates/firewall-cmd_info_zone') }}"
-  with_items: "{{firewalld_info_zones.results}}"
+  loop: "{{ firewalld_info_zones.results }}"
+  loop_control:
+    label: "{{ item.cmd }}"
   when:
     - firewalld_active
     - firewalld_running
 
-
-- set_fact:
-    firewalld_zones_dict: "{{ firewalld_zones_dict|combine({item['zone']: item}) }}"
-  with_items: "{{firewalld_zones_parsed}}"
-  when:
-    - firewalld_active
-    - firewalld_running
-
-- debug:
-    msg: "{{firewalld_zones_parsed}}"
 
 # Vuln ID: V-72219
 # Severity: medium
