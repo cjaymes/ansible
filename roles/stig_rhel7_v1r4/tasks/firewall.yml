@@ -185,13 +185,28 @@
 #
 #
 
-
-- name: fail stig_rhel7_v1r4 v_72219
+- name: fail stig_rhel7_v1r4 v_72219 not running
   set_fact:
     stig_rhel7_v1r4_v_72219_result: 'fail'
   when:
     - "'v_72219' in stig_rhel7_v1r4_checks"
-    - stig_rhel7_v1r4_v_72219_result != 'pass'
+    - not firewalld_active or not firewalld_running
+
+- name: fail stig_rhel7_v1r4 v_72219 default zone
+  set_fact:
+    stig_rhel7_v1r4_v_72219_result: 'fail'
+  when:
+    - "'v_72219' in stig_rhel7_v1r4_checks"
+    - firewalld_active
+    - firewalld_running
+    - firewalld_get_default_zone != firewalld_default_zone
+
+- name: pass stig_rhel7_v1r4 v_72219
+  set_fact:
+    stig_rhel7_v1r4_v_72219_result: 'pass'
+  when:
+    - "'v_72219' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72219_result != 'fail'
 
 
 # Vuln ID: V-72271
