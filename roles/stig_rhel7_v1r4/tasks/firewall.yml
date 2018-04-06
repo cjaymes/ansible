@@ -107,8 +107,6 @@
   changed_when: false
   register: firewalld_info_zones
   loop: "{{ firewalld_get_zones }}"
-  loop_control:
-    label: "{{ item }}"
   when:
     - firewalld_active
     - firewalld_running
@@ -118,6 +116,12 @@
   loop: "{{ firewalld_info_zones.results }}"
   loop_control:
     label: "{{ item.cmd }}"
+  when:
+    - firewalld_active
+    - firewalld_running
+
+- debug:
+    msg: "{{firewalld_zones_parsed}}"
   when:
     - firewalld_active
     - firewalld_running
