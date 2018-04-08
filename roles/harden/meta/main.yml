@@ -6,8 +6,8 @@ dependencies:
   # - { role: harden_backup }
   # - { role: harden_cron }
   # - { role: harden_filesystems }
-  # - { role: harden_firewall }
-  - { role: harden_gdm }
+  - { role: harden_firewall }
+  # - { role: harden_gdm }
   # - { role: harden_grub }
   # - { role: harden_home_dirs }
   # - { role: harden_init }
