@@ -59,9 +59,10 @@ filesystems_types_pseudo:
 # TODO lockdown whitelist defintion
 firewalld_zones: [
     {
-        name: 'block',
+        zone: 'block',
         target: '%%REJECT%%',
         icmp_block_inversion: 'no',
+        interfaces: '',
         sources: '',
         services: '',
         ports: '',
@@ -73,9 +74,10 @@ firewalld_zones: [
         rich_rules: '',
     },
     {
-        name: 'dmz',
+        zone: 'dmz',
         target: 'default',
         icmp_block_inversion: 'no',
+        interfaces: '',
         sources: '',
         services: 'ssh',
         ports: '',
@@ -87,9 +89,10 @@ firewalld_zones: [
         rich_rules: '',
     },
     {
-        name: 'drop',
+        zone: 'drop',
         target: 'DROP',
         icmp_block_inversion: 'no',
+        interfaces: 'eth0',
         sources: '',
         services: '',
         ports: '',
@@ -101,9 +104,10 @@ firewalld_zones: [
         rich_rules: '',
     },
     {
-        name: 'external',
+        zone: 'external',
         target: 'default',
         icmp_block_inversion: 'no',
+        interfaces: '',
         sources: '',
         services: 'ssh',
         ports: '',
@@ -115,9 +119,10 @@ firewalld_zones: [
         rich_rules: '',
     },
     {
-        name: 'home',
+        zone: 'home',
         target: 'default',
         icmp_block_inversion: 'no',
+        interfaces: '',
         sources: '',
         services: 'dhcpv6-client mdns samba-client ssh',
         ports: '',
@@ -129,9 +134,10 @@ firewalld_zones: [
         rich_rules: '',
     },
     {
-        name: 'internal',
+        zone: 'internal',
         target: 'default',
         icmp_block_inversion: 'no',
+        interfaces: '',
         sources: '',
         services: 'dhcpv6-client mdns samba-client ssh',
         ports: '',
@@ -143,9 +149,10 @@ firewalld_zones: [
         rich_rules: '',
     },
     {
-        name: 'public',
+        zone: 'public',
         target: 'default',
         icmp_block_inversion: 'no',
+        interfaces: '',
         sources: '',
         services: 'dhcpv6-client ssh',
         ports: '',
@@ -157,9 +164,10 @@ firewalld_zones: [
         rich_rules: '',
     },
     {
-        name: 'trusted',
+        zone: 'trusted',
         target: 'ACCEPT',
         icmp_block_inversion: 'no',
+        interfaces: '',
         sources: '',
         services: '',
         ports: '',
@@ -171,9 +179,10 @@ firewalld_zones: [
         rich_rules: '',
     },
     {
-        name: 'work',
+        zone: 'work',
         target: 'default',
         icmp_block_inversion: 'no',
+        interfaces: '',
         sources: '',
         services: 'dhcpv6-client ssh',
         ports: '',
@@ -186,7 +195,6 @@ firewalld_zones: [
     },
 ]
 firewalld_default_zone: drop
-firewalld_interface_zones:
 firewalld_direct_rules:
     - ipv4 filter IN_drop_allow 0 -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
 
