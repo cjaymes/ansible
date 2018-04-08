@@ -57,115 +57,134 @@ filesystems_types_pseudo:
 # TODO passthrough definitions
 # TODO lockdown
 # TODO lockdown whitelist defintion
-firewalld_zones:
-    block:
-        target: '%%REJECT%%'
-        icmp_block_inversion: no
-        sources:
-        services:
-        ports:
-        protocols:
-        masquerade: no
-        forward_ports:
-        source_ports:
-        icmp_blocks:
-        rich_rules:
-    dmz:
-        target: default
-        icmp_block_inversion: no
-        sources:
-        services: ssh
-        ports:
-        protocols:
-        masquerade: no
-        forward_ports:
-        source_ports:
-        icmp_blocks:
-        rich_rules:
-    drop:
-        target: DROP
-        icmp_block_inversion: no
-        sources:
-        services:
-        ports:
-        protocols:
-        masquerade: no
-        forward_ports:
-        source_ports:
-        icmp_blocks:
-        rich_rules:
-    external:
-        target: default
-        icmp_block_inversion: no
-        sources:
-        services: ssh
-        ports:
-        protocols:
-        masquerade: yes
-        forward_ports:
-        source_ports:
-        icmp_blocks:
-        rich_rules:
-    home:
-        target: default
-        icmp_block_inversion: no
-        sources:
-        services: dhcpv6-client mdns samba-client ssh
-        ports:
-        protocols:
-        masquerade: no
-        forward_ports:
-        source_ports:
-        icmp_blocks:
-        rich_rules:
-    internal:
-        target: default
-        icmp_block_inversion: no
-        sources:
-        services: dhcpv6-client mdns samba-client ssh
-        ports:
-        protocols:
-        masquerade: no
-        forward_ports:
-        source_ports:
-        icmp_blocks:
-        rich_rules:
-    public:
-        target: default
-        icmp_block_inversion: no
-        sources:
-        services: dhcpv6-client ssh
-        ports:
-        protocols:
-        masquerade: no
-        forward_ports:
-        source_ports:
-        icmp_blocks:
-        rich_rules:
-    trusted:
-        target: ACCEPT
-        icmp_block_inversion: no
-        sources:
-        services:
-        ports:
-        protocols:
-        masquerade: no
-        forward_ports:
-        source_ports:
-        icmp_blocks:
-        rich_rules:
-    work:
-        target: default
-        icmp_block_inversion: no
-        sources:
-        services: dhcpv6-client ssh
-        ports:
-        protocols:
-        masquerade: no
-        forward_ports:
-        source_ports:
-        icmp_blocks:
-        rich_rules:
+firewalld_zones: [
+    {
+        name: 'block',
+        target: '%%REJECT%%',
+        icmp_block_inversion: 'no',
+        sources: '',
+        services: '',
+        ports: '',
+        protocols: '',
+        masquerade: 'no',
+        forward_ports: '',
+        source_ports: '',
+        icmp_blocks: '',
+        rich_rules: '',
+    },
+    {
+        name: 'dmz',
+        target: 'default',
+        icmp_block_inversion: 'no',
+        sources: '',
+        services: 'ssh',
+        ports: '',
+        protocols: '',
+        masquerade: 'no',
+        forward_ports: '',
+        source_ports: '',
+        icmp_blocks: '',
+        rich_rules: '',
+    },
+    {
+        name: 'drop',
+        target: 'DROP',
+        icmp_block_inversion: 'no',
+        sources: '',
+        services: '',
+        ports: '',
+        protocols: '',
+        masquerade: 'no',
+        forward_ports: '',
+        source_ports: '',
+        icmp_blocks: '',
+        rich_rules: '',
+    },
+    {
+        name: 'external',
+        target: 'default',
+        icmp_block_inversion: 'no',
+        sources: '',
+        services: 'ssh',
+        ports: '',
+        protocols: '',
+        masquerade: 'yes',
+        forward_ports: '',
+        source_ports: '',
+        icmp_blocks: '',
+        rich_rules: '',
+    },
+    {
+        name: 'home',
+        target: 'default',
+        icmp_block_inversion: 'no',
+        sources: '',
+        services: 'dhcpv6-client mdns samba-client ssh',
+        ports: '',
+        protocols: '',
+        masquerade: 'no',
+        forward_ports: '',
+        source_ports: '',
+        icmp_blocks: '',
+        rich_rules: '',
+    },
+    {
+        name: 'internal',
+        target: 'default',
+        icmp_block_inversion: 'no',
+        sources: '',
+        services: 'dhcpv6-client mdns samba-client ssh',
+        ports: '',
+        protocols: '',
+        masquerade: 'no',
+        forward_ports: '',
+        source_ports: '',
+        icmp_blocks: '',
+        rich_rules: '',
+    },
+    {
+        name: 'public',
+        target: 'default',
+        icmp_block_inversion: 'no',
+        sources: '',
+        services: 'dhcpv6-client ssh',
+        ports: '',
+        protocols: '',
+        masquerade: 'no',
+        forward_ports: '',
+        source_ports: '',
+        icmp_blocks: '',
+        rich_rules: '',
+    },
+    {
+        name: 'trusted',
+        target: 'ACCEPT',
+        icmp_block_inversion: 'no',
+        sources: '',
+        services: '',
+        ports: '',
+        protocols: '',
+        masquerade: 'no',
+        forward_ports: '',
+        source_ports: '',
+        icmp_blocks: '',
+        rich_rules: '',
+    },
+    {
+        name: 'work',
+        target: 'default',
+        icmp_block_inversion: 'no',
+        sources: '',
+        services: 'dhcpv6-client ssh',
+        ports: '',
+        protocols: '',
+        masquerade: 'no',
+        forward_ports: '',
+        source_ports: '',
+        icmp_blocks: '',
+        rich_rules: '',
+    },
+]
 firewalld_default_zone: drop
 firewalld_interface_zones:
 firewalld_direct_rules:
