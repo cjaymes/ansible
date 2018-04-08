@@ -112,7 +112,7 @@ firewalld_zones: [
         services: 'ssh',
         ports: '',
         protocols: '',
-        masquerade: 'yes',
+        masquerade: 'no',
         forward_ports: '',
         source_ports: '',
         icmp_blocks: '',
