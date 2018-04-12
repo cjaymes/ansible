@@ -57,6 +57,20 @@ filesystems_types_pseudo:
 # TODO passthrough definitions
 # TODO lockdown
 # TODO lockdown whitelist defintion
+firewalld_zone_compare_keys: [
+    'forward_ports',
+    'icmp_block_inversion',
+    'icmp_blocks',
+    'interfaces',
+    'masquerade',
+    'ports',
+    'protocols',
+    'rich_rules',
+    'services',
+    'source_ports',
+    'sources',
+    'target',
+]
 firewalld_zones: [
     {
         active: '',
