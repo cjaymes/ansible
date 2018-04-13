@@ -130,7 +130,7 @@ firewalld_zones: [
         services: 'ssh',
         ports: '',
         protocols: '',
-        masquerade: 'no',
+        masquerade: 'yes',
         forward_ports: '',
         source_ports: '',
         icmp_blocks: '',
@@ -218,6 +218,78 @@ firewalld_zones: [
     },
 ]
 firewalld_default_zone: drop
+firewalld_ipv4_direct_basic_chains: {
+    nat: [
+        'OUTPUT_direct',
+        'POSTROUTING_direct',
+        'PREROUTING_direct',
+    ],
+    mangle: [
+        'FORWARD_direct',
+        'INPUT_direct',
+        'OUTPUT_direct',
+        'POSTROUTING_direct',
+        'PREROUTING_direct',
+    ],
+    security: [
+        'FORWARD_direct',
+        'INPUT_direct',
+        'OUTPUT_direct',
+    ],
+    raw: [
+        'OUTPUT_direct',
+        'PREROUTING_direct',
+    ],
+    filter: [
+        'FORWARD_direct',
+        'INPUT_direct',
+        'OUTPUT_direct',
+    ],
+}
+firewalld_ipv6_direct_basic_chains: {
+    nat: [
+        'OUTPUT_direct',
+        'POSTROUTING_direct',
+        'PREROUTING_direct',
+    ],
+    mangle: [
+        'FORWARD_direct',
+        'INPUT_direct',
+        'OUTPUT_direct',
+        'POSTROUTING_direct',
+        'PREROUTING_direct',
+    ],
+    security: [
+        'FORWARD_direct',
+        'INPUT_direct',
+        'OUTPUT_direct',
+    ],
+    raw: [
+        'OUTPUT_direct',
+        'PREROUTING_direct',
+    ],
+    filter: [
+        'FORWARD_direct',
+        'INPUT_direct',
+        'OUTPUT_direct',
+    ],
+}
+firewalld_eb_direct_basic_chains: {
+    nat: [
+        'POSTROUTING_direct',
+        'PREROUTING_direct',
+        'OUTPUT_direct',
+    ],
+    broute: [
+        'BROUTING_direct',
+    ],
+    filter: [
+        'INPUT_direct',
+        'OUTPUT_direct',
+        'FORWARD_direct',
+    ],
+}
+
 firewalld_direct_rules:
     - ipv4 filter IN_drop_allow 0 -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
 
