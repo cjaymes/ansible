@@ -150,10 +150,6 @@ firewalld_services_predefined: [
     'xmpp-server',
 ]
 # TODO helper definitions
-# TODO direct chain definitions
-# TODO passthrough definitions
-# TODO lockdown
-# TODO lockdown whitelist defintion
 firewalld_zone_compare_keys: [
     'forward_ports',
     'icmp_block_inversion',
@@ -350,6 +346,7 @@ firewalld_ipv4_direct_basic_chains: {
         'OUTPUT_direct',
     ],
 }
+# TODO direct chain definitions
 firewalld_ipv6_tables: [
     'nat',
     'mangle',
@@ -405,10 +402,26 @@ firewalld_eb_direct_basic_chains: {
         'FORWARD_direct',
     ],
 }
+firewalld_direct_rules: [
+    'ipv4 filter IN_drop_allow 0 -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT',
+]
+# TODO passthrough definitions
+firewalld_passthroughs: []
+# TODO lockdown
 firewalld_lockdown_mode: yes
+# TODO lockdown whitelist defintion
+firewalld_lockdown_whitelist_contexts: [
+    'system_u:system_r:NetworkManager_t:s0',
+    'system_u:system_r:virtd_t:s0-s0:c0.c1023',
+]
+firewalld_lockdown_whitelist_uids: [
+    '0',
+]
+firewalld_lockdown_whitelist_users: []
+firewalld_lockdown_whitelist_commands: [
+    '/usr/bin/python -Es /usr/bin/firewall-config',
+]
 
-firewalld_direct_rules:
-    - ipv4 filter IN_drop_allow 0 -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
 
 nfs_required: False
 
