@@ -50,8 +50,105 @@ filesystems_types_pseudo:
     - systemd-1
 
 # TODO ipset definitions
+firewalld_ipsets_predefined: []
 # TODO icmptype definitions
+firewalld_icmptypes_predefined: [
+    'destination-unreachable',
+    'echo-reply',
+    'echo-request',
+    'parameter-problem',
+    'redirect',
+    'router-advertisement',
+    'router-solicitation',
+    'source-quench',
+    'time-exceeded',
+    'timestamp-reply',
+    'timestamp-request',
+]
 # TODO service definitions
+firewalld_services_predefined: [
+    'RH-Satellite-6',
+    'amanda-client',
+    'amanda-k5-client',
+    'bacula',
+    'bacula-client',
+    'ceph',
+    'ceph-mon',
+    'dhcp',
+    'dhcpv6',
+    'dhcpv6-client',
+    'dns',
+    'docker-registry',
+    'dropbox-lansync',
+    'freeipa-ldap',
+    'freeipa-ldaps',
+    'freeipa-replication',
+    'ftp',
+    'high-availability',
+    'http',
+    'https',
+    'imap',
+    'imaps',
+    'ipp',
+    'ipp-client',
+    'ipsec',
+    'iscsi-target',
+    'kadmin',
+    'kerberos',
+    'kpasswd',
+    'ldap',
+    'ldaps',
+    'libvirt',
+    'libvirt-tls',
+    'mdns',
+    'mosh',
+    'mountd',
+    'ms-wbt',
+    'mysql',
+    'nfs',
+    'ntp',
+    'openvpn',
+    'pmcd',
+    'pmproxy',
+    'pmwebapi',
+    'pmwebapis',
+    'pop3',
+    'pop3s',
+    'postgresql',
+    'privoxy',
+    'proxy-dhcp',
+    'ptp',
+    'pulseaudio',
+    'puppetmaster',
+    'radius',
+    'rpc-bind',
+    'rsyncd',
+    'samba',
+    'samba-client',
+    'sane',
+    'smtp',
+    'smtps',
+    'snmp',
+    'snmptrap',
+    'squid',
+    'ssh',
+    'synergy',
+    'syslog',
+    'syslog-tls',
+    'telnet',
+    'tftp',
+    'tftp-client',
+    'tinc',
+    'tor-socks',
+    'transmission-client',
+    'vdsm',
+    'vnc-server',
+    'wbem-https',
+    'xmpp-bosh',
+    'xmpp-client',
+    'xmpp-local',
+    'xmpp-server',
+]
 # TODO helper definitions
 # TODO direct chain definitions
 # TODO passthrough definitions
@@ -218,6 +315,13 @@ firewalld_zones: [
     },
 ]
 firewalld_default_zone: drop
+firewalld_ipv4_tables: [
+    'nat',
+    'mangle',
+    'security',
+    'raw',
+    'filter',
+]
 firewalld_ipv4_direct_basic_chains: {
     nat: [
         'OUTPUT_direct',
@@ -246,6 +350,13 @@ firewalld_ipv4_direct_basic_chains: {
         'OUTPUT_direct',
     ],
 }
+firewalld_ipv6_tables: [
+    'nat',
+    'mangle',
+    'security',
+    'raw',
+    'filter',
+]
 firewalld_ipv6_direct_basic_chains: {
     nat: [
         'OUTPUT_direct',
@@ -274,6 +385,11 @@ firewalld_ipv6_direct_basic_chains: {
         'OUTPUT_direct',
     ],
 }
+firewalld_eb_tables: [
+    'nat',
+    'broute',
+    'filter',
+]
 firewalld_eb_direct_basic_chains: {
     nat: [
         'POSTROUTING_direct',
@@ -289,6 +405,7 @@ firewalld_eb_direct_basic_chains: {
         'FORWARD_direct',
     ],
 }
+firewalld_lockdown_mode: yes
 
 firewalld_direct_rules:
     - ipv4 filter IN_drop_allow 0 -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
