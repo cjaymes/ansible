@@ -49,9 +49,7 @@ filesystems_types_pseudo:
     - hugetlbfs
     - systemd-1
 
-# TODO ipset definitions
 firewalld_ipsets_predefined: []
-# TODO icmptype definitions
 firewalld_icmptypes_predefined: [
     'destination-unreachable',
     'echo-reply',
@@ -65,7 +63,6 @@ firewalld_icmptypes_predefined: [
     'timestamp-reply',
     'timestamp-request',
 ]
-# TODO service definitions
 firewalld_services_predefined: [
     'RH-Satellite-6',
     'amanda-client',
@@ -149,7 +146,6 @@ firewalld_services_predefined: [
     'xmpp-local',
     'xmpp-server',
 ]
-# TODO helper definitions
 firewalld_zone_compare_keys: [
     'forward_ports',
     'icmp_block_inversion',
@@ -346,7 +342,6 @@ firewalld_ipv4_direct_basic_chains: {
         'OUTPUT_direct',
     ],
 }
-# TODO direct chain definitions
 firewalld_ipv6_tables: [
     'nat',
     'mangle',
@@ -405,11 +400,8 @@ firewalld_eb_direct_basic_chains: {
 firewalld_direct_rules: [
     'ipv4 filter IN_drop_allow 0 -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT',
 ]
-# TODO passthrough definitions
 firewalld_passthroughs: []
-# TODO lockdown
 firewalld_lockdown_mode: yes
-# TODO lockdown whitelist defintion
 firewalld_lockdown_whitelist_contexts: [
     'system_u:system_r:NetworkManager_t:s0',
     'system_u:system_r:virtd_t:s0-s0:c0.c1023',
