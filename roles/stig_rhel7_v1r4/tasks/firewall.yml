@@ -192,15 +192,7 @@
     - "'v_72219' in stig_rhel7_v1r4_checks"
     - not firewalld_active or not firewalld_running
 
-- name: fail stig_rhel7_v1r4 v_72219 default zone
-  set_fact:
-    stig_rhel7_v1r4_v_72219_result: 'fail'
-  when:
-    - "'v_72219' in stig_rhel7_v1r4_checks"
-    - firewalld_active
-    - firewalld_running
-    - firewalld_get_default_zone != firewalld_default_zone
-
+# we don't check just the services, but that the config matches what we expect
 - name: fail stig_rhel7_v1r4 v_72219 zone config
   set_fact:
     stig_rhel7_v1r4_v_72219_result: 'fail'
@@ -210,6 +202,15 @@
     - firewalld_running
     - firewalld_zones_parsed|selectattr("zone", "equalto", item[1]['zone'])|map(attribute=item[0])|join != item[1][item[0]]
   loop: "{{ lookup('nested', firewalld_zone_compare_keys, firewalld_zones) }}"
+
+- name: fail stig_rhel7_v1r4 v_72219 default zone
+  set_fact:
+    stig_rhel7_v1r4_v_72219_result: 'fail'
+  when:
+    - "'v_72219' in stig_rhel7_v1r4_checks"
+    - firewalld_active
+    - firewalld_running
+    - firewalld_get_default_zone != firewalld_default_zone
 
 - name: pass stig_rhel7_v1r4 v_72219
   set_fact:
