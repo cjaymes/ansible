@@ -1,0 +1,364 @@
+- name: test module
+  hosts: stig-rhel7
+  vars:
+      get: false
+  tasks:
+    ### firewall_cmd EXAMPLES
+    - name: get firewall state
+      firewall_cmd:
+          state: get
+      register: firewalld_state
+    - debug:
+        msg: '{{firewalld_state}}'
+      when: get == true
+
+    - name: reload permanent configuration into runtime
+      firewall_cmd:
+        state: reload
+
+    - name: save runtime configuration to permanent configuration
+      firewall_cmd:
+        state: save
+
+    - name: set zone as default
+      firewall_cmd:
+        default_zone: work
+    - name: reset default zone
+      firewall_cmd:
+        default_zone: public
+
+    - name: set log_denied to default
+      firewall_cmd:
+        log_denied: off
+
+    - name: set automatic_helpers to default
+      firewall_cmd:
+        automatic_helpers: system
+      when: firewalld_state['firewalld']['version'] is version('0.4.3.2', '>')
+
+
+    ### firewall_cmd_zone EXAMPLES
+    - name: create zone; permanent is implied
+      firewall_cmd_zone:
+        name: test
+        state: present
+
+    - name: reload permanent configuration into runtime (necessary after zone creation)
+      firewall_cmd:
+        state: reload
+
+    - name: set zone description; permanent is implied
+      firewall_cmd_zone:
+        name: test
+        description: Long description of a zone for testing
+      when: firewalld_state['firewalld']['version'] is version('0.4.3.2', '>')
+
+    - name: set zone short description; permanent is implied
+      firewall_cmd_zone:
+        name: test
+        short: Zone for testing
+      when: firewalld_state['firewalld']['version'] is version('0.4.3.2', '>')
+
+    - name: set zone target; permanent is implied
+      firewall_cmd_zone:
+        name: test
+        target: ACCEPT
+
+    - name: get firewall zone state
+      firewall_cmd_zone:
+          name: test
+          state: get
+      register: firewalld_zone_state
+      when: get == true
+    - debug:
+        msg: '{{firewalld_zone_state}}'
+      when: get == true
+
+    # - name: add an interface to a zone
+    #   firewall_cmd_zone:
+    #     name: test
+    #     interface: eth0
+    #     state: present
+    # - name: get firewall zone state
+    #   firewall_cmd_zone:
+    #       name: test
+    #       state: get
+    #   when: get == true
+    #   register: firewalld_zone_state
+    # - debug:
+    #     msg: '{{firewalld_zone_state}}'
+    #   when: get == true
+    # - name: remove an interface from a zone
+    #   firewall_cmd_zone:
+    #     name: test
+    #     interface: eth0
+    #     state: absent
+
+    - name: set zone icmp block inversion
+      firewall_cmd_zone:
+        name: test
+        icmp_block_inversion: true
+    - name: get firewall zone state
+      firewall_cmd_zone:
+          name: test
+          state: get
+      register: firewalld_zone_state
+      when: get == true
+    - debug:
+        msg: '{{firewalld_zone_state}}'
+      when: get == true
+    - name: reset zone icmp block inversion
+      firewall_cmd_zone:
+        name: test
+        icmp_block_inversion: false
+
+    - name: add a source to a zone
+      firewall_cmd_zone:
+        name: test
+        source: 192.168.0.0/16
+        state: present
+    - name: get firewall zone state
+      firewall_cmd_zone:
+          name: test
+          state: get
+      register: firewalld_zone_state
+      when: get == true
+    - debug:
+        msg: '{{firewalld_zone_state}}'
+      when: get == true
+    - name: remove a source from a zone
+      firewall_cmd_zone:
+        name: test
+        source: 192.168.0.0/16
+        state: absent
+
+    - name: add a service to a zone
+      firewall_cmd_zone:
+        name: test
+        service: ssh
+        state: present
+    - name: get firewall zone state
+      firewall_cmd_zone:
+          name: test
+          state: get
+      register: firewalld_zone_state
+      when: get == true
+    - debug:
+        msg: '{{firewalld_zone_state}}'
+      when: get == true
+    - name: remove a service from a zone
+      firewall_cmd_zone:
+        name: test
+        service: ssh
+        state: absent
+
+    - name: add a port to a zone
+      firewall_cmd_zone:
+        name: test
+        port: 22/tcp
+        state: present
+    - name: get firewall zone state
+      firewall_cmd_zone:
+          name: test
+          state: get
+      register: firewalld_zone_state
+      when: get == true
+    - debug:
+        msg: '{{firewalld_zone_state}}'
+      when: get == true
+    - name: remove a port from a zone
+      firewall_cmd_zone:
+        name: test
+        port: 22/tcp
+        state: absent
+
+    - name: add a protocol to a zone
+      firewall_cmd_zone:
+        name: test
+        protocol: gre
+        state: present
+    - name: get firewall zone state
+      firewall_cmd_zone:
+          name: test
+          state: get
+      when: get == true
+      register: firewalld_zone_state
+    - debug:
+        msg: '{{firewalld_zone_state}}'
+      when: get == true
+    - name: remove a protocol from a zone
+      firewall_cmd_zone:
+        name: test
+        protocol: gre
+        state: absent
+
+    - name: set zone masquerading
+      firewall_cmd_zone:
+        name: test
+        masquerade: true
+    - name: get firewall zone state
+      firewall_cmd_zone:
+          name: test
+          state: get
+      register: firewalld_zone_state
+      when: get == true
+    - debug:
+        msg: '{{firewalld_zone_state}}'
+      when: get == true
+    - name: reset zone masquerading
+      firewall_cmd_zone:
+        name: test
+        masquerade: false
+
+    - name: add a forward-port to a zone
+      firewall_cmd_zone:
+        name: test
+        forward_port: port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42
+        state: present
+    - name: get firewall zone state
+      firewall_cmd_zone:
+          name: test
+          state: get
+      register: firewalld_zone_state
+      when: get == true
+    - debug:
+        msg: '{{firewalld_zone_state}}'
+      when: get == true
+    - name: remove a forward-port from a zone
+      firewall_cmd_zone:
+        name: test
+        forward_port: port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42
+        state: absent
+
+    - name: add a source-port to a zone
+      firewall_cmd_zone:
+        name: test
+        source_port: 68/udp
+        state: present
+    - name: get firewall zone state
+      firewall_cmd_zone:
+          name: test
+          state: get
+      register: firewalld_zone_state
+      when: get == true
+    - debug:
+        msg: '{{firewalld_zone_state}}'
+      when: get == true
+    - name: remove a source-port from a zone
+      firewall_cmd_zone:
+        name: test
+        source_port: 68/udp
+        state: absent
+
+    - name: add an icmp-block to a zone
+      firewall_cmd_zone:
+        name: test
+        icmp_block: echo-request
+        state: present
+    - name: get firewall zone state
+      firewall_cmd_zone:
+          name: test
+          state: get
+      register: firewalld_zone_state
+      when: get == true
+    - debug:
+        msg: '{{firewalld_zone_state}}'
+      when: get == true
+    - name: remove an icmp-block from a zone
+      firewall_cmd_zone:
+        name: test
+        icmp_block: echo-request
+        state: absent
+
+    - name: add a rich rule to a zone
+      firewall_cmd_zone:
+        name: test
+        rich_rule: rule protocol value="ah" accept
+        state: present
+    - name: get firewall zone state
+      firewall_cmd_zone:
+          name: test
+          state: get
+      register: firewalld_zone_state
+      when: get == true
+    - debug:
+        msg: '{{firewalld_zone_state}}'
+      when: get == true
+    - name: remove a rich rule from a zone
+      firewall_cmd_zone:
+        name: test
+        rich_rule: rule protocol value="ah" accept
+        state: absent
+
+    ### firewall_cmd_direct EXAMPLES
+    - name: add a direct chain
+      firewall_cmd_direct:
+        network: ipv4
+        table: filter
+        chain: IN_test_allow
+        state: present
+
+    - name: get firewall direct state
+      firewall_cmd_direct:
+          state: get
+      register: firewalld_direct_state
+    - debug:
+        msg: '{{firewalld_direct_state}}'
+
+    - name: add a direct rule
+      firewall_cmd_direct:
+        network: ipv4
+        table: filter
+        chain: IN_test_allow
+        priority: 0
+        rule: -m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
+        state: present
+    - name: get firewall direct state
+      firewall_cmd_direct:
+          state: get
+      register: firewalld_direct_state
+    - debug:
+        msg: '{{firewalld_direct_state}}'
+    - name: remove a direct rule
+      firewall_cmd_direct:
+        network: ipv4
+        table: filter
+        chain: IN_test_allow
+        priority: 0
+        rule: -m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
+        state: absent
+
+    - name: add a direct passthrough
+      firewall_cmd_direct:
+        network: ipv4
+        passthrough: -A IN_test_allow -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
+        state: present
+    - name: get firewall direct state
+      firewall_cmd_direct:
+          state: get
+      register: firewalld_direct_state
+    - debug:
+        msg: '{{firewalld_direct_state}}'
+    - name: remove a direct passthrough
+      firewall_cmd_direct:
+        network: ipv4
+        passthrough: -A IN_test_allow -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
+        state: absent
+
+    - name: remove a direct chain
+      firewall_cmd_direct:
+        network: ipv4
+        table: filter
+        chain: IN_test_allow
+        state: absent
+
+
+    ### firewall_cmd_zone EXAMPLES
+    - name: delete zone; permanent is implied
+      firewall_cmd_zone:
+        name: test
+        state: absent
+
+    - name: reload permanent configuration into runtime (necessary after zone deletion)
+      firewall_cmd:
+        state: reload
