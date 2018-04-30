@@ -1,3 +1,22 @@
+- name: get firewall state
+  firewall_cmd:
+      state: get
+  register: firewalld_state
+
+- debug:
+    msg: "{{firewalld_state}}"
+
+- name: get firewall zone state
+  firewall_cmd:
+      name: "{{item}}"
+      state: get
+  with_items: "{{firewalld_zone_names}}"
+  register: firewalld_zone_state
+
+- debug:
+    msg: "{{firewalld_zone_state}}"
+
+
 # Vuln ID: V-72219
 # Severity: medium
 # Group Title: SRG-OS-000096-GPOS-00050
@@ -55,9 +74,6 @@
 # NIST SP 800-53 Revision 4 :: AC-17 (1)
 #
 #
-
-- debug:
-    msg: '{{firewalld_zones}}'
 
 - name: fail stig_rhel7_v1r4 v_72219 not running
   set_fact:

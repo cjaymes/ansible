@@ -52,8 +52,9 @@ filesystems_types_pseudo:
 firewalld_ipsets: []
 firewalld_icmptypes: []
 firewalld_services: []
-firewalld_zones: [
-    {
+firewalld_zone_names: ['block', 'dmz', 'drop', 'external', 'home', 'internal', 'public', 'trusted', 'work']
+firewalld_zone_configs: {
+    block: {
         name: 'block',
         target: '%%REJECT%%',
         icmp_block_inversion: false,
@@ -68,7 +69,7 @@ firewalld_zones: [
         icmp_blocks: [],
         rich_rules: [],
     },
-    {
+    dmz: {
         name: 'dmz',
         target: 'default',
         icmp_block_inversion: false,
@@ -83,7 +84,7 @@ firewalld_zones: [
         icmp_blocks: [],
         rich_rules: [],
     },
-    {
+    drop: {
         name: 'drop',
         target: 'DROP',
         icmp_block_inversion: false,
@@ -98,7 +99,7 @@ firewalld_zones: [
         icmp_blocks: [],
         rich_rules: [],
     },
-    {
+    external: {
         name: 'external',
         target: 'default',
         icmp_block_inversion: false,
@@ -113,7 +114,7 @@ firewalld_zones: [
         icmp_blocks: [],
         rich_rules: [],
     },
-    {
+    home: {
         name: 'home',
         target: 'default',
         icmp_block_inversion: false,
@@ -128,7 +129,7 @@ firewalld_zones: [
         icmp_blocks: [],
         rich_rules: [],
     },
-    {
+    internal: {
         name: 'internal',
         target: 'default',
         icmp_block_inversion: false,
@@ -143,7 +144,7 @@ firewalld_zones: [
         icmp_blocks: [],
         rich_rules: [],
     },
-    {
+    public: {
         name: 'public',
         target: 'default',
         icmp_block_inversion: false,
@@ -158,7 +159,7 @@ firewalld_zones: [
         icmp_blocks: [],
         rich_rules: [],
     },
-    {
+    trusted: {
         name: 'trusted',
         target: 'ACCEPT',
         icmp_block_inversion: false,
@@ -173,7 +174,7 @@ firewalld_zones: [
         icmp_blocks: [],
         rich_rules: [],
     },
-    {
+    work: {
         name: 'work',
         target: 'default',
         icmp_block_inversion: false,
@@ -188,7 +189,7 @@ firewalld_zones: [
         icmp_blocks: [],
         rich_rules: [],
     },
-]
+}
 firewalld_default_zone: public
 firewalld_direct_rules: [
     {
