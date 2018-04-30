@@ -147,7 +147,7 @@ firewalld_zones: [
         name: 'public',
         target: 'default',
         icmp_block_inversion: false,
-        interfaces: ansible_interfaces|filter('ne', 'lo')|list,
+        interfaces: "{{ansible_interfaces|filter('ne', 'lo')|list}}",
         sources: [],
         services: ['dhcpv6-client', 'ssh'],
         ports: [],
