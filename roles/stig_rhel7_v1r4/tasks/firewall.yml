@@ -7,7 +7,7 @@
     msg: "{{firewalld_state}}"
 
 - name: get firewall zone state
-  firewall_cmd:
+  firewall_zone_cmd:
       name: "{{item}}"
       state: get
   with_items: "{{firewalld_zone_names}}"
