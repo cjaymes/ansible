@@ -11,6 +11,11 @@
       firewall_cmd:
         state: reload
 
+    - name: get firewall configuration
+      firewall_cmd:
+          state: get
+      register: firewalld_config
+
     - name: set zone description; permanent is implied
       firewall_cmd_zone:
         name: test
