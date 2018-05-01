@@ -1,7 +1,7 @@
 - name: test module
   hosts: stig-rhel7
-  # vars:
-  #     get: false
+  vars:
+      get: true
   tasks:
     ### firewall_cmd EXAMPLES
     - name: get firewall configuration
