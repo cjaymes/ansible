@@ -144,37 +144,22 @@ EXAMPLES = '''
       firewall_cmd_zone:
         name: test
         description: Long description of a zone for testing
-      when: firewalld_state['firewalld']['version'] is version('0.4.3.2', '>')
 
     - name: set zone short description; permanent is implied
       firewall_cmd_zone:
         name: test
         short: Zone for testing
-      when: firewalld_state['firewalld']['version'] is version('0.4.3.2', '>')
 
     - name: set zone target; permanent is implied
       firewall_cmd_zone:
         name: test
         target: ACCEPT
 
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
-
     # - name: add an interface to a zone
     #   firewall_cmd_zone:
     #     name: test
     #     interface: eth0
     #     state: present
-    # - name: get firewall configuration
-    #   firewall_cmd:
-    #       state: get
-    #   register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
     # - name: remove an interface from a zone
     #   firewall_cmd_zone:
     #     name: test
@@ -185,12 +170,6 @@ EXAMPLES = '''
       firewall_cmd_zone:
         name: test
         icmp_block_inversion: true
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
     - name: reset zone icmp block inversion
       firewall_cmd_zone:
         name: test
@@ -201,12 +180,6 @@ EXAMPLES = '''
         name: test
         source: 192.168.0.0/16
         state: present
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
     - name: remove a source from a zone
       firewall_cmd_zone:
         name: test
@@ -218,12 +191,6 @@ EXAMPLES = '''
         name: test
         service: ssh
         state: present
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
     - name: remove a service from a zone
       firewall_cmd_zone:
         name: test
@@ -235,12 +202,6 @@ EXAMPLES = '''
         name: test
         port: 22/tcp
         state: present
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
     - name: remove a port from a zone
       firewall_cmd_zone:
         name: test
@@ -252,12 +213,6 @@ EXAMPLES = '''
         name: test
         protocol: gre
         state: present
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
     - name: remove a protocol from a zone
       firewall_cmd_zone:
         name: test
@@ -268,12 +223,6 @@ EXAMPLES = '''
       firewall_cmd_zone:
         name: test
         masquerade: true
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
     - name: reset zone masquerading
       firewall_cmd_zone:
         name: test
@@ -284,12 +233,6 @@ EXAMPLES = '''
         name: test
         forward_port: port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42
         state: present
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
     - name: remove a forward-port from a zone
       firewall_cmd_zone:
         name: test
@@ -301,12 +244,6 @@ EXAMPLES = '''
         name: test
         source_port: 68/udp
         state: present
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
     - name: remove a source-port from a zone
       firewall_cmd_zone:
         name: test
@@ -318,12 +255,6 @@ EXAMPLES = '''
         name: test
         icmp_block: echo-request
         state: present
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
     - name: remove an icmp-block from a zone
       firewall_cmd_zone:
         name: test
@@ -335,12 +266,6 @@ EXAMPLES = '''
         name: test
         rich_rule: rule protocol value="ah" accept
         state: present
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
     - name: remove a rich rule from a zone
       firewall_cmd_zone:
         name: test

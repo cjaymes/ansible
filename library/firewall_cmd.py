@@ -57,12 +57,12 @@ options:
 '''
 
 EXAMPLES = '''
-    - name: get firewall state
+    - name: get firewall configuration
       firewall_cmd:
           state: get
-      register: firewalld_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_state}}'
+        msg: '{{firewalld_config}}'
 
     - name: reload permanent configuration into runtime
       firewall_cmd:

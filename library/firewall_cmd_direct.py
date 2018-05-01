@@ -78,13 +78,12 @@ EXAMPLES = '''
         table: filter
         chain: IN_test_allow
         state: present
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
+    - name: remove a direct chain
+      firewall_cmd_direct:
+        network: ipv4
+        table: filter
+        chain: IN_test_allow
+        state: absent
 
     - name: add a direct rule
       firewall_cmd_direct:
@@ -94,12 +93,6 @@ EXAMPLES = '''
         priority: 0
         rule: -m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
         state: present
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
     - name: remove a direct rule
       firewall_cmd_direct:
         network: ipv4
@@ -114,23 +107,10 @@ EXAMPLES = '''
         network: ipv4
         passthrough: -A IN_test_allow -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
         state: present
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
     - name: remove a direct passthrough
       firewall_cmd_direct:
         network: ipv4
         passthrough: -A IN_test_allow -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
-        state: absent
-
-    - name: remove a direct chain
-      firewall_cmd_direct:
-        network: ipv4
-        table: filter
-        chain: IN_test_allow
         state: absent
 '''
 
