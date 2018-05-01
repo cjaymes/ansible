@@ -1,0 +1,41 @@
+- name: test firewall_cmd module
+  hosts: stig-rhel7
+  tasks:
+    - name: get firewall configuration
+      firewall_cmd:
+          state: get
+      register: firewalld_config
+    - debug:
+        msg: '{{firewalld_config}}'
+
+    - name: reload permanent configuration into runtime
+      firewall_cmd:
+        state: reload
+
+    - name: save runtime configuration to permanent configuration
+      firewall_cmd:
+        state: save
+
+    - name: set zone as default
+      firewall_cmd:
+        default_zone: work
+
+    - name: get firewall configuration
+      firewall_cmd:
+          state: get
+      register: firewalld_config
+    - debug:
+        msg: '{{firewalld_config}}'
+
+    - name: reset default zone
+      firewall_cmd:
+        default_zone: public
+
+    - name: set log_denied to default
+      firewall_cmd:
+        log_denied: off
+
+    - name: set automatic_helpers to default
+      firewall_cmd:
+        automatic_helpers: system
+      when: firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
