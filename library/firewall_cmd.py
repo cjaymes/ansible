@@ -201,7 +201,7 @@ def main():
 
             direct_rules = []
             for line in module.firewall_cmd(args + ['--get-all-rules']).splitlines():
-                m = re.fullmatch(r'(ipv4|ipv6|eb) (\S+) (\S+) ([0-9]+) (.*)', line.strip())
+                m = re.match(r'^(ipv4|ipv6|eb) (\S+) (\S+) ([0-9]+) (.*)$', line.strip())
                 if m:
                     direct_rules.append(
                         dict(
@@ -215,7 +215,7 @@ def main():
 
             direct_passthroughs = []
             for line in module.firewall_cmd(args + ['--get-all-passthroughs']).splitlines():
-                m = re.fullmatch(r'(ipv4|ipv6|eb) (.*)', line.strip())
+                m = re.match(r'^(ipv4|ipv6|eb) (.*)$', line.strip())
                 if m:
                     direct_passthroughs.append(
                         dict(
