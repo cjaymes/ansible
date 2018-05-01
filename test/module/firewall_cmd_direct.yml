@@ -1,0 +1,94 @@
+- name: test module
+  hosts: stig-rhel7
+  tasks:
+    - name: get firewall configuration
+      firewall_cmd:
+          state: get
+      register: firewalld_config
+    - debug:
+        msg: '{{firewalld_config}}'
+
+    - name: create zone; permanent is implied
+      firewall_cmd_zone:
+        name: test
+        state: present
+
+    - name: reload permanent configuration into runtime (necessary after zone creation)
+      firewall_cmd:
+        state: reload
+
+    - name: add a direct chain
+      firewall_cmd_direct:
+        network: ipv4
+        table: filter
+        chain: IN_test_allow
+        state: present
+
+    - name: get firewall configuration
+      firewall_cmd:
+          state: get
+      register: firewalld_config
+    - debug:
+        msg: '{{firewalld_config}}'
+
+    - name: add a direct rule
+      firewall_cmd_direct:
+        network: ipv4
+        table: filter
+        chain: IN_test_allow
+        priority: 0
+        rule: -m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
+        state: present
+    - name: get firewall configuration
+      firewall_cmd:
+          state: get
+      register: firewalld_config
+    - debug:
+        msg: '{{firewalld_config}}'
+    - name: remove a direct rule
+      firewall_cmd_direct:
+        network: ipv4
+        table: filter
+        chain: IN_test_allow
+        priority: 0
+        rule: -m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
+        state: absent
+
+    - name: add a direct passthrough
+      firewall_cmd_direct:
+        network: ipv4
+        passthrough: -A IN_test_allow -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
+        state: present
+    - name: get firewall configuration
+      firewall_cmd:
+          state: get
+      register: firewalld_config
+    - debug:
+        msg: '{{firewalld_config}}'
+    - name: remove a direct passthrough
+      firewall_cmd_direct:
+        network: ipv4
+        passthrough: -A IN_test_allow -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
+        state: absent
+
+    - name: remove a direct chain
+      firewall_cmd_direct:
+        network: ipv4
+        table: filter
+        chain: IN_test_allow
+        state: absent
+    - name: get firewall configuration
+      firewall_cmd:
+          state: get
+      register: firewalld_config
+    - debug:
+        msg: '{{firewalld_config}}'
+
+    - name: delete zone; permanent is implied
+      firewall_cmd_zone:
+        name: test
+        state: absent
+
+    - name: reload permanent configuration into runtime (necessary after zone deletion)
+      firewall_cmd:
+        state: reload

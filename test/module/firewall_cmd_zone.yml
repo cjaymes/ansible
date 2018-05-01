@@ -1,44 +1,14 @@
-- name: test module
+- name: test firewall_cmd_direct module
   hosts: stig-rhel7
-  vars:
-      get: true
   tasks:
-    ### firewall_cmd EXAMPLES
+
     - name: get firewall configuration
       firewall_cmd:
           state: get
       register: firewalld_config
-      when: get == true
     - debug:
         msg: '{{firewalld_config}}'
-      when: get == true
 
-    - name: reload permanent configuration into runtime
-      firewall_cmd:
-        state: reload
-
-    - name: save runtime configuration to permanent configuration
-      firewall_cmd:
-        state: save
-
-    - name: set zone as default
-      firewall_cmd:
-        default_zone: work
-    - name: reset default zone
-      firewall_cmd:
-        default_zone: public
-
-    - name: set log_denied to default
-      firewall_cmd:
-        log_denied: off
-
-    - name: set automatic_helpers to default
-      firewall_cmd:
-        automatic_helpers: system
-      when: firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
-
-
-    ### firewall_cmd_zone EXAMPLES
     - name: create zone; permanent is implied
       firewall_cmd_zone:
         name: test
@@ -69,10 +39,8 @@
       firewall_cmd:
           state: get
       register: firewalld_config
-      when: get == true
     - debug:
         msg: '{{firewalld_config}}'
-      when: get == true
 
     # - name: add an interface to a zone
     #   firewall_cmd_zone:
@@ -83,10 +51,8 @@
     #   firewall_cmd:
     #       state: get
     #   register: firewalld_config
-    #   when: get == true
     # - debug:
     #     msg: '{{firewalld_config}}'
-    #   when: get == true
     # - name: remove an interface from a zone
     #   firewall_cmd_zone:
     #     name: test
@@ -101,10 +67,8 @@
       firewall_cmd:
           state: get
       register: firewalld_config
-      when: get == true
     - debug:
         msg: '{{firewalld_config}}'
-      when: get == true
     - name: reset zone icmp block inversion
       firewall_cmd_zone:
         name: test
@@ -119,10 +83,8 @@
       firewall_cmd:
           state: get
       register: firewalld_config
-      when: get == true
     - debug:
         msg: '{{firewalld_config}}'
-      when: get == true
     - name: remove a source from a zone
       firewall_cmd_zone:
         name: test
@@ -138,10 +100,8 @@
       firewall_cmd:
           state: get
       register: firewalld_config
-      when: get == true
     - debug:
         msg: '{{firewalld_config}}'
-      when: get == true
     - name: remove a service from a zone
       firewall_cmd_zone:
         name: test
@@ -157,10 +117,8 @@
       firewall_cmd:
           state: get
       register: firewalld_config
-      when: get == true
     - debug:
         msg: '{{firewalld_config}}'
-      when: get == true
     - name: remove a port from a zone
       firewall_cmd_zone:
         name: test
@@ -176,10 +134,8 @@
       firewall_cmd:
           state: get
       register: firewalld_config
-      when: get == true
     - debug:
         msg: '{{firewalld_config}}'
-      when: get == true
     - name: remove a protocol from a zone
       firewall_cmd_zone:
         name: test
@@ -194,10 +150,8 @@
       firewall_cmd:
           state: get
       register: firewalld_config
-      when: get == true
     - debug:
         msg: '{{firewalld_config}}'
-      when: get == true
     - name: reset zone masquerading
       firewall_cmd_zone:
         name: test
@@ -212,10 +166,8 @@
       firewall_cmd:
           state: get
       register: firewalld_config
-      when: get == true
     - debug:
         msg: '{{firewalld_config}}'
-      when: get == true
     - name: remove a forward-port from a zone
       firewall_cmd_zone:
         name: test
@@ -231,10 +183,8 @@
       firewall_cmd:
           state: get
       register: firewalld_config
-      when: get == true
     - debug:
         msg: '{{firewalld_config}}'
-      when: get == true
     - name: remove a source-port from a zone
       firewall_cmd_zone:
         name: test
@@ -250,10 +200,8 @@
       firewall_cmd:
           state: get
       register: firewalld_config
-      when: get == true
     - debug:
         msg: '{{firewalld_config}}'
-      when: get == true
     - name: remove an icmp-block from a zone
       firewall_cmd_zone:
         name: test
@@ -269,86 +217,14 @@
       firewall_cmd:
           state: get
       register: firewalld_config
-      when: get == true
     - debug:
         msg: '{{firewalld_config}}'
-      when: get == true
     - name: remove a rich rule from a zone
       firewall_cmd_zone:
         name: test
         rich_rule: rule protocol value="ah" accept
         state: absent
 
-    ### firewall_cmd_direct EXAMPLES
-    - name: add a direct chain
-      firewall_cmd_direct:
-        network: ipv4
-        table: filter
-        chain: IN_test_allow
-        state: present
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-      when: get == true
-    - debug:
-        msg: '{{firewalld_config}}'
-      when: get == true
-
-    - name: add a direct rule
-      firewall_cmd_direct:
-        network: ipv4
-        table: filter
-        chain: IN_test_allow
-        priority: 0
-        rule: -m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
-        state: present
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-      when: get == true
-    - debug:
-        msg: '{{firewalld_config}}'
-      when: get == true
-    - name: remove a direct rule
-      firewall_cmd_direct:
-        network: ipv4
-        table: filter
-        chain: IN_test_allow
-        priority: 0
-        rule: -m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
-        state: absent
-
-    - name: add a direct passthrough
-      firewall_cmd_direct:
-        network: ipv4
-        passthrough: -A IN_test_allow -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
-        state: present
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-      when: get == true
-    - debug:
-        msg: '{{firewalld_config}}'
-      when: get == true
-    - name: remove a direct passthrough
-      firewall_cmd_direct:
-        network: ipv4
-        passthrough: -A IN_test_allow -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
-        state: absent
-
-    - name: remove a direct chain
-      firewall_cmd_direct:
-        network: ipv4
-        table: filter
-        chain: IN_test_allow
-        state: absent
-
-
-    ### firewall_cmd_zone EXAMPLES
     - name: delete zone; permanent is implied
       firewall_cmd_zone:
         name: test
