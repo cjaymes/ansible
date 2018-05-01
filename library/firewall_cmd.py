@@ -93,6 +93,7 @@ RETURN = '''
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.firewall_cmd_utils import FirewallCmdAnsibleModule
+import re
 
 
 def set_option(module, query_arg, set_arg, option):
