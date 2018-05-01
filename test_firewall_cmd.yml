@@ -49,7 +49,7 @@
     #     msg: '{{firewalld_config}}'
     - fail:
         msg: "log_denied"
-      when: "{{firewalld_config['firewalld']['log_denied'] != 'off'}}"
+      when: firewalld_config['firewalld']['log_denied'] != 'off'
 
     - name: set automatic_helpers to default
       firewall_cmd:

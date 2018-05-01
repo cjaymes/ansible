@@ -2,13 +2,6 @@
   hosts: stig-rhel7
   tasks:
 
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
-
     - name: create zone; permanent is implied
       firewall_cmd_zone:
         name: test
@@ -23,6 +16,18 @@
         name: test
         description: Long description of a zone for testing
       when: firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
+
+    - name: get firewall configuration
+      firewall_cmd:
+          state: get
+      register: firewalld_config
+    # - debug:
+    #     msg: '{{firewalld_config}}'
+    - fail:
+        msg: "description"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['description'] != 'Long description of a zone for testing'
+          - firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
 
     - name: set zone short description; permanent is implied
       firewall_cmd_zone:
