@@ -48,28 +48,3 @@ class FirewallCmdAnsibleModule(AnsibleModule):
         except OSError as exception:
             self.fail_json(msg='firewall-cmd failed with exception: {0}'.format(exception))
         return out
-
-    def firewalld_get_result(self):
-        result = {'changed': False, 'firewalld':{}}
-
-        if not self.firewalld_installed():
-            result['firewalld']['installed'] = False
-            self.exit_json(**result)
-        else:
-            result['firewalld']['installed'] = True
-
-        if not self.firewalld_running():
-            result['firewalld']['running'] = False
-            self.exit_json(**result)
-        else:
-            result['firewalld']['running'] = True
-
-        result['firewalld']['version'] = self.firewalld_version()
-        result['firewalld']['log_denied'] = self.firewall_cmd(['--get-log-denied']).strip()
-        if self.version_cmp('0.4.3.2', self.firewalld_version()) > 0:
-            result['firewalld']['automatic_helpers'] = self.firewall_cmd(['--get-automatic-helpers']).strip()
-        result['firewalld']['default_zone'] = self.firewall_cmd(['--get-default-zone']).strip()
-        result['firewalld']['permanent_zones'] = self.firewall_cmd(['--permanent', '--get-zones']).strip().split()
-        result['firewalld']['runtime_zones'] = self.firewall_cmd(['--permanent', '--get-zones']).strip().split()
-
-        return result

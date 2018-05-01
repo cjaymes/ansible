@@ -33,13 +33,11 @@ options:
             - If only name is specified, this will add or remove the zone itself; permanent is implied.
             - For zone adds or removes to be reflected in runtime, firewall_cmd state: reload will have to be issued.
             - The state expected of the option specified.
-            - If the state is get, the firewall zone configuration is returned.
         choices:
             - present
             - absent
             - enabled
             - disabled
-            - get
         type: str
     timeout:
         description:
@@ -159,26 +157,24 @@ EXAMPLES = '''
         name: test
         target: ACCEPT
 
-    - name: get firewall zone state
-      firewall_cmd_zone:
-          name: test
+    - name: get firewall configuration
+      firewall_cmd:
           state: get
-      register: firewalld_zone_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_zone_state}}'
+        msg: '{{firewalld_config}}'
 
     # - name: add an interface to a zone
     #   firewall_cmd_zone:
     #     name: test
     #     interface: eth0
     #     state: present
-    # - name: get firewall zone state
-    #   firewall_cmd_zone:
-    #       name: test
+    # - name: get firewall configuration
+    #   firewall_cmd:
     #       state: get
-    #   register: firewalld_zone_state
+    #   register: firewalld_config
     # - debug:
-    #     msg: '{{firewalld_zone_state}}'
+    #     msg: '{{firewalld_config}}'
     # - name: remove an interface from a zone
     #   firewall_cmd_zone:
     #     name: test
@@ -189,13 +185,12 @@ EXAMPLES = '''
       firewall_cmd_zone:
         name: test
         icmp_block_inversion: true
-    - name: get firewall zone state
-      firewall_cmd_zone:
-          name: test
+    - name: get firewall configuration
+      firewall_cmd:
           state: get
-      register: firewalld_zone_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_zone_state}}'
+        msg: '{{firewalld_config}}'
     - name: reset zone icmp block inversion
       firewall_cmd_zone:
         name: test
@@ -206,13 +201,12 @@ EXAMPLES = '''
         name: test
         source: 192.168.0.0/16
         state: present
-    - name: get firewall zone state
-      firewall_cmd_zone:
-          name: test
+    - name: get firewall configuration
+      firewall_cmd:
           state: get
-      register: firewalld_zone_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_zone_state}}'
+        msg: '{{firewalld_config}}'
     - name: remove a source from a zone
       firewall_cmd_zone:
         name: test
@@ -224,13 +218,12 @@ EXAMPLES = '''
         name: test
         service: ssh
         state: present
-    - name: get firewall zone state
-      firewall_cmd_zone:
-          name: test
+    - name: get firewall configuration
+      firewall_cmd:
           state: get
-      register: firewalld_zone_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_zone_state}}'
+        msg: '{{firewalld_config}}'
     - name: remove a service from a zone
       firewall_cmd_zone:
         name: test
@@ -242,13 +235,12 @@ EXAMPLES = '''
         name: test
         port: 22/tcp
         state: present
-    - name: get firewall zone state
-      firewall_cmd_zone:
-          name: test
+    - name: get firewall configuration
+      firewall_cmd:
           state: get
-      register: firewalld_zone_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_zone_state}}'
+        msg: '{{firewalld_config}}'
     - name: remove a port from a zone
       firewall_cmd_zone:
         name: test
@@ -260,13 +252,12 @@ EXAMPLES = '''
         name: test
         protocol: gre
         state: present
-    - name: get firewall zone state
-      firewall_cmd_zone:
-          name: test
+    - name: get firewall configuration
+      firewall_cmd:
           state: get
-      register: firewalld_zone_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_zone_state}}'
+        msg: '{{firewalld_config}}'
     - name: remove a protocol from a zone
       firewall_cmd_zone:
         name: test
@@ -277,13 +268,12 @@ EXAMPLES = '''
       firewall_cmd_zone:
         name: test
         masquerade: true
-    - name: get firewall zone state
-      firewall_cmd_zone:
-          name: test
+    - name: get firewall configuration
+      firewall_cmd:
           state: get
-      register: firewalld_zone_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_zone_state}}'
+        msg: '{{firewalld_config}}'
     - name: reset zone masquerading
       firewall_cmd_zone:
         name: test
@@ -294,13 +284,12 @@ EXAMPLES = '''
         name: test
         forward_port: port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42
         state: present
-    - name: get firewall zone state
-      firewall_cmd_zone:
-          name: test
+    - name: get firewall configuration
+      firewall_cmd:
           state: get
-      register: firewalld_zone_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_zone_state}}'
+        msg: '{{firewalld_config}}'
     - name: remove a forward-port from a zone
       firewall_cmd_zone:
         name: test
@@ -312,13 +301,12 @@ EXAMPLES = '''
         name: test
         source_port: 68/udp
         state: present
-    - name: get firewall zone state
-      firewall_cmd_zone:
-          name: test
+    - name: get firewall configuration
+      firewall_cmd:
           state: get
-      register: firewalld_zone_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_zone_state}}'
+        msg: '{{firewalld_config}}'
     - name: remove a source-port from a zone
       firewall_cmd_zone:
         name: test
@@ -330,13 +318,12 @@ EXAMPLES = '''
         name: test
         icmp_block: echo-request
         state: present
-    - name: get firewall zone state
-      firewall_cmd_zone:
-          name: test
+    - name: get firewall configuration
+      firewall_cmd:
           state: get
-      register: firewalld_zone_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_zone_state}}'
+        msg: '{{firewalld_config}}'
     - name: remove an icmp-block from a zone
       firewall_cmd_zone:
         name: test
@@ -348,13 +335,12 @@ EXAMPLES = '''
         name: test
         rich_rule: rule protocol value="ah" accept
         state: present
-    - name: get firewall zone state
-      firewall_cmd_zone:
-          name: test
+    - name: get firewall configuration
+      firewall_cmd:
           state: get
-      register: firewalld_zone_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_zone_state}}'
+        msg: '{{firewalld_config}}'
     - name: remove a rich rule from a zone
       firewall_cmd_zone:
         name: test
@@ -559,7 +545,7 @@ def main():
         argument_spec=dict(
             name=dict(type='str'),
             permanent=dict(type='bool', default=True),
-            state=dict(type='str', choices=['present', 'absent', 'enabled', 'disabled', 'reload', 'get']),
+            state=dict(type='str', choices=['present', 'absent', 'enabled', 'disabled', 'reload']),
             timeout=dict(type='str'),
             description=dict(type='str'),
             short=dict(type='str'),
@@ -578,56 +564,6 @@ def main():
         ),
         supports_check_mode=True
     )
-
-    # check for get
-    if module.params['state'] is not None and module.params['state'] == 'get':
-        result = module.firewalld_get_result()
-
-        result['firewalld_zone'] = {}
-        args = []
-        if module.params['name'] is not None:
-            args.append('--zone=' + module.params['name'])
-            result['firewalld_zone']['name'] = module.params['name']
-        else:
-            result['firewalld_zone']['name'] = result['firewalld']['default_zone']
-
-        if module.params['permanent'] is not None and module.params['permanent']:
-            args.append('--permanent')
-            result['firewalld_zone']['permanent'] = True
-        else:
-            result['firewalld_zone']['permanent'] = False
-
-        perm_args = args[:]
-        if '--permanent' not in perm_args:
-            perm_args.append('--permanent')
-        if module.version_cmp('0.4.3.2', module.firewalld_version()) > 0:
-            result['firewalld_zone']['description'] = module.firewall_cmd(perm_args + ['--get-description']).strip()
-            result['firewalld_zone']['short'] = module.firewall_cmd(perm_args + ['--get-short']).strip()
-        result['firewalld_zone']['target'] = module.firewall_cmd(perm_args + ['--get-target']).strip()
-        result['firewalld_zone']['icmp_block_inversion'] = module.firewall_cmd(args + ['--query-icmp-block-inversion']).strip() == 'yes'
-        result['firewalld_zone']['interfaces'] = module.firewall_cmd(args + ['--list-interfaces']).strip().split()
-        result['firewalld_zone']['sources'] = module.firewall_cmd(args + ['--list-sources']).strip().split()
-        result['firewalld_zone']['services'] = module.firewall_cmd(args + ['--list-services']).strip().split()
-        result['firewalld_zone']['ports'] = module.firewall_cmd(args + ['--list-ports']).strip().split()
-        result['firewalld_zone']['protocols'] = module.firewall_cmd(args + ['--list-protocols']).strip().split()
-        result['firewalld_zone']['masquerade'] = module.firewall_cmd(args + ['--query-masquerade']).strip() == 'yes'
-
-        result['firewalld_zone']['forward_ports'] = []
-        for line in module.firewall_cmd(args + ['--list-forward-ports']).strip().splitlines():
-            line = line.strip()
-            if line != '':
-                result['firewalld_zone']['forward_ports'].append(line)
-
-        result['firewalld_zone']['source_ports'] = module.firewall_cmd(args + ['--list-source-ports']).strip().split()
-        result['firewalld_zone']['icmp_blocks'] = module.firewall_cmd(args + ['--list-icmp-blocks']).strip().split()
-
-        result['firewalld_zone']['rich_rules'] = []
-        for line in module.firewall_cmd(args + ['--list-rich-rules']).splitlines():
-            line = line.strip()
-            if line != '':
-                result['firewalld_zone']['rich_rules'].append(line)
-
-        module.exit_json(**result)
 
     if not module.firewalld_installed():
         module.fail_json(msg='firewalld is not installed')

@@ -27,13 +27,11 @@ options:
         description:
             - For direct adds or removes to be reflected in runtime, firewall_cmd state: reload will have to be issued.
             - The state expected of the option specified.
-            - If the state is get, the firewall direct configuration is returned.
         choices:
             - present
             - absent
             - enabled
             - disabled
-            - get
         type: str
     network:
         description:
@@ -81,13 +79,12 @@ EXAMPLES = '''
         chain: IN_test_allow
         state: present
 
-    - name: get firewall direct state
-      firewall_cmd_direct:
-          name: test
+    - name: get firewall configuration
+      firewall_cmd:
           state: get
-      register: firewalld_direct_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_direct_state}}'
+        msg: '{{firewalld_config}}'
 
     - name: add a direct rule
       firewall_cmd_direct:
@@ -97,13 +94,12 @@ EXAMPLES = '''
         priority: 0
         rule: -m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
         state: present
-    - name: get firewall direct state
-      firewall_cmd_direct:
-          name: test
+    - name: get firewall configuration
+      firewall_cmd:
           state: get
-      register: firewalld_direct_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_direct_state}}'
+        msg: '{{firewalld_config}}'
     - name: remove a direct rule
       firewall_cmd_direct:
         network: ipv4
@@ -118,13 +114,12 @@ EXAMPLES = '''
         network: ipv4
         passthrough: -A IN_test_allow -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
         state: present
-    - name: get firewall direct state
-      firewall_cmd_direct:
-          name: test
+    - name: get firewall configuration
+      firewall_cmd:
           state: get
-      register: firewalld_direct_state
+      register: firewalld_config
     - debug:
-        msg: '{{firewalld_direct_state}}'
+        msg: '{{firewalld_config}}'
     - name: remove a direct passthrough
       firewall_cmd_direct:
         network: ipv4
@@ -196,7 +191,7 @@ def main():
     module = FirewallCmdAnsibleModule(
         argument_spec=dict(
             permanent=dict(type='bool', default=True),
-            state=dict(type='str', choices=['present', 'absent', 'enabled', 'disabled', 'get']),
+            state=dict(type='str', choices=['present', 'absent', 'enabled', 'disabled']),
             network=dict(type='str', choices=['ipv4', 'ipv6', 'eb'], default='ipv4'),
             table=dict(type='str'),
             chain=dict(type='str'),
@@ -206,40 +201,6 @@ def main():
         ),
         supports_check_mode=True
     )
-
-    # check for get
-    if module.params['state'] is not None and module.params['state'] == 'get':
-        result = module.firewalld_get_result()
-
-        result['firewalld_direct'] = {}
-        args = ['--direct']
-
-        result['firewalld_direct']['chains'] = module.firewall_cmd(args + ['--get-all-chains']).strip().split()
-        result['firewalld_direct']['rules'] = []
-        for line in module.firewall_cmd(args + ['--get-all-rules']).splitlines():
-            m = re.fullmatch(r'(ipv4|ipv6|eb) (\S+) (\S+) ([0-9]+) (.*)', line.strip())
-            if m:
-                result['firewalld_direct']['rules'].append(
-                    dict(
-                        network=m.group(1),
-                        table=m.group(2),
-                        chain=m.group(3),
-                        priority=m.group(4),
-                        rule=m.group(5)
-                    )
-                )
-        result['firewalld_direct']['passthroughs'] = []
-        for line in module.firewall_cmd(args + ['--get-all-passthroughs']).splitlines():
-            m = re.fullmatch(r'(ipv4|ipv6|eb) (.*)', line.strip())
-            if m:
-                result['firewalld_direct']['passthroughs'].append(
-                    dict(
-                        network=m.group(1),
-                        passthrough=m.group(2)
-                    )
-                )
-
-        module.exit_json(**result)
 
     if not module.firewalld_installed():
         module.fail_json(msg='firewalld is not installed')

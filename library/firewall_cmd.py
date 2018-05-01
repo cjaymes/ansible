@@ -121,7 +121,115 @@ def main():
 
     # check for get
     if module.params['state'] is not None and module.params['state'] == 'get':
-        result = module.firewalld_get_result()
+        result = {'changed': False, 'firewalld':{}}
+
+        if not module.firewalld_installed():
+            result['firewalld']['installed'] = False
+            module.exit_json(**result)
+        else:
+            result['firewalld']['installed'] = True
+
+        if not module.firewalld_running():
+            result['firewalld']['running'] = False
+            module.exit_json(**result)
+        else:
+            result['firewalld']['running'] = True
+
+        result['firewalld']['version'] = module.firewalld_version()
+        result['firewalld']['log_denied'] = module.firewall_cmd(['--get-log-denied']).strip()
+        if module.version_cmp('0.4.3.2', module.firewalld_version()) > 0:
+            result['firewalld']['automatic_helpers'] = module.firewall_cmd(['--get-automatic-helpers']).strip()
+        result['firewalld']['default_zone'] = module.firewall_cmd(['--get-default-zone']).strip()
+
+        result['firewalld']['permanent_zones'] = {}
+        result['firewalld']['runtime_zones'] = {}
+        for permanent in (True, False):
+            if permanent:
+                zone_names = module.firewall_cmd(['--permanent', '--get-zones']).strip().split()
+            else:
+                zone_names = module.firewall_cmd(['--get-zones']).strip().split()
+
+            for zone_name in zone_names:
+                zone = {}
+                zone['name'] = zone_name
+                zone['permanent'] = permanent
+
+                if permanent:
+                    args = ['--permanent', '--zone=' + zone_name]
+                else:
+                    args = ['--zone=' + zone_name]
+
+                perm_args = args[:]
+                perm_args.append('--permanent')
+                if module.version_cmp('0.4.3.2', module.firewalld_version()) > 0:
+                    zone['description'] = module.firewall_cmd(perm_args + ['--get-description']).strip()
+                    zone['short'] = module.firewall_cmd(perm_args + ['--get-short']).strip()
+                zone['target'] = module.firewall_cmd(perm_args + ['--get-target']).strip()
+                zone['icmp_block_inversion'] = module.firewall_cmd(args + ['--query-icmp-block-inversion']).strip() == 'yes'
+                zone['interfaces'] = module.firewall_cmd(args + ['--list-interfaces']).strip().split()
+                zone['sources'] = module.firewall_cmd(args + ['--list-sources']).strip().split()
+                zone['services'] = module.firewall_cmd(args + ['--list-services']).strip().split()
+                zone['ports'] = module.firewall_cmd(args + ['--list-ports']).strip().split()
+                zone['protocols'] = module.firewall_cmd(args + ['--list-protocols']).strip().split()
+                zone['masquerade'] = module.firewall_cmd(args + ['--query-masquerade']).strip() == 'yes'
+
+                zone['forward_ports'] = []
+                for line in module.firewall_cmd(args + ['--list-forward-ports']).strip().splitlines():
+                    line = line.strip()
+                    if line != '':
+                        zone['forward_ports'].append(line)
+
+                zone['source_ports'] = module.firewall_cmd(args + ['--list-source-ports']).strip().split()
+                zone['icmp_blocks'] = module.firewall_cmd(args + ['--list-icmp-blocks']).strip().split()
+
+                zone['rich_rules'] = []
+                for line in module.firewall_cmd(args + ['--list-rich-rules']).splitlines():
+                    line = line.strip()
+                    if line != '':
+                        zone['rich_rules'].append(line)
+
+                if permanent:
+                    result['firewalld']['permanent_zones'][zone_name] = zone
+                else:
+                    result['firewalld']['runtime_zones'][zone_name] = zone
+
+            if permanent:
+                args = ['--permanent', '--direct']
+            else:
+                args = ['--direct']
+
+            direct_rules = []
+            for line in module.firewall_cmd(args + ['--get-all-rules']).splitlines():
+                m = re.fullmatch(r'(ipv4|ipv6|eb) (\S+) (\S+) ([0-9]+) (.*)', line.strip())
+                if m:
+                    direct_rules.append(
+                        dict(
+                            network=m.group(1),
+                            table=m.group(2),
+                            chain=m.group(3),
+                            priority=m.group(4),
+                            rule=m.group(5)
+                        )
+                    )
+
+            direct_passthroughs = []
+            for line in module.firewall_cmd(args + ['--get-all-passthroughs']).splitlines():
+                m = re.fullmatch(r'(ipv4|ipv6|eb) (.*)', line.strip())
+                if m:
+                    direct_passthroughs.append(
+                        dict(
+                            network=m.group(1),
+                            passthrough=m.group(2)
+                        )
+                    )
+            if permanent:
+                result['firewalld']['permanent_direct_chains'] = module.firewall_cmd(args + ['--get-all-chains']).strip().split()
+                result['firewalld']['permanent_direct_rules'] = direct_rules
+                result['firewalld']['permanent_direct_passthroughs'] = direct_passthroughs
+            else:
+                result['firewalld']['runtime_direct_chains'] = module.firewall_cmd(args + ['--get-all-chains']).strip().split()
+                result['firewalld']['runtime_direct_rules'] = direct_rules
+                result['firewalld']['runtime_direct_passthroughs'] = direct_passthroughs
 
         module.exit_json(**result)
 
