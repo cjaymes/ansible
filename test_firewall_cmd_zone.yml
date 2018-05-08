@@ -461,7 +461,7 @@
     - fail:
         msg: "deleted zone"
       when:
-          - 'test' not in firewalld_config['firewalld']['permanent_zones']
+          - firewalld_config['firewalld']['permanent_zones'] | not_contains('test')
 
     - name: reload permanent configuration into runtime (necessary after zone deletion)
       firewall_cmd:
