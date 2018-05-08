@@ -53,6 +53,20 @@ firewalld_ipsets: []
 firewalld_icmptypes: []
 firewalld_services: []
 firewalld_zone_names: ['block', 'dmz', 'drop', 'external', 'home', 'internal', 'public', 'trusted', 'work']
+firewalld_zone_config_value_keys:
+    - target
+    - icmp_block_inversion
+    - masquerade
+firewalld_zone_config_list_keys:
+    - interfaces
+    - sources
+    - services
+    - ports
+    - protocols
+    - forward_ports
+    - source_ports
+    - icmp_blocks
+    - rich_rules
 firewalld_zone_configs: {
     block: {
         name: 'block',
