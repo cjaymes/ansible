@@ -20,7 +20,7 @@
     - fail:
         msg: "zone is created"
       when:
-          - 'test' in firewalld_config['firewalld']['permanent_zones']
+          - firewalld_config['firewalld']['permanent_zones'] | contains('test')
 
     - name: set zone description; permanent is implied
       firewall_cmd_zone:
@@ -158,7 +158,7 @@
     - fail:
         msg: "source added"
       when:
-          - '192.168.0.0/16' not in firewalld_config['firewalld']['permanent_zones']['test']['source']
+          - firewalld_config['firewalld']['permanent_zones']['test']['source'] | not_contains('192.168.0.0/16')
 
     - name: remove a source from a zone
       firewall_cmd_zone:
@@ -175,7 +175,7 @@
     - fail:
         msg: "source removed"
       when:
-          - '192.168.0.0/16' in firewalld_config['firewalld']['permanent_zones']['test']['source']
+          - firewalld_config['firewalld']['permanent_zones']['test']['source'] | contains('192.168.0.0/16')
 
     - name: add a service to a zone
       firewall_cmd_zone:
@@ -192,7 +192,7 @@
     - fail:
         msg: "service added"
       when:
-          - 'ssh' not in firewalld_config['firewalld']['permanent_zones']['test']['service']
+          - firewalld_config['firewalld']['permanent_zones']['test']['service'] | not_contains('ssh')
 
     - name: remove a service from a zone
       firewall_cmd_zone:
@@ -209,7 +209,7 @@
     - fail:
         msg: "service removed"
       when:
-          - 'ssh' in firewalld_config['firewalld']['permanent_zones']['test']['service']
+          - firewalld_config['firewalld']['permanent_zones']['test']['service'] | contains('ssh')
 
     - name: add a port to a zone
       firewall_cmd_zone:
@@ -226,7 +226,7 @@
     - fail:
         msg: "port added"
       when:
-          - '22/tcp' not in firewalld_config['firewalld']['permanent_zones']['test']['port']
+          - firewalld_config['firewalld']['permanent_zones']['test']['port'] | not_contains('22/tcp')
 
     - name: remove a port from a zone
       firewall_cmd_zone:
@@ -243,7 +243,7 @@
     - fail:
         msg: "port removed"
       when:
-          - '22/tcp' in firewalld_config['firewalld']['permanent_zones']['test']['port']
+          - firewalld_config['firewalld']['permanent_zones']['test']['port'] | contains('22/tcp')
 
     - name: add a protocol to a zone
       firewall_cmd_zone:
@@ -260,7 +260,7 @@
     - fail:
         msg: "protocol added"
       when:
-          - 'gre' not in firewalld_config['firewalld']['permanent_zones']['test']['protocol']
+          - firewalld_config['firewalld']['permanent_zones']['test']['protocol'] | not_contains('gre')
 
     - name: remove a protocol from a zone
       firewall_cmd_zone:
@@ -277,7 +277,7 @@
     - fail:
         msg: "protocol removed"
       when:
-          - 'gre' in firewalld_config['firewalld']['permanent_zones']['test']['protocol']
+          - firewalld_config['firewalld']['permanent_zones']['test']['protocol'] | contains('gre')
 
     - name: set zone masquerading
       firewall_cmd_zone:
@@ -326,7 +326,7 @@
     - fail:
         msg: "forward-port added"
       when:
-          - 'port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42' not in firewalld_config['firewalld']['permanent_zones']['test']['forward_port']
+          - firewalld_config['firewalld']['permanent_zones']['test']['forward_port'] | not_contains('port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42')
 
     - name: remove a forward-port from a zone
       firewall_cmd_zone:
@@ -343,7 +343,7 @@
     - fail:
         msg: "forward-port removed"
       when:
-          - 'port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42' in firewalld_config['firewalld']['permanent_zones']['test']['forward_port']
+          - firewalld_config['firewalld']['permanent_zones']['test']['forward_port'] | contains('port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42')
 
     - name: add a source-port to a zone
       firewall_cmd_zone:
@@ -360,7 +360,7 @@
     - fail:
         msg: "source-port added"
       when:
-          - '68/udp' not in firewalld_config['firewalld']['permanent_zones']['test']['source_port']
+          - firewalld_config['firewalld']['permanent_zones']['test']['source_port'] | not_contains('68/udp')
 
     - name: remove a source-port from a zone
       firewall_cmd_zone:
@@ -377,7 +377,7 @@
     - fail:
         msg: "source-port removed"
       when:
-          - '68/udp' in firewalld_config['firewalld']['permanent_zones']['test']['source_port']
+          - firewalld_config['firewalld']['permanent_zones']['test']['source_port'] | contains('68/udp')
 
     - name: add an icmp-block to a zone
       firewall_cmd_zone:
@@ -394,7 +394,7 @@
     - fail:
         msg: "icmp block added"
       when:
-          - 'echo-request' not in firewalld_config['firewalld']['permanent_zones']['test']['icmp_block']
+          - firewalld_config['firewalld']['permanent_zones']['test']['icmp_block'] | not_contains('echo-request')
 
     - name: remove an icmp-block from a zone
       firewall_cmd_zone:
@@ -411,7 +411,7 @@
     - fail:
         msg: "icmp block removed"
       when:
-          - 'echo-request' in firewalld_config['firewalld']['permanent_zones']['test']['icmp_block']
+          - firewalld_config['firewalld']['permanent_zones']['test']['icmp_block'] | contains('echo-request')
 
     - name: add a rich rule to a zone
       firewall_cmd_zone:
@@ -428,7 +428,7 @@
     - fail:
         msg: "rich rule added"
       when:
-          - 'rule protocol value="ah" accept' not in firewalld_config['firewalld']['permanent_zones']['test']['rich_rule']
+          - firewalld_config['firewalld']['permanent_zones']['test']['rich_rule'] | not_contains('rule protocol value="ah" accept')
 
     - name: remove a rich rule from a zone
       firewall_cmd_zone:
@@ -445,7 +445,7 @@
     - fail:
         msg: "rich rule removed"
       when:
-          - 'rule protocol value="ah" accept' in firewalld_config['firewalld']['permanent_zones']['test']['rich_rule']
+          - firewalld_config['firewalld']['permanent_zones']['test']['rich_rule'] | contains('rule protocol value="ah" accept')
 
     - name: delete zone; permanent is implied
       firewall_cmd_zone:
