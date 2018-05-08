@@ -31,8 +31,8 @@
     - fail:
         msg: "description"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['description'] != 'Long description of a zone for testing'
           - firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
+          - firewalld_config['firewalld']['permanent_zones']['description'] != 'Long description of a zone for testing'
 
     - name: set zone short description; permanent is implied
       firewall_cmd_zone:
