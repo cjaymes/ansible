@@ -65,8 +65,12 @@
       firewall_cmd:
           state: get
       register: firewalld_config
-    - debug:
-        msg: '{{firewalld_config}}'
+    # - debug:
+    #     msg: '{{firewalld_config}}'
+    - fail:
+        msg: "short"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['target'] != 'ACCEPT'
 
     # - name: add an interface to a zone
     #   firewall_cmd_zone:
