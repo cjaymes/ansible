@@ -26,5 +26,9 @@
 - name: remove extra zones
   firewall_cmd_zone:
       name: "{{item}}"
-      state: present
+      state: absent
   with_items: "{{ firewalld_state['firewalld']['permanent_zones'].keys() | difference(firewalld_zone_names) }}"
+
+- name: reload firewall from permanent
+  firewall_cmd:
+      state: reload
