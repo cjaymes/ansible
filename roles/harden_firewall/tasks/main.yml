@@ -9,8 +9,22 @@
       enabled: yes
       state: started
 
-- name: zones
+- name: get firewall state
+  firewall_cmd:
+      state: get
+  register: firewalld_state
+
+- debug:
+    msg: "{{firewalld_state}}"
+
+- name: add missing zones
   firewall_cmd_zone:
       name: "{{item}}"
       state: present
   with_items: "{{ firewalld_zone_names }}"
+
+- name: remove extra zones
+  firewall_cmd_zone:
+      name: "{{item}}"
+      state: present
+  with_items: "{{ firewalld_state['firewalld']['permanent_zones'].keys() | difference(firewalld_zone_names) }}"
