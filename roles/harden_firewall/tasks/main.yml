@@ -14,8 +14,8 @@
       state: get
   register: firewalld_state
 
-- debug:
-    msg: "{{firewalld_state}}"
+# - debug:
+#     msg: "{{firewalld_state}}"
 
 - name: add missing zones
   firewall_cmd_zone:
@@ -32,6 +32,11 @@
 - name: reload firewall from permanent
   firewall_cmd:
       state: reload
+
+- name: refresh firewall state
+  firewall_cmd:
+      state: get
+  register: firewalld_state
 
 - name: config zones
   include_tasks: zone.yml
