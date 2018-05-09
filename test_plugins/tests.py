@@ -2,6 +2,8 @@ from ansible import errors
 
 def containing(value, content):
     try:
+        print(str(value))
+        print(str(content))
         return content in value
     except Exception, e:
         raise errors.AnsibleFilterError('containing plugin error: %s, string=%s' % str(e),str(string) )
