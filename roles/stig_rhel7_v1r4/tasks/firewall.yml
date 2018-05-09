@@ -6,16 +6,6 @@
 - debug:
     msg: "{{firewalld_state}}"
 
-- name: get firewall zone state
-  firewall_cmd_zone:
-      name: "{{item}}"
-      state: get
-  with_items: "{{firewalld_zone_names}}"
-  register: firewalld_zone_state
-
-- debug:
-    msg: "{{firewalld_zone_state}}"
-
 
 # Vuln ID: V-72219
 # Severity: medium
@@ -80,11 +70,16 @@
     stig_rhel7_v1r4_v_72219_result: 'fail'
   when:
     - "'v_72219' in stig_rhel7_v1r4_checks"
-    - not firewalld_active or not firewalld_running
+    - not firewalld_state['firewalld']['installed'] or not firewalld_state['firewalld']['running']
 
-# TODO compare ipset config vs expectation
-# TODO compare icmptypes config vs expectation
-# TODO compare services config vs expectation
+- name: fail stig_rhel7_v1r4 v_72219 default zone
+  set_fact:
+    stig_rhel7_v1r4_v_72219_result: 'fail'
+  when:
+    - "'v_72219' in stig_rhel7_v1r4_checks"
+    - firewalld_state['firewalld']['installed']
+    - firewalld_state['firewalld']['running']
+    - firewalld_state['firewalld']['default_zone'] == firewalld_default_zone
 
 # compare zone config vs expectation
 - name: fail stig_rhel7_v1r4 v_72219 zone config
@@ -92,19 +87,13 @@
     stig_rhel7_v1r4_v_72219_result: 'fail'
   when:
     - "'v_72219' in stig_rhel7_v1r4_checks"
-    - firewalld_active
-    - firewalld_running
-    - firewalld_zones_parsed|selectattr("zone", "equalto", item[1]['zone'])|map(attribute=item[0])|join != item[1][item[0]]
-  loop: "{{ lookup('nested', firewalld_zone_compare_keys, firewalld_zones) }}"
+    - firewalld_state['firewalld']['installed']
+    - firewalld_state['firewalld']['running']
+    - firewalld_state['firewalld']['permanent_zones'] == firewalld_zone_configs
 
-- name: fail stig_rhel7_v1r4 v_72219 default zone
-  set_fact:
-    stig_rhel7_v1r4_v_72219_result: 'fail'
-  when:
-    - "'v_72219' in stig_rhel7_v1r4_checks"
-    - firewalld_active
-    - firewalld_running
-    - firewalld_get_default_zone != firewalld_default_zone
+# TODO compare ipset config vs expectation
+# TODO compare icmptypes config vs expectation
+# TODO compare services config vs expectation
 
 - name: pass stig_rhel7_v1r4 v_72219
   set_fact:
@@ -167,10 +156,9 @@
     stig_rhel7_v1r4_v_72271_result: 'fail'
   when:
     - "'v_72271' in stig_rhel7_v1r4_checks"
-    - firewalld_active
-    - firewalld_running
-    - firewalld_direct_rules|selectattr("zone", "equalto", item[1]['zone'])|map(attribute=item[0])|join != item[1][item[0]]
-  loop: "{{ firewalld_direct_rules }}"
+    - firewalld_state['firewalld']['installed']
+    - firewalld_state['firewalld']['running']
+    - firewalld_state['firewalld']['permanent_direct_rules'] == firewalld_direct_rules
 
 - name: pass stig_rhel7_v1r4 v_72271
   set_fact:
@@ -330,8 +318,8 @@
     stig_rhel7_v1r4_v_72315_result: 'pass'
   when:
     - "'v_72315' in stig_rhel7_v1r4_checks"
-    - firewalld_active
-    - firewalld_running
+    - firewalld_state['firewalld']['installed']
+    - firewalld_state['firewalld']['running']
 
 - name: fail stig_rhel7_v1r4 v_72315
   set_fact:
