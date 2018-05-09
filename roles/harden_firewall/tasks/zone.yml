@@ -1,3 +1,6 @@
+- debug:
+    msg: "Setting {{firewalld_zone}} with {{firewalld_zone_configs[firewalld_zone]}}"
+
 - name: set forward_ports
   firewall_cmd_zone:
       name: "{{firewalld_zone}}"
