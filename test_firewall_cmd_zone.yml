@@ -116,7 +116,7 @@
     - fail:
         msg: "zone is created"
       when:
-          - firewalld_config['firewalld']['permanent_zones'] is containing('test')
+          - firewalld_config['firewalld']['permanent_zones'] is not_containing('test')
 
     - fail:
         msg: "description is set"
@@ -342,7 +342,7 @@
     - fail:
         msg: "deleted zone"
       when:
-          - firewalld_config['firewalld']['permanent_zones'] is not_containing('test')
+          - firewalld_config['firewalld']['permanent_zones'] is containing('test')
 
     - name: reload permanent configuration into runtime (necessary after zone deletion)
       firewall_cmd:
