@@ -26,10 +26,12 @@ options:
             - If the state is reload, the permanent configuration is loaded into runtime.
             - If the state is save, the runtime configuration is saved into permanent.
             - If the state is get, the firewall configuration is returned.
+            - If the state is get_version, the firewall version and status is returned.
         choices:
             - reload
             - save
             - get
+            - get_version
         type: str
     log_denied:
         description:
@@ -115,7 +117,7 @@ def main():
             default_zone=dict(type='str'),
             log_denied=dict(type='str', choices=['all', 'unicast', 'broadcast', 'multicast', 'off']),
             automatic_helpers=dict(type='str', choices=['yes', 'no', 'system']),
-            state=dict(type='str', choices=['save', 'reload', 'get']),
+            state=dict(type='str', choices=['save', 'reload', 'get', 'get_version']),
         ),
         supports_check_mode=True
     )
@@ -231,6 +233,26 @@ def main():
                 result['firewalld']['runtime_direct_chains'] = module.firewall_cmd(args + ['--get-all-chains']).strip().split()
                 result['firewalld']['runtime_direct_rules'] = direct_rules
                 result['firewalld']['runtime_direct_passthroughs'] = direct_passthroughs
+
+        module.exit_json(**result)
+
+    # check for get_version
+    if module.params['state'] is not None and module.params['state'] == 'get_version':
+        result = {'changed': False, 'firewalld':{}}
+
+        if not module.firewalld_installed():
+            result['firewalld']['installed'] = False
+            module.exit_json(**result)
+        else:
+            result['firewalld']['installed'] = True
+
+        if not module.firewalld_running():
+            result['firewalld']['running'] = False
+            module.exit_json(**result)
+        else:
+            result['firewalld']['running'] = True
+
+        result['firewalld']['version'] = module.firewalld_version()
 
         module.exit_json(**result)
 
