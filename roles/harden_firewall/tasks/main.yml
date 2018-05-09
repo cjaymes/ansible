@@ -7,10 +7,10 @@
   service:
       name: firewalld.service
       enabled: yes
-      state: running
+      state: started
 
 - name: zones
   firewall_cmd:
       name: "{{item}}"
       state: exists
-  with: "{{ firewalld_zone_names }}"
+  with_items: "{{ firewalld_zone_names }}"
