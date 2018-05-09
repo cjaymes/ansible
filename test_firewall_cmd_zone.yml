@@ -2,6 +2,16 @@
   hosts: stig-rhel7
   tasks:
 
+    - name: get firewall configuration
+      firewall_cmd:
+          state: get
+      register: firewalld_config
+    # - debug:
+    #     msg: '{{firewalld_config}}'
+
+
+    ### Positives
+
     - name: create zone; permanent is implied
       firewall_cmd_zone:
         name: test
@@ -11,36 +21,11 @@
       firewall_cmd:
         state: reload
 
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "zone is created"
-      when:
-          - firewalld_config['firewalld']['permanent_zones'] is containing('test')
-
     - name: set zone description; permanent is implied
       firewall_cmd_zone:
         name: test
         description: Long description of a zone for testing
       when: firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-      when:
-          - firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "description is set"
-      when:
-          - firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
-          - firewalld_config['firewalld']['permanent_zones']['test']['description'] != 'Long description of a zone for testing'
 
     - name: set zone short description; permanent is implied
       firewall_cmd_zone:
@@ -48,100 +33,21 @@
         short: Zone for testing
       when: firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
 
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-      when:
-          - firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "short is set"
-      when:
-          - firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
-          - firewalld_config['firewalld']['permanent_zones']['test']['short'] != 'Zone for testing'
-
     - name: set zone target; permanent is implied
       firewall_cmd_zone:
         name: test
         target: ACCEPT
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "target is ACCEPT"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['target'] != 'ACCEPT'
-
-    - name: set zone target; permanent is implied
-      firewall_cmd_zone:
-        name: test
-        target: DROP
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "target is DROP"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['target'] != 'DROP'
 
     # - name: add an interface to a zone
     #   firewall_cmd_zone:
     #     name: test
     #     interface: eth0
     #     state: present
-    # - name: get firewall configuration
-    #   firewall_cmd:
-    #       state: get
-    #   register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    # - name: remove an interface from a zone
-    #   firewall_cmd_zone:
-    #     name: test
-    #     interface: eth0
-    #     state: absent
 
     - name: set zone icmp block inversion
       firewall_cmd_zone:
         name: test
         icmp_block_inversion: true
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "icmp_block_inversion true"
-      when:
-          - not firewalld_config['firewalld']['permanent_zones']['test']['icmp_block_inversion']
-
-    - name: reset zone icmp block inversion
-      firewall_cmd_zone:
-        name: test
-        icmp_block_inversion: false
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "icmp_block_inversion false"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['icmp_block_inversion']
 
     - name: add a source to a zone
       firewall_cmd_zone:
@@ -149,67 +55,11 @@
         source: 192.168.0.0/16
         state: present
 
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "source added"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['source'] is not_containing('192.168.0.0/16')
-
-    - name: remove a source from a zone
-      firewall_cmd_zone:
-        name: test
-        source: 192.168.0.0/16
-        state: absent
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "source removed"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['source'] is containing('192.168.0.0/16')
-
     - name: add a service to a zone
       firewall_cmd_zone:
         name: test
         service: ssh
         state: present
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "service added"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['service'] is not_containing('ssh')
-
-    - name: remove a service from a zone
-      firewall_cmd_zone:
-        name: test
-        service: ssh
-        state: absent
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "service removed"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['service'] is containing('ssh')
 
     - name: add a port to a zone
       firewall_cmd_zone:
@@ -217,99 +67,16 @@
         port: 22/tcp
         state: present
 
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "port added"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['port'] is not_containing('22/tcp')
-
-    - name: remove a port from a zone
-      firewall_cmd_zone:
-        name: test
-        port: 22/tcp
-        state: absent
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "port removed"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['port'] is containing('22/tcp')
-
     - name: add a protocol to a zone
       firewall_cmd_zone:
         name: test
         protocol: gre
         state: present
 
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "protocol added"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['protocol'] is not_containing('gre')
-
-    - name: remove a protocol from a zone
-      firewall_cmd_zone:
-        name: test
-        protocol: gre
-        state: absent
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "protocol removed"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['protocol'] is containing('gre')
-
     - name: set zone masquerading
       firewall_cmd_zone:
         name: test
         masquerade: true
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "masquerade true"
-      when:
-          - not firewalld_config['firewalld']['permanent_zones']['test']['masquerade']
-
-    - name: reset zone masquerading
-      firewall_cmd_zone:
-        name: test
-        masquerade: false
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "masquerade false"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['masquerade']
 
     - name: add a forward-port to a zone
       firewall_cmd_zone:
@@ -317,67 +84,11 @@
         forward_port: port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42
         state: present
 
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "forward-port added"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['forward_port'] is not_containing('port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42')
-
-    - name: remove a forward-port from a zone
-      firewall_cmd_zone:
-        name: test
-        forward_port: port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42
-        state: absent
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "forward-port removed"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['forward_port'] is containing('port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42')
-
     - name: add a source-port to a zone
       firewall_cmd_zone:
         name: test
         source_port: 68/udp
         state: present
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "source-port added"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['source_port'] is not_containing('68/udp')
-
-    - name: remove a source-port from a zone
-      firewall_cmd_zone:
-        name: test
-        source_port: 68/udp
-        state: absent
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "source-port removed"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['source_port'] is containing('68/udp')
 
     - name: add an icmp-block to a zone
       firewall_cmd_zone:
@@ -385,16 +96,150 @@
         icmp_block: echo-request
         state: present
 
-    - name: get firewall configuration
+    - name: add a rich rule to a zone
+      firewall_cmd_zone:
+        name: test
+        rich_rule: rule protocol value="ah" accept
+        state: present
+
+
+    ### Refresh
+
+    - name: refresh firewall configuration
       firewall_cmd:
           state: get
       register: firewalld_config
     # - debug:
     #     msg: '{{firewalld_config}}'
+
+
+    ### Positive Tests
+
+    - fail:
+        msg: "zone is created"
+      when:
+          - firewalld_config['firewalld']['permanent_zones'] is containing('test')
+
+    - fail:
+        msg: "description is set"
+      when:
+          - firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
+          - firewalld_config['firewalld']['permanent_zones']['test']['description'] != 'Long description of a zone for testing'
+
+    - fail:
+        msg: "short is set"
+      when:
+          - firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
+          - firewalld_config['firewalld']['permanent_zones']['test']['short'] != 'Zone for testing'
+
+    - fail:
+        msg: "icmp_block_inversion true"
+      when:
+          - not firewalld_config['firewalld']['permanent_zones']['test']['icmp_block_inversion']
+
+    - fail:
+        msg: "source added"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['source'] is not_containing('192.168.0.0/16')
+
+    - fail:
+        msg: "service added"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['service'] is not_containing('ssh')
+
+    - fail:
+        msg: "port added"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['port'] is not_containing('22/tcp')
+
+    - fail:
+        msg: "protocol added"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['protocol'] is not_containing('gre')
+
+    - fail:
+        msg: "masquerade true"
+      when:
+          - not firewalld_config['firewalld']['permanent_zones']['test']['masquerade']
+
+    - fail:
+        msg: "forward-port added"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['forward_port'] is not_containing('port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42')
+
+    - fail:
+        msg: "source-port added"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['source_port'] is not_containing('68/udp')
+
     - fail:
         msg: "icmp block added"
       when:
           - firewalld_config['firewalld']['permanent_zones']['test']['icmp_block'] is not_containing('echo-request')
+
+    - fail:
+        msg: "rich rule added"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['rich_rule'] is not_containing('rule protocol value="ah" accept')
+
+    ### Negatives
+
+    - name: set zone target; permanent is implied
+      firewall_cmd_zone:
+        name: test
+        target: DROP
+
+    # - name: remove an interface from a zone
+    #   firewall_cmd_zone:
+    #     name: test
+    #     interface: eth0
+    #     state: absent
+
+    - name: reset zone icmp block inversion
+      firewall_cmd_zone:
+        name: test
+        icmp_block_inversion: false
+
+    - name: remove a source from a zone
+      firewall_cmd_zone:
+        name: test
+        source: 192.168.0.0/16
+        state: absent
+
+    - name: remove a service from a zone
+      firewall_cmd_zone:
+        name: test
+        service: ssh
+        state: absent
+
+    - name: remove a port from a zone
+      firewall_cmd_zone:
+        name: test
+        port: 22/tcp
+        state: absent
+
+    - name: remove a protocol from a zone
+      firewall_cmd_zone:
+        name: test
+        protocol: gre
+        state: absent
+
+    - name: reset zone masquerading
+      firewall_cmd_zone:
+        name: test
+        masquerade: false
+
+    - name: remove a forward-port from a zone
+      firewall_cmd_zone:
+        name: test
+        forward_port: port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42
+        state: absent
+
+    - name: remove a source-port from a zone
+      firewall_cmd_zone:
+        name: test
+        source_port: 68/udp
+        state: absent
 
     - name: remove an icmp-block from a zone
       firewall_cmd_zone:
@@ -402,62 +247,100 @@
         icmp_block: echo-request
         state: absent
 
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "icmp block removed"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['icmp_block'] is containing('echo-request')
-
-    - name: add a rich rule to a zone
-      firewall_cmd_zone:
-        name: test
-        rich_rule: rule protocol value="ah" accept
-        state: present
-
-    - name: get firewall configuration
-      firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
-    - fail:
-        msg: "rich rule added"
-      when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['rich_rule'] is not_containing('rule protocol value="ah" accept')
-
     - name: remove a rich rule from a zone
       firewall_cmd_zone:
         name: test
         rich_rule: rule protocol value="ah" accept
         state: absent
 
-    - name: get firewall configuration
+
+    ### Refresh
+
+    - name: refresh firewall configuration
       firewall_cmd:
           state: get
       register: firewalld_config
     # - debug:
     #     msg: '{{firewalld_config}}'
+
+
+    ### Negative Tests
+
+    - fail:
+        msg: "target is DROP"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['target'] != 'DROP'
+
+    # TODO interface removal test
+
+    - fail:
+        msg: "icmp_block_inversion false"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['icmp_block_inversion']
+
+    - fail:
+        msg: "source removed"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['source'] is containing('192.168.0.0/16')
+
+    - fail:
+        msg: "service removed"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['service'] is containing('ssh')
+
+    - fail:
+        msg: "port removed"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['port'] is containing('22/tcp')
+
+    - fail:
+        msg: "protocol removed"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['protocol'] is containing('gre')
+
+    - fail:
+        msg: "masquerade false"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['masquerade']
+
+    - fail:
+        msg: "forward-port removed"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['forward_port'] is containing('port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42')
+
+    - fail:
+        msg: "source-port removed"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['source_port'] is containing('68/udp')
+
+    - fail:
+        msg: "icmp block removed"
+      when:
+          - firewalld_config['firewalld']['permanent_zones']['test']['icmp_block'] is containing('echo-request')
+
     - fail:
         msg: "rich rule removed"
       when:
           - firewalld_config['firewalld']['permanent_zones']['test']['rich_rule'] is containing('rule protocol value="ah" accept')
+
+    ### Delete
 
     - name: delete zone; permanent is implied
       firewall_cmd_zone:
         name: test
         state: absent
 
-    - name: get firewall configuration
+    ### Refresh
+
+    - name: refresh firewall configuration
       firewall_cmd:
           state: get
       register: firewalld_config
     # - debug:
     #     msg: '{{firewalld_config}}'
+
+    ### Delete Test
+
     - fail:
         msg: "deleted zone"
       when:
