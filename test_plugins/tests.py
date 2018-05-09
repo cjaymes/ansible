@@ -1,9 +1,13 @@
+# Make coding more python3-ish
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
 from ansible import errors
 
 def containing(value, content):
     try:
-        print(str(value))
-        print(str(content))
+        print(repr(value))
+        print(repr(content))
         return content in value
     except Exception, e:
         raise errors.AnsibleFilterError('containing plugin error: %s, string=%s' % str(e),str(string) )
