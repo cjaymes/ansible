@@ -13,7 +13,7 @@
       name: "{{firewalld_zone}}"
       forward_port: "{{item}}"
       state: absent
-  with_items: "{{ firewalld_zone_configs[firewalld_zone]['forward_ports'] | difference(firewalld_state['firewalld']['permanent_zones'][firewalld_zone]['forward_ports']) }}"
+  with_items: "{{ firewalld_zone_configs[firewalld_zone]['forward_ports'] | difference(firewalld_state_['firewalld']['permanent_zones'][firewalld_zone]['forward_ports']) }}"
 
 - name: set icmp_block_inversion
   firewall_cmd_zone:
@@ -32,7 +32,7 @@
       name: "{{firewalld_zone}}"
       icmp_block: "{{item}}"
       state: absent
-  with_items: "{{ firewalld_zone_configs[firewalld_zone]['icmp_blocks'] | difference(firewalld_state['firewalld']['permanent_zones'][firewalld_zone]['icmp_blocks']) }}"
+  with_items: "{{ firewalld_zone_configs[firewalld_zone]['icmp_blocks'] | difference(firewalld_state_['firewalld']['permanent_zones'][firewalld_zone]['icmp_blocks']) }}"
 
 # - name: add interfaces
 #   firewall_cmd_zone:
@@ -46,7 +46,7 @@
 #       name: "{{firewalld_zone}}"
 #       interface: "{{item}}"
 #       state: absent
-#   with_items: "{{ firewalld_zone_configs[firewalld_zone]['interfaces'] | difference(firewalld_state['firewalld']['permanent_zones'][firewalld_zone]['interfaces']) }}"
+#   with_items: "{{ firewalld_zone_configs[firewalld_zone]['interfaces'] | difference(firewalld_state_['firewalld']['permanent_zones'][firewalld_zone]['interfaces']) }}"
 
 - name: set masquerade
   firewall_cmd_zone:
@@ -65,7 +65,7 @@
       name: "{{firewalld_zone}}"
       port: "{{item}}"
       state: absent
-  with_items: "{{ firewalld_zone_configs[firewalld_zone]['ports'] | difference(firewalld_state['firewalld']['permanent_zones'][firewalld_zone]['ports']) }}"
+  with_items: "{{ firewalld_zone_configs[firewalld_zone]['ports'] | difference(firewalld_state_['firewalld']['permanent_zones'][firewalld_zone]['ports']) }}"
 
 - name: add protocols
   firewall_cmd_zone:
@@ -79,7 +79,7 @@
       name: "{{firewalld_zone}}"
       protocol: "{{item}}"
       state: absent
-  with_items: "{{ firewalld_zone_configs[firewalld_zone]['protocols'] | difference(firewalld_state['firewalld']['permanent_zones'][firewalld_zone]['protocols']) }}"
+  with_items: "{{ firewalld_zone_configs[firewalld_zone]['protocols'] | difference(firewalld_state_['firewalld']['permanent_zones'][firewalld_zone]['protocols']) }}"
 
 - name: add rich_rules
   firewall_cmd_zone:
@@ -93,7 +93,7 @@
       name: "{{firewalld_zone}}"
       rich_rule: "{{item}}"
       state: absent
-  with_items: "{{ firewalld_zone_configs[firewalld_zone]['rich_rules'] | difference(firewalld_state['firewalld']['permanent_zones'][firewalld_zone]['rich_rules']) }}"
+  with_items: "{{ firewalld_zone_configs[firewalld_zone]['rich_rules'] | difference(firewalld_state_['firewalld']['permanent_zones'][firewalld_zone]['rich_rules']) }}"
 
 - name: add services
   firewall_cmd_zone:
@@ -107,7 +107,7 @@
       name: "{{firewalld_zone}}"
       service: "{{item}}"
       state: absent
-  with_items: "{{ firewalld_zone_configs[firewalld_zone]['services'] | difference(firewalld_state['firewalld']['permanent_zones'][firewalld_zone]['services']) }}"
+  with_items: "{{ firewalld_zone_configs[firewalld_zone]['services'] | difference(firewalld_state_['firewalld']['permanent_zones'][firewalld_zone]['services']) }}"
 
 - name: add source_ports
   firewall_cmd_zone:
@@ -121,7 +121,7 @@
       name: "{{firewalld_zone}}"
       source_port: "{{item}}"
       state: absent
-  with_items: "{{ firewalld_zone_configs[firewalld_zone]['source_ports'] | difference(firewalld_state['firewalld']['permanent_zones'][firewalld_zone]['source_ports']) }}"
+  with_items: "{{ firewalld_zone_configs[firewalld_zone]['source_ports'] | difference(firewalld_state_['firewalld']['permanent_zones'][firewalld_zone]['source_ports']) }}"
 
 - name: add sources
   firewall_cmd_zone:
@@ -135,7 +135,7 @@
       name: "{{firewalld_zone}}"
       source: "{{item}}"
       state: absent
-  with_items: "{{ firewalld_zone_configs[firewalld_zone]['sources'] | difference(firewalld_state['firewalld']['permanent_zones'][firewalld_zone]['sources']) }}"
+  with_items: "{{ firewalld_zone_configs[firewalld_zone]['sources'] | difference(firewalld_state_['firewalld']['permanent_zones'][firewalld_zone]['sources']) }}"
 
 - name: set target
   firewall_cmd_zone:
