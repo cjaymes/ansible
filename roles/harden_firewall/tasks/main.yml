@@ -1,0 +1,16 @@
+- name: firewalld is installed
+  yum:
+      name: firewalld
+      state: present
+
+- name: firewalld is running
+  service:
+      name: firewalld.service
+      enabled: yes
+      state: running
+
+- name: zones
+  firewall_cmd:
+      name: "{{item}}"
+      state: exists
+  with: "{{ firewalld_zone_names }}"
