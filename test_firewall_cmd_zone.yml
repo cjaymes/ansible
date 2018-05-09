@@ -19,86 +19,86 @@
       firewall_cmd:
         state: reload
 
-    - name: set zone description; permanent is implied
-      firewall_cmd_zone:
-        name: test
-        description: Long description of a zone for testing
-      when: firewalld_version['firewalld']['version'] is version('0.4.3.2', '>')
-
-    - name: set zone short description; permanent is implied
-      firewall_cmd_zone:
-        name: test
-        short: Zone for testing
-      when: firewalld_version['firewalld']['version'] is version('0.4.3.2', '>')
-
-    - name: set zone target; permanent is implied
-      firewall_cmd_zone:
-        name: test
-        target: ACCEPT
-
-    # - name: add an interface to a zone
+    # - name: set zone description; permanent is implied
     #   firewall_cmd_zone:
     #     name: test
-    #     interface: eth0
+    #     description: Long description of a zone for testing
+    #   when: firewalld_version['firewalld']['version'] is version('0.4.3.2', '>')
+    #
+    # - name: set zone short description; permanent is implied
+    #   firewall_cmd_zone:
+    #     name: test
+    #     short: Zone for testing
+    #   when: firewalld_version['firewalld']['version'] is version('0.4.3.2', '>')
+    #
+    # - name: set zone target; permanent is implied
+    #   firewall_cmd_zone:
+    #     name: test
+    #     target: ACCEPT
+    #
+    # # - name: add an interface to a zone
+    # #   firewall_cmd_zone:
+    # #     name: test
+    # #     interface: eth0
+    # #     state: present
+    #
+    # - name: set zone icmp block inversion
+    #   firewall_cmd_zone:
+    #     name: test
+    #     icmp_block_inversion: true
+    #
+    # - name: add a source to a zone
+    #   firewall_cmd_zone:
+    #     name: test
+    #     source: 192.168.0.0/16
     #     state: present
-
-    - name: set zone icmp block inversion
-      firewall_cmd_zone:
-        name: test
-        icmp_block_inversion: true
-
-    - name: add a source to a zone
-      firewall_cmd_zone:
-        name: test
-        source: 192.168.0.0/16
-        state: present
-
-    - name: add a service to a zone
-      firewall_cmd_zone:
-        name: test
-        service: ssh
-        state: present
-
-    - name: add a port to a zone
-      firewall_cmd_zone:
-        name: test
-        port: 22/tcp
-        state: present
-
-    - name: add a protocol to a zone
-      firewall_cmd_zone:
-        name: test
-        protocol: gre
-        state: present
-
-    - name: set zone masquerading
-      firewall_cmd_zone:
-        name: test
-        masquerade: true
-
-    - name: add a forward-port to a zone
-      firewall_cmd_zone:
-        name: test
-        forward_port: port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42
-        state: present
-
-    - name: add a source-port to a zone
-      firewall_cmd_zone:
-        name: test
-        source_port: 68/udp
-        state: present
-
-    - name: add an icmp-block to a zone
-      firewall_cmd_zone:
-        name: test
-        icmp_block: echo-request
-        state: present
-
-    - name: add a rich rule to a zone
-      firewall_cmd_zone:
-        name: test
-        rich_rule: rule protocol value="ah" accept
-        state: present
+    #
+    # - name: add a service to a zone
+    #   firewall_cmd_zone:
+    #     name: test
+    #     service: ssh
+    #     state: present
+    #
+    # - name: add a port to a zone
+    #   firewall_cmd_zone:
+    #     name: test
+    #     port: 22/tcp
+    #     state: present
+    #
+    # - name: add a protocol to a zone
+    #   firewall_cmd_zone:
+    #     name: test
+    #     protocol: gre
+    #     state: present
+    #
+    # - name: set zone masquerading
+    #   firewall_cmd_zone:
+    #     name: test
+    #     masquerade: true
+    #
+    # - name: add a forward-port to a zone
+    #   firewall_cmd_zone:
+    #     name: test
+    #     forward_port: port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42
+    #     state: present
+    #
+    # - name: add a source-port to a zone
+    #   firewall_cmd_zone:
+    #     name: test
+    #     source_port: 68/udp
+    #     state: present
+    #
+    # - name: add an icmp-block to a zone
+    #   firewall_cmd_zone:
+    #     name: test
+    #     icmp_block: echo-request
+    #     state: present
+    #
+    # - name: add a rich rule to a zone
+    #   firewall_cmd_zone:
+    #     name: test
+    #     rich_rule: rule protocol value="ah" accept
+    #     state: present
 
 
     ### Refresh

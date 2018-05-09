@@ -1,6 +1,11 @@
 - name: test firewall_cmd module
   hosts: stig-rhel7
   tasks:
+    - name: get firewall version
+      firewall_cmd:
+          state: get_version
+      register: firewalld_version
+
     - name: reload permanent configuration into runtime
       firewall_cmd:
         state: reload
@@ -12,11 +17,6 @@
     - name: set zone as default
       firewall_cmd:
         default_zone: work
-
-    - name: get firewall version
-      firewall_cmd:
-          state: get_version
-      register: firewalld_version
 
     - name: get firewall configuration
       firewall_cmd:
