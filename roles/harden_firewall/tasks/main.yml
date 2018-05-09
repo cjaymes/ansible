@@ -12,5 +12,5 @@
 - name: zones
   firewall_cmd_zone:
       name: "{{item}}"
-      state: exists
+      state: present
   with_items: "{{ firewalld_zone_names }}"
