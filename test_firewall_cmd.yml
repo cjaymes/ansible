@@ -13,6 +13,11 @@
       firewall_cmd:
         default_zone: work
 
+    - name: get firewall version
+      firewall_cmd:
+          state: get_version
+      register: firewalld_version
+
     - name: get firewall configuration
       firewall_cmd:
           state: get
@@ -54,7 +59,7 @@
     - name: set automatic_helpers to default
       firewall_cmd:
         automatic_helpers: system
-      when: firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
+      when: firewalld_version['firewalld']['version'] is version('0.4.3.2', '>')
 
     - name: get firewall configuration
       firewall_cmd:
@@ -65,5 +70,5 @@
     - fail:
         msg: "default zone"
       when:
-          - firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
+          - firewalld_version['firewalld']['version'] is version('0.4.3.2', '>')
           - firewalld_config['firewalld']['automatic_helpers'] != 'system'

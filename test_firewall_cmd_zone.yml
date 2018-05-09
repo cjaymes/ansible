@@ -2,12 +2,10 @@
   hosts: stig-rhel7
   tasks:
 
-    - name: get firewall configuration
+    - name: get firewall version
       firewall_cmd:
-          state: get
-      register: firewalld_config
-    # - debug:
-    #     msg: '{{firewalld_config}}'
+          state: get_version
+      register: firewalld_version
 
 
     ### Positives
@@ -25,13 +23,13 @@
       firewall_cmd_zone:
         name: test
         description: Long description of a zone for testing
-      when: firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
+      when: firewalld_version['firewalld']['version'] is version('0.4.3.2', '>')
 
     - name: set zone short description; permanent is implied
       firewall_cmd_zone:
         name: test
         short: Zone for testing
-      when: firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
+      when: firewalld_version['firewalld']['version'] is version('0.4.3.2', '>')
 
     - name: set zone target; permanent is implied
       firewall_cmd_zone:
@@ -123,13 +121,13 @@
     - fail:
         msg: "description is set"
       when:
-          - firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
+          - firewalld_version['firewalld']['version'] is version('0.4.3.2', '>')
           - firewalld_config['firewalld']['permanent_zones']['test']['description'] != 'Long description of a zone for testing'
 
     - fail:
         msg: "short is set"
       when:
-          - firewalld_config['firewalld']['version'] is version('0.4.3.2', '>')
+          - firewalld_version['firewalld']['version'] is version('0.4.3.2', '>')
           - firewalld_config['firewalld']['permanent_zones']['test']['short'] != 'Zone for testing'
 
     - fail:
