@@ -41,7 +41,8 @@
 - name: config zones
   include_tasks: zone.yml
   vars:
-      firewalld_zone: "{{item}}"
       firewalld_state_: "{{ firewalld_state }}"
   with_items:
       - "{{ firewalld_zone_names }}"
+  loop_control:
+    loop_var: firewalld_zone
