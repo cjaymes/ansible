@@ -10,7 +10,7 @@
       state: started
 
 - name: zones
-  firewall_cmd:
+  firewall_cmd_zone:
       name: "{{item}}"
       state: exists
   with_items: "{{ firewalld_zone_names }}"
