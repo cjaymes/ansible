@@ -138,22 +138,22 @@
     - fail:
         msg: "source added"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['source'] is not_containing('192.168.0.0/16')
+          - firewalld_config['firewalld']['permanent_zones']['test']['sources'] is not_containing('192.168.0.0/16')
 
     - fail:
         msg: "service added"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['service'] is not_containing('ssh')
+          - firewalld_config['firewalld']['permanent_zones']['test']['services'] is not_containing('ssh')
 
     - fail:
         msg: "port added"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['port'] is not_containing('22/tcp')
+          - firewalld_config['firewalld']['permanent_zones']['test']['ports'] is not_containing('22/tcp')
 
     - fail:
         msg: "protocol added"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['protocol'] is not_containing('gre')
+          - firewalld_config['firewalld']['permanent_zones']['test']['protocols'] is not_containing('gre')
 
     - fail:
         msg: "masquerade true"
@@ -163,22 +163,22 @@
     - fail:
         msg: "forward-port added"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['forward_port'] is not_containing('port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42')
+          - firewalld_config['firewalld']['permanent_zones']['test']['forward_ports'] is not_containing('port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42')
 
     - fail:
         msg: "source-port added"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['source_port'] is not_containing('68/udp')
+          - firewalld_config['firewalld']['permanent_zones']['test']['source_ports'] is not_containing('68/udp')
 
     - fail:
         msg: "icmp block added"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['icmp_block'] is not_containing('echo-request')
+          - firewalld_config['firewalld']['permanent_zones']['test']['icmp_blocks'] is not_containing('echo-request')
 
     - fail:
         msg: "rich rule added"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['rich_rule'] is not_containing('rule protocol value="ah" accept')
+          - firewalld_config['firewalld']['permanent_zones']['test']['rich_rules'] is not_containing('rule protocol value="ah" accept')
 
     ### Negatives
 
@@ -279,22 +279,22 @@
     - fail:
         msg: "source removed"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['source'] is containing('192.168.0.0/16')
+          - firewalld_config['firewalld']['permanent_zones']['test']['sources'] is containing('192.168.0.0/16')
 
     - fail:
         msg: "service removed"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['service'] is containing('ssh')
+          - firewalld_config['firewalld']['permanent_zones']['test']['services'] is containing('ssh')
 
     - fail:
         msg: "port removed"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['port'] is containing('22/tcp')
+          - firewalld_config['firewalld']['permanent_zones']['test']['ports'] is containing('22/tcp')
 
     - fail:
         msg: "protocol removed"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['protocol'] is containing('gre')
+          - firewalld_config['firewalld']['permanent_zones']['test']['protocols'] is containing('gre')
 
     - fail:
         msg: "masquerade false"
@@ -304,22 +304,22 @@
     - fail:
         msg: "forward-port removed"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['forward_port'] is containing('port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42')
+          - firewalld_config['firewalld']['permanent_zones']['test']['forward_ports'] is containing('port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42')
 
     - fail:
         msg: "source-port removed"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['source_port'] is containing('68/udp')
+          - firewalld_config['firewalld']['permanent_zones']['test']['source_ports'] is containing('68/udp')
 
     - fail:
         msg: "icmp block removed"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['icmp_block'] is containing('echo-request')
+          - firewalld_config['firewalld']['permanent_zones']['test']['icmp_blocks'] is containing('echo-request')
 
     - fail:
         msg: "rich rule removed"
       when:
-          - firewalld_config['firewalld']['permanent_zones']['test']['rich_rule'] is containing('rule protocol value="ah" accept')
+          - firewalld_config['firewalld']['permanent_zones']['test']['rich_rules'] is containing('rule protocol value="ah" accept')
 
     ### Delete
 
