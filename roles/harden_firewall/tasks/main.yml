@@ -21,14 +21,21 @@
   firewall_cmd_zone:
       name: "{{item}}"
       state: present
-  with_items: "{{ firewalld_zone_names }}"
+  with_items: "{{ firewalld_zone_configs.keys() }}"
 
 - name: remove extra zones
   firewall_cmd_zone:
       name: "{{item}}"
       state: absent
-  with_items: "{{ firewalld_state['firewalld']['permanent_zones'].keys() | difference(firewalld_zone_names) }}"
+  with_items: "{{ firewalld_state['firewalld']['permanent_zones'].keys() | difference(firewalld_zone_configs.keys()) }}"
 
 - name: reload firewall from permanent
   firewall_cmd:
       state: reload
+
+- name: config zones
+  include_tasks: zone.yml
+    vars:
+        firewalld_zone: "{{item}}"
+  with_items:
+      - "{{ firewalld_zone_names }}"

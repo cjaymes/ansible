@@ -1,0 +1,19 @@
+- name: set forward_ports
+  firewall_cmd_zone:
+      name: "{{firewalld_zone}}"
+      forward_port: "{{item}}"
+      state: present
+  with_items: "{{firewalld_zone_configs[firewalld_zone]['forward_ports']}}"
+# icmp_block_inversion: false,
+# icmp_blocks: [],
+# interfaces: [],
+# masquerade: false,
+# name: 'block',
+# permanent: true,
+# ports: [],
+# protocols: [],
+# rich_rules: [],
+# services: [],
+# source_ports: [],
+# sources: [],
+# target: 'REJECT',
