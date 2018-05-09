@@ -1,4 +1,4 @@
-- name: test firewall_cmd_direct module
+- name: test firewall_cmd_zone module
   hosts: stig-rhel7
   tasks:
 
