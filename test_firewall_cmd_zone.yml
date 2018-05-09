@@ -328,6 +328,10 @@
         name: test
         state: absent
 
+    - name: reload permanent configuration into runtime (necessary after zone deletion)
+      firewall_cmd:
+        state: reload
+
     ### Refresh
 
     - name: refresh firewall configuration
@@ -343,7 +347,3 @@
         msg: "deleted zone"
       when:
           - firewalld_config['firewalld']['permanent_zones'] is containing('test')
-
-    - name: reload permanent configuration into runtime (necessary after zone deletion)
-      firewall_cmd:
-        state: reload
