@@ -37,5 +37,6 @@
   include_tasks: zone.yml
   vars:
       firewalld_zone: "{{item}}"
+      firewalld_state: "{{firewalld_state}}"
   with_items:
       - "{{ firewalld_zone_names }}"
