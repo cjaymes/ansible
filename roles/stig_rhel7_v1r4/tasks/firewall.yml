@@ -79,7 +79,7 @@
     - "'v_72219' in stig_rhel7_v1r4_checks"
     - firewalld_state['firewalld']['installed']
     - firewalld_state['firewalld']['running']
-    - firewalld_state['firewalld']['default_zone'] == firewalld_default_zone
+    - firewalld_state['firewalld']['default_zone'] != firewalld_default_zone
 
 # compare zone config vs expectation
 - name: fail stig_rhel7_v1r4 v_72219 zone config
@@ -89,7 +89,7 @@
     - "'v_72219' in stig_rhel7_v1r4_checks"
     - firewalld_state['firewalld']['installed']
     - firewalld_state['firewalld']['running']
-    - firewalld_state['firewalld']['permanent_zones'] == firewalld_zone_configs
+    - firewalld_state['firewalld']['permanent_zones'] != firewalld_zone_configs
 
 # TODO compare ipset config vs expectation
 # TODO compare icmptypes config vs expectation
