@@ -236,7 +236,7 @@ firewalld_direct_rules: [
     {
         family: 'ipv4',
         table: 'filter',
-        chain: 'IN_public_allow',
+        chain: 'IN_{{firewalld_default_zone}}_allow',
         priority: 0,
         rule: '-p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT',
     },
