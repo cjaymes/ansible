@@ -49,9 +49,6 @@ filesystems_types_pseudo:
     - hugetlbfs
     - systemd-1
 
-firewalld_ipsets: []
-firewalld_icmptypes: []
-firewalld_services: []
 firewalld_default_zone: public
 firewalld_zone_names: [
     'block',
@@ -235,9 +232,13 @@ firewalld_direct_rules: [
         network: 'ipv4',
         table: 'filter',
         chain: 'IN_public_allow',
+        priority: 0,
         rule: '-p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT',
     },
 ]
+firewalld_ipsets: []
+firewalld_icmptypes: []
+firewalld_services: []
 firewalld_passthroughs: []
 firewalld_lockdown_mode: yes
 firewalld_lockdown_whitelist_contexts: [
