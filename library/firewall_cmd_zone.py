@@ -626,8 +626,8 @@ def main():
     if module.params['interface'] is not None and set_zone_list_option(
         module,
         '--query-interface',
-        '--add-interface',
-        '--remove-interface',
+        '--change-interface',
+        '--change-interface',
         module.params['interface']
     ):
         result['changed'] = True
