@@ -75,3 +75,19 @@
 # TODO firewalld_services
 # TODO firewalld_passthroughs
 # TODO firewalld_lockdown_mode
+
+- name: template /etc/hosts.allow
+  template:
+      src: files/etc/hosts.allow.j2
+      dest: /etc/hosts.allow
+      mode: 0644
+      owner: root
+      group: root
+
+- name: template /etc/hosts.deny
+  template:
+      src: files/etc/hosts.deny.j2
+      dest: /etc/hosts.deny
+      mode: 0644
+      owner: root
+      group: root

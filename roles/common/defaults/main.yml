@@ -1,14 +1,4 @@
-aide_conf_sha1: a0c76a14d918a55fe059ff9592e708fe62b75aca
-aide_frequency: daily
-aide_notification_email: root
-
-auditing_email: root
-auditing_aggregation_server:
-auditing_network_failure_action: syslog
-auditing_disk_full_action: syslog
-auditing_log_file_default: /var/log/audit/audit.log
-
-dhcp_required: True
+### Constants; probably shouldn't be overriden
 
 filesystems_types_local:
     - btrfs
@@ -48,6 +38,21 @@ filesystems_types_pseudo:
     - mqueue
     - hugetlbfs
     - systemd-1
+
+
+### Variables; could be overriden depending on environment
+
+subnets_local: 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16
+
+aide_conf_sha1: a0c76a14d918a55fe059ff9592e708fe62b75aca
+aide_frequency: daily
+aide_notification_email: root
+
+auditing_email: root
+auditing_aggregation_server:
+auditing_network_failure_action: syslog
+auditing_disk_full_action: syslog
+auditing_log_file_default: /var/log/audit/audit.log
 
 firewalld_default_zone: public
 firewalld_zone_names: [
@@ -253,15 +258,4 @@ firewalld_lockdown_whitelist_commands: [
     '/usr/bin/python -Es /usr/bin/firewall-config',
 ]
 
-
-nfs_required: False
-
 ntp_server: localhost
-
-samba_required: False
-
-snmpd_required: True
-
-tftpd_required: False
-
-vsftpd_required: True
