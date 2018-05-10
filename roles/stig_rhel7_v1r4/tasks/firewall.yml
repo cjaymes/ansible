@@ -91,9 +91,11 @@
     - firewalld_state['firewalld']['running']
     - firewalld_state['firewalld']['permanent_zones'] != firewalld_zone_configs
 
-# TODO compare ipset config vs expectation
-# TODO compare icmptypes config vs expectation
-# TODO compare services config vs expectation
+# TODO firewalld_ipsets
+# TODO firewalld_icmptypes
+# TODO firewalld_services
+# TODO firewalld_passthroughs
+# TODO firewalld_lockdown_mode
 
 - name: pass stig_rhel7_v1r4 v_72219
   set_fact:
@@ -234,12 +236,20 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-# - name: fail stig_rhel7_v1r4 v_72273
-#   set_fact:
-#     stig_rhel7_v1r4_v_72273_result: 'fail'
-#   when:
-#     - "'v_72273' in stig_rhel7_v1r4_checks"
-#     - stig_rhel7_v1r4_v_72273_result != 'pass'
+- name: fail stig_rhel7_v1r4 v_72273 installed & running
+  set_fact:
+    stig_rhel7_v1r4_v_72273_result: 'fail'
+  when:
+    - "'v_72273' in stig_rhel7_v1r4_checks"
+    - firewalld_state['firewalld']['installed']
+    - firewalld_state['firewalld']['running']
+
+- name: pass stig_rhel7_v1r4 v_72273
+  set_fact:
+    stig_rhel7_v1r4_v_72273_result: 'pass'
+  when:
+    - "'v_72273' in stig_rhel7_v1r4_checks"
+    - stig_rhel7_v1r4_v_72273_result != 'fail'
 
 
 # Vuln ID: V-72315
