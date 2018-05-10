@@ -63,7 +63,7 @@
       chain: "{{item.chain}}"
       priority: "{{item.priority}}"
       rule: "{{item.rule}}"
-      state: present
+      state: absent
   with_items: "{{ firewalld_state['firewalld']['permanent_direct_rules'] | difference(firewalld_direct_rules) }}"
 
 - name: reload firewall from permanent

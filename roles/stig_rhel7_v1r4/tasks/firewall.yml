@@ -160,7 +160,7 @@
     - "'v_72271' in stig_rhel7_v1r4_checks"
     - firewalld_state['firewalld']['installed']
     - firewalld_state['firewalld']['running']
-    - firewalld_state['firewalld']['permanent_direct_rules'] == firewalld_direct_rules
+    - firewalld_state['firewalld']['permanent_direct_rules'] != firewalld_direct_rules
 
 - name: pass stig_rhel7_v1r4 v_72271
   set_fact:
