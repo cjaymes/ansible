@@ -1,5 +1,21 @@
-- debug:
-    msg: "Setting {{firewalld_zone}} with {{firewalld_zone_configs[firewalld_zone]}}"
+# - debug:
+#     msg: "Setting {{firewalld_zone}} with {{firewalld_zone_configs[firewalld_zone]}}"
+
+- name: set zone description
+  firewall_cmd_zone:
+    name: "{{firewalld_zone}}"
+    description: "{{firewalld_zone_configs[firewalld_zone]['description']}}"
+  when:
+      - firewalld_state_['firewalld']['version'] is version('0.4.3.2', '>')
+      - firewalld_zone_configs[firewalld_zone] is containing('description')
+
+- name: set zone short description
+  firewall_cmd_zone:
+    name: "{{firewalld_zone}}"
+    short: "{{firewalld_zone_configs[firewalld_zone]['short']}}"
+  when:
+      - firewalld_state_['firewalld']['version'] is version('0.4.3.2', '>')
+      - firewalld_zone_configs[firewalld_zone] is containing('short')
 
 - name: add forward_ports
   firewall_cmd_zone:
