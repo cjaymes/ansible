@@ -627,7 +627,7 @@ def main():
         module,
         '--query-interface',
         '--change-interface',
-        '--change-interface',
+        '--remove-interface',
         module.params['interface']
     ):
         result['changed'] = True
