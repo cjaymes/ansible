@@ -48,7 +48,7 @@
 
 - name: add direct rules
   firewall_cmd_direct:
-      network: "{{item.network}}"
+      family: "{{item.family}}"
       table: "{{item.table}}"
       chain: "{{item.chain}}"
       priority: "{{item.priority}}"
@@ -58,7 +58,7 @@
 
 - name: remove direct rules
   firewall_cmd_direct:
-      network: "{{item.network}}"
+      family: "{{item.family}}"
       table: "{{item.table}}"
       chain: "{{item.chain}}"
       priority: "{{item.priority}}"

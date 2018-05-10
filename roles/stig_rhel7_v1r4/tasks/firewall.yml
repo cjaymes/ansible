@@ -236,20 +236,20 @@
 # NIST SP 800-53 Revision 4 :: CM-6 b
 #
 #
-- name: fail stig_rhel7_v1r4 v_72273 installed & running
+- name: pass stig_rhel7_v1r4 v_72273 installed & running
   set_fact:
-    stig_rhel7_v1r4_v_72273_result: 'fail'
+    stig_rhel7_v1r4_v_72273_result: 'pass'
   when:
     - "'v_72273' in stig_rhel7_v1r4_checks"
     - firewalld_state['firewalld']['installed']
     - firewalld_state['firewalld']['running']
 
-- name: pass stig_rhel7_v1r4 v_72273
+- name: fail stig_rhel7_v1r4 v_72273
   set_fact:
-    stig_rhel7_v1r4_v_72273_result: 'pass'
+    stig_rhel7_v1r4_v_72273_result: 'fail'
   when:
     - "'v_72273' in stig_rhel7_v1r4_checks"
-    - stig_rhel7_v1r4_v_72273_result != 'fail'
+    - stig_rhel7_v1r4_v_72273_result != 'pass'
 
 
 # Vuln ID: V-72315

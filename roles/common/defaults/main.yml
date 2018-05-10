@@ -229,7 +229,7 @@ firewalld_zone_configs: {
 }
 firewalld_direct_rules: [
     {
-        network: 'ipv4',
+        family: 'ipv4',
         table: 'filter',
         chain: 'IN_public_allow',
         priority: 0,

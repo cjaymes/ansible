@@ -33,9 +33,9 @@ options:
             - enabled
             - disabled
         type: str
-    network:
+    family:
         description:
-            - The network firewall tables to modify
+            - The network firewall family to modify
         choices:
             - ipv4
             - ipv6
@@ -61,33 +61,33 @@ options:
         default: 0
     rule:
         description:
-            - Adds or removes a rule within the specified network, table and chain.
-            - Requires the state, network (defaults to ipv4), table and chain options
+            - Adds or removes a rule within the specified family, table and chain.
+            - Requires the state, family (defaults to ipv4), table and chain options
         type: str
     passthrough:
         description:
             - Adds or removes a passthrough within the specified table.
-            - Requires the state and network (defaults to ipv4) options
+            - Requires the state and family (defaults to ipv4) options
         type: str
 '''
 
 EXAMPLES = '''
     - name: add a direct chain
       firewall_cmd_direct:
-        network: ipv4
+        family: ipv4
         table: filter
         chain: IN_test_allow
         state: present
     - name: remove a direct chain
       firewall_cmd_direct:
-        network: ipv4
+        family: ipv4
         table: filter
         chain: IN_test_allow
         state: absent
 
     - name: add a direct rule
       firewall_cmd_direct:
-        network: ipv4
+        family: ipv4
         table: filter
         chain: IN_test_allow
         priority: 0
@@ -95,7 +95,7 @@ EXAMPLES = '''
         state: present
     - name: remove a direct rule
       firewall_cmd_direct:
-        network: ipv4
+        family: ipv4
         table: filter
         chain: IN_test_allow
         priority: 0
@@ -104,12 +104,12 @@ EXAMPLES = '''
 
     - name: add a direct passthrough
       firewall_cmd_direct:
-        network: ipv4
+        family: ipv4
         passthrough: -A IN_test_allow -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
         state: present
     - name: remove a direct passthrough
       firewall_cmd_direct:
-        network: ipv4
+        family: ipv4
         passthrough: -A IN_test_allow -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
         state: absent
 '''
@@ -172,7 +172,7 @@ def main():
         argument_spec=dict(
             permanent=dict(type='bool', default=True),
             state=dict(type='str', choices=['present', 'absent', 'enabled', 'disabled']),
-            network=dict(type='str', choices=['ipv4', 'ipv6', 'eb'], default='ipv4'),
+            family=dict(type='str', choices=['ipv4', 'ipv6', 'eb'], default='ipv4'),
             table=dict(type='str'),
             chain=dict(type='str'),
             priority=dict(type='int', default=0),
@@ -192,7 +192,7 @@ def main():
     if module.params['rule'] is not None:
         if module.params['state'] is None:
             module.fail_json(msg='The state option is required with the rule option')
-        # NOTE: network is alwasy defined
+        # NOTE: family is always defined; default or explicit
         if module.params['table'] is None:
             module.fail_json(msg='The table option is required with the rule option')
         if module.params['chain'] is None:
@@ -200,7 +200,7 @@ def main():
         # NOTE: priority is always defined
 
         options = ' '.join((
-            module.params['network'],
+            module.params['family'],
             module.params['table'],
             module.params['chain'],
             str(module.params['priority']),
@@ -220,12 +220,12 @@ def main():
     if module.params['chain'] is not None:
         if module.params['state'] is None:
             module.fail_json(msg='The state option is required with the chain option')
-        # NOTE: network is alwasy defined
+        # NOTE: family is always defined; default or explicit
         if module.params['table'] is None:
             module.fail_json(msg='The table option is required with the chain option')
 
         options = ' '.join((
-            module.params['network'],
+            module.params['family'],
             module.params['table'],
             module.params['chain'],
         ))
@@ -242,10 +242,10 @@ def main():
     if module.params['passthrough'] is not None:
         if module.params['state'] is None:
             module.fail_json(msg='The state option is required with the passthrough option')
-        # NOTE: network is alwasy defined
+        # NOTE: family is always defined; default or explicit
 
         options = ' '.join((
-            module.params['network'],
+            module.params['family'],
             module.params['passthrough'],
         ))
         if set_list_option(
