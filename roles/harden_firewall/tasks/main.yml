@@ -46,9 +46,6 @@
   loop_control:
     loop_var: firewalld_zone
 
-- wait_for:
-    timeout: 3
-
 # - name: reload firewall from permanent
 #   firewall_cmd:
 #       state: reload
@@ -76,12 +73,9 @@
       state: absent
   with_items: "{{ firewalld_state['firewalld']['permanent_direct_rules'] | difference(firewalld_direct_rules) }}"
 
-- wait_for:
-    timeout: 3
-
 - name: reload firewall from permanent
   firewall_cmd:
-      state: reload
+      state: complete-reload
 
 # TODO firewalld_ipsets
 # TODO firewalld_icmptypes
