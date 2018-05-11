@@ -77,6 +77,9 @@
   firewall_cmd:
       state: complete-reload
 
+- name: wait for connection to come back
+    wait_for_connection:
+
 # TODO firewalld_ipsets
 # TODO firewalld_icmptypes
 # TODO firewalld_services
