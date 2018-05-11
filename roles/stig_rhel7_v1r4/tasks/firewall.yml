@@ -65,20 +65,27 @@
 #
 #
 
+- name: fail stig_rhel7_v1r4 v_72219 not installed
+  set_fact:
+    stig_rhel7_v1r4_v_72219_result: 'fail'
+  when:
+    - "'v_72219' in stig_rhel7_v1r4_checks"
+    - not firewalld_state['firewalld']['installed']
+
 - name: fail stig_rhel7_v1r4 v_72219 not running
   set_fact:
     stig_rhel7_v1r4_v_72219_result: 'fail'
   when:
     - "'v_72219' in stig_rhel7_v1r4_checks"
-    - not firewalld_state['firewalld']['installed'] or not firewalld_state['firewalld']['running']
+    - stig_rhel7_v1r4_v_72219_result != 'fail'
+    - not firewalld_state['firewalld']['running']
 
 - name: fail stig_rhel7_v1r4 v_72219 default zone
   set_fact:
     stig_rhel7_v1r4_v_72219_result: 'fail'
   when:
     - "'v_72219' in stig_rhel7_v1r4_checks"
-    - firewalld_state['firewalld']['installed']
-    - firewalld_state['firewalld']['running']
+    - stig_rhel7_v1r4_v_72219_result != 'fail'
     - firewalld_state['firewalld']['default_zone'] != firewalld_default_zone
 
 - name: fail stig_rhel7_v1r4 v_72219 zones
@@ -86,8 +93,7 @@
     stig_rhel7_v1r4_v_72219_result: 'fail'
   when:
     - "'v_72219' in stig_rhel7_v1r4_checks"
-    - firewalld_state['firewalld']['installed']
-    - firewalld_state['firewalld']['running']
+    - stig_rhel7_v1r4_v_72219_result != 'fail'
     - firewalld_state['firewalld']['permanent_zones'].keys() != firewalld_zone_configs.keys()
 
 # compare zone config vs expectation
@@ -97,8 +103,6 @@
   when:
     - "'v_72219' in stig_rhel7_v1r4_checks"
     - stig_rhel7_v1r4_v_72219_result != 'fail'
-    - firewalld_state['firewalld']['installed']
-    - firewalld_state['firewalld']['running']
     - firewalld_state['firewalld']['permanent_zones'][item[0]][item[1]] != firewalld_zone_configs[item[0]][item[1]]
   loop: "{{ query('nested', firewalld_zone_configs.keys(), firewalld_zone_compare_keys) }}"
 
