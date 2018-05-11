@@ -39,6 +39,21 @@ filesystems_types_pseudo:
     - hugetlbfs
     - systemd-1
 
+firewalld_zone_compare_keys: [
+    'forward_ports',
+    'icmp_block_inversion',
+    'icmp_blocks',
+    'interfaces',
+    'masquerade',
+    'ports',
+    'protocols',
+    'rich_rules',
+    'services',
+    'source_ports',
+    'sources',
+    'target',
+]
+
 
 ### Variables; could be overriden depending on environment
 
@@ -64,7 +79,7 @@ firewalld_zone_names: [
     'internal',
     'public',
     'trusted',
-    'work'
+    'work',
 ]
 firewalld_zone_configs: {
     block: {
