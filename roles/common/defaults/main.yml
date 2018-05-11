@@ -240,7 +240,7 @@ firewalld_direct_rules: [
     {
         family: 'ipv4',
         table: 'filter',
-        chain: 'IN_{{firewalld_default_zone}}_allow',
+        chain: 'INPUT',     # STIG says IN_public_allow, but that chain is not created when conf is reloaded
         priority: 0,
         rule: '-p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT',
     },
