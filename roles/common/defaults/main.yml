@@ -126,7 +126,7 @@ firewalld_zone_configs: {
         icmp_block_inversion: false,
         icmp_blocks: [],
         interfaces: [],
-        masquerade: 'yes',
+        masquerade: true,
         name: 'external',
         permanent: true,
         ports: [],
