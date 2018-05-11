@@ -23,12 +23,14 @@ options:
         type: str
     state:
         description:
-            - If the state is reload, the permanent configuration is loaded into runtime.
+            - If the state is reload, reload firewall rules and keep state information. Current permanent configuration will become new runtime configuration, i.e. all runtime only changes done until reload are lost with reload if they have not been also in permanent configuration.
+            - If the state is complete-reload, reload firewall completely, even netfilter kernel modules. This will most likely terminate active connections, because state information is lost. This option should only be used in case of severe firewall problems. For example if there are state information problems that no connection can be established with correct firewall rules.
             - If the state is save, the runtime configuration is saved into permanent.
             - If the state is get, the firewall configuration is returned.
             - If the state is get_version, the firewall version and status is returned.
         choices:
             - reload
+            - complete-reload
             - save
             - get
             - get_version
@@ -117,7 +119,7 @@ def main():
             default_zone=dict(type='str'),
             log_denied=dict(type='str', choices=['all', 'unicast', 'broadcast', 'multicast', 'off']),
             automatic_helpers=dict(type='str', choices=['yes', 'no', 'system']),
-            state=dict(type='str', choices=['save', 'reload', 'get', 'get_version']),
+            state=dict(type='str', choices=['save', 'reload', 'complete-reload', 'get', 'get_version']),
         ),
         supports_check_mode=True
     )
@@ -271,6 +273,14 @@ def main():
     # check for reload
     if module.params['state'] is not None and module.params['state'] == 'reload':
         module.firewall_cmd(['--reload'])
+
+        # TODO figure out if runtime & perm are different
+        module.exit_json(changed=True)
+
+
+    # check for complete-reload
+    if module.params['state'] is not None and module.params['state'] == 'complete-reload':
+        module.firewall_cmd(['--complete-reload'])
 
         # TODO figure out if runtime & perm are different
         module.exit_json(changed=True)
