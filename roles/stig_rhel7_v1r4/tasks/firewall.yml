@@ -81,10 +81,14 @@
     - firewalld_state['firewalld']['running']
     - firewalld_state['firewalld']['default_zone'] != firewalld_default_zone
 
-- name: fail stig_rhel7_v1r4 v_72219 zone config
+- name: fail stig_rhel7_v1r4 v_72219 zones
   set_fact:
     stig_rhel7_v1r4_v_72219_result: 'fail'
-  with_items: "{{ firewalld_state['firewalld']['permanent_zones'].keys() | difference(firewalld_zone_configs.keys()) }}"
+  when:
+    - "'v_72219' in stig_rhel7_v1r4_checks"
+    - firewalld_state['firewalld']['installed']
+    - firewalld_state['firewalld']['running']
+    - firewalld_state['firewalld']['permanent_zones'].keys() != firewalld_zone_configs.keys()
 
 # compare zone config vs expectation
 - name: fail stig_rhel7_v1r4 v_72219 zone config
