@@ -1,5 +1,5 @@
-# - debug:
-#     msg: "Setting {{firewalld_zone}} with {{firewalld_zone_configs[firewalld_zone]}}"
+- debug:
+    msg: "Setting {{firewalld_zone}} with {{firewalld_zone_configs[firewalld_zone]}}"
 
 - name: set zone description
   firewall_cmd_zone:
@@ -60,6 +60,9 @@
   when:
       - firewalld_zone_configs[firewalld_zone] is containing('icmp_blocks')
 
+- debug:
+    msg: "Adding interfaces: {{firewalld_zone_configs[firewalld_zone]['interfaces']}}"
+
 - name: add interfaces
   firewall_cmd_zone:
       name: "{{firewalld_zone}}"
@@ -68,6 +71,9 @@
   with_items: "{{firewalld_zone_configs[firewalld_zone]['interfaces']}}"
   when:
       - firewalld_zone_configs[firewalld_zone] is containing('interfaces')
+
+- debug:
+    msg: "Removing interfaces: {{ firewalld_zone_configs[firewalld_zone]['interfaces'] | difference(firewalld_state_['firewalld']['permanent_zones'][firewalld_zone]['interfaces']) }}"
 
 - name: remove interfaces
   firewall_cmd_zone:
