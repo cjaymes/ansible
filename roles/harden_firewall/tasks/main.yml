@@ -46,26 +46,30 @@
   loop_control:
     loop_var: firewalld_zone
 
-# - name: add direct rules
-#   firewall_cmd_direct:
-#       family: "{{item.family}}"
-#       table: "{{item.table}}"
-#       chain: "{{item.chain}}"
-#       priority: "{{item.priority}}"
-#       rule: "{{item.rule}}"
-#       state: present
-#   with_items: "{{ firewalld_direct_rules }}"
+- name: reload firewall from permanent
+  firewall_cmd:
+      state: reload
 
-# - name: remove direct rules
-#   firewall_cmd_direct:
-#       family: "{{item.family}}"
-#       table: "{{item.table}}"
-#       chain: "{{item.chain}}"
-#       priority: "{{item.priority}}"
-#       rule: "{{item.rule}}"
-#       state: absent
-#   with_items: "{{ firewalld_state['firewalld']['permanent_direct_rules'] | difference(firewalld_direct_rules) }}"
-#
+- name: add direct rules
+  firewall_cmd_direct:
+      family: "{{item.family}}"
+      table: "{{item.table}}"
+      chain: "{{item.chain}}"
+      priority: "{{item.priority}}"
+      rule: "{{item.rule}}"
+      state: present
+  with_items: "{{ firewalld_direct_rules }}"
+
+- name: remove direct rules
+  firewall_cmd_direct:
+      family: "{{item.family}}"
+      table: "{{item.table}}"
+      chain: "{{item.chain}}"
+      priority: "{{item.priority}}"
+      rule: "{{item.rule}}"
+      state: absent
+  with_items: "{{ firewalld_state['firewalld']['permanent_direct_rules'] | difference(firewalld_direct_rules) }}"
+
 - name: reload firewall from permanent
   firewall_cmd:
       state: reload
