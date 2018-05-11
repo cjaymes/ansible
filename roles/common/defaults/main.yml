@@ -236,13 +236,14 @@ firewalld_zone_configs: {
         target: 'default',
     },
 }
+firewalld_direct_chains: []
 firewalld_direct_rules: [
     {
         family: 'ipv4',
         table: 'filter',
-        chain: 'INPUT',     # STIG says IN_public_allow, but that chain is not created when conf is reloaded
+        chain: 'IN_public_allow',
         priority: 0,
-        rule: '-p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT',
+        rule: '-m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT',
     },
 ]
 firewalld_ipsets: []

@@ -46,9 +46,15 @@
   loop_control:
     loop_var: firewalld_zone
 
-- name: reload firewall from permanent
-  firewall_cmd:
-      state: reload
+- wait_for:
+    timeout: 3
+
+# - name: reload firewall from permanent
+#   firewall_cmd:
+#       state: reload
+#
+
+# TODO firewalld_direct_chains
 
 - name: add direct rules
   firewall_cmd_direct:
@@ -69,6 +75,9 @@
       rule: "{{item.rule}}"
       state: absent
   with_items: "{{ firewalld_state['firewalld']['permanent_direct_rules'] | difference(firewalld_direct_rules) }}"
+
+- wait_for:
+    timeout: 3
 
 - name: reload firewall from permanent
   firewall_cmd:
