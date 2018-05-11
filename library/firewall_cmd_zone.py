@@ -289,7 +289,7 @@ from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.firewall_cmd_utils import FirewallCmdAnsibleModule
 
 
-def set_zone_bool_option(module, add_arg, remove_arg, option):
+def set_zone_bool_option(module, query_arg, add_arg, remove_arg, option):
     if module.params['permanent'] is not None and not module.params['permanent']:
         cmd = 'firewall-cmd'
     else:
