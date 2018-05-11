@@ -56,16 +56,16 @@
       state: present
   with_items: "{{ firewalld_direct_rules }}"
 
-- name: remove direct rules
-  firewall_cmd_direct:
-      family: "{{item.family}}"
-      table: "{{item.table}}"
-      chain: "{{item.chain}}"
-      priority: "{{item.priority}}"
-      rule: "{{item.rule}}"
-      state: absent
-  with_items: "{{ firewalld_state['firewalld']['permanent_direct_rules'] | difference(firewalld_direct_rules) }}"
-
+# - name: remove direct rules
+#   firewall_cmd_direct:
+#       family: "{{item.family}}"
+#       table: "{{item.table}}"
+#       chain: "{{item.chain}}"
+#       priority: "{{item.priority}}"
+#       rule: "{{item.rule}}"
+#       state: absent
+#   with_items: "{{ firewalld_state['firewalld']['permanent_direct_rules'] | difference(firewalld_direct_rules) }}"
+#
 - name: reload firewall from permanent
   firewall_cmd:
       state: reload
@@ -76,18 +76,18 @@
 # TODO firewalld_passthroughs
 # TODO firewalld_lockdown_mode
 
-- name: template /etc/hosts.allow
-  template:
-      src: files/etc/hosts.allow.j2
-      dest: /etc/hosts.allow
-      mode: 0644
-      owner: root
-      group: root
-
-- name: template /etc/hosts.deny
-  template:
-      src: files/etc/hosts.deny.j2
-      dest: /etc/hosts.deny
-      mode: 0644
-      owner: root
-      group: root
+# - name: template /etc/hosts.allow
+#   template:
+#       src: files/etc/hosts.allow.j2
+#       dest: /etc/hosts.allow
+#       mode: 0644
+#       owner: root
+#       group: root
+#
+# - name: template /etc/hosts.deny
+#   template:
+#       src: files/etc/hosts.deny.j2
+#       dest: /etc/hosts.deny
+#       mode: 0644
+#       owner: root
+#       group: root
