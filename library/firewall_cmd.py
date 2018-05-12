@@ -93,6 +93,672 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
+firewalld:
+    description: data structure showing the current configuration of firewalld
+    returned: success
+    type: complex
+    contains:
+        default_zone:
+            description: default zone interfaces are placed in if they don't define ZONE in their ifcfg-* file
+            returned: success
+            type: string
+            sample: public
+
+        installed:
+            description: true if the firewalld service is installed
+            returned: success
+            type: bool
+            sample: true
+
+        log_denied:
+            description: current setting of log_denied; see corresponding option
+            returned: success
+            type: str
+            sample: off
+
+        automatic_helpers:
+            description: current setting of automatic_helpers; see corresponding option
+            returned: success
+            type: str
+            sample: off
+
+        permanent_direct_chains:
+            description: direct chains defined in the permanent configuration
+            returned: success
+            type: complex
+            contains:
+                family:
+                    description: family of the chain (ipv4, ipv6, eb)
+                    returned: success
+                    type: str
+                    sample: ipv4
+                table:
+                    description: table of the chain
+                    returned: success
+                    type: str
+                    sample: filter
+                chain:
+                    description: chain name
+                    returned: success
+                    type: str
+                    sample: IN_public_allow
+        permanent_direct_passthroughs:
+            description: direct passthroughs defined in the permanent configuration
+            returned: success
+            type: complex
+            contains:
+                family:
+                family:
+                    description: family of the passthrough (ipv4, ipv6, eb)
+                    returned: success
+                    type: str
+                    sample: ipv4
+                passthrough:
+                    description: passthrough definition
+                    returned: success
+                    type: str
+                    sample: -A IN_test_allow -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
+        permanent_direct_rules:
+            description: direct rules defined in the permanent configuration
+            returned: success
+            type: complex
+            contains:
+                family:
+                    description: family of the chain (ipv4, ipv6, eb)
+                    returned: success
+                    type: str
+                    sample: ipv4
+                table:
+                    description: table of the chain
+                    returned: success
+                    type: str
+                    sample: filter
+                chain:
+                    description: chain name
+                    returned: success
+                    type: str
+                    sample: IN_public_allow
+                priority:
+                    description: priority of the rule
+                    returned: success
+                    type: int
+                    sample: 0
+                rule:
+                    description: rule content
+                    returned: success
+                    type: str
+                    sample: -m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
+        permanent_zones:
+            description: zones defined in the permanent configuration
+            returned: success
+            type: complex
+            contains:
+                forward_ports:
+                    description: current setting of forward_ports; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42']
+                icmp_block_inversion:
+                    description: current setting of icmp_block_inversion; see corresponding option
+                    returned: success
+                    type: bool
+                    sample: false
+                icmp_blocks:
+                    description: current setting of icmp_blocks; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['echo-request']
+                interfaces:
+                    description: current setting of interfaces; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample:
+                masquerade:
+                    description: true if this zone is masquerading
+                    returned: success
+                    type: bool
+                    sample: true
+                name:
+                    description: name of the zone
+                    returned: success
+                    type: str
+                    sample: public
+                permanent:
+                    description: true if this is in the permanent configuration
+                    returned: success
+                    type: list(str)
+                    sample: true
+                ports:
+                    description: current setting of ports; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['22/tcp']
+                protocols:
+                    description: current setting of protocols; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['gre']
+                rich_rules:
+                    description: current setting of rich_rules; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['rule protocol value="ah" accept']
+                services:
+                    description: current setting of services; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['ssh']
+                source_ports:
+                    description: current setting of source_ports; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['68/udp']
+                sources:
+                    description: current setting of sources; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['192.168.0.0/16']
+                target:
+                    description: current setting of target; see corresponding option
+                    returned: success
+                    type: str
+                    sample: REJECT
+
+        running:
+            description: true if the firewalld service is running
+            returned: success
+            type: bool
+            sample: true
+
+        runtime_direct_chains:
+            description: direct chains defined in the runtime configuration
+            returned: success
+            type: complex
+            content:
+                family:
+                    description: family of the chain (ipv4, ipv6, eb)
+                    returned: success
+                    type: str
+                    sample: ipv4
+                table:
+                    description: table of the chain
+                    returned: success
+                    type: str
+                    sample: filter
+                chain:
+                    description: chain name
+                    returned: success
+                    type: str
+                    sample: IN_public_allow
+        runtime_direct_passthroughs:
+            description: direct passthroughs defined in the runtime configuration
+            returned: success
+            type: complex
+            contains:
+                family:
+                family:
+                    description: family of the passthrough (ipv4, ipv6, eb)
+                    returned: success
+                    type: str
+                    sample: ipv4
+                passthrough:
+                    description: passthrough definition
+                    returned: success
+                    type: str
+                    sample: -A IN_test_allow -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
+        runtime_direct_rules:
+            description: direct rules defined in the runtime configuration
+            returned: success
+            type: complex
+            contains:
+                family:
+                    description: family of the chain (ipv4, ipv6, eb)
+                    returned: success
+                    type: str
+                    sample: ipv4
+                table:
+                    description: table of the chain
+                    returned: success
+                    type: str
+                    sample: filter
+                chain:
+                    description: chain name
+                    returned: success
+                    type: str
+                    sample: IN_public_allow
+                priority:
+                    description: priority of the rule
+                    returned: success
+                    type: int
+                    sample: 0
+                rule:
+                    description: rule content
+                    returned: success
+                    type: str
+                    sample: -m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
+        runtime_zones:
+            description: zones defined in the runtime configuration
+            returned: success
+            type: complex
+            contains:
+                forward_ports:
+                    description: current setting of forward_ports; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['port=3389:proto=tcp:toport=3389:toaddr=192.168.42.42']
+                icmp_block_inversion:
+                    description: current setting of icmp_block_inversion; see corresponding option
+                    returned: success
+                    type: bool
+                    sample: false
+                icmp_blocks:
+                    description: current setting of icmp_blocks; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['echo-request']
+                interfaces:
+                    description: current setting of interfaces; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample:
+                masquerade:
+                    description: true if this zone is masquerading
+                    returned: success
+                    type: bool
+                    sample: true
+                name:
+                    description: name of the zone
+                    returned: success
+                    type: str
+                    sample: public
+                permanent:
+                    description: true if this is in the permanent configuration
+                    returned: success
+                    type: list(str)
+                    sample: true
+                ports:
+                    description: current setting of ports; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['22/tcp']
+                protocols:
+                    description: current setting of protocols; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['gre']
+                rich_rules:
+                    description: current setting of rich_rules; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['rule protocol value="ah" accept']
+                services:
+                    description: current setting of services; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['ssh']
+                source_ports:
+                    description: current setting of source_ports; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['68/udp']
+                sources:
+                    description: current setting of sources; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['192.168.0.0/16']
+                target:
+                    description: current setting of target; see corresponding option
+                    returned: success
+                    type: str
+                    sample: REJECT
+
+        version:
+            description: version of firewalld
+            returned: success
+            type: str
+            sample: '0.4.3.2'
+
+            "permanent_zones": {
+                "block": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "block",
+                    "permanent": true,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "REJECT"
+                },
+                "dmz": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "dmz",
+                    "permanent": true,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [
+                        "ssh"
+                    ],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "default"
+                },
+                "drop": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "drop",
+                    "permanent": true,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "DROP"
+                },
+                "external": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": true,
+                    "name": "external",
+                    "permanent": true,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [
+                        "ssh"
+                    ],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "default"
+                },
+                "home": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "home",
+                    "permanent": true,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [
+                        "dhcpv6-client",
+                        "mdns",
+                        "samba-client",
+                        "ssh"
+                    ],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "default"
+                },
+                "internal": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "internal",
+                    "permanent": true,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [
+                        "dhcpv6-client",
+                        "mdns",
+                        "samba-client",
+                        "ssh"
+                    ],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "default"
+                },
+                "public": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "public",
+                    "permanent": true,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [
+                        "dhcpv6-client",
+                        "ssh"
+                    ],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "default"
+                },
+                "trusted": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "trusted",
+                    "permanent": true,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "ACCEPT"
+                },
+                "work": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "work",
+                    "permanent": true,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [
+                        "dhcpv6-client",
+                        "ssh"
+                    ],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "default"
+                }
+            },
+            "running": true,
+            "runtime_direct_chains": [],
+            "runtime_direct_passthroughs": [],
+            "runtime_direct_rules": [],
+            "runtime_zones": {
+                "block": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "block",
+                    "permanent": false,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "REJECT"
+                },
+                "dmz": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "dmz",
+                    "permanent": false,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [
+                        "ssh"
+                    ],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "default"
+                },
+                "drop": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "drop",
+                    "permanent": false,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "DROP"
+                },
+                "external": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": true,
+                    "name": "external",
+                    "permanent": false,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [
+                        "ssh"
+                    ],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "default"
+                },
+                "home": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "home",
+                    "permanent": false,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [
+                        "ssh",
+                        "mdns",
+                        "samba-client",
+                        "dhcpv6-client"
+                    ],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "default"
+                },
+                "internal": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "internal",
+                    "permanent": false,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [
+                        "ssh",
+                        "mdns",
+                        "samba-client",
+                        "dhcpv6-client"
+                    ],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "default"
+                },
+                "public": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [
+                        "eth0"
+                    ],
+                    "masquerade": false,
+                    "name": "public",
+                    "permanent": false,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [
+                        "dhcpv6-client",
+                        "ssh"
+                    ],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "default"
+                },
+                "trusted": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "trusted",
+                    "permanent": false,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "ACCEPT"
+                },
+                "work": {
+                    "forward_ports": [],
+                    "icmp_block_inversion": false,
+                    "icmp_blocks": [],
+                    "interfaces": [],
+                    "masquerade": false,
+                    "name": "work",
+                    "permanent": false,
+                    "ports": [],
+                    "protocols": [],
+                    "rich_rules": [],
+                    "services": [
+                        "ssh",
+                        "dhcpv6-client"
+                    ],
+                    "source_ports": [],
+                    "sources": [],
+                    "target": "default"
+                }
+            },
+            "version": "0.4.3.2"
+        }
+    }
 '''
 
 from ansible.module_utils.basic import AnsibleModule
