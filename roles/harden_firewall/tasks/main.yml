@@ -84,6 +84,7 @@
 
 - name: wait for connection to come back
     wait_for_connection:
+        timeout: 10
 
 # TODO firewalld_ipsets
 # TODO firewalld_icmptypes
