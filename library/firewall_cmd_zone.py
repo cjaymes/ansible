@@ -67,12 +67,6 @@ options:
         description:
             - Set the icmp-block-inversion for this zone.
         type: bool
-    # interface:
-    #     description:
-    #         - The interface to relate to the zone.
-    #         - NOTE: this currently doesn't work if ZONE is specified in /etc/sysconfig/network-scripts/ifcfg-*
-    #         - The state option should be used to specify if the interface is present or absent.
-    #     type: str
     source:
         description:
             - The source to relate to the zone.
@@ -154,17 +148,6 @@ EXAMPLES = '''
       firewall_cmd_zone:
         name: test
         target: ACCEPT
-
-    # - name: add an interface to a zone
-    #   firewall_cmd_zone:
-    #     name: test
-    #     interface: eth0
-    #     state: present
-    # - name: remove an interface from a zone
-    #   firewall_cmd_zone:
-    #     name: test
-    #     interface: eth0
-    #     state: absent
 
     - name: set zone icmp block inversion
       firewall_cmd_zone:

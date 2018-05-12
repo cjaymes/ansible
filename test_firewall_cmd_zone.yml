@@ -36,12 +36,6 @@
         name: test
         target: ACCEPT
 
-    # - name: add an interface to a zone
-    #   firewall_cmd_zone:
-    #     name: test
-    #     interface: eth0
-    #     state: present
-
     - name: set zone icmp block inversion
       firewall_cmd_zone:
         name: test
@@ -186,12 +180,6 @@
       firewall_cmd_zone:
         name: test
         target: DROP
-
-    # - name: remove an interface from a zone
-    #   firewall_cmd_zone:
-    #     name: test
-    #     interface: eth0
-    #     state: absent
 
     - name: reset zone icmp block inversion
       firewall_cmd_zone:
