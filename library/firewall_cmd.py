@@ -893,12 +893,23 @@ def main():
                             passthrough=m.group(2)
                         )
                     )
+            direct_chains = []
+            for line in module.firewall_cmd(args + ['--get-all-chains']).splitlines():
+                m = re.match(r'^(ipv4|ipv6|eb) (\S+) (\S+)$', line.strip())
+                if m:
+                    direct_passthroughs.append(
+                        dict(
+                            family=m.group(1),
+                            table=m.group(2),
+                            chain=m.group(3)
+                        )
+                    )
             if permanent:
-                result['firewalld']['permanent_direct_chains'] = module.firewall_cmd(args + ['--get-all-chains']).strip().split()
+                result['firewalld']['permanent_direct_chains'] = direct_chains
                 result['firewalld']['permanent_direct_rules'] = direct_rules
                 result['firewalld']['permanent_direct_passthroughs'] = direct_passthroughs
             else:
-                result['firewalld']['runtime_direct_chains'] = module.firewall_cmd(args + ['--get-all-chains']).strip().split()
+                result['firewalld']['runtime_direct_chains'] = direct_chains
                 result['firewalld']['runtime_direct_rules'] = direct_rules
                 result['firewalld']['runtime_direct_passthroughs'] = direct_passthroughs
 
