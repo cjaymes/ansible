@@ -24,7 +24,6 @@
   with_items: "{{ network_interfaces.keys() }}"
   loop_control:
     loop_var: network_interface
-  notify: restart networking
 
 # - debug:
 #     msg: "{{firewalld_state}}"
