@@ -25,6 +25,9 @@
   loop_control:
     loop_var: network_interface
 
+- name: flush handlers before we get to firewalld config
+  meta: flush_handlers
+
 # - debug:
 #     msg: "{{firewalld_state}}"
 
