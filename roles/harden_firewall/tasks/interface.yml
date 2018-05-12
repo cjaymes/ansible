@@ -6,4 +6,6 @@
       path: "/etc/sysconfig/network-scripts/ifcfg-{{network_interface}}"
       regexp: '^ZONE='
       line: "ZONE={{network_interfaces[network_interface]['zone']}}"
-  notify: restart networking
+  notify:
+      - restart networking
+      - restart firewalld
