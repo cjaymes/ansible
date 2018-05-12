@@ -1,8 +1,3 @@
-- handlers:
-    - name: restart networking
-      service: network
-        state: restarted
-
 - name: firewalld is installed
   yum:
       name: firewalld
