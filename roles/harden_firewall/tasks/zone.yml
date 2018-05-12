@@ -60,38 +60,6 @@
   when:
       - firewalld_zone_configs[firewalld_zone] is containing('icmp_blocks')
 
-- debug:
-    msg: "Adding interfaces: {{firewalld_zone_configs[firewalld_zone]['interfaces']}}"
-
-- name: add interfaces
-  firewall_cmd_zone:
-      name: "{{firewalld_zone}}"
-      interface: "{{item}}"
-      state: present
-  with_items: "{{firewalld_zone_configs[firewalld_zone]['interfaces']}}"
-  when:
-      - firewalld_zone_configs[firewalld_zone] is containing('interfaces')
-
-- name: wait for connection to come back
-  wait_for_connection:
-      timeout: 10
-
-- debug:
-    msg: "Removing interfaces: {{ firewalld_state_['firewalld']['permanent_zones'][firewalld_zone]['interfaces'] | difference(firewalld_zone_configs[firewalld_zone]['interfaces']) }}"
-
-- name: remove interfaces
-  firewall_cmd_zone:
-      name: "{{firewalld_zone}}"
-      interface: "{{item}}"
-      state: absent
-  with_items: "{{ firewalld_state_['firewalld']['permanent_zones'][firewalld_zone]['interfaces'] | difference(firewalld_zone_configs[firewalld_zone]['interfaces']) }}"
-  when:
-      - firewalld_zone_configs[firewalld_zone] is containing('interfaces')
-
-- name: wait for connection to come back
-  wait_for_connection:
-      timeout: 10
-
 - name: set masquerade
   firewall_cmd_zone:
       name: "{{firewalld_zone}}"
