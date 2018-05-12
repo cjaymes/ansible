@@ -72,6 +72,10 @@
   when:
       - firewalld_zone_configs[firewalld_zone] is containing('interfaces')
 
+- name: wait for connection to come back
+  wait_for_connection:
+      timeout: 10
+
 - debug:
     msg: "Removing interfaces: {{ firewalld_state_['firewalld']['permanent_zones'][firewalld_zone]['interfaces'] | difference(firewalld_zone_configs[firewalld_zone]['interfaces']) }}"
 
@@ -83,6 +87,10 @@
   with_items: "{{ firewalld_state_['firewalld']['permanent_zones'][firewalld_zone]['interfaces'] | difference(firewalld_zone_configs[firewalld_zone]['interfaces']) }}"
   when:
       - firewalld_zone_configs[firewalld_zone] is containing('interfaces')
+
+- name: wait for connection to come back
+  wait_for_connection:
+      timeout: 10
 
 - name: set masquerade
   firewall_cmd_zone:
