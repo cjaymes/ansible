@@ -875,7 +875,7 @@ def main():
                 if m:
                     direct_rules.append(
                         dict(
-                            network=m.group(1),
+                            family=m.group(1),
                             table=m.group(2),
                             chain=m.group(3),
                             priority=m.group(4),
@@ -889,7 +889,7 @@ def main():
                 if m:
                     direct_passthroughs.append(
                         dict(
-                            network=m.group(1),
+                            family=m.group(1),
                             passthrough=m.group(2)
                         )
                     )
