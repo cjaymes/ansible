@@ -102,7 +102,7 @@
 
 - name: reload firewall from permanent
   firewall_cmd:
-      state: reload
+      state: complete-reload
 
 - name: wait for connection to come back
   wait_for_connection:
