@@ -19,18 +19,6 @@
       msg: "Firewalld is not running"
   when: not firewalld_state['firewalld']['running']
 
-- name: configure network interfaces
-  include_tasks: interface.yml
-  with_items: "{{ network_interfaces.keys() }}"
-  loop_control:
-    loop_var: network_interface
-
-- name: flush handlers before we get to firewalld config
-  meta: flush_handlers
-
-# - debug:
-#     msg: "{{firewalld_state}}"
-
 - name: add missing zones
   firewall_cmd_zone:
       name: "{{item}}"
@@ -46,6 +34,15 @@
 - name: reload firewall from permanent
   firewall_cmd:
       state: reload
+
+- name: configure network interfaces
+  include_tasks: interface.yml
+  with_items: "{{ network_interfaces.keys() }}"
+  loop_control:
+    loop_var: network_interface
+
+- name: flush handlers before we get to firewalld config
+  meta: flush_handlers
 
 - name: refresh firewall state
   firewall_cmd:
