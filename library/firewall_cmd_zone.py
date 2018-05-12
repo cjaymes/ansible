@@ -491,9 +491,9 @@ def set_zone_interface(module):
                         "nmcli con modify {0} connection.zone {1}".format(module.params['interface'], module.params['name']),
                         use_unsafe_shell=True)
                     if len(err) > 0:
-                        module.fail_json(msg='firewall-cmd failed with error: {0}'.format(str(err)))
+                        module.fail_json(msg='nmcli con modify failed with error: {0}'.format(str(err)))
                 except OSError as exception:
-                    module.fail_json(msg='firewall-cmd failed with exception: {0}'.format(exception))
+                    module.fail_json(msg='nmcli con modify failed with exception: {0}'.format(exception))
         elif module.params['state'] in ['disabled', 'absent'] and cur_zone == module.params['name']:
             changed = True
             if not module.check_mode:
@@ -506,6 +506,14 @@ def set_zone_interface(module):
                         module.fail_json(msg='firewall-cmd failed with error: {0}'.format(str(err)))
                 except OSError as exception:
                     module.fail_json(msg='firewall-cmd failed with exception: {0}'.format(exception))
+
+        if changed and not module.check_mode:
+            try:
+                rc, out, err = module.run_command("systemctl restart network".split(' '))
+                if len(err) > 0:
+                    module.fail_json(msg='systemctl restart network failed with error: {0}'.format(str(err)))
+            except OSError as exception:
+                module.fail_json(msg='systemctl restart network failed with exception: {0}'.format(exception))
     else:
         if module.params['permanent'] is not None and not module.params['permanent']:
             cmd = 'firewall-cmd'
