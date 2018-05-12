@@ -67,12 +67,12 @@ options:
         description:
             - Set the icmp-block-inversion for this zone.
         type: bool
-    interface:
-        description:
-            - The interface to relate to the zone.
-            - NOTE: this currently doesn't work if ZONE is specified in /etc/sysconfig/network-scripts/ifcfg-*
-            - The state option should be used to specify if the interface is present or absent.
-        type: str
+    # interface:
+    #     description:
+    #         - The interface to relate to the zone.
+    #         - NOTE: this currently doesn't work if ZONE is specified in /etc/sysconfig/network-scripts/ifcfg-*
+    #         - The state option should be used to specify if the interface is present or absent.
+    #     type: str
     source:
         description:
             - The source to relate to the zone.
@@ -464,107 +464,107 @@ def set_zone_list_option(module, query_arg, add_arg, remove_arg, option):
 
     return changed
 
-def set_zone_interface(module):
-    if module.params['state'] is None:
-        module.fail_json(msg='The state option is required with the interface option')
-
-    changed = False
-
-    # check nmcli first
-    nmcli_managed = True
-    try:
-        rc, out, err = module.run_command(
-            "nmcli con show {0} | grep '^connection\.zone'".format(module.params['interface']),
-            use_unsafe_shell=True)
-        if len(err) > 0:
-            nmcli_managed = False
-    except OSError as exception:
-        nmcli_managed = False
-    if nmcli_managed:
-        cur_zone = out.split(':')[1].strip()
-
-        if module.params['state'] in ['enabled', 'present'] and cur_zone != module.params['name']:
-            changed = True
-            if not module.check_mode:
-                try:
-                    rc, out, err = module.run_command(
-                        "nmcli con modify {0} connection.zone {1}".format(module.params['interface'], module.params['name']),
-                        use_unsafe_shell=True)
-                    if len(err) > 0:
-                        module.fail_json(msg='nmcli con modify failed with error: {0}'.format(str(err)))
-                except OSError as exception:
-                    module.fail_json(msg='nmcli con modify failed with exception: {0}'.format(exception))
-        elif module.params['state'] in ['disabled', 'absent'] and cur_zone == module.params['name']:
-            changed = True
-            if not module.check_mode:
-                try:
-                    # This just moves the con back to the default zone; close as we can get to "removing"
-                    rc, out, err = module.run_command(
-                        "nmcli con modify {0} connection.zone NULL".format(module.params['interface']),
-                        use_unsafe_shell=True)
-                    if len(err) > 0:
-                        module.fail_json(msg='firewall-cmd failed with error: {0}'.format(str(err)))
-                except OSError as exception:
-                    module.fail_json(msg='firewall-cmd failed with exception: {0}'.format(exception))
-
-        if changed and not module.check_mode:
-            try:
-                rc, out, err = module.run_command("systemctl restart network".split(' '))
-                if len(err) > 0:
-                    module.fail_json(msg='systemctl restart network failed with error: {0}'.format(str(err)))
-            except OSError as exception:
-                module.fail_json(msg='systemctl restart network failed with exception: {0}'.format(exception))
-    else:
-        if module.params['permanent'] is not None and not module.params['permanent']:
-            cmd = 'firewall-cmd'
-        else:
-            cmd = 'firewall-cmd --permanent'
-
-        if module.params['name'] is not None:
-            cmd += ' --zone=' + module.params['name']
-
-        if module.params['timeout'] is not None:
-            timeout = ' --timeout=' + module.params['timeout']
-        else:
-            timeout = ''
-
-        try:
-            rc, out, err = module.run_command(
-                "{0} --query-interface='{1}'".format(cmd, module.params['interface']),
-                use_unsafe_shell=True)
-            if len(err) > 0:
-                module.fail_json(msg='firewall-cmd failed with error: {0}'.format(str(err)))
-            value_exists = 'yes' in out
-        except OSError as exception:
-            module.fail_json(msg='firewall-cmd failed with exception: {0}'.format(exception))
-
-        if module.params['state'] in ['enabled', 'present'] and not value_exists:
-            # if state will change, set changed true
-            changed = True
-            if not module.check_mode:
-                try:
-                    rc, out, err = module.run_command(
-                        "{0} --add-interface='{1}'{2}".format(cmd, module.params['interface'], timeout),
-                        use_unsafe_shell=True)
-                    if len(err) > 0:
-                        module.fail_json(msg='firewall-cmd failed with error: {0}'.format(str(err)))
-                except OSError as exception:
-                    module.fail_json(msg='firewall-cmd failed with exception: {0}'.format(exception))
-        elif module.params['state'] in ['disabled', 'absent'] and value_exists:
-            # if state will change, set changed true
-            changed = True
-            if not module.check_mode:
-                try:
-                    rc, out, err = module.run_command(
-                        "{0} --remove-interface='{1}'{2}".format(cmd, module.params['interface'], timeout),
-                        use_unsafe_shell=True)
-                    if len(err) > 0:
-                        module.fail_json(msg='firewall-cmd failed with error: {0}'.format(str(err)))
-                except OSError as exception:
-                    module.fail_json(msg='firewall-cmd failed with exception: {0}'.format(exception))
-
-    return changed
-
+# def set_zone_interface(module):
+#     if module.params['state'] is None:
+#         module.fail_json(msg='The state option is required with the interface option')
+#
+#     changed = False
+#
+#     # check nmcli first
+#     nmcli_managed = True
+#     try:
+#         rc, out, err = module.run_command(
+#             "nmcli con show {0} | grep '^connection\.zone'".format(module.params['interface']),
+#             use_unsafe_shell=True)
+#         if len(err) > 0:
+#             nmcli_managed = False
+#     except OSError as exception:
+#         nmcli_managed = False
+#     if nmcli_managed:
+#         cur_zone = out.split(':')[1].strip()
+#
+#         if module.params['state'] in ['enabled', 'present'] and cur_zone != module.params['name']:
+#             changed = True
+#             if not module.check_mode:
+#                 try:
+#                     rc, out, err = module.run_command(
+#                         "nmcli con modify {0} connection.zone {1}".format(module.params['interface'], module.params['name']),
+#                         use_unsafe_shell=True)
+#                     if len(err) > 0:
+#                         module.fail_json(msg='nmcli con modify failed with error: {0}'.format(str(err)))
+#                 except OSError as exception:
+#                     module.fail_json(msg='nmcli con modify failed with exception: {0}'.format(exception))
+#         elif module.params['state'] in ['disabled', 'absent'] and cur_zone == module.params['name']:
+#             changed = True
+#             if not module.check_mode:
+#                 try:
+#                     # This just moves the con back to the default zone; close as we can get to "removing"
+#                     rc, out, err = module.run_command(
+#                         "nmcli con modify {0} connection.zone NULL".format(module.params['interface']),
+#                         use_unsafe_shell=True)
+#                     if len(err) > 0:
+#                         module.fail_json(msg='firewall-cmd failed with error: {0}'.format(str(err)))
+#                 except OSError as exception:
+#                     module.fail_json(msg='firewall-cmd failed with exception: {0}'.format(exception))
+#
+#         if changed and not module.check_mode:
+#             try:
+#                 rc, out, err = module.run_command(['systemctl', 'restart', 'network'])
+#                 if len(err) > 0:
+#                     module.fail_json(msg='systemctl restart network failed with error: {0}'.format(str(err)))
+#             except OSError as exception:
+#                 module.fail_json(msg='systemctl restart network failed with exception: {0}'.format(exception))
+#     else:
+#         if module.params['permanent'] is not None and not module.params['permanent']:
+#             cmd = 'firewall-cmd'
+#         else:
+#             cmd = 'firewall-cmd --permanent'
+#
+#         if module.params['name'] is not None:
+#             cmd += ' --zone=' + module.params['name']
+#
+#         if module.params['timeout'] is not None:
+#             timeout = ' --timeout=' + module.params['timeout']
+#         else:
+#             timeout = ''
+#
+#         try:
+#             rc, out, err = module.run_command(
+#                 "{0} --query-interface='{1}'".format(cmd, module.params['interface']),
+#                 use_unsafe_shell=True)
+#             if len(err) > 0:
+#                 module.fail_json(msg='firewall-cmd failed with error: {0}'.format(str(err)))
+#             value_exists = 'yes' in out
+#         except OSError as exception:
+#             module.fail_json(msg='firewall-cmd failed with exception: {0}'.format(exception))
+#
+#         if module.params['state'] in ['enabled', 'present'] and not value_exists:
+#             # if state will change, set changed true
+#             changed = True
+#             if not module.check_mode:
+#                 try:
+#                     rc, out, err = module.run_command(
+#                         "{0} --add-interface='{1}'{2}".format(cmd, module.params['interface'], timeout),
+#                         use_unsafe_shell=True)
+#                     if len(err) > 0:
+#                         module.fail_json(msg='firewall-cmd failed with error: {0}'.format(str(err)))
+#                 except OSError as exception:
+#                     module.fail_json(msg='firewall-cmd failed with exception: {0}'.format(exception))
+#         elif module.params['state'] in ['disabled', 'absent'] and value_exists:
+#             # if state will change, set changed true
+#             changed = True
+#             if not module.check_mode:
+#                 try:
+#                     rc, out, err = module.run_command(
+#                         "{0} --remove-interface='{1}'{2}".format(cmd, module.params['interface'], timeout),
+#                         use_unsafe_shell=True)
+#                     if len(err) > 0:
+#                         module.fail_json(msg='firewall-cmd failed with error: {0}'.format(str(err)))
+#                 except OSError as exception:
+#                     module.fail_json(msg='firewall-cmd failed with exception: {0}'.format(exception))
+#
+#     return changed
+#
 def main():
     # set up the module & defaults
     module = FirewallCmdAnsibleModule(
@@ -577,7 +577,7 @@ def main():
             short=dict(type='str'),
             target=dict(type='str', choices=['default', 'ACCEPT', 'DROP', 'REJECT']),
             icmp_block_inversion=dict(type='bool'),
-            interface=dict(type='str'),
+            # interface=dict(type='str'),
             source=dict(type='str'),
             service=dict(type='str'),
             port=dict(type='str'),
@@ -612,7 +612,7 @@ def main():
         'short',
         'target',
         'icmp_block_inversion',
-        'interface',
+        # 'interface',
         'source',
         'service',
         'port',
@@ -724,9 +724,9 @@ def main():
     ):
         result['changed'] = True
 
-    if module.params['interface'] is not None and set_zone_interface(module):
-        result['changed'] = True
-
+    # if module.params['interface'] is not None and set_zone_interface(module):
+    #     result['changed'] = True
+    #
     if module.params['source'] is not None and set_zone_list_option(
         module,
         '--query-source',
