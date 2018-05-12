@@ -253,7 +253,7 @@ firewalld_lockdown_whitelist_commands: [
     '/usr/bin/python -Es /usr/bin/firewall-config',
 ]
 
-network_devices: {
+network_interfaces: {
     eth0: {
         zone: public,
     },

@@ -1,0 +1,8 @@
+- debug:
+    msg: "Setting {{network_interface}} with {{network_interfaces[network_interface]}}"
+
+- name: set zone
+  lineinfile:
+      path: "/etc/sysconfig/network-scripts/ifcfg-{{network_interface}}"
+      regexp: '^ZONE='
+      line: "ZONE={{network_interfaces[network_interface]['zone']}}"
