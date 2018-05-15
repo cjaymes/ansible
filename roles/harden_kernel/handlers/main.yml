@@ -1,0 +1,2 @@
+- name: reload sysctl
+  command: /usr/sbin/sysctl -p
