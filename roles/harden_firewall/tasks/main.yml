@@ -20,6 +20,12 @@
       msg: "Firewalld is not running"
   when: not firewalld_state['firewalld']['running']
 
+- name: set default zone
+  firewall_cmd:
+      default_zone: "{{ firewalld_default_zone }}"
+
+# TODO log_denied, automatic_helpers
+
 - name: add missing zones
   firewall_cmd_zone:
       name: "{{item}}"
