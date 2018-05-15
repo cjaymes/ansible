@@ -1,7 +1,8 @@
 - name: firewalld is installed
   yum:
       name: firewalld
-      state: present
+      update_cache: yes
+      state: latest
 
 - name: firewalld is running
   service:
