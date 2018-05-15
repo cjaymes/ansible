@@ -228,7 +228,6 @@ firewalld_zone_configs: {
 }
 firewalld_direct_chains: []
 firewalld_direct_rules: [
-    the following rule is from DISA, but will not apply when firewalld is reloaded
     {
         family: 'ipv4',
         table: 'filter',
