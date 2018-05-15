@@ -190,7 +190,7 @@ firewalld_zone_configs: {
         ],
         source_ports: [],
         sources: [],
-        target: 'default',
+        target: 'DROP',
     },
     trusted: {
         forward_ports: [],
@@ -228,14 +228,14 @@ firewalld_zone_configs: {
 }
 firewalld_direct_chains: []
 firewalld_direct_rules: [
-    # the following rule is from DISA, but will not apply when firewalld is reloaded
-    # {
-    #     family: 'ipv4',
-    #     table: 'filter',
-    #     chain: 'IN_public_allow',
-    #     priority: 0,
-    #     rule: '-m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT',
-    # },
+    the following rule is from DISA, but will not apply when firewalld is reloaded
+    {
+        family: 'ipv4',
+        table: 'filter',
+        chain: 'IN_public_allow',
+        priority: 0,
+        rule: '-m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT',
+    },
 ]
 firewalld_ipsets: []
 firewalld_icmptypes: []
