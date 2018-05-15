@@ -1,4 +1,4 @@
-- name: firewalld is installed
+- name: firewalld is installed & latest
   yum:
       name: firewalld
       update_cache: yes
@@ -99,21 +99,21 @@
       state: absent
   with_items: "{{ firewalld_state['firewalld']['permanent_direct_rules'] | difference(firewalld_direct_rules) }}"
 
-- name: refresh firewall state
-  firewall_cmd:
-      state: get
-  register: firewalld_state
-
-- debug:
-    msg: "{{firewalld_state}}"
-
-- name: reload firewall from permanent
-  firewall_cmd:
-      state: complete-reload
-
-- name: wait for connection to come back
-  wait_for_connection:
-      timeout: 10
+# - name: refresh firewall state
+#   firewall_cmd:
+#       state: get
+#   register: firewalld_state
+#
+# - debug:
+#     msg: "{{firewalld_state}}"
+#
+# - name: reload firewall from permanent
+#   firewall_cmd:
+#       state: reload
+#
+# - name: wait for connection to come back
+#   wait_for_connection:
+#       timeout: 10
 
 # TODO firewalld_ipsets
 # TODO firewalld_icmptypes
