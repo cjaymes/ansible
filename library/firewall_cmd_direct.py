@@ -217,7 +217,7 @@ def main():
             result['changed'] = True
 
     # NOTE: this option must be processed after rule to avoid processing rules as chain
-    if module.params['chain'] is not None:
+    elif module.params['chain'] is not None:
         if module.params['state'] is None:
             module.fail_json(msg='The state option is required with the chain option')
         # NOTE: family is always defined; default or explicit
@@ -239,7 +239,7 @@ def main():
             # if state will change, set changed true
             result['changed'] = True
 
-    if module.params['passthrough'] is not None:
+    elif module.params['passthrough'] is not None:
         if module.params['state'] is None:
             module.fail_json(msg='The state option is required with the passthrough option')
         # NOTE: family is always defined; default or explicit
