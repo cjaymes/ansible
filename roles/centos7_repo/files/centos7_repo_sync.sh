@@ -9,6 +9,21 @@ REPOS=(
     "extras",
     "epel",
 )
+DISABLED_REPOS=(
+    "centosplus",
+    "cr",
+    "base-debuginfo",
+    "fasttrack",
+    "base-source",
+    "updates-source",
+    "extras-source",
+    "centosplus-source",
+    "epel-debuginfo",
+    "epel-source",
+    "epel-testing",
+    "epel-testing-debuginfo",
+    "epel-testing-source",
+)
 
 mkdir -p "$SHARE"
 cd "$SHARE"
