@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SHARE=/share/RHEL/7
+SHARE=/share/repo
 
 declare -a REPOS
 REPOS=(
@@ -263,8 +263,8 @@ REPOS=(
 # "rhel-7-server-openstack-7.0-tools-source-rpms",
 # "rhel-7-server-eus-satellite-tools-6.3-puppet4-source-rpms",
 
-mkdir -p $SHARE
-cd $SHARE
+mkdir -p "$SHARE"
+cd "$SHARE"
 for d in ${REPOS[*]}; do
     reposync --plugins --gpgcheck --delete --downloadcomps --download-metadata --repoid=$d
     createrepo -v --update --groupfile comps.xml $d
