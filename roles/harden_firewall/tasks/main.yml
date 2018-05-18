@@ -91,10 +91,10 @@
 
 - name: remove direct rules
   firewall_cmd_direct:
-      family: "{{item.family}}"
+      family: "{{ item.family | default('ipv4') }}"
       table: "{{item.table}}"
       chain: "{{item.chain}}"
-      priority: "{{item.priority}}"
+      priority: "{{ item.priority | default(0) }}"
       rule: "{{item.rule}}"
       state: absent
   with_items: "{{ firewalld_state['firewalld']['permanent_direct_rules'] | difference(firewalld_direct_rules) }}"
