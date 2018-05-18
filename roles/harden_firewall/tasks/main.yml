@@ -56,6 +56,21 @@
       state: get
   register: firewalld_state
 
+- name: add missing ipsets
+  firewall_cmd_ipset:
+      name: "{{item}}"
+      type: "{{firewalld_ipsets[item].type}}"
+      family: "{{firewalld_ipsets[item].family|default('inet')}}"
+      options: "{{firewalld_ipsets[item].options|default({})}}"
+      state: present
+  with_items: "{{ firewalld_ipsets.keys() }}"
+
+- name: remove extra zones
+  firewall_cmd_zone:
+      name: "{{item}}"
+      state: absent
+  with_items: "{{ firewalld_state['firewalld']['permanent_ipsets'].keys() | difference(firewalld_ipsets.keys()) }}"
+
 - name: configure ipsets
   include_tasks: ipset.yml
   with_items: "{{firewalld_ipsets.keys()}}"
