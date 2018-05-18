@@ -23,6 +23,8 @@
     entry: "{{item}}"
     state: present
   with_items: "{{firewalld_ipsets[ipset_name]['entries']}}"
+  when:
+      - firewalld_ipsets[ipset_name] is containing('entries')
 
 - name: remove entries
   firewall_cmd_ipset:
@@ -30,3 +32,5 @@
     entry: "{{item}}"
     state: present
   with_items: "{{ firewalld_state['firewalld']['permanent_ipsets'][ipset_name]['entries'] | difference(firewalld_ipsets[ipset_name]['entries']) }}"
+  when:
+      - firewalld_ipsets[ipset_name] is containing('entries')
