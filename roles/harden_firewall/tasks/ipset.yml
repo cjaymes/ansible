@@ -6,5 +6,5 @@
     name: "{{ipset_name}}"
     description: "{{firewalld_ipsets[ipset_name]['description']}}"
   when:
-      - firewalld_state_['firewalld']['version'] is version('0.4.3.2', '>')
+      - firewalld_state['firewalld']['version'] is version('0.4.3.2', '>')
       - firewalld_ipsets[ipset_name] is containing('description')
