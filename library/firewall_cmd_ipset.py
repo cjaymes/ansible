@@ -265,9 +265,9 @@ def main():
 
         if set_list_option(
             module,
-            '--ipset={0} --query-entry'.format(module.params['name']),
-            '--ipset={0} --add-entry'.format(module.params['name']),
-            '--ipset={0} --remove-entry'.format(module.params['name']),
+            '--ipset="{0}" --query-entry'.format(module.params['name']),
+            '--ipset="{0}" --add-entry'.format(module.params['name']),
+            '--ipset="{0}" --remove-entry'.format(module.params['name']),
             module.params['entry']
         ):
             # if state will change, set changed true
@@ -279,7 +279,7 @@ def main():
             module.fail_json(msg='The name option is required with the entry option')
 
         ipset_exists = None
-        if module.params['name'] in module.firewall_cmd(cmd + ['--get-ipsets']).split(' '):
+        if module.params['name'] in module.firewall_cmd(cmd + ['--get-ipsets']).strip().split(' '):
             ipset_exists = True
         else:
             ipset_exists = False
@@ -289,7 +289,7 @@ def main():
             result['changed'] = True
             if not module.check_mode:
                 cmd = cmd + [
-                    '--new-ipset={0}'.format(module.params['name']),
+                    '--new-ipset="{0}"'.format(module.params['name']),
                     '--type={0}'.format(module.params['type']),
                     '--family={0}'.format(module.params['family']),
                     ]
@@ -304,7 +304,7 @@ def main():
             # if state will change, set changed true
             result['changed'] = True
             if not module.check_mode:
-                module.firewall_cmd(cmd + ['--delete-ipset={0}'.format(module.params['name'])])
+                module.firewall_cmd(cmd + ['--delete-ipset="{0}"'.format(module.params['name'])])
 
     if module.version_cmp('0.4.3.2', module.firewalld_version()) <= 0 and (
         module.params['state'] is None
