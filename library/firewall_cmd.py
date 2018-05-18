@@ -540,13 +540,46 @@ def main():
             result['firewalld']['automatic_helpers'] = module.firewall_cmd(['--get-automatic-helpers']).strip()
         result['firewalld']['default_zone'] = module.firewall_cmd(['--get-default-zone']).strip()
 
+        result['firewalld']['permanent_ipsets'] = {}
+        result['firewalld']['runtime_ipsets'] = {}
         result['firewalld']['permanent_zones'] = {}
         result['firewalld']['runtime_zones'] = {}
         for permanent in (True, False):
             if permanent:
+                ipset_names = module.firewall_cmd(['--permanent', '--get-ipsets']).strip().split()
                 zone_names = module.firewall_cmd(['--permanent', '--get-zones']).strip().split()
             else:
+                ipset_names = module.firewall_cmd(['--get-ipsets']).strip().split()
                 zone_names = module.firewall_cmd(['--get-zones']).strip().split()
+
+            for ipset_name in ipset_names:
+                ipset = {}
+                ipset['name'] = ipset_name
+                ipset['permanent'] = permanent
+
+                if permanent:
+                    args = ['--permanent', '--ipset=' + ipset_name]
+                else:
+                    args = ['--ipset=' + ipset_name]
+
+                perm_args = args[:]
+                perm_args.append('--permanent')
+                if module.version_cmp('0.4.3.2', module.firewalld_version()) > 0:
+                    ipset['description'] = module.firewall_cmd(perm_args + ['--get-description']).strip()
+                    ipset['short'] = module.firewall_cmd(perm_args + ['--get-short']).strip()
+
+                # TODO type & options...might have to use info-ipset
+
+                ipset['entries'] = []
+                for line in module.firewall_cmd(args + ['--get-entries']).strip().splitlines():
+                    line = line.strip()
+                    if line != '':
+                        ipset['entries'].append(line)
+
+                if permanent:
+                    result['firewalld']['permanent_ipsets'][ipset_name] = ipset
+                else:
+                    result['firewalld']['runtime_ipsets'][ipset_name] = ipset
 
             for zone_name in zone_names:
                 zone = {}
