@@ -562,8 +562,7 @@ def main():
                 else:
                     args = ['--ipset=' + ipset_name]
 
-                perm_args = args[:]
-                perm_args.append('--permanent')
+                perm_args = ['--permanent', '--ipset=' + ipset_name]
                 if module.version_cmp('0.4.3.2', module.firewalld_version()) > 0:
                     ipset['description'] = module.firewall_cmd(perm_args + ['--get-description']).strip()
                     ipset['short'] = module.firewall_cmd(perm_args + ['--get-short']).strip()
@@ -593,9 +592,8 @@ def main():
                     args = ['--permanent', '--zone=' + zone_name]
                 else:
                     args = ['--zone=' + zone_name]
+                perm_args = ['--permanent', '--zone=' + zone_name]
 
-                perm_args = args[:]
-                perm_args.append('--permanent')
                 if module.version_cmp('0.4.3.2', module.firewalld_version()) > 0:
                     zone['description'] = module.firewall_cmd(perm_args + ['--get-description']).strip()
                     zone['short'] = module.firewall_cmd(perm_args + ['--get-short']).strip()
