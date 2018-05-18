@@ -10,11 +10,14 @@
 #       enabled: yes
 #       state: started
 #
-# - name: get firewall state
-#   firewall_cmd:
-#       state: get
-#   register: firewalld_state
-#
+- name: get firewall state
+  firewall_cmd:
+      state: get
+  register: firewalld_state
+
+- debug:
+    msg: "{{firewalld_state}}"
+
 # - name: fail if firewalld not running
 #   fail:
 #       msg: "Firewalld is not running"
@@ -83,6 +86,14 @@
   with_items: "{{firewalld_ipsets.keys()}}"
   loop_control:
       loop_var: ipset_name
+
+- name: get firewall state
+  firewall_cmd:
+      state: get
+  register: firewalld_state
+
+- debug:
+    msg: "{{firewalld_state}}"
 
 # # TODO firewalld_icmptypes
 # # TODO firewalld_services
