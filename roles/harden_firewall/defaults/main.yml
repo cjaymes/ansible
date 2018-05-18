@@ -1,0 +1,3 @@
+# Allow traffic from private subnets by default. This should be replaced by
+# whatever you're using for your local networks
+firewall_local_networks: "{{network_private_subnets}}"
