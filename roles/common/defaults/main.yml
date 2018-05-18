@@ -519,7 +519,7 @@ firewalld_zone_configs: {
 firewalld_direct_chains: []
 firewalld_direct_rules: [
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'filter',
         chain: 'IN_public_allow',
         priority: 0,
@@ -529,7 +529,7 @@ firewalld_direct_rules: [
     # Block Invalid Packets
     # From https://javapipe.com/ddos/blog/iptables-ddos-protection/
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 1,
@@ -538,7 +538,7 @@ firewalld_direct_rules: [
     # Block New Packets That Are Not SYN
     # From https://javapipe.com/ddos/blog/iptables-ddos-protection/
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 2,
@@ -547,7 +547,7 @@ firewalld_direct_rules: [
     # Block Uncommon MSS Values
     # From https://javapipe.com/ddos/blog/iptables-ddos-protection/
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 3,
@@ -556,28 +556,28 @@ firewalld_direct_rules: [
     # Block Packets With Bogus TCP Flags
     # From https://javapipe.com/ddos/blog/iptables-ddos-protection/
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 4,
         rule: '-p tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG NONE -j DROP',
     },
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 4,
         rule: '-p tcp --tcp-flags FIN,SYN FIN,SYN -j DROP',
     },
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 4,
         rule: '-p tcp --tcp-flags SYN,RST SYN,RST -j DROP',
     },
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 4,
@@ -591,14 +591,14 @@ firewalld_direct_rules: [
         rule: '-p tcp --tcp-flags FIN,RST FIN,RST -j DROP',
     },
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 4,
         rule: '-p tcp --tcp-flags FIN,ACK FIN -j DROP',
     },
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 4,
@@ -612,7 +612,7 @@ firewalld_direct_rules: [
         rule: '-p tcp --tcp-flags ACK,FIN FIN -j DROP',
     },
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 4,
@@ -626,7 +626,7 @@ firewalld_direct_rules: [
         rule: '-p tcp --tcp-flags ALL ALL -j DROP',
     },
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 4,
@@ -640,14 +640,14 @@ firewalld_direct_rules: [
         rule: '-p tcp --tcp-flags ALL FIN,PSH,URG -j DROP',
     },
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 4,
         rule: '-p tcp --tcp-flags ALL SYN,FIN,PSH,URG -j DROP',
     },
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 4,
@@ -655,7 +655,7 @@ firewalld_direct_rules: [
     },
     # Drop 127.0.0.0/8 packets not on interface lo
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 5,
@@ -663,7 +663,7 @@ firewalld_direct_rules: [
     },
     # Drop ICMP packets except echo-request
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 6,
@@ -671,7 +671,7 @@ firewalld_direct_rules: [
     },
     # limit connections per host to 80
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'filter',
         chain: 'INPUT',
         priority: 7,
@@ -680,14 +680,14 @@ firewalld_direct_rules: [
     # set up a ssh brute-force protection blacklist (using list DEFAULT)
     # Drop NEW connections after more than 10 in 60 seconds
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'filter',
         chain: 'INPUT',
         priority: 8,
         rule: '-p tcp --dport ssh -m conntrack --ctstate NEW -m recent --set',
     },
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'filter',
         chain: 'INPUT',
         priority: 8,
