@@ -42,6 +42,7 @@ options:
         description:
             - Description of the ipset
             - Requires the name option
+            - NOTE: As of firewalld 0.4.4.4 --get-description always returns '', so this will always show changed. It is set though.
         type: str
     short:
         description:
