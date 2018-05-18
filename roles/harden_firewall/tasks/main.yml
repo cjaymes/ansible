@@ -56,6 +56,10 @@
       state: get
   register: firewalld_state
 
+# TODO firewalld_ipsets
+# TODO firewalld_icmptypes
+# TODO firewalld_services
+
 - name: config zones
   include_tasks: zone.yml
   vars:
@@ -111,9 +115,6 @@
 # - debug:
 #     msg: "{{firewalld_state}}"
 #
-# TODO firewalld_ipsets
-# TODO firewalld_icmptypes
-# TODO firewalld_services
 # TODO firewalld_passthroughs
 # TODO firewalld_lockdown_mode
 
