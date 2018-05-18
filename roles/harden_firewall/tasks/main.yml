@@ -56,6 +56,9 @@
       state: get
   register: firewalld_state
 
+- debug:
+    msg: "{{firewalld_state}}"
+
 - name: add missing ipsets
   firewall_cmd_ipset:
       name: "{{item}}"
