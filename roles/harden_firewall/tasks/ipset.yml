@@ -2,7 +2,7 @@
     msg: "Setting {{ipset_name}} with {{firewalld_ipsets[ipset_name]}}"
 
 - name: set ipset description
-  firewall_cmd_zone:
+  firewall_cmd_ipset:
     name: "{{ipset_name}}"
     description: "{{firewalld_ipsets[ipset_name]['description']}}"
   when:
