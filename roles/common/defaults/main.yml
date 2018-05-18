@@ -584,7 +584,7 @@ firewalld_direct_rules: [
         rule: '-p tcp --tcp-flags SYN,RST SYN,RST -j DROP',
     },
     {
-        family: 'ipv4'
+        family: 'ipv4',
         table: 'mangle',
         chain: 'PREROUTING',
         priority: 4,
