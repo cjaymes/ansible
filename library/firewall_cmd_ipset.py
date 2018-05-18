@@ -83,6 +83,7 @@ options:
         description:
             - An entry in the ipset
             - Requires the name option
+            - Requires the state option
         type: str
 '''
 
