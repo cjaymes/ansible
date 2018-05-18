@@ -567,6 +567,9 @@ def main():
                 if module.version_cmp('0.4.3.2', module.firewalld_version()) > 0:
                     ipset['description'] = module.firewall_cmd(perm_args + ['--get-description']).strip()
                     ipset['short'] = module.firewall_cmd(perm_args + ['--get-short']).strip()
+                    print("Got desc,short: " + str(module.firewalld_version()))
+                else:
+                    print("Version: " + str(module.firewalld_version()))
 
                 # TODO type & options...might have to use info-ipset
 

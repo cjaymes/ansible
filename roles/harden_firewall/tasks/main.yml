@@ -74,6 +74,10 @@
       state: absent
   with_items: "{{ firewalld_state['firewalld']['permanent_ipsets'].keys() | difference(firewalld_ipsets.keys()) }}"
 
+# - name: reload firewall from permanent
+#   firewall_cmd:
+#       state: reload
+#
 # - name: configure ipsets
 #   include_tasks: ipset.yml
 #   with_items: "{{firewalld_ipsets.keys()}}"
