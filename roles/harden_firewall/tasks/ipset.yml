@@ -8,3 +8,25 @@
   when:
       - firewalld_state['firewalld']['version'] is version('0.4.3.2', '>')
       - firewalld_ipsets[ipset_name] is containing('description')
+
+- name: set ipset short
+  firewall_cmd_ipset:
+    name: "{{ipset_name}}"
+    short: "{{firewalld_ipsets[ipset_name]['short']}}"
+  when:
+      - firewalld_state['firewalld']['version'] is version('0.4.3.2', '>')
+      - firewalld_ipsets[ipset_name] is containing('short')
+
+- name: add entries
+  firewall_cmd_ipset:
+    name: "{{ipset_name}}"
+    entry: "{{item}}"
+    state: present
+  with_items: "{{firewalld_ipsets[ipset_name]['entries']}}"
+
+- name: remove entries
+  firewall_cmd_ipset:
+    name: "{{ipset_name}}"
+    entry: "{{item}}"
+    state: present
+  with_items: "{{ firewalld_state['firewalld']['permanent_ipsets'][ipset_name]['entries'] | difference(firewalld_ipsets[ipset_name]['entries']) }}"
