@@ -11,6 +11,7 @@ REPOS=(
     "rhel-ha-for-rhel-7-server-rpms"
     "rhel-7-server-ansible-2.5-rpms"
     "rhel-7-server-thirdparty-oracle-java-rpms"
+    "rhel-7-server-devtools-rpms"
 )
 DISABLED_REPOS=(
     "rh-gluster-3-client-for-rhel-7-server-debug-rpms"
@@ -32,7 +33,6 @@ DISABLED_REPOS=(
     "rhel-7-server-devtools-beta-rpms"
     "rhel-7-server-devtools-beta-source-rpms"
     "rhel-7-server-devtools-debug-rpms"
-    "rhel-7-server-devtools-rpms"
     "rhel-7-server-devtools-source-rpms"
     "rhel-7-server-dotnet-beta-debug-rpms"
     "rhel-7-server-dotnet-beta-rpms"
@@ -270,5 +270,5 @@ mkdir -p "$SHARE"
 cd "$SHARE"
 for d in ${REPOS[*]}; do
     reposync --plugins --gpgcheck --delete --downloadcomps --download-metadata --repoid=$d
-    createrepo -v --update --groupfile comps.xml $d
+    createrepo --update --groupfile comps.xml $d
 done
