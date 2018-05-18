@@ -51,39 +51,39 @@
 # - name: flush handlers before we get to firewalld config
 #   meta: flush_handlers
 
-- name: refresh firewall state
-  firewall_cmd:
-      state: get
-  register: firewalld_state
-
-- debug:
-    msg: "{{firewalld_state}}"
-
-- name: add missing ipsets
-  firewall_cmd_ipset:
-      name: "{{item}}"
-      type: "{{firewalld_ipsets[item].type}}"
-      family: "{{firewalld_ipsets[item].family|default('inet')}}"
-      options: "{{firewalld_ipsets[item].options|default({})}}"
-      state: present
-  with_items: "{{ firewalld_ipsets.keys() }}"
-
-- name: remove extra zones
-  firewall_cmd_zone:
-      name: "{{item}}"
-      state: absent
-  with_items: "{{ firewalld_state['firewalld']['permanent_ipsets'].keys() | difference(firewalld_ipsets.keys()) }}"
+# - name: refresh firewall state
+#   firewall_cmd:
+#       state: get
+#   register: firewalld_state
+#
+# - debug:
+#     msg: "{{firewalld_state}}"
+#
+# - name: add missing ipsets
+#   firewall_cmd_ipset:
+#       name: "{{item}}"
+#       type: "{{firewalld_ipsets[item].type}}"
+#       family: "{{firewalld_ipsets[item].family|default('inet')}}"
+#       options: "{{firewalld_ipsets[item].options|default({})}}"
+#       state: present
+#   with_items: "{{ firewalld_ipsets.keys() }}"
+#
+# - name: remove extra zones
+#   firewall_cmd_zone:
+#       name: "{{item}}"
+#       state: absent
+#   with_items: "{{ firewalld_state['firewalld']['permanent_ipsets'].keys() | difference(firewalld_ipsets.keys()) }}"
 
 # - name: reload firewall from permanent
 #   firewall_cmd:
 #       state: reload
 #
-# - name: configure ipsets
-#   include_tasks: ipset.yml
-#   with_items: "{{firewalld_ipsets.keys()}}"
-#   loop_control:
-#       loop_var: ipset_name
-#
+- name: configure ipsets
+  include_tasks: ipset.yml
+  with_items: "{{firewalld_ipsets.keys()}}"
+  loop_control:
+      loop_var: ipset_name
+
 # # TODO firewalld_icmptypes
 # # TODO firewalld_services
 #
