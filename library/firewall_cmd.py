@@ -188,6 +188,41 @@ firewalld:
                     returned: success
                     type: str
                     sample: -m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
+        permanent_ipsets:
+            description: ipsets defined in the permanent configuration
+            returned: success
+            type: complex
+            contains:
+                description:
+                    description: current setting of description; see corresponding option
+                    returned: success
+                    type: str
+                    sample: IPv4 private subnets
+                short:
+                    description: current setting of short description; see corresponding option
+                    returned: success
+                    type: str
+                    sample: Private subnets
+                family:
+                    description: current setting of family; see corresponding option
+                    returned: success
+                    type: str
+                    sample: inet
+                type:
+                    description: current setting of type; see corresponding option
+                    returned: success
+                    type: str
+                    sample: hash:ip
+                options:
+                    description: current setting of options; see corresponding option
+                    returned: success
+                    type: dict(str, str)
+                    sample: {}
+                entries:
+                    description: current entries in the ipset; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16']
         permanent_zones:
             description: zones defined in the permanent configuration
             returned: success
@@ -336,6 +371,41 @@ firewalld:
                     returned: success
                     type: str
                     sample: -m tcp -p tcp -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
+        runtime_ipsets:
+            description: ipsets defined in the runtime configuration
+            returned: success
+            type: complex
+            contains:
+                description:
+                    description: current setting of description; see corresponding option
+                    returned: success
+                    type: str
+                    sample: IPv4 private subnets
+                short:
+                    description: current setting of short description; see corresponding option
+                    returned: success
+                    type: str
+                    sample: Private subnets
+                family:
+                    description: current setting of family; see corresponding option
+                    returned: success
+                    type: str
+                    sample: inet
+                type:
+                    description: current setting of type; see corresponding option
+                    returned: success
+                    type: str
+                    sample: hash:ip
+                options:
+                    description: current setting of options; see corresponding option
+                    returned: success
+                    type: dict(str, str)
+                    sample: {}
+                entries:
+                    description: current entries in the ipset; see corresponding option
+                    returned: success
+                    type: list(str)
+                    sample: ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16']
         runtime_zones:
             description: zones defined in the runtime configuration
             returned: success
@@ -417,348 +487,6 @@ firewalld:
             returned: success
             type: str
             sample: '0.4.3.2'
-
-            "permanent_zones": {
-                "block": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "block",
-                    "permanent": true,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "REJECT"
-                },
-                "dmz": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "dmz",
-                    "permanent": true,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [
-                        "ssh"
-                    ],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "default"
-                },
-                "drop": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "drop",
-                    "permanent": true,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "DROP"
-                },
-                "external": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": true,
-                    "name": "external",
-                    "permanent": true,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [
-                        "ssh"
-                    ],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "default"
-                },
-                "home": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "home",
-                    "permanent": true,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [
-                        "dhcpv6-client",
-                        "mdns",
-                        "samba-client",
-                        "ssh"
-                    ],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "default"
-                },
-                "internal": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "internal",
-                    "permanent": true,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [
-                        "dhcpv6-client",
-                        "mdns",
-                        "samba-client",
-                        "ssh"
-                    ],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "default"
-                },
-                "public": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "public",
-                    "permanent": true,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [
-                        "dhcpv6-client",
-                        "ssh"
-                    ],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "default"
-                },
-                "trusted": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "trusted",
-                    "permanent": true,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "ACCEPT"
-                },
-                "work": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "work",
-                    "permanent": true,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [
-                        "dhcpv6-client",
-                        "ssh"
-                    ],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "default"
-                }
-            },
-            "running": true,
-            "runtime_direct_chains": [],
-            "runtime_direct_passthroughs": [],
-            "runtime_direct_rules": [],
-            "runtime_zones": {
-                "block": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "block",
-                    "permanent": false,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "REJECT"
-                },
-                "dmz": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "dmz",
-                    "permanent": false,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [
-                        "ssh"
-                    ],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "default"
-                },
-                "drop": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "drop",
-                    "permanent": false,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "DROP"
-                },
-                "external": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": true,
-                    "name": "external",
-                    "permanent": false,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [
-                        "ssh"
-                    ],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "default"
-                },
-                "home": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "home",
-                    "permanent": false,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [
-                        "ssh",
-                        "mdns",
-                        "samba-client",
-                        "dhcpv6-client"
-                    ],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "default"
-                },
-                "internal": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "internal",
-                    "permanent": false,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [
-                        "ssh",
-                        "mdns",
-                        "samba-client",
-                        "dhcpv6-client"
-                    ],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "default"
-                },
-                "public": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [
-                        "eth0"
-                    ],
-                    "masquerade": false,
-                    "name": "public",
-                    "permanent": false,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [
-                        "dhcpv6-client",
-                        "ssh"
-                    ],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "default"
-                },
-                "trusted": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "trusted",
-                    "permanent": false,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "ACCEPT"
-                },
-                "work": {
-                    "forward_ports": [],
-                    "icmp_block_inversion": false,
-                    "icmp_blocks": [],
-                    "interfaces": [],
-                    "masquerade": false,
-                    "name": "work",
-                    "permanent": false,
-                    "ports": [],
-                    "protocols": [],
-                    "rich_rules": [],
-                    "services": [
-                        "ssh",
-                        "dhcpv6-client"
-                    ],
-                    "source_ports": [],
-                    "sources": [],
-                    "target": "default"
-                }
-            },
-            "version": "0.4.3.2"
-        }
-    }
 '''
 
 from ansible.module_utils.basic import AnsibleModule
