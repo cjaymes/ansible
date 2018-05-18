@@ -71,85 +71,85 @@
       state: absent
   with_items: "{{ firewalld_state['firewalld']['permanent_ipsets'].keys() | difference(firewalld_ipsets.keys()) }}"
 
-- name: configure ipsets
-  include_tasks: ipset.yml
-  with_items: "{{firewalld_ipsets.keys()}}"
-  loop_control:
-      loop_var: ipset_name
-
-# TODO firewalld_icmptypes
-# TODO firewalld_services
-
-- name: config zones
-  include_tasks: zone.yml
-  vars:
-      firewalld_state_: "{{ firewalld_state }}"
-  with_items: "{{ firewalld_zone_configs.keys() }}"
-  loop_control:
-    loop_var: firewalld_zone
-
-- name: reload firewall from permanent
-  firewall_cmd:
-      state: reload
-
-- name: refresh firewall state
-  firewall_cmd:
-      state: get
-  register: firewalld_state
-
-- debug:
-    msg: "{{firewalld_state}}"
-
-
-# TODO firewalld_direct_chains
-
-- name: add direct rules
-  firewall_cmd_direct:
-      family: "{{item.family}}"
-      table: "{{item.table}}"
-      chain: "{{item.chain}}"
-      priority: "{{item.priority}}"
-      rule: "{{item.rule}}"
-      state: present
-  with_items: "{{ firewalld_direct_rules }}"
-
-- name: remove direct rules
-  firewall_cmd_direct:
-      family: "{{ item.family | default('ipv4') }}"
-      table: "{{item.table}}"
-      chain: "{{item.chain}}"
-      priority: "{{ item.priority | default(0) }}"
-      rule: "{{item.rule}}"
-      state: absent
-  with_items: "{{ firewalld_state['firewalld']['permanent_direct_rules'] | difference(firewalld_direct_rules) }}"
-
-- name: reload firewall from permanent
-  firewall_cmd:
-      state: reload
-
-- name: refresh firewall state
-  firewall_cmd:
-      state: get
-  register: firewalld_state
-
+# - name: configure ipsets
+#   include_tasks: ipset.yml
+#   with_items: "{{firewalld_ipsets.keys()}}"
+#   loop_control:
+#       loop_var: ipset_name
+#
+# # TODO firewalld_icmptypes
+# # TODO firewalld_services
+#
+# - name: config zones
+#   include_tasks: zone.yml
+#   vars:
+#       firewalld_state_: "{{ firewalld_state }}"
+#   with_items: "{{ firewalld_zone_configs.keys() }}"
+#   loop_control:
+#     loop_var: firewalld_zone
+#
+# - name: reload firewall from permanent
+#   firewall_cmd:
+#       state: reload
+#
+# - name: refresh firewall state
+#   firewall_cmd:
+#       state: get
+#   register: firewalld_state
+#
 # - debug:
 #     msg: "{{firewalld_state}}"
 #
-# TODO firewalld_passthroughs
-# TODO firewalld_lockdown_mode
-
-- name: template /etc/hosts.allow
-  template:
-      src: files/etc/hosts.allow.j2
-      dest: /etc/hosts.allow
-      mode: 0644
-      owner: root
-      group: root
-
-- name: template /etc/hosts.deny
-  template:
-      src: files/etc/hosts.deny.j2
-      dest: /etc/hosts.deny
-      mode: 0644
-      owner: root
-      group: root
+#
+# # TODO firewalld_direct_chains
+#
+# - name: add direct rules
+#   firewall_cmd_direct:
+#       family: "{{item.family}}"
+#       table: "{{item.table}}"
+#       chain: "{{item.chain}}"
+#       priority: "{{item.priority}}"
+#       rule: "{{item.rule}}"
+#       state: present
+#   with_items: "{{ firewalld_direct_rules }}"
+#
+# - name: remove direct rules
+#   firewall_cmd_direct:
+#       family: "{{ item.family | default('ipv4') }}"
+#       table: "{{item.table}}"
+#       chain: "{{item.chain}}"
+#       priority: "{{ item.priority | default(0) }}"
+#       rule: "{{item.rule}}"
+#       state: absent
+#   with_items: "{{ firewalld_state['firewalld']['permanent_direct_rules'] | difference(firewalld_direct_rules) }}"
+#
+# - name: reload firewall from permanent
+#   firewall_cmd:
+#       state: reload
+#
+# - name: refresh firewall state
+#   firewall_cmd:
+#       state: get
+#   register: firewalld_state
+#
+# # - debug:
+# #     msg: "{{firewalld_state}}"
+# #
+# # TODO firewalld_passthroughs
+# # TODO firewalld_lockdown_mode
+#
+# - name: template /etc/hosts.allow
+#   template:
+#       src: files/etc/hosts.allow.j2
+#       dest: /etc/hosts.allow
+#       mode: 0644
+#       owner: root
+#       group: root
+#
+# - name: template /etc/hosts.deny
+#   template:
+#       src: files/etc/hosts.deny.j2
+#       dest: /etc/hosts.deny
+#       mode: 0644
+#       owner: root
+#       group: root
