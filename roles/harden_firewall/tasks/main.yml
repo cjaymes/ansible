@@ -99,40 +99,36 @@
       state: absent
   with_items: "{{ firewalld_state['firewalld']['permanent_direct_rules'] | difference(firewalld_direct_rules) }}"
 
-# - name: refresh firewall state
-#   firewall_cmd:
-#       state: get
-#   register: firewalld_state
-#
+- name: reload firewall from permanent
+  firewall_cmd:
+      state: reload
+
+- name: refresh firewall state
+  firewall_cmd:
+      state: get
+  register: firewalld_state
+
 # - debug:
 #     msg: "{{firewalld_state}}"
 #
-# - name: reload firewall from permanent
-#   firewall_cmd:
-#       state: reload
-#
-# - name: wait for connection to come back
-#   wait_for_connection:
-#       timeout: 10
-
 # TODO firewalld_ipsets
 # TODO firewalld_icmptypes
 # TODO firewalld_services
 # TODO firewalld_passthroughs
 # TODO firewalld_lockdown_mode
 
-# - name: template /etc/hosts.allow
-#   template:
-#       src: files/etc/hosts.allow.j2
-#       dest: /etc/hosts.allow
-#       mode: 0644
-#       owner: root
-#       group: root
-#
-# - name: template /etc/hosts.deny
-#   template:
-#       src: files/etc/hosts.deny.j2
-#       dest: /etc/hosts.deny
-#       mode: 0644
-#       owner: root
-#       group: root
+- name: template /etc/hosts.allow
+  template:
+      src: files/etc/hosts.allow.j2
+      dest: /etc/hosts.allow
+      mode: 0644
+      owner: root
+      group: root
+
+- name: template /etc/hosts.deny
+  template:
+      src: files/etc/hosts.deny.j2
+      dest: /etc/hosts.deny
+      mode: 0644
+      owner: root
+      group: root
