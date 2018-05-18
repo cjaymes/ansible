@@ -56,7 +56,12 @@
       state: get
   register: firewalld_state
 
-# TODO firewalld_ipsets
+- name: configure ipsets
+  include_tasks: ipset.yml
+  with_items: "{{firewalld_ipsets.keys()}}"
+  loop_control:
+      loop_var: ipset_name
+
 # TODO firewalld_icmptypes
 # TODO firewalld_services
 

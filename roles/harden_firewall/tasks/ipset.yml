@@ -1,0 +1,2 @@
+- debug:
+    msg: "Setting {{ipset_name}} with {{firewalld_ipsets[ipset_name]}}"
