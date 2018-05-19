@@ -1,9 +1,8 @@
-- name: install createrepo
+- name: install packages
   yum:
       name: createrepo
       state: install
-
-- name: install yum-utils
-  yum:
-      name: yum-utils
-      state: install
+  loop:
+      - createrepo
+      - yum-utils
+      - nfs-utils
