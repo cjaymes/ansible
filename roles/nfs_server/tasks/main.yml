@@ -1,0 +1,21 @@
+- name: install packages
+  yum:
+      name: createrepo
+      state: install
+  loop:
+      - nfs-utils
+
+- name: set up nfs service
+  service:
+      name: nfs
+      enable: true
+      state: started
+
+- name: add firewall exception
+  command: firewall-cmd --add-service=nfs
+
+- name: add firewall exception
+  command: firewall-cmd --add-service=nfs --permanent
+
+# TODO exports
+# notify: refresh exports
