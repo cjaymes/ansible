@@ -39,15 +39,15 @@
 #     - harden_xorg
 #     - harden_yum
 
-- name: include rhel 6 specific roles
-  include_role:
-    name: "{{item}}"
-  with_items:
-    - harden_init
-    # TODO anything replaced by sssd?
-    - harden_iptables
-  when: ansible_distribution_major_version == '6'
-
+# - name: include rhel 6 specific roles
+#   include_role:
+#     name: "{{item}}"
+#   with_items:
+#     - harden_init
+#     # TODO anything replaced by sssd?
+#     - harden_iptables
+#   when: ansible_distribution_major_version == '6'
+#
 - name: include rhel 7 specific roles
   include_role:
     name: "{{item}}"
