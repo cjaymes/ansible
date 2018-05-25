@@ -3,11 +3,21 @@
       state: installed
       name: cronie
 
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38605
+- name: crond service configuration
+  service:
+      name: crond.service
+      enabled: yes
+      state: started
+
 - name: get cron.allow stat
   stat:
       path: /etc/cron.allow
   register: cron_allow_stat
 
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72053, V-72055
 - name: set cron.allow properties
   file:
       path: /etc/cron.allow
