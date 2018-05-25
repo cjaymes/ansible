@@ -15,9 +15,10 @@ dependencies:
   # - { role: harden_kernel }
   # - { role: harden_ldap }
   # - { role: harden_logins }
+  # - { role: harden_logrotate }
   # - { role: harden_modules }
   # - { role: harden_network }
-  # - { role: harden_nfs }
+  # - { role: harden_nfs_server }
   # - { role: harden_ntpd }
   # - { role: harden_packages }
   # - { role: harden_pam }
