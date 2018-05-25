@@ -3,7 +3,6 @@
 #     name: "{{harden_role}}"
 #   loop:
 #     - harden_aide
-#     - harden_antivirus
 #     - harden_auditing
 #     - harden_backup
 #     - harden_cron
@@ -49,6 +48,7 @@
 #     - harden_init
 #     # TODO anything replaced by sssd?
 #     - harden_iptables
+#     - mcafee_client
 #   loop_control:
 #     loop_var: harden_role
 
@@ -60,5 +60,6 @@
     - harden_firewalld
     # - harden_sssd
     # - harden_systemd
+    # - TODO mcafee_client or clamav
   loop_control:
     loop_var: harden_role
