@@ -9,7 +9,7 @@ dependencies:
   - { role: harden_firewall }
   # - { role: harden_gdm }
   # - { role: harden_grub }
-  # - { role: harden_home_dirs }
+  # - { role: harden_gnome }
   # - { role: harden_init }
   # - { role: harden_ips }
   # - { role: harden_kernel }
@@ -22,18 +22,17 @@ dependencies:
   # - { role: harden_packages }
   # - { role: harden_pam }
   # - { role: harden_passwords }
+  # - { role: harden_patching }
   # - { role: harden_postfix }
-  # - { role: harden_prohibited_files }
+  # - { role: harden_resolv_conf }
   # - { role: harden_rsyslogd }
   # - { role: harden_samba }
   # - { role: harden_selinux }
-  # - { role: harden_services }
   # - { role: harden_snmpd }
   # - { role: harden_sshd }
   # - { role: harden_sssd }
   # - { role: harden_sudo }
   # - { role: harden_systemd }
-  # - { role: harden_system_dirs }
   # - { role: harden_tftpd }
   # - { role: harden_umask }
   # - { role: harden_vsftpd }

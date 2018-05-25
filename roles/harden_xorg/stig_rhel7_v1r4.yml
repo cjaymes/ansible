@@ -1,0 +1,46 @@
+# Vuln ID: V-72307
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86931r3_rule
+# STIG ID: RHEL-07-040730
+# Rule Title: An X Windows display manager must not be installed unless approved.
+# Discussion: Internet services that are not required for system or application processes must not be active to decrease the attack surface of the system. X Windows has a long history of security vulnerabilities and will not be used unless approved and documented.
+# IA Controls:
+# Check Content: Verify that if the system has X Windows System installed, it is authorized.
+#
+# Check for the X11 package with the following command:
+#
+# # rpm -qa | grep xorg | grep server
+#
+# Ask the System Administrator if use of the X Windows System is an operational requirement.
+#
+# If the use of X Windows on the system is not documented with the Information System Security Officer (ISSO), this is a finding.
+# Fix Text: Document the requirement for an X Windows server with the ISSO or remove the related packages with the following commands:
+#
+# # rpm -e xorg-x11-server-common
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72307
+#   set_fact:
+#     stig_rhel7_v1r4_v_72307_result: 'fail'
+#   when:
+#     - "'v_72307' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72307_result != 'pass'
