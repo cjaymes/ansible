@@ -1,6 +1,6 @@
 # - name: import non-specific roles
 #   import_role:
-#     name: {{item}}
+#     name: "{{item}}"
 #   with_items:
 #     - harden_aide
 #     - harden_antivirus
@@ -41,7 +41,7 @@
 
 - name: import rhel 6 specific roles
   import_role:
-    name: {{item}}
+    name: "{{item}}"
   with_items:
     - harden_init
     # TODO anything replaced by sssd?
@@ -50,7 +50,7 @@
 
 - name: import rhel 7 specific roles
   import_role:
-    name: {{item}}
+    name: "{{item}}"
   with_items:
     - harden_firewalld
     # - harden_sssd
