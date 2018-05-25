@@ -1,34 +1,3 @@
-- name: systemctl status nails
-  shell: systemctl status nails || true
-  # following is so we don't get an error about using command instead of module
-  args:
-      warn: false
-  # errors are expected; ignore
-  ignore_errors: yes
-  # this command doesn't actually change anything
-  changed_when: false
-  register: antivirus_nails_status
-
-# - name: antivirus_nails_status
-#   debug:
-#     msg: '{{antivirus_nails_status}}'
-
-- name: systemctl status clamav-daemon
-  shell: systemctl status clamav-daemon || true
-  # following is so we don't get an error about using command instead of module
-  args:
-      warn: false
-  # errors are expected; ignore
-  ignore_errors: yes
-  # this command doesn't actually change anything
-  changed_when: false
-  register: antivirus_clamav_status
-
-# - name: antivirus_clamav_status
-#   debug:
-#     msg: '{{antivirus_clamav_status}}'
-
-
 # Vuln ID: V-72213
 # Severity: high
 # Group Title: SRG-OS-000480-GPOS-00227
