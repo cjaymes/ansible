@@ -1,5 +1,5 @@
-# - name: import non-specific roles
-#   import_role:
+# - name: include non-specific roles
+#   include_role:
 #     name: "{{item}}"
 #   with_items:
 #     - harden_aide
@@ -39,8 +39,8 @@
 #     - harden_xorg
 #     - harden_yum
 
-- name: import rhel 6 specific roles
-  import_role:
+- name: include rhel 6 specific roles
+  include_role:
     name: "{{item}}"
   with_items:
     - harden_init
@@ -48,8 +48,8 @@
     - harden_iptables
   when: ansible_distribution_major_version == 6
 
-- name: import rhel 7 specific roles
-  import_role:
+- name: include rhel 7 specific roles
+  include_role:
     name: "{{item}}"
   with_items:
     - harden_firewalld
