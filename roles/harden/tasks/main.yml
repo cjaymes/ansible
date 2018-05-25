@@ -3,7 +3,7 @@
 #     name: "{{harden_role}}"
 #   loop:
 #     - harden_aide
-#     - harden_auditing
+#     - harden_auditd
 #     - harden_cron
 #     - harden_filesystems
 #     - harden_gdm
