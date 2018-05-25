@@ -60,5 +60,7 @@
     # - harden_sssd
     # - harden_systemd
     # - TODO mcafee_client or clamav
+    # TODO usbguard might be available on rhel6
+    # - harden_usbguard
   loop_control:
     loop_var: harden_role

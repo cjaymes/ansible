@@ -1,0 +1,26 @@
+- name: install packages
+  yum:
+      state: installed
+      name: usbguard
+
+- name: usbguard config
+  template:
+      src: templates/etc/usbguard/usbguard-daemon.conf.j2
+      dest: /etc/usbguard/usbguard-daemon.conf
+      owner: root
+      group: root
+      mode: 0600
+
+- name: usbguard rules
+  copy:
+      src: files/etc/usbguard/rules.conf
+      dest: /etc/usbguard/rules.conf
+      owner: root
+      group: root
+      mode: 0600
+
+- name: usbguard service
+  service:
+      name: usbguard
+      enabled: yes
+      state: started
