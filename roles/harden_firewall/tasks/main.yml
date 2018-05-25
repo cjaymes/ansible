@@ -156,7 +156,7 @@
 #
 # - name: template /etc/hosts.allow
 #   template:
-#       src: files/etc/hosts.allow.j2
+#       src: templates/etc/hosts.allow.j2
 #       dest: /etc/hosts.allow
 #       mode: 0644
 #       owner: root
@@ -164,7 +164,7 @@
 #
 # - name: template /etc/hosts.deny
 #   template:
-#       src: files/etc/hosts.deny.j2
+#       src: templates/etc/hosts.deny.j2
 #       dest: /etc/hosts.deny
 #       mode: 0644
 #       owner: root
