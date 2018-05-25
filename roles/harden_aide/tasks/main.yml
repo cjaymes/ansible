@@ -1,3 +1,7 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71973, V-71975
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38489, V-38670, V-38673, V-38695, V-38696, V-38698, V-38700
 - name: install aide
   yum:
       state: installed
@@ -20,6 +24,23 @@
   when:
       - aide_frequency == 'weekly'
 
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-51391
+- name: check if /var/lib/aide/aide.db.gz exists
+  stat:
+      path: /var/lib/aide/aide.db.gz
+  register: aide_db_stat
+
+- name: create initial aide db
+  command: aide --init
+  when: aide_db_stat.exists == False
+
+- name: move initial db to permanent location
+  command: mv -f /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+  when: aide_db_stat.exists == False
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72069, V-72071, V-72073
 - name: aide.conf
   template:
       src: etc/aide.conf
