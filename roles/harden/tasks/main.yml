@@ -1,7 +1,7 @@
 # - name: include non-specific roles
 #   include_role:
-#     name: "{{item}}"
-#   with_items:
+#     name: "{{harden_role}}"
+#   loop:
 #     - harden_aide
 #     - harden_antivirus
 #     - harden_auditing
@@ -38,21 +38,27 @@
 #     - harden_vsftpd
 #     - harden_xorg
 #     - harden_yum
+#   loop_control:
+#     loop_var: harden_role
 
 # - name: include rhel 6 specific roles
 #   include_role:
-#     name: "{{item}}"
-#   with_items:
+#     name: "{{harden_role}}"
+#   when: ansible_distribution_major_version == '6'
+#   loop:
 #     - harden_init
 #     # TODO anything replaced by sssd?
 #     - harden_iptables
-#   when: ansible_distribution_major_version == '6'
-#
+#   loop_control:
+#     loop_var: harden_role
+
 - name: include rhel 7 specific roles
   include_role:
-    name: "{{item}}"
-  with_items:
+    name: "{{harden_role}}"
+  when: ansible_distribution_major_version == '7'
+  loop:
     - harden_firewalld
     # - harden_sssd
     # - harden_systemd
-  when: ansible_distribution_major_version == '7'
+  loop_control:
+    loop_var: harden_role
