@@ -1,15 +1,15 @@
-# - name: firewalld is installed & latest
-#   yum:
-#       name: firewalld
-#       update_cache: yes
-#       state: latest
-#
-# - name: firewalld is running
-#   service:
-#       name: firewalld.service
-#       enabled: yes
-#       state: started
-#
+- name: firewalld is installed & latest
+  yum:
+      name: firewalld
+      update_cache: yes
+      state: latest
+
+- name: firewalld is running
+  service:
+      name: firewalld.service
+      enabled: yes
+      state: started
+
 - name: get firewall state
   firewall_cmd:
       state: get
@@ -18,69 +18,65 @@
 - debug:
     msg: "{{firewalld_state}}"
 
-# - name: fail if firewalld not running
-#   fail:
-#       msg: "Firewalld is not running"
-#   when: not firewalld_state['firewalld']['running']
-#
-# - name: set default zone
-#   firewall_cmd:
-#       default_zone: "{{ firewalld_default_zone }}"
-#
-# # TODO log_denied, automatic_helpers
-#
-# - name: add missing zones
-#   firewall_cmd_zone:
-#       name: "{{item}}"
-#       state: present
-#   with_items: "{{ firewalld_zone_configs.keys() }}"
-#
-# - name: remove extra zones
-#   firewall_cmd_zone:
-#       name: "{{item}}"
-#       state: absent
-#   with_items: "{{ firewalld_state['firewalld']['permanent_zones'].keys() | difference(firewalld_zone_configs.keys()) }}"
-#
-# - name: reload firewall from permanent
-#   firewall_cmd:
-#       state: reload
-#
-# - name: configure network interfaces
-#   include_tasks: interface.yml
-#   with_items: "{{ network_interfaces.keys() }}"
-#   loop_control:
-#     loop_var: network_interface
-#
-# - name: flush handlers before we get to firewalld config
-#   meta: flush_handlers
+- name: fail if firewalld not running
+  fail:
+      msg: "Firewalld is not running"
+  when: not firewalld_state['firewalld']['running']
 
-# - name: refresh firewall state
-#   firewall_cmd:
-#       state: get
-#   register: firewalld_state
-#
-# - debug:
-#     msg: "{{firewalld_state}}"
-#
-# - name: add missing ipsets
-#   firewall_cmd_ipset:
-#       name: "{{item}}"
-#       type: "{{firewalld_ipsets[item].type}}"
-#       family: "{{firewalld_ipsets[item].family|default('inet')}}"
-#       options: "{{firewalld_ipsets[item].options|default({})}}"
-#       state: present
-#   with_items: "{{ firewalld_ipsets.keys() }}"
-#
-# - name: remove extra zones
-#   firewall_cmd_zone:
-#       name: "{{item}}"
-#       state: absent
-#   with_items: "{{ firewalld_state['firewalld']['permanent_ipsets'].keys() | difference(firewalld_ipsets.keys()) }}"
+# TODO log_denied, automatic_helpers
 
-# - name: reload firewall from permanent
-#   firewall_cmd:
-#       state: reload
-#
+- name: add missing zones
+  firewall_cmd_zone:
+      name: "{{item}}"
+      state: present
+  with_items: "{{ firewalld_zone_configs.keys() }}"
+
+- name: remove extra zones
+  firewall_cmd_zone:
+      name: "{{item}}"
+      state: absent
+  with_items: "{{ firewalld_state['firewalld']['permanent_zones'].keys() | difference(firewalld_zone_configs.keys()) }}"
+
+- name: reload firewall from permanent
+  firewall_cmd:
+      state: reload
+
+- name: configure network interfaces
+  include_tasks: interface.yml
+  with_items: "{{ network_interfaces.keys() }}"
+  loop_control:
+    loop_var: network_interface
+
+- name: flush handlers before we get to firewalld config
+  meta: flush_handlers
+
+- name: refresh firewall state
+  firewall_cmd:
+      state: get
+  register: firewalld_state
+
+- debug:
+    msg: "{{firewalld_state}}"
+
+- name: add missing ipsets
+  firewall_cmd_ipset:
+      name: "{{item}}"
+      type: "{{firewalld_ipsets[item].type}}"
+      family: "{{firewalld_ipsets[item].family|default('inet')}}"
+      options: "{{firewalld_ipsets[item].options|default({})}}"
+      state: present
+  with_items: "{{ firewalld_ipsets.keys() }}"
+
+- name: remove extra zones
+  firewall_cmd_zone:
+      name: "{{item}}"
+      state: absent
+  with_items: "{{ firewalld_state['firewalld']['permanent_ipsets'].keys() | difference(firewalld_ipsets.keys()) }}"
+
+- name: reload firewall from permanent
+  firewall_cmd:
+      state: reload
+
 - name: configure ipsets
   include_tasks: ipset.yml
   with_items: "{{firewalld_ipsets.keys()}}"
@@ -95,77 +91,81 @@
 - debug:
     msg: "{{firewalld_state}}"
 
-# # TODO firewalld_icmptypes
-# # TODO firewalld_services
-#
-# - name: config zones
-#   include_tasks: zone.yml
-#   with_items: "{{ firewalld_zone_configs.keys() }}"
-#   loop_control:
-#     loop_var: firewalld_zone
-#
-# - name: reload firewall from permanent
-#   firewall_cmd:
-#       state: reload
-#
-# - name: refresh firewall state
-#   firewall_cmd:
-#       state: get
-#   register: firewalld_state
-#
+# TODO firewalld_icmptypes
+# TODO firewalld_services
+
+- name: config zones
+  include_tasks: zone.yml
+  with_items: "{{ firewalld_zone_configs.keys() }}"
+  loop_control:
+    loop_var: firewalld_zone
+
+- name: reload firewall from permanent
+  firewall_cmd:
+      state: reload
+
+- name: refresh firewall state
+  firewall_cmd:
+      state: get
+  register: firewalld_state
+
+- debug:
+    msg: "{{firewalld_state}}"
+
+
+# TODO firewalld_direct_chains
+
+- name: add direct rules
+  firewall_cmd_direct:
+      family: "{{item.family}}"
+      table: "{{item.table}}"
+      chain: "{{item.chain}}"
+      priority: "{{item.priority}}"
+      rule: "{{item.rule}}"
+      state: present
+  with_items: "{{ firewalld_direct_rules }}"
+
+- name: remove direct rules
+  firewall_cmd_direct:
+      family: "{{ item.family | default('ipv4') }}"
+      table: "{{item.table}}"
+      chain: "{{item.chain}}"
+      priority: "{{ item.priority | default(0) }}"
+      rule: "{{item.rule}}"
+      state: absent
+  with_items: "{{ firewalld_state['firewalld']['permanent_direct_rules'] | difference(firewalld_direct_rules) }}"
+
+- name: set default zone
+  firewall_cmd:
+      default_zone: "{{ firewalld_default_zone }}"
+
+- name: reload firewall from permanent
+  firewall_cmd:
+      state: reload
+
+- name: refresh firewall state
+  firewall_cmd:
+      state: get
+  register: firewalld_state
+
 # - debug:
 #     msg: "{{firewalld_state}}"
 #
-#
-# # TODO firewalld_direct_chains
-#
-# - name: add direct rules
-#   firewall_cmd_direct:
-#       family: "{{item.family}}"
-#       table: "{{item.table}}"
-#       chain: "{{item.chain}}"
-#       priority: "{{item.priority}}"
-#       rule: "{{item.rule}}"
-#       state: present
-#   with_items: "{{ firewalld_direct_rules }}"
-#
-# - name: remove direct rules
-#   firewall_cmd_direct:
-#       family: "{{ item.family | default('ipv4') }}"
-#       table: "{{item.table}}"
-#       chain: "{{item.chain}}"
-#       priority: "{{ item.priority | default(0) }}"
-#       rule: "{{item.rule}}"
-#       state: absent
-#   with_items: "{{ firewalld_state['firewalld']['permanent_direct_rules'] | difference(firewalld_direct_rules) }}"
-#
-# - name: reload firewall from permanent
-#   firewall_cmd:
-#       state: reload
-#
-# - name: refresh firewall state
-#   firewall_cmd:
-#       state: get
-#   register: firewalld_state
-#
-# # - debug:
-# #     msg: "{{firewalld_state}}"
-# #
-# # TODO firewalld_passthroughs
-# # TODO firewalld_lockdown_mode
-#
-# - name: template /etc/hosts.allow
-#   template:
-#       src: templates/etc/hosts.allow.j2
-#       dest: /etc/hosts.allow
-#       mode: 0644
-#       owner: root
-#       group: root
-#
-# - name: template /etc/hosts.deny
-#   template:
-#       src: templates/etc/hosts.deny.j2
-#       dest: /etc/hosts.deny
-#       mode: 0644
-#       owner: root
-#       group: root
+# TODO firewalld_passthroughs
+# TODO firewalld_lockdown_mode
+
+- name: template /etc/hosts.allow
+  template:
+      src: templates/etc/hosts.allow.j2
+      dest: /etc/hosts.allow
+      mode: 0644
+      owner: root
+      group: root
+
+- name: template /etc/hosts.deny
+  template:
+      src: templates/etc/hosts.deny.j2
+      dest: /etc/hosts.deny
+      mode: 0644
+      owner: root
+      group: root
