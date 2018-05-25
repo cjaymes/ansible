@@ -4,7 +4,6 @@
 #   loop:
 #     - harden_aide
 #     - harden_auditing
-#     - harden_backup
 #     - harden_cron
 #     - harden_filesystems
 #     - harden_gdm
