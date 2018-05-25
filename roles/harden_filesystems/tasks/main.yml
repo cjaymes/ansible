@@ -1,2 +1,2 @@
 - name: apply fstab fixes
-  include_tasks: fstab-opt-present.yml
+  include_tasks: fstab.yml
