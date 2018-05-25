@@ -1,0 +1,57 @@
+- name: import non-specific roles
+  import_role:
+    name: {{item}}
+  with_items:
+    - harden_aide
+    - harden_antivirus
+    - harden_auditing
+    - harden_backup
+    - harden_cron
+    - harden_filesystems
+    - harden_gdm
+    - harden_grub
+    - harden_gnome
+    - harden_ips
+    - harden_kernel
+    - harden_ldap
+    - harden_logins
+    - harden_logrotate
+    - harden_modules
+    - harden_network
+    - harden_nfs_server
+    - harden_ntpd
+    - harden_packages
+    - harden_pam
+    - harden_passwords
+    - harden_patching
+    - harden_postfix
+    - harden_resolv_conf
+    - harden_rsyslogd
+    - harden_samba
+    - harden_selinux
+    - harden_snmpd
+    - harden_sshd
+    - harden_sudo
+    - harden_tftpd
+    - harden_umask
+    - harden_vsftpd
+    - harden_xorg
+    - harden_yum
+
+- name: import rhel 6 specific roles
+  import_role:
+    name: {{item}}
+  with_items:
+    - harden_init
+    # TODO anything replaced by sssd?
+    - harden_iptables
+  when: ansible_distribution_major_version == 6
+
+- name: import rhel 7 specific roles
+  import_role:
+    name: {{item}}
+  with_items:
+    - harden_firewalld
+    - harden_sssd
+    - harden_systemd
+  when: ansible_distribution_major_version == 7
