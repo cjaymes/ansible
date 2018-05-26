@@ -23,6 +23,7 @@
   when: item.uid >= 1000
   loop: "{{passwd.home_directories}}"
   register: home_umasks
+  failed_when: False
 
 - debug:
     msg: "{{home_umasks}}"
