@@ -1,3 +1,8 @@
+- name: install tcp_wrappers
+  yum:
+      name: tcp_wrappers
+      state: latest
+
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72315
 - name: template /etc/hosts.allow
