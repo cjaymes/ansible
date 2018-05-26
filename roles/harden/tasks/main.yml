@@ -32,8 +32,8 @@
 #     - harden_sudo
 #     - harden_tcpwrappers
 #     - harden_tftpd
-    - harden_umask
-#     - harden_vsftpd
+    # - harden_umask
+    - harden_vsftpd
 #     - harden_xorg
 #     - harden_yum
   loop_control:
