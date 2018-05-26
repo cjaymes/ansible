@@ -19,6 +19,14 @@
       group: root
       mode: 0600
 
+- name: usbguard logrotate
+  copy:
+      src: files/etc/logrotate.d/usbguard
+      dest: /etc/logrotate.d/usbguard
+      owner: root
+      group: root
+      mode: 0600
+
 - name: usbguard service
   service:
       name: usbguard
