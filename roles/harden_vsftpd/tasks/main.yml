@@ -1,6 +1,6 @@
 - name: check if vsftpd is installed
   command: rpm -qi vsftpd
-  warn: False
+    warn: False
   ignore_errors: True
   register: vsftpd_installed
 
