@@ -1,0 +1,20 @@
+nfs_client_packages:
+    - libtirpc
+    - gssproxy
+    - libverto
+    - keyutils
+    - libverto-libevent
+    - keyutils-libs
+    - nfs-utils
+    - libbasicobjects
+    - quota
+    - libcollection
+    - quota-nls
+    - libevent
+    - rpcbind
+    - libini_config
+    - libnfsidmap
+    - tcp_wrappers
+    - libpath_utils
+    - tcp_wrappers-libs
+    - libref_array
