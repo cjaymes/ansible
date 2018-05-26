@@ -61,3 +61,12 @@
       regexp: ^umask\s+
       line: umask 077
       state: present
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38651 (SV-50452r1_rule)
+- name: set umask in /etc/bashrc
+  lineinfile:
+      path: /etc/bashrc
+      regexp: ^umask\s+
+      line: umask 077
+      state: present
