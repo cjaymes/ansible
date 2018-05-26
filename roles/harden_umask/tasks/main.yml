@@ -30,7 +30,7 @@
 
 - name: set umask in interactive user dotfiles
   include_tasks: set_umask_in_files.yml
-  when: item.skipped|default(False) == True
+  when: item.skipped|default(False) == False
   loop: "{{home_umasks.results}}"
   loop_control:
       loop_var: home_umask_result
