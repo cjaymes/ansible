@@ -45,56 +45,6 @@
 #     - stig_rhel6_v1r18_v_38642_result != 'pass'
 
 
-# Vuln ID: V-38645
-# Severity: low
-# Group Title: SRG-OS-999999
-# Rule ID: SV-50446r1_rule
-# STIG ID: RHEL-06-000345
-# Rule Title: The system default umask in /etc/login.defs must be 077.
-# Discussion: The umask value influences the permissions assigned to files when they are created. A misconfigured umask value could result in files with excessive permissions that can be read and/or written to by unauthorized users.
-# IA Controls:
-# Check Content: Verify the "umask" setting is configured correctly in the "/etc/login.defs" file by running the following command:
-#
-# # grep -i "umask" /etc/login.defs
-#
-# All output must show the value of "umask" set to 077, as shown in the below:
-#
-# # grep -i "umask" /etc/login.defs
-# UMASK 077
-#
-#
-# If the above command returns no output, or if the umask is configured incorrectly, this is a finding.
-# Fix Text: To ensure the default umask controlled by "/etc/login.defs" is set properly, add or correct the "umask" setting in "/etc/login.defs" to read as follows:
-#
-# UMASK 077
-# False Positives:
-# False Negatives:
-# Documentable: false
-# Mitigations:
-# Potential Impact:
-# Third Party Tools:
-# Mitigation Control:
-# Responsibility:
-# Severity Override Guidance:
-# Check Content Reference: M
-# Classification: Unclass
-# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
-# VMS Asset Posture:
-#  CCI: CCI-000366
-# The organization implements the security configuration settings.
-# NIST SP 800-53 :: CM-6 b
-# NIST SP 800-53A :: CM-6.1 (iv)
-# NIST SP 800-53 Revision 4 :: CM-6 b
-#
-#
-# - name: fail stig_rhel6_v1r18 v_38645
-#   set_fact:
-#     stig_rhel6_v1r18_v_38645_result: 'fail'
-#   when:
-#     - "'v_38645' in stig_rhel6_v1r18_checks"
-#     - stig_rhel6_v1r18_v_38645_result != 'pass'
-
-
 # Vuln ID: V-38647
 # Severity: low
 # Group Title: SRG-OS-999999

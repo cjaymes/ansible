@@ -1,0 +1,28 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71995 (SV-86619r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38645 (SV-50446r1_rule)
+- name: set UMASK in /etc/login.defs
+  lineinfile:
+      path: /etc/login.defs
+      regexp: ^UMASK\s+
+      line: UMASK 077
+      state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72049 (SV-86673r1_rule)
+- name: pull parsed /etc/passwd
+  passwd:
+  register: passwd
+
+- debug:
+    msg: passwd
+
+- name: check home directories for umask files
+  command: grep -i umask {{item[home]}}
+  when: item[uid] >= 1000
+  loop: "{{passwd}}"
+  register: home_umasks
+
+- debug:
+    msg: home_umasks
