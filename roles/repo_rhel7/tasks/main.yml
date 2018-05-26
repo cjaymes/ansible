@@ -1,4 +1,4 @@
 #subscription-manager register
 #subscription-manager attach
-#  - { role: el_repo }
+#  - { role: repo_el }
 # daily cronjob
