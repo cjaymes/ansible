@@ -12,3 +12,8 @@ network_interfaces: {
 }
 
 ntp_server: localhost
+
+packages:
+    - mlocate
+    - vim
+    - screen
