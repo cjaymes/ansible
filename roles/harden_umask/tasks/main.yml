@@ -19,7 +19,7 @@
     msg: "{{passwd}}"
 
 - name: check home directories for umask files
-  shell: grep -i -h '^umask\s' {{item.home}}/.*
+  shell: grep -i -h -s '^umask\s' {{item.home}}/.*
   when: item.uid >= 1000
   loop: "{{passwd.home_directories}}"
   register: home_umasks
