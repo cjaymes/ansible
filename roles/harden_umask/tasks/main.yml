@@ -29,9 +29,8 @@
     msg: "{{home_umasks}}"
 
 - name: set umask in interactive user dotfiles
-  include_task:
-    name: set_umask_in_files.yml
-    vars:
-        files: "{{item.stdout_lines}}"
+  include_tasks: set_umask_in_files.yml
   when: item.skipped|default(False) == True
   loop: "{{home_umasks.results}}"
+  loop_control:
+      loop_var: home_umask_result

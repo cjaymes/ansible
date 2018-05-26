@@ -4,4 +4,4 @@
       regexp: ^umask\s+
       line: umask 077
       state: present
-  loop: "{{files}}"
+  loop: "{{home_umask_result.stdout_lines}}"
