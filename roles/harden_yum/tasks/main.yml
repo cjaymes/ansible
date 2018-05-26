@@ -20,7 +20,7 @@
 
 - name: replace gpgcheck=0 with gpgcheck=1 in /etc/yum.repo.d/*.repo
   command: "sed -ri 's/^gpgcheck=0/gpgcheck=1/g' {{item}}"
-  loop: gpgcheck_repos.stdout_lines
+  loop: gpgcheck_repos.stdout_lines|default(list())
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71979 (SV-86603r1_rule)
