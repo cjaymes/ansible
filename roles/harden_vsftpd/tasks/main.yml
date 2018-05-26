@@ -10,4 +10,4 @@
 
 - name: include fixes if command succeeded (package is installed)
   include_tasks: harden_vsftpd.yml
-  when: vsftpd_installed | succeeded
+  when: vsftpd_installed is succeeded
