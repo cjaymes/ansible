@@ -29,9 +29,9 @@
 #     - harden_selinux
 #     - harden_snmpd
 #     - harden_sshd
-#     - harden_sudo
-#     - harden_tcpwrappers
-    - harden_tftpd
+    - harden_sudo
+    # - harden_tcpwrappers
+    # - harden_tftpd
     # - harden_umask
     # - harden_vsftpd
     # - harden_yum
