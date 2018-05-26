@@ -30,7 +30,7 @@
 
 - name: set umask in interactive user dotfiles
   include_tasks: set_umask_in_files.yml
-  when: home_umask_result is succeeded
+  when: not home_umask_result is skipped
   loop: "{{home_umasks.results}}"
   loop_control:
       loop_var: home_umask_result
