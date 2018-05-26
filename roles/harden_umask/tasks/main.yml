@@ -19,7 +19,7 @@
     msg: "{{passwd}}"
 
 - name: check home directories for umask files
-  shell: grep -i -h -s '^umask\s' {{item.home}}/.*
+  shell: grep --no-messages --files-with-matches '^umask\s' {{item.home}}/.*
   when: item.uid >= 1000
   loop: "{{passwd.home_directories}}"
   register: home_umasks
@@ -27,3 +27,11 @@
 
 - debug:
     msg: "{{home_umasks}}"
+
+- name: set umask in interactive user dotfiles
+  include_task:
+    name: set_umask_in_files.yml
+    vars:
+        files: "{{item.stdout_lines}}"
+  when: item.skipped|default(False) == True
+  loop: "{{home_umasks.results}}"

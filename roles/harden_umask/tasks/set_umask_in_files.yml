@@ -1,0 +1,7 @@
+- name: set umask in given files
+  lineinfile:
+      path: "{{item}}"
+      regexp: ^umask\s+
+      line: umask 077
+      state: present
+  loop: "{{files}}"
