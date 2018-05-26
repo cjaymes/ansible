@@ -52,3 +52,12 @@
       regexp: ^umask\s+
       line: umask 077
       state: present
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38649 (SV-50450r1_rule)
+- name: set umask in /etc/csh.cshrc
+  lineinfile:
+      path: /etc/csh.cshrc
+      regexp: ^umask\s+
+      line: umask 077
+      state: present
