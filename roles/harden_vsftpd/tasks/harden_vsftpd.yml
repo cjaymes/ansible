@@ -1,2 +1,19 @@
-- debug:
-    msg: "{{vsftpd_installed}}"
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38599 (SV-50400r2_rule)
+- name: set banner_file
+  lineinfile:
+      path: /etc/vsftpd/vsftpd.conf
+      regexp: ^banner_file\s*=
+      line: banner_file=/etc/issue
+      state: present
+  notify: restart vsftpd
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38702 (SV-50503r1_rule)
+- name: check if vsftpd is started by xinetd
+  shell: grep --no-messages --files-with-matches vsftpd /etc/xinetd.d/*
+  register: vsftpd_xinetd
+
+- name: pull server_args from config file
+  shell: grep server_args {{vsftpd_xinetd.stdout}}
+  when: vsftpd_xinetd is succeeded
