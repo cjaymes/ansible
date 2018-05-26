@@ -7,8 +7,8 @@
 - name: set secure mode
   lineinfile:
       path: /etc/xinetd.d/tftp
-      regexp: ^(\s*)server_args\s*=
-      line: "\\1server_args = {{tftpd_server_args_extra}} -s /var/lib/tftpboot"
+      regexp: ^(\s*)server_args(\s*)=
+      line: "\\1server_args\\2= {{tftpd_server_args_extra}} -s /var/lib/tftpboot"
       backrefs: yes
       state: present
   notify:
