@@ -43,3 +43,12 @@
       regexp: ^umask\s+
       line: umask 022
       state: present
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38647 (SV-50448r1_rule)
+- name: set umask in /etc/profile
+  lineinfile:
+      path: /etc/profile
+      regexp: ^umask\s+
+      line: umask 077
+      state: present
