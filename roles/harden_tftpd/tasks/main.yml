@@ -5,8 +5,15 @@
   ignore_errors: True
   register: tftpd_installed
 
-- debug:
-    msg: "{{tftpd_installed}}"
+- name: check if xinetd is installed
+  command: rpm -qi xinetd
+  args:
+      warn: False
+  ignore_errors: True
+  register: xinetd_installed
+
+# - debug:
+#     msg: "{{tftpd_installed}}"
 
 - name: include fixes if command succeeded (package is installed)
   include_tasks: harden_tftpd.yml

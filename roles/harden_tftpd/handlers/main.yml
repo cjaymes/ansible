@@ -2,6 +2,7 @@
   service:
       name: xinetd
       state: restarted
+  when: xinetd_installed is succeeded
 
 - name: restart tftpd
   service:
