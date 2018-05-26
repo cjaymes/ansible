@@ -271,7 +271,7 @@ REPO_FILE="$SHARE/$(hostname -s).repo"
 echo > "$REPO_FILE"
 cd "$SHARE"
 for d in ${REPOS[*]}; do
-    echo <<"EOF" >> "$REPO_FILE"
+    cat >> "$REPO_FILE" <<"EOF"
 [$d]
 name = $d
 baseurl = file://$SHARE/$d
