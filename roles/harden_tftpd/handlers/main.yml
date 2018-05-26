@@ -1,0 +1,9 @@
+- name: restart xinetd
+  service:
+      name: xinetd
+      state: restarted
+
+- name: restart tftpd
+  service:
+      name: tftp
+      state: restarted

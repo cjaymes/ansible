@@ -31,10 +31,10 @@
 #     - harden_sshd
 #     - harden_sudo
 #     - harden_tcpwrappers
-#     - harden_tftpd
+    - harden_tftpd
     # - harden_umask
     # - harden_vsftpd
-    - harden_yum
+    # - harden_yum
   loop_control:
     loop_var: harden_role
 

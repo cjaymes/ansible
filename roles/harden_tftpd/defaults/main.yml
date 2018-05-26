@@ -1,0 +1,2 @@
+# set to -c for client uploads
+tftpd_server_args_extra:

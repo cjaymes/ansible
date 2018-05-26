@@ -1,0 +1,13 @@
+- name: check if tftp is installed
+  command: rpm -qi tftp-server
+  args:
+      warn: False
+  ignore_errors: True
+  register: tftpd_installed
+
+- debug:
+    msg: "{{tftpd_installed}}"
+
+- name: include fixes if command succeeded (package is installed)
+  include_tasks: harden_tftpd.yml
+  when: tftpd_installed is succeeded
