@@ -1,7 +1,7 @@
-# - name: include non-specific roles
-#   include_role:
-#     name: "{{harden_role}}"
-#   loop:
+- name: include non-specific roles
+  include_role:
+    name: "{{harden_role}}"
+  loop:
 #     - harden_aide
 #     - harden_auditd
 #     - harden_cron
@@ -32,12 +32,12 @@
 #     - harden_sudo
 #     - harden_tcpwrappers
 #     - harden_tftpd
-#     - harden_umask
+    - harden_umask
 #     - harden_vsftpd
 #     - harden_xorg
 #     - harden_yum
-#   loop_control:
-#     loop_var: harden_role
+  loop_control:
+    loop_var: harden_role
 
 # - name: include rhel 6 specific roles
 #   include_role:
@@ -51,16 +51,16 @@
 #   loop_control:
 #     loop_var: harden_role
 
-- name: include rhel 7 specific roles
-  include_role:
-    name: "{{harden_role}}"
-  when: ansible_distribution_major_version == '7'
-  loop:
-    - harden_firewalld
-    # - harden_sssd
-    # - harden_systemd
-    # - TODO mcafee_client or clamav
-    # TODO usbguard might be available on rhel6
-    # - harden_usbguard
-  loop_control:
-    loop_var: harden_role
+# - name: include rhel 7 specific roles
+#   include_role:
+#     name: "{{harden_role}}"
+#   when: ansible_distribution_major_version == '7'
+#   loop:
+#     - harden_firewalld
+#     # - harden_sssd
+#     # - harden_systemd
+#     # - TODO mcafee_client or clamav
+#     # TODO usbguard might be available on rhel6
+#     # - harden_usbguard
+#   loop_control:
+#     loop_var: harden_role
