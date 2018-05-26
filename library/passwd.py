@@ -93,6 +93,8 @@ def main():
     for line in out.splitlines():
         record = zip(('login', 'passwd', 'uid', 'gid', 'name', 'home', 'shell'), line.strip().split(':'))
         record = dict(record)
+        record['uid'] = int(record['uid'])
+        record['gid'] = int(record['gid'])
         result['home_directories'].append(record)
 
     module.exit_json(**result)
