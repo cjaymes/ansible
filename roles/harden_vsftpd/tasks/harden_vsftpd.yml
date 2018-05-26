@@ -12,6 +12,7 @@
 # V-38702 (SV-50503r1_rule)
 - name: check if vsftpd is started by xinetd
   shell: grep --no-messages --files-with-matches vsftpd /etc/xinetd.d/*
+  ignore_errors: True
   register: vsftpd_xinetd
 
 - name: pull server_args from config file
