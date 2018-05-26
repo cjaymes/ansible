@@ -1,0 +1,6 @@
+- name: check if vsftpd is installed
+  command: rpm -qi vsftpd
+  register: vsftpd_installed
+
+- debug:
+    msg: "{{vsftpd_installed}}"
