@@ -1,3 +1,6 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-58901 (SV-73331r2_rule)
+
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71947 (SV-86571r2_rule)
 - name: collect NOPASSWD files
