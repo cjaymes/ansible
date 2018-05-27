@@ -11,3 +11,17 @@
       regexp: '^([^#].*)NOPASSWD(.*)$'
       replace: '\1PASSWD\2'
   loop: "{{nopasswd_files.stdout_lines}}"
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71949 (SV-86573r2_rule)
+- name: collect !authenticate files
+  shell: grep --no-messages  --files-with-matches '!authenticate' /etc/sudoers /etc/sudoers.d/*
+  register: noauthenticate_files
+  ignore_errors: True
+
+- name: replace uncommented !authenticate with authenticate
+  replace:
+      path: "{{item}}"
+      regexp: '^([^#].*)!authenticate(.*)$'
+      replace: '\1authenticate\2'
+  loop: "{{noauthenticate_files.stdout_lines}}"
