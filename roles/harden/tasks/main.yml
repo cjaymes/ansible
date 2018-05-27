@@ -28,8 +28,8 @@
 #     - harden_samba
 #     - harden_selinux
 #     - harden_snmpd
-#     - harden_sshd
-    - harden_sudo
+    - harden_sshd
+    # - harden_sudo
     # - harden_tcpwrappers
     # - harden_tftpd
     # - harden_umask

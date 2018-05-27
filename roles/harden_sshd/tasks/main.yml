@@ -1,0 +1,263 @@
+# TODO check location of sshd_config
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71939 (SV-86563r2_rule)
+- name: set PermitEmptyPasswords
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*PermitEmptyPasswords\s+
+      line: PermitEmptyPasswords no
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71957 (SV-86581r2_rule)
+- name: set PermitUserEnvironment
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*PermitUserEnvironment\s+
+      line: PermitUserEnvironment no
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71959 (SV-86583r2_rule)
+- name: set HostbasedAuthentication
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*HostbasedAuthentication\s+
+      line: HostbasedAuthentication no
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72221 (SV-86845r2_rule)
+- name: set Ciphers
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*Ciphers\s+
+      line: Ciphers aes128-ctr,aes192-ctr,aes256-ctr
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72225 (SV-86849r3_rule)
+- name: set Banner
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*Banner\s+
+      line: Banner /etc/issue
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72233 (SV-86857r2_rule)
+- name: install ssh packages
+  yum:
+      name: "{{item}}"
+      state: latest
+  loop:
+      - openssh-clients
+      - openssh-server
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72235 (SV-86859r2_rule)
+- name: sshd service
+  service:
+      name: sshd
+      enabled: yes
+      state: started
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72237 (SV-86861r3_rule)
+- name: set ClientAliveInterval
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*ClientAliveInterval\s+
+      line: ClientAliveInterval 600
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72239 (SV-86863r3_rule)
+- name: set RhostsRSAAuthentication
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*RhostsRSAAuthentication\s+
+      line: RhostsRSAAuthentication no
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72241 (SV-86865r3_rule)
+- name: set ClientAliveCountMax
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*ClientAliveCountMax\s+
+      line: ClientAliveCountMax 0
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72243 (SV-86867r2_rule)
+- name: set IgnoreRhosts
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*IgnoreRhosts\s+
+      line: IgnoreRhosts yes
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72245 (SV-86869r2_rule)
+- name: set PrintLastLog
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*PrintLastLog\s+
+      line: PrintLastLog yes
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72247 (SV-86871r2_rule)
+- name: set PermitRootLogin
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*PermitRootLogin\s+
+      line: PermitRootLogin no
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72249 (SV-86873r2_rule)
+- name: set IgnoreUserKnownHosts
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*IgnoreUserKnownHosts\s+
+      line: IgnoreUserKnownHosts yes
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72251 (SV-86875r3_rule)
+- name: set Protocol
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*Protocol\s+
+      line: Protocol 2
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72253 (SV-86877r2_rule)
+- name: set MACs
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*MACs\s+
+      line: MACs hmac-sha2-256,hmac-sha2-512
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72255 (SV-86879r1_rule)
+- name: find public keys
+  command: find /etc/ssh -name '*.pub'
+  register: ssh_public_key_files
+
+- name: set public key permissions
+  file:
+      path: "{{item}}"
+      mode: 0644
+  loop: "{{ssh_public_key_files.stdout_lines}}"
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72257 (SV-86881r1_rule)
+- name: find private keys
+  command: find / -name '*ssh_host*key'
+  register: ssh_private_key_files
+
+- name: set private key permissions
+  file:
+      path: "{{item}}"
+      mode: 0600
+  loop: "{{ssh_private_key_files.stdout_lines}}"
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72259 (SV-86883r2_rule)
+- name: set GSSAPIAuthentication
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*GSSAPIAuthentication\s+
+      line: GSSAPIAuthentication no
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72261 (SV-86885r2_rule)
+- name: set KerberosAuthentication
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*KerberosAuthentication\s+
+      line: KerberosAuthentication no
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72263 (SV-86887r2_rule)
+- name: set StrictModes
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*StrictModes\s+
+      line: StrictModes yes
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72265 (SV-86889r2_rule)
+- name: set UsePrivilegeSeparation
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*UsePrivilegeSeparation\s+
+      line: UsePrivilegeSeparation sandbox
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72267 (SV-86891r2_rule)
+- name: set Compression
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*Compression\s+
+      line: Compression delayed
+      state: present
+  notify:
+      - restart sshd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72303 (SV-86927r3_rule)
+- name: set X11Forwarding
+  lineinfile:
+      path: "{{sshd_config_file}}"
+      regexp: ^\s*X11Forwarding\s+
+      line: X11Forwarding yes
+      state: present
+  notify:
+      - restart sshd
