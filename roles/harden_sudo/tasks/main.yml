@@ -1,0 +1,13 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71947 (SV-86571r2_rule)
+- name: collect NOPASSWD files
+  shell: grep --no-messages  --files-with-matches NOPASSWD /etc/sudoers /etc/sudoers.d/*
+  register: nopasswd_files
+  ignore_errors: True
+
+- name: replace uncommented NOPASSWD with PASSWD
+  replace:
+      path: "{{item}}"
+      regexp: '^([^#].*)NOPASSWD(.*)$'
+      replace: '\1PASSWD\2'
+  loop: "{{nopasswd_files.stdout_lines}}"
