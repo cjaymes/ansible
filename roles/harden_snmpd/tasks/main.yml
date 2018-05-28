@@ -1,0 +1,13 @@
+- name: check if snmpd is installed
+  command: rpm -qi net-snmp
+  args:
+      warn: False
+  ignore_errors: True
+  register: snmpd_installed
+
+# - debug:
+#     msg: "{{snmpd_installed}}"
+
+- name: include fixes if command succeeded (package is installed)
+  include_tasks: harden_snmpd.yml
+  when: snmpd_installed is succeeded

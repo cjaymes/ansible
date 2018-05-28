@@ -1,0 +1,10 @@
+# TODO check location of snmpd_config_file
+
+- name: set tlsAlgorithms
+  lineinfile:
+      path: "{{snmpd_config_file}}"
+      regexp: ^\s*snmp\s+tlsAlgorithms\s+
+      line: snmp tlsAlgorithms HIGH
+      state: present
+  notify:
+      - restart snmpd
