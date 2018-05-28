@@ -4,7 +4,7 @@
   lineinfile:
       path: "{{snmpd_config_file}}"
       regexp: ^\s*snmp\s+tlsAlgorithms\s+
-      line: snmp tlsAlgorithms HIGH
+      line: "snmp tlsAlgorithms {{openssl_cipher_suites}}"
       state: present
   notify:
       - restart snmpd
