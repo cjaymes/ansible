@@ -1,11 +1,10 @@
 # TODO check location of snmpd_config_file
 
 - name: set tlsAlgorithms
-  lineinfile:
+  replace:
       path: "{{snmpd_config_file}}"
       regexp: ^\s*snmp\s+tlsAlgorithms\s+
-      line: "[snmp] tlsAlgorithms {{openssl_cipher_suites}}"
-      state: present
+      replace: "[snmp] tlsAlgorithms {{openssl_cipher_suites}}"
   notify:
       - restart snmpd
 
@@ -14,47 +13,42 @@
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
 # V-38653 (SV-50454r1_rule)
 - name: comment public com2sec
-  lineinfile:
+  replace:
       path: "{{snmpd_config_file}}"
       regexp: ^(\s*(com2sec|com2sec6|com2secunix)\s+.*public\s*(#.*)?)$
-      line: "#\\1"
-      backrefs: yes
+      replace: "#\\1"
   notify:
       - restart snmpd
 - name: comment private com2sec
-  lineinfile:
+  replace:
       path: "{{snmpd_config_file}}"
       regexp: ^(\s*(com2sec|com2sec6|com2secunix)\s+.*private\s*(#.*)?)$
-      line: "#\\1"
-      backrefs: yes
+      replace: "#\\1"
   notify:
       - restart snmpd
 
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
 # V-38660 (SV-50461r1_rule)
 - name: comment v1/v2c groups
-  lineinfile:
+  replace:
       path: "{{snmpd_config_file}}"
       regexp: ^(\s*group\s+\S+\s+(v1|v2c).*)$
-      line: "#\\1"
-      backrefs: yes
+      replace: "#\\1"
   notify:
       - restart snmpd
 
 - name: comment rocommunity/rwcommunity lines
-  lineinfile:
+  replace:
       path: "{{snmpd_config_file}}"
       regexp: ^(\s*(rocommunity|rwcommunity|rocommunity6|rwcommunity6).*)$
-      line: "#\\1"
-      backrefs: yes
+      replace: "#\\1"
   notify:
       - restart snmpd
 
 - name: comment v1/v2c accesses
-  lineinfile:
+  replace:
       path: "{{snmpd_config_file}}"
       regexp: ^(\s*access\s+\S+\s+\S+\s+(v1|v2c).*)$
-      line: "#\\1"
-      backrefs: yes
+      replace: "#\\1"
   notify:
       - restart snmpd
