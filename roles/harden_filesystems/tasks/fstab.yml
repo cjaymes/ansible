@@ -1,21 +1,6 @@
-- name: cat /etc/fstab
-  shell: cat /etc/fstab || true
-  # following is so we don't get an error about using command instead of module
-  args:
-      warn: false
-  # errors are expected; ignore
-  ignore_errors: yes
-  # this command doesn't actually change anything
-  changed_when: false
+- name: parse /etc/fstab
+  fstab:
   register: fstab
-
-- name: fstab
-  debug:
-    msg: '{{fstab}}'
-
-- name: parse fstab
-  set_fact:
-      fstab: "{{ fstab_txt.stdout | parse_cli_textfsm('textfsm_templates/etc/fstab') | list }}"
 
 - name: fstab
   debug:
@@ -30,20 +15,20 @@
 - name: add nosuid to removable
   include_tasks: fstab-opt-present.yml
   vars:
-    point: "{{item.mountpoint}}"
+    point: "{{item.mount_point}}"
     opt: nosuid
   with_items: "{{fstab}}"
   when:
-      - item.type in filesystems_types_removable
+      - item.fstype in filesystems_types_removable
 
 - name: add nosuid to network
   include_tasks: fstab-opt-present.yml
   vars:
-    point: "{{item.mountpoint}}"
+    point: "{{item.mount_point}}"
     opt: nosuid
   with_items: "{{fstab}}"
   when:
-      - item.type in filesystems_types_network
+      - item.fstype in filesystems_types_network
 
 # TODO fix separate filesystem for /home,/var,/var/log/audit,/tmp
 # TODO maybe use available lvm pool?
@@ -57,17 +42,17 @@
 - name: add sec=krb5:krb5i:krb5p to nfs mounts
   include_tasks: fstab-opt-present.yml
   vars:
-    point: "{{item.mountpoint}}"
+    point: "{{item.mount_point}}"
     opt: sec=krb5:krb5i:krb5p
   with_items: "{{fstab}}"
   when:
-      - item.type in ['nfs', 'nfs4']
+      - item.fstype in ['nfs', 'nfs4']
 
 - name: add noexec to network
   include_tasks: fstab-opt-present.yml
   vars:
-    point: "{{item.mountpoint}}"
+    point: "{{item.mount_point}}"
     opt: noexec
   with_items: "{{fstab}}"
   when:
-      - item.type in filesystems_types_network
+      - item.fstype in filesystems_types_network
