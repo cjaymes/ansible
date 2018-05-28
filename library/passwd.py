@@ -21,14 +21,13 @@ options:
 
 EXAMPLES = '''
     - name: parse passwd file
-      interactive_homes:
-      register: int_homes
+      register: passwd
     - debug:
-        msg: '{{int_homes}}'
+        msg: '{{passwd}}'
 '''
 
 RETURN = '''
-home_directories:
+passwd:
     description: data structure corresponding to the fields in the passwd file
     returned: success
     type: list(dict)
@@ -81,7 +80,7 @@ def main():
         supports_check_mode=True
     )
 
-    result = {'changed': False, 'home_directories': []}
+    result = {'changed': False, 'passwd': []}
 
     try:
         rc, out, err = module.run_command(['cat', '/etc/passwd'])
@@ -95,7 +94,7 @@ def main():
         record = dict(record)
         record['uid'] = int(record['uid'])
         record['gid'] = int(record['gid'])
-        result['home_directories'].append(record)
+        result['passwd'].append(record)
 
     module.exit_json(**result)
 
