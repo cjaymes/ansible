@@ -21,7 +21,7 @@
 - name: check home directories for umask files
   shell: grep --no-messages --files-with-matches '^umask\s' {{item.home}}/.*
   when: item.uid >= 1000
-  loop: "{{passwd.home_directories}}"
+  loop: "{{passwd.passwd}}"
   register: home_umasks
   failed_when: False
 
