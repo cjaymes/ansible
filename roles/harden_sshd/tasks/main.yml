@@ -2,6 +2,8 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71939 (SV-86563r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38614 (SV-50415r1_rule)
 - name: set PermitEmptyPasswords
   lineinfile:
       path: "{{sshd_config_file}}"
@@ -13,6 +15,8 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71957 (SV-86581r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38616 (SV-50417r1_rule)
 - name: set PermitUserEnvironment
   lineinfile:
       path: "{{sshd_config_file}}"
@@ -24,6 +28,8 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71959 (SV-86583r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38612 (SV-50413r1_rule)
 - name: set HostbasedAuthentication
   lineinfile:
       path: "{{sshd_config_file}}"
@@ -35,6 +41,8 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72221 (SV-86845r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38617 (SV-50418r1_rule)
 - name: set Ciphers
   lineinfile:
       path: "{{sshd_config_file}}"
@@ -46,6 +54,8 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72225 (SV-86849r3_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38615 (SV-50416r1_rule)
 - name: set Banner
   lineinfile:
       path: "{{sshd_config_file}}"
@@ -75,6 +85,8 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72237 (SV-86861r3_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38608 (SV-50409r1_rule)
 - name: set ClientAliveInterval
   lineinfile:
       path: "{{sshd_config_file}}"
@@ -97,6 +109,8 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72241 (SV-86865r3_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38610 (SV-50411r1_rule)
 - name: set ClientAliveCountMax
   lineinfile:
       path: "{{sshd_config_file}}"
@@ -108,6 +122,8 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72243 (SV-86867r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38611 (SV-50412r1_rule)
 - name: set IgnoreRhosts
   lineinfile:
       path: "{{sshd_config_file}}"
@@ -119,6 +135,8 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72245 (SV-86869r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38484 (SV-50285r2_rule)
 - name: set PrintLastLog
   lineinfile:
       path: "{{sshd_config_file}}"
@@ -130,6 +148,8 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72247 (SV-86871r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38613 (SV-50414r1_rule)
 - name: set PermitRootLogin
   lineinfile:
       path: "{{sshd_config_file}}"
@@ -152,6 +172,8 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72251 (SV-86875r3_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38607 (SV-50408r1_rule)
 - name: set Protocol
   lineinfile:
       path: "{{sshd_config_file}}"
