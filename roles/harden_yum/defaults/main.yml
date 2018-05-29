@@ -1,0 +1,4 @@
+redhat_release_key_file: /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+
+yum_config_file: /etc/yum.conf
+yum_repo_dir: /etc/yum.repos.d

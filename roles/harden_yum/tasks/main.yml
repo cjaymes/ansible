@@ -4,7 +4,7 @@
 # V-38483 (SV-50283r1_rule)
 - name: set gpgcheck in yum.conf
   ini_file:
-      path: /etc/yum.conf
+      path: "{{yum_config_file}}"
       section: main
       option: gpgcheck
       value: 1
@@ -14,7 +14,7 @@
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
 # V-38487 (SV-50288r1_rule)
 - name: check for gpgcheck=0 in /etc/yum.repos.d/*.repo
-  shell: grep --no-messages --files-with-matches '^gpgcheck\s*=\s*0' /etc/yum.repos.d/*.repo
+  shell: "grep --no-messages --files-with-matches '^gpgcheck\\s*=\\s*0' {{yum_repo_dir}}/*.repo"
   ignore_errors: True
   register: gpgcheck_repos
 
@@ -29,7 +29,7 @@
 # V-71979 (SV-86603r1_rule)
 - name: set localpkg_gpgcheck in yum.conf
   ini_file:
-      path: /etc/yum.conf
+      path: "{{yum_config_file}}"
       section: main
       option: localpkg_gpgcheck
       value: 1
@@ -40,7 +40,7 @@
 # V-71981 (SV-86605r1_rule)
 - name: set repo_gpgcheck in yum.conf
   ini_file:
-      path: /etc/yum.conf
+      path: "{{yum_config_file}}"
       section: main
       option: repo_gpgcheck
       value: 1
@@ -51,5 +51,5 @@
 # V-38476 (SV-50276r3_rule)
 - name: import rpm gpg keys
   rpm_key:
-      key: /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+      key: "{{redhat_release_key_file}}"
       state: present
