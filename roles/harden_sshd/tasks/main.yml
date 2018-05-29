@@ -152,14 +152,14 @@
 # V-38613 (SV-50414r1_rule)
 # TODO skip if we're logging in as root
 # TODO skip if there are no interactive users in %wheel or otherwise defined in sudoers
-- name: set PermitRootLogin
-  lineinfile:
-      path: "{{sshd_config_file}}"
-      regexp: ^\s*PermitRootLogin\s+
-      line: PermitRootLogin no
-      state: present
-  notify:
-      - restart sshd
+# - name: set PermitRootLogin
+#   lineinfile:
+#       path: "{{sshd_config_file}}"
+#       regexp: ^\s*PermitRootLogin\s+
+#       line: PermitRootLogin no
+#       state: present
+#   notify:
+#       - restart sshd
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72249 (SV-86873r2_rule)
