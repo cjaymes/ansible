@@ -17,6 +17,16 @@
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71971 (SV-86595r1_rule)
 - name: set root's role
-  user:
-      name: root
+  semanage_login:
+      login: root
       seuser: unconfined_u
+
+- name: set wheel's role
+  semanage_login:
+      login: %wheel
+      seuser: sysadm_u
+
+- name: set default role
+  semanage_login:
+      login: __default__
+      seuser: user_u
