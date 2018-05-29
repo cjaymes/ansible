@@ -101,7 +101,7 @@ def get_list(module):
     # skip first line
     lines = out.splitlines()[1:]
     for line in lines:
-        (login, seuser, range, service) = re.split(r'\s+', line.strip(), maxsplits=4)
+        (login, seuser, range, service) = re.split(r'\s+', line.strip(), maxsplit=4)
         record = {
             'seuser': seuser,
             'range': range,
