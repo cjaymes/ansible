@@ -8,7 +8,7 @@
   lineinfile:
       path: /etc/xinetd.d/tftp
       regexp: ^(\s*)server_args(\s*)=
-      line: "\\1server_args\\2= {{tftpd_server_args_extra}} -s /var/lib/tftpboot"
+      line: "\\1server_args\\2= {{tftpd_server_args}}"
       backrefs: yes
       state: present
   notify:
