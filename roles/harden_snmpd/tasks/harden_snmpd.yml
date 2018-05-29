@@ -1,10 +1,11 @@
 # TODO check location of snmpd_config_file
 
 - name: set tlsAlgorithms
-  replace:
+  lineinfile:
       path: "{{snmpd_config_file}}"
       regexp: ^\s*snmp\s+tlsAlgorithms\s+
-      replace: "[snmp] tlsAlgorithms {{openssl_cipher_suites}}"
+      line: "[snmp] tlsAlgorithms {{openssl_cipher_suites}}"
+      state: present
   notify:
       - restart snmpd
 
