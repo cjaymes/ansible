@@ -1,0 +1,4 @@
+- name: install required packages
+  yum:
+      name: policycoreutils-python
+      state: installed
