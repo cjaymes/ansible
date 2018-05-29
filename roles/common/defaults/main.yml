@@ -1,23 +1,35 @@
 ### Constants; probably shouldn't be overriden
 
-network_private_subnets: 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16
-
 ### Variables; could/should be overriden depending on environment
+
+# need to be at least 2 dns_servers to be STIG compliant...and for good practice :)
+dns_servers:
+    - 4.2.2.1
+    - 4.2.2.2
 
 # tcp or udp
 log_aggregation_protocol: tcp
+
 # Below is an unqualified DNS. Should probably be a round robin
 # The port defaults to 514 and is optional
 log_aggregation_server: syslog:514
 
-network_subnets: "{{network_private_subnets}}"
+# The subnets used in the local network
+network_subnets:
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+
 network_interfaces: {
     eth0: {
         zone: drop,
     },
 }
 
-ntp_server: localhost
+# Below are unqualified DNS entries. They could be defined as NAME entries or actual server names
+ntp_servers:
+    - ntp0
+    - ntp1
 
 packages:
     - mlocate
