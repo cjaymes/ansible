@@ -20,13 +20,16 @@
   semanage_login:
       login: root
       seuser: unconfined_u
+      state: present
 
 - name: set wheel's role
   semanage_login:
       login: "%wheel"
       seuser: sysadm_u
+      state: present
 
 - name: set default role
   semanage_login:
       login: __default__
       seuser: user_u
+      state: present
