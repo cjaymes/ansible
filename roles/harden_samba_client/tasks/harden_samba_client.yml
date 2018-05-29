@@ -2,7 +2,7 @@
 # V-38656 (SV-50457r1_rule)
 - name: set client signing
   ini_file:
-      path: /etc/samba/smb.conf
+      path: "{{smb_config_file}}"
       section: global
       value: mandatory
       state: present
