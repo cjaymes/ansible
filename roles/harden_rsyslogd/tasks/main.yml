@@ -14,6 +14,7 @@
 # V-38520 (SV-50321r1_rule), V-38521 (SV-50322r1_rule)
 - name: comment ~ line
   replace:
+      path: "{{rsyslogd_config_file}}"
       regexp: ^(\*\.\*\s+~\s*(#.*)?)$
       replace: '#\1'
 
