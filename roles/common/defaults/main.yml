@@ -2,7 +2,12 @@
 
 network_private_subnets: 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16
 
-### Variables; could be overriden depending on environment
+### Variables; could/should be overriden depending on environment
+
+# tcp or udp
+log_aggregation_protocol: tcp
+# Below is an unqualified DNS. Should probably be a round robin
+log_aggregation_server: syslog
 
 network_subnets: "{{network_private_subnets}}"
 network_interfaces: {

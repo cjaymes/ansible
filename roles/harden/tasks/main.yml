@@ -24,9 +24,9 @@
 #     - harden_patching
 #     - harden_postfix
 #     - harden_resolv_conf
-#     - harden_rsyslogd
-#     - harden_samba
-    - harden_selinux
+    - harden_rsyslogd
+    # - harden_samba
+    # - harden_selinux
     # - harden_snmpd
     # - harden_sshd
     # - harden_sudo
