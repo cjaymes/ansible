@@ -1,4 +1,22 @@
 - name: install required packages
   yum:
-      name: policycoreutils-python
+      name: "{{item}}"
       state: installed
+  loop:
+      - policycoreutils-python
+      - libselinux-python
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71989 (SV-86613r2_rule), V-71991 (SV-86615r3_rule)
+- name: Set SELinux to enforcing & using targeted policy
+  selinux:
+      policy: targeted
+      state: enforcing
+# TODO automatically reboot?
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71971 (SV-86595r1_rule)
+- name: set root's role
+  user:
+      name: root
+      seuser: unconfined_u
