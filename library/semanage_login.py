@@ -90,6 +90,7 @@ def get_list(module):
         cmd.append('--store')
         cmd.append(module.params['store'])
 
+    cmd.append('--list')
     try:
         rc, out, err = module.run_command(cmd)
         if len(err) > 0:
