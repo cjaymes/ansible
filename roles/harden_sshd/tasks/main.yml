@@ -1,3 +1,21 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72233 (SV-86857r2_rule)
+- name: install ssh packages
+  yum:
+      name: "{{item}}"
+      state: latest
+  loop:
+      - openssh-clients
+      - openssh-server
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72235 (SV-86859r2_rule)
+- name: sshd service
+  service:
+      name: sshd
+      enabled: yes
+      state: started
+
 # TODO check location of sshd_config
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
@@ -64,24 +82,6 @@
       state: present
   notify:
       - restart sshd
-
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-72233 (SV-86857r2_rule)
-- name: install ssh packages
-  yum:
-      name: "{{item}}"
-      state: latest
-  loop:
-      - openssh-clients
-      - openssh-server
-
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-72235 (SV-86859r2_rule)
-- name: sshd service
-  service:
-      name: sshd
-      enabled: yes
-      state: started
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72237 (SV-86861r3_rule)
