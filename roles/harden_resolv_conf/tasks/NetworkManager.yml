@@ -1,0 +1,5 @@
+- name: set domain servers
+  nmcli:
+      conn_name: "{{network_interface_default}}"
+      dns4: "{{dns_servers}}"
+      state: present

@@ -1,0 +1,29 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72281 (SV-86905r1_rule)
+- name: hosts line in /etc/nsswitch.conf
+  command: grep '^\s*[^#]hosts:'
+  register: nsswitch_hosts
+
+- name: comment lines in /etc/resolv.conf if dns is not being used
+  replace:
+      path: /etc/resolv.conf
+      regexp: ^(\s*[^#].*)$
+      replace: '#\1'
+  when: not nsswitch_hosts.out is containing('dns')
+
+- name: check if NetworkManager is installed
+  command: rpm -qi NetworkManager
+  args:
+      warn: False
+  ignore_errors: True
+  register: NetworkManager_installed
+
+- name: include fixes if command succeeded (package is installed)
+  include_tasks: NetworkManager.yml
+  when: NetworkManager_installed is succeeded
+
+# TODO resolvconf
+
+- name: include fixes if command failed (package is not installed)
+  include_tasks: static.yml
+  when: NetworkManager_installed is failed

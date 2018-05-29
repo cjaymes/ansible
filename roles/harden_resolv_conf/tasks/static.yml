@@ -1,0 +1,7 @@
+- name: set domain servers
+  lineinfile:
+      path: /etc/resolv.conf
+      regexp: '^\s*nameserver\s+{{item}}'
+      line: 'nameserver {{item}}'
+      state: present
+  loop: "{{dns_servers}}"
