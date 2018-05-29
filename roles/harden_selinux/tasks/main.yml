@@ -8,6 +8,8 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71989 (SV-86613r2_rule), V-71991 (SV-86615r3_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-51363 (SV-65573r1_rule), V-51369 (SV-65579r1_rule)
 - name: Set SELinux to enforcing & using targeted policy
   selinux:
       policy: targeted
@@ -33,3 +35,7 @@
       login: __default__
       seuser: user_u
       state: present
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-51379 (SV-65589r1_rule)
+# TODO fix unlabeled device files
