@@ -7,7 +7,8 @@ network_private_subnets: 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16
 # tcp or udp
 log_aggregation_protocol: tcp
 # Below is an unqualified DNS. Should probably be a round robin
-log_aggregation_server: syslog
+# The port defaults to 514 and is optional
+log_aggregation_server: syslog:514
 
 network_subnets: "{{network_private_subnets}}"
 network_interfaces: {
