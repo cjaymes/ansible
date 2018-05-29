@@ -5,16 +5,16 @@
 
 - name: usbguard config
   template:
-      src: templates/etc/usbguard/usbguard-daemon.conf.j2
-      dest: /etc/usbguard/usbguard-daemon.conf
+      src: "templates{{usbguard_daemon_config_file}}.j2"
+      dest: "{{usbguard_daemon_config_file}}"
       owner: root
       group: root
       mode: 0600
 
 - name: usbguard rules
   copy:
-      src: files/etc/usbguard/rules.conf
-      dest: /etc/usbguard/rules.conf
+      src: "files{{usbguard_rules_config_file}}"
+      dest: "{{usbguard_rules_config_file}}"
       owner: root
       group: root
       mode: 0600

@@ -1,0 +1,2 @@
+usbguard_daemon_config_file: /etc/usbguard/usbguard-daemon.conf
+usbguard_rules_config_file: /etc/usbguard/rules.conf
