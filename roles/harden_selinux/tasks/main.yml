@@ -23,7 +23,7 @@
 
 - name: set wheel's role
   semanage_login:
-      login: %wheel
+      login: "%wheel"
       seuser: sysadm_u
 
 - name: set default role
