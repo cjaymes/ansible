@@ -1,13 +1,2 @@
-- name: install pre-reqs
-  yum:
-      name: "{{item}}"
-      state: installed
-  loop:
-      - python-gobject
-      - NetworkManager-glib
-
 - name: set domain servers
-  nmcli:
-      conn_name: "{{network_interface_default}}"
-      dns4: "{{dns_servers}}"
-      state: present
+  command: "nmcli con mod {{network_interface_default}} ipv4.dns '{{dns_servers | join(' ')}}'"
