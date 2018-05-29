@@ -99,9 +99,17 @@ def get_list(module):
         module.fail_json(msg='{0} failed with exception: {1}'.format(cmd.join(' '), exception))
 
     l = {}
-    # skip first line
-    lines = out.splitlines()[1:]
-    for line in lines:
+    for line in out.splitlines():
+        line = line.strip()
+
+        # skip blanks
+        if line == '':
+            continue
+
+        # skip header
+        if re.match(r'^Login Name'):
+            continue
+
         (login, seuser, range, service) = re.split(r'\s+', line.strip(), maxsplit=4)
         record = {
             'seuser': seuser,
