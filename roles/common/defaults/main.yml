@@ -26,6 +26,8 @@ network_interfaces: {
     },
 }
 
+network_interface_default: eth0
+
 # Below are unqualified DNS entries. They could be defined as NAME entries or actual server names
 ntp_servers:
     - ntp0
