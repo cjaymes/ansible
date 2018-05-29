@@ -1,2 +1,3 @@
 - name: set domain servers
   command: "nmcli con mod {{network_interface_default}} ipv4.dns '{{dns_servers | join(' ')}}'"
+ 
