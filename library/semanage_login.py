@@ -107,7 +107,7 @@ def get_list(module):
             continue
 
         # skip header
-        if re.match(r'^Login Name'):
+        if re.match(r'^Login Name', line):
             continue
 
         (login, seuser, range, service) = re.split(r'\s+', line.strip(), maxsplit=4)
