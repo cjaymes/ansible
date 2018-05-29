@@ -3,8 +3,8 @@
 - name: cron logging
   lineinfile:
       path: "{{rsyslogd_config_file}}"
-      regexp: ^cron\..*/var/log/cron.log
-      line: cron.* /var/log/cron.log
+      regexp: ^cron\..*/var/log/cron(\.log)?
+      line: cron.* /var/log/cron
       insertbefore: ^\*\.\*
       state: present
 
