@@ -1,2 +1,3 @@
 # set to -c for client uploads
+# "-s /var/lib/tftpboot" is required for STIG compliance
 tftpd_server_args: -s /var/lib/tftpboot
