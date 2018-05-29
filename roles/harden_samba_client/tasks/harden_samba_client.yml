@@ -1,0 +1,12 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38656 (SV-50457r1_rule)
+- name: set client signing
+  ini_file:
+      path: /etc/samba/smb.conf
+      section: global
+      value: mandatory
+      state: present
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38657 (SV-50458r2_rule)
+# TODO Need a way to add "sec=krb5i" or "sec=ntlmv2i" to cifs mounts without disrupting service in fstab

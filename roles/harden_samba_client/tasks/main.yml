@@ -1,0 +1,13 @@
+- name: check if samba-client is installed
+  command: rpm -qi samba-client
+  args:
+      warn: False
+  ignore_errors: True
+  register: samba_client_installed
+
+# - debug:
+#     msg: "{{samba_client_installed}}"
+
+- name: include fixes if command succeeded (package is installed)
+  include_tasks: harden_samba_client.yml
+  when: samba_client_installed is succeeded
