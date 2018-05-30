@@ -16,13 +16,13 @@ def even(value):
     except Exception, e:
         raise errors.AnsibleFilterError('Test error: %s, string=%s' % str(e),str(string) )
 
-def ge(value):
+def ge(value, content):
     try:
         return value >= content
     except Exception, e:
         raise errors.AnsibleFilterError('Test error: %s, string=%s' % str(e),str(string) )
 
-def gt(value):
+def gt(value, content):
     try:
         return value > content
     except Exception, e:
