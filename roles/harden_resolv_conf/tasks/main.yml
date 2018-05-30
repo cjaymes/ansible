@@ -9,7 +9,7 @@
       path: /etc/resolv.conf
       regexp: ^(\s*[^#].*)$
       replace: '#\1'
-  when: not nsswitch_hosts.stdout is containing('dns')
+  when: not nsswitch_hosts.stdout is in('dns')
 
 - name: check if NetworkManager is installed
   command: rpm -qi NetworkManager
