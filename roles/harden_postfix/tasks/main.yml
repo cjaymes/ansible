@@ -1,0 +1,60 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38669 (SV-50470r1_rule)
+- name: install postfix
+  yum:
+    name: postfix
+    state: installed
+
+- name: postfix service
+  service:
+    name: postfix
+    enabled: yes
+    state: started
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72297 (SV-86921r2_rule)
+- name: get smtpd_client_restrictions
+  command: postconf -n smtpd_client_restrictions
+  register: smtpd_client_restrictions
+
+- name: set smtpd_client_restrictions
+  command: postconf -e 'smtpd_client_restrictions = permit_mynetworks,reject'
+  notify: restart postfix
+  when:
+    - smtpd_client_restrictions.stdout != 'smtpd_client_restrictions = permit_mynetworks,reject'
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38446 (SV-50246r2_rule)
+
+# TODO pull alias_maps from "postconf alias_maps"
+
+- name: query root alias
+  command: "postmap -q root hash:{{postfix_alias_map_file}}"
+  register: root_alias
+  failed_when: False
+
+- name: set root alias
+  lineinfile:
+    path: "{{postfix_alias_map_file}}"
+    regexp: '^\s*root:'
+    line: "root: {{system_administrator_email}}"
+    insertafter: EOF
+    state: present
+  when: root_alias.stdout == ''
+  register: set_root_alias
+
+- name: update alias db
+  command: postalias hash:/etc/aliases
+  when: set_root_alias is changed
+  notify: restart postfix
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38622 (SV-50423r2_rule)
+- name: set inet_interfaces
+  lineinfile:
+    path: "{{postfix_main_config_file}}"
+    regexp: ^\s*inet_interfaces\s*=
+    line: inet_interfaces = localhost
+    state: present
+  when: not postfix_mail_relay
+  notify: restart postfix

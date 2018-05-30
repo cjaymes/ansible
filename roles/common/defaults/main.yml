@@ -38,3 +38,5 @@ packages:
     - mlocate
     - vim
     - screen
+
+system_administrator_email: sysadmin@mail

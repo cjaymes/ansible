@@ -22,8 +22,8 @@
 #     - harden_pam
 #     - harden_passwords
 #     - harden_patching
-#     - harden_postfix
-    - harden_resolv_conf
+    - harden_postfix
+    # - harden_resolv_conf
     # - harden_rsyslogd
     # - harden_samba
     # - harden_selinux

@@ -1,0 +1,5 @@
+postfix_alias_map_file: /etc/aliases
+
+postfix_main_config_file: /etc/postfix/main.cf
+
+postfix_mail_relay: False
