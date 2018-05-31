@@ -1,0 +1,32 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71927 (SV-86551r1_rule)
+- name: set shadow mindays
+  command: "chage -m 1 {{item.login}}"
+  when: item.mindays != 1
+  loop: "{{shadow.shadow|selectattr('login', 'in', interactive_accounts)|list}}"
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71931 (SV-86555r1_rule)
+- name: set shadow maxdays
+  command: "chage -M 60 {{item.login}}"
+  when: item.maxdays != 60
+  loop: "{{shadow.shadow|selectattr('login', 'in', interactive_accounts)|list}}"
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38496 (SV-50297r3_rule)
+- name: check non-interactive for passwords
+  debug:
+    msg: "{{item}}"
+  when:
+    - not item.locked
+    - not item.disabled
+  loop: "{{shadow.shadow|selectattr('login', 'in', service_accounts)|list}}"
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38502 (SV-50303r1_rule), V-38503 (SV-50304r1_rule), V-38504 (SV-50305r1_rule)
+- name: set ownership of /etc/shadow
+  file:
+    path: /etc/shadow
+    owner: root
+    group: root
+    mode: 0000

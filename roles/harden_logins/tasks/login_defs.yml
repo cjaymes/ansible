@@ -1,0 +1,68 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71921 (SV-86545r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38576 (SV-50377r1_rule)
+- name: set ENCRYPT_METHOD
+  lineinfile:
+    path: /etc/login.defs
+    regexp: ^\s*ENCRYPT_METHOD\s+
+    line: ENCRYPT_METHOD SHA512
+    state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71925 (SV-86549r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38477 (SV-50277r1_rule)
+- name: set PASS_MIN_DAYS
+  lineinfile:
+    path: /etc/login.defs
+    regexp: ^\s*PASS_MIN_DAYS\s+
+    line: PASS_MIN_DAYS 1
+    state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71929 (SV-86553r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38479 (SV-50279r1_rule)
+- name: set PASS_MAX_DAYS
+  lineinfile:
+    path: /etc/login.defs
+    regexp: ^\s*PASS_MAX_DAYS\s+
+    line: PASS_MAX_DAYS 60
+    state: present
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38475 (SV-50275r3_rule)
+- name: set PASS_MIN_LEN
+  lineinfile:
+    path: /etc/login.defs
+    regexp: ^\s*PASS_MIN_LEN\s+
+    line: PASS_MIN_LEN 15
+    state: present
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38480 (SV-50280r1_rule)
+- name: set PASS_WARN_AGE
+  lineinfile:
+    path: /etc/login.defs
+    regexp: ^\s*PASS_WARN_AGE\s+
+    line: PASS_WARN_AGE 7
+    state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71951 (SV-86575r1_rule)
+- name: set FAIL_DELAY
+  lineinfile:
+    path: /etc/login.defs
+    regexp: ^\s*FAIL_DELAY\s+
+    line: FAIL_DELAY 4
+    state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72013 (SV-86637r1_rule)
+- name: set CREATE_HOME
+  lineinfile:
+    path: /etc/login.defs
+    regexp: ^\s*CREATE_HOME\s+
+    line: CREATE_HOME yes
+    state: present

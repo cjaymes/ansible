@@ -1,0 +1,11 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71903 (SV-86527r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38577 (SV-50378r1_rule)
+- name: set crypt_style
+  ini_file:
+    path: /etc/libuser.conf
+    section: defaults
+    option: crypt_style
+    value: sha512
+    state: present

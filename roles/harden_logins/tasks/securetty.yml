@@ -1,0 +1,15 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38492 (SV-50293r1_rule)
+- name: remove virtual consoles
+  replace:
+    path: /etc/securetty
+    regexp: ^vc/[0-9]+\n
+    replace: ''
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38494 (SV-50295r1_rule)
+- name: remove serial ports
+  replace:
+    path: /etc/securetty
+    regexp: ^ttyS[0-9]+\n
+    replace: ''

@@ -1,0 +1,80 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71903 (SV-86527r2_rule)
+- name: set ucredit
+  lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^\s*ucredit\s+=
+    line: ucredit = -1
+    state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71905 (SV-86529r4_rule)
+- name: set lcredit
+  lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^\s*lcredit\s+=
+    line: lcredit = -1
+    state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71907 (SV-86531r2_rule)
+- name: set dcredit
+  lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^\s*dcredit\s+=
+    line: dcredit = -1
+    state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71909 (SV-86533r1_rule)
+- name: set ocredit
+  lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^\s*ocredit\s+=
+    line: ocredit = -1
+    state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71911 (SV-86535r1_rule)
+- name: set difok
+  lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^\s*difok\s+=
+    line: difok = 8
+    state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71913 (SV-86537r1_rule)
+- name: set minclass
+  lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^\s*minclass\s+=
+    line: minclass = 4
+    state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71915 (SV-86539r2_rule)
+- name: set maxrepeat
+  lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^\s*maxrepeat\s+=
+    line: maxrepeat = 3
+    state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71917 (SV-86541r1_rule)
+- name: set maxclassrepeat
+  lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^\s*maxclassrepeat\s+=
+    line: maxclassrepeat = 4
+    state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71935 (SV-86559r1_rule)
+- name: set minlen
+  lineinfile:
+    path: /etc/security/pwquality.conf
+    regexp: ^\s*minlen\s+=
+    line: minlen = 15
+    state: present

@@ -1,0 +1,40 @@
+- name: pull parsed /etc/passwd
+  passwd_dump:
+  register: passwd
+
+- name: pull parsed /etc/shadow
+  shadow_dump:
+  register: shadow
+
+- name: pull parsed /etc/group
+  group_dump:
+  register: group
+
+- set_fact:
+    interactive_accounts: "{{passwd.passwd|selectattr('uid', 'ge', 1000)|selectattr('uid', 'lt', 65500)|map(attribute='login')|list}}"
+- set_fact:
+    service_accounts: "{{passwd.passwd|selectattr('uid', 'gt', 0)|selectattr('uid', 'lt', 1000)|map(attribute='login')|list}}"
+
+- name: include tasks
+  include_tasks: "{{harden_pwquality_tasks}}.yml"
+  loop:
+    - default_useradd
+    - group
+    - gshadow
+    - issue
+    - libuser_conf
+    - login_defs
+    - passwd
+    - profile
+    - security_pwquality_conf
+    - security_limits_conf
+    - securetty
+    - shadow
+  loop_control:
+    loop_var: harden_pwquality_tasks
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38595 (SV-50396r3_rule)
+# TODO The system must be configured to require the use of a CAC, PIV compliant hardware token, or Alternate Logon Token (ALT) for authentication.
+# https://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Managing_Smart_Cards/enabling-smart-card-login.html
+# https://access.redhat.com/solutions/82273

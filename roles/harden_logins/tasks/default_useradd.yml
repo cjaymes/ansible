@@ -1,0 +1,10 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71941 (SV-86565r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38692 (SV-50493r1_rule), V-38694 (SV-50495r1_rule) [using RHEL7 requirement of 15 days]
+- name: set INACTIVE
+  lineinfile:
+    path: /etc/default/useradd
+    regexp: ^\s*INACTIVE\s*=
+    line: INACTIVE=15
+    state: present

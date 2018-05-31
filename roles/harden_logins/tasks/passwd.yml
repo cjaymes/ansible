@@ -1,0 +1,45 @@
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72005 (SV-86629r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38500 (SV-50301r2_rule)
+- name: renumber uid==0 accounts other than root
+  include_tasks: rename_0_user.yml
+  loop: "{{ passwd.passwd|selectattr('uid', 'eq', 0)|selectattr('login', 'ne', 'root')|map(attribute='login')|list }}"
+  loop_control:
+    loop_var: login
+  register: renamed
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72001 (SV-86625r1_rule)
+- name: remove unnecessary users
+  user:
+    name: "{{item}}"
+    state: absent
+  loop: "{{unnecessary_users}}"
+
+- name: remove unnecessary groups
+  group:
+    name: "{{item}}"
+    state: absent
+  loop: "{{unnecessary_groups}}"
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72011 (SV-86635r1_rule), V-72015 (SV-86639r1_rule)
+- name: create home dirs for interactive users if they don't exist
+  file:
+    path: "{{item.home}}"
+    owner: "{{item.uid}}"
+    group: "{{item.gid}}"
+    mode: 0700
+    state: directory
+  loop: "{{passwd.passwd|selectattr('uid', 'ge', 1000)|selectattr('uid', 'lt', 65000)|list}}"
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38450 (SV-50250r1_rule), V-38451 (SV-50251r1_rule), V-38457 (SV-50257r1_rule)
+- name: set ownership of /etc/passwd
+  file:
+    path: /etc/passwd
+    owner: root
+    group: root
+    mode: 0644

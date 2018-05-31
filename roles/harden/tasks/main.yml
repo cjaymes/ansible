@@ -12,7 +12,7 @@
 #     - harden_ips
 #     - harden_kernel
 #     - harden_ldap
-#     - harden_logins
+    - harden_logins
 #     - harden_logrotate
 #     - harden_modules
 #     - harden_network
@@ -20,7 +20,7 @@
 #     - harden_ntpd
 #     - harden_packages
 #     - harden_pam
-    - harden_postfix
+    # - harden_postfix
     # - harden_resolv_conf
     # - harden_rsyslogd
     # - harden_samba

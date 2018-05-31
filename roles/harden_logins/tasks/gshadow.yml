@@ -1,0 +1,8 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38443 (SV-50243r1_rule), V-38448 (SV-50248r1_rule), V-38449 (SV-50249r1_rule)
+- name: set ownership of /etc/gshadow
+  file:
+    path: /etc/gshadow
+    owner: root
+    group: root
+    mode: 0000

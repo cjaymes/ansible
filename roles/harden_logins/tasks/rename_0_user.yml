@@ -1,0 +1,22 @@
+# NOTE: we assume passwd is parsed into register passwd
+
+- set_fact:
+    uid: "{{ passwd.passwd|selectattr('uid', 'gt', 300)|map(attribute='uid')|min - 1 }}"
+
+# NOTE: can't use usermod for uid 0
+- name: renumber uid==0 accounts other than root; use wheel as primary group
+  replace:
+    path: /etc/passwd
+    regexp: "^({{login}}:[^:]*):0:[^:]+:(.*)$"
+    replace: '\1:{{uid}}:10:\2'
+
+- name: change ownership of home directory
+  file:
+    path: "{{passwd.passwd|selectattr('login', 'eq', login)|map(attribute='home')}}"
+    owner: "{{uid}}"
+    group: 10
+    recurse: yes
+
+- name: pull parsed /etc/passwd
+  passwd_dump:
+  register: passwd

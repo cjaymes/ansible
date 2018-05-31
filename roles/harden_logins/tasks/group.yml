@@ -1,0 +1,19 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38458 (SV-50258r1_rule), V-38459 (SV-50259r1_rule), V-38461 (SV-50261r1_rule)
+- name: set ownership of /etc/group
+  file:
+    path: /etc/group
+    owner: root
+    group: root
+    mode: 0644
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72003 (SV-86627r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38681 (SV-50482r2_rule)
+- name: create missing groups
+  group:
+    name: "group{{item}}"
+    state: present
+  when: group.group|selectattr('gid','eq',item)|list|length == 0
+  loop: "{{passwd.passwd|map(attribute='gid')|list}}"
