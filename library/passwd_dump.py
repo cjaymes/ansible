@@ -10,7 +10,7 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-module: passwd
+module: passwd_dump
 short_description: Parse the passwd file
 description:
   - Get the parsed contents of the passwd file.
@@ -21,6 +21,7 @@ options:
 
 EXAMPLES = '''
     - name: parse passwd file
+      passwd_dump:
       register: passwd
     - debug:
         msg: '{{passwd}}'
@@ -90,10 +91,18 @@ def main():
         module.fail_json(msg='cat /etc/passwd failed with exception: {0}'.format(exception))
 
     for line in out.splitlines():
-        record = zip(('login', 'passwd', 'uid', 'gid', 'name', 'home', 'shell'), line.strip().split(':'))
+        line = line.strip()
+
+        if line == '':
+            continue
+        if re.match(r'^\s*#', line):
+            continue
+
+        record = zip(('login', 'passwd', 'uid', 'gid', 'name', 'home', 'shell'), line.split(':'))
         record = dict(record)
         record['uid'] = int(record['uid'])
         record['gid'] = int(record['gid'])
+
         result['passwd'].append(record)
 
     module.exit_json(**result)

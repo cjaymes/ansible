@@ -10,7 +10,7 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-module: shadow
+module: shadow_dump
 short_description: Parse the shadow file
 description:
   - Get the parsed contents of the shadow file.
@@ -21,6 +21,7 @@ options:
 
 EXAMPLES = '''
     - name: parse shadow file
+      shadow_dump:
       register: shadow
     - debug:
         msg: '{{shadow}}'
@@ -111,10 +112,12 @@ def main():
 
     for line in out.splitlines():
         line = line.strip()
+
         if line == '':
             continue
         if re.match(r'^\s*#', line):
             continue
+
         record = zip(('login', 'passwd', 'lastchg', 'mindays', 'maxdays', 'warndays', 'inactive', 'expire', 'reserved'), line.split(':'))
         record = dict(record)
 
