@@ -1,0 +1,6 @@
+nslcd_config_file: /etc/nslcd.conf
+# Alternates are:
+# - /etc/ldap.conf
+# - /etc/nss_ldap.conf
+# - /etc/pam_ldap.conf
+# - /etc/openldap/ldap.conf

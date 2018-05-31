@@ -1,0 +1,26 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72227 (SV-86851r2_rule)
+# - name: use tls for ldap
+#   lineinfile:
+#     path: /etc/nslcd.conf
+#     regexp: ^\s*ssl\s+
+#     line: ssl start_tls
+#     state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72229 (SV-86853r2_rule)
+# - name: use ca cert dir for ldap
+#   lineinfile:
+#     path: /etc/nslcd.conf
+#     regexp: ^\s*tls_cacertdir\s+
+#     line: tls_cacertdir /etc/openldap/cacerts
+#     state: present
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72231 (SV-86855r2_rule)
+# - name: use ca cert file for ldap
+#   lineinfile:
+#     path: /etc/nslcd.conf
+#     regexp: ^\s*tls_cacertfile\s+
+#     line: tls_cacertfile /etc/openldap/ldap-cacert.pem
+#     state: present

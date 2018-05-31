@@ -1,0 +1,10 @@
+- name: read /etc/syconfig/authconfig
+  command: cat /etc/syconfig/authconfig
+  register: authconfig
+
+- name: include harden_nslcd
+  include_tasks: harden_nslcd.yml
+  when:
+    - authconfig.stdout is in('USELDAP=yes')
+    - authconfig.stdout is in('USELDAPAUTH=yes')
+    - authconfig.stdout is in('FORCELEGACY=yes')
