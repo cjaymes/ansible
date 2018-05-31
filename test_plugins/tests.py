@@ -8,67 +8,67 @@ def eq(value, content):
     try:
         return value == content
     except Exception, e:
-        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % str(e),str(value),str(content) )
+        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % (str(e),str(value),str(content)) )
 
 def even(value):
     try:
         return value % 2 == 0
     except Exception, e:
-        raise errors.AnsibleFilterError('Test error: %s, value=%s' % str(e),str(value) )
+        raise errors.AnsibleFilterError('Test error: %s, value=%s' % (str(e),str(value)) )
 
 def ge(value, content):
     try:
         return value >= content
     except Exception, e:
-        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % str(e),str(value),str(content) )
+        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % (str(e),str(value),str(content)) )
 
 def gt(value, content):
     try:
         return value > content
     except Exception, e:
-        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % str(e),str(value),str(content) )
+        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % (str(e),str(value),str(content)) )
 
 def _in(value, content):
     try:
-        return content in value
+        return value in content
     except Exception, e:
-        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % str(e),str(value),str(content) )
+        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % (str(e),str(value),str(content)) )
 
 def not_in(value, content):
     try:
-        return content not in value
+        return value not in content
     except Exception, e:
-        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % str(e),str(value),str(content) )
+        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % (str(e),str(value),str(content)) )
 
 def le(value, content):
     try:
         return value <= content
     except Exception, e:
-        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % str(e),str(value),str(content) )
+        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % (str(e),str(value),str(content)) )
 
 def lt(value, content):
     try:
         return value < content
     except Exception, e:
-        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % str(e),str(value),str(content) )
+        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % (str(e),str(value),str(content)) )
 
 def ne(value, content):
     try:
         return value != content
     except Exception, e:
-        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % str(e),str(value),str(content) )
+        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % (str(e),str(value),str(content)) )
 
 def none(value):
     try:
         return value is None
     except Exception, e:
-        raise errors.AnsibleFilterError('Test error: %s, value=%s' % str(e),str(value) )
+        raise errors.AnsibleFilterError('Test error: %s, value=%s' % (str(e),str(value)) )
 
 def odd(value):
     try:
         return value % 2 == 1
     except Exception, e:
-        raise errors.AnsibleFilterError('Test error: %s, value=%s' % str(e),str(value) )
+        raise errors.AnsibleFilterError('Test error: %s, value=%s' % (str(e),str(value)) )
 
 
 class TestModule(object):
