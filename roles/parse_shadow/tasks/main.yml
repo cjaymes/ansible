@@ -1,0 +1,3 @@
+- name: parse /etc/shadow
+  shadow_dump:
+  register: shadow

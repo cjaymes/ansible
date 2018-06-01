@@ -1,0 +1,3 @@
+- name: parse /etc/group
+  group_dump:
+  register: group

@@ -1,0 +1,8 @@
+- name: parse /etc/passwd
+  passwd_dump:
+  register: passwd
+
+- set_fact:
+    interactive_accounts: "{{passwd.passwd|selectattr('uid', 'ge', 1000)|selectattr('uid', 'lt', 65500)|map(attribute='login')|list}}"
+- set_fact:
+    service_accounts: "{{passwd.passwd|selectattr('uid', 'gt', 0)|selectattr('uid', 'lt', 1000)|map(attribute='login')|list}}"

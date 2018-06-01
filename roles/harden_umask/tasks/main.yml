@@ -11,13 +11,6 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72049 (SV-86673r1_rule)
-- name: pull parsed /etc/passwd
-  passwd_dump:
-  register: passwd
-
-- debug:
-    msg: "{{passwd}}"
-
 - name: check home directories for umask files
   shell: grep --no-messages --files-with-matches '^umask\s' {{item.home}}/.*
   when: item.uid >= 1000

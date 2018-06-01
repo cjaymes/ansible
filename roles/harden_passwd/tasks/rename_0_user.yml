@@ -17,6 +17,6 @@
     group: 10
     recurse: yes
 
-- name: pull parsed /etc/passwd
+- name: reparse /etc/passwd
   passwd_dump:
   register: passwd

@@ -2,63 +2,55 @@
   include_role:
     name: "{{harden_role}}"
   loop:
-#     - harden_aide
-#     - harden_auditd
-#     - harden_cron
-#     - harden_filesystems
-#     - harden_gdm
-#     - harden_grub
-#     - harden_gnome
-#     - harden_ips
+    - harden_aide
+    - harden_antivirus
+    - harden_auditd
+    - harden_authconfig
+    - harden_cron
+    - harden_filesystems
+    - harden_firewalld
+    - harden_gdm
+    - harden_gnome
+    - harden_group
+    - harden_grub
+    - harden_gshadow
+    - harden_init
+    - harden_iptables
+    - harden_issue
     - harden_kernel
-#     - harden_ldap
-    # - harden_logins
-#     - harden_logrotate
-#     - harden_modules
-#     - harden_network
-#     - harden_nfs_server
-#     - harden_nslcd
-#     - harden_ntpd
-#     - harden_packages
-#     - harden_pam
-    # - harden_postfix
-    # - harden_resolv_conf
-    # - harden_rsyslogd
-    # - harden_samba
-    # - harden_selinux
-    # - harden_snmpd
-    # - harden_sshd
-    # - harden_sudo
-    # - harden_tcpwrappers
-    # - harden_tftpd
-    # - harden_umask
-    # - harden_vsftpd
-    # - harden_yum
+    - harden_ldap
+    - harden_libuser
+    - harden_limits
+    - harden_login
+    - harden_logrotate
+    - harden_modules
+    - harden_network
+    - harden_nfs_server
+    - harden_nslcd
+    - harden_ntpd
+    - harden_packages
+    - harden_pam
+    - harden_passwd
+    - harden_postfix
+    - harden_profile
+    - harden_pwquality
+    - harden_resolv_conf
+    - harden_rsyslogd
+    - harden_samba
+    - harden_securetty
+    - harden_selinux
+    - harden_shadow
+    - harden_snmpd
+    - harden_sshd
+    - harden_sssd
+    - harden_sudo
+    - harden_systemd
+    - harden_tcpwrappers
+    - harden_tftpd
+    - harden_umask
+    - harden_usbguard
+    - harden_useradd
+    - harden_vsftpd
+    - harden_yum
   loop_control:
     loop_var: harden_role
-
-# - name: include rhel 6 specific roles
-#   include_role:
-#     name: "{{harden_role}}"
-#   when: ansible_distribution_major_version == '6'
-#   loop:
-#     - harden_init
-#     # TODO anything replaced by sssd?
-#     - harden_iptables
-#     - mcafee_client
-#   loop_control:
-#     loop_var: harden_role
-
-# - name: include rhel 7 specific roles
-#   include_role:
-#     name: "{{harden_role}}"
-#   when: ansible_distribution_major_version == '7'
-#   loop:
-#     - harden_firewalld
-#     # - harden_sssd
-#     # - harden_systemd
-#     # - TODO mcafee_client or clamav
-#     # TODO usbguard might be available on rhel6
-#     # - harden_usbguard
-#   loop_control:
-#     loop_var: harden_role

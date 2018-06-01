@@ -1,10 +1,3 @@
-- name: read /etc/syconfig/authconfig
-  command: cat /etc/syconfig/authconfig
-  register: authconfig
-
-- name: include sssd tasks
-  include_tasks: ldap.yml
-  when:
-    - authconfig.stdout is in('USELDAP=yes')
-    - authconfig.stdout is in('USELDAPAUTH=yes')
-    - authconfig.stdout is in('FORCELEGACY=no')
+- name: include if we're running rhel7
+  include_tasks: harden.yml
+  when: ansible_distribution_major_version == '7'
