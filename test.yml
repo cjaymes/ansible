@@ -1,0 +1,6 @@
+---
+
+# - hosts: all
+- hosts: stig-rhel7
+  roles:
+    - harden
