@@ -1,0 +1,38 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-51875 (SV-66089r1_rule)
+- name: set pam_lastlog.so
+  pamd:
+      name: system-auth
+      new_type: session
+      new_control: required
+      new_module_path: pam_lastlog.so
+      module_arguments:
+          - showfailed
+      state: after
+      type: session
+      control: required
+      module_path: pam_limits.so
+  notify: noeol system-auth
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38482 (SV-50282r1_rule)
+# V-38569 (SV-50370r1_rule)
+# V-38570 (SV-50371r1_rule)
+# V-38571 (SV-50372r2_rule)
+# V-38572 (SV-50373r2_rule)
+# V-38693 (SV-50494r2_rule)
+- name: set pam_cracklib.so args
+  pamd:
+      name: system-auth
+      type: password
+      control: required
+      module_path: pam_cracklib.so
+      module_arguments:
+          - dcredit=-1
+          - ucredit=-1
+          - ocredit=-1
+          - lcredit=-1
+          - difok=8
+          - maxrepeat=3
+      state: args_present
+  notify: noeol system-auth

@@ -1,0 +1,8 @@
+- name: noeol system-auth
+  shell: echo >> /etc/pam.d/system-auth
+
+- name: noeol password-auth
+  shell: echo >> /etc/pam.d/password-auth
+
+- name: noeol postlogin
+  shell: echo >> /etc/pam.d/postlogin

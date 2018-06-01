@@ -1,0 +1,185 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71919 (SV-86543r2_rule)
+# V-71933 (SV-86557r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38574 (SV-50375r3_rule)
+# V-38658 (SV-50459r5_rule)
+- name: set pam_unix.so args
+  pamd:
+      name: system-auth
+      type: password
+      control: sufficient
+      module_path: pam_unix.so
+      module_arguments:
+          - shadow
+          - sha512
+          - remember=5
+      state: args_present
+  notify: noeol system-auth
+
+- name: set pam_unix.so args
+  pamd:
+      name: password-auth
+      type: password
+      control: sufficient
+      module_path: pam_unix.so
+      module_arguments:
+          - shadow
+          - sha512
+          - remember=5
+      state: args_present
+  notify: noeol password-auth
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71937 (SV-86561r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38497 (SV-50298r2_rule)
+- name: unset pam_unix.so arg nullok
+  pamd:
+      name: system-auth
+      type: password
+      control: sufficient
+      module_path: pam_unix.so
+      module_arguments: nullok
+      state: args_absent
+  notify: noeol system-auth
+
+- name: unset pam_unix.so arg nullok
+  pamd:
+      name: system-auth
+      type: auth
+      control: sufficient
+      module_path: pam_unix.so
+      module_arguments: nullok
+      state: args_absent
+  notify: noeol system-auth
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71943 (SV-86567r3_rule)
+# V-71945 (SV-86569r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38501 (SV-50302r4_rule)
+# V-38573 (SV-50374r4_rule)
+# V-38592 (SV-50393r4_rule)
+- name: set pam_faillock.so before pam_unix
+  pamd:
+      name: system-auth
+      new_type: auth
+      new_control: required
+      new_module_path: pam_faillock.so
+      module_arguments:
+          - preauth
+          - silent
+          - audit
+          - deny=3
+          - even_deny_root
+          - fail_interval=900
+          - unlock_time=604800
+      state: before
+      type: auth
+      control: sufficient
+      module_path: pam_unix.so
+  notify: noeol system-auth
+
+- name: set pam_faillock.so after pam_unix
+  pamd:
+      name: system-auth
+      new_type: auth
+      new_control: '[default=die]'
+      new_module_path: pam_faillock.so
+      module_arguments:
+          - authfail
+          - audit
+          - deny=3
+          - even_deny_root
+          - fail_interval=900
+          - unlock_time=604800
+      state: after
+      type: auth
+      control: sufficient
+      module_path: pam_unix.so
+  notify: noeol system-auth
+
+- name: set pam_faillock.so account
+  pamd:
+      name: system-auth
+      new_type: account
+      new_control: required
+      new_module_path: pam_faillock.so
+      state: before
+      type: account
+      control: required
+      module_path: pam_unix.so
+  notify: noeol system-auth
+
+- name: set pam_faillock.so before pam_unix
+  pamd:
+      name: password-auth
+      new_type: auth
+      new_control: required
+      new_module_path: pam_faillock.so
+      module_arguments:
+          - preauth
+          - silent
+          - audit
+          - deny=3
+          - even_deny_root
+          - fail_interval=900
+          - unlock_time=604800
+      state: before
+      type: auth
+      control: sufficient
+      module_path: pam_unix.so
+  notify: noeol password-auth
+
+- name: set pam_faillock.so after pam_unix
+  pamd:
+      name: password-auth
+      new_type: auth
+      new_control: '[default=die]'
+      new_module_path: pam_faillock.so
+      module_arguments:
+          - authfail
+          - audit
+          - deny=3
+          - even_deny_root
+          - fail_interval=900
+          - unlock_time=604800
+      state: after
+      type: auth
+      control: sufficient
+      module_path: pam_unix.so
+  notify: noeol password-auth
+
+- name: set pam_faillock.so account
+  pamd:
+      name: password-auth
+      new_type: account
+      new_control: required
+      new_module_path: pam_faillock.so
+      state: before
+      type: account
+      control: required
+      module_path: pam_unix.so
+  notify: noeol password-auth
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-73159 (SV-87811r3_rule)
+- name: set pam_pwquality.so args
+  pamd:
+      name: passwd
+      type: password
+      control: requisite
+      module_path: pam_pwquality.so
+      module_arguments:
+          - retry=3
+      state: args_present
+  notify: noeol passwd
+
+- name: include rhel7 specific
+  include_tasks: rhel7.yml
+  when: ansible_distribution_major_version == '7'
+
+- name: include rhel6 specific
+  include_tasks: rhel6.yml
+  when: ansible_distribution_major_version == '6'

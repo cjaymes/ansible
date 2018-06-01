@@ -1,0 +1,210 @@
+# Vuln ID: V-71965
+# Severity: medium
+# Group Title: SRG-OS-000104-GPOS-00051
+# Rule ID: SV-86589r1_rule
+# STIG ID: RHEL-07-010500
+# Rule Title: The operating system must uniquely identify and must authenticate organizational users (or processes acting on behalf of organizational users) using multifactor authentication.
+# Discussion: To assure accountability and prevent unauthenticated access, organizational users must be identified and authenticated to prevent potential misuse and compromise of the system.
+#
+# Organizational users include organizational employees or individuals the organization deems to have equivalent status of employees (e.g., contractors). Organizational users (and processes acting on behalf of users) must be uniquely identified and authenticated to all accesses, except for the following:
+#
+# 1) Accesses explicitly identified and documented by the organization. Organizations document specific user actions that can be performed on the information system without identification or authentication;
+#
+# and
+#
+# 2) Accesses that occur through authorized use of group authenticators without individual authentication. Organizations may require unique identification of individuals in group accounts (e.g., shared privilege accounts) or for detailed accountability of individual activity.
+#
+# Satisfies: SRG-OS-000104-GPOS-00051, SRG-OS-000106-GPOS-00053, SRG-OS-000107-GPOS-00054, SRG-OS-000109-GPOS-00056, SRG-OS-000108-GPOS-00055, SRG-OS-000108-GPOS-00057, SRG-OS-000108-GPOS-00058
+# IA Controls:
+# Check Content: Verify the operating system requires multifactor authentication to uniquely identify organizational users using multifactor authentication.
+#
+# Check to see if smartcard authentication is enforced on the system:
+#
+# # authconfig --test | grep -i smartcard
+#
+# The entry for use only smartcard for logon may be enabled, and the smartcard module and smartcard removal actions must not be blank.
+#
+# If smartcard authentication is disabled or the smartcard and smartcard removal actions are blank, this is a finding.
+# Fix Text: Configure the operating system to require individuals to be authenticated with a multifactor authenticator.
+#
+# Enable smartcard logons with the following commands:
+#
+# # authconfig --enablesmartcard --smartcardaction=1 --update
+# # authconfig --enablerequiresmartcard -update
+#
+# Modify the "/etc/pam_pkcs11/pkcs11_eventmgr.conf" file to uncomment the following line:
+#
+# #/usr/X11R6/bin/xscreensaver-command -lock
+#
+# Modify the "/etc/pam_pkcs11/pam_pkcs11.conf" file to use the cackey module if required.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000766
+# The information system implements multifactor authentication for network access to non-privileged accounts.
+# NIST SP 800-53 :: IA-2 (2)
+# NIST SP 800-53A :: IA-2 (2).1
+# NIST SP 800-53 Revision 4 :: IA-2 (2)
+#
+#
+# - name: fail stig_rhel7_v1r4 v_71965
+#   set_fact:
+#     stig_rhel7_v1r4_v_71965_result: 'fail'
+#   when:
+#     - "'v_71965' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_71965_result != 'pass'
+
+
+# Vuln ID: V-72417
+# Severity: medium
+# Group Title: SRG-OS-000375-GPOS-00160
+# Rule ID: SV-87041r2_rule
+# STIG ID: RHEL-07-041001
+# Rule Title: The operating system must have the required packages for multifactor authentication installed.
+# Discussion: Using an authentication device, such as a CAC or token that is separate from the information system, ensures that even if the information system is compromised, that compromise will not affect credentials stored on the authentication device.
+#
+# Multifactor solutions that require devices separate from information systems gaining access include, for example, hardware tokens providing time-based or challenge-response authenticators and smart cards such as the U.S. Government Personal Identity Verification card and the DoD Common Access Card.
+#
+# A privileged account is defined as an information system account with authorizations of a privileged user.
+#
+# Remote access is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
+#
+# This requirement only applies to components where this is specific to the function of the device or has the concept of an organizational user (e.g., VPN, proxy capability). This does not apply to authentication for the purpose of configuring the device itself (management).
+#
+# Requires further clarification from NIST.
+#
+# Satisfies: SRG-OS-000375-GPOS-00160, SRG-OS-000375-GPOS-00161, SRG-OS-000375-GPOS-00162
+# IA Controls:
+# Check Content: Verify the operating system has the packages required for multifactor authentication installed.
+#
+# Check for the presence of the packages required to support multifactor authentication with the following commands:
+#
+# # yum list installed esc
+# esc-1.1.0-26.el7.noarch.rpm
+#
+# # yum list installed pam_pkcs11
+# pam_pkcs11-0.6.2-14.el7.noarch.rpm
+#
+# # yum list installed authconfig-gtk
+# authconfig-gtk-6.1.12-19.el7.noarch.rpm
+#
+# If the "esc", "pam_pkcs11", and "authconfig-gtk" packages are not installed, this is a finding.
+# Fix Text: Configure the operating system to implement multifactor authentication by installing the required packages.
+#
+# Install the "esc", "pam_pkcs11", "authconfig", and "authconfig-gtk" packages on the system with the following command:
+#
+# # yum install esc pam_pkcs11 authconfig-gtk
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001948
+# The information system implements multifactor authentication for remote access to privileged accounts such that one of the factors is provided by a device separate from the system gaining access.
+# NIST SP 800-53 Revision 4 :: IA-2 (11)
+#
+# CCI-001953
+# The information system accepts Personal Identity Verification (PIV) credentials.
+# NIST SP 800-53 Revision 4 :: IA-2 (12)
+#
+# CCI-001954
+# The information system electronically verifies Personal Identity Verification (PIV) credentials.
+# NIST SP 800-53 Revision 4 :: IA-2 (12)
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72417
+#   set_fact:
+#     stig_rhel7_v1r4_v_72417_result: 'fail'
+#   when:
+#     - "'v_72417' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72417_result != 'pass'
+
+
+# Vuln ID: V-72433
+# Severity: medium
+# Group Title: SRG-OS-000375-GPOS-00160
+# Rule ID: SV-87057r4_rule
+# STIG ID: RHEL-07-041003
+# Rule Title: The operating system must implement certificate status checking for PKI authentication.
+# Discussion: Using an authentication device, such as a CAC or token that is separate from the information system, ensures that even if the information system is compromised, that compromise will not affect credentials stored on the authentication device.
+#
+# Multifactor solutions that require devices separate from information systems gaining access include, for example, hardware tokens providing time-based or challenge-response authenticators and smart cards such as the U.S. Government Personal Identity Verification card and the DoD Common Access Card.
+#
+# A privileged account is defined as an information system account with authorizations of a privileged user.
+#
+# Remote access is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
+#
+# This requirement only applies to components where this is specific to the function of the device or has the concept of an organizational user (e.g., VPN, proxy capability). This does not apply to authentication for the purpose of configuring the device itself (management).
+#
+# Requires further clarification from NIST.
+#
+# Satisfies: SRG-OS-000375-GPOS-00160, SRG-OS-000375-GPOS-00161, SRG-OS-000375-GPOS-00162
+# IA Controls:
+# Check Content: Verify the operating system implements certificate status checking for PKI authentication.
+#
+# Check to see if Online Certificate Status Protocol (OCSP) is enabled on the system with the following command:
+#
+# # grep cert_policy /etc/pam_pkcs11/pam_pkcs11.conf
+#
+# cert_policy = ca, ocsp_on, signature;
+# cert_policy = ca, ocsp_on, signature;
+# cert_policy = ca, ocsp_on, signature;
+#
+#
+# There should be at least three lines returned.
+#
+# If "oscp_on" is not present in all "cert_policy" lines in "/etc/pam_pkcs11/pam_pkcs11.conf", this is a finding.
+#
+# Fix Text: Configure the operating system to do certificate status checking for PKI authentication.
+#
+# Modify all of the "cert_policy" lines in "/etc/pam_pkcs11/pam_pkcs11.conf" to include "ocsp_on".
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001948
+# The information system implements multifactor authentication for remote access to privileged accounts such that one of the factors is provided by a device separate from the system gaining access.
+# NIST SP 800-53 Revision 4 :: IA-2 (11)
+#
+# CCI-001953
+# The information system accepts Personal Identity Verification (PIV) credentials.
+# NIST SP 800-53 Revision 4 :: IA-2 (12)
+#
+# CCI-001954
+# The information system electronically verifies Personal Identity Verification (PIV) credentials.
+# NIST SP 800-53 Revision 4 :: IA-2 (12)
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72433
+#   set_fact:
+#     stig_rhel7_v1r4_v_72433_result: 'fail'
+#   when:
+#     - "'v_72433' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72433_result != 'pass'
