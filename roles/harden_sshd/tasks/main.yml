@@ -145,6 +145,12 @@
       state: present
   notify:
       - restart sshd
+- name:
+  lineinfile:
+      path: /etc/pam.d/sshd
+      insertafter: ^session\s+required\s+pam_selinux\.so\s+open
+      line: session     required      pam_lastlog.so showfailed
+      state: present
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72247 (SV-86871r2_rule)
