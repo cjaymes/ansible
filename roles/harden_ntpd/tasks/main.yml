@@ -1,0 +1,52 @@
+- name: stop, disable chronyd
+  service:
+      name: chronyd
+      enabled: no
+      state: stopped
+  failed_when: False
+
+- name: remove chronyd
+  yum:
+      name: chrony
+      state: absent
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72269 (SV-86893r2_rule)
+- name: install ntpd
+  yum:
+      name: ntp
+      state: installed
+
+- name: ntpd running, enabled
+  service:
+      name: ntpd
+      enabled: yes
+      state: started
+
+- name: set maxpoll
+  lineinfile:
+      path: /etc/ntp.conf
+      regexp: ^\s*maxpoll\s+
+      line: maxpoll 10
+      state: present
+
+
+- name: remove default servers
+  replace:
+      path: /etc/ntp.conf
+      regexp: ^\s*server\s+.*ntp\.org.*\n
+      replace: ''
+
+- name: set servers
+  lineinfile:
+      path: /etc/ntp.conf
+      line: "server {{item}}"
+      state: present
+  loop: "{{ntp_servers}}"
+
+- name: set disable monitor
+  lineinfile:
+      path: /etc/ntp.conf
+      regexp: ^\s*disable\s+monitor
+      line: disable monitor
+      state: present
