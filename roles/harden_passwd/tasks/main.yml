@@ -18,12 +18,6 @@
     state: absent
   loop: "{{unnecessary_users}}"
 
-- name: remove unnecessary groups
-  group:
-    name: "{{item}}"
-    state: absent
-  loop: "{{unnecessary_groups}}"
-
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72011 (SV-86635r1_rule), V-72015 (SV-86639r1_rule)
 - name: create home dirs for interactive users if they don't exist

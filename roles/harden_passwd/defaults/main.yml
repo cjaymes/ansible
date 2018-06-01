@@ -1,6 +1,3 @@
 unnecessary_users:
   - games
   - gopher
-
-unnecessary_groups:
-  - games
