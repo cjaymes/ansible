@@ -135,6 +135,7 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72245 (SV-86869r2_rule)
+# V-72275 (SV-86899r2_rule)
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
 # V-38484 (SV-50285r2_rule)
 - name: set PrintLastLog
