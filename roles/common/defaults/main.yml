@@ -2,6 +2,8 @@
 
 ### Variables; could/should be overriden depending on environment
 
+is_ldap_server: False
+
 # need to be at least 2 dns_servers to be STIG compliant...and for good practice :)
 dns_servers:
     - 4.2.2.1

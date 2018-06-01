@@ -1,0 +1,31 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71897 (SV-86521r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38590 (SV-50391r1_rule)
+- name: install required packages
+  yum:
+      name: "{{item}}"
+      state: installed
+  loop: "{{packages_required}}"
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71967 (SV-86591r1_rule)
+# V-71969 (SV-86593r1_rule)
+# V-72077 (SV-86701r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38591 (SV-50392r1_rule)
+# V-38603 (SV-50404r1_rule)
+# V-38671 (SV-50472r1_rule)
+- name: remove prohibited packages
+  yum:
+      name: "{{item}}"
+      state: absent
+  loop: "{{packages_required}}"
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38627 (SV-50428r2_rule)
+- name: remove openldap-servers
+  yum:
+      name: openldap-servers
+      state: absent
+  when: not is_ldap_server
