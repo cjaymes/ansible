@@ -10,13 +10,14 @@
 #     - harden_grub
 #     - harden_gnome
 #     - harden_ips
-#     - harden_kernel
+    - harden_kernel
 #     - harden_ldap
-    - harden_logins
+    # - harden_logins
 #     - harden_logrotate
 #     - harden_modules
 #     - harden_network
 #     - harden_nfs_server
+#     - harden_nslcd
 #     - harden_ntpd
 #     - harden_packages
 #     - harden_pam
