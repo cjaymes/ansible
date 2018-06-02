@@ -1,17 +1,21 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71953 (SV-86577r1_rule)
 - name: AutomaticLoginEnable = false in /etc/gdm/custom.conf [daemon]
   ini_file:
       path: /etc/gdm/custom.conf
       section: daemon
       mode: 0644
       option: AutomaticLoginEnable
-      value: false
+      value: 'false'
       state: present
 
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71955 (SV-86579r2_rule)
 - name: TimedLoginEnable = false in /etc/gdm/custom.conf [daemon]
   ini_file:
       path: /etc/gdm/custom.conf
       section: daemon
       mode: 0644
       option: TimedLoginEnable
-      value: false
+      value: 'false'
       state: present

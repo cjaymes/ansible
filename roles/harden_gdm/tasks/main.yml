@@ -1,14 +1,13 @@
-- name: gdm is installed
-  shell: yum list installed gdm || true
-  # following is so we don't get an error about using command instead of module
+- name: check if gdm is installed
+  command: rpm -qi gdm
   args:
-      warn: false
-  # errors are expected; ignore
-  ignore_errors: yes
-  # this command doesn't actually change anything
-  changed_when: false
+      warn: False
+  ignore_errors: True
+  changed_when: False
+  failed_when: False
   register: gdm_installed
 
 - name: include harden
   include_tasks: harden.yml
-  when: gdm_installed is succeeded
+  when:
+      - gdm_installed.rc == 0
