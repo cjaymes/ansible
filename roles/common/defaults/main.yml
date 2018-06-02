@@ -6,6 +6,7 @@ is_ldap_server: False
 is_routing: False
 is_xinetd_used: False
 is_tftpd_server: False
+is_X_required: False
 
 # need to be at least 2 dns_servers to be STIG compliant...and for good practice :)
 dns_servers:
