@@ -19,6 +19,7 @@
     - harden_group
     - harden_grub
     - harden_gshadow
+    - harden_home_directories
     - harden_init
     - harden_iptables
     - harden_issue

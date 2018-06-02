@@ -1,0 +1,594 @@
+# Vuln ID: V-72017
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86641r2_rule
+# STIG ID: RHEL-07-020630
+# Rule Title: All local interactive user home directories must have mode 0750 or less permissive.
+# Discussion: Excessive permissions on local interactive user home directories may allow unauthorized access to user files by other users.
+# IA Controls:
+# Check Content: Verify the assigned home directory of all local interactive users has a mode of "0750" or less permissive.
+#
+# Check the home directory assignment for all non-privileged users on the system with the following command:
+#
+# Note: This may miss interactive users that have been assigned a privileged User Identifier (UID). Evidence of interactive use may be obtained from a number of log files containing system logon information.
+#
+# # ls -ld $(egrep ':[0-9]{4}' /etc/passwd | cut -d: -f6)
+# -rwxr-x--- 1 smithj users  18 Mar  5 17:06 /home/smithj
+#
+# If home directories referenced in "/etc/passwd" do not have a mode of "0750" or less permissive, this is a finding.
+# Fix Text: Change the mode of interactive user’s home directories to "0750". To change the mode of a local interactive user’s home directory, use the following command:
+#
+# Note: The example will be for the user "smithj".
+#
+# # chmod 0750 /home/smithj
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72017
+#   set_fact:
+#     stig_rhel7_v1r4_v_72017_result: 'fail'
+#   when:
+#     - "'v_72017' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72017_result != 'pass'
+
+
+# Vuln ID: V-72019
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86643r4_rule
+# STIG ID: RHEL-07-020640
+# Rule Title: All local interactive user home directories must be owned by their respective users.
+# Discussion: If a local interactive user does not own their home directory, unauthorized users could access or modify the user's files, and the users may not be able to access their own files.
+# IA Controls:
+# Check Content: Verify the assigned home directory of all local interactive users on the system exists.
+#
+# Check the home directory assignment for all local interactive users on the system with the following command:
+#
+# # ls -ld $(egrep ':[0-9]{4}' /etc/passwd | cut -d: -f6)
+#
+# -rwxr-x--- 1 smithj users 18 Mar 5 17:06 /home/smithj
+#
+# If any home directories referenced in "/etc/passwd" are not owned by the interactive user, this is a finding.
+# Fix Text: Change the owner of a local interactive user’s home directories to that owner. To change the owner of a local interactive user’s home directory, use the following command:
+#
+# Note: The example will be for the user smithj, who has a home directory of "/home/smithj".
+#
+# # chown smithj /home/smithj
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72019
+#   set_fact:
+#     stig_rhel7_v1r4_v_72019_result: 'fail'
+#   when:
+#     - "'v_72019' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72019_result != 'pass'
+
+
+# Vuln ID: V-72021
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86645r4_rule
+# STIG ID: RHEL-07-020650
+# Rule Title: All local interactive user home directories must be group-owned by the home directory owners primary group.
+# Discussion: If the Group Identifier (GID) of a local interactive user’s home directory is not the same as the primary GID of the user, this would allow unauthorized access to the user’s files, and users that share the same group may not be able to access files that they legitimately should.
+# IA Controls:
+# Check Content: Verify the assigned home directory of all local interactive users is group-owned by that user’s primary GID.
+#
+# Check the home directory assignment for all local interactive users on the system with the following command:
+#
+# # ls -ld $(egrep ':[0-9]{4}' /etc/passwd | cut -d: -f6)
+#
+# -rwxr-x--- 1 smithj users 18 Mar 5 17:06 /home/smithj
+#
+# Check the user's primary group with the following command:
+#
+# # grep users /etc/group
+#
+# users:x:250:smithj,jonesj,jacksons
+#
+# If the user home directory referenced in "/etc/passwd" is not group-owned by that user’s primary GID, this is a finding.
+#
+# Fix Text: Change the group owner of a local interactive user’s home directory to the group found in "/etc/passwd". To change the group owner of a local interactive user’s home directory, use the following command:
+#
+# Note: The example will be for the user "smithj", who has a home directory of "/home/smithj", and has a primary group of users.
+#
+# # chgrp users /home/smithj
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72021
+#   set_fact:
+#     stig_rhel7_v1r4_v_72021_result: 'fail'
+#   when:
+#     - "'v_72021' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72021_result != 'pass'
+
+
+# Vuln ID: V-72023
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86647r1_rule
+# STIG ID: RHEL-07-020660
+# Rule Title: All files and directories contained in local interactive user home directories must be owned by the owner of the home directory.
+# Discussion: If local interactive users do not own the files in their directories, unauthorized users may be able to access them. Additionally, if files are not owned by the user, this could be an indication of system compromise.
+# IA Controls:
+# Check Content: Verify all files and directories in a local interactive user’s home directory are owned by the user.
+#
+# Check the owner of all files and directories in a local interactive user’s home directory with the following command:
+#
+# Note: The example will be for the user "smithj", who has a home directory of "/home/smithj".
+#
+# # ls -lLR /home/smithj
+# -rw-r--r-- 1 smithj smithj  18 Mar  5 17:06 file1
+# -rw-r--r-- 1 smithj smithj 193 Mar  5 17:06 file2
+# -rw-r--r-- 1 smithj smithj 231 Mar  5 17:06 file3
+#
+# If any files are found with an owner different than the home directory user, this is a finding.
+# Fix Text: Change the owner of a local interactive user’s files and directories to that owner. To change the owner of a local interactive user’s files and directories, use the following command:
+#
+# Note: The example will be for the user smithj, who has a home directory of "/home/smithj".
+#
+# # chown smithj /home/smithj/<file or directory>
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72023
+#   set_fact:
+#     stig_rhel7_v1r4_v_72023_result: 'fail'
+#   when:
+#     - "'v_72023' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72023_result != 'pass'
+
+
+# Vuln ID: V-72025
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86649r1_rule
+# STIG ID: RHEL-07-020670
+# Rule Title: All files and directories contained in local interactive user home directories must be group-owned by a group of which the home directory owner is a member.
+# Discussion: If a local interactive user’s files are group-owned by a group of which the user is not a member, unintended users may be able to access them.
+# IA Controls:
+# Check Content: Verify all files and directories in a local interactive user home directory are group-owned by a group the user is a member of.
+#
+# Check the group owner of all files and directories in a local interactive user’s home directory with the following command:
+#
+# Note: The example will be for the user "smithj", who has a home directory of "/home/smithj".
+#
+# # ls -lLR /<home directory>/<users home directory>/
+# -rw-r--r-- 1 smithj smithj  18 Mar  5 17:06 file1
+# -rw-r--r-- 1 smithj smithj 193 Mar  5 17:06 file2
+# -rw-r--r-- 1 smithj sa        231 Mar  5 17:06 file3
+#
+# If any files are found with an owner different than the group home directory user, check to see if the user is a member of that group with the following command:
+#
+# # grep smithj /etc/group
+# sa:x:100:juan,shelley,bob,smithj
+# smithj:x:521:smithj
+#
+# If the user is not a member of a group that group owns file(s) in a local interactive user’s home directory, this is a finding.
+# Fix Text: Change the group of a local interactive user’s files and directories to a group that the interactive user is a member of. To change the group owner of a local interactive user’s files and directories, use the following command:
+#
+# Note: The example will be for the user smithj, who has a home directory of "/home/smithj" and is a member of the users group.
+#
+# # chgrp users /home/smithj/<file>
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72025
+#   set_fact:
+#     stig_rhel7_v1r4_v_72025_result: 'fail'
+#   when:
+#     - "'v_72025' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72025_result != 'pass'
+
+
+# Vuln ID: V-72027
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86651r1_rule
+# STIG ID: RHEL-07-020680
+# Rule Title: All files and directories contained in local interactive user home directories must have mode 0750 or less permissive.
+# Discussion: If a local interactive user files have excessive permissions, unintended users may be able to access or modify them.
+# IA Controls:
+# Check Content: Verify all files and directories contained in a local interactive user home directory, excluding local initialization files, have a mode of "0750".
+#
+# Check the mode of all non-initialization files in a local interactive user home directory with the following command:
+#
+# Files that begin with a "." are excluded from this requirement.
+#
+# Note: The example will be for the user "smithj", who has a home directory of "/home/smithj".
+#
+# # ls -lLR /home/smithj
+# -rwxr-x--- 1 smithj smithj  18 Mar  5 17:06 file1
+# -rwxr----- 1 smithj smithj 193 Mar  5 17:06 file2
+# -rw-r-x--- 1 smithj smithj 231 Mar  5 17:06 file3
+#
+# If any files are found with a mode more permissive than "0750", this is a finding.
+# Fix Text: Set the mode on files and directories in the local interactive user home directory with the following command:
+#
+# Note: The example will be for the user smithj, who has a home directory of "/home/smithj" and is a member of the users group.
+#
+# # chmod 0750 /home/smithj/<file>
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72027
+#   set_fact:
+#     stig_rhel7_v1r4_v_72027_result: 'fail'
+#   when:
+#     - "'v_72027' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72027_result != 'pass'
+
+
+# Vuln ID: V-72029
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86653r1_rule
+# STIG ID: RHEL-07-020690
+# Rule Title: All local initialization files for interactive users must be owned by the home directory user or root.
+# Discussion: Local initialization files are used to configure the user's shell environment upon logon. Malicious modification of these files could compromise accounts upon logon.
+# IA Controls:
+# Check Content: Verify all local initialization files for interactive users are owned by the home directory user or root.
+#
+# Check the owner on all local initialization files with the following command:
+#
+# Note: The example will be for the "smithj" user, who has a home directory of "/home/smithj".
+#
+# # ls -al /home/smithj/.* | more
+# -rwxr-xr-x  1 smithj users        896 Mar 10  2011 .bash_profile
+# -rwxr-xr-x  1 smithj users        497 Jan  6  2007 .login
+# -rwxr-xr-x  1 smithj users        886 Jan  6  2007 .profile
+#
+# If any file that sets a local interactive user’s environment variables to override the system is not owned by the home directory owner or root, this is a finding.
+# Fix Text: Set the owner of the local initialization files for interactive users to either the directory owner or root with the following command:
+#
+# Note: The example will be for the smithj user, who has a home directory of "/home/smithj".
+#
+# # chown smithj /home/smithj/.*
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72029
+#   set_fact:
+#     stig_rhel7_v1r4_v_72029_result: 'fail'
+#   when:
+#     - "'v_72029' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72029_result != 'pass'
+
+
+# Vuln ID: V-72031
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86655r2_rule
+# STIG ID: RHEL-07-020700
+# Rule Title: Local initialization files for local interactive users must be group-owned by the users primary group or root.
+# Discussion: Local initialization files for interactive users are used to configure the user's shell environment upon logon. Malicious modification of these files could compromise accounts upon logon.
+# IA Controls:
+# Check Content: Verify the local initialization files of all local interactive users are group-owned by that user’s primary Group Identifier (GID).
+#
+# Check the home directory assignment for all non-privileged users on the system with the following command:
+#
+# Note: The example will be for the smithj user, who has a home directory of "/home/smithj" and a primary group of "users".
+#
+# # cut -d: -f 1,4,6 /etc/passwd | egrep ":[1-4][0-9]{3}"
+# smithj:1000:/home/smithj
+#
+# # grep 1000 /etc/group
+# users:x:1000:smithj,jonesj,jacksons
+#
+# Note: This may miss interactive users that have been assigned a privileged User Identifier (UID). Evidence of interactive use may be obtained from a number of log files containing system logon information.
+#
+# Check the group owner of all local interactive users’ initialization files with the following command:
+#
+# # ls -al /home/smithj/.*
+# -rwxr-xr-x  1 smithj users        896 Mar 10  2011 .profile
+# -rwxr-xr-x  1 smithj users        497 Jan  6  2007 .login
+# -rwxr-xr-x  1 smithj users        886 Jan  6  2007 .something
+#
+# If all local interactive users’ initialization files are not group-owned by that user’s primary GID, this is a finding.
+# Fix Text: Change the group owner of a local interactive user’s files to the group found in "/etc/passwd" for the user. To change the group owner of a local interactive user home directory, use the following command:
+#
+# Note: The example will be for the user smithj, who has a home directory of "/home/smithj", and has a primary group of users.
+#
+# # chgrp users /home/smithj/<file>
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72031
+#   set_fact:
+#     stig_rhel7_v1r4_v_72031_result: 'fail'
+#   when:
+#     - "'v_72031' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72031_result != 'pass'
+
+
+# Vuln ID: V-72033
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86657r1_rule
+# STIG ID: RHEL-07-020710
+# Rule Title: All local initialization files must have mode 0740 or less permissive.
+# Discussion: Local initialization files are used to configure the user's shell environment upon logon. Malicious modification of these files could compromise accounts upon logon.
+# IA Controls:
+# Check Content: Verify that all local initialization files have a mode of "0740" or less permissive.
+#
+# Check the mode on all local initialization files with the following command:
+#
+# Note: The example will be for the smithj user, who has a home directory of "/home/smithj".
+#
+# # ls -al /home/smithj/.* | more
+# -rwxr-xr-x  1 smithj users        896 Mar 10  2011 .profile
+# -rwxr-xr-x  1 smithj users        497 Jan  6  2007 .login
+# -rwxr-xr-x  1 smithj users        886 Jan  6  2007 .something
+#
+# If any local initialization files have a mode more permissive than "0740", this is a finding.
+# Fix Text: Set the mode of the local initialization files to "0740" with the following command:
+#
+# Note: The example will be for the smithj user, who has a home directory of "/home/smithj".
+#
+# # chmod 0740 /home/smithj/.<INIT_FILE>
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72033
+#   set_fact:
+#     stig_rhel7_v1r4_v_72033_result: 'fail'
+#   when:
+#     - "'v_72033' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72033_result != 'pass'
+
+
+# Vuln ID: V-72035
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86659r3_rule
+# STIG ID: RHEL-07-020720
+# Rule Title: All local interactive user initialization files executable search paths must contain only paths that resolve to the users home directory.
+# Discussion: The executable search path (typically the PATH environment variable) contains a list of directories for the shell to search to find executables. If this path includes the current working directory (other than the user’s home directory), executables in these directories may be executed instead of system commands. This variable is formatted as a colon-separated list of directories. If there is an empty entry, such as a leading or trailing colon or two consecutive colons, this is interpreted as the current working directory. If deviations from the default system search path for the local interactive user are required, they must be documented with the Information System Security Officer (ISSO).
+# IA Controls:
+# Check Content: Verify that all local interactive user initialization files' executable search path statements do not contain statements that will reference a working directory other than the users’ home directory.
+#
+# Check the executable search path statement for all local interactive user initialization files in the users' home directory with the following commands:
+#
+# Note: The example will be for the smithj user, which has a home directory of "/home/smithj".
+#
+# # grep -i path /home/smithj/.*
+# /home/smithj/.bash_profile:PATH=$PATH:$HOME/.local/bin:$HOME/bin
+# /home/smithj/.bash_profile:export PATH
+#
+# If any local interactive user initialization files have executable search path statements that include directories outside of their home directory, this is a finding.
+# Fix Text: Edit the local interactive user initialization files to change any PATH variable statements that reference directories other than their home directory.
+#
+# If a local interactive user requires path variables to reference a directory owned by the application, it must be documented with the ISSO.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72035
+#   set_fact:
+#     stig_rhel7_v1r4_v_72035_result: 'fail'
+#   when:
+#     - "'v_72035' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72035_result != 'pass'
+
+
+# Vuln ID: V-72037
+# Severity: medium
+# Group Title: SRG-OS-000480-GPOS-00227
+# Rule ID: SV-86661r1_rule
+# STIG ID: RHEL-07-020730
+# Rule Title: Local initialization files must not execute world-writable programs.
+# Discussion: If user start-up files execute world-writable programs, especially in unprotected directories, they could be maliciously modified to destroy user files or otherwise compromise the system at the user level. If the system is compromised at the user level, it is easier to elevate privileges to eventually compromise the system at the root and network level.
+# IA Controls:
+# Check Content: Verify that local initialization files do not execute world-writable programs.
+#
+# Check the system for world-writable files with the following command:
+#
+# # find / -perm -002 -type f -exec ls -ld {} \; | more
+#
+# For all files listed, check for their presence in the local initialization files with the following commands:
+#
+# Note: The example will be for a system that is configured to create users’ home directories in the "/home" directory.
+#
+# # grep <file> /home/*/.*
+#
+# If any local initialization files are found to reference world-writable files, this is a finding.
+# Fix Text: Set the mode on files being executed by the local initialization files with the following command:
+#
+# # chmod 0755  <file>
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+# - name: fail stig_rhel7_v1r4 v_72037
+#   set_fact:
+#     stig_rhel7_v1r4_v_72037_result: 'fail'
+#   when:
+#     - "'v_72037' in stig_rhel7_v1r4_checks"
+#     - stig_rhel7_v1r4_v_72037_result != 'pass'
