@@ -1,0 +1,168 @@
+# Vuln ID: V-38652
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50453r2_rule
+# STIG ID: RHEL-06-000269
+# Rule Title: Remote file systems must be mounted with the nodev option.
+# Discussion: Legitimate device files should only exist in the /dev directory. NFS mounts should not present device files to users.
+# IA Controls:
+# Check Content: To verify the "nodev" option is configured for all NFS mounts, run the following command:
+#
+# $ mount | grep "nfs "
+#
+# All NFS mounts should show the "nodev" setting in parentheses, along with other mount options.
+# If the setting does not show, this is a finding.
+# Fix Text: Add the "nodev" option to the fourth column of "/etc/fstab" for the line which controls mounting of any NFS mounts.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+# - name: fail stig_rhel6_v1r18 v_38652
+#   set_fact:
+#     stig_rhel6_v1r18_v_38652_result: 'fail'
+#   when:
+#     - "'v_38652' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38652_result != 'pass'
+
+
+# Vuln ID: V-38654
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-50455r2_rule
+# STIG ID: RHEL-06-000270
+# Rule Title: Remote file systems must be mounted with the nosuid option.
+# Discussion: NFS mounts should not present suid binaries to users. Only vendor-supplied suid executables should be installed to their default location on the local filesystem.
+# IA Controls:
+# Check Content: To verify the "nosuid" option is configured for all NFS mounts, run the following command:
+#
+# $ mount | grep nfs
+#
+# All NFS mounts should show the "nosuid" setting in parentheses, along with other mount options.
+# If the setting does not show, this is a finding.
+# Fix Text: Add the "nosuid" option to the fourth column of "/etc/fstab" for the line which controls mounting of any NFS mounts.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000366
+# The organization implements the security configuration settings.
+# NIST SP 800-53 :: CM-6 b
+# NIST SP 800-53A :: CM-6.1 (iv)
+# NIST SP 800-53 Revision 4 :: CM-6 b
+#
+#
+# - name: fail stig_rhel6_v1r18 v_38654
+#   set_fact:
+#     stig_rhel6_v1r18_v_38654_result: 'fail'
+#   when:
+#     - "'v_38654' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38654_result != 'pass'
+
+
+# Vuln ID: V-38655
+# Severity: low
+# Group Title: SRG-OS-000035
+# Rule ID: SV-50456r1_rule
+# STIG ID: RHEL-06-000271
+# Rule Title: The noexec option must be added to removable media partitions.
+# Discussion: Allowing users to execute binaries from removable media such as USB keys exposes the system to potential compromise.
+# IA Controls:
+# Check Content: To verify that binaries cannot be directly executed from removable media, run the following command:
+#
+# # grep noexec /etc/fstab
+#
+# The output should show "noexec" in use.
+# If it does not, this is a finding.
+# Fix Text: The "noexec" mount option prevents the direct execution of binaries on the mounted filesystem. Users should not be allowed to execute binaries that exist on partitions mounted from removable media (such as a USB key). The "noexec" option prevents code from being executed directly from the media itself, and may therefore provide a line of defense against certain types of worms or malicious code. Add the "noexec" option to the fourth column of "/etc/fstab" for the line which controls mounting of any removable media partitions.
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000087
+# The organization disables information system functionality that provides the capability for automatic execution of code on mobile devices without user direction.
+# NIST SP 800-53 :: AC-19 e
+# NIST SP 800-53A :: AC-19.1 (v)
+#
+#
+# - name: fail stig_rhel6_v1r18 v_38655
+#   set_fact:
+#     stig_rhel6_v1r18_v_38655_result: 'fail'
+#   when:
+#     - "'v_38655' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38655_result != 'pass'
+
+
+# Vuln ID: V-57569
+# Severity: medium
+# Group Title: SRG-OS-999999
+# Rule ID: SV-71919r1_rule
+# STIG ID: RHEL-06-000528
+# Rule Title: The noexec option must be added to the /tmp partition.
+# Discussion: Allowing users to execute binaries from world-writable directories such as "/tmp" should never be necessary in normal operation and can expose the system to potential compromise.
+# IA Controls:
+# Check Content: To verify that binaries cannot be directly executed from the /tmp directory, run the following command:
+#
+# $ grep '\s/tmp' /etc/fstab
+#
+# The resulting output will show whether the /tmp partition has the "noexec" flag set. If the /tmp partition does not have the noexec flag set, this is a finding.
+# Fix Text: The "noexec" mount option can be used to prevent binaries from being executed out of "/tmp". Add the "noexec" option to the fourth column of "/etc/fstab" for the line which controls mounting of "/tmp".
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-000381
+# The organization configures the information system to provide only essential capabilities.
+# NIST SP 800-53 :: CM-7
+# NIST SP 800-53A :: CM-7.1 (ii)
+# NIST SP 800-53 Revision 4 :: CM-7 a
+#
+#
+# - name: fail stig_rhel6_v1r18 v_57569
+#   set_fact:
+#     stig_rhel6_v1r18_v_57569_result: 'fail'
+#   when:
+#     - "'v_57569' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_57569_result != 'pass'

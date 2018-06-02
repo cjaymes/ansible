@@ -14,6 +14,7 @@
     - harden_dccp
     - harden_filesystems
     - harden_firewalld
+    - harden_fstab
     - harden_gdm
     - harden_gnome
     - harden_group

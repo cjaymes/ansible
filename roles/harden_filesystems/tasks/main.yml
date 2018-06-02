@@ -1,2 +1,0 @@
-- name: apply fstab fixes
-  include_tasks: fstab.yml

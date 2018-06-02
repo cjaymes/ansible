@@ -1,5 +1,5 @@
 - name: parse /etc/fstab
-  fstab:
+  fstab_dump:
   register: fstab
 
 - name: fstab
@@ -30,9 +30,10 @@
   when:
       - item.fstype in filesystems_types_network
 
-# TODO fix separate filesystem for /home,/var,/var/log/audit,/tmp
-# TODO maybe use available lvm pool?
-
+# NOTE: not sure this is a really good idea, despite STIG direction. This uses
+# memory in RAM for /tmp instead of the hard drive. The intent of this would be
+# speed, not security. The tmpfs could be grown to cause memory allocation
+# failures
 - name: enable (and start) tmp.mount
   systemd:
       name: tmp.mount
