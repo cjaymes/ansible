@@ -5,6 +5,7 @@
     - harden_abrt
     - harden_aide
     - harden_antivirus
+    - harden_at
     - harden_auditd
     - harden_autofs
     - harden_avahi
