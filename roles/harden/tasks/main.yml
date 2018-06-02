@@ -48,7 +48,7 @@
     - harden_rhn
     - harden_rlogind
     - harden_rsh
-    - harden_rsyslogd
+    - harden_rsyslog
     - harden_samba_client
     - harden_screen
     - harden_sctp
