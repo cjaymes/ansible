@@ -1,0 +1,17 @@
+- name: /boot/efi/EFI/redhat/grub.cfg ownership
+  file:
+      path: /boot/efi/EFI/redhat/grub.cfg
+      owner: root
+      group: root
+      mode: 0600
+      state: file
+  when:
+      - boot_method == 'UEFI'
+
+- name: include if we're running rhel7
+  include_tasks: rhel7.yml
+  when: ansible_distribution_major_version == '7'
+
+- name: include if we're running rhel7
+  include_tasks: rhel6.yml
+  when: ansible_distribution_major_version == '6'

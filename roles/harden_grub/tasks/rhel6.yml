@@ -1,0 +1,39 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38579 (SV-50380r2_rule)
+# V-38581 (SV-50382r2_rule)
+# V-38583 (SV-50384r4_rule)
+- name: /etc/grub/grub.conf ownership
+  file:
+      path: /etc/grub/grub.conf
+      owner: root
+      group: root
+      mode: 0600
+      state: file
+  when:
+      - boot_method == 'BIOS'
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38438 (SV-50238r4_rule)
+- name: add audit=1 to kernel lines
+  replace:
+      path: /etc/grub/grub.conf
+      regexp: ^\s*kernel\s+(((?!audit=1).)*)(#.*)?$
+      replace: 'kernel \1 audit=1 \2'
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38585 (SV-50386r4_rule)
+- name: insert password
+  lineinfile:
+      path: /etc/grub/grub.conf
+      regexp: ^\s*password
+      insertbefore: ^\s*title
+      line: "password --encrypted {{grub_password}}"
+      state: present
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-51337 (SV-65547r2_rule)
+- name: remove selinux=0 from kernel lines
+  replace:
+      path: /etc/grub/grub.conf
+      regexp: ^\s*kernel\s+(.*)selinux=0(.*(#.*)?)$
+      replace: 'kernel \1 \2'

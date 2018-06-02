@@ -1,0 +1,15 @@
+- name: grub2-mkconfig
+  command: grub2-mkconfig --output=/boot/grub2/grub.cfg
+  changed_when: False
+  when:
+      - boot_method == 'BIOS'
+
+- name: grub2-mkconfig
+  command: grub2-mkconfig --output=/boot/efi/EFI/redhat/grub.cfg
+  changed_when: False
+  when:
+      - boot_method == 'UEFI'
+
+- name: generate initramfs
+  command: dracut -f
+  changed_when: False

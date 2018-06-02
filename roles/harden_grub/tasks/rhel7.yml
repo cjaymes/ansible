@@ -1,0 +1,62 @@
+- name: /boot/grub2/grub.cfg ownership
+  file:
+      path: /boot/grub2/grub.cfg
+      owner: root
+      group: root
+      mode: 0600
+      state: file
+  when:
+      - boot_method == 'BIOS'
+
+- name: remove selinux=0 from GRUB_CMDLINE_LINUX
+  replace:
+      path: /etc/default/grub
+      regexp: ^\s*GRUB_CMDLINE_LINUX="(.*)selinux=0(.*)".*$
+      replace: 'GRUB_CMDLINE_LINUX="\1 \2"'
+  notify: grub2-mkconfig
+
+- name: add audit=1 to GRUB_CMDLINE_LINUX
+  replace:
+      path: /etc/default/grub
+      regexp: ^\s*GRUB_CMDLINE_LINUX="(((?!audit=1).)*)".*$
+      replace: 'GRUB_CMDLINE_LINUX="\1 audit=1"'
+  notify: grub2-mkconfig
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71961 (SV-86585r4_rule)
+# V-71963 (SV-86587r3_rule)
+- name: set grub superusers
+  lineinfile:
+      path: /etc/grub.d/40_custom
+      regexp: ^\s*set\s+superusers
+      line: set superusers="root"
+      state: present
+  notify: grub2-mkconfig
+- name: set grub password
+  lineinfile:
+      path: /etc/grub.d/40_custom
+      regexp: ^\s*password_pbkdf2\s+root
+      line: "password_pbkdf2 root {{grub_password}}"
+      state: present
+  notify: grub2-mkconfig
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72067 (SV-86691r3_rule)
+# TODO case when /boot is part of /
+- name: install package
+  yum:
+      name: dracut-fips
+      state: installed
+  notify: generate initramfs
+- name: boot UUID
+  shell: blkid $(mount | grep /boot | awk '{print $1}') | awk '{print $2}' | sed 's/"//g'
+  register: boot_uuid
+  changed_when: False
+- name: add fips=1 to GRUB_CMDLINE_LINUX
+  lineinfile:
+      path: /etc/default/grub
+      regexp: ^\s*GRUB_CMDLINE_LINUX="(((?!fips=1).)*)".*$
+      backrefs: yes
+      line: 'GRUB_CMDLINE_LINUX="\1 fips=1 boot={{boot_uuid.stdout}}"'
+      state: present
+  notify: grub2-mkconfig
