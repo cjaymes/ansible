@@ -1,0 +1,8 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71897 (SV-86521r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38590 (SV-50391r1_rule)
+- name: install required packages
+  yum:
+      name: screen
+      state: installed

@@ -18,7 +18,6 @@
     - harden_iptables
     - harden_issue
     - harden_kdump
-    - harden_ldap
     - harden_libuser
     - harden_limits
     - harden_login
@@ -36,7 +35,8 @@
     - harden_resolv_conf
     - harden_rhn
     - harden_rsyslogd
-    - harden_samba
+    - harden_samba_client
+    - harden_screen
     - harden_securetty
     - harden_selinux
     - harden_shadow
