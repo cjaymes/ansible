@@ -33,6 +33,7 @@
     - harden_profile
     - harden_pwquality
     - harden_resolv_conf
+    - harden_rexec
     - harden_rhn
     - harden_rsh
     - harden_rsyslogd
