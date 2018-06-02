@@ -17,4 +17,27 @@
 
 - name: include fixes if command succeeded (package is installed)
   include_tasks: harden_tftpd.yml
-  when: tftpd_installed is succeeded
+  when:
+      - tftpd_installed is succeeded
+      - is_tftpd_server
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72301 (SV-86925r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38609 (SV-50410r2_rule)
+- name: disable, stop service
+  service:
+      name: tftp
+      enabled: no
+      state: stopped
+  when:
+      - not is_tftpd_server
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38606 (SV-50407r2_rule)
+- name: remove package
+  yum:
+      name: tftp-server
+      state: absent
+  when:
+      - not is_tftpd_server
