@@ -77,3 +77,6 @@
     - harden_yum
   loop_control:
     loop_var: harden_role
+
+# TODO harden_antivirus: can't think of a way to install AV solutions without
+# more specific information
