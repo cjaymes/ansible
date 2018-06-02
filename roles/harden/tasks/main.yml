@@ -5,6 +5,7 @@
     - harden_aide
     - harden_antivirus
     - harden_auditd
+    - harden_autofs
     - harden_cron
     - harden_filesystems
     - harden_firewalld
