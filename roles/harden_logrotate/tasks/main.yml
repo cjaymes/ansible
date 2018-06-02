@@ -1,0 +1,13 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38624 (SV-50425r1_rule)
+- name: ensure default logrotate cronjob
+  copy:
+      src: files/etc/cron.daily/logrotate
+      dest: /etc/cron.daily/logrotate
+      owner: root
+      group: root
+      mode: 0700
+      seuser: system_u
+      serole: object_r
+      setype: bin_t
+      selevel: s0
