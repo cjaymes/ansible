@@ -32,7 +32,7 @@
     - harden_netconsole
     - harden_nfs_server
     - harden_nslcd
-    - harden_ntpd
+    - harden_ntp
     - harden_oddjob
     - harden_openldap
     - harden_pam
