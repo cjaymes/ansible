@@ -17,7 +17,6 @@
       path: "{{rsyslogd_config_file}}"
       regexp: ^(\*\.\*\s+~\s*(#.*)?)$
       replace: '#\1'
-
 - name: log aggregation target
   lineinfile:
       path: "{{rsyslogd_config_file}}"
@@ -26,7 +25,6 @@
       insertafter: EOF
       state: present
   when: log_aggregation_protocol == 'udp'
-
 - name: log aggregation target
   lineinfile:
       path: "{{rsyslogd_config_file}}"
@@ -38,4 +36,33 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72211 (SV-86835r1_rule)
-# TODO comment "ModLoad imtcp" unless this is a log aggregation server
+- name: comment v5 imtcp/imudp line
+  replace:
+      path: "{{rsyslogd_config_file}}"
+      regexp: ^(\s*\$ModLoad\s+(imtcp|imudp).*)$
+      replace: '#\1'
+  when:
+      - not is_syslog_server
+- name: comment v7+ imtcp/imudp line
+  replace:
+      path: "{{rsyslogd_config_file}}"
+      regexp: ^(\s*module\(.*load=['"](imtcp|imudp).*)$
+      replace: '#\1'
+  when:
+      - not is_syslog_server
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38518 (SV-50319r2_rule)
+# V-38519 (SV-50320r2_rule)
+# V-38623 (SV-50424r2_rule)
+- name: read rsyslog_files
+  rsyslog_files:
+  register: rsyslog_files
+- name: check rsyslog files
+  file:
+      path: "{{item}}"
+      owner: root
+      group: root
+      mode: 0600
+      state: file
+  loop: "{{rsyslog_files.files}}"

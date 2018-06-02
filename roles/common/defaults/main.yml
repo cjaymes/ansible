@@ -7,6 +7,7 @@ is_routing: False
 is_xinetd_used: False
 is_tftpd_server: False
 is_X_required: False
+is_syslog_server: False
 
 boot_method: BIOS
 #boot_method: UEFI
