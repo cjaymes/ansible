@@ -15,3 +15,12 @@
       regexp: ^\s*PROMPT\s*=
       line: PROMPT=no
       state: present
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38668 (SV-50469r3_rule)
+- name: set exec
+  lineinfile:
+      path: /etc/init/control-alt-delete.override
+      regexp: ^\s*exec\s*=
+      line: exec /usr/bin/logger -p security.info "Ctrl-Alt-Delete pressed"
+      state: present
