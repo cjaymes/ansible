@@ -1,0 +1,17 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71983 (SV-86607r2_rule)
+- name: blacklist usb-storage
+  lineinfile:
+      path: /etc/modprobe.d/stig-blacklist
+      line: blacklist usb-storage
+      state: present
+      create: yes
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38490 (SV-50291r6_rule)
+- name: prevent module installation
+  lineinfile:
+      path: /etc/modprobe.d/stig
+      line: install usb-storage /bin/true
+      state: present
+      create: yes

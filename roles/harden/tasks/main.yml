@@ -62,6 +62,7 @@
     - harden_telnet
     - harden_tftpd
     - harden_umask
+    - harden_usb_storage
     - harden_usbguard
     - harden_useradd
     - harden_vsftpd
