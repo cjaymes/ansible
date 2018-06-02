@@ -1,0 +1,15 @@
+- name: blacklist module
+  lineinfile:
+      path: /etc/modprobe.d/stig-blacklist
+      line: "blacklist sctp"
+      state: present
+      create: yes
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38515 (SV-50316r5_rule)
+- name: prevent module installation
+  lineinfile:
+      path: /etc/modprobe.d/stig-install
+      line: "install sctp /bin/true"
+      state: present
+      create: yes

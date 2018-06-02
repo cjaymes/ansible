@@ -49,6 +49,7 @@
     - harden_rsyslogd
     - harden_samba_client
     - harden_screen
+    - harden_sctp
     - harden_securetty
     - harden_selinux
     - harden_sendmail
