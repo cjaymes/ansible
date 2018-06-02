@@ -1,0 +1,7 @@
+- name: Apply sysctl settings
+  sysctl:
+      name: "{{item.name}}"
+      value: "{{item.value}}"
+      state: present
+  notify: reload sysctl
+  with_items: "{{sysctl_settings}}"
