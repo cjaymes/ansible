@@ -1,0 +1,13 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38640 (SV-50441r2_rule)
+- name: stop, disable service
+  service:
+      name: abrtd
+      enabled: no
+      state: stopped
+
+
+- name: remove package
+  yum:
+      name: abrt
+      state: absent

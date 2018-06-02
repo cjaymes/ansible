@@ -2,6 +2,7 @@
   include_role:
     name: "{{harden_role}}"
   loop:
+    - harden_abrt
     - harden_aide
     - harden_antivirus
     - harden_auditd
