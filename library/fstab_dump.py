@@ -10,7 +10,7 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-module: fstab
+module: fstab_dump
 short_description: Parse the fstab file
 description:
   - Get the parsed contents of the fstab file.
@@ -21,6 +21,7 @@ options:
 
 EXAMPLES = '''
     - name: parse fstab file
+      fstab_dump:
       register: fstab
     - debug:
         msg: '{{fstab}}'
