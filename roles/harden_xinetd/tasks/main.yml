@@ -1,0 +1,16 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38582 (SV-50383r2_rule)
+- name: disable, stop xinetd service
+  service:
+      name: xinetd
+      enabled: no
+      state: stopped
+  when: not is_xinetd_used
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38584 (SV-50385r1_rule)
+- name: remove xinetd
+  yum:
+      name: xinetd
+      state: absent
+  when: not is_xinetd_used
