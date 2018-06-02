@@ -41,6 +41,7 @@
     - harden_pwquality
     - harden_qpid
     - harden_rdisc
+    - harden_rds
     - harden_resolv_conf
     - harden_rexec
     - harden_rhn
