@@ -26,3 +26,186 @@
       state: present
   notify: reload sysctl
   when: ansible_distribution_major_version == '6'
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72283 (SV-86907r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38523 (SV-50324r2_rule)
+- name: Apply net.ipv4.conf.all.accept_source_route
+  sysctl:
+      name: net.ipv4.conf.all.accept_source_route
+      value: 0
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72285 (SV-86909r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38529 (SV-50330r2_rule)
+- name: Apply net.ipv4.conf.default.accept_source_route
+  sysctl:
+      name: net.ipv4.conf.default.accept_source_route
+      value: 0
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72287 (SV-86911r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38535 (SV-50336r2_rule)
+- name: Apply net.ipv4.icmp_echo_ignore_broadcasts
+  sysctl:
+      name: net.ipv4.icmp_echo_ignore_broadcasts
+      value: 1
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72289 (SV-86913r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38533 (SV-50334r3_rule)
+- name: Apply net.ipv4.conf.default.accept_redirects
+  sysctl:
+      name: net.ipv4.conf.default.accept_redirects
+      value: 0
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72291 (SV-86915r3_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38600 (SV-50401r2_rule)
+- name: Apply net.ipv4.conf.default.send_redirects
+  sysctl:
+      name: net.ipv4.conf.default.send_redirects
+      value: 0
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72293 (SV-86917r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38601 (SV-50402r2_rule)
+- name: Apply net.ipv4.conf.all.send_redirects
+  sysctl:
+      name: net.ipv4.conf.all.send_redirects
+      value: 0
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72295 (SV-86919r1_rule)
+- name: Get interface promisc mode
+  command: "ip link show {{item}}"
+  loop: "{{network_interfaces.keys()}}"
+  changed_when: False
+  register: network_interface_state
+
+- name: set promisc off
+  command: "ip link set {{item}} promisc off"
+  loop: "{{network_interface_state.results}}"
+  when: "'promisc' in item.stdout"
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72309 (SV-86933r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38511 (SV-50312r2_rule)
+- name: Apply net.ipv4.ip_forward
+  sysctl:
+      name: net.ipv4.ip_forward
+      value: 0
+      state: present
+  when: not is_routing
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72319 (SV-86943r1_rule)
+- name: Apply net.ipv6.conf.all.accept_source_route
+  sysctl:
+      name: net.ipv6.conf.all.accept_source_route
+      value: 0
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-73175 (SV-87827r3_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38524 (SV-50325r2_rule)
+- name: Apply net.ipv4.conf.all.accept_redirects
+  sysctl:
+      name: net.ipv4.conf.all.accept_redirects
+      value: 0
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38526 (SV-50327r2_rule)
+- name: Apply net.ipv4.conf.all.secure_redirects
+  sysctl:
+      name: net.ipv4.conf.all.secure_redirects
+      value: 0
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38528 (SV-50329r2_rule)
+- name: Apply net.ipv4.conf.all.log_martians
+  sysctl:
+      name: net.ipv4.conf.all.log_martians
+      value: 1
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38532 (SV-50333r2_rule)
+- name: Apply net.ipv4.conf.default.secure_redirects
+  sysctl:
+      name: net.ipv4.conf.default.secure_redirects
+      value: 0
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38537 (SV-50338r2_rule)
+- name: Apply net.ipv4.icmp_ignore_bogus_error_responses
+  sysctl:
+      name: net.ipv4.icmp_ignore_bogus_error_responses
+      value: 1
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38539 (SV-50340r2_rule)
+- name: Apply net.ipv4.tcp_syncookies
+  sysctl:
+      name: net.ipv4.tcp_syncookies
+      value: 1
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38542 (SV-50343r2_rule)
+- name: Apply net.ipv4.conf.all.rp_filter
+  sysctl:
+      name: net.ipv4.conf.all.rp_filter
+      value: 1
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38544 (SV-50345r2_rule)
+- name: Apply net.ipv4.conf.default.rp_filter
+  sysctl:
+      name: net.ipv4.conf.default.rp_filter
+      value: 1
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38548 (SV-50349r3_rule)
+- name: Apply net.ipv6.conf.default.accept_redirects
+  sysctl:
+      name: net.ipv6.conf.default.accept_redirects
+      value: 0
+      state: present
+  notify: reload sysctl
