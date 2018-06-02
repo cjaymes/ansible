@@ -1,0 +1,50 @@
+# TODO add ipv6 detection
+# TODO add basic rules; perhaps open listening ports as a default?
+# TODO martian blocking
+
+- name: set default FORWARD policy
+  command: ip6tables -P FORWARD DROP
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38444 (SV-50244r2_rule)
+- name: set default INPUT policy
+  command: ip6tables -P INPUT DROP
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38513 (SV-50314r2_rule)
+- name: set default INPUT policy
+  command: iptables -P INPUT DROP
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38686 (SV-50487r2_rule)
+- name: set default FORWARD policy
+  command: iptables -P FORWARD DROP
+
+# NOTE: because we have to use command above, the tasks are alwasy marked as
+# changed, which makes notify always fire
+
+- name: save ip4 changes
+  shell: iptables-save > /etc/sysconfig/iptables
+
+- name: save ip6 changes
+  shell: ip6tables-save > /etc/sysconfig/ip6tables
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38512 (SV-50313r2_rule)
+# V-38555 (SV-50356r2_rule)
+# V-38560 (SV-50361r2_rule)
+- name: ensure the iptables service is started
+  service:
+      name: iptables
+      enabled: yes
+      state: started
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38549 (SV-50350r3_rule)
+# V-38551 (SV-50352r3_rule)
+# V-38553 (SV-50354r3_rule)
+- name: ensure the ip6tables service is started
+  service:
+      name: ip6tables
+      enabled: yes
+      state: started
