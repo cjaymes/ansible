@@ -1,0 +1,9 @@
+- name: parse exports file
+  exports_dump:
+  register: exports
+
+- name: check export
+  include_tasks: export.yml
+  loop: "{{exports.exports.keys()}}"
+  loop_control:
+      loop_var: export

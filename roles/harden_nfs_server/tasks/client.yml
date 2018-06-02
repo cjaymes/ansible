@@ -1,0 +1,8 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38460 (SV-50260r1_rule)
+- name: remove all_squash
+  replace:
+      path: /etc/exports
+      regexp: '^({{export}}\s+.*{{client["client"]}}\([^)]*)all_squash([^)]*\))'
+      replace: \1\2
+  when: "'rw' is in(client['options'])"
