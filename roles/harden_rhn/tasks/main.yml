@@ -1,0 +1,16 @@
+- name: include if we're running rhel6
+  include_tasks: harden.yml
+  when: ansible_distribution_major_version == '6'
+
+- name: remove rhn & subscription-manager
+  yum:
+      name: "{{item}}"
+      state: absent
+  loop:
+      - rhnsd
+      - rhn-check
+      - rhn-client-tools
+      - rhn-setup
+      - rhnlib
+      - subscription-manager
+      - yum-rhn-plugin
