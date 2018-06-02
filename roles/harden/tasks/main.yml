@@ -27,7 +27,6 @@
     - harden_limits
     - harden_login
     - harden_logrotate
-    - harden_modules
     - harden_netconsole
     - harden_nfs_server
     - harden_nslcd
@@ -64,6 +63,7 @@
     - harden_tcpwrappers
     - harden_telnet
     - harden_tftpd
+    - harden_tipc
     - harden_umask
     - harden_usb_storage
     - harden_usbguard
