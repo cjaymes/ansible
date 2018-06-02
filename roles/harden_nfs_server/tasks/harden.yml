@@ -1,0 +1,33 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38460 (SV-50260r1_rule)
+- name: remove all_squash
+  replace:
+      path: /etc/exports
+      regexp: '(\([^)]*rw[^)]*),all_squash([^)]*\))'
+      replace: \1\2
+
+- name: remove all_squash
+  replace:
+      path: /etc/exports
+      regexp: '(\([^)]*)all_squash,([^)]*rw[^)]*\))'
+      replace: \1\2
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38460 (SV-50260r1_rule)
+- name: remove insecure_locks
+  replace:
+      path: /etc/exports
+      regexp: '(\([^)]*),insecure_locks([^)]*\))'
+      replace: \1\2
+
+- name: remove insecure_locks
+  replace:
+      path: /etc/exports
+      regexp: '(\([^)]*)insecure_locks,([^)]*\))'
+      replace: \1\2
+
+- name: remove insecure_locks
+  replace:
+      path: /etc/exports
+      regexp: '\(insecure_locks\)'
+      replace: '()'

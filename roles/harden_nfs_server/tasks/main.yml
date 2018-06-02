@@ -1,9 +1,9 @@
-- name: parse exports file
-  exports_dump:
-  register: exports
+- name: nfs-server status
+  command: systemctl status nfs-server
+  failed_when: False
+  changed_when: False
+  register: nfs_server_status
 
-- name: check export
-  include_tasks: export.yml
-  loop: "{{exports.exports.keys()}}"
-  loop_control:
-      loop_var: export
+- name: include harden
+  include_tasks: harden.yml
+  when: nfs_server_status is successful
