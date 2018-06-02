@@ -4,7 +4,6 @@
   loop:
     - harden_abrt
     - harden_aide
-    - harden_antivirus
     - harden_at
     - harden_auditd
     - harden_autofs
@@ -56,6 +55,7 @@
     - harden_selinux
     - harden_sendmail
     - harden_shadow
+    - harden_smartcards
     - harden_snmpd
     - harden_sshd
     - harden_sssd
@@ -64,7 +64,7 @@
     - harden_systemd
     - harden_tcpwrappers
     - harden_telnet
-    - harden_tftpd
+    - harden_tftp
     - harden_tipc
     - harden_umask
     - harden_usb_storage
