@@ -3,4 +3,4 @@
 # - hosts: all
 - hosts: stig-rhel7
   roles:
-    - harden_grub
+    - harden_gnome

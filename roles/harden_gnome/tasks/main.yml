@@ -1,0 +1,22 @@
+- name: check if gnome-session is installed
+  command: rpm -qi gnome-session
+  args:
+      warn: False
+  ignore_errors: True
+  changed_when: False
+  failed_when: False
+  register: gnome_installed
+
+- name: include if we're running rhel7
+  include_tasks: rhel7.yml
+  when:
+      - ansible_distribution_major_version == '7'
+      # - is_X_required
+      - gnome_installed.rc == 0
+
+- name: include if we're running rhel7
+  include_tasks: rhel6.yml
+  when:
+      - ansible_distribution_major_version == '6'
+      # - is_X_required
+      - gnome_installed.rc == 0

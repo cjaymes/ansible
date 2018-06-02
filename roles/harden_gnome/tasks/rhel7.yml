@@ -1,0 +1,105 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71859 (SV-86483r3_rule)
+- name: set banner-message-enable
+  ini_file:
+      path: /etc/dconf/db/local.d/01-banner-message
+      section: org/gnome/login-screen
+      option: banner-message-enable
+      value: 'true'
+      state: present
+  notify: update dconf
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71861 (SV-86485r3_rule)
+- name: set banner-message-text
+  ini_file:
+      path: /etc/dconf/db/local.d/01-banner-message
+      section: org/gnome/login-screen
+      option: banner-message-text
+      value: "'You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.\\nBy using this IS (which includes any device attached to this IS), you consent to the following conditions:\\n-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.\\n-At any time, the USG may inspect and seize data stored on this IS.\\n-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.\\n-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.\\n-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.'"
+      state: present
+  notify: update dconf
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71891 (SV-86515r4_rule)
+- name: set lock-enabled
+  ini_file:
+      path: /etc/dconf/db/local.d/00-screensaver
+      section: org/gnome/desktop/screensaver
+      option: lock-enabled
+      value: 'true'
+      state: present
+  notify: update dconf
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71893 (SV-86517r4_rule)
+- name: set idle-delay
+  ini_file:
+      path: /etc/dconf/db/local.d/00-screensaver
+      section: org/gnome/desktop/session
+      option: idle-delay
+      value: uint32 900
+      state: present
+  notify: update dconf
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71899 (SV-86523r3_rule)
+- name: set idle-activation-enabled
+  ini_file:
+      path: /etc/dconf/db/local.d/00-screensaver
+      section: org/gnome/desktop/screensaver
+      option: idle-activation-enabled
+      value: 'true'
+      state: present
+  notify: update dconf
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71901 (SV-86525r2_rule)
+- name: set lock-delay
+  ini_file:
+      path: /etc/dconf/db/local.d/00-screensaver
+      section: org/gnome/desktop/screensaver
+      option: lock-delay
+      value: 'uint32 5'
+      state: present
+  notify: update dconf
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-73155 (SV-87807r3_rule)
+- name: lock lock-delay
+  lineinfile:
+      path: /etc/dconf/db/local.d/locks/session
+      line: /org/gnome/desktop/screensaver/lock-delay
+      create: yes
+      state: present
+  notify: update dconf
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-73157 (SV-87809r3_rule)
+- name: lock idle-delay
+  lineinfile:
+      path: /etc/dconf/db/local.d/locks/session
+      line: /org/gnome/desktop/session/idle-delay
+      create: yes
+      state: present
+  notify: update dconf
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-78995 (SV-93701r1_rule)
+- name: lock lock-enabled
+  lineinfile:
+      path: /etc/dconf/db/local.d/locks/session
+      line: /org/gnome/desktop/screensaver/lock-enabled
+      create: yes
+      state: present
+  notify: update dconf
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-78997 (SV-93703r1_rule)
+- name: lock idle-activation-enabled
+  lineinfile:
+      path: /etc/dconf/db/local.d/locks/session
+      line: /org/gnome/desktop/screensaver/idle-activation-enabled
+      create: yes
+      state: present
+  notify: update dconf
