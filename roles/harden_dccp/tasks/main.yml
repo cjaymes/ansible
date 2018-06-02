@@ -1,0 +1,27 @@
+- name: blacklist module
+  lineinfile:
+      path: /etc/modprobe.d/stig-blacklist
+      line: "blacklist {{item}}"
+      state: present
+      create: yes
+  loop:
+      - dccp
+      - dccp_diag
+      - dccp_ipv4
+      - dccp_ipv6
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-77821 (SV-92517r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38514 (SV-50315r5_rule)
+- name: prevent module installation
+  lineinfile:
+      path: /etc/modprobe.d/stig-install
+      line: "install {{item}} /bin/true"
+      state: present
+      create: yes
+  loop:
+      - dccp
+      - dccp_diag
+      - dccp_ipv4
+      - dccp_ipv6

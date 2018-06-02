@@ -11,6 +11,7 @@
     - harden_avahi
     - harden_bluetooth
     - harden_cron
+    - harden_dccp
     - harden_filesystems
     - harden_firewalld
     - harden_gdm
