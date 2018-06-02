@@ -11,7 +11,7 @@
 # V-38490 (SV-50291r6_rule)
 - name: prevent module installation
   lineinfile:
-      path: /etc/modprobe.d/stig
+      path: /etc/modprobe.d/stig-install
       line: install usb-storage /bin/true
       state: present
       create: yes
