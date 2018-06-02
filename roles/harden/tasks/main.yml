@@ -29,6 +29,7 @@
     - harden_nfs_server
     - harden_nslcd
     - harden_ntpd
+    - harden_oddjob
     - harden_openldap
     - harden_pam
     - harden_passwd

@@ -1,0 +1,9 @@
+# TODO remove package
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38646 (SV-50447r2_rule)
+- name: stop, disable service
+  service:
+      name: oddjobd
+      enabled: no
+      state: stopped
