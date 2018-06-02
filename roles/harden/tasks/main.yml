@@ -9,6 +9,7 @@
     - harden_auditd
     - harden_autofs
     - harden_avahi
+    - harden_bluetooth
     - harden_cron
     - harden_filesystems
     - harden_firewalld
