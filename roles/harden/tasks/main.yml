@@ -36,6 +36,7 @@
     - harden_postfix
     - harden_profile
     - harden_pwquality
+    - harden_qpid
     - harden_resolv_conf
     - harden_rexec
     - harden_rhn
