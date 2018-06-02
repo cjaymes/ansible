@@ -41,7 +41,7 @@ def main():
         supports_check_mode=True
     )
 
-    result = {'changed': False, 'rsyslog_files': []}
+    result = {'changed': False, 'files': []}
 
     try:
         rc, out, err = module.run_command('cat /etc/rsyslog.conf /etc/rsyslog.d/*', use_unsafe_shell=True)
@@ -68,7 +68,7 @@ def main():
             # strip off -
             action = action[1:]
 
-        result['rsyslog_files'].append(action)
+        result['files'].append(action)
 
     module.exit_json(**result)
 
