@@ -1,5 +1,3 @@
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-71969 (SV-86593r1_rule)
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
 # V-38603 (SV-50404r1_rule)
 # V-38671 (SV-50472r1_rule)
@@ -8,7 +6,6 @@
       name: "{{item}}"
       state: absent
   loop:
-      - ypserv
       - sendmail
 
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
