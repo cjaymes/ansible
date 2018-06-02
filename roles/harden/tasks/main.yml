@@ -42,6 +42,7 @@
     - harden_screen
     - harden_securetty
     - harden_selinux
+    - harden_sendmail
     - harden_shadow
     - harden_snmpd
     - harden_sshd

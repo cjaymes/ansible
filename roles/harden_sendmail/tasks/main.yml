@@ -1,0 +1,8 @@
+# TODO service
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38671 (SV-50472r1_rule)
+- name: remove prohibited packages
+  yum:
+      name: sendmail
+      state: absent
