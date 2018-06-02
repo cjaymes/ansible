@@ -16,7 +16,7 @@
     - harden_init
     - harden_iptables
     - harden_issue
-    - harden_kernel
+    - harden_kdump
     - harden_ldap
     - harden_libuser
     - harden_limits
@@ -43,6 +43,7 @@
     - harden_sshd
     - harden_sssd
     - harden_sudo
+    - harden_sysctl
     - harden_systemd
     - harden_tcpwrappers
     - harden_tftpd
