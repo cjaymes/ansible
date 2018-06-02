@@ -3,4 +3,4 @@
 # - hosts: all
 - hosts: stig-rhel7
   roles:
-    - harden_nfs_server
+    - harden_sysctl

@@ -1,7 +1,28 @@
-- name: Apply sysctl settings
+- name: Apply anti-DDoS sysctl settings
   sysctl:
       name: "{{item.name}}"
       value: "{{item.value}}"
       state: present
   notify: reload sysctl
   with_items: "{{sysctl_settings}}"
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-77825 (SV-92521r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38596 (SV-50397r2_rule)
+- name: Apply kernel.randomize_va_space
+  sysctl:
+      name: kernel.randomize_va_space
+      value: 2
+      state: present
+  notify: reload sysctl
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38597 (SV-50398r2_rule)
+- name: Apply kernel.exec-shield
+  sysctl:
+      name: kernel.exec-shield
+      value: 1
+      state: present
+  notify: reload sysctl
+  when: ansible_distribution_major_version == '6'
