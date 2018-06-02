@@ -6,7 +6,8 @@
   yum:
       name: "{{item}}"
       state: installed
-  loop: "{{packages_required}}"
+  loop:
+      - screen
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71967 (SV-86591r1_rule)
@@ -20,7 +21,11 @@
   yum:
       name: "{{item}}"
       state: absent
-  loop: "{{packages_required}}"
+  loop:
+      - rsh-server
+      - ypserv
+      - telnet-server
+      - sendmail
 
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
 # V-38627 (SV-50428r2_rule)

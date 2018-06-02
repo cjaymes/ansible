@@ -1,8 +1,0 @@
-packages_required:
-    - screen
-
-packages_prohibited:
-    - rsh-server
-    - ypserv
-    - telnet-server
-    - sendmail
