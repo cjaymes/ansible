@@ -35,6 +35,7 @@
     - harden_resolv_conf
     - harden_rexec
     - harden_rhn
+    - harden_rlogind
     - harden_rsh
     - harden_rsyslogd
     - harden_samba_client

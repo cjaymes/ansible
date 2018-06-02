@@ -1,0 +1,9 @@
+# TODO remove package
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38602 (SV-50403r2_rule)
+- name: disable, stop service
+  service:
+      name: rlogin
+      enabled: no
+      state: stopped
