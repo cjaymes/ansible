@@ -50,6 +50,7 @@
     - harden_usbguard
     - harden_useradd
     - harden_vsftpd
+    - harden_xinetd
     - harden_yum
   loop_control:
     loop_var: harden_role
