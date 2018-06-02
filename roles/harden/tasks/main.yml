@@ -26,6 +26,7 @@
     - harden_login
     - harden_logrotate
     - harden_modules
+    - harden_netconsole
     - harden_nfs_server
     - harden_nslcd
     - harden_ntpd
