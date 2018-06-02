@@ -12,7 +12,6 @@
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71967 (SV-86591r1_rule)
 # V-71969 (SV-86593r1_rule)
-# V-72077 (SV-86701r1_rule)
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
 # V-38591 (SV-50392r1_rule)
 # V-38603 (SV-50404r1_rule)
@@ -24,7 +23,6 @@
   loop:
       - rsh-server
       - ypserv
-      - telnet-server
       - sendmail
 
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018

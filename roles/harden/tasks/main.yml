@@ -47,6 +47,7 @@
     - harden_sysctl
     - harden_systemd
     - harden_tcpwrappers
+    - harden_telnet
     - harden_tftpd
     - harden_umask
     - harden_usbguard
