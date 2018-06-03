@@ -1,16 +1,16 @@
-- name: auditing generate rules
+- name: generate audit rules
   command: augenrules
   register: auditing_augenrules
   changed_when: "'No change' not in auditing_augenrules.stdout"
-  notify: auditing reload
+  notify: reload audit rules
 
-- name: auditing reload
+- name: reload audit rules
   command: auditctl -R /etc/audit/audit.rules
   register: auditing_reload
   changed_when: "'No change' not in auditing_reload.stdout"
-  notify: auditing restart
+  notify: restart auditd
 
-- name: auditing restart
+- name: restart auditd
   systemd:
       name: auditd
       state: restarted

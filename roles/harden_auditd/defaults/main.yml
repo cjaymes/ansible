@@ -4,7 +4,10 @@
 ### Variables; could be overriden depending on environment
 
 auditing_email: root
-auditing_aggregation_server:
-auditing_network_failure_action: syslog
+
 auditing_disk_full_action: syslog
+
+# Compliance requires syslog, single, or halt
+auditing_network_failure_action: syslog
+
 auditing_log_file_default: /var/log/audit/audit.log

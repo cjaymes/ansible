@@ -1,16 +1,25 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72187 (SV-86811r3_rule)
 -a always,exit -F arch=b32 -S init_module -k module-change
 -a always,exit -F arch=b64 -S init_module -k module-change
 
+# V-72189 (SV-86813r3_rule)
 -a always,exit -F arch=b32 -S delete_module -k module-change
 -a always,exit -F arch=b64 -S delete_module -k module-change
 
+# V-72191 (SV-86815r3_rule)
 -w /sbin/insmod -p x -F auid!=4294967295 -k module-change
+
+# V-72193 (SV-86817r3_rule)
 -w /sbin/rmmod -p x -F auid!=4294967295 -k module-change
 
+# V-72195 (SV-86819r3_rule)
 -w /sbin/modprobe -p x -F auid!=4294967295 -k module-change
 
+# V-78999 (SV-93705r1_rule)
 -a always,exit -F arch=b32 -S create_module -k module-change
 -a always,exit -F arch=b64 -S create_module -k module-change
 
+# V-79001 (SV-93707r1_rule)
 -a always,exit -F arch=b32 -S finit_module -k module-change
 -a always,exit -F arch=b64 -S finit_module -k module-change

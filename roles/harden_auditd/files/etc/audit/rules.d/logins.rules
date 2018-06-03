@@ -1,0 +1,9 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72143 (SV-86767r2_rule)
+-w /var/log/tallylog -p wa -k logins
+
+# V-72145 (SV-86769r3_rule)
+-w /var/run/faillock -p wa -k logins
+
+# V-72147 (SV-86771r2_rule)
+-w /var/log/lastlog -p wa -k logins

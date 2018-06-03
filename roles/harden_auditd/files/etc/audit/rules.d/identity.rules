@@ -1,0 +1,15 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72197 (SV-86821r4_rule)
+-w /etc/passwd -p wa -k identity
+
+# V-73165 (SV-87817r2_rule)
+-w /etc/group -p wa -k identity
+
+# V-73167 (SV-87819r3_rule)
+-w /etc/gshadow -p wa -k identity
+
+# V-73171 (SV-87823r3_rule)
+-w /etc/shadow -p wa -k identity
+
+# V-73173 (SV-87825r4_rule)
+-w /etc/security/opasswd -p wa -k identity

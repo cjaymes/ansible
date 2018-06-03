@@ -1,0 +1,4 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72163 (SV-86787r4_rule)
+-w /etc/sudoers -p wa -k privileged-actions
+-w /etc/sudoers.d/ -p wa -k privileged-actions
