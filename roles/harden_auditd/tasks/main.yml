@@ -20,9 +20,7 @@
       group: root
       mode: 0600
   loop:
-      - 00_delete_rules.rules
-      - 01_backlog.rules
-      - 02_failure.rules
+      - 00_header.rules
       - access.rules
       - delete.rules
       - identity.rules

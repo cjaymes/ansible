@@ -1,0 +1,15 @@
+# Red Hat Enterprise Linux 7 Security Guide
+# section 6.5.1
+
+# delete existing rules
+-D
+
+# maximum amount of existing audit buffers in the kernel
+-b 8192
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72081 (SV-86705r3_rule)
+
+# action that is performed when a critical error is detected
+# 0=silent 1=printk 2=panic
+-f 2

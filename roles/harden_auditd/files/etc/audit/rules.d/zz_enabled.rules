@@ -1,3 +1,8 @@
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-xxxxx (SV-xxxxx_rule)
+# Red Hat Enterprise Linux 7 Security Guide
+# section 6.5.1
+
+# enables and disables the Audit system or locks its configuration
+# When 0 is passed, this can be used to temporarily disable auditing. When 1
+# is passed as an argument, it will enable auditing. To lock the audit
+# configuration so that it can't be changed, pass a 2 as the argument
 -e 2
