@@ -11,8 +11,8 @@
   notify: restart auditd
 
 - name: restart auditd
-  systemd:
-      name: auditd
-      state: restarted
-  # if everything has been configured, we can't restart, but we want to show
-  ignore_errors: yes
+  command: systemctl restart auditd
+  register: auditd_restart
+  changed_when: "'Operation refused' in auditd_restart.stderr"
+  failed_when: False
+  notify: needs restart
