@@ -1,0 +1,4 @@
+- debug:
+    msg: "Configuration is not completely applied until restart. You should restart {{ ansible_host }} now."
+
+# TODO check for /var/run/reboot-required too

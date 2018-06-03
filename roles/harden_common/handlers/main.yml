@@ -1,0 +1,2 @@
+- name: needs restart
+  include_tasks: needs_restart.yml
