@@ -1,3 +1,5 @@
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72079 (SV-86703r2_rule)
 - name: install packages
   yum:
       state: installed
@@ -6,10 +8,12 @@
       - audit
       - audispd-plugins
 
-- name: run auditd
+- name: service running
   systemd:
       name: auditd
+      enabled: yes
       state: started
+
 
 - name: remove /etc/audit/rules.d/audit.rules
   file:
