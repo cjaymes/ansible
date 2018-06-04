@@ -48,7 +48,7 @@
   lineinfile:
       path: /etc/audisp/audisp-remote.conf
       regexp: ^\s*disk_full_action\s*=
-      line: "disk_full_action = {{auditing_disk_full_action}}"
+      line: "disk_full_action = {{audit_disk_full_action}}"
       state: present
   notify: restart auditd
 
@@ -58,6 +58,6 @@
   lineinfile:
       path: /etc/audisp/audisp-remote.conf
       regexp: ^\s*network_failure_action\s*=
-      line: "network_failure_action = {{auditing_network_failure_action}}"
+      line: "network_failure_action = {{audit_network_failure_action}}"
       state: present
   notify: restart auditd

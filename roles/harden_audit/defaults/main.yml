@@ -1,0 +1,21 @@
+### Constants; probably shouldn't be overriden
+
+
+### Variables; could be overriden depending on environment
+
+audit_email: root
+
+# Compliance requires syslog, single, or halt
+audit_disk_full_action: syslog
+
+# Compliance requires syslog, single, or halt
+audit_network_failure_action: syslog
+
+audit_log_file: /var/log/audit/audit.log
+
+audit_space_left_action: email
+
+audit_log_group: root
+
+# Compliance requires "syslog", "exec", "single", or "halt"
+audit_disk_error_action: syslog

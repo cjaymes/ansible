@@ -35,17 +35,17 @@
   ignore_errors: yes
   changed_when: False
   failed_when: False
-  register: auditing_log_partition_size
+  register: audit_log_partition_size
 
-- name: calculate space_left size; 75% of auditing_log_partition_size
+- name: calculate space_left size; 75% of audit_log_partition_size
   set_fact:
-      auditing_log_partition_75: '{{ ( ( auditing_log_partition_size.stdout|int / 1024 ) * 0.75 )|int }}'
+      audit_log_partition_75: '{{ ( ( audit_log_partition_size.stdout|int / 1024 ) * 0.75 )|int }}'
 
 - name: set space_left
   lineinfile:
       path: /etc/audit/auditd.conf
       regexp: ^\s*space_left\s*=
-      line: "space_left = {{auditing_log_partition_75}}"
+      line: "space_left = {{audit_log_partition_75}}"
       state: present
   notify: restart auditd
 
@@ -55,7 +55,7 @@
   lineinfile:
       path: /etc/audit/auditd.conf
       regexp: ^\s*space_left_action\s*=
-      line: "space_left_action = email"
+      line: "space_left_action = {{audit_space_left_action}}"
       state: present
   notify: restart auditd
 
@@ -65,6 +65,33 @@
   lineinfile:
       path: /etc/audit/auditd.conf
       regexp: ^\s*action_mail_acct\s*=
-      line: "action_mail_acct = {{auditing_email}}"
+      line: "action_mail_acct = {{audit_email}}"
+      state: present
+  notify: restart auditd
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38445 (SV-50245r2_rule)
+- name: set log_group
+  lineinfile:
+      path: /etc/audit/auditd.conf
+      regexp: ^\s*log_group\s*=
+      line: "log_group = {{audit_log_group}}"
+      state: present
+  notify: restart auditd
+
+- name: reset /var/log/audit/audit.log perms
+  file:
+      path: /var/log/audit/audit.log
+      owner: root
+      group: root
+      mode: 0660
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38464 (SV-50264r1_rule)
+- name: set disk_error_action
+  lineinfile:
+      path: /etc/audit/auditd.conf
+      regexp: ^\s*disk_error_action\s*=
+      line: "disk_error_action = {{audit_disk_error_action}}"
       state: present
   notify: restart auditd

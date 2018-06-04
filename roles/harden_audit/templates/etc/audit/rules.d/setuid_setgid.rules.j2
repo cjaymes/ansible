@@ -1,5 +1,5 @@
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72095 (SV-86719r5_rule)
-{% for item in auditing_setuid_setgid_combined %}
+{% for item in audit_setuid_setgid_combined %}
 -a always,exit -F path={{item}} -F perm=x -F auid>=1000 -F auid!=4294967295 -k setuid_setgid
 {% endfor %}

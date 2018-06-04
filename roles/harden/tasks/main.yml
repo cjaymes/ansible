@@ -5,7 +5,7 @@
     - harden_abrt
     - harden_aide
     - harden_at
-    - harden_auditd
+    - harden_audit
     - harden_autofs
     - harden_avahi
     - harden_bluetooth

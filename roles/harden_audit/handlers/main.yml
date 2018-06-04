@@ -1,18 +1,18 @@
 - name: generate audit rules
   command: augenrules
-  register: auditing_augenrules
-  changed_when: "'No change' not in auditing_augenrules.stdout"
+  register: audit_augenrules
+  changed_when: "'No change' not in audit_augenrules.stdout"
   notify: reload audit rules
 
 - name: reload audit rules
   command: auditctl -R /etc/audit/audit.rules
-  register: auditing_reload
-  changed_when: "'No change' not in auditing_reload.stdout"
+  register: audit_reload
+  changed_when: "'No change' not in audit_reload.stdout"
   notify: restart auditd
 
 - name: restart auditd
   command: systemctl restart auditd
-  register: auditd_restart
-  changed_when: "'Operation refused' in auditd_restart.stderr"
+  register: audit_restart
+  changed_when: "'Operation refused' in audit_restart.stderr"
   failed_when: False
   notify: needs restart

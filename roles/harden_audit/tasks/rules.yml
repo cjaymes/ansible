@@ -32,23 +32,23 @@
   ignore_errors: yes
   changed_when: False
   failed_when: False
-  register: auditing_local_filesystems
+  register: audit_local_filesystems
 
 - name: find {{item}} -xdev -type f \( -perm -4000 -o -perm -2000 \) 2>/dev/null
   shell: find {{item}} -xdev -type f \( -perm -4000 -o -perm -2000 \) 2>/dev/null
   ignore_errors: yes
   changed_when: False
   failed_when: False
-  register: auditing_setuid_setgid
-  with_items: '{{auditing_local_filesystems.stdout_lines}}'
+  register: audit_setuid_setgid
+  with_items: '{{audit_local_filesystems.stdout_lines}}'
 
 - set_fact:
-    auditing_setuid_setgid_combined: []
+    audit_setuid_setgid_combined: []
 
-- name: combine auditing_setuid_setgid results
+- name: combine audit_setuid_setgid results
   set_fact:
-      auditing_setuid_setgid_combined: '{{auditing_setuid_setgid_combined}} + {{item.stdout_lines}}'
-  with_items: '{{auditing_setuid_setgid.results}}'
+      audit_setuid_setgid_combined: '{{audit_setuid_setgid_combined}} + {{item.stdout_lines}}'
+  with_items: '{{audit_setuid_setgid.results}}'
 
 - name: setuid_setgid audit rules
   template:
