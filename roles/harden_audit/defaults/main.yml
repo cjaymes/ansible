@@ -22,7 +22,7 @@ audit_disk_full_action: syslog
 # Compliance requires at least 6. 8 is RHEL7 default
 audit_max_log_file: 8
 
-audit_write_logs: yes
+audit_write_logs: 'yes'
 
 audit_max_log_file_action: rotate
 
@@ -36,7 +36,7 @@ audit_admin_space_left_action: single
 audisp_remote_server: "{{log_aggregation_server}}"
 
 # Compliance requires yes
-audisp_enable_krb5: yes
+audisp_enable_krb5: 'yes'
 
 # Compliance requires syslog, single, or halt
 audisp_disk_full_action: syslog
