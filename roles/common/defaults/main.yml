@@ -2,6 +2,10 @@
 
 ### Variables; could/should be overriden depending on environment
 
+# required to be defined (in group or host vars):
+# domain - domain to use to fully qualify hostnames
+# grub_password - hash generated with 'grub2-mkpasswd-pbkdf2' on rhel7 or 'grub-crypt --sha-512' on rhel6
+
 is_ldap_server: False
 is_routing: False
 is_xinetd_used: False
@@ -12,9 +16,6 @@ is_syslog_server: False
 boot_method: BIOS
 #boot_method: UEFI
 
-# required to be defined (in group or host vars):
-#  grub_password - hash generated with 'grub2-mkpasswd-pbkdf2' on rhel7 or 'grub-crypt --sha-512' on rhel6
-
 # need to be at least 2 dns_servers to be STIG compliant...and for good practice :)
 dns_servers:
     - 4.2.2.1
@@ -23,9 +24,8 @@ dns_servers:
 # tcp or udp
 log_aggregation_protocol: tcp
 
-# Below is an unqualified DNS. Should probably be a round robin
 # The port defaults to 514 and is optional
-log_aggregation_server: syslog:514
+log_aggregation_server: "syslog.{{domain}}:514"
 
 # The subnets used in the local network
 network_subnets:
@@ -52,4 +52,4 @@ packages:
     - vim
     - screen
 
-email_notifications: sysadmin@mail
+email_notifications: "sysadmin@mail.{{domain}}"
