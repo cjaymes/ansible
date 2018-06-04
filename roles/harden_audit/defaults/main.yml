@@ -31,6 +31,12 @@ audit_num_logs: 5
 # Compliance requires single, suspend, halt
 audit_admin_space_left_action: single
 
+# Set to 0640 if the group needs to read the file
+audit_log_file_perms: 0600
+
+# Set to 0750 if the group needs to access the dir
+audit_log_dir_perms: 0700
+
 ### audisp
 
 audisp_remote_server: "{{log_aggregation_server}}"

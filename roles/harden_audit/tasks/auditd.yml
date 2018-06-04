@@ -99,7 +99,7 @@
       path: "{{audit_log_file}}"
       owner: root
       group: "{{audit_log_group}}"
-      mode: 0640
+      mode: "{{audit_log_file_perms}}"
 
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
 # V-38464 (SV-50264r1_rule)
@@ -128,7 +128,7 @@
       path: "{{audit_log_file|dirname}}"
       owner: root
       group: "{{audit_log_group}}"
-      mode: 0750
+      mode: "{{audit_log_dir_perms}}"
 
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
 # V-38633 (SV-50434r1_rule)
