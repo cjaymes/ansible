@@ -30,14 +30,8 @@
   stat:
       path: /var/lib/aide/aide.db.gz
   register: aide_db_stat
-
-- name: create initial aide db
-  command: aide --init
-  when: aide_db_stat.exists == False
-
-- name: move initial db to permanent location
-  command: mv -f /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
-  when: aide_db_stat.exists == False
+  changed_when: aide_db_stat.exists == False
+  notify: aide db init
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72069, V-72071, V-72073
