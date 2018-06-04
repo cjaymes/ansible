@@ -42,10 +42,9 @@ network_interfaces: {
 # Interface for default route and DNS
 network_interface_default: eth0
 
-# Below are unqualified DNS entries. They could be defined as NAME entries or actual server names
 ntp_servers:
-    - ntp0
-    - ntp1
+    - "ntp0.{{domain}}"
+    - "ntp1.{{domain}}"
 
 packages:
     - mlocate
