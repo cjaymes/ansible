@@ -94,12 +94,12 @@
 # V-38445 (SV-50245r2_rule)
 # V-38495 (SV-50296r1_rule)
 # V-38498 (SV-50299r1_rule)
-- name: reset {{audit_log_file}} perms
+- name: reset {{audit_log_file}} mode
   file:
       path: "{{audit_log_file}}"
       owner: root
       group: "{{audit_log_group}}"
-      mode: "{{audit_log_file_perms}}"
+      mode: "{{audit_log_file_mode}}"
 
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
 # V-38464 (SV-50264r1_rule)
@@ -123,12 +123,12 @@
 
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
 # V-38468 (SV-50268r1_rule)
-- name: reset {{audit_log_file|dirname}} perms
+- name: reset {{audit_log_file|dirname}} mode
   file:
       path: "{{audit_log_file|dirname}}"
       owner: root
       group: "{{audit_log_group}}"
-      mode: "{{audit_log_dir_perms}}"
+      mode: "{{audit_log_dir_mode}}"
 
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
 # V-38633 (SV-50434r1_rule)
