@@ -4,5 +4,10 @@
 ### Variables; could be overriden depending on environment
 
 aide_conf_sha1: a0c76a14d918a55fe059ff9592e708fe62b75aca
+
 aide_frequency: daily
+#aide_frequency: weekly
+
+# Compliance requires this to include: Information Management Officer/
+# Information System Security Officer and System Administrators
 aide_notification_email: "{{email_notifications}}"
