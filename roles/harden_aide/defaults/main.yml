@@ -5,4 +5,4 @@
 
 aide_conf_sha1: a0c76a14d918a55fe059ff9592e708fe62b75aca
 aide_frequency: daily
-aide_notification_email: root
+aide_notification_email: "{{email_notifications}}"
