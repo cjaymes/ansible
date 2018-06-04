@@ -5,6 +5,7 @@
 
 auditing_email: root
 
+# Compliance requires syslog, single, or halt
 auditing_disk_full_action: syslog
 
 # Compliance requires syslog, single, or halt

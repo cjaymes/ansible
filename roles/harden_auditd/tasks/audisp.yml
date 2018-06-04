@@ -1,0 +1,63 @@
+# port = 60
+# ##local_port =
+# transport = tcp
+# queue_file = /var/spool/audit/remote.log
+# mode = immediate
+# queue_depth = 2048
+# format = managed
+# network_retry_time = 1
+# max_tries_per_record = 3
+# max_time_per_record = 5
+# heartbeat_timeout = 0
+#
+# disk_low_action = ignore
+# disk_error_action = warn_once
+# remote_ending_action = reconnect
+# generic_error_action = syslog
+# generic_warning_action = syslog
+# queue_error_action = stop
+# overflow_action = syslog
+#
+# ##krb5_principal =
+# ##krb5_client_name = auditd
+# ##krb5_key_file = /etc/audisp/audisp-remote.key
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72083 (SV-86707r1_rule)
+- name: set remote_server
+  lineinfile:
+      path: /etc/audisp/audisp-remote.conf
+      regexp: ^\s*remote_server\s*=
+      line: "remote_server = {{log_aggregation_server}}"
+      state: present
+  notify: restart auditd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72085 (SV-86709r1_rule)
+- name: set enable_krb5
+  lineinfile:
+      path: /etc/audisp/audisp-remote.conf
+      regexp: ^\s*enable_krb5\s*=
+      line: "enable_krb5 = yes"
+      state: present
+  notify: restart auditd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72087 (SV-86711r2_rule)
+- name: set disk_full_action
+  lineinfile:
+      path: /etc/audisp/audisp-remote.conf
+      regexp: ^\s*disk_full_action\s*=
+      line: "disk_full_action = {{auditing_disk_full_action}}"
+      state: present
+  notify: restart auditd
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-73163 (SV-87815r2_rule)
+- name: set network_failure_action
+  lineinfile:
+      path: /etc/audisp/audisp-remote.conf
+      regexp: ^\s*network_failure_action\s*=
+      line: "network_failure_action = {{auditing_network_failure_action}}"
+      state: present
+  notify: restart auditd
