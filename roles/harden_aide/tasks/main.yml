@@ -1,7 +1,14 @@
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-71973, V-71975
+# V-71973 (SV-86597r1_rule)
+# V-71975 (SV-86599r1_rule)
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
-# V-38489, V-38670, V-38673, V-38695, V-38696, V-38698, V-38700
+# V-38489 (SV-50290r1_rule)
+# V-38670 (SV-50471r2_rule)
+# V-38673 (SV-50474r2_rule)
+# V-38695 (SV-50496r2_rule)
+# V-38696 (SV-50497r2_rule)
+# V-38698 (SV-50499r2_rule)
+# V-38700 (SV-50501r2_rule)
 - name: install aide
   yum:
       state: installed
@@ -25,7 +32,7 @@
       - aide_frequency == 'weekly'
 
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
-# V-51391
+# V-51391 (SV-65601r1_rule)
 - name: check if /var/lib/aide/aide.db.gz exists
   stat:
       path: /var/lib/aide/aide.db.gz
@@ -34,7 +41,9 @@
   notify: aide db init
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-72069, V-72071, V-72073
+# V-72069 (SV-86693r2_rule)
+# V-72071 (SV-86695r2_rule)
+# V-72073 (SV-86697r2_rule)
 - name: aide.conf
   template:
       src: etc/aide.conf
