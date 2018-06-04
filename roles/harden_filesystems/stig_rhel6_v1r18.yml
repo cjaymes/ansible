@@ -1,3 +1,195 @@
+# Vuln ID: V-38637
+# Severity: medium
+# Group Title: SRG-OS-000278
+# Rule ID: SV-50438r2_rule
+# STIG ID: RHEL-06-000281
+# Rule Title: The system package management tool must verify contents of all files associated with the audit package.
+# Discussion: The hash on important files like audit system executables should match the information given by the RPM database. Audit executables  with erroneous hashes could be a sign of nefarious activity on the system.
+# IA Controls:
+# Check Content: The following command will list which audit files on the system have file hashes different from what is expected by the RPM database.
+#
+# # rpm -V audit | awk '$1 ~ /..5/ && $2 != "c"'
+#
+#
+# If there is output, this is a finding.
+# Fix Text: The RPM package management system can check the hashes of audit system package files. Run the following command to list which audit files on the system have hashes that differ from what is expected by the RPM database:
+#
+# # rpm -V audit | grep '^..5'
+#
+# A "c" in the second column indicates that a file is a configuration file, which may appropriately be expected to change. If the file that has changed was not expected to then refresh from distribution media or online repositories.
+#
+# rpm -Uvh [affected_package]
+#
+# OR
+#
+# yum reinstall [affected_package]
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001496
+# The information system implements cryptographic mechanisms to protect the integrity of audit tools.
+# NIST SP 800-53 :: AU-9 (3)
+# NIST SP 800-53A :: AU-9 (3).1
+# NIST SP 800-53 Revision 4 :: AU-9 (3)
+#
+#
+# - name: fail stig_rhel6_v1r18 v_38637
+#   set_fact:
+#     stig_rhel6_v1r18_v_38637_result: 'fail'
+#   when:
+#     - "'v_38637' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38637_result != 'pass'
+
+
+# Vuln ID: V-38663
+# Severity: medium
+# Group Title: SRG-OS-000256
+# Rule ID: SV-50464r1_rule
+# STIG ID: RHEL-06-000278
+# Rule Title: The system package management tool must verify permissions on all files and directories associated with the audit package.
+# Discussion: Permissions on audit binaries and configuration files that are too generous could allow an unauthorized user to gain privileges that they should not have. The permissions set by the vendor should be maintained. Any deviations from this baseline should be investigated.
+# IA Controls:
+# Check Content: The following command will list which audit files on the system have permissions different from what is expected by the RPM database:
+#
+# # rpm -V audit | grep '^.M'
+#
+# If there is any output, for each file or directory found, compare the RPM-expected permissions with the permissions on the file or directory:
+#
+# # rpm -q --queryformat "[%{FILENAMES} %{FILEMODES:perms}\n]" audit | grep  [filename]
+# # ls -lL [filename]
+#
+# If the existing permissions are more permissive than those expected by RPM, this is a finding.
+# Fix Text: The RPM package management system can restore file access permissions of the audit package files and directories. The following command will update audit files with permissions different from what is expected by the RPM database:
+#
+# # rpm --setperms audit
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001493
+# The information system protects audit tools from unauthorized access.
+# NIST SP 800-53 :: AU-9
+# NIST SP 800-53A :: AU-9.1
+# NIST SP 800-53 Revision 4 :: AU-9
+#
+#
+# - name: fail stig_rhel6_v1r18 v_38663
+#   set_fact:
+#     stig_rhel6_v1r18_v_38663_result: 'fail'
+#   when:
+#     - "'v_38663' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38663_result != 'pass'
+
+
+# Vuln ID: V-38664
+# Severity: medium
+# Group Title: SRG-OS-000257
+# Rule ID: SV-50465r1_rule
+# STIG ID: RHEL-06-000279
+# Rule Title: The system package management tool must verify ownership on all files and directories associated with the audit package.
+# Discussion: Ownership of audit binaries and configuration files that is incorrect could allow an unauthorized user to gain privileges that they should not have. The ownership set by the vendor should be maintained. Any deviations from this baseline should be investigated.
+# IA Controls:
+# Check Content: The following command will list which audit files on the system have ownership different from what is expected by the RPM database:
+#
+# # rpm -V audit | grep '^.....U'
+#
+#
+# If there is output, this is a finding.
+# Fix Text: The RPM package management system can restore file ownership of the audit package files and directories. The following command will update audit files with ownership different from what is expected by the RPM database:
+#
+# # rpm --setugids audit
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001494
+# The information system protects audit tools from unauthorized modification.
+# NIST SP 800-53 :: AU-9
+# NIST SP 800-53A :: AU-9.1
+# NIST SP 800-53 Revision 4 :: AU-9
+#
+#
+# - name: fail stig_rhel6_v1r18 v_38664
+#   set_fact:
+#     stig_rhel6_v1r18_v_38664_result: 'fail'
+#   when:
+#     - "'v_38664' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38664_result != 'pass'
+
+
+# Vuln ID: V-38665
+# Severity: medium
+# Group Title: SRG-OS-000258
+# Rule ID: SV-50466r1_rule
+# STIG ID: RHEL-06-000280
+# Rule Title: The system package management tool must verify group-ownership on all files and directories associated with the audit package.
+# Discussion: Group-ownership of audit binaries and configuration files that is incorrect could allow an unauthorized user to gain privileges that they should not have. The group-ownership set by the vendor should be maintained. Any deviations from this baseline should be investigated.
+# IA Controls:
+# Check Content: The following command will list which audit files on the system have group-ownership different from what is expected by the RPM database:
+#
+# # rpm -V audit | grep '^......G'
+#
+#
+# If there is output, this is a finding.
+# Fix Text: The RPM package management system can restore file group-ownership of the audit package files and directories. The following command will update audit files with group-ownership different from what is expected by the RPM database:
+#
+# # rpm --setugids audit
+# False Positives:
+# False Negatives:
+# Documentable: false
+# Mitigations:
+# Potential Impact:
+# Third Party Tools:
+# Mitigation Control:
+# Responsibility:
+# Severity Override Guidance:
+# Check Content Reference: M
+# Classification: Unclass
+# STIG: Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# VMS Asset Posture:
+#  CCI: CCI-001495
+# The information system protects audit tools from unauthorized deletion.
+# NIST SP 800-53 :: AU-9
+# NIST SP 800-53A :: AU-9.1
+# NIST SP 800-53 Revision 4 :: AU-9
+#
+#
+# - name: fail stig_rhel6_v1r18 v_38665
+#   set_fact:
+#     stig_rhel6_v1r18_v_38665_result: 'fail'
+#   when:
+#     - "'v_38665' in stig_rhel6_v1r18_checks"
+#     - stig_rhel6_v1r18_v_38665_result != 'pass'
+
+
 # Vuln ID: V-38447
 # Severity: low
 # Group Title: SRG-OS-999999

@@ -1,0 +1,315 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38470 (SV-50270r2_rule)
+- name: audit settimeofday
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+      - -a always,exit -F arch=b32 -S settimeofday -k audit_time_rules
+      - -a always,exit -F arch=b64 -S settimeofday -k audit_time_rules
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38525 (SV-50326r4_rule)
+- name: audit stime
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+      - -a always,exit -F arch=b32 -S stime -k audit_time_rules
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38527 (SV-50328r3_rule)
+- name: audit clock_settime
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+      - -a always,exit -F arch=b32 -S clock_settime -k audit_time_rules
+      - -a always,exit -F arch=b64 -S clock_settime -k audit_time_rules
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38530 (SV-50331r2_rule)
+- name: audit /etc/localtime
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: -w /etc/localtime -p wa -k audit_time_rules
+      state: present
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38531 (SV-50332r2_rule)
+# V-38534 (SV-50335r2_rule)
+# V-38536 (SV-50337r2_rule)
+# V-38538 (SV-50339r2_rule)
+- name: audit account changes
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -w /etc/group -p wa -k audit_account_changes
+    - -w /etc/passwd -p wa -k audit_account_changes
+    - -w /etc/gshadow -p wa -k audit_account_changes
+    - -w /etc/shadow -p wa -k audit_account_changes
+    - -w /etc/security/opasswd -p wa -k audit_account_changes
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38540 (SV-50341r4_rule)
+- name: audit network modifications
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=b32 -S sethostname -S setdomainname -k audit_network_modifications
+    - -a always,exit -F arch=b64 -S sethostname -S setdomainname -k audit_network_modifications
+    - -w /etc/issue -p wa -k audit_network_modifications
+    - -w /etc/issue.net -p wa -k audit_network_modifications
+    - -w /etc/hosts -p wa -k audit_network_modifications
+    - -w /etc/sysconfig/network -p wa -k audit_network_modifications
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38541 (SV-50342r2_rule)
+- name: audit selinux
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: -w /etc/selinux/ -p wa -k MAC-policy
+      state: present
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38543 (SV-50344r3_rule)
+- name: audit chmod
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=b32 -S chmod -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b32 -S chmod -F auid=0 -k perm_mod
+    - -a always,exit -F arch=b64 -S chmod -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b64 -S chmod -F auid=0 -k perm_mod
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38545 (SV-50346r3_rule)
+- name: audit chown
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=b32 -S chown -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b32 -S chown -F auid=0 -k perm_mod
+    - -a always,exit -F arch=b64 -S chown -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b64 -S chown -F auid=0 -k perm_mod
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38547 (SV-50348r3_rule)
+- name: audit fchmod
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=b32 -S fchmod -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b32 -S fchmod -F auid=0 -k perm_mod
+    - -a always,exit -F arch=b64 -S fchmod -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b64 -S fchmod -F auid=0 -k perm_mod
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38550 (SV-50351r3_rule)
+- name: audit fchmodat
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=b32 -S fchmodat -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b32 -S fchmodat -F auid=0 -k perm_mod
+    - -a always,exit -F arch=b64 -S fchmodat -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b64 -S fchmodat -F auid=0 -k perm_mod
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38552 (SV-50353r3_rule)
+- name: audit fchown
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=b32 -S fchown -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b32 -S fchown -F auid=0 -k perm_mod
+    - -a always,exit -F arch=b64 -S fchown -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b64 -S fchown -F auid=0 -k perm_mod
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38554 (SV-50355r3_rule)
+- name: audit fchownat
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=b32 -S fchownat -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b32 -S fchownat -F auid=0 -k perm_mod
+    - -a always,exit -F arch=b64 -S fchownat -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b64 -S fchownat -F auid=0 -k perm_mod
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38556 (SV-50357r3_rule)
+- name: audit fremovexattr
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=b32 -S fremovexattr -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b32 -S fremovexattr -F auid=0 -k perm_mod
+    - -a always,exit -F arch=b64 -S fremovexattr -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b64 -S fremovexattr -F auid=0 -k perm_mod
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38557 (SV-50358r3_rule)
+- name: audit fsetxattr
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=b32 -S fsetxattr -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b32 -S fsetxattr -F auid=0 -k perm_mod
+    - -a always,exit -F arch=b64 -S fsetxattr -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b64 -S fsetxattr -F auid=0 -k perm_mod
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38558 (SV-50359r3_rule)
+- name: audit lchown
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=b32 -S lchown -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b32 -S lchown -F auid=0 -k perm_mod
+    - -a always,exit -F arch=b64 -S lchown -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b64 -S lchown -F auid=0 -k perm_mod
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38559 (SV-50360r3_rule)
+- name: audit lremovexattr
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=b32 -S lremovexattr -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b32 -S lremovexattr -F auid=0 -k perm_mod
+    - -a always,exit -F arch=b64 -S lremovexattr -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b64 -S lremovexattr -F auid=0 -k perm_mod
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38561 (SV-50362r3_rule)
+- name: audit lsetxattr
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=b32 -S lsetxattr -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b32 -S lsetxattr -F auid=0 -k perm_mod
+    - -a always,exit -F arch=b64 -S lsetxattr -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b64 -S lsetxattr -F auid=0 -k perm_mod
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38563 (SV-50364r3_rule)
+- name: audit removexattr
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=b32 -S removexattr -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b32 -S removexattr -F auid=0 -k perm_mod
+    - -a always,exit -F arch=b64 -S removexattr -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b64 -S removexattr -F auid=0 -k perm_mod
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38565 (SV-50366r3_rule)
+- name: audit setxattr
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=b32 -S setxattr -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b32 -S setxattr -F auid=0 -k perm_mod
+    - -a always,exit -F arch=b64 -S setxattr -F auid>=500 -F auid!=4294967295 -k perm_mod
+    - -a always,exit -F arch=b64 -S setxattr -F auid=0 -k perm_mod
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38566 (SV-50367r2_rule)
+- name: audit EACCES,EPERM
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=ARCH -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=500 -F auid!=4294967295 -k access
+    - -a always,exit -F arch=ARCH -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=500 -F auid!=4294967295 -k access
+    - -a always,exit -F arch=ARCH -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid=0 -k access
+    - -a always,exit -F arch=ARCH -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid=0 -k access
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38567 (SV-50368r4_rule)
+- name: audit setuid,setgid
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "-a always,exit -F path={{item}} -F perm=x -F auid>=500 -F auid!=4294967295 -k privileged"
+      state: present
+  loop: "{{audit_setuid_setgid_files}}"
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38568 (SV-50369r3_rule)
+- name: audit mount
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=ARCH -S mount -F auid>=500 -F auid!=4294967295 -k export
+    - -a always,exit -F arch=ARCH -S mount -F auid=0 -k export
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38575 (SV-50376r4_rule)
+- name: audit delete
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -a always,exit -F arch=ARCH -S rmdir -S unlink -S unlinkat -S rename -S renameat -F auid>=500 -F auid!=4294967295 -k delete
+    - -a always,exit -F arch=ARCH -S rmdir -S unlink -S unlinkat -S rename -S renameat -F auid=0 -k delete
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38578 (SV-50379r2_rule)
+- name: audit sudoers
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -w /etc/sudoers -p wa -k actions
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38580 (SV-50381r2_rule)
+- name: audit modules
+  lineinfile:
+      path: /etc/audit/audit.rules
+      line: "{{item}}"
+      state: present
+  loop:
+    - -w /sbin/insmod -p x -k modules
+    - -w /sbin/rmmod -p x -k modules
+    - -w /sbin/modprobe -p x -k modules
+    - -a always,exit -F arch=[ARCH] -S init_module -S delete_module -k modules

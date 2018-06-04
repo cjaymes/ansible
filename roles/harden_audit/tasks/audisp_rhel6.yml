@@ -1,0 +1,9 @@
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38471 (SV-50271r1_rule)
+- name: set active
+  lineinfile:
+      path: /etc/audisp/plugins.d/syslog.conf
+      regexp: ^\s*active\s*=
+      line: "active = yes"
+      state: present
+  notify: restart auditd

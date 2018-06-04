@@ -52,4 +52,4 @@ packages:
     - vim
     - screen
 
-system_administrator_email: sysadmin@mail
+email_notifications: sysadmin@mail

@@ -37,7 +37,7 @@
   lineinfile:
     path: "{{postfix_alias_map_file}}"
     regexp: '^\s*root:'
-    line: "root: {{system_administrator_email}}"
+    line: "root: {{email_notifications}}"
     insertafter: EOF
     state: present
   when: root_alias.stdout == ''
