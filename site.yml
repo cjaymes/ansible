@@ -1,0 +1,4 @@
+---
+- hosts: repos
+  roles:
+      - repo
