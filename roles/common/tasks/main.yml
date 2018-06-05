@@ -7,17 +7,13 @@
 - group_by:
     key: "os_{{ansible_distribution}}_{{ ansible_distribution_major_version }}"
 
-- name: repo mkdir
-  file:
-      path: "{{repo_share}}"
-      state: directory
-  when: not is_repo_server
-
 - name: repo fstab
-  lineinfile:
-      path: /etc/fstab
-      line: "{{repo_server}}:{{repo_share}} {{repo_share}} nfs ro,insecure,all_squash 0 0"
-      state: present
+  mount:
+      src: "{{repo_server}}:{{repo_share}}"
+      path: "{{repo_share}}"
+      fstype: nfs
+      opts: ro,insecure,all_squash
+      state: mounted
   when: not is_repo_server
 
 - name: repo link
