@@ -1,6 +1,6 @@
 - name: install packages
   yum:
-      name: createrepo
+      name: "{{item}}"
       state: installed
   loop:
       - createrepo
