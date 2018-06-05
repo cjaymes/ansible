@@ -10,7 +10,7 @@ echo > "$REPO_FILE"
 
 cd "$SHARE"
 
-for d in ${REPOS[*]}; do
+for d in $REPOS; do
     echo Adding $d to $SHARE .repo file
     cat >> "$REPO_FILE" <<"EOF"
 [$d]

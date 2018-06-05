@@ -1,0 +1,5 @@
+# These two vars should be overriden in host_vars
+
+repo_share: /share/repo
+
+repos: []

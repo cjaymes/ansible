@@ -19,3 +19,27 @@
       - /usr/local/bin/repo_gen_files.sh
       - /usr/local/bin/repo_sync.sh
       - /etc/cron.daily/repo_sync
+
+- name: install config
+  template:
+      src: "templates/etc/repo.conf"
+      dest: /etc/repo.conf
+      owner: root
+      group: root
+      mode: 0644
+  notify: generate repo files
+
+- name: mkdir
+  file:
+      path: "{{repo_share}}"
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+
+- name: add export
+  lineinfile:
+      path: /etc/exports
+      line: "{{repo_share}} *(ro,insecure,all_squash)"
+      state: present
+  notify: refresh exports

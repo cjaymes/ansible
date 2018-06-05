@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+
 source /etc/repo.conf
 
 REPONAME=$(basename "$SHARE")
@@ -6,7 +7,7 @@ REPONAME=$(basename "$SHARE")
 txt=~/${REPONAME}_$(date '+%Y%m%d').txt
 tgz=~/${REPONAME}_$(date '+%Y%m%d').tgz
 
-echo Finding packages modified in the last 45 days
+echo Finding files modified in the last 45 days
 files=$(find $SHARE -mtime -45 -printf '%P' | sort)
 
 echo Fixing permissions in $SHARE

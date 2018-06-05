@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 source /etc/repo.conf
 
@@ -13,7 +13,11 @@ cd "$SHARE"
 
 for d in $REPOS; do
     echo Updating metadata in $SHARE/$d
-    createrepo --update --groupfile comps.xml $d
+    if [ -f "$SHARE/$d/comps.xml" ]; then
+        createrepo --update --groupfile comps.xml $d
+    else
+        createrepo --update $d
+    fi
     [ 0 != $? ] && echo "Got error $?" && exit 1
 done
 
