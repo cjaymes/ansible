@@ -1,21 +1,28 @@
 - name: install packages
   yum:
-      name: createrepo
-      state: install
+      name: nfs-utils
+      state: installed
   loop:
       - nfs-utils
+
+- name: set up rpcbind service
+  service:
+      name: rpcbind
+      enabled: yes
+      state: started
 
 - name: set up nfs service
   service:
       name: nfs
-      enable: true
+      enabled: yes
       state: started
 
 - name: add firewall exception
   command: firewall-cmd --add-service=nfs
+  when: ansible_distribution_major_version == '7'
 
 - name: add firewall exception
   command: firewall-cmd --add-service=nfs --permanent
+  when: ansible_distribution_major_version == '7'
 
-# TODO exports
-# notify: refresh exports
+# TODO rhel6 firewall exception
