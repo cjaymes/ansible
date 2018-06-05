@@ -1,16 +1,16 @@
 ---
-- hosts: centos7-repo
+- hosts: centos7_repos
   roles:
       - repo_centos7
 
-- hosts: rhel7-repo
+- hosts: rhel7_repos
   roles:
     - repo_rhel7
 
-- hosts: rhel6-repo
+- hosts: rhel6_repos
   roles:
     - repo_rhel6
 
-- hosts: epel-repo
+- hosts: epel_repos
   roles:
     - repo_epel
