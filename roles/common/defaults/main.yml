@@ -1,4 +1,6 @@
 ### Constants; probably shouldn't be overriden
+ansible_dependencies:
+    - libselinux-python
 
 ### Variables; could/should be overriden depending on environment
 

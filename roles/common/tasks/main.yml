@@ -1,0 +1,5 @@
+- name: install ansible dependencies
+  yum:
+      name: "{{item}}"
+      state: installed
+  loop: "{{ansible_dependencies}}"
