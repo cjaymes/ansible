@@ -1,0 +1,4 @@
+---
+- hosts: desktops
+  roles:
+      - desktop
