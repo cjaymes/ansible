@@ -7,12 +7,12 @@
 - group_by:
     key: "os_{{ansible_distribution}}_{{ ansible_distribution_major_version }}"
 
-- name: repo fstab
+- name: repo mount
   mount:
       src: "{{repo_server}}:{{repo_share}}"
       path: "{{repo_share}}"
       fstype: nfs
-      opts: ro,insecure,all_squash
+      opts: ro
       state: mounted
   when: not is_repo_server
 
@@ -28,6 +28,11 @@
       name: "{{item}}"
       state: absent
   loop:
+      - rhnsd
+      - rhn-check
+      - rhn-client-tools
+      - rhn-setup
+      - rhnlib
       - subscription-manager
-      - rhn*
+      - yum-rhn-plugin
   when: not is_repo_server
