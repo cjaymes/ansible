@@ -21,18 +21,18 @@
   lineinfile:
       path: "{{rsyslogd_config_file}}"
       regexp: ^\*\.\*\s+@@.*
-      line: "*.* @{{log_aggregation_server}}"
+      line: "*.* @{{syslog_server}}"
       insertafter: EOF
       state: present
-  when: log_aggregation_protocol == 'udp'
+  when: syslog_protocol == 'udp'
 - name: log aggregation target
   lineinfile:
       path: "{{rsyslogd_config_file}}"
       regexp: ^\*\.\*\s+@@.*
-      line: "*.* @@{{log_aggregation_server}}"
+      line: "*.* @@{{syslog_server}}"
       insertafter: EOF
       state: present
-  when: log_aggregation_protocol == 'tcp'
+  when: syslog_protocol == 'tcp'
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72211 (SV-86835r1_rule)

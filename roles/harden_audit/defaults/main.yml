@@ -40,7 +40,7 @@ audit_log_dir_mode: 0700
 
 ### audisp
 
-audisp_remote_server: "{{log_aggregation_server}}"
+audisp_remote_server: "{{syslog_server}}"
 
 # Compliance requires yes
 audisp_enable_krb5: 'yes'
