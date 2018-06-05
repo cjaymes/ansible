@@ -9,11 +9,16 @@ ansible_dependencies:
 # grub_password - hash generated with 'grub2-mkpasswd-pbkdf2' on rhel7 or 'grub-crypt --sha-512' on rhel6
 
 is_ldap_server: False
+is_ntp_server: False
+is_mail_server: False
+is_tftpd_server: False
+is_syslog_server: False
+is_repo_server: False
+is_desktop: True
+
 is_routing: False
 is_xinetd_used: False
-is_tftpd_server: False
 is_X_required: False
-is_syslog_server: False
 
 boot_method: BIOS
 #boot_method: UEFI
@@ -24,10 +29,10 @@ dns_servers:
     - 4.2.2.2
 
 # tcp or udp
-log_aggregation_protocol: tcp
+syslog_protocol: tcp
 
 # The port defaults to 514 and is optional
-log_aggregation_server: "syslog.{{domain}}:514"
+syslog_server: "syslog.{{domain}}:514"
 
 # The subnets used in the local network
 network_subnets:

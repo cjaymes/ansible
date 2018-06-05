@@ -3,3 +3,35 @@
       name: "{{item}}"
       state: installed
   loop: "{{ansible_dependencies}}"
+
+- group_by:
+    key: "os_{{ansible_distribution}}_{{ ansible_distribution_major_version }}"
+
+- name: repo mkdir
+  file:
+      path: "{{repo_share}}"
+      state: directory
+  when: not is_repo_server
+
+- name: repo fstab
+  lineinfile:
+      path: /etc/fstab
+      line: "{{repo_server}}:{{repo_share}} {{repo_share}} nfs ro,insecure,all_squash 0 0"
+      state: present
+  when: not is_repo_server
+
+- name: repo link
+  file:
+      path: "/etc/yum.repos.d/{{repo_server}}.repo"
+      src: "{{repo_share}}/{{repo_server}}.repo"
+      state: link
+  when: not is_repo_server
+
+- name: remove subscription-manager, rhn* pkags
+  yum:
+      name: "{{item}}"
+      state: absent
+  loop:
+      - subscription-manager
+      - rhn*
+  when: not is_repo_server
