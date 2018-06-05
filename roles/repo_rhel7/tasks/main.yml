@@ -1,4 +1,26 @@
 #subscription-manager register
 #subscription-manager attach
-#  - { role: repo_el }
-# daily cronjob
+
+- name: install config
+  copy:
+      src: "files/etc/repo.conf"
+      dest: /etc/repo.conf
+      owner: root
+      group: root
+      mode: 0644
+  notify: generate repo files
+
+- name: mkdir
+  file:
+      path: /share/rhel7_repo
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+
+- name: add export
+  lineinfile:
+      path: /etc/exports
+      line: /share/rhel7_repo *(ro,insecure,all_squash)
+      state: present
+  notify: refresh exports

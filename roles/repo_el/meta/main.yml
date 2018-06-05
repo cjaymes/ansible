@@ -1,3 +1,4 @@
 ---
 dependencies:
-  - { role: nfs_server }
+    - { role: common }
+    - { role: nfs_server }

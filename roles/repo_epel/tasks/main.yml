@@ -1,3 +1,6 @@
+#subscription-manager register
+#subscription-manager attach
+
 - name: install config
   copy:
       src: "files/etc/repo.conf"
@@ -9,7 +12,7 @@
 
 - name: mkdir
   file:
-      path: /share/centos7_repo
+      path: /share/epel_repo
       owner: root
       group: root
       mode: 0755
@@ -18,6 +21,6 @@
 - name: add export
   lineinfile:
       path: /etc/exports
-      line: /share/centos7_repo *(ro,insecure,all_squash)
+      line: /share/epel_repo *(ro,insecure,all_squash)
       state: present
   notify: refresh exports

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+/usr/local/bin/repo_sync.sh | logger -t repo_sync
+EXITVALUE=$?
+if [ $EXITVALUE != 0 ]; then
+    /usr/bin/logger -t repo_sync "ALERT exited abnormally with [$EXITVALUE]"
+fi
+exit 0

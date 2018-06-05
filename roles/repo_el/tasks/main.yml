@@ -1,7 +1,21 @@
 - name: install packages
   yum:
       name: createrepo
-      state: install
+      state: installed
   loop:
       - createrepo
       - yum-utils
+
+- name: install scripts, cronjob
+  copy:
+      src: "files/{{item}}"
+      dest: "{{item}}"
+      owner: root
+      group: root
+      mode: 0700
+  loop:
+      - /usr/local/bin/repo_diff_package.sh
+      - /usr/local/bin/repo_diff_update.sh
+      - /usr/local/bin/repo_gen_files.sh
+      - /usr/local/bin/repo_sync.sh
+      - /etc/cron.daily/repo_sync
