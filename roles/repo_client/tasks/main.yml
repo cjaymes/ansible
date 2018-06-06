@@ -1,0 +1,2 @@
+- include_tasks: repo_client.yml
+  when: "'repo_servers' not in group_names"

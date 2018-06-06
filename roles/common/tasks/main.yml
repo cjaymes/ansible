@@ -9,5 +9,15 @@
 
 - include_tasks: "{{item}}"
   loop:
-      - repo_client.yml
       - wheel_user.yml
+
+- name: trust distro key
+  rpm_key:
+      key: "{{distribution_key_file}}"
+      state: present
+
+- include_role:
+    name: "{{item}}"
+  loop:
+      - repo_client
+      - ntp_client
