@@ -1,0 +1,39 @@
+- name: chrony package
+  yum:
+      name: chrony
+      state: installed
+
+- name: chrony service
+  service:
+      name: chronyd
+      enabled: yes
+      state: started
+
+- name: add firewall exception
+  firewall_cmd_zone:
+      service: ntp
+      permanent: no
+      state: present
+  when: ansible_distribution_major_version == '7'
+
+- name: add firewall exception
+  firewall_cmd_zone:
+      service: ntp
+      state: present
+  when: ansible_distribution_major_version == '7'
+
+- name: allow local networks
+  lineinfile:
+      path: /etc/chrony.conf
+      line: "allow {{item}}"
+      state: present
+  loop: "{{network_subnets}}"
+  notify: restart chrony
+
+- name: turn on logging
+  lineinfile:
+      path: /etc/chrony.conf
+      regexp: ^\s*log\s+
+      line: log measurements statistics tracking
+      state: present
+  notify: restart chrony
