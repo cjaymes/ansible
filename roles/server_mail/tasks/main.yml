@@ -1,0 +1,77 @@
+- name: install
+  yum:
+      name: postfix
+      state: installed
+
+- name: service
+  service:
+      name: postfix
+      enabled: yes
+      state: started
+
+- name: add firewall exception
+  firewall_cmd_zone:
+      service: smtp
+      permanent: no
+      state: present
+  when: ansible_distribution_major_version == '7'
+
+- name: add firewall exception
+  firewall_cmd_zone:
+      service: smtp
+      state: present
+  when: ansible_distribution_major_version == '7'
+
+# TODO rhel6 firewall exception
+
+- name: set allow_postfix_local_write_mail_spool
+  command: setsebool -P allow_postfix_local_write_mail_spool on
+  changed_when: False
+
+- name: set myhostname
+  lineinfile:
+      path: /etc/postfix/main.cf
+      regexp: ^\s*myhostname\s*=
+      line: "myhostname = {{ansible_fqdn}}"
+      state: present
+  notify: restart postfix
+
+- name: set mydomain
+  lineinfile:
+      path: /etc/postfix/main.cf
+      regexp: ^\s*mydomain\s*=
+      line: "mydomain = {{ansible_domain}}"
+      state: present
+  notify: restart postfix
+
+- name: set myorigin
+  lineinfile:
+      path: /etc/postfix/main.cf
+      regexp: ^\s*myorigin\s*=
+      line: myorigin = $mydomain
+      state: present
+  notify: restart postfix
+
+- name: set inet_interfaces
+  lineinfile:
+      path: /etc/postfix/main.cf
+      regexp: ^\s*inet_interfaces\s*=
+      line: inet_interfaces = all
+      state: present
+  notify: restart postfix
+
+- name: set mydestination
+  lineinfile:
+      path: /etc/postfix/main.cf
+      regexp: ^\s*mydestination\s*=
+      line: mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+      state: present
+  notify: restart postfix
+
+- name: set mynetworks
+  lineinfile:
+      path: /etc/postfix/main.cf
+      regexp: ^\s*mynetworks\s*=
+      line: "mynetworks = {{network_subnets|join(', ')}}"
+      state: present
+  notify: restart postfix
