@@ -1,3 +1,8 @@
+- name: remove dvd repo
+  file:
+      path: /etc/yum.repos.d/dvd.repo
+      state: absent
+
 - name: repo mount
   mount:
       src: "{{repo_server}}:{{repo_share}}"
@@ -5,6 +10,11 @@
       fstype: nfs
       opts: ro
       state: mounted
+
+- name: trust distro key
+  rpm_key:
+      key: "{{distribution_key_file}}"
+      state: present
 
 - name: repo link
   file:
@@ -25,7 +35,7 @@
       - subscription-manager
       - yum-rhn-plugin
 
-- name: trust distro key
-  rpm_key:
-      key: "{{distribution_key_file}}"
-      state: present
+- name: remove redhat repo
+  file:
+      path: /etc/yum.repos.d/redhat.repo
+      state: absent
