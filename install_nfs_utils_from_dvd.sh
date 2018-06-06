@@ -15,3 +15,5 @@ EOF
 rpmkeys --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 
 yum install -y nfs-utils
+
+umount /mnt
