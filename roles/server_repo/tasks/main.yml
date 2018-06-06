@@ -40,6 +40,7 @@
 - name: add export
   lineinfile:
       path: /etc/exports
-      line: "{{repo_share}} *(ro,insecure,all_squash)"
+      regexp: "^{{repo_share}}"
+      line: "{{repo_share}} *(ro,all_squash)"
       state: present
   notify: refresh exports

@@ -7,17 +7,29 @@
 - group_by:
     key: "os_{{ansible_distribution}}_{{ ansible_distribution_major_version }}"
 
-- include_tasks: "{{item}}"
-  loop:
-      - wheel_user.yml
+- name: wheel user
+  user:
+      name: "{{wheel_user}}"
+      password: "{{wheel_user_password}}"
+      groups:
+          - wheel
+      append: yes
+      create_home: yes
+      state: present
+
+- name: wheel user authorized ssh keys
+  lineinfile:
+      path: "/home/{{wheel_user}}/.ssh/authorized_keys"
+      line: "{{wheel_user_key}}"
+      owner: "{{wheel_user}}"
+      group: "{{wheel_user}}"
+      mode: 0600
+      state: present
+  loop: "{{wheel_user_keys}}"
+  loop_control:
+      loop_var: wheel_user_key
 
 - name: trust distro key
   rpm_key:
       key: "{{distribution_key_file}}"
       state: present
-
-- include_role:
-    name: "{{item}}"
-  loop:
-      - client_repo
-      - client_ntp

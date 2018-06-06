@@ -1,2 +1,4 @@
-- include_tasks: ntp_client.yml
-  when: "'ntp_servers' not in group_names"
+- include_tasks: ntp_client_el7.yml
+  when:
+      - "'ntp_servers' not in group_names"
+      - ansible_distribution_major_version == '7'

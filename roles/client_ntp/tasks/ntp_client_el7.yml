@@ -1,0 +1,14 @@
+- name: comment servers
+  replace:
+      path: /etc/chrony.conf
+      regexp: ^(\s*server\s+.*ntp.org.*)$
+      replace: "#\\1"
+  notify: restart chrony
+
+- name: servers
+  lineinfile:
+      path: /etc/chrony.conf
+      line: 'server {{item}}'
+      state: present
+  loop: "{{ntp_servers}}"
+  notify: restart chrony
