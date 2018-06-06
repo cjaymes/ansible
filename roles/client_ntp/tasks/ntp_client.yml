@@ -1,3 +1,14 @@
+- name: install chrony
+  yum:
+      name: chrony
+      state: installed
+
+- name: chrony service
+  service:
+      name: chronyd
+      enabled: yes
+      state: started
+
 - name: comment servers
   replace:
       path: /etc/chrony.conf
