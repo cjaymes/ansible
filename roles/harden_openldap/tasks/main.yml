@@ -4,4 +4,4 @@
   yum:
       name: openldap-servers
       state: absent
-  when: not is_ldap_server
+  when: "'ldap_servers' not in group_names"

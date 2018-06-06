@@ -11,17 +11,9 @@ ansible_dependencies:
 # wheel_user_password - crypt of the wheel user's password; should be vaulted
 # wheel_user_keys - ssh keys of wheel_user
 
-is_ldap_server: False
-is_ntp_server: False
-is_mail_server: False
-is_tftpd_server: False
-is_syslog_server: False
-is_repo_server: False
-is_desktop: True
-
 is_routing: False
 is_xinetd_used: False
-is_X_required: False
+is_X_required: "{{'desktops' in group_names}}"
 
 boot_method: BIOS
 #boot_method: UEFI

@@ -19,7 +19,7 @@
   include_tasks: harden_tftpd.yml
   when:
       - tftpd_installed is succeeded
-      - is_tftpd_server
+      - "'tftp_servers' in group_names"
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72301 (SV-86925r1_rule)
@@ -31,7 +31,7 @@
       enabled: no
       state: stopped
   when:
-      - not is_tftpd_server
+      - "'tftp_servers' not in group_names"
 
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
 # V-38606 (SV-50407r2_rule)
@@ -40,4 +40,4 @@
       name: tftp-server
       state: absent
   when:
-      - not is_tftpd_server
+      - "'tftp_servers' not in group_names"
