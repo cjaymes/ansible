@@ -28,8 +28,7 @@ mail_server: "mail.{domain}"
 # tcp or udp
 syslog_protocol: tcp
 
-# The port defaults to 514 and is optional
-syslog_server: "syslog.{{domain}}:514"
+syslog_server: "syslog.{{domain}}"
 
 # The subnets used in the local network
 network_subnets:
