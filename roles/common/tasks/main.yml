@@ -7,57 +7,7 @@
 - group_by:
     key: "os_{{ansible_distribution}}_{{ ansible_distribution_major_version }}"
 
-- name: repo mount
-  mount:
-      src: "{{repo_server}}:{{repo_share}}"
-      path: "{{repo_share}}"
-      fstype: nfs
-      opts: ro
-      state: mounted
-  when: not is_repo_server
-
-- name: repo link
-  file:
-      path: "/etc/yum.repos.d/{{repo_server}}.repo"
-      src: "{{repo_share}}/{{repo_server}}.repo"
-      state: link
-  when: not is_repo_server
-
-- name: remove subscription-manager, rhn* pkags
-  yum:
-      name: "{{item}}"
-      state: absent
+- include_tasks: "{{item}}"
   loop:
-      - rhnsd
-      - rhn-check
-      - rhn-client-tools
-      - rhn-setup
-      - rhnlib
-      - subscription-manager
-      - yum-rhn-plugin
-  when: not is_repo_server
-
-- name: trust distro key
-  rpm_key:
-      key: "{{distribution_key_file}}"
-      state: present
-
-- name: wheel user
-  user:
-      name: "{{wheel_user}}"
-      password: "{{wheel_user_password}}"
-      groups:
-          - wheel
-      append: yes
-      create_home: yes
-      state: present
-
-- name: wheel user authorized ssh keys
-  lineinfile:
-      path: "/home/{{wheel_user}}/.ssh/authorized_keys"
-      line: "{{item}}"
-      owner: "{{wheel_user}}"
-      group: "{{wheel_user}}"
-      mode: 0600
-      state: present
-  loop: "{{wheel_user_keys}}"
+      - repo_client.yml
+      - wheel_user.yml

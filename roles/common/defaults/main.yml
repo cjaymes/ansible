@@ -7,6 +7,9 @@ ansible_dependencies:
 # required to be defined (in group or host vars):
 # domain - domain to use to fully qualify hostnames
 # grub_password - hash generated with 'grub2-mkpasswd-pbkdf2' on rhel7 or 'grub-crypt --sha-512' on rhel6
+# wheel_user - login name of an admin user
+# wheel_user_password - crypt of the wheel user's password; should be vaulted
+# wheel_user_keys - ssh keys of wheel_user
 
 is_ldap_server: False
 is_ntp_server: False
