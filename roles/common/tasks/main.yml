@@ -19,5 +19,5 @@
 - include_role:
     name: "{{item}}"
   loop:
-      - repo_client
-      - ntp_client
+      - client_repo
+      - client_ntp
