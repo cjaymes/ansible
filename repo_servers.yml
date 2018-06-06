@@ -1,4 +1,4 @@
 ---
 - hosts: repo_servers
   roles:
-      - repo
+      - server_repo

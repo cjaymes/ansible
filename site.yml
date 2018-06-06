@@ -1,4 +1,12 @@
 ---
-- hosts: repos
+- hosts: repo_servers
   roles:
-      - repo
+      - server_repo
+
+- hosts: ntp_servers
+  roles:
+      - server_ntp
+
+- hosts: desktops
+  roles:
+      - desktop
