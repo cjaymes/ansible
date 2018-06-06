@@ -18,11 +18,16 @@
       state: started
 
 - name: add firewall exception
-  command: firewall-cmd --add-service=nfs
+  firewall_cmd_zone:
+      service: nfs
+      permanent: no
+      state: present
   when: ansible_distribution_major_version == '7'
 
 - name: add firewall exception
-  command: firewall-cmd --add-service=nfs --permanent
+  firewall_cmd_zone:
+      service: nfs
+      state: present
   when: ansible_distribution_major_version == '7'
 
 # TODO rhel6 firewall exception
