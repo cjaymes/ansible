@@ -23,6 +23,10 @@ dns_servers:
     - 4.2.2.1
     - 4.2.2.2
 
+dns_upstream:
+    - 4.2.2.1
+    - 4.2.2.2
+
 mail_server: "mail.{domain}"
 
 # tcp or udp

@@ -1,0 +1,5 @@
+- name: PTR record
+  lineinfile:
+      path: "{{zone_file}}"
+      line: "{{record.octet}} IN PTR {{record.fqdn}}."
+      state: present

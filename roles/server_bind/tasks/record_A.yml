@@ -1,0 +1,5 @@
+- name: A record
+  lineinfile:
+      path: "{{zone_file}}"
+      line: "{{record.hostname}} IN A {{record.address}}"
+      state: present

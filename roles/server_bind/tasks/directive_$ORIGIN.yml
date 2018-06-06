@@ -1,0 +1,6 @@
+- name: $ORIGIN directive
+  lineinfile:
+      path: "{{zone_file}}"
+      regexp: "^\\{{directive.type}}"
+      line: "{{directive.type}} {{directive.value}}."
+      state: present

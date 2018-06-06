@@ -1,0 +1,36 @@
+- name: install
+  yum:
+      name: bind
+      state: installed
+
+- name: template named.conf
+  template:
+      src: templates/etc/named.conf
+      dest: /etc/named.conf
+  notify:
+      - check named config
+      - restart named
+
+- name: zone files
+  include_tasks: zone.yml
+  loop: "{{dns_zones}}"
+  loop_control:
+      loop_var: zone
+
+- name: service
+  service:
+      name: named
+      enabled: yes
+      state: started
+
+- name: firewall exception
+  firewall_cmd_zone:
+      permanent: yes
+      service: dns
+      state: present
+
+- name: firewall exception
+  firewall_cmd_zone:
+      permanent: no
+      service: dns
+      state: present

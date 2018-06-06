@@ -1,0 +1,32 @@
+- set_fact:
+    zone_file: /var/named/named.{{zone.name}}
+
+- debug:
+    msg: "Creating zone {{zone.name}} in {{zone_file}}"
+
+- name: create file
+  file:
+      path: "{{zone_file}}"
+      owner: root
+      group: named
+      mode: 0640
+      state: touch
+  changed_when: False
+
+- name: directives
+  include_tasks: directive_{{directive.type}}.yml
+  loop: "{{zone.directives}}"
+  loop_control:
+      loop_var: directive
+  notify:
+      - check named config
+      - restart named
+
+- name: records
+  include_tasks: "record_{{record.type}}.yml"
+  loop: "{{zone.records}}"
+  loop_control:
+      loop_var: record
+  notify:
+      - check named config
+      - restart named

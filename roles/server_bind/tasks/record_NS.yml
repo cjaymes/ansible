@@ -1,0 +1,5 @@
+- name: NS record
+  lineinfile:
+      path: "{{zone_file}}"
+      line: " IN NS {{record.fqdn}}."
+      state: present
