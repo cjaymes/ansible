@@ -1,0 +1,2 @@
+- include_tasks: client_mail.yml
+  when: "'mail_servers' not in group_names"

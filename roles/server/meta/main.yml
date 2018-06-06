@@ -3,3 +3,4 @@ dependencies:
     - { role: common }
     - { role: client_repo }
     - { role: client_ntp }
+    - { role: client_mail }

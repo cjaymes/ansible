@@ -1,0 +1,60 @@
+- name: install
+  yum:
+      name: postfix
+      state: installed
+
+- name: service
+  service:
+      name: postfix
+      enabled: yes
+      state: started
+
+- name: set myhostname
+  lineinfile:
+      path: /etc/postfix/main.cf
+      regexp: ^\s*myhostname\s*=
+      line: "myhostname = {{ansible_fqdn}}"
+      state: present
+  notify: restart postfix
+
+- name: set mydomain
+  lineinfile:
+      path: /etc/postfix/main.cf
+      regexp: ^\s*mydomain\s*=
+      line: "mydomain = {{ansible_domain}}"
+      state: present
+  notify: restart postfix
+
+- name: set myorigin
+  lineinfile:
+      path: /etc/postfix/main.cf
+      regexp: ^\s*myorigin\s*=
+      line: myorigin = $mydomain
+      state: present
+  notify: restart postfix
+
+# We can use $mydomain with a MX record set up, otherwise we have to specify
+# a host
+- name: set relayhost
+  lineinfile:
+      path: /etc/postfix/main.cf
+      regexp: ^\s*relayhost\s*=
+      line: relayhost = "{{mail_server}}"
+      state: present
+  notify: restart postfix
+
+- name: set inet_interfaces
+  lineinfile:
+      path: /etc/postfix/main.cf
+      regexp: ^\s*inet_interfaces\s*=
+      line: inet_interfaces = loopback-only
+      state: present
+  notify: restart postfix
+
+- name: set mydestination
+  lineinfile:
+      path: /etc/postfix/main.cf
+      regexp: ^\s*mydestination\s*=
+      line: mydestination =
+      state: present
+  notify: restart postfix
