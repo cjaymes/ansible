@@ -39,7 +39,7 @@
   lineinfile:
       path: /etc/postfix/main.cf
       regexp: ^\s*relayhost\s*=
-      line: relayhost = "{{mail_server}}"
+      line: "relayhost = [{{mail_server}}]"
       state: present
   notify: restart postfix
 
