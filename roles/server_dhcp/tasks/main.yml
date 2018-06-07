@@ -1,0 +1,17 @@
+- name: install packages
+  yum:
+      name: "{{item}}"
+      state: installed
+  loop:
+      - dhcp
+
+- name: template dhcpd.conf
+  template:
+      src: templates/etc/dhcp/dhcpd.conf
+      dest: /etc/dhcp/dhcpd.conf
+      owner: root
+      group: root
+      mode: 0640
+  notify:
+      - check dhcpd config
+      # - restart dhcpd

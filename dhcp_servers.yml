@@ -1,0 +1,4 @@
+---
+- hosts: dhcp_servers
+  roles:
+      - server_dhcp

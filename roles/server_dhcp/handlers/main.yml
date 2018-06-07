@@ -1,0 +1,8 @@
+- name: check dhcpd config
+  command: dhcpd -t
+  changed_when: False
+
+- name: restart dhcpd
+  service:
+      name: dhcpd
+      state: restarted
