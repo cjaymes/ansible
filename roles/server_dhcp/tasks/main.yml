@@ -14,4 +14,22 @@
       mode: 0640
   notify:
       - check dhcpd config
-      # - restart dhcpd
+      - restart dhcpd
+
+- name: service enabled, started
+  service:
+      name: dhcpd
+      enabled: yes
+      state: started
+
+- name: firewall exception, permanent
+  firewall_cmd_zone:
+      permanent: yes
+      service: dhcp
+      state: present
+
+- name: firewall exception
+  firewall_cmd_zone:
+      permanent: no
+      service: dhcp
+      state: present
