@@ -1,5 +1,0 @@
-- name: MX record
-  lineinfile:
-      path: "{{zone_file}}"
-      line: " IN MX {{record.preference}} {{record.fqdn}}."
-      state: present

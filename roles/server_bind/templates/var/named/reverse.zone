@@ -1,0 +1,20 @@
+{% for directive in zone.directives %}{% if directive.type == '$TTL' %}
+$TTL {{directive.value}}
+{% elif directive.type == '$INCLUDE' %}
+$INCLUDE {{directive.value}}
+{% elif directive.type == '$ORIGIN' %}
+$ORIGIN {{directive.value}}.
+{% endif %}{% endfor %}
+
+{% for record in zone.records %}{% if record.type == 'SOA' %}
+@    IN SOA  {{record.primary_name_server}}{% if record.primary_name_server != '@' %}{{'.'}}{% endif %} {{record.hostmaster_email|replace('@','.')}}.   (
+                       {{record.serial_number}}         ; serial
+                       {{record.time_to_refresh}}       ; time to refresh
+                       {{record.time_to_retry}}         ; time to retry
+                       {{record.time_to_expire}}        ; time to expire
+                       {{record.minimum_ttl}} )         ; minimum ttl
+{% elif record.type == 'NS' %}
+     IN NS   {{record.fqdn}}.
+{% elif record.type == 'PTR' %}
+{{record.octet}} IN PTR  {{record.fqdn}}.
+{% endif -%}{% endfor -%}

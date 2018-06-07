@@ -1,8 +1,11 @@
-- name: install
+- name: install packages
   yum:
-      name: bind
+      name: "{{item}}"
       state: installed
-
+  loop:
+      - bind
+      - bind-utils
+      
 - name: template named.conf
   template:
       src: templates/etc/named.conf

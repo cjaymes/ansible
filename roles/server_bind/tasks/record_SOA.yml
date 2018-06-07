@@ -1,6 +1,0 @@
-- name: SOA record
-  lineinfile:
-      path: "{{zone_file}}"
-      regexp: \s+SOA\s+
-      line: "@ IN SOA {{record.primary_name_server}} {{record.hostmaster_email}}. ( {{record.serial_number}} {{record.time_to_refresh}} {{record.time_to_retry}} {{record.time_to_expire}} {{record.minimum_ttl}} )"
-      state: present

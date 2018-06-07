@@ -1,5 +1,0 @@
-- name: CNAME record
-  lineinfile:
-      path: "{{zone_file}}"
-      line: "{{record.alias}} IN CNAME {{record.hostname}}"
-      state: present
