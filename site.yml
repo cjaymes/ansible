@@ -1,4 +1,12 @@
 ---
+- hosts: dns_servers
+  roles:
+      - server_dns
+
+- hosts: dhcp_servers
+  roles:
+      - server_dhcp
+
 - hosts: repo_servers
   roles:
       - server_repo
