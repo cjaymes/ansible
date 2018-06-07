@@ -3,12 +3,6 @@
       name: postfix
       state: installed
 
-- name: service
-  service:
-      name: postfix
-      enabled: yes
-      state: started
-
 - name: set myhostname
   lineinfile:
       path: /etc/postfix/main.cf
@@ -21,7 +15,7 @@
   lineinfile:
       path: /etc/postfix/main.cf
       regexp: ^\s*mydomain\s*=
-      line: "mydomain = {{ansible_domain}}"
+      line: "mydomain = {{domain}}"
       state: present
   notify: restart postfix
 
@@ -58,3 +52,9 @@
       line: mydestination =
       state: present
   notify: restart postfix
+
+- name: start service
+  service:
+      name: postfix
+      enabled: yes
+      state: started
