@@ -1,7 +1,7 @@
 - name: template zone
   template:
       src: templates/var/named/named.zone
-      dest: "/var/named/named.{{zone.name}}"
+      dest: "/var/named/dynamic/named.{{zone.name}}"
       owner: root
       group: named
       mode: 0640
