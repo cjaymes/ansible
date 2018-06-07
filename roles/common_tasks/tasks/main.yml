@@ -4,9 +4,6 @@
       state: installed
   loop: "{{ansible_dependencies}}"
 
-- group_by:
-    key: "os_{{ansible_distribution}}_{{ ansible_distribution_major_version }}"
-
 - name: wheel user
   user:
       name: "{{wheel_user}}"
