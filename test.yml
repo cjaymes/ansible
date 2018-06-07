@@ -1,6 +1,8 @@
 ---
 
-# - hosts: all
-- hosts: stig-rhel7
+- hosts:
+    - ns0
+    - dhcp0
   roles:
-    - harden_audit
+      - common
+      - static_ip

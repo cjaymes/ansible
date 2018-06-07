@@ -1,0 +1,7 @@
+- name: check that the static_ip matches what is on the machine already
+  fail:
+      msg: "Static IP, {{static_ip}}, doesn't match what machine is currently using, {{ansible_default_ipv4.address}}"
+  when: static_ip != ansible_default_ipv4.address
+
+- name: configure interface
+  command: "nmcli connection modify eth0 ipv4.method manual ip4 '{{static_ip}}/{{network_prefix_length}}' gw4 {{network_router}} ipv4.dns '{{dns_servers|join(' ')}}' ipv4.dns-search '{{dns_search|join(',')}}'"
