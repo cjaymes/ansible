@@ -2,3 +2,4 @@
 dependencies:
     - { role: common }
     - { role: server }
+    - { role: static_ip }
