@@ -4,7 +4,7 @@
   when: static_ip != ansible_default_ipv4.address
 
 - name: configure interface
-  command: "nmcli connection modify eth0 ipv4.method manual ip4 '{{static_ip}}/{{network_prefix_length}}' gw4 {{network_router}} ipv4.dns '{{dns_servers|join(' ')}}' ipv4.dns-search '{{dns_search|join(',')}}'"
+  command: "nmcli connection modify {{ansible_default_ipv4.interface}} ipv4.method manual ip4 '{{static_ip}}/{{network_prefix_length}}' gw4 {{network_router}} ipv4.dns '{{dns_servers|join(' ')}}' ipv4.dns-search '{{dns_search|join(',')}}'"
   changed_when: False
 
 - name: restart NetworkManager
