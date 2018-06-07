@@ -1,18 +1,7 @@
-- name: forward zone
+- name: template zone
   template:
-      src: templates/var/named/forward.zone
-      dest: "/var/named/named.{{zone.forward}}"
-      owner: root
-      group: named
-      mode: 0640
-  notify:
-      - check named config
-      - restart named
-
-- name: reverse zone
-  template:
-      src: templates/var/named/reverse.zone
-      dest: "/var/named/named.{{zone.reverse}}"
+      src: templates/var/named/named.zone
+      dest: "/var/named/named.{{zone.name}}"
       owner: root
       group: named
       mode: 0640

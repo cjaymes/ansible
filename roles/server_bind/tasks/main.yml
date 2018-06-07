@@ -1,11 +1,11 @@
-- name: install packages
+- name: install bind, bind-utils
   yum:
       name: "{{item}}"
       state: installed
   loop:
       - bind
       - bind-utils
-      
+
 - name: template named.conf
   template:
       src: templates/etc/named.conf
@@ -20,13 +20,13 @@
   loop_control:
       loop_var: zone
 
-- name: service
+- name: service enabled, started
   service:
       name: named
       enabled: yes
       state: started
 
-- name: firewall exception
+- name: firewall exception, permanent
   firewall_cmd_zone:
       permanent: yes
       service: dns

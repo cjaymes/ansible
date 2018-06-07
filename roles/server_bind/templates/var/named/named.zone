@@ -21,4 +21,6 @@ $ORIGIN {{directive.value}}.
 {{record.hostname}} IN A    {{record.address}}
 {% elif record.type == 'CNAME' %}
 {{record.alias}} IN CNAME {{record.hostname}}
+{% elif record.type == 'PTR' %}
+{{record.octet}} IN PTR  {{record.fqdn}}.
 {% endif -%}{% endfor -%}
