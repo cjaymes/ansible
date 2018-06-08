@@ -8,3 +8,5 @@
   notify:
       - check named config
       - restart named
+  when:
+      - zone.type in ['master', 'slave']
