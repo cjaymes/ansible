@@ -1,7 +1,8 @@
 - name: remove journal files
-  shell: rm -f /var/named/*.jnl
+  shell: rm -f /var/named/dynamic/*.jnl
   args:
       warn: False
+  changed_when: False
 
 - name: check named config
   command: named-checkconf -z -j
