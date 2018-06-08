@@ -1,8 +1,11 @@
 ---
 
 - hosts:
-    - ns0
-    - dhcp0
+    - ns1
   roles:
-      - common
-      - static_ip
+      - server_dns
+
+- hosts:
+    - dhcp1
+  roles:
+      - server_dhcp
