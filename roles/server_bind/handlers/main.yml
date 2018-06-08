@@ -1,5 +1,5 @@
 - name: check named config
-  command: named-checkconf
+  command: named-checkconf -z -j
   changed_when: False
 
 - name: restart named
