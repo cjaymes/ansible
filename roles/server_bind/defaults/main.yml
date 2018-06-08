@@ -1,0 +1,101 @@
+dns_master: ns0
+dns_master_ip: "{{host_ips['ns0']}}"
+
+dns_keys:
+    - name: dhcp_updater
+      algorithm: hmac-sha256
+      secret: "{{dhcp_updater_secret_vault}}"
+
+dns_zones:
+    - name: '.'
+      type: hint
+      file: named.ca
+
+    # - name: master-zone.com
+    #   type: "{% if ansible_hostname == dns_master %}master{% else %}slave{% endif %}"
+    #   allow_update:
+    #       - key "dhcp_updater"
+    #   directives:
+    #       - type: $TTL
+    #         value: 1D
+    #   records:
+    #       - type: SOA
+    #         primary_name_server: '@'
+    #         hostmaster_email: "{{email_notifications}}"
+    #         serial_number: 2018060601
+    #         time_to_refresh: 1D
+    #         time_to_retry: 1H
+    #         time_to_expire: 1W
+    #         minimum_ttl: 3H
+    #
+    #       - type: NS
+    #         fqdn: ns0.master-zone.com
+    #       - type: NS
+    #         fqdn: ns1.master-zone.com
+    #
+    #       - type: MX
+    #         preference: 10
+    #         fqdn: mail0.master-zone.com
+    #       - type: MX
+    #         preference: 20
+    #         fqdn: mail1.master-zone.com
+    #
+    #       - type: A
+    #         hostname: ns0
+    #         address: x.x.x.x
+    #       - type: A
+    #         hostname: ns1
+    #         address: x.x.x.x
+    #       - type: A
+    #         hostname: mail0
+    #         address: x.x.x.x
+    #       - type: A
+    #         hostname: mail1
+    #         address: x.x.x.x
+    #
+    #       - type: CNAME
+    #         alias: mail
+    #         hostname: mail0
+    # - name: x.x.x.in-addr.arpa
+    #   type: master
+    #   allow_update:
+    #       - key "dhcp_updater"
+    #   directives:
+    #       - type: $TTL
+    #         value: 1D
+    #   records:
+    #       - type: SOA
+    #         primary_name_server: '@'
+    #         hostmaster_email: "{{email_notifications}}"
+    #         serial_number: 2018060601
+    #         time_to_refresh: 1D
+    #         time_to_retry: 1H
+    #         time_to_expire: 1W
+    #         minimum_ttl: 3H
+    #
+    #       - type: NS
+    #         fqdn: ns0.master-zone.com
+    #       - type: NS
+    #         fqdn: ns1.master-zone.com
+    #
+    #       - type: PTR
+    #         address: "{{host_ips['ns0']}}"
+    #         fqdn: ns0.master-zone.com
+    #       - type: PTR
+    #         address: "{{host_ips['ns1']}}"
+    #         fqdn: ns1.master-zone.com
+    #       - type: PTR
+    #         address: "{{host_ips['mail0']}}"
+    #         fqdn: mail0.master-zone.com
+    #       - type: PTR
+    #         address: "{{host_ips['mail1']}}"
+    #         fqdn: mail1.master-zone.com
+    #
+    # - name: forward-zone.com
+    #   type: forward
+    #   forwarders:
+    #       - x.x.x.x
+    # - name: x.x.x.in-addr.arpa
+    #   type: forward
+    #   forwarders:
+    #       - x.x.x.x
