@@ -6,6 +6,9 @@ dns_keys:
       algorithm: hmac-sha256
       secret: "{{dhcp_updater_secret_vault}}"
 
+dns_blacklist_url: https://raw.githubusercontent.com/oznu/dns-zone-blacklist/master/bind/bind-nxdomain.blacklist
+dns_blacklist_checksum_url: https://raw.githubusercontent.com/oznu/dns-zone-blacklist/master/bind/bind-nxdomain.blacklist.checksum
+
 dns_zones:
     - name: '.'
       type: hint
