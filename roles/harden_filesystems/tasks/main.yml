@@ -1,0 +1,40 @@
+- name: verify packages
+  command: rpm --verify --all
+  register: filesystem_pkg_verify
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71849 (SV-86473r2_rule)
+- name: package file permissions mismatch
+  set_fact:
+    filesystem_mod_files: "{{ filesystem_mod_files | default([]) + [ item.split(' ')[-1] ] }}"
+  loop: "{{filesystem_pkg_verify.stdout_lines}}"
+  when: item | match('^\.M')
+  register: filesystem_mod_files
+
+- name: modified packages
+  command: "rpm -qf {{item}}"
+  loop: "{{filesystem_mod_files}}"
+  register: filesystem_mod_file_pkgs
+
+- name: combine modified packages
+  set_fact:
+    filesystem_mod_pkgs: "{{ filesystem_mod_pkgs | default([]) + [item.stdout] }}"
+  loop: "{{filesystem_mod_file_pkgs.results}}"
+
+- name: unique modified packages
+  set_fact:
+    filesystem_mod_pkgs: "{{ filesystem_mod_pkgs | unique }}"
+
+- name: reset permissions
+  command: "rpm --setperms {{item}}"
+  loop: "{{filesystem_mod_pkgs}}"
+
+- name: reset permissions
+  command: "rpm --setugids {{item}}"
+  loop: "{{filesystem_mod_pkgs}}"
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71855 (SV-86479r2_rule)
+- name: package file hash mismatch
+  shell: rpm -Va | grep '^\.\.5' | awk '{print $3}'
+  register: filesystem_mod_files
