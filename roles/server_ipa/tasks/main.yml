@@ -1,0 +1,21 @@
+- name: install packages
+  yum:
+      name: freeipa-server
+      state: installed
+
+- name: open firewall
+  firewall_cmd_zone:
+      service: "{{item}}"
+      state: present
+  loop:
+      - freeipa-ldap
+      - freeipa-ldaps
+
+- name: open firewall
+  firewall_cmd_zone:
+      permanent: yes
+      service: "{{item}}"
+      state: present
+  loop:
+      - freeipa-ldap
+      - freeipa-ldaps
