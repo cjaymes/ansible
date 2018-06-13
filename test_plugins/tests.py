@@ -2,6 +2,7 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
+import stat
 from ansible import errors
 
 def eq(value, content):
@@ -72,7 +73,29 @@ def odd(value):
 
 def less_permissive(value, content):
     try:
-        return value != content
+        val_owner = value & stat.S_IRWXU
+        val_group = value & stat.S_IRWXG
+        val_other = value & stat.S_IRWXO
+        con_owner = content & stat.S_IRWXU
+        con_group = content & stat.S_IRWXG
+        con_other = content & stat.S_IRWXO
+
+        return val_owner < con_owner or val_group < con_group or val_other < con_other
+
+    except Exception, e:
+        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % (str(e),str(value),str(content)) )
+
+def more_permissive(value, content):
+    try:
+        val_owner = value & stat.S_IRWXU
+        val_group = value & stat.S_IRWXG
+        val_other = value & stat.S_IRWXO
+        con_owner = content & stat.S_IRWXU
+        con_group = content & stat.S_IRWXG
+        con_other = content & stat.S_IRWXO
+
+        return val_owner > con_owner or val_group > con_group or val_other > con_other
+
     except Exception, e:
         raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % (str(e),str(value),str(content)) )
 

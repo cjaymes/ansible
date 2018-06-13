@@ -1,11 +1,6 @@
 ---
 
 - hosts:
-    - ns1
+    - stig-rhel7
   roles:
-      - server_dns
-
-- hosts:
-    - dhcp1
-  roles:
-      - server_dhcp
+      - harden_filesystems
