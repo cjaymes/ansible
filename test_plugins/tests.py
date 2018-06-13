@@ -70,6 +70,11 @@ def odd(value):
     except Exception, e:
         raise errors.AnsibleFilterError('Test error: %s, value=%s' % (str(e),str(value)) )
 
+def less_permissive(value, content):
+    try:
+        return value != content
+    except Exception, e:
+        raise errors.AnsibleFilterError('Test error: %s, value=%s, content=%s' % (str(e),str(value),str(content)) )
 
 class TestModule(object):
     def tests(self):
@@ -92,6 +97,9 @@ class TestModule(object):
 
             'lt': lt,
             'lessthan': lt,
+
+            'less_permissive': less_permissive,
+            'more_permissive': more_permissive,
 
             'ne': ne,
             'notequalto': ne,
