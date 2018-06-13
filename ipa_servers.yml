@@ -1,0 +1,4 @@
+---
+- hosts: ipa_servers
+  roles:
+      - server_ipa
