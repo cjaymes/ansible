@@ -20,41 +20,9 @@
   loop_control:
       loop_var: zone
 
-- name: get current blacklist
-  command: "curl --fail --output /tmp/named.dns-zone-blacklist --silent {{dns_blacklist_url}}"
-  args:
-      warn: False
-  changed_when: False
-
-- name: get current blacklist checksum
-  command: "curl --fail --silent {{dns_blacklist_checksum_url}}"
-  args:
-      warn: False
-  changed_when: False
-  register: dns_blacklist_checksum
-
-- set_fact:
-    dns_blacklist_checksum: "{{dns_blacklist_checksum.stdout}}"
-
-- name: checksum blacklist
-  command: sha256sum /tmp/named.dns-zone-blacklist
-  changed_when: False
-  register: blacklist_file_checksum
-
-- set_fact:
-    blacklist_file_checksum: "{{blacklist_file_checksum.stdout.split(' ')[0]}}"
-
-- name: check the file
-  command: named-checkzone dns-zone-blacklist /tmp/named.dns-zone-blacklist
-  when: dns_blacklist_checksum == blacklist_file_checksum
-  register: blacklist_file_check
-
-- name: move new blacklist in place
-  command: mv -f /tmp/named.dns-zone-blacklist /var/named/named.dns-zone-blacklist
-  when: blacklist_file_check.rc == 0
-  notify:
-      - check named config
-      - restart named
+- name: configure blacklist
+  include_tasks: blacklist.yml
+  when: dns_blacklist_url is defined
 
 - name: service enabled, started
   service:
