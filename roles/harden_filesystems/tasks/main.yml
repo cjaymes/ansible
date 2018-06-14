@@ -2,29 +2,19 @@
   rpm_verify_all_dump:
   register: rpm_verify_all_dump
 
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-71849 (SV-86473r2_rule)
 - name: collect modified packages
   command: "rpm -qf {{item.path}}"
   args:
     warn: False
+  changed_when: False
   loop: "{{rpm_verify_all_dump.rpm_verify_all}}"
-  when:
-      - item.mode_differs
-      - not item.is_ghost
   register: filesystem_file_pkgs
-
-# - debug:
-#     msg: "{{filesystem_file_pkgs}}"
 
 - name: combine pkg & verify
   set_fact:
     filesystem_pkg_V: "{{ filesystem_pkg_V | default([]) + [ { 'package': item.stdout, 'verify': item.item } ] }}"
   when: not item is skipped
   loop: "{{filesystem_file_pkgs.results}}"
-
-# - debug:
-#     msg: "{{filesystem_pkg_V}}"
 
 - name: collect package query dump
   rpm_query_dump:
@@ -33,46 +23,42 @@
   loop: "{{filesystem_pkg_V}}"
   register: rpm_query_dump
 
-# - debug:
-#     msg: "{{rpm_query_dump}}"
-
 - name: combine pkg, verify, query
   set_fact:
     filesystem_pkg_V_q: "{{ filesystem_pkg_V_q | default([]) + [ { 'package': item.item.package, 'verify': item.item.verify, 'query': item.rpm_query_dump[0] } ] }}"
   loop: "{{rpm_query_dump.results}}"
 
-# - debug:
-#     msg: "{{filesystem_pkg_V_q}}"
-
-- name: collect file mode
+- name: collect file stat
   stat:
       path: "{{item.verify.path}}"
   loop: "{{filesystem_pkg_V_q}}"
   register: stat
-
-# - debug:
-#     msg: "{{stat}}"
 
 - name: combine pkg, verify, query, stat
   set_fact:
     filesystem_pkg_V_q_s: "{{ filesystem_pkg_V_q_s | default([]) + [ { 'package': item.item.package, 'verify': item.item.verify, 'query': item.item.query, 'stat': item.stat } ] }}"
   loop: "{{stat.results}}"
 
-- debug:
-    msg: "{{filesystem_pkg_V_q_s}}"
-
-- debug:
-    msg: "{{item}}"
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71849 (SV-86473r2_rule)
+- name: reset file user permissions
+  file:
+      path: "{{item.verify.path}}"
+      mode: "{{item.query.mode_permissions}}"
   when:
+      - item.verify.mode_differs
       - item.stat.mode is more_permissive(item.query.mode_permissions)
   loop: "{{filesystem_pkg_V_q_s}}"
-# - name: reset permissions
-#   command: "rpm --setperms {{item}}"
-#   loop: "{{filesystem_mod_pkgs}}"
-#
-# - name: reset permissions
-#   command: "rpm --setugids {{item}}"
-#   loop: "{{filesystem_mod_pkgs}}"
+
+- name: reset file owner
+  file:
+      path: "{{item.verify.path}}"
+      owner: "{{item.query.owner}}"
+  when:
+      - item.verify.owner_differs
+      - item.stat.pw_name != item.query.owner
+  loop: "{{filesystem_pkg_V_q_s}}"
+
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71855 (SV-86479r2_rule)
