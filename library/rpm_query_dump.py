@@ -21,12 +21,23 @@ options:
         description:
             - The name of the package to query.
         type: str
+    path:
+        description:
+            - The path of the file for which to filter.
+        type: str
 '''
 
 EXAMPLES = '''
     - name: parse rpm --query --dump
       rpm_query_dump:
         name: kernel
+      register: rpm_query_dump
+    - debug:
+        msg: '{{rpm_query_dump}}'
+    - name: parse rpm --query --dump
+      rpm_query_dump:
+        name: grubby-8.28-23.el7.x86_64
+        path: /etc/sysconfig/kernel
       register: rpm_query_dump
     - debug:
         msg: '{{rpm_query_dump}}'
@@ -240,7 +251,8 @@ def main():
     # set up the module & defaults
     module = AnsibleModule(
         argument_spec=dict(
-            name=dict(type='str', required=True)
+            name=dict(type='str', required=True),
+            path=dict(type='str')
         ),
         supports_check_mode=True
     )
@@ -261,6 +273,10 @@ def main():
             continue
 
         (path, size, mtime, checksum, mode, user, group, is_config, is_doc, device_major_minor, link_path) = line.split()
+
+        if module.params['path'] is not None and path != module.params['path']:
+            continue
+            
         size = int(size)
         mtime = int(mtime)
         mode = int(mode, 8)
