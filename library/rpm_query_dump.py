@@ -318,9 +318,6 @@ def main():
         record['mode_is_setuid'] = mode & stat.S_ISUID
         record['mode_is_setgid'] = mode & stat.S_ISGID
         record['mode_is_sticky'] = mode & stat.S_ISVTX
-        record['mode_owner'] = mode & stat.S_IRWXU
-        record['mode_group'] = mode & stat.S_IRWXG
-        record['mode_other'] = mode & stat.S_IRWXO
         record['mode_owner_read'] = mode & stat.S_IRUSR
         record['mode_owner_write'] = mode & stat.S_IWUSR
         record['mode_owner_execute'] = mode & stat.S_IXUSR
@@ -330,6 +327,9 @@ def main():
         record['mode_other_read'] = mode & stat.S_IROTH
         record['mode_other_write'] = mode & stat.S_IWOTH
         record['mode_other_execute'] = mode & stat.S_IXOTH
+        record['mode_owner'] = (mode & stat.S_IRWXU) >> 6
+        record['mode_group'] = (mode & stat.S_IRWXG) >> 3
+        record['mode_other'] = (mode & stat.S_IRWXO)
 
         record['user'] = user
 
