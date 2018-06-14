@@ -58,7 +58,7 @@ rpm_verify_all:
             returned: success
             type: bool
             sample: True
-        user_differs:
+        owner_differs:
             description: True when file user ownership differs.
             returned: success
             type: bool
@@ -146,7 +146,7 @@ def main():
         record['digest_differs'] = m.group(3) == '5'
         record['device_major_minor_mismatch'] = m.group(4) == 'D'
         record['link_path_mismatch'] = m.group(5) == 'L'
-        record['user_differs'] = m.group(6) == 'U'
+        record['owner_differs'] = m.group(6) == 'U'
         record['group_differs'] = m.group(7) == 'G'
         record['mtime_differs'] = m.group(8) == 'T'
         record['caps_differ'] = m.group(9) == 'P'
