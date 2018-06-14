@@ -199,8 +199,8 @@ rpm_query_dump:
             returned: success
             type: bool
             sample: True
-        user:
-            description: File user owner.
+        owner:
+            description: File owner.
             returned: success
             type: str
             sample: root
@@ -272,11 +272,11 @@ def main():
         if line == '':
             continue
 
-        (path, size, mtime, checksum, mode, user, group, is_config, is_doc, device_major_minor, link_path) = line.split()
+        (path, size, mtime, checksum, mode, owner, group, is_config, is_doc, device_major_minor, link_path) = line.split()
 
         if module.params['path'] is not None and path != module.params['path']:
             continue
-            
+
         size = int(size)
         mtime = int(mtime)
         mode = int(mode, 8)
@@ -331,7 +331,7 @@ def main():
         record['mode_other_write'] = mode & stat.S_IWOTH != 0
         record['mode_other_execute'] = mode & stat.S_IXOTH != 0
 
-        record['user'] = user
+        record['owner'] = owner
 
         record['group'] = group
 
