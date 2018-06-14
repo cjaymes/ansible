@@ -315,21 +315,21 @@ def main():
         if record['mode_is_socket']:
             record['mode_type'] = 'socket'
         record['mode_permissions'] = stat.S_IMODE(mode)
-        record['mode_is_setuid'] = mode & stat.S_ISUID
-        record['mode_is_setgid'] = mode & stat.S_ISGID
-        record['mode_is_sticky'] = mode & stat.S_ISVTX
-        record['mode_owner_read'] = mode & stat.S_IRUSR
-        record['mode_owner_write'] = mode & stat.S_IWUSR
-        record['mode_owner_execute'] = mode & stat.S_IXUSR
-        record['mode_group_read'] = mode & stat.S_IRGRP
-        record['mode_group_write'] = mode & stat.S_IWGRP
-        record['mode_group_execute'] = mode & stat.S_IXGRP
-        record['mode_other_read'] = mode & stat.S_IROTH
-        record['mode_other_write'] = mode & stat.S_IWOTH
-        record['mode_other_execute'] = mode & stat.S_IXOTH
+        record['mode_is_setuid'] = mode & stat.S_ISUID != 0
+        record['mode_is_setgid'] = mode & stat.S_ISGID != 0
+        record['mode_is_sticky'] = mode & stat.S_ISVTX != 0
         record['mode_owner'] = (mode & stat.S_IRWXU) >> 6
         record['mode_group'] = (mode & stat.S_IRWXG) >> 3
         record['mode_other'] = (mode & stat.S_IRWXO)
+        record['mode_owner_read'] = mode & stat.S_IRUSR != 0
+        record['mode_owner_write'] = mode & stat.S_IWUSR != 0
+        record['mode_owner_execute'] = mode & stat.S_IXUSR != 0
+        record['mode_group_read'] = mode & stat.S_IRGRP != 0
+        record['mode_group_write'] = mode & stat.S_IWGRP != 0
+        record['mode_group_execute'] = mode & stat.S_IXGRP != 0
+        record['mode_other_read'] = mode & stat.S_IROTH != 0
+        record['mode_other_write'] = mode & stat.S_IWOTH != 0
+        record['mode_other_execute'] = mode & stat.S_IXOTH != 0
 
         record['user'] = user
 
