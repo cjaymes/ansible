@@ -3,7 +3,8 @@ from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
 import stat
-from ansible import errors, vars
+from ansible import errors
+from ansible.utils.unsafe_proxy import AnsibleUnsafeText
 
 def eq(value, content):
     try:
