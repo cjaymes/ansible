@@ -1,40 +1,81 @@
 - name: verify packages
-  command: rpm --verify --all
-  register: filesystem_pkg_verify
+  rpm_verify_all_dump:
+  register: rpm_verify_all_dump
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71849 (SV-86473r2_rule)
-- name: package file permissions mismatch
+- name: collect modified packages
+  command: "rpm -qf {{item.path}}"
+  args:
+    warn: False
+  loop: "{{rpm_verify_all_dump.rpm_verify_all}}"
+  when:
+      - item.mode_differs
+      - not item.is_ghost
+  register: filesystem_file_pkgs
+
+# - debug:
+#     msg: "{{filesystem_file_pkgs}}"
+
+- name: combine pkg & verify
   set_fact:
-    filesystem_mod_files: "{{ filesystem_mod_files | default([]) + [ item.split(' ')[-1] ] }}"
-  loop: "{{filesystem_pkg_verify.stdout_lines}}"
-  when: item | match('^\.M')
-  register: filesystem_mod_files
+    filesystem_pkg_V: "{{ filesystem_pkg_V | default([]) + [ { 'package': item.stdout, 'verify': item.item } ] }}"
+  when: not item is skipped
+  loop: "{{filesystem_file_pkgs.results}}"
 
-- name: modified packages
-  command: "rpm -qf {{item}}"
-  loop: "{{filesystem_mod_files}}"
-  register: filesystem_mod_file_pkgs
+# - debug:
+#     msg: "{{filesystem_pkg_V}}"
 
-- name: combine modified packages
+- name: collect package query dump
+  rpm_query_dump:
+      name: "{{item.package}}"
+      path: "{{item.verify.path}}"
+  loop: "{{filesystem_pkg_V}}"
+  register: rpm_query_dump
+
+# - debug:
+#     msg: "{{rpm_query_dump}}"
+
+- name: combine pkg, verify, query
   set_fact:
-    filesystem_mod_pkgs: "{{ filesystem_mod_pkgs | default([]) + [item.stdout] }}"
-  loop: "{{filesystem_mod_file_pkgs.results}}"
+    filesystem_pkg_V_q: "{{ filesystem_pkg_V_q | default([]) + [ { 'package': item.item.package, 'verify': item.item.verify, 'query': item.rpm_query_dump[0] } ] }}"
+  loop: "{{rpm_query_dump.results}}"
 
-- name: unique modified packages
+# - debug:
+#     msg: "{{filesystem_pkg_V_q}}"
+
+- name: collect file mode
+  stat:
+      path: "{{item.verify.path}}"
+  loop: "{{filesystem_pkg_V_q}}"
+  register: stat
+
+# - debug:
+#     msg: "{{stat}}"
+
+- name: combine pkg, verify, query, stat
   set_fact:
-    filesystem_mod_pkgs: "{{ filesystem_mod_pkgs | unique }}"
+    filesystem_pkg_V_q_s: "{{ filesystem_pkg_V_q_s | default([]) + [ { 'package': item.item.package, 'verify': item.item.verify, 'query': item.item.query, 'stat': item.stat } ] }}"
+  loop: "{{stat.results}}"
 
-- name: reset permissions
-  command: "rpm --setperms {{item}}"
-  loop: "{{filesystem_mod_pkgs}}"
+- debug:
+    msg: "{{filesystem_pkg_V_q_s}}"
 
-- name: reset permissions
-  command: "rpm --setugids {{item}}"
-  loop: "{{filesystem_mod_pkgs}}"
+- debug:
+    msg: "{{item}}"
+  when:
+      - item.stat.mode is more_permissive(item.query.mode_permissions)
+  loop: "{{filesystem_pkg_V_q_s}}"
+# - name: reset permissions
+#   command: "rpm --setperms {{item}}"
+#   loop: "{{filesystem_mod_pkgs}}"
+#
+# - name: reset permissions
+#   command: "rpm --setugids {{item}}"
+#   loop: "{{filesystem_mod_pkgs}}"
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71855 (SV-86479r2_rule)
-- name: package file hash mismatch
-  shell: rpm -Va | grep '^\.\.5' | awk '{print $3}'
-  register: filesystem_mod_files
+# - name: package file hash mismatch
+#   shell: rpm -Va | grep '^\.\.5' | awk '{print $3}'
+#   register: filesystem_mod_files

@@ -3,7 +3,7 @@ from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
 import stat
-from ansible import errors
+from ansible import errors, vars
 
 def eq(value, content):
     try:
@@ -73,6 +73,10 @@ def odd(value):
 
 def less_permissive(value, content):
     try:
+        if isinstance(value, str):
+            value = int(value, 8)
+        if isinstance(content, str):
+            content = int(content, 8)
         val_owner = value & stat.S_IRWXU
         val_group = value & stat.S_IRWXG
         val_other = value & stat.S_IRWXO
@@ -87,12 +91,20 @@ def less_permissive(value, content):
 
 def more_permissive(value, content):
     try:
-        val_owner = value & stat.S_IRWXU
-        val_group = value & stat.S_IRWXG
-        val_other = value & stat.S_IRWXO
-        con_owner = content & stat.S_IRWXU
-        con_group = content & stat.S_IRWXG
-        con_other = content & stat.S_IRWXO
+        if isinstance(value, (str, AnsibleUnsafeText)):
+            v = int(value, 8)
+        else:
+            v = value
+        if isinstance(content, (str, AnsibleUnsafeText)):
+            c = int(content, 8)
+        else:
+            c = content
+        val_owner = v & stat.S_IRWXU
+        val_group = v & stat.S_IRWXG
+        val_other = v & stat.S_IRWXO
+        con_owner = c & stat.S_IRWXU
+        con_group = c & stat.S_IRWXG
+        con_other = c & stat.S_IRWXO
 
         return val_owner > con_owner or val_group > con_group or val_other > con_other
 
