@@ -42,43 +42,43 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71849 (SV-86473r2_rule)
-# - name: reset file user permissions
-#   file:
-#       path: "{{item.verify.path}}"
-#       mode: "{{item.query.mode_permissions}}"
-#   loop: "{{filesystem_pkg_V_q_s}}"
-#   when:
-#       - item.verify.mode_differs
-#       - item.stat.mode is more_permissive(item.query.mode_permissions)
-#
-# - name: reset file owner
-#   file:
-#       path: "{{item.verify.path}}"
-#       owner: "{{item.query.owner}}"
-#   loop: "{{filesystem_pkg_V_q_s}}"
-#   when:
-#       - item.verify.owner_differs
-#       - item.stat.pw_name != item.query.owner
-#
-# - name: reset file group
-#   file:
-#       path: "{{item.verify.path}}"
-#       group: "{{item.query.group}}"
-#   loop: "{{filesystem_pkg_V_q_s}}"
-#   when:
-#       - item.verify.group_differs
-#       - item.stat.gr_name != item.query.group
+- name: reset file user permissions
+  file:
+      path: "{{item.verify.path}}"
+      mode: "{{item.query.mode_permissions}}"
+  loop: "{{filesystem_pkg_V_q_s}}"
+  when:
+      - item.verify.mode_differs
+      - item.stat.mode is more_permissive(item.query.mode_permissions)
+
+- name: reset file owner
+  file:
+      path: "{{item.verify.path}}"
+      owner: "{{item.query.owner}}"
+  loop: "{{filesystem_pkg_V_q_s}}"
+  when:
+      - item.verify.owner_differs
+      - item.stat.pw_name != item.query.owner
+
+- name: reset file group
+  file:
+      path: "{{item.verify.path}}"
+      group: "{{item.query.group}}"
+  loop: "{{filesystem_pkg_V_q_s}}"
+  when:
+      - item.verify.group_differs
+      - item.stat.gr_name != item.query.group
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71855 (SV-86479r2_rule)
 
 # TODO add check for package in repo. if it doesn't exist this errors
-- name: reinstall for checksum mismatch
-  command: "echo yum reinstall -y {{item.package}}"
-  args:
-      warn: False
-  loop: "{{filesystem_pkg_V_q_s}}"
-  when:
-      - item.verify.digest_differs
-      - not item.verify.is_config
-      - not item.verify.is_ghost
+# - name: reinstall for checksum mismatch
+#   command: "yum reinstall -y {{item.package}}"
+#   args:
+#       warn: False
+#   loop: "{{filesystem_pkg_V_q_s}}"
+#   when:
+#       - item.verify.digest_differs
+#       - not item.verify.is_config
+#       - not item.verify.is_ghost
