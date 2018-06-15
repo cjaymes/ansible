@@ -30,6 +30,7 @@
 
 - name: collect file stat
   stat:
+      checksum_algorithm: "{{rpm_checksum_algorithm}}"
       path: "{{item.verify.path}}"
   loop: "{{filesystem_pkg_V_q}}"
   register: stat
@@ -70,9 +71,12 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71855 (SV-86479r2_rule)
+
+# TODO add check for package in repo. if it doesn't exist this errors
 - name: reinstall for checksum mismatch
-  debug:
-      msg: "{{item}}"
+  command: "echo yum reinstall -y {{item.package}}"
+  args:
+      warn: False
   loop: "{{filesystem_pkg_V_q_s}}"
   when:
       - item.verify.digest_differs
