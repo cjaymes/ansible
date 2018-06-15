@@ -41,35 +41,40 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71849 (SV-86473r2_rule)
-- name: reset file user permissions
-  file:
-      path: "{{item.verify.path}}"
-      mode: "{{item.query.mode_permissions}}"
-  when:
-      - item.verify.mode_differs
-      - item.stat.mode is more_permissive(item.query.mode_permissions)
-  loop: "{{filesystem_pkg_V_q_s}}"
-
-- name: reset file owner
-  file:
-      path: "{{item.verify.path}}"
-      owner: "{{item.query.owner}}"
-  when:
-      - item.verify.owner_differs
-      - item.stat.pw_name != item.query.owner
-  loop: "{{filesystem_pkg_V_q_s}}"
-
-- name: reset file group
-  file:
-      path: "{{item.verify.path}}"
-      group: "{{item.query.group}}"
-  when:
-      - item.verify.group_differs
-      - item.stat.gr_name != item.query.group
-  loop: "{{filesystem_pkg_V_q_s}}"
+# - name: reset file user permissions
+#   file:
+#       path: "{{item.verify.path}}"
+#       mode: "{{item.query.mode_permissions}}"
+#   loop: "{{filesystem_pkg_V_q_s}}"
+#   when:
+#       - item.verify.mode_differs
+#       - item.stat.mode is more_permissive(item.query.mode_permissions)
+#
+# - name: reset file owner
+#   file:
+#       path: "{{item.verify.path}}"
+#       owner: "{{item.query.owner}}"
+#   loop: "{{filesystem_pkg_V_q_s}}"
+#   when:
+#       - item.verify.owner_differs
+#       - item.stat.pw_name != item.query.owner
+#
+# - name: reset file group
+#   file:
+#       path: "{{item.verify.path}}"
+#       group: "{{item.query.group}}"
+#   loop: "{{filesystem_pkg_V_q_s}}"
+#   when:
+#       - item.verify.group_differs
+#       - item.stat.gr_name != item.query.group
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71855 (SV-86479r2_rule)
-# - name: package file hash mismatch
-#   shell: rpm -Va | grep '^\.\.5' | awk '{print $3}'
-#   register: filesystem_mod_files
+- name: reinstall for checksum mismatch
+  debug:
+      msg: "{{item}}"
+  loop: "{{filesystem_pkg_V_q_s}}"
+  when:
+      - item.verify.digest_differs
+      - not item.verify.is_config
+      - not item.verify.is_ghost
