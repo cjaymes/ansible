@@ -2,7 +2,21 @@
   passwd_dump:
   register: passwd
 
+# - debug:
+#     msg: "{{passwd}}"
+
+- name: collect login_defs
+  login_defs_dump:
+  register: login_defs
+
+# - debug:
+#     msg: "{{login_defs}}"
+
 - set_fact:
-    interactive_accounts: "{{passwd.passwd|selectattr('uid', 'ge', 1000)|selectattr('uid', 'lt', 65500)|map(attribute='login')|list}}"
+    uid_min: "{{login_defs.login_defs.UID_MIN|int}}"
+
 - set_fact:
-    service_accounts: "{{passwd.passwd|selectattr('uid', 'gt', 0)|selectattr('uid', 'lt', 1000)|map(attribute='login')|list}}"
+    interactive_accounts: "{{passwd.passwd|selectattr('uid', 'ge', uid_min|int)|selectattr('uid', 'lt', 65500)|map(attribute='login')|list}}"
+
+- set_fact:
+    service_accounts: "{{passwd.passwd|selectattr('uid', 'gt', 0)|selectattr('uid', 'lt', uid_min|int)|map(attribute='login')|list}}"
