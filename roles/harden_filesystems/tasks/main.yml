@@ -73,12 +73,15 @@
 # V-71855 (SV-86479r2_rule)
 
 # TODO add check for package in repo. if it doesn't exist this errors
-# - name: reinstall for checksum mismatch
-#   command: "yum reinstall -y {{item.package}}"
-#   args:
-#       warn: False
-#   loop: "{{filesystem_pkg_V_q_s}}"
-#   when:
-#       - item.verify.digest_differs
-#       - not item.verify.is_config
-#       - not item.verify.is_ghost
+- name: reinstall for checksum mismatch
+  command: "yum reinstall -y {{item.package}}"
+  args:
+      warn: False
+  loop: "{{filesystem_pkg_V_q_s}}"
+  when:
+      - item.verify.digest_differs
+      - not item.verify.is_config
+      - not item.verify.is_ghost
+  register: filesystem_reinstall
+  failed_when: False
+  changed_when: filesystem_reinstall.rc == 0
