@@ -1,3 +1,50 @@
+- name: explicit defaults in yum.conf
+  ini_file:
+      path: "{{yum_config_file}}"
+      section: main
+      option: "{{item.option}}"
+      value: "{{item.value}}"
+      no_extra_spaces: yes
+      state: present
+  loop:
+      # prevents a rogue repo
+      - option: reposdir
+        value: /etc/yum.repos.d
+      # ensure running kernel is never accidentally deleted
+      - option: protected_packages
+        value: 'yum  glob:/etc/yum/protected.d/*.conf'
+      - option: protected_multilib
+        value: 1
+      - option: logfile
+        value: /var/log/yum.log
+      - option: payload_gpgcheck
+        value: 1
+      - option: installonlypkgs
+        value: kernel kernel-big‐mem kernel-enterprise kernel-smp kernel-debug kernel-unsupported kernel-source kernel-devel kernel-PAE kernel-PAE-debug
+      - option: installonly_limit
+        value: 3
+      - option: upgrade_group_objects_upgrade
+        value: 1
+      - option: autocheck_running_kernel
+        value: 1
+      - option: diskspacecheck
+        value: 1
+      - option: sslverify
+        value: 1
+      - option: history_record
+        value: 1
+      - option: syslog_ident
+        value: yum
+      - option: syslog_facility
+        value: LOG_USER
+      - option: syslog_device
+        value: /dev/log
+      - option: pluginpath
+        value: /usr/share/yum-plugins /usr/lib/yum-plugins
+      - option: pluginconfpath
+        value: /etc/yum/pluginconf.d
+      - option: bugtracker_url
+        value: file:///dev/null
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71977 (SV-86601r1_rule)
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
@@ -15,7 +62,8 @@
 # V-38487 (SV-50288r1_rule)
 - name: check for gpgcheck=0 in /etc/yum.repos.d/*.repo
   shell: "grep --no-messages --files-with-matches '^gpgcheck\\s*=\\s*0' {{yum_repo_dir}}/*.repo"
-  ignore_errors: True
+  failed_when: False
+  changed_when: False
   register: gpgcheck_repos
 
 - name: replace gpgcheck=0 with gpgcheck=1 in /etc/yum.repo.d/*.repo

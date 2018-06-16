@@ -3,4 +3,4 @@
 - hosts:
     - stig-rhel7
   roles:
-      - harden_filesystems
+      - harden_yum
