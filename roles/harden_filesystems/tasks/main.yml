@@ -1,3 +1,5 @@
+# TODO: fstype replacement
+
 # - name: verify packages
 #   rpm_verify_all_dump:
 #   register: rpm_verify_all_dump
@@ -112,21 +114,27 @@
 #   file:
 #       path: "{{item}}"
 #       group: root
-#   loop: "{{filesystem_group_unowned.stdout_lines}}"
+#   loop: "{{fs_group_unowned.stdout_lines}}"
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-72039 (SV-86663r1_rule)
+# - name: collect unlabled devices
+#   shell: find /dev \( -context *:device_t:* -o -context *:unlabeled_t:* \) \( -type c -o -type b \) -printf "%p %Z\n"
+#   register: fs_unlabeled_devs
+#   changed_when: False
+#   failed_when: False
+#
+# # NOTE: the STIG says to reinstall packages containing /dev files, but they
+# # aren't actually installed via a package, so we re-label instead
+# - name: relabel /dev
+#   command: "setfiles -v {{fs_file_contexts}} /dev"
+#   when:
+#       - fs_unlabeled_devs.stdout != ''
+#   register: fs_relabel
+#   changed_when: fs_relabel.stdout != ''
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-72039 (SV-86663r1_rule)
-- name: collect unlabled devices
-  shell: find /dev \( -context *:device_t:* -o -context *:unlabeled_t:* \) \( -type c -o -type b \) -printf "%p %Z\n"
-  register: filesystem_unlabeled_devs
-  changed_when: False
-  failed_when: False
-
-# NOTE: the STIG says to reinstall packages containing /dev files, but they
-# aren't actually installed via a package, so we re-label instead
-- name: relabel /dev
-  command: "setfiles -v {{filesystem_file_contexts}} /dev"
-  when:
-      - filesystem_unlabeled_devs.stdout != ''
-  register: filesystem_relabel
-  changed_when: filesystem_relabel.stdout != ''
+# V-72047 (SV-86671r3_rule)
+- name: collect world writable dirs
+  command: find / -xdev -perm -002 -type d -fstype xfs -exec ls -lLd {} \;
+  register: fs_world_writable
