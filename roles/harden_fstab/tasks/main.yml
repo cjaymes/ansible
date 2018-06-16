@@ -21,7 +21,7 @@
   vars:
     point: "{{item.mount_point}}"
     opt: nosuid
-  with_items: "{{fstab}}"
+  with_items: "{{fstab.fstab}}"
   when:
       - item.fstype in fs_types_removable
 
@@ -34,20 +34,21 @@
   vars:
     point: "{{item.mount_point}}"
     opt: nosuid
-  with_items: "{{fstab}}"
+  with_items: "{{fstab.fstab}}"
   when:
       - item.fstype in fs_types_network
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72311 (SV-86935r3_rule)
-- name: add sec=krb5:krb5i:krb5p to nfs mounts
-  include_tasks: fstab-opt-present.yml
-  vars:
-    point: "{{item.mount_point}}"
-    opt: sec=krb5:krb5i:krb5p
-  with_items: "{{fstab}}"
-  when:
-      - item.fstype in ['nfs', 'nfs4']
+# TODO: need to check that client & server support krb before this is implemented
+# - name: add sec=krb5:krb5i:krb5p to nfs mounts
+#   include_tasks: fstab-opt-present.yml
+#   vars:
+#     point: "{{item.mount_point}}"
+#     opt: sec=krb5:krb5i:krb5p
+#   with_items: "{{fstab.fstab}}"
+#   when:
+#       - item.fstype in ['nfs', 'nfs4']
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-73161 (SV-87813r1_rule)
@@ -58,7 +59,7 @@
   vars:
     point: "{{item.mount_point}}"
     opt: noexec
-  with_items: "{{fstab}}"
+  with_items: "{{fstab.fstab}}"
   when:
       - item.fstype in fs_types_network
 
@@ -69,7 +70,7 @@
   vars:
     point: "{{item.mount_point}}"
     opt: nodev
-  with_items: "{{fstab}}"
+  with_items: "{{fstab.fstab}}"
   when:
       - item.fstype in ['nfs', 'nfs4']
 

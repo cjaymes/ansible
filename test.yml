@@ -3,4 +3,4 @@
 - hosts:
     - stig-rhel7
   roles:
-      - harden_fs
+      - harden_fstab
