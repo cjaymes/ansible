@@ -2,16 +2,20 @@
   fstab_dump:
   register: fstab
 
-- name: fstab
-  debug:
-    msg: '{{fstab}}'
+# - name: fstab
+#   debug:
+#     msg: '{{fstab}}'
 
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72041 (SV-86665r3_rule)
 - name: add nosuid to /home
   include_tasks: fstab-opt-present.yml
   vars:
     point: /home
     opt: nosuid
 
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72043 (SV-86667r1_rule)
 - name: add nosuid to removable
   include_tasks: fstab-opt-present.yml
   vars:
@@ -21,6 +25,8 @@
   when:
       - item.fstype in fs_types_removable
 
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72045 (SV-86669r1_rule)
 - name: add nosuid to network
   include_tasks: fstab-opt-present.yml
   vars:
@@ -30,16 +36,8 @@
   when:
       - item.fstype in fs_types_network
 
-# NOTE: not sure this is a really good idea, despite STIG direction. This uses
-# memory in RAM for /tmp instead of the hard drive. The intent of this would be
-# speed, not security. The tmpfs could be grown to cause memory allocation
-# failures
-- name: enable (and start) tmp.mount
-  systemd:
-      name: tmp.mount
-      enabled: yes
-      state: started
-
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72311 (SV-86935r3_rule)
 - name: add sec=krb5:krb5i:krb5p to nfs mounts
   include_tasks: fstab-opt-present.yml
   vars:
@@ -49,6 +47,8 @@
   when:
       - item.fstype in ['nfs', 'nfs4']
 
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-73161 (SV-87813r1_rule)
 - name: add noexec to network
   include_tasks: fstab-opt-present.yml
   vars:
