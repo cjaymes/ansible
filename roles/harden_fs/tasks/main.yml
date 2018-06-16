@@ -10,36 +10,36 @@
 #     warn: False
 #   changed_when: False
 #   loop: "{{rpm_verify_all_dump.rpm_verify_all}}"
-#   register: filesystem_file_pkgs
+#   register: fs_file_pkgs
 #
 # - name: combine pkg & verify
 #   set_fact:
-#     filesystem_pkg_V: "{{ filesystem_pkg_V | default([]) + [ { 'package': item.stdout, 'verify': item.item } ] }}"
+#     fs_pkg_V: "{{ fs_pkg_V | default([]) + [ { 'package': item.stdout, 'verify': item.item } ] }}"
 #   when: not item is skipped
-#   loop: "{{filesystem_file_pkgs.results}}"
+#   loop: "{{fs_file_pkgs.results}}"
 #
 # - name: collect package query dump
 #   rpm_query_dump:
 #       name: "{{item.package}}"
 #       path: "{{item.verify.path}}"
-#   loop: "{{filesystem_pkg_V}}"
+#   loop: "{{fs_pkg_V}}"
 #   register: rpm_query_dump
 #
 # - name: combine pkg, verify, query
 #   set_fact:
-#     filesystem_pkg_V_q: "{{ filesystem_pkg_V_q | default([]) + [ { 'package': item.item.package, 'verify': item.item.verify, 'query': item.rpm_query_dump[0] } ] }}"
+#     fs_pkg_V_q: "{{ fs_pkg_V_q | default([]) + [ { 'package': item.item.package, 'verify': item.item.verify, 'query': item.rpm_query_dump[0] } ] }}"
 #   loop: "{{rpm_query_dump.results}}"
 #
 # - name: collect file stat
 #   stat:
 #       checksum_algorithm: "{{rpm_checksum_algorithm}}"
 #       path: "{{item.verify.path}}"
-#   loop: "{{filesystem_pkg_V_q}}"
+#   loop: "{{fs_pkg_V_q}}"
 #   register: stat
 #
 # - name: combine pkg, verify, query, stat
 #   set_fact:
-#     filesystem_pkg_V_q_s: "{{ filesystem_pkg_V_q_s | default([]) + [ { 'package': item.item.package, 'verify': item.item.verify, 'query': item.item.query, 'stat': item.stat } ] }}"
+#     fs_pkg_V_q_s: "{{ fs_pkg_V_q_s | default([]) + [ { 'package': item.item.package, 'verify': item.item.verify, 'query': item.item.query, 'stat': item.stat } ] }}"
 #   loop: "{{stat.results}}"
 #
 # # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
@@ -48,7 +48,7 @@
 #   file:
 #       path: "{{item.verify.path}}"
 #       mode: "{{item.query.mode_permissions}}"
-#   loop: "{{filesystem_pkg_V_q_s}}"
+#   loop: "{{fs_pkg_V_q_s}}"
 #   when:
 #       - item.verify.mode_differs
 #       - item.stat.mode is more_permissive(item.query.mode_permissions)
@@ -57,7 +57,7 @@
 #   file:
 #       path: "{{item.verify.path}}"
 #       owner: "{{item.query.owner}}"
-#   loop: "{{filesystem_pkg_V_q_s}}"
+#   loop: "{{fs_pkg_V_q_s}}"
 #   when:
 #       - item.verify.owner_differs
 #       - item.stat.pw_name != item.query.owner
@@ -66,7 +66,7 @@
 #   file:
 #       path: "{{item.verify.path}}"
 #       group: "{{item.query.group}}"
-#   loop: "{{filesystem_pkg_V_q_s}}"
+#   loop: "{{fs_pkg_V_q_s}}"
 #   when:
 #       - item.verify.group_differs
 #       - item.stat.gr_name != item.query.group
@@ -79,20 +79,20 @@
 #   command: "yum reinstall -y {{item.package}}"
 #   args:
 #       warn: False
-#   loop: "{{filesystem_pkg_V_q_s}}"
+#   loop: "{{fs_pkg_V_q_s}}"
 #   when:
 #       - item.verify.digest_differs
 #       - not item.verify.is_config
 #       - not item.verify.is_ghost
-#   register: filesystem_reinstall
+#   register: fs_reinstall
 #   failed_when: False
-#   changed_when: filesystem_reinstall.rc == 0
+#   changed_when: fs_reinstall.rc == 0
 #
 # # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # # V-72007 (SV-86631r2_rule)
 # - name: collect unowned files
 #   shell: find / -fstype xfs -nouser 2>/dev/null
-#   register: filesystem_unowned
+#   register: fs_unowned
 #   changed_when: False
 #   failed_when: False
 #
@@ -100,13 +100,13 @@
 #   file:
 #       path: "{{item}}"
 #       owner: root
-#   loop: "{{filesystem_unowned.stdout_lines}}"
+#   loop: "{{fs_unowned.stdout_lines}}"
 #
 # # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # # V-72009 (SV-86633r2_rule)
 # - name: collect group unowned files
 #   shell: find / -fstype xfs -nogroup 2>/dev/null
-#   register: filesystem_group_unowned
+#   register: fs_group_unowned
 #   changed_when: False
 #   failed_when: False
 #

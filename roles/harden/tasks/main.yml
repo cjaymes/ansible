@@ -11,8 +11,8 @@
     - harden_bluetooth
     - harden_cron
     - harden_dccp
-    - harden_filesystems
     - harden_firewalld
+    - harden_fs
     - harden_fstab
     - harden_gdm
     - harden_gnome

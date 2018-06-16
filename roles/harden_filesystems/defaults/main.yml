@@ -1,1 +1,0 @@
-filesystem_file_contexts: "/etc/selinux/{{selinux_policy}}/contexts/files/file_contexts"
