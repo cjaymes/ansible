@@ -157,7 +157,7 @@
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72047 (SV-86671r3_rule)
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
-V-38699 (SV-50500r2_rule)
+# V-38699 (SV-50500r2_rule)
 - name: collect world writable dirs
   command: "find / -xdev -perm -002 -type d {{fs_find_fstypes}}"
   register: fs_world_writable
@@ -185,6 +185,12 @@ V-38699 (SV-50500r2_rule)
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72065 (SV-86689r1_rule)
+
+# NOTE: not sure this is a really good idea, despite STIG direction. This uses
+# memory in RAM for /tmp instead of the hard drive. The intent of this would be
+# speed, not security. The tmpfs could be grown to cause memory allocation
+# failures
+
 - name: start, enable tmp.mount
   service:
       name: tmp.mount
