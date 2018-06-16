@@ -42,6 +42,10 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71849 (SV-86473r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38663 (SV-50464r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38452 (SV-50252r2_rule)
 - name: reset file user permissions
   file:
       path: "{{item.verify.path}}"
@@ -51,6 +55,12 @@
       - item.verify.mode_differs
       - item.stat.mode is more_permissive(item.query.mode_permissions)
 
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71849 (SV-86473r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38664 (SV-50465r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38454 (SV-50254r2_rule)
 - name: reset file owner
   file:
       path: "{{item.verify.path}}"
@@ -60,6 +70,12 @@
       - item.verify.owner_differs
       - item.stat.pw_name != item.query.owner
 
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-71849 (SV-86473r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38665 (SV-50466r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38453 (SV-50253r2_rule)
 - name: reset file group
   file:
       path: "{{item.verify.path}}"
@@ -71,6 +87,10 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-71855 (SV-86479r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38637 (SV-50438r2_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38447 (SV-50247r4_rule)
 
 # TODO add check for package in repo. if it doesn't exist this errors
 - name: reinstall for checksum mismatch
