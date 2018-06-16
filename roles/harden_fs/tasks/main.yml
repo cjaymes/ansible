@@ -132,30 +132,38 @@
 #       - fs_unlabeled_devs.stdout != ''
 #   register: fs_relabel
 #   changed_when: fs_relabel.stdout != ''
-
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-72047 (SV-86671r3_rule)
-- name: collect world writable dirs
-  command: find / -xdev -perm -002 -type d -fstype xfs
-  register: fs_world_writable
-  changed_when: False
-
-- name: collect stat of dirs
-  stat:
-      path: "{{item}}"
-  loop: "{{fs_world_writable.stdout_lines}}"
-  register: fs_ww_stat
-
-- name: reset owner if not in list
-  file:
-      path: "{{item.item}}"
-      owner: root
-  loop: "{{fs_ww_stat.results}}"
-  when: item.stat.pw_name not in fs_world_writable_users
-
-- name: reset group if not in list
-  file:
-      path: "{{item.item}}"
-      group: root
-  loop: "{{fs_ww_stat.results}}"
-  when: item.stat.gr_name not in fs_world_writable_groups
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-72047 (SV-86671r3_rule)
+# - name: collect world writable dirs
+#   command: find / -xdev -perm -002 -type d -fstype xfs
+#   register: fs_world_writable
+#   changed_when: False
+#
+# - name: collect stat of dirs
+#   stat:
+#       path: "{{item}}"
+#   loop: "{{fs_world_writable.stdout_lines}}"
+#   register: fs_ww_stat
+#
+# - name: reset owner if not in list
+#   file:
+#       path: "{{item.item}}"
+#       owner: root
+#   loop: "{{fs_ww_stat.results}}"
+#   when: item.stat.pw_name not in fs_world_writable_users
+#
+# - name: reset group if not in list
+#   file:
+#       path: "{{item.item}}"
+#       group: root
+#   loop: "{{fs_ww_stat.results}}"
+#   when: item.stat.gr_name not in fs_world_writable_groups
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-72065 (SV-86689r1_rule)
+# - name: start, enable tmp.mount
+#   service:
+#       name: tmp.mount
+#       enabled: yes
+#       state: started
