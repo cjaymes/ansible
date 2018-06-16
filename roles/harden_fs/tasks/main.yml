@@ -1,201 +1,265 @@
-- name: verify packages
-  rpm_verify_all_dump:
-  register: rpm_verify_all_dump
+# - name: verify packages
+#   rpm_verify_all_dump:
+#   register: rpm_verify_all_dump
+#
+# - name: collect modified packages
+#   command: "rpm -qf {{item.path}}"
+#   args:
+#     warn: False
+#   changed_when: False
+#   loop: "{{rpm_verify_all_dump.rpm_verify_all}}"
+#   register: fs_file_pkgs
+#
+# - name: combine pkg & verify
+#   set_fact:
+#     fs_pkg_V: "{{ fs_pkg_V | default([]) + [ { 'package': item.stdout, 'verify': item.item } ] }}"
+#   when: not item is skipped
+#   loop: "{{fs_file_pkgs.results}}"
+#
+# - name: collect package query dump
+#   rpm_query_dump:
+#       name: "{{item.package}}"
+#       path: "{{item.verify.path}}"
+#   loop: "{{fs_pkg_V}}"
+#   register: rpm_query_dump
+#
+# - name: combine pkg, verify, query
+#   set_fact:
+#     fs_pkg_V_q: "{{ fs_pkg_V_q | default([]) + [ { 'package': item.item.package, 'verify': item.item.verify, 'query': item.rpm_query_dump[0] } ] }}"
+#   loop: "{{rpm_query_dump.results}}"
+#
+# - name: collect file stat
+#   stat:
+#       checksum_algorithm: "{{rpm_checksum_algorithm}}"
+#       path: "{{item.verify.path}}"
+#   loop: "{{fs_pkg_V_q}}"
+#   register: stat
+#
+# - name: combine pkg, verify, query, stat
+#   set_fact:
+#     fs_pkg_V_q_s: "{{ fs_pkg_V_q_s | default([]) + [ { 'package': item.item.package, 'verify': item.item.verify, 'query': item.item.query, 'stat': item.stat } ] }}"
+#   loop: "{{stat.results}}"
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-71849 (SV-86473r2_rule)
+# # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# # V-38663 (SV-50464r1_rule)
+# # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# # V-38452 (SV-50252r2_rule)
+# # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# # V-38465 (SV-50265r3_rule)
+# # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# # V-38469 (SV-50269r3_rule)
+# - name: reset file permissions
+#   file:
+#       path: "{{item.verify.path}}"
+#       mode: "{{item.query.mode_permissions}}"
+#   loop: "{{fs_pkg_V_q_s}}"
+#   when:
+#       - item.verify.mode_differs
+#       - item.stat.mode is more_permissive(item.query.mode_permissions)
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-71849 (SV-86473r2_rule)
+# # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# # V-38664 (SV-50465r1_rule)
+# # V-38454 (SV-50254r2_rule)
+# # V-38472 (SV-50272r1_rule)
+# - name: reset file owner
+#   file:
+#       path: "{{item.verify.path}}"
+#       owner: "{{item.query.owner}}"
+#   loop: "{{fs_pkg_V_q_s}}"
+#   when:
+#       - item.verify.owner_differs
+#       - item.stat.pw_name != item.query.owner
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-71849 (SV-86473r2_rule)
+# # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# # V-38665 (SV-50466r1_rule)
+# # V-38466 (SV-50266r4_rule)
+# # V-38453 (SV-50253r2_rule)
+# - name: reset file group
+#   file:
+#       path: "{{item.verify.path}}"
+#       group: "{{item.query.group}}"
+#   loop: "{{fs_pkg_V_q_s}}"
+#   when:
+#       - item.verify.group_differs
+#       - item.stat.gr_name != item.query.group
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-71855 (SV-86479r2_rule)
+# # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# # V-38637 (SV-50438r2_rule)
+# # V-38447 (SV-50247r4_rule)
+#
+# # TODO add check for package in repo. if it doesn't exist this errors
+# - name: reinstall for checksum mismatch
+#   command: "yum reinstall -y {{item.package}}"
+#   args:
+#       warn: False
+#   loop: "{{fs_pkg_V_q_s}}"
+#   when:
+#       - item.verify.digest_differs
+#       - not item.verify.is_config
+#       - not item.verify.is_ghost
+#   register: fs_reinstall
+#   failed_when: False
+#   changed_when: fs_reinstall.rc == 0
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-72007 (SV-86631r2_rule)
+# - name: collect unowned files
+#   command: "find / {{fs_find_fstypes}} -nouser"
+#   register: fs_unowned
+#   changed_when: False
+#   failed_when: False
+#
+# - name: reset owner of unowned files
+#   file:
+#       path: "{{item}}"
+#       owner: root
+#   loop: "{{fs_unowned.stdout_lines}}"
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-72009 (SV-86633r2_rule)
+# - name: collect group unowned files
+#   command: "find / {{fs_find_fstypes}} -nogroup"
+#   register: fs_group_unowned
+#   changed_when: False
+#   failed_when: False
+#
+# - name: reset owner of group unowned files
+#   file:
+#       path: "{{item}}"
+#       group: root
+#   loop: "{{fs_group_unowned.stdout_lines}}"
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-72039 (SV-86663r1_rule)
+# - name: collect unlabeled devices
+#   shell: find /dev \( -context *:device_t:* -o -context *:unlabeled_t:* \) \( -type c -o -type b \) -printf "%p %Z\n"
+#   register: fs_unlabeled_devs
+#   changed_when: False
+#   failed_when: False
+#
+# # NOTE: the STIG says to reinstall packages containing /dev files, but they
+# # aren't actually installed via a package, so we re-label from policy instead
+# - name: relabel /dev
+#   command: "setfiles -v {{fs_file_contexts}} /dev"
+#   when:
+#       - fs_unlabeled_devs.stdout != ''
+#   register: fs_relabel
+#   changed_when: fs_relabel.stdout != ''
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-72047 (SV-86671r3_rule)
+# # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38699 (SV-50500r2_rule)
+# - name: collect world writable dirs
+#   command: "find / -xdev -perm -002 -type d {{fs_find_fstypes}}"
+#   register: fs_world_writable
+#   changed_when: False
+#
+# - name: collect stat of dirs
+#   stat:
+#       path: "{{item}}"
+#   loop: "{{fs_world_writable.stdout_lines}}"
+#   register: fs_ww_stat
+#
+# - name: reset owner if not in list
+#   file:
+#       path: "{{item.item}}"
+#       owner: root
+#   loop: "{{fs_ww_stat.results}}"
+#   when: item.stat.pw_name not in fs_world_writable_users
+#
+# - name: reset group if not in list
+#   file:
+#       path: "{{item.item}}"
+#       group: root
+#   loop: "{{fs_ww_stat.results}}"
+#   when: item.stat.gr_name not in fs_world_writable_groups
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-72065 (SV-86689r1_rule)
+# - name: start, enable tmp.mount
+#   service:
+#       name: tmp.mount
+#       enabled: yes
+#       state: started
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-72277 (SV-86901r1_rule)
+# - name: remove .shosts files
+#   command: find / -name '*.shosts' -exec rm -vf {} ;
+#   register: fs_shosts_rm
+#   changed_when: fs_shosts_rm.stdout != ''
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-72279 (SV-86903r1_rule)
+# - name: remove shosts.equiv files
+#   command: find / -name shosts.equiv -exec rm -vf {} ;
+#   register: fs_shosts_equiv_rm
+#   changed_when: fs_shosts_equiv_rm.stdout != ''
+#
 
-- name: collect modified packages
-  command: "rpm -qf {{item.path}}"
-  args:
-    warn: False
+# # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38491 (SV-50292r1_rule)
+- name: remove .rhosts files
+  command: find / -name '.rhosts' -exec rm -vf {} ;
+  register: fs_rhosts_rm
+  changed_when: fs_rhosts_rm.stdout != ''
+
+- name: remove hosts.equiv files
+  command: find / -name hosts.equiv -exec rm -vf {} ;
+  register: fs_hosts_equiv_rm
+  changed_when: fs_hosts_equiv_rm.stdout != ''
+
+# # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38619 (SV-50420r2_rule)
+- name: remove .netrc files
+  command: find /root /home -xdev -name .netrc -exec rm -vf {} ;
+  register: fs_netrc_rm
+  changed_when: fs_netrc_rm.stdout != ''
+
+# # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38643 (SV-50444r3_rule)
+- name: collect world writable files
+  command: "find / -xdev -perm -002 -type f {{fs_find_fstypes}}"
+  register: fs_ww_files
   changed_when: False
-  loop: "{{rpm_verify_all_dump.rpm_verify_all}}"
-  register: fs_file_pkgs
 
-- name: combine pkg & verify
-  set_fact:
-    fs_pkg_V: "{{ fs_pkg_V | default([]) + [ { 'package': item.stdout, 'verify': item.item } ] }}"
-  when: not item is skipped
-  loop: "{{fs_file_pkgs.results}}"
-
-- name: collect package query dump
-  rpm_query_dump:
-      name: "{{item.package}}"
-      path: "{{item.verify.path}}"
-  loop: "{{fs_pkg_V}}"
-  register: rpm_query_dump
-
-- name: combine pkg, verify, query
-  set_fact:
-    fs_pkg_V_q: "{{ fs_pkg_V_q | default([]) + [ { 'package': item.item.package, 'verify': item.item.verify, 'query': item.rpm_query_dump[0] } ] }}"
-  loop: "{{rpm_query_dump.results}}"
-
-- name: collect file stat
-  stat:
-      checksum_algorithm: "{{rpm_checksum_algorithm}}"
-      path: "{{item.verify.path}}"
-  loop: "{{fs_pkg_V_q}}"
-  register: stat
-
-- name: combine pkg, verify, query, stat
-  set_fact:
-    fs_pkg_V_q_s: "{{ fs_pkg_V_q_s | default([]) + [ { 'package': item.item.package, 'verify': item.item.verify, 'query': item.item.query, 'stat': item.stat } ] }}"
-  loop: "{{stat.results}}"
-
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-71849 (SV-86473r2_rule)
-# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
-# V-38663 (SV-50464r1_rule)
-# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
-# V-38452 (SV-50252r2_rule)
-- name: reset file user permissions
-  file:
-      path: "{{item.verify.path}}"
-      mode: "{{item.query.mode_permissions}}"
-  loop: "{{fs_pkg_V_q_s}}"
-  when:
-      - item.verify.mode_differs
-      - item.stat.mode is more_permissive(item.query.mode_permissions)
-
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-71849 (SV-86473r2_rule)
-# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
-# V-38664 (SV-50465r1_rule)
-# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
-# V-38454 (SV-50254r2_rule)
-- name: reset file owner
-  file:
-      path: "{{item.verify.path}}"
-      owner: "{{item.query.owner}}"
-  loop: "{{fs_pkg_V_q_s}}"
-  when:
-      - item.verify.owner_differs
-      - item.stat.pw_name != item.query.owner
-
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-71849 (SV-86473r2_rule)
-# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
-# V-38665 (SV-50466r1_rule)
-# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
-# V-38453 (SV-50253r2_rule)
-- name: reset file group
-  file:
-      path: "{{item.verify.path}}"
-      group: "{{item.query.group}}"
-  loop: "{{fs_pkg_V_q_s}}"
-  when:
-      - item.verify.group_differs
-      - item.stat.gr_name != item.query.group
-
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-71855 (SV-86479r2_rule)
-# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
-# V-38637 (SV-50438r2_rule)
-# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
-# V-38447 (SV-50247r4_rule)
-
-# TODO add check for package in repo. if it doesn't exist this errors
-- name: reinstall for checksum mismatch
-  command: "yum reinstall -y {{item.package}}"
-  args:
-      warn: False
-  loop: "{{fs_pkg_V_q_s}}"
-  when:
-      - item.verify.digest_differs
-      - not item.verify.is_config
-      - not item.verify.is_ghost
-  register: fs_reinstall
-  failed_when: False
-  changed_when: fs_reinstall.rc == 0
-
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-72007 (SV-86631r2_rule)
-- name: collect unowned files
-  command: "find / {{fs_find_fstypes}} -nouser"
-  register: fs_unowned
-  changed_when: False
-  failed_when: False
-
-- name: reset owner of unowned files
+- name: remove other write
   file:
       path: "{{item}}"
-      owner: root
-  loop: "{{fs_unowned.stdout_lines}}"
+      owner: o-w
+  loop: "{{fs_ww_files.stdout_lines}}"
 
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-72009 (SV-86633r2_rule)
-- name: collect group unowned files
-  command: "find / {{fs_find_fstypes}} -nogroup"
-  register: fs_group_unowned
+# # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38697 (SV-50498r2_rule)
+- name: collect world writable dirs w/o sticky
+  command: "find / -xdev -type d -perm -002 \\! -perm -1000 {{fs_find_fstypes}}"
+  register: fs_ww_nonsticky_dirs
   changed_when: False
-  failed_when: False
 
-- name: reset owner of group unowned files
+- name: set sticky bit
   file:
       path: "{{item}}"
-      group: root
-  loop: "{{fs_group_unowned.stdout_lines}}"
+      owner: +t
+  loop: "{{fs_ww_nonsticky_dirs.stdout_lines}}"
 
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-72039 (SV-86663r1_rule)
-- name: collect unlabled devices
-  shell: find /dev \( -context *:device_t:* -o -context *:unlabeled_t:* \) \( -type c -o -type b \) -printf "%p %Z\n"
-  register: fs_unlabeled_devs
-  changed_when: False
-  failed_when: False
-
-# NOTE: the STIG says to reinstall packages containing /dev files, but they
-# aren't actually installed via a package, so we re-label instead
-- name: relabel /dev
-  command: "setfiles -v {{fs_file_contexts}} /dev"
-  when:
-      - fs_unlabeled_devs.stdout != ''
-  register: fs_relabel
-  changed_when: fs_relabel.stdout != ''
-
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-72047 (SV-86671r3_rule)
-- name: collect world writable dirs
-  command: "find / -xdev -perm -002 -type d {{fs_find_fstypes}}"
-  register: fs_world_writable
+# # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38699 (SV-50500r2_rule)
+- name: collect world writable dirs w/o sticky
+  command: "find / -xdev -type d -perm -002 \\! -perm -1000 {{fs_find_fstypes}}"
+  register: fs_ww_nonsticky_dirs
   changed_when: False
 
-- name: collect stat of dirs
-  stat:
+- name: set sticky bit
+  file:
       path: "{{item}}"
-  loop: "{{fs_world_writable.stdout_lines}}"
-  register: fs_ww_stat
-
-- name: reset owner if not in list
-  file:
-      path: "{{item.item}}"
-      owner: root
-  loop: "{{fs_ww_stat.results}}"
-  when: item.stat.pw_name not in fs_world_writable_users
-
-- name: reset group if not in list
-  file:
-      path: "{{item.item}}"
-      group: root
-  loop: "{{fs_ww_stat.results}}"
-  when: item.stat.gr_name not in fs_world_writable_groups
-
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-72065 (SV-86689r1_rule)
-- name: start, enable tmp.mount
-  service:
-      name: tmp.mount
-      enabled: yes
-      state: started
-
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-72277 (SV-86901r1_rule)
-- name: remove .shosts files
-  command: find / -name '*.shosts' -exec rm -vf {} ;
-  register: fs_shosts_rm
-  changed_when: fs_shosts_rm.stdout != ''
-
-# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-72279 (SV-86903r1_rule)
-- name: remove shosts.equiv files
-  command: find / -name shosts.equiv -exec rm -vf {} ;
-  register: fs_shosts_equiv_rm
-  changed_when: fs_shosts_equiv_rm.stdout != ''
+      owner: +t
+  loop: "{{fs_ww_nonsticky_dirs.stdout_lines}}"

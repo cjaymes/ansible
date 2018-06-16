@@ -10,4 +10,12 @@ fs_world_writable_groups:
     - sys
     - bin
 
-fs_find_fstypes: "\\( -fstype {{fs_types_local.join(' -o -fstype ')}} \\)"
+fs_find_fstypes: "\\( -fstype {{fs_types_local|join(' -o -fstype ')}} \\)"
+
+fs_lib_dirs:
+    - /lib
+    - /lib64
+    - /usr/lib
+    - /usr/lib64
+    - /usr/local/lib
+    - /usr/local/lib64
