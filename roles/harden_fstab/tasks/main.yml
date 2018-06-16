@@ -27,6 +27,8 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72045 (SV-86669r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38654 (SV-50455r2_rule)
 - name: add nosuid to network
   include_tasks: fstab-opt-present.yml
   vars:
@@ -49,6 +51,8 @@
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-73161 (SV-87813r1_rule)
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38655 (SV-50456r1_rule)
 - name: add noexec to network
   include_tasks: fstab-opt-present.yml
   vars:
@@ -57,3 +61,22 @@
   with_items: "{{fstab}}"
   when:
       - item.fstype in fs_types_network
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-38652 (SV-50453r2_rule)
+- name: add nodev to nfs mounts
+  include_tasks: fstab-opt-present.yml
+  vars:
+    point: "{{item.mount_point}}"
+    opt: nodev
+  with_items: "{{fstab}}"
+  when:
+      - item.fstype in ['nfs', 'nfs4']
+
+# Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
+# V-57569 (SV-71919r1_rule)
+- name: add noexec to /tmp
+  include_tasks: fstab-opt-present.yml
+  vars:
+    point: /tmp
+    opt: noexec
