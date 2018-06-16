@@ -19,7 +19,7 @@
     opt: nosuid
   with_items: "{{fstab}}"
   when:
-      - item.fstype in filesystems_types_removable
+      - item.fstype in fs_types_removable
 
 - name: add nosuid to network
   include_tasks: fstab-opt-present.yml
@@ -28,7 +28,7 @@
     opt: nosuid
   with_items: "{{fstab}}"
   when:
-      - item.fstype in filesystems_types_network
+      - item.fstype in fs_types_network
 
 # NOTE: not sure this is a really good idea, despite STIG direction. This uses
 # memory in RAM for /tmp instead of the hard drive. The intent of this would be
@@ -56,4 +56,4 @@
     opt: noexec
   with_items: "{{fstab}}"
   when:
-      - item.fstype in filesystems_types_network
+      - item.fstype in fs_types_network

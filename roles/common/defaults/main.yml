@@ -1,6 +1,48 @@
 ### Constants; probably shouldn't be overriden
+
 ansible_dependencies:
     - libselinux-python
+
+fs_types_local:
+    - btrfs
+    - ext2
+    - ext3
+    - ext4
+    - reiserfs
+    - xfs
+    - squashfs
+    - romfs
+    - ramfs
+    - fuse
+fs_types_network:
+    - cifs
+    - nfs
+    - nfs4
+    - smbfs
+fs_types_removable:
+    - iso9660
+    - msdos
+    - vfat
+    - udf
+    - ubifs         # flash filesystem
+    - jffs2         # flash filesystem
+fs_types_pseudo:
+    - sysfs
+    - rootfs
+    - proc
+    - cgroup
+    - cpuset
+    - devtmpfs
+    - debugfs
+    - securityfs
+    - configfs
+    - devpts
+    - selinuxfs
+    - mqueue
+    - hugetlbfs
+    - systemd-1
+
+rpm_checksum_algorithm: sha256
 
 ### Variables; could/should be overriden depending on environment
 
@@ -28,8 +70,6 @@ dns_upstream:
     - 4.2.2.2
 
 mail_server: "mail.{domain}"
-
-rpm_checksum_algorithm: sha256
 
 # tcp or udp
 syslog_protocol: tcp
