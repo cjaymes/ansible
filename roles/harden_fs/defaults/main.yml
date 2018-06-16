@@ -1,1 +1,11 @@
 fs_file_contexts: "/etc/selinux/{{selinux_policy}}/contexts/files/file_contexts"
+
+fs_world_writable_users:
+    - root
+    - sys
+    - bin
+
+fs_world_writable_groups:
+    - root
+    - sys
+    - bin
