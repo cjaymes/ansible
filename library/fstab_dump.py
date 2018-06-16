@@ -86,15 +86,17 @@ def main():
         module.fail_json(msg='cat /etc/fstab failed with exception: {0}'.format(exception))
 
     for line in out.splitlines():
-        m = re.match(r'^\s*#')
-        if m:
+        if re.match(r'^\s*#', line):
             continue
 
         line = line.strip()
 
+        if line == '':
+            continue
+
         record = zip(
             ('device', 'mount_point', 'fstype', 'options', 'dump', 'pass'),
-            re.split(r'\s+', line.strip(), maxsplit=6)
+            re.split(r'\s+', line, maxsplit=6)
         )
         record = dict(record)
         record['dump'] = int(record['dump'])
