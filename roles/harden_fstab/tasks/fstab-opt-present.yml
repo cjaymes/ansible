@@ -11,4 +11,6 @@
 
 - name: 'If {{ point }} changed, remount'
   command: 'mount {{ point }} -o remount'
+  args:
+      warn: False
   when: fstab_lif.changed
