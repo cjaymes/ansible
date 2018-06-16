@@ -167,10 +167,17 @@
 #       name: tmp.mount
 #       enabled: yes
 #       state: started
+#
+# # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# # V-72277 (SV-86901r1_rule)
+# - name: remove .shosts files
+#   command: find / -name '*.shosts' -exec rm -vf {} ;
+#   register: fs_shosts_rm
+#   changed_when: fs_shosts_rm.stdout != ''
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
-# V-72277 (SV-86901r1_rule)
-- name: remove .shosts files
-  command: find / -name '*.shosts' -exec rm -vf {} ;
-  register: fs_shosts_rm
-  changed_when: fs_shosts_rm.stdout != ''
+# V-72279 (SV-86903r1_rule)
+- name: remove shosts.equiv files
+  command: find / -name shosts.equiv -exec rm -vf {} ;
+  register: fs_shosts_equiv_rm
+  changed_when: fs_shosts_equiv_rm.stdout != ''
