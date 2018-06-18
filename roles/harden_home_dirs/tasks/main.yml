@@ -22,6 +22,7 @@
   file:
       path: "{{item.item.home}}"
       owner: "{{item.item.login}}"
+      state: directory
   loop: "{{interactive_home_stat.results}}"
   when:
       - not item is skipped
@@ -33,6 +34,7 @@
   file:
       path: "{{item.item.home}}"
       group: "{{item.item.gid}}"
+      state: directory
   loop: "{{interactive_home_stat.results}}"
   when:
       - not item is skipped
