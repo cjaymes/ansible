@@ -3,3 +3,6 @@
       path: "{{item.home}}"
   loop: "{{passwd.passwd}}"
   when: item.login in interactive_accounts
+  register: interactive_home_stat
+
+- name: 
