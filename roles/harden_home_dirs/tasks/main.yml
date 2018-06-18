@@ -9,9 +9,20 @@
 # V-72017 (SV-86641r2_rule)
 - name: "check stat mode is <= {{home_dirs_perm|oct}}"
   file:
-      path: "{{item.stat.path}}"
+      path: "{{item.item.home}}"
       mode: "{{home_dirs_perm}}"
   loop: "{{interactive_home_stat.results}}"
   when:
       - not item is skipped
       - item.stat.mode is perm_gt(home_dirs_perm)
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72019 (SV-86643r4_rule)
+- name: "check stat owner is user"
+  file:
+      path: "{{item.item.home}}"
+      owner: "{{item.item.login}}"
+  loop: "{{interactive_home_stat.results}}"
+  when:
+      - not item is skipped
+      - item.stat.pw_name != item.item.login
