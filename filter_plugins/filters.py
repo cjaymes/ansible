@@ -21,9 +21,15 @@ def duplicates(list_):
     except Exception, e:
         raise errors.AnsibleFilterError('Filter error: %s, list_=%s' % (str(e),str(list_)) )
 
+def oct_(int_):
+    try:
+        return oct(int_)
+    except Exception, e:
+        raise errors.AnsibleFilterError('Filter error: %s, list_=%s' % (str(e),str(list_)) )
 
 class FilterModule(object):
     def filters(self):
         return {
             'duplicates': duplicates,
+            'oct': oct_,
         }
