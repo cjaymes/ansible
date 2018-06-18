@@ -26,3 +26,14 @@
   when:
       - not item is skipped
       - item.stat.pw_name != item.item.login
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72021 (SV-86645r4_rule)
+- name: "check stat group is user's primary group"
+  file:
+      path: "{{item.item.home}}"
+      group: "{{item.item.gid}}"
+  loop: "{{interactive_home_stat.results}}"
+  when:
+      - not item is skipped
+      - item.stat.gid != item.item.gid
