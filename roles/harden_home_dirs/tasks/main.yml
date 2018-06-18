@@ -1,0 +1,5 @@
+- name: collect interactive user home dir stat
+  stat:
+      path: "{{item.home}}"
+  loop: "{{passwd.passwd}}"
+  when: item.login in interactive_accounts

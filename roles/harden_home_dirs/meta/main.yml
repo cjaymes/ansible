@@ -1,3 +1,4 @@
 ---
 dependencies:
   - { role: harden_common }
+  - { role: parse_passwd }
