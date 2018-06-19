@@ -2,5 +2,8 @@
 
 - hosts:
     - stig-rhel7
-  roles:
-      - harden_home_dirs
+  tasks:
+      - users_dump:
+        register: users_dump
+      - debug:
+          msg: "{{users_dump}}"
