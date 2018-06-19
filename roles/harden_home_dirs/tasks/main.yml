@@ -1,8 +1,9 @@
 - name: collect interactive user home dir stat
   stat:
       path: "{{item.home}}"
-  loop: "{{passwd.passwd}}"
-  when: item.login in interactive_accounts
+  loop: "{{users_dump.users}}"
+  when:
+      - not item.is_sys
   register: interactive_home_stat
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
@@ -21,12 +22,12 @@
 - name: "check stat owner is user"
   file:
       path: "{{item.item.home}}"
-      owner: "{{item.item.login}}"
+      owner: "{{item.item.name}}"
       state: directory
   loop: "{{interactive_home_stat.results}}"
   when:
       - not item is skipped
-      - item.stat.pw_name != item.item.login
+      - item.stat.pw_name != item.item.name
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72021 (SV-86645r4_rule)
@@ -45,21 +46,14 @@
 - name: recurse directory for owner
   file:
       path: "{{item.home}}"
-      owner: "{{item.login}}"
+      owner: "{{item.name}}"
       state: directory
       recurse: yes
-  loop: "{{passwd.passwd}}"
+  loop: "{{users_dump.users}}"
   when:
-      - item.login in interactive_accounts
+      - not item.is_sys
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72025 (SV-86649r1_rule)
-- name: recurse directory for group
-  file:
-      path: "{{item.home}}"
-      owner: "{{item.login}}"
-      state: directory
-      recurse: yes
-  loop: "{{passwd.passwd}}"
-  when:
-      - item.login in interactive_accounts
+# TODO: this requires recursing through every file in the users home dir and
+# checking if the group owner is one of the user's groups
