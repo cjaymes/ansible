@@ -51,3 +51,15 @@
   loop: "{{passwd.passwd}}"
   when:
       - item.login in interactive_accounts
+
+# Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
+# V-72025 (SV-86649r1_rule)
+- name: recurse directory for group
+  file:
+      path: "{{item.home}}"
+      owner: "{{item.login}}"
+      state: directory
+      recurse: yes
+  loop: "{{passwd.passwd}}"
+  when:
+      - item.login in interactive_accounts
