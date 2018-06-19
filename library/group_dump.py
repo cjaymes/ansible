@@ -78,7 +78,7 @@ def main():
         if re.match(r'^\s*#', line):
             continue
 
-        record = zip(('group', 'passwd', 'gid'), line.split(':'))
+        record = zip(('group', 'passwd', 'gid', 'members'), line.split(':', 3))
         record = dict(record)
         record['gid'] = int(record['gid'])
         result['group'].append(record)
