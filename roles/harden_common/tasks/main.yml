@@ -1,0 +1,3 @@
+- name: collect user information
+  users_dump:
+  register: users_dump
