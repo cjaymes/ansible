@@ -5,9 +5,9 @@
 # V-38500 (SV-50301r2_rule)
 - name: renumber uid==0 accounts other than root
   include_tasks: rename_0_user.yml
-  loop: "{{ passwd.passwd|selectattr('uid', 'eq', 0)|selectattr('login', 'ne', 'root')|map(attribute='login')|list }}"
+  loop: "{{ users_dump.users|selectattr('uid', 'eq', 0)|selectattr('name', 'ne', 'root')|map(attribute='name')|list }}"
   loop_control:
-    loop_var: login
+    loop_var: user_name
   register: renamed
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
@@ -27,7 +27,7 @@
     group: "{{item.gid}}"
     mode: 0700
     state: directory
-  loop: "{{passwd.passwd|selectattr('uid', 'ge', 1000)|selectattr('uid', 'lt', 65000)|list}}"
+  loop: "{{users_dump.users|selectattr('uid', 'ge', 1000)|selectattr('uid', 'lt', 65000)|list}}"
 
 # Red Hat Enterprise Linux 6 Security Technical Implementation Guide :: Release: 18 Benchmark Date: 26 Jan 2018
 # V-38450 (SV-50250r1_rule), V-38451 (SV-50251r1_rule), V-38457 (SV-50257r1_rule)
