@@ -15,8 +15,10 @@
   group:
     name: "group{{item}}"
     state: present
-  when: group.group|selectattr('gid','eq',item)|list|length == 0
-  loop: "{{passwd.passwd|map(attribute='gid')|list}}"
+  when:
+      - not item in users_dump.groups_by_id
+  loop: "{{users_dump.users|map(attribute='gid')|list}}"
+  register: reload users_dump
 
 # Red Hat Enterprise Linux 7 Security Technical Implementation Guide :: Release: 4 Benchmark Date: 26 Jan 2018
 # V-72001 (SV-86625r1_rule)
