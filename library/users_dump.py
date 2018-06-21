@@ -10,26 +10,26 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-module: passwd_dump
-short_description: Parse the passwd file
+module: users_dump
+short_description: Collect user and group information from the system
 description:
-  - Get the parsed contents of the passwd file.
+  - Collect user and group information from the system.
 version_added: "2.5"
 author: "Casey Jaymes"
 options:
 '''
 
 EXAMPLES = '''
-    - name: parse passwd file
-      passwd_dump:
-      register: passwd
+    - name: Collect user and group information from the system
+      users_dump:
+      register: users_dump
     - debug:
-        msg: '{{passwd}}'
+        msg: '{{users_dump}}'
 '''
 
 RETURN = '''
 users:
-    description: data structure corresponding to the users on the system
+    description: data structure corresponding to the user and group information on the system
     returned: success
     type: list(dict)
     contains:
