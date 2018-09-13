@@ -1,0 +1,11 @@
+- name: install pkg
+  yum:
+      name: "{{item}}"
+      state: present
+  loop:
+      - zabbix-proxy-mysql
+
+- name: start service
+  service:
+      name: zabbix-server-mysql
+      state: started

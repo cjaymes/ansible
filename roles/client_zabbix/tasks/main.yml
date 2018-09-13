@@ -1,0 +1,11 @@
+- name: install agent pkg
+  yum:
+      name: "{{item}}"
+      state: present
+  loop:
+      - zabbix-agent
+
+- name: start service
+  service:
+      name: zabbix-agent
+      state: started
