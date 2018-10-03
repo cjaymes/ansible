@@ -1,3 +1,3 @@
 ---
 dependencies:
-  - { role: harden_common }
+  - { role: common_harden }
