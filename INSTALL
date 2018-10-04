@@ -1,0 +1,9 @@
+virtualenv venv
+
+. venv/bin/activate
+
+pip install -r requirements.txt
+
+#!!! customize your variables first
+
+ansible-playbook site.yml
