@@ -30,3 +30,15 @@
   rpm_key:
       key: "{{distribution_key_file}}"
       state: present
+
+- include_tasks: chrony.yml
+  when:
+    - "'ntp_servers' not in group_names"
+
+- include_tasks: postfix.yml
+  when:
+    - "'mail_servers' not in group_names"
+
+- include_tasks: repo.yml
+  when:
+    - "'repo_servers' not in group_names"

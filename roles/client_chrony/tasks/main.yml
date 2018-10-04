@@ -1,3 +1,0 @@
-- include_tasks: client_chrony.yml
-  when:
-      - "'ntp_servers' not in group_names"
