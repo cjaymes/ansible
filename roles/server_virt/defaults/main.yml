@@ -1,0 +1,417 @@
+virt_domain:
+    type: kvm
+    #name:
+    #uuid:
+    #genid:
+    #title:
+    #description:
+    #metadata:
+        #...
+    os:
+        - type:
+            type: hvm # The value of the type element
+            arch: x86_64
+            machine: pc-i440fx-rhel7.0.0
+        #TODO loader:
+        #TODO nvram
+        - boot:
+            dev: hd
+        #TODO bootmenu
+        #TODO smbios
+        #TODO bios
+        #TODO Host bootloader
+        #TODO Direct kernel boot
+        #TODO Container boot
+    #TODO sysinfo
+    vcpu:
+        total: 2 # The value of the vcpu element
+        current: 2
+        placement: static
+        #TODO cpuset
+        #TODO vcpus
+    #TODO iothreads
+    #TODO cputune
+    memory:
+        boot: 2
+        unit: GiB
+        current: 2
+        #TODO maxMemory
+    #TODO memoryBacking
+    #TODO memtune
+    #TODO numatune
+    #TODO blkiotune
+    resource:
+        - partition: /machine
+    cpu:
+        match: exact #|minimum|strict
+        check: full #|none|partial
+        mode: custom #|host-model|host-passthrough
+        model:
+            name: Nehalem # the value of the model element
+            fallback: forbid #|allow
+        #TODO vendor
+        #TODO topology
+        features:
+            - name: x2apic
+              policy: require #|force|optional|disable|forbid
+            - name: hypervisor
+              policy: require #|force|optional|disable|forbid
+        #TODO cache
+        #TODO numa
+    on_poweroff: destroy #|restart|preserve|rename-restart
+    on_reboot: restart #|destroy|preserve|rename-restart
+    on_crash: restart #|destroy|preserve|rename-restart|coredump-destroy|coredump-restart
+    #TODO on_lockfailure: poweroff|restart|pause|ignore
+    pm:
+        suspend_to_mem:
+            enabled: no
+        suspend_to_disk:
+            enabled: no
+    features:
+        #- pae:
+        - acpi:
+        - apic:
+        #-hap:
+            #state: on #|off
+        #- viridian:
+        #- privnet:
+        - hyperv:
+            relaxed:
+                state: on #|off
+            vapic:
+                state: on #|off
+            spinlocks:
+                state: on #|off
+                retries: 8191 # at least 4095
+            #vpindex:
+                #state: on #|off
+            #runtime:
+                #state: on #|off
+            #synic:
+                #state: on #|off
+            #stimer:
+                #state: on #|off
+            #reset:
+                #state: on #|off
+            #vendor_id:
+                #state: on #|off
+            #frequencies:
+                #state: on #|off
+            #reenlightenment:
+                #state: on #|off
+            #tlbflush:
+                #state: on #|off
+        #- pvspinlock:
+            #state: on #|off
+        #- kvm:
+            #hidden:
+                #state: on #|off
+        #- pmu:
+            #state: on #|off
+        #- vmport:
+            #state: on #|off
+        #- gic:
+            #state: on #|off
+            #version: 2 #|3|host
+        #- smm:
+            #state: on #|off
+            #tseg: 0
+            #tseg_unit: MiB
+        #- ioapic:
+            #state: on #|off
+            #driver: kvm #|qemu
+        #- hpt:
+            #state: on #|off
+            #resizing: enabled #|disabled|required
+            #maxpagesize: #???
+        #- vmcoreinfo:
+            #state: on #|off
+        #- htm:
+            #state: on #|off
+    clock:
+        offset: localtime #|utc|timezone|variable
+        timer:
+            #- name: platform
+              #track: boot #|guest|wall
+              #tickpolicy: delay #|catchup|merge|discard
+              #tickpolicy_catchup: threshold #|slew|limit
+              #present: yes #|no
+            - name: hpet
+              #tickpolicy: delay #|catchup|merge|discard
+              present: no
+            #- name: kvmclock
+            - name: pit
+              tickpolicy: delay
+              #present: yes #|no
+            - name: rtc
+              #track: boot #|guest|wall
+              tickpolicy: catchup
+              #present: yes #|no
+            #- name: tsc
+              #tickpolicy: delay #|catchup|merge|discard
+              #TODO frequency
+              #TODO mode
+              #present: yes #|no
+            #- name: hypervclock
+              #tickpolicy: delay #|catchup|merge|discard
+              #present: yes #|no
+      #TODO perf
+      devices:
+          - emulator: /usr/libexec/qemu-kvm
+          - disk:
+              type: file
+              device: disk
+              driver:
+                  name: qemu
+                  type: qcow2
+              source:
+                  #file: /var/lib/libvirt/images/{name}.qcow2
+              backingStore:
+              target:
+                  dev: hda
+                  bus: ide
+              alias:
+                  name: ide0-0-0
+              address:
+                  type: drive
+                  controller: 0
+                  bus: 0
+                  target: 0
+                  unit: 0
+          - disk:
+              type: file
+              device: cdrom
+              driver:
+                  name: qemu
+                  type: raw
+              source:
+                  #file: ...
+              backingStore:
+              target:
+                  dev: hdb
+                  bus: ide
+              readonly:
+              alias:
+                  name: ide0-0-1
+              address:
+                  type: drive
+                  controller: 0
+                  bus: 0
+                  target: 0
+                  unit: 1
+          - controller:
+              type: usb
+              index: 0
+              model: ich9-ehci1
+              alias:
+                  name: usb
+              address:
+                  type: pci
+                  domain: 0x0000
+                  bus: 0x00
+                  slot: 0x05
+                  function: 0x7
+          - controller:
+              type: usb
+              index: 0
+              model: ich9-uhci1
+              alias:
+                  name: usb
+              master:
+                  startport: 0
+              address:
+                  type: pci
+                  domain: 0x0000
+                  bus: 0x00
+                  slot: 0x05
+                  function: 0x0
+                  multifunction: on
+          - controller:
+              type: usb
+              index: 0
+              model: ich9-uhci2
+              alias:
+                  name: usb
+              master:
+                  startport: 2
+              address:
+                  type: pci
+                  domain: 0x0000
+                  bus: 0x00
+                  slot: 0x05
+                  function: 0x1
+          - controller:
+              type: usb
+              index: 0
+              model: ich9-uhci3
+              alias:
+                  name: usb
+              master:
+                  startport: 4
+              address:
+                  type: pci
+                  domain: 0x0000
+                  bus: 0x00
+                  slot: 0x05
+                  function: 0x2
+          - controller:
+              type: pci
+              index: 0
+              model: pci-root
+              alias:
+                  name: pci.0
+          - controller:
+              type: ide
+              index: 0
+              alias:
+                  name: ide
+              address:
+                  type: pci
+                  domain: 0x0000
+                  bus: 0x00
+                  slot: 0x01
+                  function: 0x1
+          - controller:
+              type: virtio-serial
+              index: 0
+              alias:
+                  name: virtio-serial0
+              address:
+                  type: pci
+                  domain: 0x0000
+                  bus: 0x00
+                  slot: 0x04
+                  function: 0x0
+          - interface:
+              type: bridge
+              mac:
+                  #address: '52:54:00:xx:xx:xx'
+              source:
+                  #bridge: br200
+              target:
+                  dev: vnet0
+              model:
+                  type: e1000
+              alias:
+                  name: net0
+              address:
+                  type: pci
+                  domain: 0x0000
+                  bus: 0x00
+                  slot: 0x03
+                  function: 0x0
+          - serial:
+              type: pty
+              source:
+                  path: /dev/pts/0
+              target:
+                  port: 0
+              alias:
+                  name: serial0
+          - console:
+              type: pty
+              tty: /dev/pts/0
+              source:
+                  path: /dev/pts/0
+              target:
+                  type: serial
+                  port: 0
+              alias:
+                  name: serial0
+          - channel:
+              type: spicevmc
+              target:
+                  type: virtio
+                  name: com.redhat.spice.0
+                  state: disconnected
+              alias:
+                  name: channel0
+              address:
+                  type: virtio-serial
+                  controller: 0
+                  bus: 0
+                  port: 1
+          - input:
+              type: tablet
+              bus: usb
+              alias:
+                  name: input0
+              address:
+                  type: usb
+                  bus: 0
+                  port: 1
+          - input:
+              type: mouse
+              bus: ps2
+              alias:
+                  name: input1
+          - input:
+              type: keyboard
+              bus: ps2
+              alias:
+                  name: input2
+          - graphics:
+              type: spice
+              port: 5900
+              autoport: yes
+              listen: 127.0.0.1 # attribute
+              listens:
+                  - type: address
+                    address: 127.0.0.1
+          - video:
+              model:
+                  type: qxl
+                  ram: 65536
+                  vram: 65536
+                  vgamem: 16384
+                  heads: 1
+                  primary: yes
+              alias:
+                  name: video0
+              address:
+                  type: pci
+                  domain: 0x0000
+                  bus: 0x00
+                  slot: 0x02
+                  function: 0x0
+          - redirdev:
+              bus: usb
+              type: spicevmc
+              alias:
+                  name: redir0
+              address:
+                  type: usb
+                  bus: 0
+                  port: 2
+          - redirdev:
+              bus: usb
+              type: spicevmc
+              alias:
+                  name: redir1
+              address:
+                  type: usb
+                  bus: 0
+                  port: 3
+          - memballoon:
+              model: virtio
+              alias:
+                  name: balloon0
+              address:
+                  type: pci
+                  domain: 0x0000
+                  bus: 0x00
+                  slot: 0x06
+                  function: 0x0
+      seclabels:
+          - type: dynamic
+            model: selinux
+            relabel: yes
+            label: system_u:system_r:svirt_t:s0:c506,c537
+            imagelabel: system_u:object_r:svirt_image_t:s0:c506,c537
+          - type: dynamic
+            model: dac
+            relabel: yes
+            label: +0:+0
+            imagelabel: +0:+0
+    #TODO keywrap
+    #TODO launchSecurity
