@@ -1,20 +1,20 @@
 ---
-- hosts: dns_servers
+- hosts: server_dns
   roles:
       - server_dns
 
-- hosts: dhcp_servers
+- hosts: server_dhcp
   roles:
       - server_dhcp
 
-- hosts: repo_servers
+- hosts: server_repo
   roles:
       - server_repo
 
-- hosts: ntp_servers
+- hosts: server_ntp
   roles:
       - server_ntp
 
-- hosts: desktops
+- hosts: desktop
   roles:
       - desktop
