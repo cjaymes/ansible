@@ -1,0 +1,4 @@
+---
+- hosts: virt_servers
+  roles:
+      - server_virt
