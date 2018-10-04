@@ -42,3 +42,7 @@
 - include_tasks: repo.yml
   when:
     - "'repo_servers' not in group_names"
+
+- include_tasks: zabbix_agent.yml
+  when:
+    - "'zabbix_servers' not in group_names"
