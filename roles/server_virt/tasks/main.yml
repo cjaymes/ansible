@@ -1,0 +1,25 @@
+- name: set dict
+  set_fact:
+      d:
+          id: 2
+          name: ipa0
+
+- name: combine with defaults dict
+  set_fact:
+      domain: "{{ virt_domain | combine(d, recursive=true) }}"
+
+- name: template domain
+  template:
+      src: templates/domain.xml.j2
+      dest: /root/domain_test.xml
+      validate: virt-xml-validate %s domain
+
+- name: fetch the file back
+  fetch:
+      src: /root/domain_test.xml
+      dest: /tmp/
+      flat: yes
+
+- name: debug file
+  debug:
+      msg: "{{lookup('file', '/tmp/domain_test.xml')}}"

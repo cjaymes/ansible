@@ -1,4 +1,4 @@
 ---
-- hosts: server_virt
+- hosts: vhost1
   roles:
       - server_virt

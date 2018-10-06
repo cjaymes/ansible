@@ -1,0 +1,72 @@
+<domain type='{{domain.type}}'{% if domain.id is defined %} id='{{domain.id}}'{% endif %}>
+  <name>{{domain.name}}</name>
+  {% if domain.uuid is defined %}<uuid>{{domain.uuid}}</uuid>{% endif %}
+  {% if domain.genid is defined %}<genid>{{domain.genid}}</genid>{% endif %}
+  {% if domain.title is defined %}<title>{{domain.title}}</title>{% endif %}
+  {% if domain.description is defined %}<description>{{domain.description}}</description>{% endif %}
+  {% if domain.metadata is defined %}<metadata>{{domain.metadata}}</metadata>{% endif %}
+  <os>{% for item in domain.os -%}
+    {%- if item.type is defined -%}
+    <type{% if item.type.arch is defined %} arch='{{item.type.arch}}'{% endif %}{% if item.type.machine is defined %} machine='{{item.type.machine}}'{% endif %}>{{item.type.type}}</type>
+    {%- endif -%}{%- if item.loader is defined -%}
+    <loader{% if item.loader.readonly is defined %} readonly='{{item.loader.readonly}}'{% endif %}{% if item.loader.type is defined %} type='{{item.loader.type}}'{% endif %}>{{item.loader.path}}</loader>
+    {%- endif -%}{%- if item.nvram is defined -%}
+    <nvram{% if item.nvram.template is defined %} template='{{item.nvram.template}}'{% endif %}>{{item.nvram.path}}</nvram>
+    {%- endif -%}{%- if item.boot is defined -%}
+    <boot dev='{{item.boot.dev}}'/>
+    {%- endif -%}{%- if item.smbios is defined -%}
+    <smbios mode='{{item.smbios.mode}}'/>
+    {%- endif -%}{%- if item.bootmenu is defined -%}
+    <bootmenu{% if item.bootmenu.enable is defined %} enable='{{item.bootmenu.enable}}'{% endif %}{% if item.bootmenu.timeout is defined %} timeout='{{item.bootmenu.timeout}}'{% endif %}/>
+    {%- endif -%}{%- if item.bios is defined -%}
+    <bios{% if item.bios.useserial is defined %} useserial='{{item.bios.useserial}}'{% endif %}{% if item.bios.rebootTimeout is defined %} rebootTimeout='{{item.bios.rebootTimeout}}'{% endif %}/>
+    {%- endif -%}{%- if item.bootloader is defined -%}
+    <bootloader>{{item.bootloader}}</bootloader>
+    {%- endif -%}{%- if item.bootloader_args is defined -%}
+    <bootloader_args>{{item.bootloader_args}}</bootloader_args>
+    {%- endif -%}{%- if item.kernel is defined -%}
+    <kernel>{{item.kernel}}</kernel>
+    {%- endif -%}{%- if item.initrd is defined -%}
+    <initrd>{{item.initrd}}</initrd>
+    {%- endif -%}{%- if item.cmdline is defined -%}
+    <cmdline>{{item.cmdline}}</cmdline>
+    {%- endif -%}{%- if item.dtb is defined -%}
+    <dtb>{{item.dtb}}</dtb>
+    {%- endif -%}{%- if item.acpi is defined -%}
+    <acpi>{%- if item.acpi.table is defined -%}
+    <table{% if item.acpi.table.type is defined %} type='{{item.acpi.table.type}}'{% endif %}>{{item.acpi.table.path}}</table>
+    {%- endif -%}</acpi>
+    {%- endif -%}{%- if item.init is defined -%}
+    <init>{{item.init}}</init>
+    {%- endif -%}{%- if item.initarg is defined -%}
+    <initarg>{{item.initarg}}</initarg>
+    {%- endif -%}{%- if item.initenv is defined -%}
+    <initenv name='{{item.initenv.name}}'>{{item.initenv.value}}</initenv>
+    {%- endif -%}{%- if item.initdir is defined -%}
+    <initdir>{{item.initdir}}</initdir>
+    {%- endif -%}{%- if item.inituser is defined -%}
+    <inituser>{{item.inituser}}</inituser>
+    {%- endif -%}{%- if item.initgroup is defined -%}
+    <initgroup>{{item.initgroup}}</initgroup>
+    {%- endif -%}{%- if item.idmap is defined -%}<idmap>{%- for item1 in item.idmap -%}
+      {%- if item.uid is defined -%}
+      <uid start='{{item1.start}}' target='{{item1.target}}' count='{{item1.count}}'/>
+      {%- endif -%}{%- if item.gid is defined -%}
+      <gid start='{{item1.start}}' target='{{item1.target}}' count='{{item1.count}}'/>
+      {%- endif -%}
+    {%- endfor -%}</idmap>{%- endif -%}
+  {%- endfor %}</os>
+  {# TODO sysinfo #}
+  <vcpu{% if domain.vcpu.cpuset is defined %} cpuset='{{domain.vcpu.cpuset}}'{% endif %}{% if domain.vcpu.current is defined %} current='{{domain.vcpu.current}}'{% endif %}{% if domain.vcpu.placement is defined %} placement='{{domain.vcpu.placement}}'{% endif %}>{{domain.vcpu.max}}</vcpu>
+  {% if domain.vcpu.vcpus is defined %}<vcpus>{%- for item in domain.vcpu.vcpus -%}
+  <vcpu id='{{item.id}}' enabled='{{item.enabled}}' hotpluggable='{{item.hotpluggable}}'{% if item.order is defined %} order='{{item.order}}'{% endif %}/>
+  {%- endfor -%}</vcpus>{%- endif -%}
+  {# TODO iothreads #}
+  {# TODO cputune #}
+  <memory{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.boot}}</memory>
+  {%- if domain.memory.max is defined -%}
+  <maxMemory{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.max}}</maxMemory>
+  {%- endif -%}{%- if domain.memory.current is defined -%}
+  <currentMemory{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.current}}</currentMemory>
+  {%- endif -%}
+</domain>
