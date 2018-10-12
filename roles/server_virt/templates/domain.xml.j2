@@ -69,4 +69,13 @@
   {%- endif -%}{%- if domain.memory.current is defined -%}
   <currentMemory{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.current}}</currentMemory>
   {%- endif -%}
+  {# TODO memoryBacking #}
+  {# TODO memtune #}
+  {# TODO numatune #}
+  {# TODO blkiotune #}
+  <resource>{%- for item in domain.resource -%}
+    {%- if item.partition is defined -%}
+    <partition>{% item.partition %}</partition>
+    {%- endif -%}
+  {%- endfor -%}</resource>
 </domain>
