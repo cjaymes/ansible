@@ -78,4 +78,8 @@
     <partition>{% item.partition %}</partition>
     {%- endif -%}
   {%- endfor -%}</resource>
+  <cpu{% if domain.cpu.match is defined %} match='{{domain.cpu.match}}'{% endif %}{% if domain.cpu.check is defined %} check='{{domain.cpu.check}}'{% endif %}{% if domain.cpu.mode is defined %} mode='{{domain.cpu.mode}}'{% endif %}>{%- for item in domain.cpu.cpu -%}
+    {%- if item.model is defined -%}
+    <model{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.max}}</maxMemory>
+  {%- endif -%}{%- endfor -%}</cpu>
 </domain>

@@ -91,10 +91,11 @@ virt_domain:
         match: exact #|minimum|strict
         check: full #|none|partial
         mode: custom #|host-model|host-passthrough
-        model:
+        cpu:
+        - model:
             name: Nehalem # the value of the model element
             fallback: forbid #|allow
-        features:
+        - features:
             - name: x2apic
               policy: require #|force|optional|disable|forbid
             - name: hypervisor
