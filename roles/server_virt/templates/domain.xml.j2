@@ -78,9 +78,9 @@
     <partition>{% item.partition %}</partition>
     {%- endif -%}
   {%- endfor -%}</resource>
-  <cpu{% if domain.cpu.match is defined %} match='{{domain.cpu.match}}'{% endif %}{% if domain.cpu.check is defined %} check='{{domain.cpu.check}}'{% endif %}{% if domain.cpu.mode is defined %} mode='{{domain.cpu.mode}}'{% endif %}>{%- for item in domain.cpu.cpu -%}
+  <cpu{% if domain.cpu.match is defined %} match='{{domain.cpu.match}}'{%- endif -%}{% if domain.cpu.check is defined %} check='{{domain.cpu.check}}'{% endif %}{% if domain.cpu.mode is defined %} mode='{{domain.cpu.mode}}'{% endif %}>{%- for item in domain.cpu.cpu -%}
     {%- if item.model is defined -%}
-    <model{% if item.model.fallback is defined %} fallback='{{item.model.fallback}}'{% endif %}{% if item.model.vendor_id is defined %} vendor_id='{{item.model.vendor_id}}'{% endif %}>{{item.model.name}}</model>
+    <model{% if item.model.fallback is defined %} fallback='{{item.model.fallback}}'{%- endif -%}{% if item.model.vendor_id is defined %} vendor_id='{{item.model.vendor_id}}'{% endif %}>{{item.model.name}}</model>
     {%- endif -%}{%- if item.vendor is defined -%}
     <vendor>{{item.vendor.name}}</vendor>
     {%- endif -%}
@@ -91,4 +91,8 @@
     {# TODO cache #}
     {# TODO numa #}
   {%- endfor -%}</cpu>
+  {%- if domain.on_poweroff is defined -%}<on_poweroff>{{domain.on_poweroff}}</on_poweroff>{%- endif -%}
+  {%- if domain.on_reboot is defined -%}<on_reboot>{{domain.on_reboot}}</on_reboot>{%- endif -%}
+  {%- if domain.on_crash is defined -%}<on_crash>{{domain.on_crash}}</on_crash>{%- endif -%}
+  {%- if domain.on_lockfailure is defined -%}<on_lockfailure>{{domain.on_lockfailure}}</on_lockfailure>{%- endif -%}
 </domain>

@@ -109,6 +109,7 @@ virt_domain:
     on_poweroff: destroy #|restart|preserve|rename-restart
     on_reboot: restart #|destroy|preserve|rename-restart
     on_crash: restart #|destroy|preserve|rename-restart|coredump-destroy|coredump-restart
+    on_lockfailure: restart #|destroy|preserve|rename-restart|coredump-destroy|coredump-restart
     pm:
         suspend_to_mem:
             enabled: no
@@ -460,7 +461,6 @@ virt_domain:
                     label: +0:+0
                     imagelabel: +0:+0
     #TODO blkiotune
-    #TODO on_lockfailure: poweroff|restart|pause|ignore
     #TODO perf
     #TODO keywrap
     #TODO launchSecurity
