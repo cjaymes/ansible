@@ -95,15 +95,17 @@ virt_domain:
         - model:
             name: Nehalem # the value of the model element
             fallback: forbid #|allow
-        - features:
+        #- vendor:
+            #name: ...
+        #- topology TODO
+        - feature:
             - name: x2apic
               policy: require #|force|optional|disable|forbid
+        - feature:
             - name: hypervisor
               policy: require #|force|optional|disable|forbid
-        #TODO vendor
-        #TODO topology
-        #TODO cache
-        #TODO numa
+        #- cache TODO
+        #- numa TODO
     on_poweroff: destroy #|restart|preserve|rename-restart
     on_reboot: restart #|destroy|preserve|rename-restart
     on_crash: restart #|destroy|preserve|rename-restart|coredump-destroy|coredump-restart

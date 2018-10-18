@@ -80,6 +80,15 @@
   {%- endfor -%}</resource>
   <cpu{% if domain.cpu.match is defined %} match='{{domain.cpu.match}}'{% endif %}{% if domain.cpu.check is defined %} check='{{domain.cpu.check}}'{% endif %}{% if domain.cpu.mode is defined %} mode='{{domain.cpu.mode}}'{% endif %}>{%- for item in domain.cpu.cpu -%}
     {%- if item.model is defined -%}
-    <model{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.max}}</maxMemory>
-  {%- endif -%}{%- endfor -%}</cpu>
+    <model{% if item.model.fallback is defined %} fallback='{{item.model.fallback}}'{% endif %}{% if item.model.vendor_id is defined %} vendor_id='{{item.model.vendor_id}}'{% endif %}>{{item.model.name}}</model>
+    {%- endif -%}{%- if item.vendor is defined -%}
+    <vendor>{{item.vendor.name}}</vendor>
+    {%- endif -%}
+    {# TODO topology #}
+    {%- if item.feature is defined -%}
+    <feature name='{{item.feature.name}}' policy='{{item.feature.policy}}'/>
+    {%- endif -%}
+    {# TODO cache #}
+    {# TODO numa #}
+  {%- endfor -%}</cpu>
 </domain>
