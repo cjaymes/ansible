@@ -179,30 +179,66 @@ virt_domain:
             #state: on #|off
     clock:
         offset: localtime #|utc|timezone|variable
-        timer:
+        timers:
+            #- name: platform # unsupported
+              #track: boot #|guest|wall
+              #tickpolicy:
+                  #policy: delay #|catchup|merge|discard
+                  #catchup:
+                      #threshold: ...
+                      #slew: ...
+                      #limit: ...
+              #present: yes #|no
             - name: hpet
               present: no
-              #tickpolicy: delay #|catchup|merge|discard
-            - name: pit
-              tickpolicy: delay
-              #present: yes #|no
-            - name: rtc
-              tickpolicy: catchup
+              #tickpolicy:
+                  #policy: delay #|catchup|merge|discard
+                  #catchup:
+                      #threshold: ...
+                      #slew: ...
+                      #limit: ...
             #- name: kvmclock
               #track: boot #|guest|wall
+              #tickpolicy:
+                  #policy: delay #|catchup|merge|discard
+                  #catchup:
+                      #threshold: ...
+                      #slew: ...
+                      #limit: ...
               #present: yes #|no
+            - name: pit
+              tickpolicy:
+                  policy: delay #|catchup|merge|discard
+                  #catchup:
+                      #threshold: ...
+                      #slew: ...
+                      #limit: ...
+              #present: yes #|no
+            - name: rtc
+              #track: boot #|guest|wall
+              tickpolicy:
+                  policy: catchup #|delay|merge|discard
+                  #catchup:
+                      #threshold: ...
+                      #slew: ...
+                      #limit: ...
             #- name: tsc
-              #tickpolicy: delay #|catchup|merge|discard
-              #TODO frequency
-              #TODO mode
+              #tickpolicy:
+                  #policy: delay #|catchup|merge|discard
+                  #catchup:
+                      #threshold: ...
+                      #slew: ...
+                      #limit: ...
+              #frequency: ...
+              #mode: emulate #|native|auto|paravirt|smpsafe
               #present: yes #|no
             #- name: hypervclock
-              #tickpolicy: delay #|catchup|merge|discard
-              #present: yes #|no
-            #- name: platform
-              #track: boot #|guest|wall
-              #tickpolicy: delay #|catchup|merge|discard
-              #tickpolicy_catchup: threshold #|slew|limit
+              #tickpolicy:
+                  #policy: delay #|catchup|merge|discard
+                  #catchup:
+                      #threshold: ...
+                      #slew: ...
+                      #limit: ...
               #present: yes #|no
     devices:
         - emulator: /usr/libexec/qemu-kvm

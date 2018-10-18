@@ -137,4 +137,9 @@
     {%- if item.vmcoreinfo is defined -%}<vmcoreinfo/>{%- endif -%}
     {%- if item.htm is defined -%}<htm state='{{item.htm.state}}'/>{%- endif -%}
   {%- endfor -%}</features>
+  <clock offset='{{domain.clock.offset}}'>{%- for item in domain.clock.timers -%}
+    <timer name='{{item.name}}'{%- if item.track is defined -%} track='{{item.track}}'{%- endif -%}{%- if item.tickpolicy is defined -%} tickpolicy='{{item.tickpolicy.policy}}'{%- endif -%}{%- if item.frequency is defined -%} frequency='{{item.frequency}}'{%- endif -%}{%- if item.mode is defined -%} mode='{{item.mode}}'{%- endif -%}{%- if item.present is defined -%} present='{{item.present}}'{%- endif -%}{%- if item.tickpolicy.policy == 'catchup' and item.tickpolicy.catchup is defined -%}>
+      <catchup{%- if item.catchup.threshold is defined -%} threshold='{{item.catchup.threshold}}'{%- endif -%}{%- if item.catchup.slew is defined -%} slew='{{item.catchup.slew}}'{%- endif -%}{%- if item.catchup.limit is defined -%} limit='{{item.catchup.limit}}'{%- endif -%}/>
+    </timer>{%- else -%}/>{%- endif -%}
+  {%- endfor -%}</clock>
 </domain>
