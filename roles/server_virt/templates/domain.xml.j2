@@ -99,4 +99,42 @@
     {%- if item.suspend_to_disk is defined -%}<suspend-to-disk enabled='{{item.suspend_to_disk.enabled}}'/>{%- endif -%}
     {%- if item.suspend_to_mem is defined -%}<suspend-to-mem enabled='{{item.suspend_to_mem.enabled}}'/>{%- endif -%}
   {%- endfor -%}</pm>{%- endif -%}
+  <features>{%- for item in domain.features -%}
+    {%- if item.pae is defined -%}<pae/>{%- endif -%}
+    {%- if item.acpi is defined -%}<acpi/>{%- endif -%}
+    {%- if item.apic is defined -%}<apic{%- if item.apic.eoi is defined -%} eoi='{{item.apic.eoi}}'{%- endif -%}/>{%- endif -%}
+    {%- if item.hap is defined -%}<hap{%- if item.hap.state is defined -%} state='{{item.hap.state}}'{%- endif -%}/>{%- endif -%}
+    {%- if item.viridian is defined -%}<viridian/>{%- endif -%}
+    {%- if item.privnet is defined -%}<privnet/>{%- endif -%}
+    {%- if item.hyperv is defined -%}<hyperv>{%- for item1 in item.hyperv -%}
+      {%- if item1.relaxed is defined -%}<relaxed state='{{item1.relaxed.state}}'/>{%- endif -%}
+      {%- if item1.vapic is defined -%}<vapic state='{{item1.vapic.state}}'/>{%- endif -%}
+      {%- if item1.spinlocks is defined -%}<spinlocks state='{{item1.spinlocks.state}}' retries='{{item1.spinlocks.retries}}'/>{%- endif -%}
+      {%- if item1.vpindex is defined -%}<vpindex state='{{item1.vpindex.state}}'/>{%- endif -%}
+      {%- if item1.runtime is defined -%}<runtime state='{{item1.runtime.state}}'/>{%- endif -%}
+      {%- if item1.synic is defined -%}<synic state='{{item1.synic.state}}'/>{%- endif -%}
+      {%- if item1.stimer is defined -%}<stimer state='{{item1.stimer.state}}'/>{%- endif -%}
+      {%- if item1.reset is defined -%}<reset state='{{item1.reset.state}}'/>{%- endif -%}
+      {%- if item1.vendor_id is defined -%}<vendor_id state='{{item1.vendor_id.state}}' value='{{item1.vendor_id.value}}'/>{%- endif -%}
+      {%- if item1.frequencies is defined -%}<frequencies state='{{item1.frequencies.state}}'/>{%- endif -%}
+      {%- if item1.reenlightenment is defined -%}<reenlightenment state='{{item1.reenlightenment.state}}'/>{%- endif -%}
+      {%- if item1.tlbflush is defined -%}<tlbflush state='{{item1.tlbflush.state}}'/>{%- endif -%}
+    {%- endfor -%}</hyperv>{%- endif -%}
+    {%- if item.pvspinlock is defined -%}<pvspinlock state='{{item.pvspinlock.state}}'/>{%- endif -%}
+    {%- if item.kvm is defined -%}<kvm>{%- for item1 in item.kvm -%}
+      {%- if item1.hidden is defined -%}<hidden state='{{item1.hidden.state}}'/>{%- endif -%}
+    {%- endfor -%}</kvm>{%- endif -%}
+    {%- if item.pmu is defined -%}<pmu state='{{item.pmu.state}}'/>{%- endif -%}
+    {%- if item.vmport is defined -%}<vmport state='{{item.vmport.state}}'/>{%- endif -%}
+    {%- if item.gic is defined -%}<gic version='{{item.gic.version}}'/>{%- endif -%}
+    {%- if item.smm is defined -%}<smm state='{{item.smm.state}}'>
+      <tseg unit='{{item.smm.tseg.unit}}'>{{item.smm.tseg.size}}</tseg>
+    </smm>{%- endif -%}
+    {%- if item.ioapic is defined -%}<ioapic driver='{{item.ioapic.driver}}'/>{%- endif -%}
+    {%- if item.hpt is defined -%}<hpt resizing='{{item.hpt.resizing}}'>
+      {%- if item.hpt.maxpagesize is defined -%}<maxpagesize unit='{{item.hpt.maxpagesize.unit}}'>{{item.hpt.maxpagesize.size}}</maxpagesize>{%- endif -%}
+    </hpt>{%- endif -%}
+    {%- if item.vmcoreinfo is defined -%}<vmcoreinfo/>{%- endif -%}
+    {%- if item.htm is defined -%}<htm state='{{item.htm.state}}'/>{%- endif -%}
+  {%- endfor -%}</features>
 </domain>
