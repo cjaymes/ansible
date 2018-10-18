@@ -95,4 +95,8 @@
   {%- if domain.on_reboot is defined -%}<on_reboot>{{domain.on_reboot}}</on_reboot>{%- endif -%}
   {%- if domain.on_crash is defined -%}<on_crash>{{domain.on_crash}}</on_crash>{%- endif -%}
   {%- if domain.on_lockfailure is defined -%}<on_lockfailure>{{domain.on_lockfailure}}</on_lockfailure>{%- endif -%}
+  {%- if domain.pm is defined -%}<pm>{%- for item in domain.pm -%}
+    {%- if item.suspend_to_disk is defined -%}<suspend-to-disk enabled='{{item.suspend_to_disk.enabled}}'/>{%- endif -%}
+    {%- if item.suspend_to_mem is defined -%}<suspend-to-mem enabled='{{item.suspend_to_mem.enabled}}'/>{%- endif -%}
+  {%- endfor -%}</pm>{%- endif -%}
 </domain>
