@@ -85,6 +85,7 @@ virt_domain:
     #TODO memoryBacking
     #TODO memtune
     #TODO numatune
+    #TODO blkiotune
     resource:
         - partition: /machine
     cpu:
@@ -240,6 +241,7 @@ virt_domain:
                       #slew: ...
                       #limit: ...
               #present: yes #|no
+    #TODO perf
     devices:
         - emulator: /usr/libexec/qemu-kvm
         - disk:
@@ -486,18 +488,16 @@ virt_domain:
               bus: 0x00
               slot: 0x06
               function: 0x0
-              seclabels:
-                  - type: dynamic
-                    model: selinux
-                    relabel: yes
-                    label: system_u:system_r:svirt_t:s0:c506,c537
-                    imagelabel: system_u:object_r:svirt_image_t:s0:c506,c537
-                  - type: dynamic
-                    model: dac
-                    relabel: yes
-                    label: +0:+0
-                    imagelabel: +0:+0
-    #TODO blkiotune
-    #TODO perf
+    seclabels:
+        - type: dynamic
+          model: selinux
+          relabel: yes
+          label: system_u:system_r:svirt_t:s0:c506,c537
+          imagelabel: system_u:object_r:svirt_image_t:s0:c506,c537
+        - type: dynamic
+          model: dac
+          relabel: yes
+          label: +0:+0
+          imagelabel: +0:+0
     #TODO keywrap
     #TODO launchSecurity
