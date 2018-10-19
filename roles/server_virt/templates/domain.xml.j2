@@ -142,4 +142,7 @@
       <catchup{%- if item.catchup.threshold is defined -%} threshold='{{item.catchup.threshold}}'{%- endif -%}{%- if item.catchup.slew is defined -%} slew='{{item.catchup.slew}}'{%- endif -%}{%- if item.catchup.limit is defined -%} limit='{{item.catchup.limit}}'{%- endif -%}/>
     </timer>{%- else -%}/>{%- endif -%}
   {%- endfor -%}</clock>
+  <devices>{%- for item in domain.devices -%}
+    {%- if item.emulator is defined -%}<emulator>{{item.emulator}}</emulator>{%- endif -%}
+  {%- endfor -%}</devices>
 </domain>
