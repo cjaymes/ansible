@@ -39,6 +39,9 @@
         {%- if dev.wwn is defined -%}
             <wwn>{{dev.wwn}}</wwn>
         {%- endif -%}
+        {%- if dev.vendor is defined -%}
+            <vendor>{{dev.vendor}}</vendor>
+        {%- endif -%}
     </disk>
 {%- endif -%}
 
