@@ -7,38 +7,18 @@
         {%- if dev.alias is defined -%}
             <alias name='{{dev.alias.name}}'/>
         {%- endif -%}
-        <source file='{{dev.source.file}}'{%- if dev.source.index is defined -%} index='{{dev.source.index}}'{%- endif -%}{%- if dev.source.startupPolicy is defined -%} startupPolicy='{{dev.source.startup_policy}}'{%- endif -%}>
-            {%- for seclabel in dev.source.seclabels -%}
-                {% include 'seclabel.xml.j2' %}
-            {%- endfor -%}
-            {%- if dev.source.snapshot is defined -%}
-                <snapshot name='{{dev.source.snapshot.name}}'/>
-            {%- endif -%}
-            {%- if dev.source.config is defined -%}
-                <config file='{{dev.source.config.file}}'/>
-            {%- endif -%}
-            {# TODO encryption #}
-            {# TODO reservations #}
-        </source>
+        {%- source_type = dev.type -%}
+        {%- source = dev.source -%}
+        {%- import 'disk_source.xml.j2'}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'block' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
         {%- if dev.alias is defined -%}
             <alias name='{{dev.alias.name}}'/>
         {%- endif -%}
-        <source dev='{{dev.source.dev}}'>
-            {%- for seclabel in dev.source.seclabels -%}
-                {% include 'seclabel.xml.j2' %}
-            {%- endfor -%}
-            {%- if dev.source.snapshot is defined -%}
-                <snapshot name='{{dev.source.snapshot.name}}'/>
-            {%- endif -%}
-            {%- if dev.source.config is defined -%}
-                <config file='{{dev.source.config.file}}'/>
-            {%- endif -%}
-            {# TODO encryption #}
-            {# TODO reservations #}
-        </source>
+        {%- source_type = dev.type -%}
+        {%- source = dev.source -%}
+        {%- import 'disk_source.xml.j2'}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'dir' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
@@ -61,44 +41,18 @@
         {%- if dev.alias is defined -%}
             <alias name='{{dev.alias.name}}'/>
         {%- endif -%}
-        <source protocol='{{dev.source.protocol}}'{%- if dev.source.name is defined -%} name='{{dev.source.name}}'{%- endif -%}{%- if dev.source.tls is defined -%} tls='{{dev.source.tls}}'{%- endif -%}>
-            {%- for host in dev.source.hosts -%}
-                <host name='{{host.name}}'{%- if host.port is defined -%} port='{{host.port}}'{%- endif -%}{%- if host.transport is defined -%} transport='{{host.transport}}'{%- endif -%}{%- if host.socket is defined -%} socket='{{host.socket}}'{%- endif -%}/>
-            {%- endfor -%}
-            {%- if dev.source.snapshot is defined -%}
-                <snapshot name='{{dev.source.snapshot.name}}'/>
-            {%- endif -%}
-            {%- if dev.source.config is defined -%}
-                <config file='{{dev.source.config.file}}'/>
-            {%- endif -%}
-            {%- if dev.source.auth is defined -%}
-                <auth username='{{dev.source.auth.username}}'>
-                    <secret type='{{dev.source.auth.secret_type}}'{%- if dev.source.auth.secret_uuid is defined -%} uuid='{{dev.source.auth.secret_uuid}}'{%- endif -%}{%- if dev.source.auth.secret_usage is defined -%} usage='{{dev.source.auth.secret_usage}}'{%- endif -%}>{{dev.source.auth.secret}}</secret>
-                </auth>
-            {%- endif -%}
-            {# TODO encryption #}
-            {# TODO reservations #}
-            {# TODO initiator #}
-        </source>
+        {%- source_type = dev.type -%}
+        {%- source = dev.source -%}
+        {%- import 'disk_source.xml.j2'}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'volume' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
         {%- if dev.alias is defined -%}
             <alias name='{{dev.alias.name}}'/>
         {%- endif -%}
-        <source pool='{{dev.source.pool}}' volume='{{dev.source.volume}}'{%- if dev.source.mode is defined -%} mode='{{dev.source.mode}}'{%- endif -%}{%- if dev.source.tls is defined -%} tls='{{dev.source.tls}}'{%- endif -%}{%- if dev.source.startupPolicy is defined -%} startupPolicy='{{dev.source.startup_policy}}'{%- endif -%}>
-            {%- for seclabel in dev.source.seclabels -%}
-                {% include 'seclabel.xml.j2' %}
-            {%- endfor -%}
-            {%- if dev.source.snapshot is defined -%}
-                <snapshot name='{{dev.source.snapshot.name}}'/>
-            {%- endif -%}
-            {%- if dev.source.config is defined -%}
-                <config file='{{dev.source.config.file}}'/>
-            {%- endif -%}
-            {# TODO encryption #}
-            {# TODO reservations #}
-        </source>
+        {%- source_type = dev.type -%}
+        {%- source = dev.source -%}
+        {%- import 'disk_source.xml.j2'}
         {%- if dev.backing_store is defined -%}
             {% set backing_store = dev.backing_store %}
             {% include 'disk_backing_store.xml.j2' %}
