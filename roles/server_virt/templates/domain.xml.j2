@@ -1,285 +1,76 @@
 <domain type='{{domain.type}}'{% if domain.id is defined %} id='{{domain.id}}'{% endif %}>
-  <name>{{domain.name}}</name>
-  {% if domain.uuid is defined %}<uuid>{{domain.uuid}}</uuid>{% endif %}
-  {% if domain.genid is defined %}<genid>{{domain.genid}}</genid>{% endif %}
-  {% if domain.title is defined %}<title>{{domain.title}}</title>{% endif %}
-  {% if domain.description is defined %}<description>{{domain.description}}</description>{% endif %}
-  {% if domain.metadata is defined %}<metadata>{{domain.metadata}}</metadata>{% endif %}
-  <os>{% for item in domain.os -%}
-    {%- if item.type is defined -%}
-    <type{% if item.type.arch is defined %} arch='{{item.type.arch}}'{% endif %}{% if item.type.machine is defined %} machine='{{item.type.machine}}'{% endif %}>{{item.type.type}}</type>
-    {%- endif -%}{%- if item.loader is defined -%}
-    <loader{% if item.loader.readonly is defined %} readonly='{{item.loader.readonly}}'{% endif %}{% if item.loader.type is defined %} type='{{item.loader.type}}'{% endif %}>{{item.loader.path}}</loader>
-    {%- endif -%}{%- if item.nvram is defined -%}
-    <nvram{% if item.nvram.template is defined %} template='{{item.nvram.template}}'{% endif %}>{{item.nvram.path}}</nvram>
-    {%- endif -%}{%- if item.boot is defined -%}
-    <boot dev='{{item.boot.dev}}'/>
-    {%- endif -%}{%- if item.smbios is defined -%}
-    <smbios mode='{{item.smbios.mode}}'/>
-    {%- endif -%}{%- if item.bootmenu is defined -%}
-    <bootmenu{% if item.bootmenu.enable is defined %} enable='{{item.bootmenu.enable}}'{% endif %}{% if item.bootmenu.timeout is defined %} timeout='{{item.bootmenu.timeout}}'{% endif %}/>
-    {%- endif -%}{%- if item.bios is defined -%}
-    <bios{% if item.bios.useserial is defined %} useserial='{{item.bios.useserial}}'{% endif %}{% if item.bios.rebootTimeout is defined %} rebootTimeout='{{item.bios.rebootTimeout}}'{% endif %}/>
-    {%- endif -%}{%- if item.bootloader is defined -%}
-    <bootloader>{{item.bootloader}}</bootloader>
-    {%- endif -%}{%- if item.bootloader_args is defined -%}
-    <bootloader_args>{{item.bootloader_args}}</bootloader_args>
-    {%- endif -%}{%- if item.kernel is defined -%}
-    <kernel>{{item.kernel}}</kernel>
-    {%- endif -%}{%- if item.initrd is defined -%}
-    <initrd>{{item.initrd}}</initrd>
-    {%- endif -%}{%- if item.cmdline is defined -%}
-    <cmdline>{{item.cmdline}}</cmdline>
-    {%- endif -%}{%- if item.dtb is defined -%}
-    <dtb>{{item.dtb}}</dtb>
-    {%- endif -%}{%- if item.acpi is defined -%}
-    <acpi>{%- if item.acpi.table is defined -%}
-    <table{% if item.acpi.table.type is defined %} type='{{item.acpi.table.type}}'{% endif %}>{{item.acpi.table.path}}</table>
-    {%- endif -%}</acpi>
-    {%- endif -%}{%- if item.init is defined -%}
-    <init>{{item.init}}</init>
-    {%- endif -%}{%- if item.initarg is defined -%}
-    <initarg>{{item.initarg}}</initarg>
-    {%- endif -%}{%- if item.initenv is defined -%}
-    <initenv name='{{item.initenv.name}}'>{{item.initenv.value}}</initenv>
-    {%- endif -%}{%- if item.initdir is defined -%}
-    <initdir>{{item.initdir}}</initdir>
-    {%- endif -%}{%- if item.inituser is defined -%}
-    <inituser>{{item.inituser}}</inituser>
-    {%- endif -%}{%- if item.initgroup is defined -%}
-    <initgroup>{{item.initgroup}}</initgroup>
-    {%- endif -%}{%- if item.idmap is defined -%}<idmap>{%- for item1 in item.idmap -%}
-      {%- if item.uid is defined -%}
-      <uid start='{{item1.start}}' target='{{item1.target}}' count='{{item1.count}}'/>
-      {%- endif -%}{%- if item.gid is defined -%}
-      <gid start='{{item1.start}}' target='{{item1.target}}' count='{{item1.count}}'/>
-      {%- endif -%}
-    {%- endfor -%}</idmap>{%- endif -%}
-  {%- endfor %}</os>
-  {# TODO sysinfo #}
-  <vcpu{% if domain.vcpu.cpuset is defined %} cpuset='{{domain.vcpu.cpuset}}'{% endif %}{% if domain.vcpu.current is defined %} current='{{domain.vcpu.current}}'{% endif %}{% if domain.vcpu.placement is defined %} placement='{{domain.vcpu.placement}}'{% endif %}>{{domain.vcpu.max}}</vcpu>
-  {% if domain.vcpu.vcpus is defined %}<vcpus>{%- for item in domain.vcpu.vcpus -%}
-  <vcpu id='{{item.id}}' enabled='{{item.enabled}}' hotpluggable='{{item.hotpluggable}}'{% if item.order is defined %} order='{{item.order}}'{% endif %}/>
-  {%- endfor -%}</vcpus>{%- endif -%}
-  {# TODO iothreads #}
-  {# TODO cputune #}
-  <memory{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.boot}}</memory>
-  {%- if domain.memory.max is defined -%}
-  <maxMemory{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.max}}</maxMemory>
-  {%- endif -%}{%- if domain.memory.current is defined -%}
-  <currentMemory{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.current}}</currentMemory>
-  {%- endif -%}
-  {# TODO memoryBacking #}
-  {# TODO memtune #}
-  {# TODO numatune #}
-  {# TODO blkiotune #}
-  <resource>{%- for item in domain.resource -%}
-    {%- if item.partition is defined -%}
-    <partition>{% item.partition %}</partition>
+    <name>{{domain.name}}</name>
+    {% if domain.uuid is defined %}
+        <uuid>{{domain.uuid}}</uuid>
+    {% endif %}
+    {% if domain.genid is defined %}
+        <genid>{{domain.genid}}</genid>
+    {% endif %}
+    {% if domain.title is defined %}
+        <title>{{domain.title}}</title>
+    {% endif %}
+    {% if domain.description is defined %}
+        <description>{{domain.description}}</description>
+    {% endif %}
+    {% if domain.metadata is defined %}
+        <metadata>{{domain.metadata}}</metadata>
+    {% endif %}
+    <os>{% for item in domain.os -%}
+        {%- include 'os.xml.j2' %}
+    {%- endfor %}</os>
+    {# TODO sysinfo #}
+    <vcpu{% if domain.vcpu.cpuset is defined %} cpuset='{{domain.vcpu.cpuset}}'{% endif %}{% if domain.vcpu.current is defined %} current='{{domain.vcpu.current}}'{% endif %}{% if domain.vcpu.placement is defined %} placement='{{domain.vcpu.placement}}'{% endif %}>{{domain.vcpu.max}}</vcpu>
+    {% if domain.vcpu.vcpus is defined %}
+        <vcpus>{%- for vcpu in domain.vcpu.vcpus -%}
+            {% include 'vcpu.xml.j2' %}
+        {%- endfor -%}</vcpus>
     {%- endif -%}
-  {%- endfor -%}</resource>
-  <cpu{% if domain.cpu.match is defined %} match='{{domain.cpu.match}}'{%- endif -%}{% if domain.cpu.check is defined %} check='{{domain.cpu.check}}'{% endif %}{% if domain.cpu.mode is defined %} mode='{{domain.cpu.mode}}'{% endif %}>{%- for item in domain.cpu.cpu -%}
-    {%- if item.model is defined -%}
-    <model{% if item.model.fallback is defined %} fallback='{{item.model.fallback}}'{%- endif -%}{% if item.model.vendor_id is defined %} vendor_id='{{item.model.vendor_id}}'{% endif %}>{{item.model.name}}</model>
-    {%- endif -%}{%- if item.vendor is defined -%}
-    <vendor>{{item.vendor.name}}</vendor>
+    {# TODO iothreads #}
+    {# TODO cputune #}
+    <memory{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.boot}}</memory>
+    {%- if domain.memory.max is defined -%}
+        <maxMemory{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.max}}</maxMemory>
     {%- endif -%}
-    {# TODO topology #}
-    {%- if item.feature is defined -%}
-    <feature name='{{item.feature.name}}' policy='{{item.feature.policy}}'/>
+    {%- if domain.memory.current is defined -%}
+        <currentMemory{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.current}}</currentMemory>
     {%- endif -%}
-    {# TODO cache #}
-    {# TODO numa #}
-  {%- endfor -%}</cpu>
-  {%- if domain.on_poweroff is defined -%}<on_poweroff>{{domain.on_poweroff}}</on_poweroff>{%- endif -%}
-  {%- if domain.on_reboot is defined -%}<on_reboot>{{domain.on_reboot}}</on_reboot>{%- endif -%}
-  {%- if domain.on_crash is defined -%}<on_crash>{{domain.on_crash}}</on_crash>{%- endif -%}
-  {%- if domain.on_lockfailure is defined -%}<on_lockfailure>{{domain.on_lockfailure}}</on_lockfailure>{%- endif -%}
-  {%- if domain.pm is defined -%}<pm>{%- for item in domain.pm -%}
-    {%- if item.suspend_to_disk is defined -%}<suspend-to-disk enabled='{{item.suspend_to_disk.enabled}}'/>{%- endif -%}
-    {%- if item.suspend_to_mem is defined -%}<suspend-to-mem enabled='{{item.suspend_to_mem.enabled}}'/>{%- endif -%}
-  {%- endfor -%}</pm>{%- endif -%}
-  <features>{%- for item in domain.features -%}
-    {%- if item.pae is defined -%}<pae/>{%- endif -%}
-    {%- if item.acpi is defined -%}<acpi/>{%- endif -%}
-    {%- if item.apic is defined -%}<apic{%- if item.apic.eoi is defined -%} eoi='{{item.apic.eoi}}'{%- endif -%}/>{%- endif -%}
-    {%- if item.hap is defined -%}<hap{%- if item.hap.state is defined -%} state='{{item.hap.state}}'{%- endif -%}/>{%- endif -%}
-    {%- if item.viridian is defined -%}<viridian/>{%- endif -%}
-    {%- if item.privnet is defined -%}<privnet/>{%- endif -%}
-    {%- if item.hyperv is defined -%}<hyperv>{%- for item1 in item.hyperv -%}
-      {%- if item1.relaxed is defined -%}<relaxed state='{{item1.relaxed.state}}'/>{%- endif -%}
-      {%- if item1.vapic is defined -%}<vapic state='{{item1.vapic.state}}'/>{%- endif -%}
-      {%- if item1.spinlocks is defined -%}<spinlocks state='{{item1.spinlocks.state}}' retries='{{item1.spinlocks.retries}}'/>{%- endif -%}
-      {%- if item1.vpindex is defined -%}<vpindex state='{{item1.vpindex.state}}'/>{%- endif -%}
-      {%- if item1.runtime is defined -%}<runtime state='{{item1.runtime.state}}'/>{%- endif -%}
-      {%- if item1.synic is defined -%}<synic state='{{item1.synic.state}}'/>{%- endif -%}
-      {%- if item1.stimer is defined -%}<stimer state='{{item1.stimer.state}}'/>{%- endif -%}
-      {%- if item1.reset is defined -%}<reset state='{{item1.reset.state}}'/>{%- endif -%}
-      {%- if item1.vendor_id is defined -%}<vendor_id state='{{item1.vendor_id.state}}' value='{{item1.vendor_id.value}}'/>{%- endif -%}
-      {%- if item1.frequencies is defined -%}<frequencies state='{{item1.frequencies.state}}'/>{%- endif -%}
-      {%- if item1.reenlightenment is defined -%}<reenlightenment state='{{item1.reenlightenment.state}}'/>{%- endif -%}
-      {%- if item1.tlbflush is defined -%}<tlbflush state='{{item1.tlbflush.state}}'/>{%- endif -%}
-    {%- endfor -%}</hyperv>{%- endif -%}
-    {%- if item.pvspinlock is defined -%}<pvspinlock state='{{item.pvspinlock.state}}'/>{%- endif -%}
-    {%- if item.kvm is defined -%}<kvm>{%- for item1 in item.kvm -%}
-      {%- if item1.hidden is defined -%}<hidden state='{{item1.hidden.state}}'/>{%- endif -%}
-    {%- endfor -%}</kvm>{%- endif -%}
-    {%- if item.pmu is defined -%}<pmu state='{{item.pmu.state}}'/>{%- endif -%}
-    {%- if item.vmport is defined -%}<vmport state='{{item.vmport.state}}'/>{%- endif -%}
-    {%- if item.gic is defined -%}<gic version='{{item.gic.version}}'/>{%- endif -%}
-    {%- if item.smm is defined -%}<smm state='{{item.smm.state}}'>
-      <tseg unit='{{item.smm.tseg.unit}}'>{{item.smm.tseg.size}}</tseg>
-    </smm>{%- endif -%}
-    {%- if item.ioapic is defined -%}<ioapic driver='{{item.ioapic.driver}}'/>{%- endif -%}
-    {%- if item.hpt is defined -%}<hpt resizing='{{item.hpt.resizing}}'>
-      {%- if item.hpt.maxpagesize is defined -%}<maxpagesize unit='{{item.hpt.maxpagesize.unit}}'>{{item.hpt.maxpagesize.size}}</maxpagesize>{%- endif -%}
-    </hpt>{%- endif -%}
-    {%- if item.vmcoreinfo is defined -%}<vmcoreinfo/>{%- endif -%}
-    {%- if item.htm is defined -%}<htm state='{{item.htm.state}}'/>{%- endif -%}
-  {%- endfor -%}</features>
-  <clock offset='{{domain.clock.offset}}'>{%- for item in domain.clock.timers -%}
-    <timer name='{{item.name}}'{%- if item.track is defined -%} track='{{item.track}}'{%- endif -%}{%- if item.tickpolicy is defined -%} tickpolicy='{{item.tickpolicy.policy}}'{%- endif -%}{%- if item.frequency is defined -%} frequency='{{item.frequency}}'{%- endif -%}{%- if item.mode is defined -%} mode='{{item.mode}}'{%- endif -%}{%- if item.present is defined -%} present='{{item.present}}'{%- endif -%}{%- if item.tickpolicy.policy == 'catchup' and item.tickpolicy.catchup is defined -%}>
-      <catchup{%- if item.catchup.threshold is defined -%} threshold='{{item.catchup.threshold}}'{%- endif -%}{%- if item.catchup.slew is defined -%} slew='{{item.catchup.slew}}'{%- endif -%}{%- if item.catchup.limit is defined -%} limit='{{item.catchup.limit}}'{%- endif -%}/>
-    </timer>{%- else -%}/>{%- endif -%}
-  {%- endfor -%}</clock>
-  <devices>{%- for dev in domain.devices -%}
-    {%- if dev.emulator is defined -%}<emulator>{{dev.emulator}}</emulator>{%- endif -%}
-    {%- if dev.disk is defined -%}<disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
-      {%- if dev.alias is defined -%}<alias name='{{dev.alias.name}}'/>{%- endif -%}
-      {%- if dev.source.seclabels is defined -%}
-      <source{%- if dev.source.file is defined %} file='{{dev.source.file}}'{%- endif -%}{%- if dev.source.block is defined %} block='{{dev.source.block}}'{%- endif -%}{%- if dev.source.dir is defined %} dir='{{dev.source.dir}}'{%- endif -%}{%- if dev.source.network is defined %} network='{{dev.source.network}}'{%- endif -%}{%- if dev.source.volume is defined %} volume='{{dev.source.volume}}'{%- endif -%}{%- if dev.source.index is defined %} index='{{dev.source.index}}'{%- endif -%}>
-        {%- for seclabel in dev.source.seclabels -%}
-        {%- if seclabel.label is defined or seclabel.baselabel is defined or seclabel.imagelabel is defined -%}
-        <seclabel type='{{seclabel.type}}'{%- if seclabel.model is defined %} model='{{seclabel.model}}'{%- endif -%}{%- if seclabel.relabel is defined %} relabel='{{seclabel.relabel}}'{%- endif -%}>
-          {%- if seclabel.label is defined -%}
-          <label>{{seclabel.label}}</label>
-          {%- endif -%}
-          {%- if seclabel.baselabel is defined -%}
-          <baselabel>{{seclabel.baselabel}}</baselabel>
-          {%- endif -%}
-          {%- if seclabel.imagelabel is defined -%}
-          <imagelabel>{{seclabel.imagelabel}}</imagelabel>
-          {%- endif -%}
-        </seclabel>
-        {%- else -%}
-        <seclabel type='{{seclabel.type}}'{%- if seclabel.model is defined %} model='{{seclabel.model}}'{%- endif -%}{%- if seclabel.relabel is defined %} relabel='{{seclabel.relabel}}'{%- endif -%}/>
-        {%- endif -%}
-        {%- endfor -%}
-      </source>
-      {%- else -%}
-      <source{%- if dev.source.file is defined %} file='{{dev.source.file}}'{%- endif -%}{%- if dev.source.block is defined %} block='{{dev.source.block}}'{%- endif -%}{%- if dev.source.dir is defined %} dir='{{dev.source.dir}}'{%- endif -%}{%- if dev.source.network is defined %} network='{{dev.source.network}}'{%- endif -%}{%- if dev.source.volume is defined %} volume='{{dev.source.volume}}'{%- endif -%}{%- if dev.source.index is defined %} index='{{dev.source.index}}'{%- endif -%}/>
-      {%- endif -%}
-      <driver name='{{dev.driver.name}}' type='{{dev.driver.type}}'/>
-    </disk>{%- endif -%}
-    {# <disk type='file' device='disk'>
-      <driver name='qemu' type='qcow2'/>
-      <source file='/var/lib/libvirt/images/dc0-1.qcow2'/>
-      <backingStore/>
-      <target dev='hda' bus='ide'/>
-      <alias name='ide0-0-0'/>
-      <address type='drive' controller='0' bus='0' target='0' unit='0'/>
-    </disk>
-    <disk type='file' device='cdrom'>
-      <driver name='qemu' type='raw'/>
-      <source file='/var/lib/libvirt/iso/Windows/SW_DVD9_Windows_Svr_Std_and_DataCtr_2012_R2_64Bit_English_-4_MLF_X19-82891.ISO'/>
-      <backingStore/>
-      <target dev='hdb' bus='ide'/>
-      <readonly/>
-      <alias name='ide0-0-1'/>
-      <address type='drive' controller='0' bus='0' target='0' unit='1'/>
-    </disk>
-    <controller type='usb' index='0' model='ich9-ehci1'>
-      <alias name='usb'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x7'/>
-    </controller>
-    <controller type='usb' index='0' model='ich9-uhci1'>
-      <alias name='usb'/>
-      <master startport='0'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0' multifunction='on'/>
-    </controller>
-    <controller type='usb' index='0' model='ich9-uhci2'>
-      <alias name='usb'/>
-      <master startport='2'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x1'/>
-    </controller>
-    <controller type='usb' index='0' model='ich9-uhci3'>
-      <alias name='usb'/>
-      <master startport='4'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x2'/>
-    </controller>
-    <controller type='pci' index='0' model='pci-root'>
-      <alias name='pci.0'/>
-    </controller>
-    <controller type='ide' index='0'>
-      <alias name='ide'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x1'/>
-    </controller>
-    <controller type='virtio-serial' index='0'>
-      <alias name='virtio-serial0'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x0'/>
-    </controller>
-    <interface type='bridge'>
-      <mac address='52:54:00:36:20:27'/>
-      <source bridge='br200'/>
-      <target dev='vnet1'/>
-      <model type='e1000'/>
-      <alias name='net0'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
-    </interface>
-    <serial type='pty'>
-      <source path='/dev/pts/1'/>
-      <target port='0'/>
-      <alias name='serial0'/>
-    </serial>
-    <console type='pty' tty='/dev/pts/1'>
-      <source path='/dev/pts/1'/>
-      <target type='serial' port='0'/>
-      <alias name='serial0'/>
-    </console>
-    <channel type='spicevmc'>
-      <target type='virtio' name='com.redhat.spice.0' state='disconnected'/>
-      <alias name='channel0'/>
-      <address type='virtio-serial' controller='0' bus='0' port='1'/>
-    </channel>
-    <input type='tablet' bus='usb'>
-      <alias name='input0'/>
-      <address type='usb' bus='0' port='1'/>
-    </input>
-    <input type='mouse' bus='ps2'>
-      <alias name='input1'/>
-    </input>
-    <input type='keyboard' bus='ps2'>
-      <alias name='input2'/>
-    </input>
-    <graphics type='spice' port='5901' autoport='yes' listen='127.0.0.1'>
-      <listen type='address' address='127.0.0.1'/>
-    </graphics>
-    <video>
-      <model type='qxl' ram='65536' vram='65536' vgamem='16384' heads='1' primary='yes'/>
-      <alias name='video0'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
-    </video>
-    <redirdev bus='usb' type='spicevmc'>
-      <alias name='redir0'/>
-      <address type='usb' bus='0' port='2'/>
-    </redirdev>
-    <redirdev bus='usb' type='spicevmc'>
-      <alias name='redir1'/>
-      <address type='usb' bus='0' port='3'/>
-    </redirdev>
-    <memballoon model='virtio'>
-      <alias name='balloon0'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x06' function='0x0'/>
-    </memballoon> #}
-  {%- endfor -%}</devices>
-  {%- for item in domain.seclabel -%}
-  {#<seclabel type='dynamic' model='selinux' relabel='yes'>
-    <label>system_u:system_r:svirt_t:s0:c198,c433</label>
-    <imagelabel>system_u:object_r:svirt_image_t:s0:c198,c433</imagelabel>
-  </seclabel>
-  <seclabel type='dynamic' model='dac' relabel='yes'>
-    <label>+0:+0</label>
-    <imagelabel>+0:+0</imagelabel>
-  </seclabel> #}
-  {%- endfor -%}
+    {# TODO memoryBacking #}
+    {# TODO memtune #}
+    {# TODO numatune #}
+    {# TODO blkiotune #}
+    <resource>{%- for res in domain.resource -%}
+        {% include 'resource.xml.j2' %}
+    {%- endfor -%}</resource>
+    <cpu{% if domain.cpu.match is defined %} match='{{domain.cpu.match}}'{%- endif -%}{% if domain.cpu.check is defined %} check='{{domain.cpu.check}}'{% endif %}{% if domain.cpu.mode is defined %} mode='{{domain.cpu.mode}}'{% endif %}>{%- for item in domain.cpu.cpu -%}
+        {% include 'cpu.xml.j2' %}
+    {%- endfor -%}</cpu>
+    {%- if domain.on_poweroff is defined -%}
+        <on_poweroff>{{domain.on_poweroff}}</on_poweroff>
+    {%- endif -%}
+    {%- if domain.on_reboot is defined -%}
+        <on_reboot>{{domain.on_reboot}}</on_reboot>
+    {%- endif -%}
+    {%- if domain.on_crash is defined -%}
+        <on_crash>{{domain.on_crash}}</on_crash>
+    {%- endif -%}
+    {%- if domain.on_lockfailure is defined -%}
+        <on_lockfailure>{{domain.on_lockfailure}}</on_lockfailure>
+    {%- endif -%}
+    {%- if domain.pm is defined -%}
+        <pm>{%- for pm in domain.pm -%}
+            {% include 'pm.xml.j2' %}
+        {%- endfor -%}</pm>
+    {%- endif -%}
+    <features>{%- for feature in domain.features -%}
+        {%include 'feature.xml.j2' %}
+    {%- endfor -%}</features>
+    <clock offset='{{domain.clock.offset}}'>{%- for timer in domain.clock.timers -%}
+        {% include 'timer.xml.j2' %}
+    {%- endfor -%}</clock>
+    <devices>{%- for dev in domain.devices -%}
+        {% include 'device.xml.j2' %}
+    {%- endfor -%}</devices>
+    {%- for seclabel in domain.seclabels -%}
+        {% include 'seclabel.xml.j2' %}
+    {%- endfor -%}
 </domain>

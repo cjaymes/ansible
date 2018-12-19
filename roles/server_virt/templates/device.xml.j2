@@ -1,0 +1,205 @@
+{%- if dev.emulator is defined -%}
+    <emulator>{{dev.emulator}}</emulator>
+{%- endif -%}
+
+{%- if dev.disk is defined and dev.type == 'file' -%}
+    <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
+        {%- if dev.alias is defined -%}
+            <alias name='{{dev.alias.name}}'/>
+        {%- endif -%}
+        <source file='{{dev.source.file}}'{%- if dev.source.index is defined -%} index='{{dev.source.index}}'{%- endif -%}{%- if dev.source.startupPolicy is defined -%} startupPolicy='{{dev.source.startup_policy}}'{%- endif -%}>
+            {%- for seclabel in dev.source.seclabels -%}
+                {% include 'seclabel.xml.j2' %}
+            {%- endfor -%}
+            {%- if dev.source.snapshot is defined -%}
+                <snapshot name='{{dev.source.snapshot.name}}'/>
+            {%- endif -%}
+            {%- if dev.source.config is defined -%}
+                <config file='{{dev.source.config.file}}'/>
+            {%- endif -%}
+            {# TODO encryption #}
+            {# TODO reservations #}
+        </source>
+    </disk>
+{%- elif dev.disk is defined and dev.type == 'block' -%}
+    <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
+        {%- if dev.alias is defined -%}
+            <alias name='{{dev.alias.name}}'/>
+        {%- endif -%}
+        <source dev='{{dev.source.dev}}'>
+            {%- for seclabel in dev.source.seclabels -%}
+                {% include 'seclabel.xml.j2' %}
+            {%- endfor -%}
+            {%- if dev.source.snapshot is defined -%}
+                <snapshot name='{{dev.source.snapshot.name}}'/>
+            {%- endif -%}
+            {%- if dev.source.config is defined -%}
+                <config file='{{dev.source.config.file}}'/>
+            {%- endif -%}
+            {# TODO encryption #}
+            {# TODO reservations #}
+        </source>
+    </disk>
+{%- elif dev.disk is defined and dev.type == 'dir' -%}
+    <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
+        {%- if dev.alias is defined -%}
+            <alias name='{{dev.alias.name}}'/>
+        {%- endif -%}
+        <source dir='{{dev.source.dir}}'>
+            {%- if dev.source.snapshot is defined -%}
+                <snapshot name='{{dev.source.snapshot.name}}'/>
+            {%- endif -%}
+            {%- if dev.source.config is defined -%}
+                <config file='{{dev.source.config.file}}'/>
+            {%- endif -%}
+            {# TODO encryption #}
+            {# TODO reservations #}
+        </source>
+    </disk>
+{%- elif dev.disk is defined and dev.type == 'network' -%}
+    <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
+        {%- if dev.alias is defined -%}
+            <alias name='{{dev.alias.name}}'/>
+        {%- endif -%}
+        <source protocol='{{dev.source.protocol}}'{%- if dev.source.name is defined -%} name='{{dev.source.name}}'{%- endif -%}{%- if dev.source.tls is defined -%} tls='{{dev.source.tls}}'{%- endif -%}>
+            {%- for host in dev.source.hosts -%}
+                <host name='{{host.name}}'{%- if host.port is defined -%} port='{{host.port}}'{%- endif -%}{%- if host.transport is defined -%} transport='{{host.transport}}'{%- endif -%}{%- if host.socket is defined -%} socket='{{host.socket}}'{%- endif -%}/>
+            {%- endfor -%}
+            {%- if dev.source.snapshot is defined -%}
+                <snapshot name='{{dev.source.snapshot.name}}'/>
+            {%- endif -%}
+            {%- if dev.source.config is defined -%}
+                <config file='{{dev.source.config.file}}'/>
+            {%- endif -%}
+            {%- if dev.source.auth is defined -%}
+                <auth username='{{dev.source.auth.username}}'>
+                    <secret type='{{dev.source.auth.secret_type}}'{%- if dev.source.auth.secret_uuid is defined -%} uuid='{{dev.source.auth.secret_uuid}}'{%- endif -%}{%- if dev.source.auth.secret_usage is defined -%} usage='{{dev.source.auth.secret_usage}}'{%- endif -%}>{{dev.source.auth.secret}}</secret>
+                </auth>
+            {%- endif -%}
+            {# TODO encryption #}
+            {# TODO reservations #}
+            {# TODO initiator #}
+        </source>
+    </disk>
+{%- elif dev.disk is defined and dev.type == 'volume' -%}
+    <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
+        {%- if dev.alias is defined -%}
+            <alias name='{{dev.alias.name}}'/>
+        {%- endif -%}
+        <source pool='{{dev.source.pool}}' volume='{{dev.source.volume}}'{%- if dev.source.mode is defined -%} mode='{{dev.source.mode}}'{%- endif -%}{%- if dev.source.tls is defined -%} tls='{{dev.source.tls}}'{%- endif -%}{%- if dev.source.startupPolicy is defined -%} startupPolicy='{{dev.source.startup_policy}}'{%- endif -%}>
+            {%- for seclabel in dev.source.seclabels -%}
+                {% include 'seclabel.xml.j2' %}
+            {%- endfor -%}
+            {%- if dev.source.snapshot is defined -%}
+                <snapshot name='{{dev.source.snapshot.name}}'/>
+            {%- endif -%}
+            {%- if dev.source.config is defined -%}
+                <config file='{{dev.source.config.file}}'/>
+            {%- endif -%}
+            {# TODO encryption #}
+            {# TODO reservations #}
+        </source>
+    </disk>
+{%- endif -%}
+
+
+{# <disk type='file' device='disk'>
+<driver name='qemu' type='qcow2'/>
+<source file='/var/lib/libvirt/images/dc0-1.qcow2'/>
+<backingStore/>
+<target dev='hda' bus='ide'/>
+<alias name='ide0-0-0'/>
+<address type='drive' controller='0' bus='0' target='0' unit='0'/>
+</disk>
+<disk type='file' device='cdrom'>
+<driver name='qemu' type='raw'/>
+<source file='/var/lib/libvirt/iso/Windows/SW_DVD9_Windows_Svr_Std_and_DataCtr_2012_R2_64Bit_English_-4_MLF_X19-82891.ISO'/>
+<backingStore/>
+<target dev='hdb' bus='ide'/>
+<readonly/>
+<alias name='ide0-0-1'/>
+<address type='drive' controller='0' bus='0' target='0' unit='1'/>
+</disk>
+<controller type='usb' index='0' model='ich9-ehci1'>
+<alias name='usb'/>
+<address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x7'/>
+</controller>
+<controller type='usb' index='0' model='ich9-uhci1'>
+<alias name='usb'/>
+<master startport='0'/>
+<address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0' multifunction='on'/>
+</controller>
+<controller type='usb' index='0' model='ich9-uhci2'>
+<alias name='usb'/>
+<master startport='2'/>
+<address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x1'/>
+</controller>
+<controller type='usb' index='0' model='ich9-uhci3'>
+<alias name='usb'/>
+<master startport='4'/>
+<address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x2'/>
+</controller>
+<controller type='pci' index='0' model='pci-root'>
+<alias name='pci.0'/>
+</controller>
+<controller type='ide' index='0'>
+<alias name='ide'/>
+<address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x1'/>
+</controller>
+<controller type='virtio-serial' index='0'>
+<alias name='virtio-serial0'/>
+<address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x0'/>
+</controller>
+<interface type='bridge'>
+<mac address='52:54:00:36:20:27'/>
+<source bridge='br200'/>
+<target dev='vnet1'/>
+<model type='e1000'/>
+<alias name='net0'/>
+<address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+</interface>
+<serial type='pty'>
+<source path='/dev/pts/1'/>
+<target port='0'/>
+<alias name='serial0'/>
+</serial>
+<console type='pty' tty='/dev/pts/1'>
+<source path='/dev/pts/1'/>
+<target type='serial' port='0'/>
+<alias name='serial0'/>
+</console>
+<channel type='spicevmc'>
+<target type='virtio' name='com.redhat.spice.0' state='disconnected'/>
+<alias name='channel0'/>
+<address type='virtio-serial' controller='0' bus='0' port='1'/>
+</channel>
+<input type='tablet' bus='usb'>
+<alias name='input0'/>
+<address type='usb' bus='0' port='1'/>
+</input>
+<input type='mouse' bus='ps2'>
+<alias name='input1'/>
+</input>
+<input type='keyboard' bus='ps2'>
+<alias name='input2'/>
+</input>
+<graphics type='spice' port='5901' autoport='yes' listen='127.0.0.1'>
+<listen type='address' address='127.0.0.1'/>
+</graphics>
+<video>
+<model type='qxl' ram='65536' vram='65536' vgamem='16384' heads='1' primary='yes'/>
+<alias name='video0'/>
+<address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
+</video>
+<redirdev bus='usb' type='spicevmc'>
+<alias name='redir0'/>
+<address type='usb' bus='0' port='2'/>
+</redirdev>
+<redirdev bus='usb' type='spicevmc'>
+<alias name='redir1'/>
+<address type='usb' bus='0' port='3'/>
+</redirdev>
+<memballoon model='virtio'>
+<alias name='balloon0'/>
+<address type='pci' domain='0x0000' bus='0x00' slot='0x06' function='0x0'/>
+</memballoon> #}

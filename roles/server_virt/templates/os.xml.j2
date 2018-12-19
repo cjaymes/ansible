@@ -1,0 +1,74 @@
+{%- if item.type is defined -%}
+    <type{% if item.type.arch is defined %} arch='{{item.type.arch}}'{% endif %}{% if item.type.machine is defined %} machine='{{item.type.machine}}'{% endif %}>{{item.type.type}}</type>
+{%- endif -%}
+{%- if item.loader is defined -%}
+    <loader{% if item.loader.readonly is defined %} readonly='{{item.loader.readonly}}'{% endif %}{% if item.loader.type is defined %} type='{{item.loader.type}}'{% endif %}>{{item.loader.path}}</loader>
+{%- endif -%}
+{%- if item.nvram is defined -%}
+    <nvram{% if item.nvram.template is defined %} template='{{item.nvram.template}}'{% endif %}>{{item.nvram.path}}</nvram>
+{%- endif -%}
+{%- if item.boot is defined -%}
+    <boot dev='{{item.boot.dev}}'/>
+{%- endif -%}
+{%- if item.smbios is defined -%}
+    <smbios mode='{{item.smbios.mode}}'/>
+{%- endif -%}
+{%- if item.bootmenu is defined -%}
+    <bootmenu{% if item.bootmenu.enable is defined %} enable='{{item.bootmenu.enable}}'{% endif %}{% if item.bootmenu.timeout is defined %} timeout='{{item.bootmenu.timeout}}'{% endif %}/>
+{%- endif -%}
+{%- if item.bios is defined -%}
+    <bios{% if item.bios.useserial is defined %} useserial='{{item.bios.useserial}}'{% endif %}{% if item.bios.rebootTimeout is defined %} rebootTimeout='{{item.bios.rebootTimeout}}'{% endif %}/>
+{%- endif -%}
+{%- if item.bootloader is defined -%}
+    <bootloader>{{item.bootloader}}</bootloader>
+{%- endif -%}
+{%- if item.bootloader_args is defined -%}
+    <bootloader_args>{{item.bootloader_args}}</bootloader_args>
+{%- endif -%}
+{%- if item.kernel is defined -%}
+    <kernel>{{item.kernel}}</kernel>
+{%- endif -%}
+{%- if item.initrd is defined -%}
+    <initrd>{{item.initrd}}</initrd>
+{%- endif -%}
+{%- if item.cmdline is defined -%}
+    <cmdline>{{item.cmdline}}</cmdline>
+{%- endif -%}
+{%- if item.dtb is defined -%}
+    <dtb>{{item.dtb}}</dtb>
+{%- endif -%}
+{%- if item.acpi is defined -%}
+    <acpi>
+        {%- if item.acpi.table is defined -%}
+            <table{% if item.acpi.table.type is defined %} type='{{item.acpi.table.type}}'{% endif %}>{{item.acpi.table.path}}</table>
+        {%- endif -%}
+    </acpi>
+{%- endif -%}
+{%- if item.init is defined -%}
+    <init>{{item.init}}</init>
+{%- endif -%}
+{%- if item.initarg is defined -%}
+    <initarg>{{item.initarg}}</initarg>
+{%- endif -%}
+{%- if item.initenv is defined -%}
+    <initenv name='{{item.initenv.name}}'>{{item.initenv.value}}</initenv>
+{%- endif -%}
+{%- if item.initdir is defined -%}
+    <initdir>{{item.initdir}}</initdir>
+{%- endif -%}
+{%- if item.inituser is defined -%}
+    <inituser>{{item.inituser}}</inituser>
+{%- endif -%}
+{%- if item.initgroup is defined -%}
+    <initgroup>{{item.initgroup}}</initgroup>
+{%- endif -%}
+{%- if item.idmap is defined -%}
+    <idmap>{%- for item1 in item.idmap -%}
+        {%- if item.uid is defined -%}
+            <uid start='{{item1.start}}' target='{{item1.target}}' count='{{item1.count}}'/>
+        {%- endif -%}
+        {%- if item.gid is defined -%}
+            <gid start='{{item1.start}}' target='{{item1.target}}' count='{{item1.count}}'/>
+        {%- endif -%}
+    {%- endfor -%}</idmap>
+{%- endif -%}

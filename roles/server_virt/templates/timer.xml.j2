@@ -1,0 +1,7 @@
+{%- if timer.tickpolicy is defined and timer.tickpolicy.policy == 'catchup' and timer.tickpolicy.catchup is defined -%}
+    <timer name='{{timer.name}}'{%- if timer.track is defined -%} track='{{timer.track}}'{%- endif -%}{%- if timer.tickpolicy is defined -%} tickpolicy='{{timer.tickpolicy.policy}}'{%- endif -%}{%- if timer.frequency is defined -%} frequency='{{timer.frequency}}'{%- endif -%}{%- if timer.mode is defined -%} mode='{{timer.mode}}'{%- endif -%}{%- if timer.present is defined -%} present='{{timer.present}}'{%- endif -%}>
+        <catchup{%- if timer.catchup.threshold is defined -%} threshold='{{timer.catchup.threshold}}'{%- endif -%}{%- if timer.catchup.slew is defined -%} slew='{{timer.catchup.slew}}'{%- endif -%}{%- if timer.catchup.limit is defined -%} limit='{{timer.catchup.limit}}'{%- endif -%}/>
+    </timer>
+{%- else -%}
+    <timer name='{{timer.name}}'{%- if timer.track is defined -%} track='{{timer.track}}'{%- endif -%}{%- if timer.tickpolicy is defined -%} tickpolicy='{{timer.tickpolicy.policy}}'{%- endif -%}{%- if timer.frequency is defined -%} frequency='{{timer.frequency}}'{%- endif -%}{%- if timer.mode is defined -%} mode='{{timer.mode}}'{%- endif -%}{%- if timer.present is defined -%} present='{{timer.present}}'{%- endif -%}/>
+{%- endif -%}
