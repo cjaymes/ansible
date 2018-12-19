@@ -99,6 +99,10 @@
             {# TODO encryption #}
             {# TODO reservations #}
         </source>
+        {%- if dev.backing_store is defined -%}
+            {% set backing_store = dev.backing_store %}
+            {% include 'disk_backing_store.xml.j2' %}
+        {%- endif -%}
     </disk>
 {%- endif -%}
 
