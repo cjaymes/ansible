@@ -15,6 +15,9 @@
             {% include 'disk_backing_store.xml.j2' %}
         {%- endif -%}
         {# TODO mirror #}
+        {%- if dev.target is defined -%}
+            <target dev='{{dev.target.dev}}'{%- if dev.target.bus is defined -%} bus='{{dev.target.bus}}'{%- endif -%}{%- if dev.target.tray is defined -%} tray='{{dev.target.tray}}'{%- endif -%}{%- if dev.target.removable is defined -%} removable='{{dev.target.removable}}'{%- endif -%}/>
+        {%- endif -%}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'block' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
@@ -29,6 +32,9 @@
             {% include 'disk_backing_store.xml.j2' %}
         {%- endif -%}
         {# TODO mirror #}
+        {%- if dev.target is defined -%}
+            <target dev='{{dev.target.dev}}'{%- if dev.target.bus is defined -%} bus='{{dev.target.bus}}'{%- endif -%}{%- if dev.target.tray is defined -%} tray='{{dev.target.tray}}'{%- endif -%}{%- if dev.target.removable is defined -%} removable='{{dev.target.removable}}'{%- endif -%}/>
+        {%- endif -%}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'dir' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
@@ -50,6 +56,9 @@
             {%- endif -%}
         </source>
         {# TODO mirror #}
+        {%- if dev.target is defined -%}
+            <target dev='{{dev.target.dev}}'{%- if dev.target.bus is defined -%} bus='{{dev.target.bus}}'{%- endif -%}{%- if dev.target.tray is defined -%} tray='{{dev.target.tray}}'{%- endif -%}{%- if dev.target.removable is defined -%} removable='{{dev.target.removable}}'{%- endif -%}/>
+        {%- endif -%}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'network' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
@@ -64,6 +73,9 @@
             {% include 'disk_backing_store.xml.j2' %}
         {%- endif -%}
         {# TODO mirror #}
+        {%- if dev.target is defined -%}
+            <target dev='{{dev.target.dev}}'{%- if dev.target.bus is defined -%} bus='{{dev.target.bus}}'{%- endif -%}{%- if dev.target.tray is defined -%} tray='{{dev.target.tray}}'{%- endif -%}{%- if dev.target.removable is defined -%} removable='{{dev.target.removable}}'{%- endif -%}/>
+        {%- endif -%}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'volume' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
@@ -78,6 +90,9 @@
             {% include 'disk_backing_store.xml.j2' %}
         {%- endif -%}
         {# TODO mirror #}
+        {%- if dev.target is defined -%}
+            <target dev='{{dev.target.dev}}'{%- if dev.target.bus is defined -%} bus='{{dev.target.bus}}'{%- endif -%}{%- if dev.target.tray is defined -%} tray='{{dev.target.tray}}'{%- endif -%}{%- if dev.target.removable is defined -%} removable='{{dev.target.removable}}'{%- endif -%}/>
+        {%- endif -%}
     </disk>
 {%- endif -%}
 
