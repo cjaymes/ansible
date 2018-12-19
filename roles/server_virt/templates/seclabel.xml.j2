@@ -1,5 +1,4 @@
-{%- if seclabel.label is defined or seclabel.baselabel is defined or seclabel.imagelabel is defined -%}
-    <seclabel type='{{seclabel.type}}'{%- if seclabel.model is defined %} model='{{seclabel.model}}'{%- endif -%}{%- if seclabel.relabel is defined %} relabel='{{seclabel.relabel}}'{%- endif -%}>
+<seclabel type='{{seclabel.type}}'{%- if seclabel.model is defined %} model='{{seclabel.model}}'{%- endif -%}{%- if seclabel.relabel is defined %} relabel='{{seclabel.relabel}}'{%- endif -%}>
     {%- if seclabel.label is defined -%}
         <label>{{seclabel.label}}</label>
     {%- endif -%}
@@ -9,7 +8,4 @@
     {%- if seclabel.imagelabel is defined -%}
         <imagelabel>{{seclabel.imagelabel}}</imagelabel>
     {%- endif -%}
-    </seclabel>
-{%- else -%}
-    <seclabel type='{{seclabel.type}}'{%- if seclabel.model is defined %} model='{{seclabel.model}}'{%- endif -%}{%- if seclabel.relabel is defined %} relabel='{{seclabel.relabel}}'{%- endif -%}/>
-{%- endif -%}
+</seclabel>
