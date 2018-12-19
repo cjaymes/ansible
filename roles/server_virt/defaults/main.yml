@@ -245,13 +245,31 @@ virt_domain:
     devices:
         - emulator: /usr/libexec/qemu-kvm
         - disk:
-          type: file
-          device: disk
+          type: file #|block|dir|network|volume
+          device: disk #|floppy|cdrom|lun|
+          #rawio: no #|yes
+          #sgio: filtered #|unfiltered
+          #snapshot: no #|internal|external
+          source:
+              #file: /var/lib/libvirt/images/{{name}}.qcow2
+              #dev: ...
+              #dir: ...
+              #protocol: nbd #|iscsi|rbd|sheepdog|gluster|vxhs
+              #name: ...
+              #tls: yes|no
+              #pool: ...
+              #volume: ...
+              #mode: host #|direct
+              #seclabels:
+                #- type: dynamic #|static|none
+                #  model: ...
+                #  relabel: yes|no
+                #  label: ...
+                #  baselabel: ...
+                #  imagelabel: ...
           driver:
               name: qemu
               type: qcow2
-          source:
-              #file: /var/lib/libvirt/images/{name}.qcow2
           backingStore:
           target:
               dev: hda
@@ -265,8 +283,11 @@ virt_domain:
               target: 0
               unit: 0
         - disk:
-          type: file
+          type: file #|block|dir|network|volume
           device: cdrom
+          #rawio: no #|yes
+          #sgio: filtered #|unfiltered
+          #snapshot: no #|internal|external
           driver:
               name: qemu
               type: raw
