@@ -142,13 +142,13 @@
       <catchup{%- if item.catchup.threshold is defined -%} threshold='{{item.catchup.threshold}}'{%- endif -%}{%- if item.catchup.slew is defined -%} slew='{{item.catchup.slew}}'{%- endif -%}{%- if item.catchup.limit is defined -%} limit='{{item.catchup.limit}}'{%- endif -%}/>
     </timer>{%- else -%}/>{%- endif -%}
   {%- endfor -%}</clock>
-  <devices>{%- for item in domain.devices -%}
-    {%- if item.emulator is defined -%}<emulator>{{item.emulator}}</emulator>{%- endif -%}
-    {%- if item.disk is defined -%}<disk type='{{item.type}}' device='{{item.device}}'{%- if item.rawio is defined -%} rawio='{{item.rawio}}'{%- endif -%}{%- if item.sgio is defined -%} sgio='{{item.sgio}}'{%- endif -%}{%- if item.snapshot is defined -%} snapshot='{{item.snapshot}}'{%- endif -%}>
-      {%- if item.alias is defined -%}<alias name='{{item.alias.name}}'/>{%- endif -%}
-      {%- if item.source.seclabels is defined -%}
-      <source{%- if item.source.file is defined %} file='{{item.source.file}}'{%- endif -%}{%- if item.source.block is defined %} block='{{item.source.block}}'{%- endif -%}{%- if item.source.dir is defined %} dir='{{item.source.dir}}'{%- endif -%}{%- if item.source.network is defined %} network='{{item.source.network}}'{%- endif -%}{%- if item.source.volume is defined %} volume='{{item.source.volume}}'{%- endif -%}{%- if item.source.index is defined %} index='{{item.source.index}}'{%- endif -%}>
-        {%- for seclabel in item.source.seclabels -%}
+  <devices>{%- for dev in domain.devices -%}
+    {%- if dev.emulator is defined -%}<emulator>{{dev.emulator}}</emulator>{%- endif -%}
+    {%- if dev.disk is defined -%}<disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
+      {%- if dev.alias is defined -%}<alias name='{{dev.alias.name}}'/>{%- endif -%}
+      {%- if dev.source.seclabels is defined -%}
+      <source{%- if dev.source.file is defined %} file='{{dev.source.file}}'{%- endif -%}{%- if dev.source.block is defined %} block='{{dev.source.block}}'{%- endif -%}{%- if dev.source.dir is defined %} dir='{{dev.source.dir}}'{%- endif -%}{%- if dev.source.network is defined %} network='{{dev.source.network}}'{%- endif -%}{%- if dev.source.volume is defined %} volume='{{dev.source.volume}}'{%- endif -%}{%- if dev.source.index is defined %} index='{{dev.source.index}}'{%- endif -%}>
+        {%- for seclabel in dev.source.seclabels -%}
         {%- if seclabel.label is defined or seclabel.baselabel is defined or seclabel.imagelabel is defined -%}
         <seclabel type='{{seclabel.type}}'{%- if seclabel.model is defined %} model='{{seclabel.model}}'{%- endif -%}{%- if seclabel.relabel is defined %} relabel='{{seclabel.relabel}}'{%- endif -%}>
           {%- if seclabel.label is defined -%}
@@ -167,9 +167,9 @@
         {%- endfor -%}
       </source>
       {%- else -%}
-      <source{%- if item.source.file is defined %} file='{{item.source.file}}'{%- endif -%}{%- if item.source.block is defined %} block='{{item.source.block}}'{%- endif -%}{%- if item.source.dir is defined %} dir='{{item.source.dir}}'{%- endif -%}{%- if item.source.network is defined %} network='{{item.source.network}}'{%- endif -%}{%- if item.source.volume is defined %} volume='{{item.source.volume}}'{%- endif -%}{%- if item.source.index is defined %} index='{{item.source.index}}'{%- endif -%}/>
+      <source{%- if dev.source.file is defined %} file='{{dev.source.file}}'{%- endif -%}{%- if dev.source.block is defined %} block='{{dev.source.block}}'{%- endif -%}{%- if dev.source.dir is defined %} dir='{{dev.source.dir}}'{%- endif -%}{%- if dev.source.network is defined %} network='{{dev.source.network}}'{%- endif -%}{%- if dev.source.volume is defined %} volume='{{dev.source.volume}}'{%- endif -%}{%- if dev.source.index is defined %} index='{{dev.source.index}}'{%- endif -%}/>
       {%- endif -%}
-      <driver name='{{item.driver.name}}' type='{{item.driver.type}}'/>
+      <driver name='{{dev.driver.name}}' type='{{dev.driver.type}}'/>
     </disk>{%- endif -%}
     {# <disk type='file' device='disk'>
       <driver name='qemu' type='qcow2'/>
