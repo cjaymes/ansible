@@ -36,6 +36,9 @@
         {%- if dev.serial is defined -%}
             <serial>{{dev.serial}}</serial>
         {%- endif -%}
+        {%- if dev.wwn is defined -%}
+            <wwn>{{dev.wwn}}</wwn>
+        {%- endif -%}
     </disk>
 {%- endif -%}
 
