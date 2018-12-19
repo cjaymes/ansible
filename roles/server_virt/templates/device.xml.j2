@@ -24,6 +24,9 @@
             {# TODO virtio attributes #}
         {%- endif -%}
         {# TODO backenddomain #}
+        {%- if dev.readonly is defined -%}
+            <readonly/>
+        {%- endif -%}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'block' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
@@ -47,6 +50,9 @@
             {# TODO virtio attributes #}
         {%- endif -%}
         {# TODO backenddomain #}
+        {%- if dev.readonly is defined -%}
+            <readonly/>
+        {%- endif -%}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'dir' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
@@ -77,6 +83,9 @@
             {# TODO virtio attributes #}
         {%- endif -%}
         {# TODO backenddomain #}
+        {%- if dev.readonly is defined -%}
+            <readonly/>
+        {%- endif -%}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'network' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
@@ -100,6 +109,9 @@
             {# TODO virtio attributes #}
         {%- endif -%}
         {# TODO backenddomain #}
+        {%- if dev.readonly is defined -%}
+            <readonly/>
+        {%- endif -%}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'volume' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
@@ -123,6 +135,9 @@
             {# TODO virtio attributes #}
         {%- endif -%}
         {# TODO backenddomain #}
+        {%- if dev.readonly is defined -%}
+            <readonly/>
+        {%- endif -%}
     </disk>
 {%- endif -%}
 
