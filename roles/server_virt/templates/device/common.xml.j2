@@ -1,0 +1,11 @@
+{%- if dev.alias is defined -%}
+    <alias name='{{dev.alias.name}}'/>
+{%- endif -%}
+
+{%- if dev.address is defined -%}
+    <address type='{{dev.address.type}}'{%- if dev.address.bus is defined -%} bus='{{dev.address.bus}}'{%- endif -%}{%- if dev.address.slot is defined -%} slot='{{dev.address.slot}}'{%- endif -%}{%- if dev.address.function is defined -%} function='{{dev.address.function}}'{%- endif -%}{%- if dev.address.domain is defined -%} domain='{{dev.address.domain}}'{%- endif -%}{%- if dev.address.multifunction is defined -%} multifunction='{{dev.address.multifunction}}'{%- endif -%}{%- if dev.address.controller is defined -%} controller='{{dev.address.controller}}'{%- endif -%}{%- if dev.address.target is defined -%} target='{{dev.address.target}}'{%- endif -%}{%- if dev.address.unit is defined -%} unit='{{dev.address.unit}}'{%- endif -%}/>
+{%- endif -%}
+
+{%- if dev.readonly is defined -%}
+    <readonly/>
+{%- endif -%}

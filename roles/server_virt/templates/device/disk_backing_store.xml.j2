@@ -5,10 +5,10 @@
     {%- if backing_store.source is defined -%}
         {%- source_type = backing_store.type -%}
         {%- source = backing_store.source -%}
-        {%- import 'disk_source.xml.j2'}
+        {%- include 'disk_source.xml.j2'}
     {%- endif -%}
     {%- if backing_store.backing_store is defined -%}
         {%- backing_store = backing_store.backing_store -%}
-        {%- import 'disk_backing_store.xml.j2'}
+        {%- include 'disk_backing_store.xml.j2'}
     {%- endif -%}
 </backingStore>

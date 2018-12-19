@@ -68,7 +68,13 @@
         {% include 'timer.xml.j2' %}
     {%- endfor -%}</clock>
     <devices>{%- for dev in domain.devices -%}
-        {% include 'device.xml.j2' %}
+        {%- if dev.emulator is defined -%}
+            {% include 'device/emulator.xml.j2' %}
+        {%- elif dev.disk is defined -%}
+            {% include 'device/disk.xml.j2' %}
+        {%- elif dev.filesystem is defined -%}
+            {% include 'device/filesystem.xml.j2' %}
+        {%- endif -%}
     {%- endfor -%}</devices>
     {%- for seclabel in domain.seclabels -%}
         {% include 'seclabel.xml.j2' %}
