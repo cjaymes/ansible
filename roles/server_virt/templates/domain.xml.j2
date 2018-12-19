@@ -74,6 +74,8 @@
             {% include 'device/disk.xml.j2' %}
         {%- elif dev.filesystem is defined -%}
             {% include 'device/filesystem.xml.j2' %}
+        {%- elif dev.controller is defined -%}
+            {% include 'device/controller.xml.j2' %}
         {%- endif -%}
     {%- endfor -%}</devices>
     {%- for seclabel in domain.seclabels -%}
