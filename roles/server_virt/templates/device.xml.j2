@@ -42,6 +42,9 @@
         {%- if dev.vendor is defined -%}
             <vendor>{{dev.vendor}}</vendor>
         {%- endif -%}
+        {%- if dev.product is defined -%}
+            <product>{{dev.product}}</product>
+        {%- endif -%}
     </disk>
 {%- endif -%}
 
