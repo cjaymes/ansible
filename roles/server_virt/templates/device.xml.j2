@@ -33,6 +33,9 @@
         {%- if dev.transient is defined -%}
             <transient/>
         {%- endif -%}
+        {%- if dev.serial is defined -%}
+            <serial>{{dev.serial}}</serial>
+        {%- endif -%}
     </disk>
 {%- endif -%}
 
