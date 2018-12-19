@@ -14,6 +14,7 @@
             {% set backing_store = dev.backing_store %}
             {% include 'disk_backing_store.xml.j2' %}
         {%- endif -%}
+        {# TODO mirror #}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'block' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
@@ -27,6 +28,7 @@
             {% set backing_store = dev.backing_store %}
             {% include 'disk_backing_store.xml.j2' %}
         {%- endif -%}
+        {# TODO mirror #}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'dir' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
@@ -47,6 +49,7 @@
                 {% include 'disk_backing_store.xml.j2' %}
             {%- endif -%}
         </source>
+        {# TODO mirror #}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'network' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
@@ -60,6 +63,7 @@
             {% set backing_store = dev.backing_store %}
             {% include 'disk_backing_store.xml.j2' %}
         {%- endif -%}
+        {# TODO mirror #}
     </disk>
 {%- elif dev.disk is defined and dev.type == 'volume' -%}
     <disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
@@ -73,6 +77,7 @@
             {% set backing_store = dev.backing_store %}
             {% include 'disk_backing_store.xml.j2' %}
         {%- endif -%}
+        {# TODO mirror #}
     </disk>
 {%- endif -%}
 
