@@ -1,0 +1,9 @@
+<redirdev type='{{dev.type}}'{%- if dev.bus is defined -%} bus='{{dev.bus}}'{%- endif -%}>
+    {%- include 'common.xml.j2' -%}
+
+    {%- if dev.source is defined -%}
+        {%- set source_type = dev.type -%}
+        {%- set source = dev.source -%}
+        {%- include 'source.xml.j2' -%}
+    {%- endif -%}
+</redirdev>

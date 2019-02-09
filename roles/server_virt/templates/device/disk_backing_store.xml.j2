@@ -5,7 +5,7 @@
     {%- if backing_store.source is defined -%}
         {%- source_type = backing_store.type -%}
         {%- source = backing_store.source -%}
-        {%- include 'disk_source.xml.j2'}
+        {%- include 'source.xml.j2'}
     {%- endif -%}
     {%- if backing_store.backing_store is defined -%}
         {%- backing_store = backing_store.backing_store -%}

@@ -76,6 +76,10 @@
             {% include 'device/filesystem.xml.j2' %}
         {%- elif dev.controller is defined -%}
             {% include 'device/controller.xml.j2' %}
+        {# TODO lease #}
+        {# TODO hostdev #}
+        {%- elif dev.redirdev is defined -%}
+            {% include 'device/redirdev.xml.j2' %}
         {%- endif -%}
     {%- endfor -%}</devices>
     {%- for seclabel in domain.seclabels -%}
