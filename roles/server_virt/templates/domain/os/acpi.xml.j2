@@ -1,0 +1,7 @@
+{%- if item.acpi is defined -%}
+    <acpi>
+        {%- if item.acpi.table is defined -%}
+            <table{% if item.acpi.table.type is defined %} type='{{item.acpi.table.type}}'{% endif %}>{{item.acpi.table.path}}</table>
+        {%- endif -%}
+    </acpi>
+{%- endif -%}

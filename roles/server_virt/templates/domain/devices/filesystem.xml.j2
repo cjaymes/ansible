@@ -1,0 +1,22 @@
+<filesystem type='{{dev.type}}'{%- if dev.accessmode is defined -%} accessmode='{{dev.accessmode}}'{%- endif -%}>
+    {%- if dev.driver is defined -%}
+        <driver type='{{dev.driver.type}}'{%- if dev.driver.wrpolicy is defined -%} wrpolicy='{{dev.driver.wrpolicy}}'{%- endif -%}{%- if dev.driver.name is defined -%} name='{{dev.driver.name}}'{%- endif -%}{%- if dev.driver.format is defined -%} format='{{dev.driver.format}}'{%- endif -%}/>
+        {# TODO virtio attributes #}
+    {%- endif -%}
+    {%- if dev.source is defined -%}
+        <source{%- if dev.source.name is defined -%} name='{{dev.source.name}}'{%- endif -%}{%- if dev.source.usage is defined -%} usage='{{dev.source.usage}}'{%- endif -%}{%- if dev.source.units is defined -%} units='{{dev.source.units}}'{%- endif -%}{%- if dev.source.dir is defined -%} dir='{{dev.source.dir}}'{%- endif -%}/>
+    {%- endif -%}
+    {%- if dev.target is defined -%}
+        <target>{{dev.target}}</target>
+    {%- endif -%}
+    {%- if dev.space_hard_limit is defined -%}
+        <space_hard_limit>{{dev.space_hard_limit}}</space_hard_limit>
+    {%- endif -%}
+    {%- if dev.space_soft_limit is defined -%}
+        <space_soft_limit>{{dev.space_soft_limit}}</space_soft_limit>
+    {%- endif -%}
+
+    {% include 'roles/server_virt/templates/domain/devices/common/alias.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/devices/common/address.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/devices/common/readonly.xml.j2' %}
+</filesystem>

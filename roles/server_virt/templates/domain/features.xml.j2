@@ -1,0 +1,19 @@
+<features>{%- for feature in domain.features -%}
+    {%include 'roles/server_virt/templates/domain/features/pae.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/acpi.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/apic.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/hap.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/viridian.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/privnet.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/hyperv.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/pvspinlock.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/kvm.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/pmu.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/vmport.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/gic.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/smm.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/ioapic.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/hpt.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/vmcoreinfo.xml.j2' %}
+    {%include 'roles/server_virt/templates/domain/features/htm.xml.j2' %}
+{%- endfor -%}</features>

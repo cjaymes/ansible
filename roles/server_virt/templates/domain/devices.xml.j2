@@ -1,0 +1,17 @@
+<devices>{%- for dev in domain.devices -%}
+    {%- if dev.emulator is defined -%}
+        {% include 'roles/server_virt/templates/domain/devices/emulator.xml.j2' %}
+    {%- elif dev.disk is defined -%}
+        {% include 'roles/server_virt/templates/domain/devices/disk.xml.j2' %}
+    {%- elif dev.filesystem is defined -%}
+        {% include 'roles/server_virt/templates/domain/devices/filesystem.xml.j2' %}
+    {%- elif dev.controller is defined -%}
+        {% include 'roles/server_virt/templates/domain/device/controller.xml.j2' %}
+    {%- elif dev.lease is defined -%}
+        {% include 'roles/server_virt/templates/domain/device/lease.xml.j2' %}
+    {%- elif dev.hostdev is defined -%}
+        {% include 'roles/server_virt/templates/domain/device/hostdev.xml.j2' %}
+    {%- elif dev.redirdev is defined -%}
+        {% include 'roles/server_virt/templates/domain/devices/redirdev.xml.j2' %}
+    {%- endif -%}
+{%- endfor -%}</devices>

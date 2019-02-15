@@ -1,0 +1,5 @@
+{% if domain.vcpu.vcpus is defined %}
+    <vcpus>{%- for vcpu in domain.vcpu.vcpus -%}
+        {% include 'roles/server_virt/templates/domain/vcpus/vcpu.xml.j2' %}
+    {%- endfor -%}</vcpus>
+{%- endif -%}

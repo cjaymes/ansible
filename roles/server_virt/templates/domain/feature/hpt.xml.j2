@@ -1,0 +1,7 @@
+{%- if feature.hpt is defined -%}
+    <hpt resizing='{{feature.hpt.resizing}}'>
+    {%- if feature.hpt.maxpagesize is defined -%}
+        <maxpagesize unit='{{feature.hpt.maxpagesize.unit}}'>{{feature.hpt.maxpagesize.size}}</maxpagesize>
+    {%- endif -%}
+    </hpt>
+{%- endif -%}

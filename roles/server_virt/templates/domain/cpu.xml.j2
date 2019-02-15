@@ -1,0 +1,8 @@
+<cpu{% if domain.cpu.match is defined %} match='{{domain.cpu.match}}'{%- endif -%}{% if domain.cpu.check is defined %} check='{{domain.cpu.check}}'{% endif %}{% if domain.cpu.mode is defined %} mode='{{domain.cpu.mode}}'{% endif %}>{%- for item in domain.cpu.cpu -%}
+    {% include 'roles/server_virt/templates/domain/cpu/model.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/cpu/vendor.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/cpu/topology.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/cpu/feature.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/cpu/cache.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/cpu/numa.xml.j2' %}
+{%- endfor -%}</cpu>

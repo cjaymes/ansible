@@ -1,0 +1,12 @@
+<backingStore{%- if backing_store.type is defined -%} type='{{backing_store.type}}'{%- endif -%}{%- if backing_store.index is defined -%} index='{{backing_store.index}}'{%- endif -%}{%- if backing_store.index is defined -%} index='{{backing_store.index}}'{%- endif -%}>
+    {%- if backing_store.format is defined -%}
+        <format type='{{backing_store.format.type}}'/>
+    {%- endif -%}
+    {%- if backing_store.source is defined -%}
+        {%- include 'roles/server_virt/templates/domain/devices/disk/backingStore/source.xml.j2'}
+    {%- endif -%}
+    {%- if backing_store.backing_store is defined -%}
+        {%- backing_store = backing_store.backing_store -%}
+        {%- include 'roles/server_virt/templates/domain/devices/disk/backingStore.xml.j2'}
+    {%- endif -%}
+</backingStore>

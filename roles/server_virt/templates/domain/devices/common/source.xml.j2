@@ -1,0 +1,74 @@
+{%- if dev.type == 'file' -%}
+    <source file='{{dev.source.file}}'{%- if dev.source.index is defined -%} index='{{dev.source.index}}'{%- endif -%}{%- if dev.source.startupPolicy is defined -%} startupPolicy='{{dev.source.startup_policy}}'{%- endif -%}>
+        {%- for seclabel in dev.source.seclabels -%}
+            {% include 'roles/server_virt/templates/domain/seclabel.xml.j2' %}
+        {%- endfor -%}
+        {%- if dev.source.snapshot is defined -%}
+            <snapshot name='{{dev.source.snapshot.name}}'/>
+        {%- endif -%}
+        {%- if dev.source.config is defined -%}
+            <config file='{{dev.source.config.file}}'/>
+        {%- endif -%}
+        {# TODO encryption #}
+        {# TODO reservations #}
+    </source>
+{%- elif dev.type == 'block' -%}
+    <source dev='{{dev.source.dev}}'>
+        {%- for seclabel in dev.source.seclabels -%}
+            {% include 'roles/server_virt/templates/domain/seclabel.xml.j2' %}
+        {%- endfor -%}
+        {%- if dev.source.snapshot is defined -%}
+            <snapshot name='{{dev.source.snapshot.name}}'/>
+        {%- endif -%}
+        {%- if dev.source.config is defined -%}
+            <config file='{{dev.source.config.file}}'/>
+        {%- endif -%}
+        {# TODO encryption #}
+        {# TODO reservations #}
+    </source>
+{%- elif dev.type == 'dir' -%}
+    <source dir='{{dev.source.dir}}'>
+        {%- if dev.source.snapshot is defined -%}
+            <snapshot name='{{dev.source.snapshot.name}}'/>
+        {%- endif -%}
+        {%- if dev.source.config is defined -%}
+            <config file='{{dev.source.config.file}}'/>
+        {%- endif -%}
+        {# TODO encryption #}
+        {# TODO reservations #}
+    </source>
+{%- elif dev.type == 'network' -%}
+    <source protocol='{{dev.source.protocol}}'{%- if dev.source.name is defined -%} name='{{dev.source.name}}'{%- endif -%}{%- if dev.source.tls is defined -%} tls='{{dev.source.tls}}'{%- endif -%}>
+        {%- for host in dev.source.hosts -%}
+            <host name='{{host.name}}'{%- if host.port is defined -%} port='{{host.port}}'{%- endif -%}{%- if host.transport is defined -%} transport='{{host.transport}}'{%- endif -%}{%- if host.socket is defined -%} socket='{{host.socket}}'{%- endif -%}/>
+        {%- endfor -%}
+        {%- if dev.source.snapshot is defined -%}
+            <snapshot name='{{dev.source.snapshot.name}}'/>
+        {%- endif -%}
+        {%- if dev.source.config is defined -%}
+            <config file='{{dev.source.config.file}}'/>
+        {%- endif -%}
+        {%- if dev.source.auth is defined -%}
+            <auth username='{{dev.source.auth.username}}'>
+                <secret type='{{dev.source.auth.secret_type}}'{%- if dev.source.auth.secret_uuid is defined -%} uuid='{{dev.source.auth.secret_uuid}}'{%- endif -%}{%- if dev.source.auth.secret_usage is defined -%} usage='{{dev.source.auth.secret_usage}}'{%- endif -%}>{{dev.source.auth.secret}}</secret>
+            </auth>
+        {%- endif -%}
+        {# TODO encryption #}
+        {# TODO reservations #}
+        {# TODO initiator #}
+    </source>
+{%- elif dev.type == 'volume' -%}
+    <source pool='{{dev.source.pool}}' volume='{{dev.source.volume}}'{%- if dev.source.mode is defined -%} mode='{{dev.source.mode}}'{%- endif -%}{%- if dev.source.tls is defined -%} tls='{{dev.source.tls}}'{%- endif -%}{%- if dev.source.startupPolicy is defined -%} startupPolicy='{{dev.source.startup_policy}}'{%- endif -%}>
+        {%- for seclabel in dev.source.seclabels -%}
+            {% include 'roles/server_virt/templates/domain/seclabel.xml.j2' %}
+        {%- endfor -%}
+        {%- if dev.source.snapshot is defined -%}
+            <snapshot name='{{dev.source.snapshot.name}}'/>
+        {%- endif -%}
+        {%- if dev.source.config is defined -%}
+            <config file='{{dev.source.config.file}}'/>
+        {%- endif -%}
+        {# TODO encryption #}
+        {# TODO reservations #}
+    </source>
+{%- endif -%}

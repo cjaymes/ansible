@@ -1,0 +1,10 @@
+{%- if item.idmap is defined -%}
+    <idmap>{%- for item1 in item.idmap -%}
+        {%- if item.uid is defined -%}
+            <uid start='{{item1.start}}' target='{{item1.target}}' count='{{item1.count}}'/>
+        {%- endif -%}
+        {%- if item.gid is defined -%}
+            <gid start='{{item1.start}}' target='{{item1.target}}' count='{{item1.count}}'/>
+        {%- endif -%}
+    {%- endfor -%}</idmap>
+{%- endif -%}

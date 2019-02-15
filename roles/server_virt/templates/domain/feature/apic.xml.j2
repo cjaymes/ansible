@@ -1,0 +1,3 @@
+{%- if feature.apic is defined -%}
+    <apic{%- if feature.apic.eoi is defined -%} eoi='{{feature.apic.eoi}}'{%- endif -%}/>
+{%- endif -%}

@@ -1,0 +1,3 @@
+<resource>{%- for res in domain.resource -%}
+    {% include 'roles/server_virt/templates/domain/resource/partition.xml.j2' %}
+{%- endfor -%}</resource>

@@ -1,0 +1,7 @@
+{%- if feature.kvm is defined -%}
+    <kvm>{%- for kvm_feature in feature.kvm -%}
+        {%- if kvm_feature.hidden is defined -%}
+            <hidden state='{{kvm_feature.hidden.state}}'/>
+        {%- endif -%}
+    {%- endfor -%}</kvm>
+{%- endif -%}

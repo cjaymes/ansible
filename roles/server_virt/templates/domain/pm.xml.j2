@@ -1,0 +1,6 @@
+{%- if domain.pm is defined -%}
+    <pm>{%- for pm in domain.pm -%}
+        {% include 'roles/server_virt/templates/domain/pm/suspend_to_disk.xml.j2' %}
+        {% include 'roles/server_virt/templates/domain/pm/suspend_to_mem.xml.j2' %}
+    {%- endfor -%}</pm>
+{%- endif -%}

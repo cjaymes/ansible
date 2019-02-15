@@ -1,0 +1,40 @@
+{%- if feature.hyperv is defined -%}
+    <hyperv>{%- for hyperv_feature in feature.hyperv -%}
+        {%- if hyperv_feature.relaxed is defined -%}
+            <relaxed state='{{hyperv_feature.relaxed.state}}'/>
+        {%- endif -%}
+        {%- if hyperv_feature.vapic is defined -%}
+            <vapic state='{{hyperv_feature.vapic.state}}'/>
+        {%- endif -%}
+        {%- if hyperv_feature.spinlocks is defined -%}
+            <spinlocks state='{{hyperv_feature.spinlocks.state}}' retries='{{hyperv_feature.spinlocks.retries}}'/>
+        {%- endif -%}
+        {%- if hyperv_feature.vpindex is defined -%}
+            <vpindex state='{{hyperv_feature.vpindex.state}}'/>
+        {%- endif -%}
+        {%- if hyperv_feature.runtime is defined -%}
+            <runtime state='{{hyperv_feature.runtime.state}}'/>
+        {%- endif -%}
+        {%- if hyperv_feature.synic is defined -%}
+            <synic state='{{hyperv_feature.synic.state}}'/>
+        {%- endif -%}
+        {%- if hyperv_feature.stimer is defined -%}
+            <stimer state='{{hyperv_feature.stimer.state}}'/>
+        {%- endif -%}
+        {%- if hyperv_feature.reset is defined -%}
+            <reset state='{{hyperv_feature.reset.state}}'/>
+        {%- endif -%}
+        {%- if hyperv_feature.vendor_id is defined -%}
+            <vendor_id state='{{hyperv_feature.vendor_id.state}}' value='{{hyperv_feature.vendor_id.value}}'/>
+        {%- endif -%}
+        {%- if hyperv_feature.frequencies is defined -%}
+            <frequencies state='{{hyperv_feature.frequencies.state}}'/>
+        {%- endif -%}
+        {%- if hyperv_feature.reenlightenment is defined -%}
+            <reenlightenment state='{{hyperv_feature.reenlightenment.state}}'/>
+        {%- endif -%}
+        {%- if hyperv_feature.tlbflush is defined -%}
+            <tlbflush state='{{hyperv_feature.tlbflush.state}}'/>
+        {%- endif -%}
+    {%- endfor -%}</hyperv>
+{%- endif -%}

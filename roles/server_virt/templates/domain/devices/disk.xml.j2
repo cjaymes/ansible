@@ -1,0 +1,39 @@
+<disk type='{{dev.type}}' device='{{dev.device}}'{%- if dev.rawio is defined -%} rawio='{{dev.rawio}}'{%- endif -%}{%- if dev.sgio is defined -%} sgio='{{dev.sgio}}'{%- endif -%}{%- if dev.snapshot is defined -%} snapshot='{{dev.snapshot}}'{%- endif -%}>
+    {%- if dev.backing_store is defined -%}
+        {% the var is to allow for recursive backingStores %}
+        {% set backing_store = dev.backing_store %}
+        {% include 'roles/server_virt/templates/domain/devices/disk/backingStore.xml.j2' %}
+    {%- endif -%}
+    {# TODO mirror #}
+    {%- if dev.target is defined -%}
+        <target dev='{{dev.target.dev}}'{%- if dev.target.bus is defined -%} bus='{{dev.target.bus}}'{%- endif -%}{%- if dev.target.tray is defined -%} tray='{{dev.target.tray}}'{%- endif -%}{%- if dev.target.removable is defined -%} removable='{{dev.target.removable}}'{%- endif -%}/>
+    {%- endif -%}
+    {# TODO iotune #}
+    {# TODO backenddomain #}
+    {%- if dev.shareable is defined -%}
+        <shareable/>
+    {%- endif -%}
+    {%- if dev.transient is defined -%}
+        <transient/>
+    {%- endif -%}
+    {%- if dev.serial is defined -%}
+        <serial>{{dev.serial}}</serial>
+    {%- endif -%}
+    {%- if dev.wwn is defined -%}
+        <wwn>{{dev.wwn}}</wwn>
+    {%- endif -%}
+    {%- if dev.vendor is defined -%}
+        <vendor>{{dev.vendor}}</vendor>
+    {%- endif -%}
+    {%- if dev.product is defined -%}
+        <product>{{dev.product}}</product>
+    {%- endif -%}
+    {# TODO geometry}
+    {# TODO blockio}
+
+    {% include 'roles/server_virt/templates/domain/devices/common/alias.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/devices/common/address.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/devices/common/readonly.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/devices/common/driver.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/devices/common/source.xml.j2' %}
+</disk>

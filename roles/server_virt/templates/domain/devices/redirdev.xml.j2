@@ -1,0 +1,7 @@
+<redirdev type='{{dev.type}}'{%- if dev.bus is defined -%} bus='{{dev.bus}}'{%- endif -%}>
+    {% include 'roles/server_virt/templates/domain/devices/common/alias.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/devices/common/address.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/devices/common/readonly.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/devices/common/driver.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/devices/common/source.xml.j2' %}
+</redirdev>

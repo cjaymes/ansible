@@ -1,0 +1,3 @@
+{%- if cpu.model is defined -%}
+    <model{% if cpu.model.fallback is defined %} fallback='{{cpu.model.fallback}}'{%- endif -%}{% if cpu.model.vendor_id is defined %} vendor_id='{{cpu.model.vendor_id}}'{% endif %}>{{cpu.model.name}}</model>
+{%- endif -%}

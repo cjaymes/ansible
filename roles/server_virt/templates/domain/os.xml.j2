@@ -1,0 +1,23 @@
+<os>{% for item in domain.os -%}
+    {% include 'roles/server_virt/templates/domain/os/type.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/loader.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/nvram.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/boot.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/smbios.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/bootmenu.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/bios.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/bootloader.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/bootloader_args.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/kernel.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/initrd.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/cmdline.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/dtb.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/acpi.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/init.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/initarg.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/initenv.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/initdir.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/inituser.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/initgroup.xml.j2'}
+    {% include 'roles/server_virt/templates/domain/os/idmap.xml.j2'}
+{%- endfor %}</os>

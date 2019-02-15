@@ -1,0 +1,3 @@
+{%- if item.bios is defined -%}
+    <bios{% if item.bios.useserial is defined %} useserial='{{item.bios.useserial}}'{% endif %}{% if item.bios.rebootTimeout is defined %} rebootTimeout='{{item.bios.rebootTimeout}}'{% endif %}/>
+{%- endif -%}

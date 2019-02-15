@@ -1,0 +1,3 @@
+{%- if domain.memory.current is defined -%}
+    <currentMemory{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.current}}</currentMemory>
+{%- endif -%}

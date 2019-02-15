@@ -1,0 +1,3 @@
+<clock offset='{{domain.clock.offset}}'>{%- for timer in domain.clock.timers -%}
+    {% include 'roles/server_virt/templates/domain/clock/timer.xml.j2' %}
+{%- endfor -%}</clock>

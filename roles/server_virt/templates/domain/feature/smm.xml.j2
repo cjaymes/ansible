@@ -1,0 +1,5 @@
+{%- if feature.smm is defined -%}
+    <smm state='{{feature.smm.state}}'>
+        <tseg unit='{{feature.smm.tseg.unit}}'>{{feature.smm.tseg.size}}</tseg>
+    </smm>
+{%- endif -%}

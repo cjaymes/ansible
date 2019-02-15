@@ -1,0 +1,1 @@
+<vcpu{% if domain.vcpu.cpuset is defined %} cpuset='{{domain.vcpu.cpuset}}'{% endif %}{% if domain.vcpu.current is defined %} current='{{domain.vcpu.current}}'{% endif %}{% if domain.vcpu.placement is defined %} placement='{{domain.vcpu.placement}}'{% endif %}>{{domain.vcpu.max}}</vcpu>

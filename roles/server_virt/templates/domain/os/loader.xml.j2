@@ -1,0 +1,3 @@
+{%- if item.loader is defined -%}
+    <loader{% if item.loader.readonly is defined %} readonly='{{item.loader.readonly}}'{% endif %}{% if item.loader.type is defined %} type='{{item.loader.type}}'{% endif %}>{{item.loader.path}}</loader>
+{%- endif -%}

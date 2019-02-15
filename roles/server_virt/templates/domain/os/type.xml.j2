@@ -1,0 +1,3 @@
+{%- if item.type is defined -%}
+    <type{% if item.type.arch is defined %} arch='{{item.type.arch}}'{% endif %}{% if item.type.machine is defined %} machine='{{item.type.machine}}'{% endif %}>{{item.type.type}}</type>
+{%- endif -%}

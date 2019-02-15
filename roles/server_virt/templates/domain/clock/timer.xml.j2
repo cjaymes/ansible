@@ -1,0 +1,15 @@
+{%- macro m(timer) -%}
+    name='{{timer.name}}'
+    {%- if timer.tickpolicy is defined %} tickpolicy='{{timer.tickpolicy}}'{% endif %}
+    {%- if timer.track is defined %} track='{{timer.track}}'{% endif %}{% if timer.frequency is defined %} frequency='{{timer.frequency}}'{% endif %}
+    {%- if timer.mode is defined %} mode='{{timer.mode}}'{% endif %}
+    {%- if timer.present is defined %} present='{{timer.present}}'{% endif %}
+{%- endmacro -%}
+
+{%- if timer.tickpolicy is defined and timer.tickpolicy == 'catchup' and timer.catchup is defined -%}
+    <timer {{m(timer)}}>
+        {%- include 'roles/server_virt/templates/domain/clock/timer/catchup.xml.j2' -%}
+    </timer>
+{%- else -%}
+    <timer {{m(timer)}}/>
+{%- endif %}

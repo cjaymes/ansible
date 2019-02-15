@@ -1,0 +1,74 @@
+{%- if backing_store.type == 'file' -%}
+    <source file='{{backing_store.source.file}}'{%- if backing_store.source.index is defined -%} index='{{backing_store.source.index}}'{%- endif -%}{%- if backing_store.source.startupPolicy is defined -%} startupPolicy='{{backing_store.source.startup_policy}}'{%- endif -%}>
+        {%- for seclabel in backing_store.source.seclabels -%}
+            {% include 'roles/server_virt/templates/domain/seclabel.xml.j2' %}
+        {%- endfor -%}
+        {%- if backing_store.source.snapshot is defined -%}
+            <snapshot name='{{backing_store.source.snapshot.name}}'/>
+        {%- endif -%}
+        {%- if backing_store.source.config is defined -%}
+            <config file='{{backing_store.source.config.file}}'/>
+        {%- endif -%}
+        {# TODO encryption #}
+        {# TODO reservations #}
+    </source>
+{%- elif backing_store.type == 'block' -%}
+    <source dev='{{backing_store.source.dev}}'>
+        {%- for seclabel in backing_store.source.seclabels -%}
+            {% include 'roles/server_virt/templates/domain/seclabel.xml.j2' %}
+        {%- endfor -%}
+        {%- if backing_store.source.snapshot is defined -%}
+            <snapshot name='{{backing_store.source.snapshot.name}}'/>
+        {%- endif -%}
+        {%- if backing_store.source.config is defined -%}
+            <config file='{{backing_store.source.config.file}}'/>
+        {%- endif -%}
+        {# TODO encryption #}
+        {# TODO reservations #}
+    </source>
+{%- elif backing_store.type == 'dir' -%}
+    <source dir='{{backing_store.source.dir}}'>
+        {%- if backing_store.source.snapshot is defined -%}
+            <snapshot name='{{backing_store.source.snapshot.name}}'/>
+        {%- endif -%}
+        {%- if backing_store.source.config is defined -%}
+            <config file='{{backing_store.source.config.file}}'/>
+        {%- endif -%}
+        {# TODO encryption #}
+        {# TODO reservations #}
+    </source>
+{%- elif backing_store.type == 'network' -%}
+    <source protocol='{{backing_store.source.protocol}}'{%- if backing_store.source.name is defined -%} name='{{backing_store.source.name}}'{%- endif -%}{%- if backing_store.source.tls is defined -%} tls='{{backing_store.source.tls}}'{%- endif -%}>
+        {%- for host in backing_store.source.hosts -%}
+            <host name='{{host.name}}'{%- if host.port is defined -%} port='{{host.port}}'{%- endif -%}{%- if host.transport is defined -%} transport='{{host.transport}}'{%- endif -%}{%- if host.socket is defined -%} socket='{{host.socket}}'{%- endif -%}/>
+        {%- endfor -%}
+        {%- if backing_store.source.snapshot is defined -%}
+            <snapshot name='{{backing_store.source.snapshot.name}}'/>
+        {%- endif -%}
+        {%- if backing_store.source.config is defined -%}
+            <config file='{{backing_store.source.config.file}}'/>
+        {%- endif -%}
+        {%- if backing_store.source.auth is defined -%}
+            <auth username='{{backing_store.source.auth.username}}'>
+                <secret type='{{backing_store.source.auth.secret_type}}'{%- if backing_store.source.auth.secret_uuid is defined -%} uuid='{{backing_store.source.auth.secret_uuid}}'{%- endif -%}{%- if backing_store.source.auth.secret_usage is defined -%} usage='{{backing_store.source.auth.secret_usage}}'{%- endif -%}>{{backing_store.source.auth.secret}}</secret>
+            </auth>
+        {%- endif -%}
+        {# TODO encryption #}
+        {# TODO reservations #}
+        {# TODO initiator #}
+    </source>
+{%- elif backing_store.type == 'volume' -%}
+    <source pool='{{backing_store.source.pool}}' volume='{{backing_store.source.volume}}'{%- if backing_store.source.mode is defined -%} mode='{{backing_store.source.mode}}'{%- endif -%}{%- if backing_store.source.tls is defined -%} tls='{{backing_store.source.tls}}'{%- endif -%}{%- if backing_store.source.startupPolicy is defined -%} startupPolicy='{{backing_store.source.startup_policy}}'{%- endif -%}>
+        {%- for seclabel in backing_store.source.seclabels -%}
+            {% include 'roles/server_virt/templates/domain/seclabel.xml.j2' %}
+        {%- endfor -%}
+        {%- if backing_store.source.snapshot is defined -%}
+            <snapshot name='{{backing_store.source.snapshot.name}}'/>
+        {%- endif -%}
+        {%- if backing_store.source.config is defined -%}
+            <config file='{{backing_store.source.config.file}}'/>
+        {%- endif -%}
+        {# TODO encryption #}
+        {# TODO reservations #}
+    </source>
+{%- endif -%}

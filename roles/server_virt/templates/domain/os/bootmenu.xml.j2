@@ -1,0 +1,3 @@
+{%- if item.bootmenu is defined -%}
+    <bootmenu{% if item.bootmenu.enable is defined %} enable='{{item.bootmenu.enable}}'{% endif %}{% if item.bootmenu.timeout is defined %} timeout='{{item.bootmenu.timeout}}'{% endif %}/>
+{%- endif -%}

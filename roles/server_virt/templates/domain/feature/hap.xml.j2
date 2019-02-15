@@ -1,0 +1,3 @@
+{%- if feature.hap is defined -%}
+    <hap{%- if feature.hap.state is defined -%} state='{{feature.hap.state}}'{%- endif -%}/>
+{%- endif -%}

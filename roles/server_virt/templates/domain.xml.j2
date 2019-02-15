@@ -1,88 +1,36 @@
 <domain type='{{domain.type}}'{% if domain.id is defined %} id='{{domain.id}}'{% endif %}>
     <name>{{domain.name}}</name>
-    {% if domain.uuid is defined %}
-        <uuid>{{domain.uuid}}</uuid>
-    {% endif %}
-    {% if domain.genid is defined %}
-        <genid>{{domain.genid}}</genid>
-    {% endif %}
-    {% if domain.title is defined %}
-        <title>{{domain.title}}</title>
-    {% endif %}
-    {% if domain.description is defined %}
-        <description>{{domain.description}}</description>
-    {% endif %}
-    {% if domain.metadata is defined %}
-        <metadata>{{domain.metadata}}</metadata>
-    {% endif %}
-    <os>{% for item in domain.os -%}
-        {%- include 'os.xml.j2' %}
-    {%- endfor %}</os>
-    {# TODO sysinfo #}
-    <vcpu{% if domain.vcpu.cpuset is defined %} cpuset='{{domain.vcpu.cpuset}}'{% endif %}{% if domain.vcpu.current is defined %} current='{{domain.vcpu.current}}'{% endif %}{% if domain.vcpu.placement is defined %} placement='{{domain.vcpu.placement}}'{% endif %}>{{domain.vcpu.max}}</vcpu>
-    {% if domain.vcpu.vcpus is defined %}
-        <vcpus>{%- for vcpu in domain.vcpu.vcpus -%}
-            {% include 'vcpu.xml.j2' %}
-        {%- endfor -%}</vcpus>
-    {%- endif -%}
-    {# TODO iothreads #}
-    {# TODO cputune #}
-    <memory{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.boot}}</memory>
-    {%- if domain.memory.max is defined -%}
-        <maxMemory{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.max}}</maxMemory>
-    {%- endif -%}
-    {%- if domain.memory.current is defined -%}
-        <currentMemory{% if domain.memory.unit is defined %} unit='{{domain.memory.unit}}'{% endif %}>{{domain.memory.current}}</currentMemory>
-    {%- endif -%}
-    {# TODO memoryBacking #}
-    {# TODO memtune #}
-    {# TODO numatune #}
-    {# TODO blkiotune #}
-    <resource>{%- for res in domain.resource -%}
-        {% include 'resource.xml.j2' %}
-    {%- endfor -%}</resource>
-    <cpu{% if domain.cpu.match is defined %} match='{{domain.cpu.match}}'{%- endif -%}{% if domain.cpu.check is defined %} check='{{domain.cpu.check}}'{% endif %}{% if domain.cpu.mode is defined %} mode='{{domain.cpu.mode}}'{% endif %}>{%- for item in domain.cpu.cpu -%}
-        {% include 'cpu.xml.j2' %}
-    {%- endfor -%}</cpu>
-    {%- if domain.on_poweroff is defined -%}
-        <on_poweroff>{{domain.on_poweroff}}</on_poweroff>
-    {%- endif -%}
-    {%- if domain.on_reboot is defined -%}
-        <on_reboot>{{domain.on_reboot}}</on_reboot>
-    {%- endif -%}
-    {%- if domain.on_crash is defined -%}
-        <on_crash>{{domain.on_crash}}</on_crash>
-    {%- endif -%}
-    {%- if domain.on_lockfailure is defined -%}
-        <on_lockfailure>{{domain.on_lockfailure}}</on_lockfailure>
-    {%- endif -%}
-    {%- if domain.pm is defined -%}
-        <pm>{%- for pm in domain.pm -%}
-            {% include 'pm.xml.j2' %}
-        {%- endfor -%}</pm>
-    {%- endif -%}
-    <features>{%- for feature in domain.features -%}
-        {%include 'feature.xml.j2' %}
-    {%- endfor -%}</features>
-    <clock offset='{{domain.clock.offset}}'>{%- for timer in domain.clock.timers -%}
-        {% include 'timer.xml.j2' %}
-    {%- endfor -%}</clock>
-    <devices>{%- for dev in domain.devices -%}
-        {%- if dev.emulator is defined -%}
-            {% include 'device/emulator.xml.j2' %}
-        {%- elif dev.disk is defined -%}
-            {% include 'device/disk.xml.j2' %}
-        {%- elif dev.filesystem is defined -%}
-            {% include 'device/filesystem.xml.j2' %}
-        {%- elif dev.controller is defined -%}
-            {% include 'device/controller.xml.j2' %}
-        {# TODO lease #}
-        {# TODO hostdev #}
-        {%- elif dev.redirdev is defined -%}
-            {% include 'device/redirdev.xml.j2' %}
-        {%- endif -%}
-    {%- endfor -%}</devices>
+    {% include 'roles/server_virt/templates/domain/uuid.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/genid.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/title.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/description.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/metadata.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/os.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/sysinfo.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/vcpu.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/vcpus.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/iothreads.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/cputune.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/memory.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/maxMemory.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/currentMemory.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/memoryBacking.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/memtune.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/numatune.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/blkiotune.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/resource.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/cpu.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/on_poweroff.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/on_reboot.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/on_crash.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/on_lockfailure.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/pm.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/features.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/clock.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/devices.xml.j2' %}
+    {% include 'roles/server_virt/templates/domain/devices.xml.j2' %}
+
     {%- for seclabel in domain.seclabels -%}
-        {% include 'seclabel.xml.j2' %}
+        {% include 'roles/server_virt/templates/domain/seclabel.xml.j2' %}
     {%- endfor -%}
 </domain>

@@ -1,0 +1,3 @@
+{%- if item.nvram is defined -%}
+    <nvram{% if item.nvram.template is defined %} template='{{item.nvram.template}}'{% endif %}>{{item.nvram.path}}</nvram>
+{%- endif -%}
